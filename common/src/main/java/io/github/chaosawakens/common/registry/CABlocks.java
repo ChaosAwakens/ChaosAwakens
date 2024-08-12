@@ -3,7 +3,7 @@ package io.github.chaosawakens.common.registry;
 import com.google.common.collect.ImmutableList;
 import io.github.chaosawakens.CAConstants;
 import io.github.chaosawakens.api.asm.annotations.RegistrarEntry;
-import io.github.chaosawakens.api.block.BlockPropertyWrapper;
+import io.github.chaosawakens.api.block.standard.BlockPropertyWrapper;
 import io.github.chaosawakens.api.platform.CAServices;
 import io.github.chaosawakens.util.ModelUtil;
 import io.github.chaosawakens.util.PredicateUtil;

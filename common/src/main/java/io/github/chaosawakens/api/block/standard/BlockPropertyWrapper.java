@@ -1,4 +1,4 @@
-package io.github.chaosawakens.api.block;
+package io.github.chaosawakens.api.block.standard;
 
 import com.google.common.collect.ImmutableSortedMap;
 import io.github.chaosawakens.CAConstants;

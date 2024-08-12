@@ -1,7 +1,7 @@
 package io.github.chaosawakens.datagen;
 
 import io.github.chaosawakens.CAConstants;
-import io.github.chaosawakens.api.block.BlockPropertyWrapper;
+import io.github.chaosawakens.api.block.standard.BlockPropertyWrapper;
 import io.github.chaosawakens.common.registry.CABlocks;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.data.loot.BlockLootSubProvider;

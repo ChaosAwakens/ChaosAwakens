@@ -1,4 +1,4 @@
-package io.github.chaosawakens.api.block;
+package io.github.chaosawakens.api.block.standard;
 
 import net.minecraft.data.models.blockstates.BlockStateGenerator;
 import net.minecraft.data.models.blockstates.MultiPartGenerator;

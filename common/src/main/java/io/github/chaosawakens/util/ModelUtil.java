@@ -2,8 +2,8 @@ package io.github.chaosawakens.util;
 
 import com.google.common.collect.Sets;
 import io.github.chaosawakens.CAConstants;
-import io.github.chaosawakens.api.block.BlockModelDefinition;
-import io.github.chaosawakens.api.block.BlockStateDefinition;
+import io.github.chaosawakens.api.block.standard.BlockModelDefinition;
+import io.github.chaosawakens.api.block.standard.BlockStateDefinition;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Direction;
@@ -67,6 +67,9 @@ public final class ModelUtil { //TODO Finish Javadocs
      * @return A new {@link BlockStateDefinition} with a {@code simpleBlock} template.
      *
      * @see #cubeAll(ResourceLocation)
+     * @see #cubeBottomTop(ResourceLocation)
+     * @see #cubeBottomTop(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #cubeBottomTop(ResourceLocation, ResourceLocation, ResourceLocation)
      * @see #cross(ResourceLocation)
      * @see #crossCutout(ResourceLocation)
      * @see #sign(ResourceLocation, ResourceLocation)

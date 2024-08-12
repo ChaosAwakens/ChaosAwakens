@@ -1,7 +1,7 @@
 package io.github.chaosawakens;
 
-import io.github.chaosawakens.api.block.BlockModelDefinition;
-import io.github.chaosawakens.api.block.BlockPropertyWrapper;
+import io.github.chaosawakens.api.block.standard.BlockModelDefinition;
+import io.github.chaosawakens.api.block.standard.BlockPropertyWrapper;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;

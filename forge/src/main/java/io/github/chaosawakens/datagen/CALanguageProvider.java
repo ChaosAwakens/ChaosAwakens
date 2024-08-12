@@ -3,7 +3,7 @@ package io.github.chaosawakens.datagen;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Lists;
 import io.github.chaosawakens.CAConstants;
-import io.github.chaosawakens.api.block.BlockPropertyWrapper;
+import io.github.chaosawakens.api.block.standard.BlockPropertyWrapper;
 import io.github.chaosawakens.common.registry.CABlocks;
 import io.github.chaosawakens.common.registry.CACreativeModeTabs;
 import io.github.chaosawakens.common.registry.CAItems;

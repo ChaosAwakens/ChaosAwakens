@@ -1,6 +1,6 @@
 package io.github.chaosawakens.common.registry;
 
-import io.github.chaosawakens.api.block.BlockPropertyWrapper;
+import io.github.chaosawakens.api.block.standard.BlockPropertyWrapper;
 import io.github.chaosawakens.util.LootUtil;
 import io.github.chaosawakens.util.ModelUtil;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
