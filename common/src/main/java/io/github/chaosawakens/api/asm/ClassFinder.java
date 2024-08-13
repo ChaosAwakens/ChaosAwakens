@@ -63,8 +63,6 @@ public final class ClassFinder {
                     public AnnotationVisitor visitAnnotation(String descriptor, boolean visible) {
                         if (Type.getDescriptor(annotationType).equals(descriptor)) {
                             try {
-                                if (className.contains("$")) className = className.replace("$", ".");
-
                                 annotatedClasses.add(Class.forName(className)); //TODO Add BOOLEAAAAA | Anyway, make it so that you can choose to just discover rather than forcefully load classes instead (too lazy to do the overloaded method stuff for this atm :p)
                             } catch (ClassNotFoundException e) {
                                 e.printStackTrace();

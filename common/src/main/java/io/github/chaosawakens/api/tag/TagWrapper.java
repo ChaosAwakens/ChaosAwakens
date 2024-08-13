@@ -3,7 +3,6 @@ package io.github.chaosawakens.api.tag;
 import com.google.common.collect.ImmutableList;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.tags.TagKey;
-import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -168,17 +167,6 @@ public class TagWrapper<T, TK extends TagKey<T>> {
 
     public ImmutableList<TK> getParentTags() {
         return ImmutableList.copyOf(storedParentTags);
-    }
-
-    /**
-     * Checks if the parent {@link TagKey} is of the specified generic type (E.G. {@link Block}).
-     *
-     * @param clazz The generic type of the parent {@link TagKey}.
-     *
-     * @return Whether the parent {@link TagKey} is of the specified generic type.
-     */
-    public boolean isTagOfType(Class<?> clazz) {
-        return parentTag.getClass().getGenericSuperclass().getClass().isAssignableFrom(clazz);
     }
 
     /**

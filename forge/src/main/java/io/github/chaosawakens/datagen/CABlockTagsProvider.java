@@ -4,6 +4,7 @@ import io.github.chaosawakens.CAConstants;
 import io.github.chaosawakens.api.block.standard.BlockPropertyWrapper;
 import io.github.chaosawakens.api.tag.TagWrapper;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;
@@ -45,7 +46,7 @@ public class CABlockTagsProvider extends BlockTagsProvider {
 
         if (!TagWrapper.getCachedTWEntries().isEmpty()) {
             TagWrapper.getCachedTWEntries().forEach(twEntry -> {
-                if (twEntry.isTagOfType(Block.class)) {
+                if (twEntry.getParentTag().isFor(Registries.BLOCK)) {
                     TagKey<?> curBlockTag = twEntry.getParentTag();
 
                     if (curBlockTag != null) {
@@ -60,22 +61,22 @@ public class CABlockTagsProvider extends BlockTagsProvider {
                         });
 
                         twEntry.getStoredTags().forEach(tagKeyEntry -> {
-                            if (tagKeyEntry != null && tagKeyEntry.getClass().getGenericSuperclass().getClass().isAssignableFrom(Block.class)) {
-                                TagKey<?> tkEntryGRep = tagKeyEntry;
+                            if (tagKeyEntry != null) {
 
-                                CAConstants.LOGGER.debug("[Tagging Block Tag]: " + tkEntryGRep + " -> " + curBlockTag);
+                                CAConstants.LOGGER.debug("[Tagging Block Tag]: " + tagKeyEntry + " -> " + curBlockTag);
 
-                                tag((TagKey<Block>) curBlockTag).addTag((TagKey<Block>) tkEntryGRep);
+                                tag((TagKey<Block>) tagKeyEntry); // Force the existingFileHelper to track the tag to be added (otherwise throws exception). Goofy ahh patch.
+                                tag((TagKey<Block>) curBlockTag).addTag((TagKey<Block>) tagKeyEntry);
                             }
                         });
 
                         twEntry.getParentTags().forEach(parentTagKeyEntry -> {
-                            if (parentTagKeyEntry != null && parentTagKeyEntry.getClass().getGenericSuperclass().getClass().isAssignableFrom(Block.class)) {
-                                TagKey<?> tkParentEntryGRep = parentTagKeyEntry;
+                            if (parentTagKeyEntry != null) {
 
-                                CAConstants.LOGGER.debug("[Tagging Block Tag]: " + curBlockTag + " -> " + tkParentEntryGRep);
+                                CAConstants.LOGGER.debug("[Tagging Block Tag]: " + curBlockTag + " -> " + parentTagKeyEntry);
 
-                                tag((TagKey<Block>) tkParentEntryGRep).addTag((TagKey<Block>) curBlockTag);
+                                tag((TagKey<Block>) curBlockTag); // Force the existingFileHelper to track the tag to be added (otherwise throws exception). Goofy ahh patch.
+                                tag((TagKey<Block>) parentTagKeyEntry).addTag((TagKey<Block>) curBlockTag);
                             }
                         });
                     }

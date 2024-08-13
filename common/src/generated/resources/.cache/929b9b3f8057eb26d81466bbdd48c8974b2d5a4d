@@ -1,6 +1,21 @@
-// 1.20.1	2024-08-13T15:10:36.9968382	Chaos Awakens: Block Tags
+// 1.20.1	2024-08-13T20:16:01.1727577	Chaos Awakens: Block Tags
+8e27edc2d59aa1e565da02d06d54d1aa67f8c987 data/chaosawakens/tags/blocks/apple_logs.json
+44f32101995f328de1f8f08f88eab68e3bebf523 data/chaosawakens/tags/blocks/fossils.json
+957eb1f35fcdfc4e4be448a395edc634bd0b5b96 data/chaosawakens/tags/blocks/fossils/blackstone.json
+c951faa57196e1074e9152bf0619c3bf0fb0295b data/chaosawakens/tags/blocks/fossils/end_stone.json
+91033c9f4dfe8714040a2bd589164d246073b5e2 data/chaosawakens/tags/blocks/fossils/gravel.json
+7ec36cd3539049cfcd3fe1303982accf951107ec data/chaosawakens/tags/blocks/fossils/ice.json
+0dc9cdcdd76e63332af82c36f1abea8c9de5c1b5 data/chaosawakens/tags/blocks/fossils/kyanite.json
+a7d8aac961a56f60e0fe06915f3f46261fe0962e data/chaosawakens/tags/blocks/fossils/netherrack.json
+9f7ef97eff03ce55e2b5e9de9bad464755b030ba data/chaosawakens/tags/blocks/fossils/sand.json
+9a1474be65c058f318de2269bc3b60c5e106fe3c data/chaosawakens/tags/blocks/fossils/sandstone.json
+dd43157ac0c3e9516448859d4d7acebd3ac3cd81 data/chaosawakens/tags/blocks/fossils/soul_soil.json
+b41349a4b011bedbfcf9cc91ce48ebbfda560d20 data/chaosawakens/tags/blocks/fossils/stone.json
+ce9339126a705d600ed3540de0f1dae1c9603889 data/chaosawakens/tags/blocks/miners_dream_mineable.json
+49e02bc82aa3025d443a2c662ae386a2fef88711 data/chaosawakens/tags/blocks/robo_immune.json
+7b73d6e38919b26eba0831d9b725aa36f1678b71 data/chaosawakens/tags/blocks/stalagmite_ore.json
 0657cc92f0d5b89ccce850814f03875040484c05 data/minecraft/tags/blocks/fence_gates.json
-c37c447f93d36e26e649181fd5838a78f48c87e9 data/minecraft/tags/blocks/logs_that_burn.json
+ceced0b9f1375666a9dff886aabbb9abc6671c6d data/minecraft/tags/blocks/logs_that_burn.json
 20896e2729b66f4a3de3f1272f9a280429dc349f data/minecraft/tags/blocks/mineable/axe.json
 7030e8eab3b9a7e1f1103635de23ae822665395f data/minecraft/tags/blocks/planks.json
 f15ff21a8eb277c8ce6b8fce2782d5bfe3d4f33c data/minecraft/tags/blocks/wooden_buttons.json

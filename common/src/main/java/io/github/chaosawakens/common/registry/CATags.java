@@ -13,7 +13,7 @@ import net.minecraft.world.level.block.Block;
 public class CATags {
 
     @LoadEarly
-    public static class CABlockTags { //TODO Create tag registrar
+    public static class CABlockTags {
         public static final TagKey<Block> BASE_STONE_CRYSTAL = createWrappedBlockTag("base_stone_crystal").getParentTag();
         public static final TagKey<Block> BASE_STONE_MINING = createWrappedBlockTag("base_stone_mining").getParentTag();
         public static final TagKey<Block> BASE_STONE_VILLAGE = createWrappedBlockTag("base_stone_village").getParentTag();
@@ -27,14 +27,30 @@ public class CATags {
         public static final TagKey<Block> DENSE_DIRT = createBlockTag("dense_dirt");
         public static final TagKey<Block> TERRA_PRETA = createBlockTag("terra_preta");
 
-        public static final TagKey<Block> APPLE_LOGS = createBlockTag("apple_logs");
-        public static final TagKey<Block> CHERRY_LOGS = createBlockTag("cherry_logs");
-        public static final TagKey<Block> DUPLICATION_LOGS = createBlockTag("duplication_logs");
-        public static final TagKey<Block> PEACH_LOGS = createBlockTag("peach_logs");
-        public static final TagKey<Block> SKYWOOD_LOGS = createBlockTag("skywood_logs");
-        public static final TagKey<Block> GINKGO_LOGS = createBlockTag("ginkgo_logs");
-        public static final TagKey<Block> MESOZOIC_LOGS = createBlockTag("mesozoic_logs");
-        public static final TagKey<Block> DENSEWOOD_LOGS = createBlockTag("densewood_logs");
+        public static final TagKey<Block> APPLE_LOGS = createWrappedBlockTag("apple_logs")
+                .withParentTagEntry(BlockTags.LOGS_THAT_BURN)
+                .getParentTag();
+        public static final TagKey<Block> CHERRY_LOGS = createWrappedBlockTag("cherry_logs")
+                .withParentTagEntry(BlockTags.LOGS_THAT_BURN)
+                .getParentTag();
+        public static final TagKey<Block> DUPLICATION_LOGS = createWrappedBlockTag("duplication_logs")
+                .withParentTagEntry(BlockTags.LOGS_THAT_BURN)
+                .getParentTag();
+        public static final TagKey<Block> PEACH_LOGS = createWrappedBlockTag("peach_logs")
+                .withParentTagEntry(BlockTags.LOGS_THAT_BURN)
+                .getParentTag();
+        public static final TagKey<Block> SKYWOOD_LOGS = createWrappedBlockTag("skywood_logs")
+                .withParentTagEntry(BlockTags.LOGS_THAT_BURN)
+                .getParentTag();
+        public static final TagKey<Block> GINKGO_LOGS = createWrappedBlockTag("ginkgo_logs")
+                .withParentTagEntry(BlockTags.LOGS_THAT_BURN)
+                .getParentTag();
+        public static final TagKey<Block> MESOZOIC_LOGS = createWrappedBlockTag("mesozoic_logs")
+                .withParentTagEntry(BlockTags.LOGS_THAT_BURN)
+                .getParentTag();
+        public static final TagKey<Block> DENSEWOOD_LOGS = createWrappedBlockTag("densewood_logs")
+                .withParentTagEntry(BlockTags.LOGS_THAT_BURN)
+                .getParentTag();
 
         public static final TagKey<Block> CRYSTALWOOD_LOGS = createBlockTag("crystalwood_logs");
         public static final TagKey<Block> CRYSTALWOOD_LEAVES = createBlockTag("crystalwood_leaves");

@@ -33,6 +33,14 @@
     "chaosawakens:skywood_log",
     "chaosawakens:skywood",
     "chaosawakens:stripped_skywood_log",
-    "chaosawakens:stripped_skywood"
+    "chaosawakens:stripped_skywood",
+    "#chaosawakens:apple_logs",
+    "#chaosawakens:cherry_logs",
+    "#chaosawakens:duplication_logs",
+    "#chaosawakens:peach_logs",
+    "#chaosawakens:skywood_logs",
+    "#chaosawakens:ginkgo_logs",
+    "#chaosawakens:mesozoic_logs",
+    "#chaosawakens:densewood_logs"
   ]
 }
