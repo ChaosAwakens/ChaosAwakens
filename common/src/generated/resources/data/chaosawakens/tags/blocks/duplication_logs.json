@@ -1,0 +1,12 @@
+{
+  "values": [
+    "chaosawakens:duplicator_log",
+    "chaosawakens:duplicator_wood",
+    "chaosawakens:stripped_duplicator_log",
+    "chaosawakens:stripped_duplicator_wood",
+    "chaosawakens:dead_duplicator_log",
+    "chaosawakens:dead_duplicator_wood",
+    "chaosawakens:stripped_dead_duplicator_log",
+    "chaosawakens:stripped_dead_duplicator_wood"
+  ]
+}

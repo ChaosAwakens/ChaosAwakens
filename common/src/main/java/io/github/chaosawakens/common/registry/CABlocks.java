@@ -33,16 +33,19 @@ public final class CABlocks {
             .getParentBlock();
     public static final Supplier<Block> APPLE_WOOD = BlockPropertyWrapper.of(CABlockPropertyWrappers.WOOD, registerBlock("apple_wood", () -> new RotatedPillarBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_ORANGE).instrument(NoteBlockInstrument.BASS).strength(2.0F).sound(SoundType.WOOD).ignitedByLava())))
             .cachedBuilder()
+            .withTag(CATags.CABlockTags.APPLE_LOGS)
             .withCustomModelDefinition(ModelUtil.cubeColumn(CAConstants.prefix("wood/apple/apple_log")))
             .build()
             .getParentBlock();
     public static final Supplier<Block> STRIPPED_APPLE_LOG = BlockPropertyWrapper.of(CABlockPropertyWrappers.LOG, registerBlock("stripped_apple_log", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(APPLE_LOG.get()).mapColor((appleLogBlock) -> appleLogBlock.getValue(RotatedPillarBlock.AXIS) == Direction.Axis.Y ? MapColor.TERRACOTTA_ORANGE : MapColor.COLOR_ORANGE))))
             .cachedBuilder()
+            .withTag(CATags.CABlockTags.APPLE_LOGS)
             .withCustomModelDefinitions(ModelUtil.rotatedPillarBlock(CAConstants.prefix("wood/apple/stripped_apple_log"), CAConstants.prefix("wood/apple/stripped_apple_log_top")))
             .build()
             .getParentBlock();
     public static final Supplier<Block> STRIPPED_APPLE_WOOD = BlockPropertyWrapper.of(CABlockPropertyWrappers.WOOD, registerBlock("stripped_apple_wood", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(APPLE_WOOD.get()))))
             .cachedBuilder()
+            .withTag(CATags.CABlockTags.APPLE_LOGS)
             .withCustomModelDefinition(ModelUtil.cubeColumn(CAConstants.prefix("wood/apple/stripped_apple_log")))
             .build()
             .getParentBlock();
@@ -94,11 +97,13 @@ public final class CABlocks {
 
     public static final Supplier<Block> CRYSTALWOOD_LOG = BlockPropertyWrapper.of(CABlockPropertyWrappers.LOG, registerBlock("crystalwood_log", () -> new RotatedPillarBlock(BlockBehaviour.Properties.of().mapColor((appleLogBlock) -> appleLogBlock.getValue(RotatedPillarBlock.AXIS) == Direction.Axis.Y ? MapColor.COLOR_ORANGE : MapColor.COLOR_BROWN).instrument(NoteBlockInstrument.BASS).strength(2.0F).sound(SoundType.WOOD).ignitedByLava())))
             .cachedBuilder()
+            .withTag(CATags.CABlockTags.CRYSTALWOOD_LOGS)
             .withCustomModelDefinitions(ModelUtil.rotatedPillarBlock(CAConstants.prefix("wood/crystalwood/crystalwood_log"), CAConstants.prefix("wood/crystalwood/crystalwood_log_top")))
             .build()
             .getParentBlock();
     public static final Supplier<Block> CRYSTALWOOD = BlockPropertyWrapper.of(CABlockPropertyWrappers.WOOD, registerBlock("crystalwood", () -> new RotatedPillarBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_ORANGE).instrument(NoteBlockInstrument.BASS).strength(2.0F).sound(SoundType.WOOD).ignitedByLava())))
             .cachedBuilder()
+            .withTag(CATags.CABlockTags.CRYSTALWOOD_LOGS)
             .withCustomModelDefinition(ModelUtil.cubeColumn(CAConstants.prefix("wood/crystalwood/crystalwood_log")))
             .build()
             .getParentBlock();
@@ -160,26 +165,31 @@ public final class CABlocks {
 
     public static final Supplier<Block> DENSEWOOD_LOG = BlockPropertyWrapper.of(CABlockPropertyWrappers.LOG, registerBlock("densewood_log", () -> new RotatedPillarBlock(BlockBehaviour.Properties.of().mapColor((appleLogBlock) -> appleLogBlock.getValue(RotatedPillarBlock.AXIS) == Direction.Axis.Y ? MapColor.COLOR_ORANGE : MapColor.COLOR_BROWN).instrument(NoteBlockInstrument.BASS).strength(2.0F).sound(SoundType.WOOD).ignitedByLava())))
             .cachedBuilder()
+            .withTag(CATags.CABlockTags.DENSEWOOD_LOGS)
             .withCustomModelDefinitions(ModelUtil.rotatedPillarBlock(CAConstants.prefix("wood/densewood/densewood_log"), CAConstants.prefix("wood/densewood/densewood_log_top")))
             .build()
             .getParentBlock();
     public static final Supplier<Block> DENSEWOOD = BlockPropertyWrapper.of(CABlockPropertyWrappers.WOOD, registerBlock("densewood", () -> new RotatedPillarBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_ORANGE).instrument(NoteBlockInstrument.BASS).strength(2.0F).sound(SoundType.WOOD).ignitedByLava())))
             .cachedBuilder()
+            .withTag(CATags.CABlockTags.DENSEWOOD_LOGS)
             .withCustomModelDefinition(ModelUtil.cubeColumn(CAConstants.prefix("wood/densewood/densewood_log")))
             .build()
             .getParentBlock();
     public static final Supplier<Block> STRIPPED_DENSEWOOD_LOG = BlockPropertyWrapper.of(CABlockPropertyWrappers.LOG, registerBlock("stripped_densewood_log", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(DENSEWOOD_LOG.get()).mapColor((appleLogBlock) -> appleLogBlock.getValue(RotatedPillarBlock.AXIS) == Direction.Axis.Y ? MapColor.TERRACOTTA_ORANGE : MapColor.COLOR_ORANGE))))
             .cachedBuilder()
+            .withTag(CATags.CABlockTags.DENSEWOOD_LOGS)
             .withCustomModelDefinitions(ModelUtil.rotatedPillarBlock(CAConstants.prefix("wood/densewood/stripped_densewood_log"), CAConstants.prefix("wood/densewood/stripped_densewood_log_top")))
             .build()
             .getParentBlock();
     public static final Supplier<Block> STRIPPED_DENSEWOOD = BlockPropertyWrapper.of(CABlockPropertyWrappers.WOOD, registerBlock("stripped_densewood", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(DENSEWOOD.get()))))
             .cachedBuilder()
+            .withTag(CATags.CABlockTags.DENSEWOOD_LOGS)
             .withCustomModelDefinition(ModelUtil.cubeColumn(CAConstants.prefix("wood/densewood/stripped_densewood_log")))
             .build()
             .getParentBlock();
     public static final Supplier<Block> DENSEWOOD_PLANKS = BlockPropertyWrapper.of(CABlockPropertyWrappers.WOODEN_PLANKS, registerBlock("densewood_planks", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_ORANGE).instrument(NoteBlockInstrument.BASS).strength(2.0F, 3.0F).sound(SoundType.WOOD).ignitedByLava())))
             .cachedBuilder()
+            .withTag(CATags.CABlockTags.DENSEWOOD_LOGS)
             .withCustomModelDefinition(ModelUtil.cubeAll(CAConstants.prefix("wood/densewood/densewood_planks")))
             .build()
             .getParentBlock();
@@ -226,41 +236,49 @@ public final class CABlocks {
 
     public static final Supplier<Block> DUPLICATOR_LOG = BlockPropertyWrapper.of(CABlockPropertyWrappers.LOG, registerBlock("duplicator_log", () -> new RotatedPillarBlock(BlockBehaviour.Properties.of().mapColor((duplicatorLogBlock) -> duplicatorLogBlock.getValue(RotatedPillarBlock.AXIS) == Direction.Axis.Y ? MapColor.COLOR_ORANGE : MapColor.COLOR_BROWN).instrument(NoteBlockInstrument.BASS).strength(2.0F).sound(SoundType.WOOD).ignitedByLava())))
             .cachedBuilder()
+            .withTag(CATags.CABlockTags.DUPLICATION_LOGS)
             .withCustomModelDefinitions(ModelUtil.rotatedPillarBlock(CAConstants.prefix("wood/duplicator/duplicator_log"), CAConstants.prefix("wood/duplicator/duplicator_log_top")))
             .build()
             .getParentBlock();
     public static final Supplier<Block> DUPLICATOR_WOOD = BlockPropertyWrapper.of(CABlockPropertyWrappers.WOOD, registerBlock("duplicator_wood", () -> new RotatedPillarBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BROWN).instrument(NoteBlockInstrument.BASS).strength(2.0F).sound(SoundType.WOOD).ignitedByLava())))
             .cachedBuilder()
+            .withTag(CATags.CABlockTags.DUPLICATION_LOGS)
             .withCustomModelDefinition(ModelUtil.cubeColumn(CAConstants.prefix("wood/duplicator/duplicator_log")))
             .build()
             .getParentBlock();
     public static final Supplier<Block> STRIPPED_DUPLICATOR_LOG = BlockPropertyWrapper.of(CABlockPropertyWrappers.LOG, registerBlock("stripped_duplicator_log", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(DUPLICATOR_LOG.get()).mapColor((duplicatorLogBlock) -> duplicatorLogBlock.getValue(RotatedPillarBlock.AXIS) == Direction.Axis.Y ? MapColor.TERRACOTTA_BROWN : MapColor.COLOR_BROWN))))
             .cachedBuilder()
+            .withTag(CATags.CABlockTags.DUPLICATION_LOGS)
             .withCustomModelDefinitions(ModelUtil.rotatedPillarBlock(CAConstants.prefix("wood/duplicator/stripped_duplicator_log"), CAConstants.prefix("wood/duplicator/stripped_duplicator_log_top")))
             .build()
             .getParentBlock();
     public static final Supplier<Block> STRIPPED_DUPLICATOR_WOOD = BlockPropertyWrapper.of(CABlockPropertyWrappers.WOOD, registerBlock("stripped_duplicator_wood", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(DUPLICATOR_WOOD.get()))))
             .cachedBuilder()
+            .withTag(CATags.CABlockTags.DUPLICATION_LOGS)
             .withCustomModelDefinition(ModelUtil.cubeColumn(CAConstants.prefix("wood/duplicator/stripped_duplicator_log")))
             .build()
             .getParentBlock();
     public static final Supplier<Block> DEAD_DUPLICATOR_LOG = BlockPropertyWrapper.of(CABlockPropertyWrappers.LOG, registerBlock("dead_duplicator_log", () -> new RotatedPillarBlock(BlockBehaviour.Properties.of().mapColor((duplicatorLogBlock) -> duplicatorLogBlock.getValue(RotatedPillarBlock.AXIS) == Direction.Axis.Y ? MapColor.TERRACOTTA_BROWN : MapColor.COLOR_BROWN).instrument(NoteBlockInstrument.BASS).strength(2.0F).sound(SoundType.WOOD).ignitedByLava())))
             .cachedBuilder()
+            .withTag(CATags.CABlockTags.DUPLICATION_LOGS)
             .withCustomModelDefinitions(ModelUtil.rotatedPillarBlock(CAConstants.prefix("wood/duplicator/dead/dead_duplicator_log"), CAConstants.prefix("wood/duplicator/dead/dead_duplicator_log_top")))
             .build()
             .getParentBlock();
     public static final Supplier<Block> DEAD_DUPLICATOR_WOOD = BlockPropertyWrapper.of(CABlockPropertyWrappers.WOOD, registerBlock("dead_duplicator_wood", () -> new RotatedPillarBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BROWN).instrument(NoteBlockInstrument.BASS).strength(2.0F).sound(SoundType.WOOD).ignitedByLava())))
             .cachedBuilder()
+            .withTag(CATags.CABlockTags.DUPLICATION_LOGS)
             .withCustomModelDefinition(ModelUtil.cubeColumn(CAConstants.prefix("wood/duplicator/dead/dead_duplicator_log")))
             .build()
             .getParentBlock();
     public static final Supplier<Block> STRIPPED_DEAD_DUPLICATOR_LOG = BlockPropertyWrapper.of(CABlockPropertyWrappers.LOG, registerBlock("stripped_dead_duplicator_log", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(DEAD_DUPLICATOR_LOG.get()).mapColor((duplicatorLogBlock) -> duplicatorLogBlock.getValue(RotatedPillarBlock.AXIS) == Direction.Axis.Y ? MapColor.TERRACOTTA_ORANGE : MapColor.COLOR_ORANGE))))
             .cachedBuilder()
+            .withTag(CATags.CABlockTags.DUPLICATION_LOGS)
             .withCustomModelDefinitions(ModelUtil.rotatedPillarBlock(CAConstants.prefix("wood/duplicator/dead/stripped_dead_duplicator_log"), CAConstants.prefix("wood/duplicator/dead/stripped_dead_duplicator_log_top")))
             .build()
             .getParentBlock();
     public static final Supplier<Block> STRIPPED_DEAD_DUPLICATOR_WOOD = BlockPropertyWrapper.of(CABlockPropertyWrappers.WOOD, registerBlock("stripped_dead_duplicator_wood", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(DEAD_DUPLICATOR_WOOD.get()))))
             .cachedBuilder()
+            .withTag(CATags.CABlockTags.DUPLICATION_LOGS)
             .withCustomModelDefinition(ModelUtil.cubeColumn(CAConstants.prefix("wood/duplicator/dead/stripped_dead_duplicator_log")))
             .build()
             .getParentBlock();
@@ -312,21 +330,25 @@ public final class CABlocks {
 
     public static final Supplier<Block> GINKGO_LOG = BlockPropertyWrapper.of(CABlockPropertyWrappers.LOG, registerBlock("ginkgo_log", () -> new RotatedPillarBlock(BlockBehaviour.Properties.of().mapColor((appleLogBlock) -> appleLogBlock.getValue(RotatedPillarBlock.AXIS) == Direction.Axis.Y ? MapColor.COLOR_ORANGE : MapColor.COLOR_BROWN).instrument(NoteBlockInstrument.BASS).strength(2.0F).sound(SoundType.WOOD).ignitedByLava())))
             .cachedBuilder()
+            .withTag(CATags.CABlockTags.GINKGO_LOGS)
             .withCustomModelDefinitions(ModelUtil.rotatedPillarBlock(CAConstants.prefix("wood/ginkgo/ginkgo_log"), CAConstants.prefix("wood/ginkgo/ginkgo_log_top")))
             .build()
             .getParentBlock();
     public static final Supplier<Block> GINKGO_WOOD = BlockPropertyWrapper.of(CABlockPropertyWrappers.WOOD, registerBlock("ginkgo_wood", () -> new RotatedPillarBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_ORANGE).instrument(NoteBlockInstrument.BASS).strength(2.0F).sound(SoundType.WOOD).ignitedByLava())))
             .cachedBuilder()
+            .withTag(CATags.CABlockTags.GINKGO_LOGS)
             .withCustomModelDefinition(ModelUtil.cubeColumn(CAConstants.prefix("wood/ginkgo/ginkgo_log")))
             .build()
             .getParentBlock();
     public static final Supplier<Block> STRIPPED_GINKGO_LOG = BlockPropertyWrapper.of(CABlockPropertyWrappers.LOG, registerBlock("stripped_ginkgo_log", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(GINKGO_LOG.get()).mapColor((appleLogBlock) -> appleLogBlock.getValue(RotatedPillarBlock.AXIS) == Direction.Axis.Y ? MapColor.TERRACOTTA_ORANGE : MapColor.COLOR_ORANGE))))
             .cachedBuilder()
+            .withTag(CATags.CABlockTags.GINKGO_LOGS)
             .withCustomModelDefinitions(ModelUtil.rotatedPillarBlock(CAConstants.prefix("wood/ginkgo/stripped_ginkgo_log"), CAConstants.prefix("wood/ginkgo/stripped_ginkgo_log_top")))
             .build()
             .getParentBlock();
     public static final Supplier<Block> STRIPPED_GINKGO_WOOD = BlockPropertyWrapper.of(CABlockPropertyWrappers.WOOD, registerBlock("stripped_ginkgo_wood", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(GINKGO_WOOD.get()))))
             .cachedBuilder()
+            .withTag(CATags.CABlockTags.GINKGO_LOGS)
             .withCustomModelDefinition(ModelUtil.cubeColumn(CAConstants.prefix("wood/ginkgo/stripped_ginkgo_log")))
             .build()
             .getParentBlock();
@@ -378,21 +400,25 @@ public final class CABlocks {
 
     public static final Supplier<Block> MESOZOIC_LOG = BlockPropertyWrapper.of(CABlockPropertyWrappers.LOG, registerBlock("mesozoic_log", () -> new RotatedPillarBlock(BlockBehaviour.Properties.of().mapColor((appleLogBlock) -> appleLogBlock.getValue(RotatedPillarBlock.AXIS) == Direction.Axis.Y ? MapColor.COLOR_ORANGE : MapColor.COLOR_BROWN).instrument(NoteBlockInstrument.BASS).strength(2.0F).sound(SoundType.WOOD).ignitedByLava())))
             .cachedBuilder()
+            .withTag(CATags.CABlockTags.MESOZOIC_LOGS)
             .withCustomModelDefinitions(ModelUtil.rotatedPillarBlock(CAConstants.prefix("wood/mesozoic/mesozoic_log"), CAConstants.prefix("wood/mesozoic/mesozoic_log_top")))
             .build()
             .getParentBlock();
     public static final Supplier<Block> MESOZOIC_WOOD = BlockPropertyWrapper.of(CABlockPropertyWrappers.WOOD, registerBlock("mesozoic_wood", () -> new RotatedPillarBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_ORANGE).instrument(NoteBlockInstrument.BASS).strength(2.0F).sound(SoundType.WOOD).ignitedByLava())))
             .cachedBuilder()
+            .withTag(CATags.CABlockTags.MESOZOIC_LOGS)
             .withCustomModelDefinition(ModelUtil.cubeColumn(CAConstants.prefix("wood/mesozoic/mesozoic_log")))
             .build()
             .getParentBlock();
     public static final Supplier<Block> STRIPPED_MESOZOIC_LOG = BlockPropertyWrapper.of(CABlockPropertyWrappers.LOG, registerBlock("stripped_mesozoic_log", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(MESOZOIC_LOG.get()).mapColor((appleLogBlock) -> appleLogBlock.getValue(RotatedPillarBlock.AXIS) == Direction.Axis.Y ? MapColor.TERRACOTTA_ORANGE : MapColor.COLOR_ORANGE))))
             .cachedBuilder()
+            .withTag(CATags.CABlockTags.MESOZOIC_LOGS)
             .withCustomModelDefinitions(ModelUtil.rotatedPillarBlock(CAConstants.prefix("wood/mesozoic/stripped_mesozoic_log"), CAConstants.prefix("wood/mesozoic/stripped_mesozoic_log_top")))
             .build()
             .getParentBlock();
     public static final Supplier<Block> STRIPPED_MESOZOIC_WOOD = BlockPropertyWrapper.of(CABlockPropertyWrappers.WOOD, registerBlock("stripped_mesozoic_wood", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(MESOZOIC_WOOD.get()))))
             .cachedBuilder()
+            .withTag(CATags.CABlockTags.MESOZOIC_LOGS)
             .withCustomModelDefinition(ModelUtil.cubeColumn(CAConstants.prefix("wood/mesozoic/stripped_mesozoic_log")))
             .build()
             .getParentBlock();
@@ -444,21 +470,25 @@ public final class CABlocks {
 
     public static final Supplier<Block> PEACH_LOG = BlockPropertyWrapper.of(CABlockPropertyWrappers.LOG, registerBlock("peach_log", () -> new RotatedPillarBlock(BlockBehaviour.Properties.of().mapColor((appleLogBlock) -> appleLogBlock.getValue(RotatedPillarBlock.AXIS) == Direction.Axis.Y ? MapColor.COLOR_ORANGE : MapColor.COLOR_BROWN).instrument(NoteBlockInstrument.BASS).strength(2.0F).sound(SoundType.WOOD).ignitedByLava())))
             .cachedBuilder()
+            .withTag(CATags.CABlockTags.PEACH_LOGS)
             .withCustomModelDefinitions(ModelUtil.rotatedPillarBlock(CAConstants.prefix("wood/peach/peach_log"), CAConstants.prefix("wood/peach/peach_log_top")))
             .build()
             .getParentBlock();
     public static final Supplier<Block> PEACH_WOOD = BlockPropertyWrapper.of(CABlockPropertyWrappers.WOOD, registerBlock("peach_wood", () -> new RotatedPillarBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_ORANGE).instrument(NoteBlockInstrument.BASS).strength(2.0F).sound(SoundType.WOOD).ignitedByLava())))
             .cachedBuilder()
+            .withTag(CATags.CABlockTags.PEACH_LOGS)
             .withCustomModelDefinition(ModelUtil.cubeColumn(CAConstants.prefix("wood/peach/peach_log")))
             .build()
             .getParentBlock();
     public static final Supplier<Block> STRIPPED_PEACH_LOG = BlockPropertyWrapper.of(CABlockPropertyWrappers.LOG, registerBlock("stripped_peach_log", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(PEACH_LOG.get()).mapColor((appleLogBlock) -> appleLogBlock.getValue(RotatedPillarBlock.AXIS) == Direction.Axis.Y ? MapColor.TERRACOTTA_ORANGE : MapColor.COLOR_ORANGE))))
             .cachedBuilder()
+            .withTag(CATags.CABlockTags.PEACH_LOGS)
             .withCustomModelDefinitions(ModelUtil.rotatedPillarBlock(CAConstants.prefix("wood/peach/stripped_peach_log"), CAConstants.prefix("wood/peach/stripped_peach_log_top")))
             .build()
             .getParentBlock();
     public static final Supplier<Block> STRIPPED_PEACH_WOOD = BlockPropertyWrapper.of(CABlockPropertyWrappers.WOOD, registerBlock("stripped_peach_wood", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(PEACH_WOOD.get()))))
             .cachedBuilder()
+            .withTag(CATags.CABlockTags.PEACH_LOGS)
             .withCustomModelDefinition(ModelUtil.cubeColumn(CAConstants.prefix("wood/peach/stripped_peach_log")))
             .build()
             .getParentBlock();
@@ -510,21 +540,25 @@ public final class CABlocks {
 
     public static final Supplier<Block> SKYWOOD_LOG = BlockPropertyWrapper.of(CABlockPropertyWrappers.LOG, registerBlock("skywood_log", () -> new RotatedPillarBlock(BlockBehaviour.Properties.of().mapColor((appleLogBlock) -> appleLogBlock.getValue(RotatedPillarBlock.AXIS) == Direction.Axis.Y ? MapColor.COLOR_BLUE : MapColor.COLOR_LIGHT_BLUE).instrument(NoteBlockInstrument.BASS).strength(2.0F).sound(SoundType.WOOD).ignitedByLava())))
             .cachedBuilder()
+            .withTag(CATags.CABlockTags.SKYWOOD_LOGS)
             .withCustomModelDefinitions(ModelUtil.rotatedPillarBlock(CAConstants.prefix("wood/skywood/skywood_log"), CAConstants.prefix("wood/skywood/skywood_log_top")))
             .build()
             .getParentBlock();
     public static final Supplier<Block> SKYWOOD = BlockPropertyWrapper.of(CABlockPropertyWrappers.WOOD, registerBlock("skywood", () -> new RotatedPillarBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BLUE).instrument(NoteBlockInstrument.BASS).strength(2.0F).sound(SoundType.WOOD).ignitedByLava())))
             .cachedBuilder()
+            .withTag(CATags.CABlockTags.SKYWOOD_LOGS)
             .withCustomModelDefinition(ModelUtil.cubeColumn(CAConstants.prefix("wood/skywood/skywood_log")))
             .build()
             .getParentBlock();
     public static final Supplier<Block> STRIPPED_SKYWOOD_LOG = BlockPropertyWrapper.of(CABlockPropertyWrappers.LOG, registerBlock("stripped_skywood_log", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(SKYWOOD_LOG.get()).mapColor((appleLogBlock) -> appleLogBlock.getValue(RotatedPillarBlock.AXIS) == Direction.Axis.Y ? MapColor.COLOR_BLUE : MapColor.COLOR_LIGHT_BLUE))))
             .cachedBuilder()
+            .withTag(CATags.CABlockTags.SKYWOOD_LOGS)
             .withCustomModelDefinitions(ModelUtil.rotatedPillarBlock(CAConstants.prefix("wood/skywood/stripped_skywood_log"), CAConstants.prefix("wood/skywood/stripped_skywood_log_top")))
             .build()
             .getParentBlock();
     public static final Supplier<Block> STRIPPED_SKYWOOD = BlockPropertyWrapper.of(CABlockPropertyWrappers.WOOD, registerBlock("stripped_skywood", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(SKYWOOD.get()))))
             .cachedBuilder()
+            .withTag(CATags.CABlockTags.SKYWOOD_LOGS)
             .withCustomModelDefinition(ModelUtil.cubeColumn(CAConstants.prefix("wood/skywood/stripped_skywood_log")))
             .build()
             .getParentBlock();
