@@ -17,6 +17,22 @@
     "chaosawakens:dead_duplicator_log",
     "chaosawakens:dead_duplicator_wood",
     "chaosawakens:stripped_dead_duplicator_log",
-    "chaosawakens:stripped_dead_duplicator_wood"
+    "chaosawakens:stripped_dead_duplicator_wood",
+    "chaosawakens:ginkgo_log",
+    "chaosawakens:ginkgo_wood",
+    "chaosawakens:stripped_ginkgo_log",
+    "chaosawakens:stripped_ginkgo_wood",
+    "chaosawakens:mesozoic_log",
+    "chaosawakens:mesozoic_wood",
+    "chaosawakens:stripped_mesozoic_log",
+    "chaosawakens:stripped_mesozoic_wood",
+    "chaosawakens:peach_log",
+    "chaosawakens:peach_wood",
+    "chaosawakens:stripped_peach_log",
+    "chaosawakens:stripped_peach_wood",
+    "chaosawakens:skywood_log",
+    "chaosawakens:skywood",
+    "chaosawakens:stripped_skywood_log",
+    "chaosawakens:stripped_skywood"
   ]
 }

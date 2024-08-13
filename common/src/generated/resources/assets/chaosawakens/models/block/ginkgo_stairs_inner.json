@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/inner_stairs",
+  "textures": {
+    "bottom": "chaosawakens:block/wood/ginkgo/ginkgo_planks",
+    "side": "chaosawakens:block/wood/ginkgo/ginkgo_planks",
+    "top": "chaosawakens:block/wood/ginkgo/ginkgo_planks"
+  }
+}

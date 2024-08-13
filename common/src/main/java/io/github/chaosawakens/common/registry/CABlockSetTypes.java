@@ -10,6 +10,7 @@ public final class CABlockSetTypes {
     public static final BlockSetType DUPLICATOR = registerBlockSetType(new BlockSetType("duplicator"));
     public static final BlockSetType GINKGO = registerBlockSetType(new BlockSetType("ginkgo"));
     public static final BlockSetType MESOZOIC = registerBlockSetType(new BlockSetType("mesozoic"));
+    public static final BlockSetType PEACH = registerBlockSetType(new BlockSetType("peach"));
     public static final BlockSetType SKYWOOD = registerBlockSetType(new BlockSetType("skywood"));
 
     private static BlockSetType registerBlockSetType(BlockSetType blockSetType) {
