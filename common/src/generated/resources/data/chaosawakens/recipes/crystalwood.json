@@ -2,7 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "L": []
+    "L": {
+      "item": "chaosawakens:crystalwood_log"
+    }
   },
   "pattern": [
     "LL",

@@ -43,7 +43,7 @@ public final class RegistryUtil {
                 : targetBlockKey.getPath().endsWith("_wood")
                 ? () -> BuiltInRegistries.BLOCK.get(targetBlockKey.withPath(BuiltInRegistries.BLOCK.getKey(targetBlock.get()).getPath().replace("wood", "log")))
                 : targetBlockKey.getPath().endsWith("wood")
-                ? () -> BuiltInRegistries.BLOCK.get(targetBlockKey.withPath(BuiltInRegistries.BLOCK.getKey(targetBlock.get()).getPath().replace("wood", "_log")))
+                ? () -> BuiltInRegistries.BLOCK.get(targetBlockKey.withPath(BuiltInRegistries.BLOCK.getKey(targetBlock.get()).getPath().concat("_log")))
                 : null;
     }
 }

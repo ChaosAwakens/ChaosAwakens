@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_air": {
+    "has_densewood_log": {
       "conditions": {
         "items": [
           {
             "items": [
-              "minecraft:air"
+              "chaosawakens:densewood_log"
             ]
           }
         ]
@@ -22,7 +22,7 @@
   },
   "requirements": [
     [
-      "has_air",
+      "has_densewood_log",
       "has_the_recipe"
     ]
   ],

@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_air": {
+    "has_stripped_skywood_log": {
       "conditions": {
         "items": [
           {
             "items": [
-              "minecraft:air"
+              "chaosawakens:stripped_skywood_log"
             ]
           }
         ]
@@ -22,7 +22,7 @@
   },
   "requirements": [
     [
-      "has_air",
+      "has_stripped_skywood_log",
       "has_the_recipe"
     ]
   ],

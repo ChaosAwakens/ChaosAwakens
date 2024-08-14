@@ -22,7 +22,7 @@ public class CARecipeProvider extends RecipeProvider {
     protected void buildRecipes(@NotNull Consumer<FinishedRecipe> pWriter) {
         if (!BlockPropertyWrapper.getMappedBwps().isEmpty()) {
             BlockPropertyWrapper.getMappedBwps().forEach((blockSupEntry, bpwEntry) -> {
-                Function<Consumer<FinishedRecipe>, Consumer<Supplier<Block>>> recipeFunc = bpwEntry.getRecipeMappingFunction() == null ? null : bpwEntry.getRecipeMappingFunction();
+                Function<Consumer<FinishedRecipe>, Consumer<Supplier<Block>>> recipeFunc = bpwEntry.getRecipeMappingFunction() == null ? null : bpwEntry.getRecipeMappingFunction(); // Otherwise doesn't work (don't ask)
 
                 if (recipeFunc != null) {
                     CAConstants.LOGGER.debug("[Generating Block Recipe]: " + blockSupEntry.get().getDescriptionId());
