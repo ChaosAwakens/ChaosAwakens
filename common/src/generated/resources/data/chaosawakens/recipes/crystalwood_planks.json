@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "chaosawakens:crystalwood_log"
+    }
+  ],
+  "result": {
+    "count": 4,
+    "item": "chaosawakens:crystalwood_planks"
+  }
+}

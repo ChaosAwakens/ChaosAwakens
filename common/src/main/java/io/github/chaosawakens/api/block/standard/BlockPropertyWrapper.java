@@ -2,11 +2,14 @@ package io.github.chaosawakens.api.block.standard;
 
 import com.google.common.collect.ImmutableSortedMap;
 import io.github.chaosawakens.CAConstants;
+import io.github.chaosawakens.api.datagen.block.BlockModelDefinition;
+import io.github.chaosawakens.api.datagen.block.BlockStateDefinition;
 import io.github.chaosawakens.common.registry.CABlocks;
 import io.github.chaosawakens.util.LootUtil;
 import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -14,6 +17,7 @@ import net.minecraft.world.level.storage.loot.LootTable;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
@@ -111,6 +115,7 @@ public class BlockPropertyWrapper { //TODO Maybe type param this for blocks
                     .withLootTable(parentTemplateWrapper.builder.blockLootTableBuilder)
                     .withSetCustomModelDefinitions(parentTemplateWrapper.builder.blockModelDefinitions)
                     .withBlockStateDefinition(parentTemplateWrapper.builder.blockStateDefinition)
+                    .withRecipe(parentTemplateWrapper.builder.recipeBuilderFunction)
                     .build(); // Direct setting of the builder would copy the entire object itself, which would in-turn overwrite it if any calls are made to the copied BPW afterward
 
             return newTemplateWrapper;
@@ -142,6 +147,7 @@ public class BlockPropertyWrapper { //TODO Maybe type param this for blocks
                     .withLootTable(parentWrapper.builder.blockLootTableBuilder)
                     .withSetCustomModelDefinitions(List.copyOf(parentWrapper.builder.blockModelDefinitions))
                     .withBlockStateDefinition(parentWrapper.builder.blockStateDefinition)
+                    .withRecipe(parentWrapper.builder.recipeBuilderFunction)
                     .build(); // Direct setting of the builder would copy the entire object itself, which would in-turn overwrite it if any calls are made to the copied BPW afterward
 
             return newWrapper;
@@ -174,6 +180,7 @@ public class BlockPropertyWrapper { //TODO Maybe type param this for blocks
                     .withLootTable(originalWrapper.builder.blockLootTableBuilder)
                     .withSetCustomModelDefinitions(List.copyOf(originalWrapper.builder.blockModelDefinitions))
                     .withBlockStateDefinition(originalWrapper.builder.blockStateDefinition)
+                    .withRecipe(originalWrapper.builder.recipeBuilderFunction)
                     .build(); // Direct setting of the builder would copy the entire object itself, which would in-turn overwrite it if any calls are made to the copied BPW afterward
 
             return newWrapper;
@@ -290,6 +297,17 @@ public class BlockPropertyWrapper { //TODO Maybe type param this for blocks
     }
 
     /**
+     * Gets the {@code Function<Consumer<FinishedRecipe>, Consumer<Supplier<Block>>>} from the {@link #builder()} if the builder exists, and it is defined within said builder.
+     * May be {@code null}.
+     *
+     * @return The {@code Function<Consumer<FinishedRecipe>, Consumer<Supplier<Block>>>}, or {@code null} if the {@link #builder()} is {@code null} || it isn't defined within said builder.
+     */
+    @Nullable
+    public Function<Consumer<FinishedRecipe>, Consumer<Supplier<Block>>> getRecipeMappingFunction() {
+        return builder == null ? null : builder.recipeBuilderFunction;
+    }
+
+    /**
      * Gets an immutable view (via {@link ImmutableSortedMap}) of {@link #MAPPED_BWPS}.
      *
      * @return An immutable view (via {@link ImmutableSortedMap}) of {@link #MAPPED_BWPS}.
@@ -324,6 +342,8 @@ public class BlockPropertyWrapper { //TODO Maybe type param this for blocks
         private List<BlockModelDefinition> blockModelDefinitions = ObjectArrayList.of();
         @Nullable
         private Function<Supplier<Block>, BlockStateDefinition> blockStateDefinition;
+        @Nullable
+        private Function<Consumer<FinishedRecipe>, Consumer<Supplier<Block>>> recipeBuilderFunction;
 
         private BPWBuilder(BlockPropertyWrapper ownerWrapper, Supplier<Block> parentBlock) {
             this.ownerWrapper = ownerWrapper;
@@ -505,6 +525,18 @@ public class BlockPropertyWrapper { //TODO Maybe type param this for blocks
          */
         public BPWBuilder withBlockStateDefinition(Function<Supplier<Block>, BlockStateDefinition> bsdMappingFunction) {
             this.blockStateDefinition = bsdMappingFunction;
+            return this;
+        }
+
+        /**
+         * Defines a custom mapping function representing the parent {@linkplain Block Block's} recipe.
+         *
+         * @param recipeBuilderMethod The mapping function accepting a representation of the parent {@linkplain Block Block's} recipe.
+         *
+         * @return {@code this} (builder method).
+         */
+        public BPWBuilder withRecipe(Function<Consumer<FinishedRecipe>, Consumer<Supplier<Block>>> recipeBuilderMethod) {
+            this.recipeBuilderFunction = recipeBuilderMethod;
             return this;
         }
 

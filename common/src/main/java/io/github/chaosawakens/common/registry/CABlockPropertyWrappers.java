@@ -3,6 +3,7 @@ package io.github.chaosawakens.common.registry;
 import io.github.chaosawakens.api.block.standard.BlockPropertyWrapper;
 import io.github.chaosawakens.util.LootUtil;
 import io.github.chaosawakens.util.ModelUtil;
+import io.github.chaosawakens.util.RecipeUtil;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.tags.BlockTags;
 
@@ -117,6 +118,7 @@ public final class CABlockPropertyWrappers { // Commented BMD calls out because 
     // Wooden Stuff
     public static final BlockPropertyWrapper WOODEN_PLANKS = BlockPropertyWrapper.ofTemplate(BASIC_BLOCK_AXE)
             .cachedBuilder()
+            .withRecipe(RecipeUtil::logToPlanks)
             .withTags(ObjectArrayList.of(BlockTags.PLANKS))
             .build();
     public static final BlockPropertyWrapper WOODEN_SLAB = BlockPropertyWrapper.createTemplate()
@@ -186,6 +188,7 @@ public final class CABlockPropertyWrappers { // Commented BMD calls out because 
             .build();
     public static final BlockPropertyWrapper WOOD = BlockPropertyWrapper.ofTemplate(BASIC_AXIS_ALIGNED_BLOCK)
             .cachedBuilder()
+            .withRecipe(RecipeUtil::logToWood)
             .withTags(ObjectArrayList.of(BlockTags.MINEABLE_WITH_AXE, BlockTags.LOGS_THAT_BURN))
             .build();
 }

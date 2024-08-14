@@ -43,5 +43,7 @@ public class ChaosAwakensForge {
         datagen.addProvider(event.includeServer(), new CALootTableProvider(datagenPackOutput));
 
         datagen.addProvider(event.includeServer(), new CABlockTagsProvider(datagenPackOutput, lookupProvider, curFileHelper));
+
+        datagen.addProvider(event.includeServer(), new CARecipeProvider(datagenPackOutput));
     }
 }

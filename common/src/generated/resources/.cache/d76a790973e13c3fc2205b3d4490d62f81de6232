@@ -1,4 +1,4 @@
-// 1.20.1	2024-08-13T15:10:37.0035204	Chaos Awakens: Block & Block Item Models
+// 1.20.1	2024-08-14T08:56:21.0029389	Chaos Awakens: Block & Block Item Models
 32bed3330bf18b5cf782cdc679df40a9845fcaad assets/chaosawakens/models/block/apple_button.json
 0b3671b602abeed4f6588f981e2e792c7403ad64 assets/chaosawakens/models/block/apple_button_inventory.json
 3238b44f02d0639abb168fe9b423a2264f6cc0c4 assets/chaosawakens/models/block/apple_button_pressed.json
@@ -282,6 +282,8 @@ fe666e87b3aa4900e04f1b9dda0e7d1f2e4747bc assets/chaosawakens/models/block/stripp
 165fa234136a2b99b81821bd6bca4e98882340ff assets/chaosawakens/models/block/stripped_skywood.json
 0f957d3bb0558004dbdf5eed0327bcd86fa10e68 assets/chaosawakens/models/block/stripped_skywood_log.json
 681daaecfbac4a32de00f2b4a673f0afbbee2315 assets/chaosawakens/models/block/stripped_skywood_log_horizontal.json
+a80df4bcbcb7c766c97d930e1502957e266391ff assets/chaosawakens/models/block/titanium_block.json
+3f7d88b1245e22adf13588569fad349afef1d7a3 assets/chaosawakens/models/block/uranium_block.json
 acb0081869fc8c4558c2baf9cfad0a1781e30ead assets/chaosawakens/models/item/apple_button.json
 405b798b72eed17f54b698f08ed155aa48be9b26 assets/chaosawakens/models/item/apple_door.json
 dc166fafea3c9233d943fb927936a0cb0e45106d assets/chaosawakens/models/item/apple_fence.json
@@ -388,3 +390,5 @@ d3f655e234e09eee8a692ac37c27979efd2472a2 assets/chaosawakens/models/item/strippe
 1285b68b6f63ed28b008bda0fe3f371760967fc7 assets/chaosawakens/models/item/stripped_peach_wood.json
 fe44fb5e5ef06e660587253b630ecbf89ea2cf7f assets/chaosawakens/models/item/stripped_skywood.json
 fc60624abc270337df55433c5964f428d16f2740 assets/chaosawakens/models/item/stripped_skywood_log.json
+08e413981cdfe8495db4997af4e3c9b2d4357667 assets/chaosawakens/models/item/titanium_block.json
+2ec0cb0a5fb2b8619b3bfcef46c84c9507740d1c assets/chaosawakens/models/item/uranium_block.json

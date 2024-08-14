@@ -1,4 +1,4 @@
-// 1.20.1	2024-08-13T15:10:36.9979877	Loot Tables
+// 1.20.1	2024-08-14T08:56:20.9969383	Loot Tables
 e0ee511bca34f9c60bdb2af23a96292e96f0a64c data/chaosawakens/loot_tables/blocks/apple_button.json
 129675638aede2a57513342e984c863d5f6fd889 data/chaosawakens/loot_tables/blocks/apple_door.json
 6de1cbe7f909970121a2193e802885c0ebce5883 data/chaosawakens/loot_tables/blocks/apple_fence.json
@@ -105,3 +105,5 @@ b83bc8b2ea96284e2d295b5f06e2347ac87681e0 data/chaosawakens/loot_tables/blocks/st
 430aff05c017c4f286876bb471612625a328113b data/chaosawakens/loot_tables/blocks/stripped_peach_wood.json
 10a970faa312ebf6654a52601ca9e96f103b46f3 data/chaosawakens/loot_tables/blocks/stripped_skywood.json
 56ba08d45dbea9a151df7f4b0144045ff3479c8f data/chaosawakens/loot_tables/blocks/stripped_skywood_log.json
+b4728b35475e244f59ad6de112bd8074e71c955e data/chaosawakens/loot_tables/blocks/titanium_block.json
+ec37a1ff63c68f2e29a164474b0dbccdcbe33381 data/chaosawakens/loot_tables/blocks/uranium_block.json

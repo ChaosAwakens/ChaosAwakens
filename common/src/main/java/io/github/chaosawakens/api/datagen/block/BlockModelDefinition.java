@@ -1,4 +1,4 @@
-package io.github.chaosawakens.api.block.standard;
+package io.github.chaosawakens.api.datagen.block;
 
 import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
 import net.minecraft.client.renderer.RenderType;

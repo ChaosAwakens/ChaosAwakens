@@ -27,34 +27,34 @@ public class CATags {
         public static final TagKey<Block> DENSE_DIRT = createBlockTag("dense_dirt");
         public static final TagKey<Block> TERRA_PRETA = createBlockTag("terra_preta");
 
-        public static final TagKey<Block> APPLE_LOGS = createWrappedBlockTag("apple_logs")
+        public static final TagKey<Block> APPLE_LOGS = createWrappedBlockTag("wood/logs/apple_logs")
                 .withParentTagEntry(BlockTags.LOGS_THAT_BURN)
                 .getParentTag();
-        public static final TagKey<Block> CHERRY_LOGS = createWrappedBlockTag("cherry_logs")
+        public static final TagKey<Block> CHERRY_LOGS = createWrappedBlockTag("wood/logs/cherry_logs")
                 .withParentTagEntry(BlockTags.LOGS_THAT_BURN)
                 .getParentTag();
-        public static final TagKey<Block> DUPLICATION_LOGS = createWrappedBlockTag("duplication_logs")
+        public static final TagKey<Block> DUPLICATION_LOGS = createWrappedBlockTag("wood/logs/duplication_logs")
                 .withParentTagEntry(BlockTags.LOGS_THAT_BURN)
                 .getParentTag();
-        public static final TagKey<Block> PEACH_LOGS = createWrappedBlockTag("peach_logs")
+        public static final TagKey<Block> PEACH_LOGS = createWrappedBlockTag("wood/logs/peach_logs")
                 .withParentTagEntry(BlockTags.LOGS_THAT_BURN)
                 .getParentTag();
-        public static final TagKey<Block> SKYWOOD_LOGS = createWrappedBlockTag("skywood_logs")
+        public static final TagKey<Block> SKYWOOD_LOGS = createWrappedBlockTag("wood/logs/skywood_logs")
                 .withParentTagEntry(BlockTags.LOGS_THAT_BURN)
                 .getParentTag();
-        public static final TagKey<Block> GINKGO_LOGS = createWrappedBlockTag("ginkgo_logs")
+        public static final TagKey<Block> GINKGO_LOGS = createWrappedBlockTag("wood/logs/ginkgo_logs")
                 .withParentTagEntry(BlockTags.LOGS_THAT_BURN)
                 .getParentTag();
-        public static final TagKey<Block> MESOZOIC_LOGS = createWrappedBlockTag("mesozoic_logs")
+        public static final TagKey<Block> MESOZOIC_LOGS = createWrappedBlockTag("wood/logs/mesozoic_logs")
                 .withParentTagEntry(BlockTags.LOGS_THAT_BURN)
                 .getParentTag();
-        public static final TagKey<Block> DENSEWOOD_LOGS = createWrappedBlockTag("densewood_logs")
+        public static final TagKey<Block> DENSEWOOD_LOGS = createWrappedBlockTag("wood/logs/densewood_logs")
                 .withParentTagEntry(BlockTags.LOGS_THAT_BURN)
                 .getParentTag();
 
-        public static final TagKey<Block> CRYSTALWOOD_LOGS = createBlockTag("crystalwood_logs");
-        public static final TagKey<Block> CRYSTALWOOD_LEAVES = createBlockTag("crystalwood_leaves");
-        public static final TagKey<Block> CRYSTALWOOD_SAPLINGS = createBlockTag("crystalwood_saplings");
+        public static final TagKey<Block> CRYSTALWOOD_LOGS = createBlockTag("wood/logs/crystalwood_logs");
+        public static final TagKey<Block> CRYSTALWOOD_LEAVES = createBlockTag("wood/leaves/crystalwood_leaves");
+        public static final TagKey<Block> CRYSTALWOOD_SAPLINGS = createBlockTag("wood/saplings/crystalwood_saplings");
 
         public static final TagKey<Block> RUBY_ORES = createBlockTag("ruby_ores");
 

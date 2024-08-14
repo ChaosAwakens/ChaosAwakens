@@ -25,6 +25,7 @@ public final class CABlocks {
     private static final ObjectArrayList<Supplier<Block>> BLOCKS = new ObjectArrayList<>();
     private static final ObjectArrayList<Supplier<Item>> BLOCK_ITEMS = new ObjectArrayList<>();
 
+    // Wood Sets
     public static final Supplier<Block> APPLE_LOG = BlockPropertyWrapper.of(CABlockPropertyWrappers.LOG, registerBlock("apple_log", () -> new RotatedPillarBlock(BlockBehaviour.Properties.of().mapColor((appleLogBlock) -> appleLogBlock.getValue(RotatedPillarBlock.AXIS) == Direction.Axis.Y ? MapColor.COLOR_ORANGE : MapColor.COLOR_BROWN).instrument(NoteBlockInstrument.BASS).strength(2.0F).sound(SoundType.WOOD).ignitedByLava())))
             .cachedBuilder()
             .withTag(CATags.CABlockTags.APPLE_LOGS)
@@ -605,6 +606,18 @@ public final class CABlocks {
     public static final Supplier<Block> SKYWOOD_BUTTON = BlockPropertyWrapper.of(CABlockPropertyWrappers.WOODEN_BUTTON, registerBlock("skywood_button", () -> new ButtonBlock(BlockBehaviour.Properties.of().noCollission().strength(0.5F).pushReaction(PushReaction.DESTROY), CABlockSetTypes.SKYWOOD, 30, true)))
             .cachedBuilder()
             .withCustomModelDefinitions(ModelUtil.button(CAConstants.prefix("wood/skywood/skywood_planks"), CAConstants.prefix("block/skywood_button_inventory")))
+            .build()
+            .getParentBlock();
+
+    // Mineral Blocks
+    public static final Supplier<Block> TITANIUM_BLOCK = BlockPropertyWrapper.of(CABlockPropertyWrappers.BASIC_BLOCK_PICKAXE_DIAMOND, registerBlock("titanium_block", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BLUE).strength(75.0F, 2400.0F).sound(SoundType.NETHERITE_BLOCK)), new Item.Properties().fireResistant()))
+            .cachedBuilder()
+            .withCustomModelDefinition(ModelUtil.cubeAll(CAConstants.prefix("mineral/titanium_block")))
+            .build()
+            .getParentBlock();
+    public static final Supplier<Block> URANIUM_BLOCK = BlockPropertyWrapper.of(CABlockPropertyWrappers.BASIC_BLOCK_PICKAXE_DIAMOND, registerBlock("uranium_block", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_GREEN).strength(60.0F, 1800.0F).sound(SoundType.NETHERITE_BLOCK)), new Item.Properties().fireResistant()))
+            .cachedBuilder()
+            .withCustomModelDefinition(ModelUtil.cubeAll(CAConstants.prefix("mineral/uranium_block")))
             .build()
             .getParentBlock();
 

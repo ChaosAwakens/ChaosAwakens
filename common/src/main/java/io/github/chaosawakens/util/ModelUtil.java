@@ -2,8 +2,8 @@ package io.github.chaosawakens.util;
 
 import com.google.common.collect.Sets;
 import io.github.chaosawakens.CAConstants;
-import io.github.chaosawakens.api.block.standard.BlockModelDefinition;
-import io.github.chaosawakens.api.block.standard.BlockStateDefinition;
+import io.github.chaosawakens.api.datagen.block.BlockModelDefinition;
+import io.github.chaosawakens.api.datagen.block.BlockStateDefinition;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Direction;

@@ -34,13 +34,13 @@
     "chaosawakens:skywood",
     "chaosawakens:stripped_skywood_log",
     "chaosawakens:stripped_skywood",
-    "#chaosawakens:apple_logs",
-    "#chaosawakens:cherry_logs",
-    "#chaosawakens:duplication_logs",
-    "#chaosawakens:peach_logs",
-    "#chaosawakens:skywood_logs",
-    "#chaosawakens:ginkgo_logs",
-    "#chaosawakens:mesozoic_logs",
-    "#chaosawakens:densewood_logs"
+    "#chaosawakens:wood/logs/apple_logs",
+    "#chaosawakens:wood/logs/cherry_logs",
+    "#chaosawakens:wood/logs/duplication_logs",
+    "#chaosawakens:wood/logs/peach_logs",
+    "#chaosawakens:wood/logs/skywood_logs",
+    "#chaosawakens:wood/logs/ginkgo_logs",
+    "#chaosawakens:wood/logs/mesozoic_logs",
+    "#chaosawakens:wood/logs/densewood_logs"
   ]
 }

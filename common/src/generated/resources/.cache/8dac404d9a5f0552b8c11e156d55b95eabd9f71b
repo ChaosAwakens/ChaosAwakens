@@ -1,4 +1,4 @@
-// 1.20.1	2024-08-13T15:10:36.9855335	Chaos Awakens: Block States
+// 1.20.1	2024-08-14T08:56:20.9809074	Chaos Awakens: Block States
 df2f1e8fa81c1f360358a98fa2fc7dc23ca6f0e3 assets/chaosawakens/blockstates/apple_button.json
 c93a856954b2d70855cccf32b8282351ecd1fd66 assets/chaosawakens/blockstates/apple_door.json
 94d85c83ab2daa5f0032f1b41e9627fe41fe677d assets/chaosawakens/blockstates/apple_fence.json
@@ -105,3 +105,5 @@ ebfbf5a7327620a543aae00e4822f8f03b7c96dd assets/chaosawakens/blockstates/strippe
 817f3fa0bde5dd51ca682fa1ccbaa4dffda5b782 assets/chaosawakens/blockstates/stripped_peach_wood.json
 a66ca250627df4b94ec66f0dbb79a980fdb517cb assets/chaosawakens/blockstates/stripped_skywood.json
 2b3024f97c7ddef3d1150209ee7e4467fc503f10 assets/chaosawakens/blockstates/stripped_skywood_log.json
+a75e029610c3b6e6093708bee9d25ec2f52adf60 assets/chaosawakens/blockstates/titanium_block.json
+85831a0d12160fe69db9db8824e6eda133657dc6 assets/chaosawakens/blockstates/uranium_block.json

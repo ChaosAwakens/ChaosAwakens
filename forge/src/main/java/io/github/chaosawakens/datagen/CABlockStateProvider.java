@@ -4,7 +4,7 @@ import com.google.common.base.Preconditions;
 import com.google.gson.JsonObject;
 import io.github.chaosawakens.CAConstants;
 import io.github.chaosawakens.api.block.standard.BlockPropertyWrapper;
-import io.github.chaosawakens.api.block.standard.BlockStateDefinition;
+import io.github.chaosawakens.api.datagen.block.BlockStateDefinition;
 import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;
