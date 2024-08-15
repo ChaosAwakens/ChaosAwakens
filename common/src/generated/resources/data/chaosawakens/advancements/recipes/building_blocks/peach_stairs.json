@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_skywood_log": {
+    "has_peach_planks": {
       "conditions": {
         "items": [
           {
             "items": [
-              "chaosawakens:skywood_log"
+              "chaosawakens:peach_planks"
             ]
           }
         ]
@@ -15,20 +15,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "chaosawakens:skywood"
+        "recipe": "chaosawakens:peach_stairs"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_skywood_log",
+      "has_peach_planks",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "chaosawakens:skywood"
+      "chaosawakens:peach_stairs"
     ]
   },
   "sends_telemetry_event": false

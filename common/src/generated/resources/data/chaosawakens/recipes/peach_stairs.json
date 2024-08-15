@@ -2,17 +2,18 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "L": {
-      "item": "chaosawakens:crystalwood_log"
+    "P": {
+      "item": "chaosawakens:peach_planks"
     }
   },
   "pattern": [
-    "LL",
-    "LL"
+    "P  ",
+    "PP ",
+    "PPP"
   ],
   "result": {
-    "count": 3,
-    "item": "chaosawakens:crystalwood"
+    "count": 4,
+    "item": "chaosawakens:peach_stairs"
   },
   "show_notification": true
 }

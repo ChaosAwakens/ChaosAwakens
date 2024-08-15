@@ -5,6 +5,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
+import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Supplier;
@@ -30,20 +31,34 @@ public final class RegistryUtil {
     }
 
     @Nullable
-    public static Supplier<Block> getPlanksFrom(Supplier<Block> logBlock) {
-        ResourceLocation logBlockKey = BuiltInRegistries.BLOCK.getKey(logBlock.get());
-        return logBlockKey.getPath().contains("log") ? () -> BuiltInRegistries.BLOCK.get(logBlockKey.withPath(BuiltInRegistries.BLOCK.getKey(logBlock.get()).getPath().replace("log", "planks"))) : null;
+    public static Supplier<Block> getPlanksFrom(Supplier<Block> targetBlock) {
+        ResourceLocation targetBlockKey = BuiltInRegistries.BLOCK.getKey(targetBlock.get());
+        String copiedPath = BuiltInRegistries.BLOCK.getKey(targetBlock.get()).getPath();
+
+        return targetBlockKey.getPath().startsWith("stripped")
+                ? targetBlockKey.getPath().endsWith("wood") && targetBlockKey.getPath().charAt(targetBlockKey.getPath().indexOf("wood") - 1) != '_'
+                ? () -> BuiltInRegistries.BLOCK.get(targetBlockKey.withPath(copiedPath.concat("_planks")))
+                : () -> BuiltInRegistries.BLOCK.get(targetBlockKey.withPath(StringUtils.substring(copiedPath, 0, copiedPath.lastIndexOf("_")).concat("_planks")))
+                : targetBlockKey.getPath().endsWith("_wood")
+                ? () -> BuiltInRegistries.BLOCK.get(targetBlockKey.withPath(StringUtils.substring(copiedPath, 0, copiedPath.lastIndexOf("_")).concat("_planks")))
+                : targetBlockKey.getPath().contains("_")
+                ? () -> BuiltInRegistries.BLOCK.get(targetBlockKey.withPath(StringUtils.substringBefore(copiedPath, "_").concat("_planks")))
+                : null; // Force nullity rather than air delegate
     }
 
     @Nullable
     public static Supplier<Block> getLogFrom(Supplier<Block> targetBlock) {
         ResourceLocation targetBlockKey = BuiltInRegistries.BLOCK.getKey(targetBlock.get());
-        return targetBlockKey.getPath().contains("planks")
-                ? () -> BuiltInRegistries.BLOCK.get(targetBlockKey.withPath(BuiltInRegistries.BLOCK.getKey(targetBlock.get()).getPath().replace("planks", "log")))
+        String copiedPath = BuiltInRegistries.BLOCK.getKey(targetBlock.get()).getPath();
+
+        return targetBlockKey.getPath().startsWith("stripped")
+                ? targetBlockKey.getPath().endsWith("wood") && targetBlockKey.getPath().charAt(targetBlockKey.getPath().indexOf("wood") - 1) != '_'
+                ? () -> BuiltInRegistries.BLOCK.get(targetBlockKey.withPath(copiedPath.concat("_log")))
+                : () -> BuiltInRegistries.BLOCK.get(targetBlockKey.withPath(StringUtils.substring(copiedPath, 0, copiedPath.lastIndexOf("_")).concat("_log")))
                 : targetBlockKey.getPath().endsWith("_wood")
-                ? () -> BuiltInRegistries.BLOCK.get(targetBlockKey.withPath(BuiltInRegistries.BLOCK.getKey(targetBlock.get()).getPath().replace("wood", "log")))
-                : targetBlockKey.getPath().endsWith("wood")
-                ? () -> BuiltInRegistries.BLOCK.get(targetBlockKey.withPath(BuiltInRegistries.BLOCK.getKey(targetBlock.get()).getPath().concat("_log")))
-                : null;
+                ? () -> BuiltInRegistries.BLOCK.get(targetBlockKey.withPath(StringUtils.substring(copiedPath, 0, copiedPath.lastIndexOf("_")).concat("_log")))
+                : targetBlockKey.getPath().contains("_")
+                ? () -> BuiltInRegistries.BLOCK.get(targetBlockKey.withPath(StringUtils.substringBefore(copiedPath, "_").concat("_log")))
+                : null; // Force nullity rather than air delegate
     }
 }

@@ -71,4 +71,30 @@ public final class RecipeUtil { //TODO Frick u method overloading functional int
             }
         };
     }
+
+    public static Consumer<Supplier<Block>> stairsFromPlanks(Consumer<FinishedRecipe> recipeConsumer, ItemLike planksILReference) {
+        return (resultBlockSup) -> ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, resultBlockSup.get(), 4)
+                .define('P', planksILReference)
+                .pattern("P  ")
+                .pattern("PP ")
+                .pattern("PPP")
+                .unlockedBy("has_" + RegistryUtil.getItemName(planksILReference), PredicateUtil.has(planksILReference))
+                .save(recipeConsumer);
+    }
+
+    public static Consumer<Supplier<Block>> stairsFromPlanks(Consumer<FinishedRecipe> recipeConsumer) {
+        return (resultBlockSup) -> {
+            Supplier<Block> planksBlock = RegistryUtil.getPlanksFrom(resultBlockSup);
+
+            if (planksBlock != null) {
+                ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, resultBlockSup.get(), 4)
+                        .define('P', planksBlock.get())
+                        .pattern("P  ")
+                        .pattern("PP ")
+                        .pattern("PPP")
+                        .unlockedBy("has_" + RegistryUtil.getItemName(planksBlock.get()), PredicateUtil.has(planksBlock.get()))
+                        .save(recipeConsumer);
+            }
+        };
+    }
 }

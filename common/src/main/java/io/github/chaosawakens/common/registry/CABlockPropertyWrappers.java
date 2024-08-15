@@ -162,6 +162,7 @@ public final class CABlockPropertyWrappers { // Commented BMD calls out because 
     public static final BlockPropertyWrapper WOODEN_STAIRS = BlockPropertyWrapper.createTemplate()
             .builder()
             .withLootTable(LootUtil::dropSelf)
+            .withRecipe(RecipeUtil::stairsFromPlanks)
             .withTags(ObjectArrayList.of(BlockTags.WOODEN_STAIRS, BlockTags.MINEABLE_WITH_AXE))
      //     .withCustomModelDefinitions(ModelUtil.stairs(CAConstants.prefix("base/template")))
             .withBlockStateDefinition(ModelUtil::stairs)

@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_crystalwood_log": {
+    "has_duplicator_planks": {
       "conditions": {
         "items": [
           {
             "items": [
-              "chaosawakens:crystalwood_log"
+              "chaosawakens:duplicator_planks"
             ]
           }
         ]
@@ -15,20 +15,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "chaosawakens:crystalwood"
+        "recipe": "chaosawakens:duplicator_stairs"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_crystalwood_log",
+      "has_duplicator_planks",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "chaosawakens:crystalwood"
+      "chaosawakens:duplicator_stairs"
     ]
   },
   "sends_telemetry_event": false

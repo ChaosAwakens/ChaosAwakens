@@ -2,17 +2,18 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "L": {
-      "item": "chaosawakens:densewood_log"
+    "P": {
+      "item": "chaosawakens:skywood_planks"
     }
   },
   "pattern": [
-    "LL",
-    "LL"
+    "P  ",
+    "PP ",
+    "PPP"
   ],
   "result": {
-    "count": 3,
-    "item": "chaosawakens:densewood"
+    "count": 4,
+    "item": "chaosawakens:skywood_stairs"
   },
   "show_notification": true
 }
