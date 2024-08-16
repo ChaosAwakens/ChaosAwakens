@@ -143,7 +143,7 @@ public class RoboPounderRageRunGoal extends Goal {
 		
 		if (owner.getTarget() != null && owner.getTarget().isAlive() && rageRunAnim.get().isPlaying()) {
 			if (targetRageRunPos == null || owner.distanceToSqr(Vector3d.atCenterOf(targetRageRunPos)) <= 4.0D) {
-				this.targetRageRunPos = BlockPosUtil.findHorizontalPositionBeyond(owner, owner.getTarget().blockPosition(), MathHelper.nextInt(owner.getRandom(), 10, 20));
+				this.targetRageRunPos = BlockPosUtil.findHorizontalPositionBeyond(owner, owner.getTarget().blockPosition(), MathHelper.nextInt(owner.getRandom(), 7, 15));
 				this.isPathingRageRun = true;
 			}
 			
@@ -153,19 +153,19 @@ public class RoboPounderRageRunGoal extends Goal {
 		}
 		
 		if (ObjectUtil.performNullityChecks(false, relevantLookPos) && isPathingRageRun) {
-			owner.getMoveControl().setWantedPosition(targetRageRunPos.getX(), targetRageRunPos.getY(), targetRageRunPos.getZ(), 0.8F);
+			owner.getMoveControl().setWantedPosition(targetRageRunPos.getX() + 0.5D, targetRageRunPos.getY(), targetRageRunPos.getZ() + 0.5D, 0.8F);
 			owner.moveRelative(0.02F, new Vector3d(owner.xxa, owner.yya, owner.zza));
 			owner.move(MoverType.SELF, owner.getDeltaMovement());
 			
 			if (owner.isPlayingAnimation(rageRunAnim.get())) owner.getLookControl().setLookAt(relevantLookPos);
-		}
-		
-		if (targetRageRunPos != null && owner.distanceToSqr(Vector3d.atCenterOf(targetRageRunPos)) <= 16.0D) {
-			this.pathTries++;
-			this.isPathingRageRun = false;
+
+			if (targetRageRunPos != null && owner.distanceToSqr(Vector3d.atCenterOf(targetRageRunPos)) <= 4.0D) {
+				this.pathTries++;
+				this.isPathingRageRun = false;
+			}
 		}
 
-		if ((owner.getTarget() == null && ++targetInterval >= 10) || owner.getRageRunDuration() <= 0 || (owner.getNavigation().isStuck()) || pathTries >= 25) {
+		if ((owner.getTarget() == null && ++targetInterval >= 10) || owner.getRageRunDuration() <= 0 || (owner.getNavigation().isStuck()) || pathTries >= 125) {
 			owner.stopAnimation(rageRunAnim.get());
 			owner.playAnimation(rageCooldownAnim.get(), true);
 		}
