@@ -290,14 +290,14 @@ public final class EntityUtil {
 			AxisAlignedBB reachBB = owner.getBoundingBox().expandTowards(viewVec.scale(reach)).inflate(4.0D, 4.0D, 4.0D);
 			EntityRayTraceResult reachedEntityHitResult = ProjectileHelper.getEntityHitResult(curWorld, owner, eyeVec, targetVec, reachBB, EntityPredicates.NO_CREATIVE_OR_SPECTATOR);
 
-			if (reachedEntityHitResult == null || !(reachedEntityHitResult.getEntity() instanceof LivingEntity) || reachedEntityHitResult.getType() != RayTraceResult.Type.ENTITY) return false;
+			if (reachedEntityHitResult == null || reachedEntityHitResult.getEntity() == null || !(reachedEntityHitResult.getEntity() instanceof LivingEntity) || reachedEntityHitResult.getType() != RayTraceResult.Type.ENTITY) return false;
 
 			LivingEntity target = (LivingEntity) reachedEntityHitResult.getEntity();
-			double distanceToTargetSqr = owner.distanceToSqr(target);
 			boolean isValidTarget = (reachedEntityHitResult != null ? target : null) != null && reachedEntityHitResult.getType() == RayTraceResult.Type.ENTITY;
+			double distanceToTargetSqr = owner.distanceToSqr(target);
 
 			if (isValidTarget) {
-				if (reachSqr >= distanceToTargetSqr && owner.swingingArm.equals(Hand.MAIN_HAND) && (!(owner instanceof PlayerEntity) || !target.interact((PlayerEntity) owner, Hand.MAIN_HAND).consumesAction())) {
+				if (reachSqr >= distanceToTargetSqr && owner != null && owner.swingingArm.equals(Hand.MAIN_HAND) && (!(owner instanceof PlayerEntity) || !target.interact((PlayerEntity) owner, Hand.MAIN_HAND).consumesAction())) {
 					target.hurt(DamageSource.mobAttack(owner), attackDamage);
 					heldStack.getItem().hurtEnemy(heldStack, target, owner);
 				}

@@ -14,7 +14,7 @@ public abstract class PlayerEntityMixin {
 		throw new IllegalAccessError("Attempted to instantiate a Mixin Class!");
 	}
 
-	@Inject(method = "Lnet/minecraft/entity/player/PlayerEntity;wantsToStopRiding()Z", at = @At("INVOKE"), cancellable = true)
+	@Inject(method = "Lnet/minecraft/entity/player/PlayerEntity;wantsToStopRiding()Z", at = @At("HEAD"), cancellable = true)
 	private void chaosawakens$wantsToStopRiding(CallbackInfoReturnable<Boolean> cir) {
 		PlayerEntity targetPlayer = (PlayerEntity) (Object) this;
 		

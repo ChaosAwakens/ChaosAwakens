@@ -1,7 +1,13 @@
 package io.github.chaosawakens.mixins;
 
+import net.minecraftforge.fml.loading.FMLEnvironment;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import software.bernie.geckolib3.core.IAnimatable;
+import software.bernie.geckolib3.core.IAnimatableModel;
 import software.bernie.geckolib3.core.controller.AnimationController;
 
 @Mixin(value = AnimationController.class, remap = false)
@@ -164,4 +170,10 @@ public abstract class AnimationControllerMixin<T extends IAnimatable> {
             }
         }
     }*/
+
+
+    @Inject(method = "getModel", at = @At(value = "INVOKE", target = "Ljava/io/PrintStream;printf(Ljava/lang/String;[Ljava/lang/Object;)Ljava/io/PrintStream;", shift = At.Shift.BEFORE), cancellable = true)
+    private void chaosawakens$getModel(T animatable, CallbackInfoReturnable<IAnimatableModel<T>> cir) {
+        if (FMLEnvironment.dist.isDedicatedServer()) cir.cancel();
+    }
 }

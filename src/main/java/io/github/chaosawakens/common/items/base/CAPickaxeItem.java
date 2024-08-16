@@ -134,7 +134,7 @@ public class CAPickaxeItem extends PickaxeItem implements ICATieredItem {
 	
 	@Override
 	public boolean onEntitySwing(ItemStack stack, LivingEntity entity) {
-		EntityUtil.applyReachModifierToEntity(entity, stack, getActualAttackDamage().get().get());
+		if (entity != null) EntityUtil.applyReachModifierToEntity(entity, stack, getActualAttackDamage().get().get());
 		return super.onEntitySwing(stack, entity);
 	}
 }

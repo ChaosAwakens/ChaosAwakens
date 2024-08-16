@@ -139,7 +139,7 @@ public class CASwordItem extends SwordItem implements ICATieredItem {
 	
 	@Override
 	public boolean onEntitySwing(ItemStack stack, LivingEntity entity) {
-		EntityUtil.applyReachModifierToEntity(entity, stack, getDamage());
+		if (entity != null) EntityUtil.applyReachModifierToEntity(entity, stack, getDamage());
 		return super.onEntitySwing(stack, entity);
 	}
 }

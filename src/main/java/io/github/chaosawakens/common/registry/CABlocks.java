@@ -86,7 +86,7 @@ public class CABlocks {
 	public static final RegistryObject<RotatedPillarBlock> STRIPPED_CHERRY_LOG = registerBlock("stripped_cherry_log", () -> new RotatedPillarBlock(Properties.copy(Blocks.STRIPPED_OAK_LOG)), CAItemGroups.BLOCKS);
 	public static final RegistryObject<RotatedPillarBlock> STRIPPED_CHERRY_WOOD = registerBlock("stripped_cherry_wood", () -> new RotatedPillarBlock(Properties.copy(Blocks.STRIPPED_OAK_WOOD)), CAItemGroups.BLOCKS);
 	public static final RegistryObject<RotatedPillarBlock> CHERRY_WOOD = registerBlock("cherry_wood", () -> new RotatedPillarBlock(Properties.copy(Blocks.OAK_WOOD)), CAItemGroups.BLOCKS);
-	public static final RegistryObject<FruitableLeavesBlock> CHERRY_LEAVES = registerBlock("cherry_leaves", () -> new FruitableLeavesBlock(() -> CAItems.CHERRIES.get(), 1, 3, 16, Properties.copy(Blocks.OAK_LEAVES)), CAItemGroups.BLOCKS);
+	public static final RegistryObject<FruitableLeavesBlock> CHERRY_LEAVES = registerBlock("cherry_leaves", () -> new FruitableLeavesBlock(CAItems.CHERRIES::get, 1, 3, 16, Properties.copy(Blocks.OAK_LEAVES)), CAItemGroups.BLOCKS);
 	public static final RegistryObject<LeafCarpetBlock> CHERRY_LEAF_CARPET = registerBlock("cherry_leaf_carpet", () -> new LeafCarpetBlock(Properties.copy(CHERRY_LEAVES.get()).noCollission()), CAItemGroups.BLOCKS);
 	public static final RegistryObject<SlabBlock> CHERRY_SLAB = registerBlock("cherry_slab", () -> new SlabBlock(Properties.copy(CABlocks.CHERRY_PLANKS.get())), CAItemGroups.BLOCKS);
 	public static final RegistryObject<PressurePlateBlock> CHERRY_PRESSURE_PLATE = registerBlock("cherry_pressure_plate", () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, Properties.copy(CABlocks.CHERRY_PLANKS.get())), CAItemGroups.BLOCKS);
@@ -185,7 +185,7 @@ public class CABlocks {
 	public static final RegistryObject<RotatedPillarBlock> STRIPPED_PEACH_LOG = registerBlock("stripped_peach_log", () -> new RotatedPillarBlock(Properties.copy(Blocks.STRIPPED_OAK_LOG)), CAItemGroups.BLOCKS);
 	public static final RegistryObject<RotatedPillarBlock> STRIPPED_PEACH_WOOD = registerBlock("stripped_peach_wood", () -> new RotatedPillarBlock(Properties.copy(Blocks.STRIPPED_OAK_WOOD)), CAItemGroups.BLOCKS);
 	public static final RegistryObject<RotatedPillarBlock> PEACH_WOOD = registerBlock("peach_wood", () -> new RotatedPillarBlock(Properties.copy(Blocks.OAK_WOOD)), CAItemGroups.BLOCKS);
-	public static final RegistryObject<FruitableLeavesBlock> PEACH_LEAVES = registerBlock("peach_leaves", () -> new FruitableLeavesBlock(() -> CAItems.PEACH.get(), 1, 2, 18, Properties.copy(Blocks.OAK_LEAVES)), CAItemGroups.BLOCKS);
+	public static final RegistryObject<FruitableLeavesBlock> PEACH_LEAVES = registerBlock("peach_leaves", () -> new FruitableLeavesBlock(CAItems.PEACH::get, 1, 2, 18, Properties.copy(Blocks.OAK_LEAVES)), CAItemGroups.BLOCKS);
 	public static final RegistryObject<LeafCarpetBlock> PEACH_LEAF_CARPET = registerBlock("peach_leaf_carpet", () -> new LeafCarpetBlock(Properties.copy(PEACH_LEAVES.get()).noCollission()), CAItemGroups.BLOCKS);
 	public static final RegistryObject<SlabBlock> PEACH_SLAB = registerBlock("peach_slab", () -> new SlabBlock(Properties.copy(CABlocks.PEACH_PLANKS.get())), CAItemGroups.BLOCKS);
 	public static final RegistryObject<PressurePlateBlock> PEACH_PRESSURE_PLATE = registerBlock("peach_pressure_plate", () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, Properties.copy(CABlocks.PEACH_PLANKS.get())), CAItemGroups.BLOCKS);
