@@ -16,7 +16,7 @@ import java.util.function.Function;
  * @param packetHandler The interface responsible for both representing the target side and handling this packet's data on the target side.
  * @param targetSide The side this packet should be sent to.
  *
- * @param <MSGT> The class representing this packet's data.
+ * @param <MSGT> The class representing/containing this packet's data.
  */
 public record BasePacket<MSGT>(ResourceLocation packetId, Class<MSGT> packetClass, BiConsumer<MSGT, FriendlyByteBuf> packetEncoder, Function<FriendlyByteBuf, MSGT> packetDecoder, PacketContext packetHandler, NetworkSide targetSide) {
 

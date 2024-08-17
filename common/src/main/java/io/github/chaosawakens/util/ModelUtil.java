@@ -4,6 +4,7 @@ import com.google.common.collect.Sets;
 import io.github.chaosawakens.CAConstants;
 import io.github.chaosawakens.api.datagen.block.BlockModelDefinition;
 import io.github.chaosawakens.api.datagen.block.BlockStateDefinition;
+import io.github.chaosawakens.common.registry.CABlockStateProperties;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Direction;
@@ -26,7 +27,7 @@ import java.util.function.Supplier;
  * Utility class containing helper methods (generally also found in datagen classes) aimed at reducing boilerplate code by natively providing
  * common {@link BlockModelDefinition} and {@link BlockStateDefinition} patterns.
  */
-public final class ModelUtil { //TODO Finish Javadocs
+public final class ModelUtil {
 
     private ModelUtil() {
         throw new IllegalAccessError("Attempted to construct Utility Class!");
@@ -1148,7 +1149,7 @@ public final class ModelUtil { //TODO Finish Javadocs
      *
      * @param doorTopTexture The {@link ResourceLocation} representing the top-half texture of the door's bottom left (I.E. When the hinge is on the left side) when it's open.
      * @param doorBottomTexture The {@link ResourceLocation} representing the bottom-half texture of the door's bottom left (I.E. When the hinge is on the left side) when it's open.
-     * @param doorItemTexture The {@link ResourceLocation} representing the item texture of the door's bottom left.
+     * @param doorItemTexture The {@link ResourceLocation} representing the item texture of the door.
      *
      * @return A {@link BlockModelDefinition} using the {@link ModelTemplates#DOOR_BOTTOM_LEFT_OPEN} template.
      *
@@ -1246,7 +1247,7 @@ public final class ModelUtil { //TODO Finish Javadocs
      *
      * @param doorTopTexture The {@link ResourceLocation} representing the top-half texture of the door's top left (I.E. When the hinge is on the left side) when it's open.
      * @param doorBottomTexture The {@link ResourceLocation} representing the bottom-half texture of the door's top left (I.E. When the hinge is on the left side) when it's open.
-     * @param doorItemTexture The {@link ResourceLocation} representing the item texture of the door's bottom left.
+     * @param doorItemTexture The {@link ResourceLocation} representing the item texture of the door.
      *
      * @return A {@link BlockModelDefinition} using the {@link ModelTemplates#DOOR_TOP_LEFT_OPEN} template.
      *
@@ -1279,6 +1280,47 @@ public final class ModelUtil { //TODO Finish Javadocs
                 .withItemModelTextureMapping(TextureMapping.layer0(doorItemTexture.withPrefix("item/")));
     }
 
+    /**
+     * Creates a {@link BlockModelDefinition} using the {@link ModelTemplates#DOOR_BOTTOM_RIGHT} template. Handles item model.
+     * <p>
+     * <h3>Required Texture Slots</h3>
+     * <b>Block Model</b>
+     * <ul>
+     *  <li>{@link TextureSlot#TOP} -> {@code doorTopTexture}</li>
+     *  <li>{@link TextureSlot#BOTTOM} -> {@code doorBottomTexture}</li>
+     * </ul>
+     * <b>Item Model</b>
+     * <ul>
+     *  <li>{@link TextureSlot#LAYER0} -> {@code doorItemTexture}</li>
+     * </ul>
+     *
+     * @param doorTopTexture The {@link ResourceLocation} representing the top-half texture of the door's bottom right (I.E. When the hinge is on the right side).
+     * @param doorBottomTexture The {@link ResourceLocation} representing the bottom-half texture of the door's bottom right (I.E. When the hinge is on the right side).
+     * @param doorItemTexture The {@link ResourceLocation} representing the item texture of the door.
+     *
+     * @return A {@link BlockModelDefinition} using the {@link ModelTemplates#DOOR_BOTTOM_RIGHT} template.
+     *
+     * @see #doorBottomLeft(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorBottomLeftOpen(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorBottomRightOpen(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorTopLeft(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorTopLeftOpen(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorTopRight(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorTopRightOpen(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorLeft(ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorLeft(ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorLeft(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorRight(ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorRight(ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorRight(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #door(ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #door(ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #door(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #door(ResourceLocation, ResourceLocation)
+     * @see #door(Supplier, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #door(Supplier, ResourceLocation, ResourceLocation)
+     * @see #door(Supplier)
+     */
     public static BlockModelDefinition doorBottomRight(ResourceLocation doorTopTexture, ResourceLocation doorBottomTexture, ResourceLocation doorItemTexture) {
         return BlockModelDefinition.of(ModelTemplates.DOOR_BOTTOM_RIGHT)
                 .withTextureMapping(TextureMapping.door(doorTopTexture.withPrefix("block/"), doorBottomTexture.withPrefix("block/")))
@@ -1287,6 +1329,47 @@ public final class ModelUtil { //TODO Finish Javadocs
                 .withItemModelTextureMapping(TextureMapping.layer0(doorItemTexture.withPrefix("item/")));
     }
 
+    /**
+     * Creates a {@link BlockModelDefinition} using the {@link ModelTemplates#DOOR_BOTTOM_RIGHT_OPEN} template. Handles item model.
+     * <p>
+     * <h3>Required Texture Slots</h3>
+     * <b>Block Model</b>
+     * <ul>
+     *  <li>{@link TextureSlot#TOP} -> {@code doorTopTexture}</li>
+     *  <li>{@link TextureSlot#BOTTOM} -> {@code doorBottomTexture}</li>
+     * </ul>
+     * <b>Item Model</b>
+     * <ul>
+     *  <li>{@link TextureSlot#LAYER0} -> {@code doorItemTexture}</li>
+     * </ul>
+     *
+     * @param doorTopTexture The {@link ResourceLocation} representing the top-half texture of the door's bottom right (I.E. When the hinge is on the left side) when it's open.
+     * @param doorBottomTexture The {@link ResourceLocation} representing the bottom-half texture of the door's bottom right (I.E. When the hinge is on the left side) when it's open.
+     * @param doorItemTexture The {@link ResourceLocation} representing the item texture of the door.
+     *
+     * @return A {@link BlockModelDefinition} using the {@link ModelTemplates#DOOR_BOTTOM_RIGHT_OPEN} template.
+     *
+     * @see #doorBottomLeft(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorBottomLeftOpen(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorBottomRight(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorTopLeft(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorTopLeftOpen(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorTopRight(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorTopRightOpen(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorLeft(ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorLeft(ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorLeft(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorRight(ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorRight(ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorRight(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #door(ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #door(ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #door(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #door(ResourceLocation, ResourceLocation)
+     * @see #door(Supplier, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #door(Supplier, ResourceLocation, ResourceLocation)
+     * @see #door(Supplier)
+     */
     public static BlockModelDefinition doorBottomRightOpen(ResourceLocation doorTopTexture, ResourceLocation doorBottomTexture, ResourceLocation doorItemTexture) {
         return BlockModelDefinition.of(ModelTemplates.DOOR_BOTTOM_RIGHT_OPEN)
                 .withTextureMapping(TextureMapping.door(doorTopTexture.withPrefix("block/"), doorBottomTexture.withPrefix("block/")))
@@ -1295,6 +1378,47 @@ public final class ModelUtil { //TODO Finish Javadocs
                 .withItemModelTextureMapping(TextureMapping.layer0(doorItemTexture.withPrefix("item/")));
     }
 
+    /**
+     * Creates a {@link BlockModelDefinition} using the {@link ModelTemplates#DOOR_TOP_RIGHT} template. Handles item model.
+     * <p>
+     * <h3>Required Texture Slots</h3>
+     * <b>Block Model</b>
+     * <ul>
+     *  <li>{@link TextureSlot#TOP} -> {@code doorTopTexture}</li>
+     *  <li>{@link TextureSlot#BOTTOM} -> {@code doorBottomTexture}</li>
+     * </ul>
+     * <b>Item Model</b>
+     * <ul>
+     *  <li>{@link TextureSlot#LAYER0} -> {@code doorItemTexture}</li>
+     * </ul>
+     *
+     * @param doorTopTexture The {@link ResourceLocation} representing the top-half texture of the door's top right (I.E. When the hinge is on the right side).
+     * @param doorBottomTexture The {@link ResourceLocation} representing the bottom-half texture of the door's top right (I.E. When the hinge is on the right side).
+     * @param doorItemTexture The {@link ResourceLocation} representing the item texture of the door.
+     *
+     * @return A {@link BlockModelDefinition} using the {@link ModelTemplates#DOOR_TOP_RIGHT} template.
+     *
+     * @see #doorBottomLeft(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorBottomLeftOpen(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorBottomRight(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorBottomRightOpen(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorTopLeft(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorTopLeftOpen(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorTopRightOpen(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorLeft(ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorLeft(ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorLeft(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorRight(ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorRight(ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorRight(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #door(ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #door(ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #door(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #door(ResourceLocation, ResourceLocation)
+     * @see #door(Supplier, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #door(Supplier, ResourceLocation, ResourceLocation)
+     * @see #door(Supplier)
+     */
     public static BlockModelDefinition doorTopRight(ResourceLocation doorTopTexture, ResourceLocation doorBottomTexture, ResourceLocation doorItemTexture) {
         return BlockModelDefinition.of(ModelTemplates.DOOR_TOP_RIGHT)
                 .withTextureMapping(TextureMapping.door(doorTopTexture.withPrefix("block/"), doorBottomTexture.withPrefix("block/")))
@@ -1303,6 +1427,47 @@ public final class ModelUtil { //TODO Finish Javadocs
                 .withItemModelTextureMapping(TextureMapping.layer0(doorItemTexture.withPrefix("item/")));
     }
 
+    /**
+     * Creates a {@link BlockModelDefinition} using the {@link ModelTemplates#DOOR_TOP_RIGHT_OPEN} template. Handles item model.
+     * <p>
+     * <h3>Required Texture Slots</h3>
+     * <b>Block Model</b>
+     * <ul>
+     *  <li>{@link TextureSlot#TOP} -> {@code doorTopTexture}</li>
+     *  <li>{@link TextureSlot#BOTTOM} -> {@code doorBottomTexture}</li>
+     * </ul>
+     * <b>Item Model</b>
+     * <ul>
+     *  <li>{@link TextureSlot#LAYER0} -> {@code doorItemTexture}</li>
+     * </ul>
+     *
+     * @param doorTopTexture The {@link ResourceLocation} representing the top-half texture of the door's top right (I.E. When the hinge is on the right side) when it's open.
+     * @param doorBottomTexture The {@link ResourceLocation} representing the bottom-half texture of the door's top right (I.E. When the hinge is on the right side) when it's open.
+     * @param doorItemTexture The {@link ResourceLocation} representing the item texture of the door.
+     *
+     * @return A {@link BlockModelDefinition} using the {@link ModelTemplates#DOOR_TOP_RIGHT_OPEN} template.
+     *
+     * @see #doorBottomLeft(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorBottomLeftOpen(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorBottomRight(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorBottomRightOpen(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorTopLeft(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorTopLeftOpen(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorTopRight(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorLeft(ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorLeft(ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorLeft(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorRight(ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorRight(ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorRight(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #door(ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #door(ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #door(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #door(ResourceLocation, ResourceLocation)
+     * @see #door(Supplier, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #door(Supplier, ResourceLocation, ResourceLocation)
+     * @see #door(Supplier)
+     */
     public static BlockModelDefinition doorTopRightOpen(ResourceLocation doorTopTexture, ResourceLocation doorBottomTexture, ResourceLocation doorItemTexture) {
         return BlockModelDefinition.of(ModelTemplates.DOOR_TOP_RIGHT_OPEN)
                 .withTextureMapping(TextureMapping.door(doorTopTexture.withPrefix("block/"), doorBottomTexture.withPrefix("block/")))
@@ -1311,14 +1476,201 @@ public final class ModelUtil { //TODO Finish Javadocs
                 .withItemModelTextureMapping(TextureMapping.layer0(doorItemTexture.withPrefix("item/")));
     }
 
+    /**
+     * Creates an {@link ObjectArrayList} of {@linkplain BlockModelDefinition BlockModelDefinitions} with all requisite left door model templates ({@link ModelTemplates#DOOR_BOTTOM_LEFT}, {@link ModelTemplates#DOOR_BOTTOM_LEFT_OPEN},
+     * {@link ModelTemplates#DOOR_TOP_LEFT}, {@link ModelTemplates#DOOR_TOP_LEFT_OPEN}).
+     * <p>
+     * <h3>Models</h3>
+     * <ul>
+     *  <li>{@link ModelTemplates#DOOR_BOTTOM_LEFT} -> <ul>
+     *      <li>{@link TextureSlot#TOP} -> {@code dblTopTexture}</li>
+     *      <li>{@link TextureSlot#BOTTOM} -> {@code dblBottomTexture}</li>
+     *  </ul></li>
+     *
+     *  <li>{@link ModelTemplates#DOOR_BOTTOM_LEFT_OPEN} -> <ul>
+     *      <li>{@link TextureSlot#TOP} -> {@code dbloTopTexture}</li>
+     *      <li>{@link TextureSlot#BOTTOM} -> {@code dbloBottomTexture}</li>
+     *  </ul></li>
+     *
+     *  <li>{@link ModelTemplates#DOOR_TOP_LEFT} -> <ul>
+     *      <li>{@link TextureSlot#TOP} -> {@code dtlTopTexture}</li>
+     *      <li>{@link TextureSlot#BOTTOM} -> {@code dtlBottomTexture}</li>
+     *  </ul></li>
+     *
+     *  <li>{@link ModelTemplates#DOOR_TOP_LEFT_OPEN} -> <ul>
+     *      <li>{@link TextureSlot#TOP} -> {@code dtloTopTexture}</li>
+     *      <li>{@link TextureSlot#BOTTOM} -> {@code dtloBottomTexture}</li>
+     *  </ul></li>
+     *
+     *  <li>{@link ModelTemplates#FLAT_ITEM} (Item Model) -> <ul>
+     *      <li>{@link TextureSlot#LAYER0} -> {@code doorItemTexture}</li>
+     *  </ul></li>
+     * </ul>
+     *
+     * @param dblTopTexture The {@link ResourceLocation} representing the top texture of the door's bottom left model.
+     * @param dblBottomTexture The {@link ResourceLocation} representing the bottom texture of the door's bottom left model.
+     * @param dbloTopTexture The {@link ResourceLocation} representing the top texture of the door's bottom open left model.
+     * @param dbloBottomTexture The {@link ResourceLocation} representing the bottom texture of the door's bottom open left model.
+     * @param dtlTopTexture The {@link ResourceLocation} representing the top texture of the door's top left model.
+     * @param dtlBottomTexture The {@link ResourceLocation} representing the bottom texture of the door's top left model.
+     * @param dtloTopTexture The {@link ResourceLocation} representing the top texture of the door's top open left model.
+     * @param dtloBottomTexture The {@link ResourceLocation} representing the bottom texture of the door's top open left model.
+     * @param doorItemTexture The {@link ResourceLocation} representing item texture of the door.
+     *
+     * @return An {@link ObjectArrayList} of all relevant door model definitions, for all of its models depending on its left hinge.
+     *
+     * @see #doorBottomLeft(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorBottomLeftOpen(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorBottomRight(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorBottomRightOpen(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorTopLeft(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorTopLeftOpen(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorTopRight(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorTopRightOpen(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorLeft(ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorLeft(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorRight(ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorRight(ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorRight(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #door(ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #door(ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #door(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #door(ResourceLocation, ResourceLocation)
+     * @see #door(Supplier, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #door(Supplier, ResourceLocation, ResourceLocation)
+     * @see #door(Supplier)
+     */
     public static ObjectArrayList<BlockModelDefinition> doorLeft(ResourceLocation dblTopTexture, ResourceLocation dblBottomTexture, ResourceLocation dbloTopTexture, ResourceLocation dbloBottomTexture, ResourceLocation dtlTopTexture, ResourceLocation dtlBottomTexture, ResourceLocation dtloTopTexture, ResourceLocation dtloBottomTexture, ResourceLocation doorItemTexture) {
         return ObjectArrayList.of(doorBottomLeft(dblTopTexture, dblBottomTexture, doorItemTexture), doorBottomLeftOpen(dbloTopTexture, dbloBottomTexture, doorItemTexture), doorTopLeft(dtlTopTexture, dtlBottomTexture, doorItemTexture), doorTopLeftOpen(dtloTopTexture, dtloBottomTexture, doorItemTexture));
     }
 
+    /**
+     * Overloaded variant of {@link #doorLeft(ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation)}.
+     * Creates an {@link ObjectArrayList} of {@linkplain BlockModelDefinition BlockModelDefinitions} with all requisite left door model templates ({@link ModelTemplates#DOOR_BOTTOM_LEFT},
+     * {@link ModelTemplates#DOOR_BOTTOM_LEFT_OPEN}, {@link ModelTemplates#DOOR_TOP_LEFT}, {@link ModelTemplates#DOOR_TOP_LEFT_OPEN}). Generalizes top and bottom texture references for both top and bottom
+     * door models, for both open and closed left door variants.
+     * <p>
+     * <h3>Models</h3>
+     * <ul>
+     *  <li>{@link ModelTemplates#DOOR_BOTTOM_LEFT} -> <ul>
+     *      <li>{@link TextureSlot#TOP} -> {@code dblTopTexture}</li>
+     *      <li>{@link TextureSlot#BOTTOM} -> {@code dblBottomTexture}</li>
+     *  </ul></li>
+     *
+     *  <li>{@link ModelTemplates#DOOR_BOTTOM_LEFT_OPEN} -> <ul>
+     *      <li>{@link TextureSlot#TOP} -> {@code dblTopTexture}</li>
+     *      <li>{@link TextureSlot#BOTTOM} -> {@code dblBottomTexture}</li>
+     *  </ul></li>
+     *
+     *  <li>{@link ModelTemplates#DOOR_TOP_LEFT} -> <ul>
+     *      <li>{@link TextureSlot#TOP} -> {@code dtlTopTexture}</li>
+     *      <li>{@link TextureSlot#BOTTOM} -> {@code dtlBottomTexture}</li>
+     *  </ul></li>
+     *
+     *  <li>{@link ModelTemplates#DOOR_TOP_LEFT_OPEN} -> <ul>
+     *      <li>{@link TextureSlot#TOP} -> {@code dtlTopTexture}</li>
+     *      <li>{@link TextureSlot#BOTTOM} -> {@code dtlBottomTexture}</li>
+     *  </ul></li>
+     *
+     *  <li>{@link ModelTemplates#FLAT_ITEM} (Item Model) -> <ul>
+     *      <li>{@link TextureSlot#LAYER0} -> {@code doorItemTexture}</li>
+     *  </ul></li>
+     * </ul>
+     *
+     * @param dblTopTexture The {@link ResourceLocation} representing the top texture of the door's bottom left model.
+     * @param dblBottomTexture The {@link ResourceLocation} representing the bottom texture of the door's bottom left model.
+     * @param dtlTopTexture The {@link ResourceLocation} representing the top texture of the door's top left model.
+     * @param dtlBottomTexture The {@link ResourceLocation} representing the bottom texture of the door's top left model.
+     * @param doorItemTexture The {@link ResourceLocation} representing item texture of the door.
+     *
+     * @return An {@link ObjectArrayList} of all relevant door model definitions, for all of its models depending on its left hinge, with top and bottom texture references for both top and bottom door models
+     * pre-defined.
+     *
+     * @see #doorBottomLeft(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorBottomLeftOpen(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorBottomRight(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorBottomRightOpen(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorTopLeft(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorTopLeftOpen(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorTopRight(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorTopRightOpen(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorLeft(ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorLeft(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorRight(ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorRight(ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorRight(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #door(ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #door(ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #door(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #door(ResourceLocation, ResourceLocation)
+     * @see #door(Supplier, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #door(Supplier, ResourceLocation, ResourceLocation)
+     * @see #door(Supplier)
+     */
     public static ObjectArrayList<BlockModelDefinition> doorLeft(ResourceLocation dblTopTexture, ResourceLocation dblBottomTexture, ResourceLocation dtlTopTexture, ResourceLocation dtlBottomTexture, ResourceLocation doorItemTexture) {
         return doorLeft(dblTopTexture, dblBottomTexture, dblTopTexture, dblBottomTexture, dtlTopTexture, dtlBottomTexture, dtlTopTexture, dtlBottomTexture, doorItemTexture);
     }
 
+    /**
+     * Overloaded variant of {@link #doorLeft(ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation)}. Creates an {@link ObjectArrayList} of
+     * {@linkplain BlockModelDefinition BlockModelDefinitions} with all requisite left door model templates ({@link ModelTemplates#DOOR_BOTTOM_LEFT}, {@link ModelTemplates#DOOR_BOTTOM_LEFT_OPEN},
+     * {@link ModelTemplates#DOOR_TOP_LEFT}, {@link ModelTemplates#DOOR_TOP_LEFT_OPEN}). Generalizes top and bottom texture references for all left door models/variants.
+     * <p>
+     * <h3>Models</h3>
+     * <ul>
+     *  <li>{@link ModelTemplates#DOOR_BOTTOM_LEFT} -> <ul>
+     *      <li>{@link TextureSlot#TOP} -> {@code doorTopTexture}</li>
+     *      <li>{@link TextureSlot#BOTTOM} -> {@code doorBottomTexture}</li>
+     *  </ul></li>
+     *
+     *  <li>{@link ModelTemplates#DOOR_BOTTOM_LEFT_OPEN} -> <ul>
+     *      <li>{@link TextureSlot#TOP} -> {@code doorTopTexture}</li>
+     *      <li>{@link TextureSlot#BOTTOM} -> {@code doorBottomTexture}</li>
+     *  </ul></li>
+     *
+     *  <li>{@link ModelTemplates#DOOR_TOP_LEFT} -> <ul>
+     *      <li>{@link TextureSlot#TOP} -> {@code doorTopTexture}</li>
+     *      <li>{@link TextureSlot#BOTTOM} -> {@code doorBottomTexture}</li>
+     *  </ul></li>
+     *
+     *  <li>{@link ModelTemplates#DOOR_TOP_LEFT_OPEN} -> <ul>
+     *      <li>{@link TextureSlot#TOP} -> {@code doorTopTexture}</li>
+     *      <li>{@link TextureSlot#BOTTOM} -> {@code doorBottomTexture}</li>
+     *  </ul></li>
+     *
+     *  <li>{@link ModelTemplates#FLAT_ITEM} (Item Model) -> <ul>
+     *      <li>{@link TextureSlot#LAYER0} -> {@code doorItemTexture}</li>
+     *  </ul></li>
+     * </ul>
+     *
+     * @param doorTopTexture The {@link ResourceLocation} representing the top texture of the door's left model.
+     * @param doorBottomTexture The {@link ResourceLocation} representing the bottom texture of the door's left model.
+     * @param doorItemTexture The {@link ResourceLocation} representing item texture of the door.
+     *
+     * @return An {@link ObjectArrayList} of all relevant door model definitions, for all of its models depending on its left hinge, with top and bottom texture references for both top and bottom door models
+     * pre-defined.
+     *
+     * @see #doorBottomLeft(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorBottomLeftOpen(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorBottomRight(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorBottomRightOpen(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorTopLeft(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorTopLeftOpen(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorTopRight(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorTopRightOpen(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorLeft(ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorLeft(ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorRight(ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorRight(ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorRight(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #door(ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #door(ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #door(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #door(ResourceLocation, ResourceLocation)
+     * @see #door(Supplier, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #door(Supplier, ResourceLocation, ResourceLocation)
+     * @see #door(Supplier)
+     */
     public static ObjectArrayList<BlockModelDefinition> doorLeft(ResourceLocation doorTopTexture, ResourceLocation doorBottomTexture, ResourceLocation doorItemTexture) {
         return doorLeft(doorTopTexture, doorBottomTexture, doorTopTexture, doorBottomTexture, doorItemTexture);
     }
@@ -2122,5 +2474,19 @@ public final class ModelUtil { //TODO Finish Javadocs
 
     public static ObjectArrayList<BlockModelDefinition> torch(ResourceLocation torchTexture, ResourceLocation torchItemTexture) {
         return torch(torchTexture, torchTexture, torchItemTexture);
+    }
+
+    public static ObjectArrayList<BlockModelDefinition> fruitableLeaves(ResourceLocation unripeLeavesTexture, ResourceLocation ripeLeavesTexture) {
+        return ObjectArrayList.of(cubeAll(unripeLeavesTexture).withBlockRenderType(new ResourceLocation(RenderType.cutoutMipped().name)), cubeAll(ripeLeavesTexture).withBlockRenderType(new ResourceLocation(RenderType.cutoutMipped().name)));
+    }
+
+    public static BlockStateDefinition fruitableLeaves(Supplier<Block> targetBlock, ResourceLocation unripeLeavesModel, ResourceLocation ripeLeavesModel) {
+        return BlockStateDefinition.of(targetBlock).withBlockStateSupplier(MultiVariantGenerator.multiVariant(targetBlock.get())
+                .with(PropertyDispatch
+                        .property(CABlockStateProperties.RIPE)
+                        .select(true, Variant.variant()
+                                .with(VariantProperties.MODEL, ripeLeavesModel))
+                        .select(false, Variant.variant()
+                                .with(VariantProperties.MODEL, unripeLeavesModel))));
     }
 }
