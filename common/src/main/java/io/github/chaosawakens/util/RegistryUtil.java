@@ -41,6 +41,8 @@ public final class RegistryUtil {
                 : () -> BuiltInRegistries.BLOCK.get(targetBlockKey.withPath(StringUtils.substring(copiedPath, 0, copiedPath.lastIndexOf("_")).concat("_planks")))
                 : targetBlockKey.getPath().endsWith("_wood")
                 ? () -> BuiltInRegistries.BLOCK.get(targetBlockKey.withPath(StringUtils.substring(copiedPath, 0, copiedPath.lastIndexOf("_")).concat("_planks")))
+                : targetBlockKey.getPath().endsWith("wood") && targetBlockKey.getPath().charAt(targetBlockKey.getPath().indexOf("wood") - 1) != '_'
+                ? () -> BuiltInRegistries.BLOCK.get(targetBlockKey.withPath(copiedPath.concat("_planks")))
                 : targetBlockKey.getPath().contains("_")
                 ? () -> BuiltInRegistries.BLOCK.get(targetBlockKey.withPath(StringUtils.substringBefore(copiedPath, "_").concat("_planks")))
                 : null; // Force nullity rather than air delegate
@@ -57,6 +59,8 @@ public final class RegistryUtil {
                 : () -> BuiltInRegistries.BLOCK.get(targetBlockKey.withPath(StringUtils.substring(copiedPath, 0, copiedPath.lastIndexOf("_")).concat("_log")))
                 : targetBlockKey.getPath().endsWith("_wood")
                 ? () -> BuiltInRegistries.BLOCK.get(targetBlockKey.withPath(StringUtils.substring(copiedPath, 0, copiedPath.lastIndexOf("_")).concat("_log")))
+                : targetBlockKey.getPath().endsWith("wood") && targetBlockKey.getPath().charAt(targetBlockKey.getPath().indexOf("wood") - 1) != '_'
+                ? () -> BuiltInRegistries.BLOCK.get(targetBlockKey.withPath(copiedPath.concat("_log")))
                 : targetBlockKey.getPath().contains("_")
                 ? () -> BuiltInRegistries.BLOCK.get(targetBlockKey.withPath(StringUtils.substringBefore(copiedPath, "_").concat("_log")))
                 : null; // Force nullity rather than air delegate
