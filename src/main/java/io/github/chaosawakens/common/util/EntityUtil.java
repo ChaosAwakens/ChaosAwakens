@@ -297,7 +297,7 @@ public final class EntityUtil {
 			double distanceToTargetSqr = owner.distanceToSqr(target);
 
 			if (isValidTarget) {
-				if (reachSqr >= distanceToTargetSqr && owner != null && owner.swingingArm.equals(Hand.MAIN_HAND) && (!(owner instanceof PlayerEntity) || !target.interact((PlayerEntity) owner, Hand.MAIN_HAND).consumesAction())) {
+				if (target != null && reachSqr >= distanceToTargetSqr && owner != null && owner.swingingArm.equals(Hand.MAIN_HAND) && (!(owner instanceof PlayerEntity) || !target.interact((PlayerEntity) owner, Hand.MAIN_HAND).consumesAction())) {
 					target.hurt(DamageSource.mobAttack(owner), attackDamage);
 					heldStack.getItem().hurtEnemy(heldStack, target, owner);
 				}
