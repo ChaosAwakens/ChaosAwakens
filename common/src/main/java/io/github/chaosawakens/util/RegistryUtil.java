@@ -31,38 +31,30 @@ public final class RegistryUtil {
     }
 
     @Nullable
-    public static Supplier<Block> getPlanksFrom(Supplier<Block> targetBlock) {
+    public static Supplier<Block> getWoodFrom(Supplier<Block> targetBlock, String regNameSuffix) {
         ResourceLocation targetBlockKey = BuiltInRegistries.BLOCK.getKey(targetBlock.get());
         String copiedPath = BuiltInRegistries.BLOCK.getKey(targetBlock.get()).getPath();
 
         return targetBlockKey.getPath().startsWith("stripped")
                 ? targetBlockKey.getPath().endsWith("wood") && targetBlockKey.getPath().charAt(targetBlockKey.getPath().indexOf("wood") - 1) != '_'
-                ? () -> BuiltInRegistries.BLOCK.get(targetBlockKey.withPath(copiedPath.concat("_planks")))
-                : () -> BuiltInRegistries.BLOCK.get(targetBlockKey.withPath(StringUtils.substring(copiedPath, 0, copiedPath.lastIndexOf("_")).concat("_planks")))
+                ? () -> BuiltInRegistries.BLOCK.get(targetBlockKey.withPath(copiedPath.concat(regNameSuffix)))
+                : () -> BuiltInRegistries.BLOCK.get(targetBlockKey.withPath(StringUtils.substring(copiedPath, 0, copiedPath.lastIndexOf("_")).concat(regNameSuffix)))
                 : targetBlockKey.getPath().endsWith("_wood")
-                ? () -> BuiltInRegistries.BLOCK.get(targetBlockKey.withPath(StringUtils.substring(copiedPath, 0, copiedPath.lastIndexOf("_")).concat("_planks")))
+                ? () -> BuiltInRegistries.BLOCK.get(targetBlockKey.withPath(StringUtils.substring(copiedPath, 0, copiedPath.lastIndexOf("_")).concat(regNameSuffix)))
                 : targetBlockKey.getPath().endsWith("wood") && targetBlockKey.getPath().charAt(targetBlockKey.getPath().indexOf("wood") - 1) != '_'
-                ? () -> BuiltInRegistries.BLOCK.get(targetBlockKey.withPath(copiedPath.concat("_planks")))
+                ? () -> BuiltInRegistries.BLOCK.get(targetBlockKey.withPath(copiedPath.concat(regNameSuffix)))
                 : targetBlockKey.getPath().contains("_")
-                ? () -> BuiltInRegistries.BLOCK.get(targetBlockKey.withPath(StringUtils.substringBefore(copiedPath, "_").concat("_planks")))
+                ? () -> BuiltInRegistries.BLOCK.get(targetBlockKey.withPath(StringUtils.substringBefore(copiedPath, "_").concat(regNameSuffix)))
                 : null; // Force nullity rather than air delegate
     }
 
     @Nullable
-    public static Supplier<Block> getLogFrom(Supplier<Block> targetBlock) {
-        ResourceLocation targetBlockKey = BuiltInRegistries.BLOCK.getKey(targetBlock.get());
-        String copiedPath = BuiltInRegistries.BLOCK.getKey(targetBlock.get()).getPath();
+    public static Supplier<Block> getPlanksFrom(Supplier<Block> targetBlock) {
+        return getWoodFrom(targetBlock, "_planks");
+    }
 
-        return targetBlockKey.getPath().startsWith("stripped")
-                ? targetBlockKey.getPath().endsWith("wood") && targetBlockKey.getPath().charAt(targetBlockKey.getPath().indexOf("wood") - 1) != '_'
-                ? () -> BuiltInRegistries.BLOCK.get(targetBlockKey.withPath(copiedPath.concat("_log")))
-                : () -> BuiltInRegistries.BLOCK.get(targetBlockKey.withPath(StringUtils.substring(copiedPath, 0, copiedPath.lastIndexOf("_")).concat("_log")))
-                : targetBlockKey.getPath().endsWith("_wood")
-                ? () -> BuiltInRegistries.BLOCK.get(targetBlockKey.withPath(StringUtils.substring(copiedPath, 0, copiedPath.lastIndexOf("_")).concat("_log")))
-                : targetBlockKey.getPath().endsWith("wood") && targetBlockKey.getPath().charAt(targetBlockKey.getPath().indexOf("wood") - 1) != '_'
-                ? () -> BuiltInRegistries.BLOCK.get(targetBlockKey.withPath(copiedPath.concat("_log")))
-                : targetBlockKey.getPath().contains("_")
-                ? () -> BuiltInRegistries.BLOCK.get(targetBlockKey.withPath(StringUtils.substringBefore(copiedPath, "_").concat("_log")))
-                : null; // Force nullity rather than air delegate
+    @Nullable
+    public static Supplier<Block> getLogFrom(Supplier<Block> targetBlock) {
+        return getWoodFrom(targetBlock, "_log");
     }
 }
