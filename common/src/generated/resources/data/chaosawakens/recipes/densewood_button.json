@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "chaosawakens:densewood_planks"
+    }
+  ],
+  "result": {
+    "item": "chaosawakens:densewood_button"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "chaosawakens:apple_planks"
+    }
+  ],
+  "result": {
+    "item": "chaosawakens:apple_button"
+  }
+}

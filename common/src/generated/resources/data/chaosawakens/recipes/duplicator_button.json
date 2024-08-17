@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "item": "chaosawakens:duplicator_planks"
+    }
+  ],
+  "result": {
+    "item": "chaosawakens:duplicator_button"
+  }
+}
