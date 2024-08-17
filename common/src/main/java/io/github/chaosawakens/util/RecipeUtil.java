@@ -97,4 +97,118 @@ public final class RecipeUtil { //TODO Frick u method overloading functional int
             }
         };
     }
+
+    public static Consumer<Supplier<Block>> doorsFromPlanks(Consumer<FinishedRecipe> recipeConsumer, ItemLike planksILReference) {
+        return (resultBlockSup) -> ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, resultBlockSup.get(), 3)
+                .define('P', planksILReference)
+                .pattern("PP")
+                .pattern("PP")
+                .pattern("PP")
+                .unlockedBy("has_" + RegistryUtil.getItemName(planksILReference), PredicateUtil.has(planksILReference))
+                .save(recipeConsumer);
+    }
+
+    public static Consumer<Supplier<Block>> doorsFromPlanks(Consumer<FinishedRecipe> recipeConsumer) {
+        return (resultBlockSup) -> {
+            Supplier<Block> planksBlock = RegistryUtil.getPlanksFrom(resultBlockSup);
+
+            if (planksBlock != null) {
+                ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, resultBlockSup.get(), 3)
+                        .define('P', planksBlock.get())
+                        .pattern("PP")
+                        .pattern("PP")
+                        .pattern("PP")
+                        .unlockedBy("has_" + RegistryUtil.getItemName(planksBlock.get()), PredicateUtil.has(planksBlock.get()))
+                        .save(recipeConsumer);
+            }
+        };
+    }
+
+    public static Consumer<Supplier<Block>> slabsFromPlanks(Consumer<FinishedRecipe> recipeConsumer, ItemLike planksILReference) {
+        return (resultBlockSup) -> ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, resultBlockSup.get(), 6)
+                .define('P', planksILReference)
+                .pattern("PPP")
+                .unlockedBy("has_" + RegistryUtil.getItemName(planksILReference), PredicateUtil.has(planksILReference))
+                .save(recipeConsumer);
+    }
+
+    public static Consumer<Supplier<Block>> slabsFromPlanks(Consumer<FinishedRecipe> recipeConsumer) {
+        return (resultBlockSup) -> {
+            Supplier<Block> planksBlock = RegistryUtil.getPlanksFrom(resultBlockSup);
+
+            if (planksBlock != null) {
+                ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, resultBlockSup.get(), 6)
+                        .define('P', planksBlock.get())
+                        .pattern("PPP")
+                        .unlockedBy("has_" + RegistryUtil.getItemName(planksBlock.get()), PredicateUtil.has(planksBlock.get()))
+                        .save(recipeConsumer);
+            }
+        };
+    }
+
+    public static Consumer<Supplier<Block>> buttonFromPlank(Consumer<FinishedRecipe> recipeConsumer, ItemLike planksILReference) {
+        return (resultBlockSup) -> ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, resultBlockSup.get(), 1)
+                .requires(planksILReference,1)
+                .unlockedBy("has_" + RegistryUtil.getItemName(planksILReference), PredicateUtil.has(planksILReference))
+                .save(recipeConsumer);
+    }
+
+    public static Consumer<Supplier<Block>> buttonFromPlank(Consumer<FinishedRecipe> recipeConsumer) {
+        return (resultBlockSup) -> {
+            Supplier<Block> planksBlock = RegistryUtil.getPlanksFrom(resultBlockSup);
+
+            if (planksBlock != null) {
+                ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, resultBlockSup.get(), 1)
+                        .requires(planksBlock.get(),1)
+                        .unlockedBy("has_" + RegistryUtil.getItemName(planksBlock.get()), PredicateUtil.has(planksBlock.get()))
+                        .save(recipeConsumer);
+            }
+        };
+    }
+
+    public static Consumer<Supplier<Block>> trapdoorsFromPlanks(Consumer<FinishedRecipe> recipeConsumer, ItemLike planksILReference) {
+        return (resultBlockSup) -> ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, resultBlockSup.get(), 2)
+                .define('P', planksILReference)
+                .pattern("PPP")
+                .pattern("PPP")
+                .unlockedBy("has_" + RegistryUtil.getItemName(planksILReference), PredicateUtil.has(planksILReference))
+                .save(recipeConsumer);
+    }
+
+    public static Consumer<Supplier<Block>> trapdoorsFromPlanks(Consumer<FinishedRecipe> recipeConsumer) {
+        return (resultBlockSup) -> {
+            Supplier<Block> planksBlock = RegistryUtil.getPlanksFrom(resultBlockSup);
+
+            if (planksBlock != null) {
+                ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, resultBlockSup.get(), 2)
+                        .define('P', planksBlock.get())
+                        .pattern("PPP")
+                        .pattern("PPP")
+                        .unlockedBy("has_" + RegistryUtil.getItemName(planksBlock.get()), PredicateUtil.has(planksBlock.get()))
+                        .save(recipeConsumer);
+            }
+        };
+    }
+
+    public static Consumer<Supplier<Block>> pressurePlateFromPlanks(Consumer<FinishedRecipe> recipeConsumer, ItemLike planksILReference) {
+        return (resultBlockSup) -> ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, resultBlockSup.get(), 1)
+                .define('P', planksILReference)
+                .pattern("PP")
+                .unlockedBy("has_" + RegistryUtil.getItemName(planksILReference), PredicateUtil.has(planksILReference))
+                .save(recipeConsumer);
+    }
+
+    public static Consumer<Supplier<Block>> pressurePlateFromPlanks(Consumer<FinishedRecipe> recipeConsumer) {
+        return (resultBlockSup) -> {
+            Supplier<Block> planksBlock = RegistryUtil.getPlanksFrom(resultBlockSup);
+
+            if (planksBlock != null) {
+                ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, resultBlockSup.get(), 1)
+                        .define('P', planksBlock.get())
+                        .pattern("PP")
+                        .unlockedBy("has_" + RegistryUtil.getItemName(planksBlock.get()), PredicateUtil.has(planksBlock.get()))
+                        .save(recipeConsumer);
+            }
+        };
+    }
 }
