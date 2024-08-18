@@ -5,7 +5,7 @@ license="All Rights Reserved."
 
 [[mods]]
 modId="chaosawakens"
-version="0.12.0.3"
+version="0.12.1.0"
 displayName="Chaos Awakens"
 updateJSONURL="https://raw.githubusercontent.com/ChaosAwakens/ChaosAwakens/1.16.5-forge/update.json"
 displayURL="https://chaosawakens.github.io/#downloadsDiv"

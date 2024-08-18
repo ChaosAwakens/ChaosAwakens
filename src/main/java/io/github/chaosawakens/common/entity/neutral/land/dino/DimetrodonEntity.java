@@ -48,7 +48,7 @@ public class DimetrodonEntity extends AnimatableAngerableAnimalEntity {
 	private final WrappedAnimationController<DimetrodonEntity> attackController = createMappedController("dimetrodonattackcontroller", this::attackPredicate);
 	private final SingletonAnimationBuilder idleAnim = new SingletonAnimationBuilder(this, "Idle", EDefaultLoopTypes.LOOP);
 	private final SingletonAnimationBuilder walkAnim = new SingletonAnimationBuilder(this, "Walk", EDefaultLoopTypes.LOOP);
-	private final SingletonAnimationBuilder swimAnim = new SingletonAnimationBuilder(this, "Swim", EDefaultLoopTypes.LOOP);
+	private final SingletonAnimationBuilder swimAnim = new SingletonAnimationBuilder(this, "Swim", EDefaultLoopTypes.LOOP).setWrappedController(attackController);
 	private final SingletonAnimationBuilder biteAnim = new SingletonAnimationBuilder(this, "Bite Attack", EDefaultLoopTypes.PLAY_ONCE).setWrappedController(attackController);
 	private static final RangedInteger ANGER_TIME_RANGE = TickRangeConverter.rangeOfSeconds(60, 120);
 	private static final Ingredient FOOD_ITEMS = Ingredient.of(Items.COD, Items.PUFFERFISH, Items.SALMON, Items.TROPICAL_FISH, CAItems.GREEN_FISH.get(), CAItems.SPARK_FISH.get());
