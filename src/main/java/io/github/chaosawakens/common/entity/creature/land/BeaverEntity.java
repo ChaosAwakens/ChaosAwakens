@@ -16,6 +16,7 @@ import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.*;
+import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.datasync.DataParameter;
@@ -160,6 +161,21 @@ public class BeaverEntity extends AnimatableAnimalEntity {
 			public void stop() {
 				super.stop();
 				setPanicking(false);
+			}
+		});
+		this.goalSelector.addGoal(1, new AvoidEntityGoal<MonsterEntity>(this, MonsterEntity.class, 12.0F, 1.1D, 1.44D) {
+			@Override
+			public void stop() {
+				super.stop();
+				setPanicking(false);
+			}
+
+			@Override
+			public void tick() {
+				super.tick();
+
+				setPanicking(distanceToSqr(toAvoid) < 120.0D);
+				getNavigation().setSpeedModifier(distanceToSqr(toAvoid) < 120.0D ? 1.74D : 1.3D);
 			}
 		});
 		this.goalSelector.addGoal(1, new RandomWalkingGoal(this, 1.6));
