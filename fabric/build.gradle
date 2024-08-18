@@ -4,7 +4,7 @@ plugins {
 }
 
 base {
-    archivesName = "${mod_name}-${minecraft_version}-fabric"
+    archivesName = "${mod_name}-${mod_version}-${minecraft_version}-fabric"
 
     sourceCompatibility = targetCompatibility = JavaVersion.VERSION_17
 }
