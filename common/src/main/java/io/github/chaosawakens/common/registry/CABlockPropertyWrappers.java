@@ -6,6 +6,7 @@ import io.github.chaosawakens.util.ModelUtil;
 import io.github.chaosawakens.util.RecipeUtil;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.ItemTags;
 
 public final class CABlockPropertyWrappers { // Commented BMD calls out because they're meant to be examples and are actually useless in templates. Keeping them would constrain the end-developer to using setter methods rather than being free to choose between those and addendum methods
 
@@ -119,13 +120,13 @@ public final class CABlockPropertyWrappers { // Commented BMD calls out because 
     public static final BlockPropertyWrapper WOODEN_PLANKS = BlockPropertyWrapper.ofTemplate(BASIC_BLOCK_AXE)
             .cachedBuilder()
             .withRecipe(RecipeUtil::logToPlanks)
-            .withTags(ObjectArrayList.of(BlockTags.PLANKS))
+            .withTags(ObjectArrayList.of(BlockTags.PLANKS, ItemTags.PLANKS))
             .build();
     public static final BlockPropertyWrapper WOODEN_SLAB = BlockPropertyWrapper.createTemplate()
             .builder()
             .withLootTable(LootUtil::dropSlab)
             .withRecipe(RecipeUtil::slabsFromPlanks)
-            .withTags(ObjectArrayList.of(BlockTags.WOODEN_SLABS, BlockTags.MINEABLE_WITH_AXE))
+            .withTags(ObjectArrayList.of(BlockTags.WOODEN_SLABS, BlockTags.MINEABLE_WITH_AXE, ItemTags.WOODEN_SLABS))
   //        .withCustomModelDefinitions(ModelUtil.slab(CAConstants.prefix("base/template")))
             .withBlockStateDefinition(ModelUtil::woodenSlab)
             .build();
@@ -134,7 +135,7 @@ public final class CABlockPropertyWrappers { // Commented BMD calls out because 
             .builder()
             .withLootTable(LootUtil::dropDoor)
             .withRecipe(RecipeUtil::doorsFromPlanks)
-            .withTags(ObjectArrayList.of(BlockTags.WOODEN_DOORS, BlockTags.MINEABLE_WITH_AXE))
+            .withTags(ObjectArrayList.of(BlockTags.WOODEN_DOORS, BlockTags.MINEABLE_WITH_AXE, ItemTags.WOODEN_DOORS))
   //        .withCustomModelDefinitions(ModelUtil.door(CAConstants.prefix("base/template_door_top"), CAConstants.prefix("base/template_door_bottom")))
             .withBlockStateDefinition(ModelUtil::door)
             .build();
@@ -142,7 +143,7 @@ public final class CABlockPropertyWrappers { // Commented BMD calls out because 
             .builder()
             .withLootTable(LootUtil::dropSelf)
             .withRecipe(RecipeUtil::trapdoorsFromPlanks)
-            .withTags(ObjectArrayList.of(BlockTags.WOODEN_TRAPDOORS, BlockTags.MINEABLE_WITH_AXE))
+            .withTags(ObjectArrayList.of(BlockTags.WOODEN_TRAPDOORS, BlockTags.MINEABLE_WITH_AXE, ItemTags.WOODEN_TRAPDOORS))
   //        .withCustomModelDefinitions(ModelUtil.trapdoor(CAConstants.prefix("base/template_trapdoor"), CAConstants.prefix("block/template_trapdoor_bottom")))
             .withBlockStateDefinition(ModelUtil::trapdoor)
             .build();
@@ -151,7 +152,7 @@ public final class CABlockPropertyWrappers { // Commented BMD calls out because 
             .builder()
             .withLootTable(LootUtil::dropSelf)
             .withRecipe(RecipeUtil::fencesFromPlanks)
-            .withTags(ObjectArrayList.of(BlockTags.WOODEN_FENCES, BlockTags.MINEABLE_WITH_AXE))
+            .withTags(ObjectArrayList.of(BlockTags.WOODEN_FENCES, BlockTags.MINEABLE_WITH_AXE, ItemTags.WOODEN_FENCES))
    //       .withCustomModelDefinitions(ModelUtil.fence(CAConstants.prefix("base/template"), CAConstants.prefix("template_fence_inventory")))
             .withBlockStateDefinition(ModelUtil::fence)
             .build();
@@ -159,7 +160,7 @@ public final class CABlockPropertyWrappers { // Commented BMD calls out because 
             .builder()
             .withLootTable(LootUtil::dropSelf)
             .withRecipe(RecipeUtil::fenceGateFromPlanks)
-            .withTags(ObjectArrayList.of(BlockTags.FENCE_GATES, BlockTags.MINEABLE_WITH_AXE))
+            .withTags(ObjectArrayList.of(BlockTags.FENCE_GATES, BlockTags.MINEABLE_WITH_AXE, ItemTags.FENCE_GATES))
     //      .withCustomModelDefinitions(ModelUtil.fenceGate(CAConstants.prefix("base/template")))
             .withBlockStateDefinition(ModelUtil::fenceGate)
             .build();
@@ -168,7 +169,7 @@ public final class CABlockPropertyWrappers { // Commented BMD calls out because 
             .builder()
             .withLootTable(LootUtil::dropSelf)
             .withRecipe(RecipeUtil::stairsFromPlanks)
-            .withTags(ObjectArrayList.of(BlockTags.WOODEN_STAIRS, BlockTags.MINEABLE_WITH_AXE))
+            .withTags(ObjectArrayList.of(BlockTags.WOODEN_STAIRS, BlockTags.MINEABLE_WITH_AXE, ItemTags.WOODEN_STAIRS))
      //     .withCustomModelDefinitions(ModelUtil.stairs(CAConstants.prefix("base/template")))
             .withBlockStateDefinition(ModelUtil::stairs)
             .build();
@@ -192,11 +193,11 @@ public final class CABlockPropertyWrappers { // Commented BMD calls out because 
 
     public static final BlockPropertyWrapper LOG = BlockPropertyWrapper.ofTemplate(BASIC_ROTATED_PILLAR_BLOCK)
             .cachedBuilder()
-            .withTags(ObjectArrayList.of(BlockTags.MINEABLE_WITH_AXE, BlockTags.LOGS_THAT_BURN))
+            .withTags(ObjectArrayList.of(BlockTags.MINEABLE_WITH_AXE, BlockTags.LOGS_THAT_BURN, ItemTags.LOGS_THAT_BURN))
             .build();
     public static final BlockPropertyWrapper WOOD = BlockPropertyWrapper.ofTemplate(BASIC_AXIS_ALIGNED_BLOCK)
             .cachedBuilder()
             .withRecipe(RecipeUtil::logToWood)
-            .withTags(ObjectArrayList.of(BlockTags.MINEABLE_WITH_AXE, BlockTags.LOGS_THAT_BURN))
+            .withTags(ObjectArrayList.of(BlockTags.MINEABLE_WITH_AXE, BlockTags.LOGS_THAT_BURN, ItemTags.LOGS_THAT_BURN))
             .build();
 }

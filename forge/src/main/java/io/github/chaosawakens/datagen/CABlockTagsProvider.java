@@ -30,14 +30,14 @@ public class CABlockTagsProvider extends BlockTagsProvider {
     protected void addTags(HolderLookup.Provider pProvider) {
         if (!BlockPropertyWrapper.getMappedBwps().isEmpty()) {
             BlockPropertyWrapper.getMappedBwps().forEach((blockSupEntry, curBwp) -> {
-                List<TagKey<Block>> parentBlockTags = curBwp.getParentBlockTags();
+                List<TagKey<?>> parentTags = curBwp.getParentTags();
 
-                if (!parentBlockTags.isEmpty()){
-                    parentBlockTags.forEach(curBlockTag -> {
-                        if (curBlockTag != null) {
+                if (!parentTags.isEmpty()){
+                    parentTags.forEach(curBlockTag -> {
+                        if (curBlockTag != null && curBlockTag.isFor(Registries.BLOCK)) {
                             CAConstants.LOGGER.debug("[Tagging Block]: " + blockSupEntry.get().getDescriptionId() + " -> " + curBlockTag);
 
-                            tag(curBlockTag).add(blockSupEntry.get());
+                            tag((TagKey<Block>) curBlockTag).add(blockSupEntry.get());
                         }
                     });
                 }

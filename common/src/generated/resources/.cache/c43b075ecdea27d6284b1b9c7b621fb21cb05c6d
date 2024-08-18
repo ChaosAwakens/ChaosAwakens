@@ -1,0 +1,9 @@
+// 1.20.1	2024-08-18T16:22:15.8963953	Chaos Awakens: Item Tags
+0657cc92f0d5b89ccce850814f03875040484c05 data/minecraft/tags/items/fence_gates.json
+c37c447f93d36e26e649181fd5838a78f48c87e9 data/minecraft/tags/items/logs_that_burn.json
+7030e8eab3b9a7e1f1103635de23ae822665395f data/minecraft/tags/items/planks.json
+c73f48340acd02386faa456c2f390fad2c17be3e data/minecraft/tags/items/wooden_doors.json
+fdd1924b92e374c670ff4cbedb9018cc5f8627a1 data/minecraft/tags/items/wooden_fences.json
+e9d45ba0b1f5a16b867fa1c22964b94df899eae6 data/minecraft/tags/items/wooden_slabs.json
+4636e61613ff9e0a3aa052326951fef28f796813 data/minecraft/tags/items/wooden_stairs.json
+ce5f64bdfa1cc7e68eb9aa7994130f054cd10ceb data/minecraft/tags/items/wooden_trapdoors.json

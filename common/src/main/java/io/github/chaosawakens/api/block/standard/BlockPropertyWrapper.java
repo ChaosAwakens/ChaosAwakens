@@ -11,6 +11,7 @@ import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.storage.loot.LootTable;
@@ -267,11 +268,11 @@ public class BlockPropertyWrapper { //TODO Maybe type param this for blocks
     }
 
     /**
-     * Gets the defined parent {@linkplain TagKey<Block> Block Tags} from the {@link #builder()} if the builder exists.
+     * Gets the defined parent {@linkplain TagKey<?> Tags} from the {@link #builder()} if the builder exists.
      *
-     * @return The defined parent {@linkplain TagKey<Block> Block Tags}, or an empty {@link ObjectArrayList} if the {@link #builder()} is {@code null}.
+     * @return The defined parent {@linkplain TagKey<?> Tags}, or an empty {@link ObjectArrayList} if the {@link #builder()} is {@code null}.
      */
-    public List<TagKey<Block>> getParentBlockTags() {
+    public List<TagKey<?>> getParentTags() {
         return builder == null ? ObjectArrayList.of() : builder.parentTags;
     }
 
@@ -338,7 +339,7 @@ public class BlockPropertyWrapper { //TODO Maybe type param this for blocks
         private List<String> definedSeparatorWords = ObjectArrayList.of();
         @Nullable
         private Function<Supplier<Block>, LootTable.Builder> blockLootTableBuilder;
-        private List<TagKey<Block>> parentTags = ObjectArrayList.of();
+        private List<TagKey<?>> parentTags = ObjectArrayList.of();
         private List<BlockModelDefinition> blockModelDefinitions = ObjectArrayList.of();
         @Nullable
         private Function<Supplier<Block>, BlockStateDefinition> blockStateDefinition;
@@ -424,41 +425,41 @@ public class BlockPropertyWrapper { //TODO Maybe type param this for blocks
         }
 
         /**
-         * Tags this BPWBuilder's parent block with the provided {@link TagKey<Block>}.
+         * Tags this BPWBuilder's parent block with the provided {@link TagKey<?>}.
          *
-         * @param parentBlockTag The {@link TagKey<Block>} with which this BPW's parent block will be tagged.
+         * @param parentBlockTag The {@link TagKey<?>} with which this BPW's parent block will be tagged. May generally be of types {@link Item} or {@link Block}.
          *
          * @return {@code this} (builder method).
          */
-        public BPWBuilder withTag(TagKey<Block> parentBlockTag) {
+        public BPWBuilder withTag(TagKey<?> parentBlockTag) {
             this.parentTags.add(parentBlockTag);
             return this;
         }
 
         /**
-         * Tags this BPWBuilder's parent block with the provided {@linkplain TagKey<Block> Block Tags}. Appends to the existing list.
+         * Tags this BPWBuilder's parent block with the provided {@linkplain TagKey<?> Tags}. Appends to the existing list.
          *
-         * @param parentBlockTags The {@linkplain TagKey<Block> TagKeys} with which this BPW's parent block will be tagged.
+         * @param parentBlockTags The {@linkplain TagKey<?> TagKeys} with which this BPW's parent block will be tagged. May generally be of types {@link Item} or {@link Block}.
          *
          * @return {@code this} (builder method).
          *
          * @see #withSetTags(List)
          */
-        public BPWBuilder withTags(List<TagKey<Block>> parentBlockTags) {
+        public BPWBuilder withTags(List<TagKey<?>> parentBlockTags) {
             this.parentTags.addAll(parentBlockTags);
             return this;
         }
 
         /**
-         * Tags this BPWBuilder's parent block with the provided {@linkplain TagKey<Block> Block Tags}. Overwrites the existing list.
+         * Tags this BPWBuilder's parent block with the provided {@linkplain TagKey<?> Tags}. Overwrites the existing list.
          *
-         * @param parentBlockTags The {@linkplain TagKey<Block> TagKeys} with which this BPW's parent block will be tagged.
+         * @param parentBlockTags The {@linkplain TagKey<?> TagKeys} with which this BPW's parent block will be tagged. May generally be of types {@link Item} or {@link Block}.
          *
          * @return {@code this} (builder method).
          *
          * @see #withTags(List)
          */
-        public BPWBuilder withSetTags(List<TagKey<Block>> parentBlockTags) {
+        public BPWBuilder withSetTags(List<TagKey<?>> parentBlockTags) {
             this.parentTags.clear();
             this.parentTags.addAll(parentBlockTags);
             return this;
