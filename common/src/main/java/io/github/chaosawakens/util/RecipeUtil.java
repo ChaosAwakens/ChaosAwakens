@@ -1,7 +1,10 @@
 package io.github.chaosawakens.util;
 
 import io.github.chaosawakens.CAConstants;
+import net.minecraft.client.resources.model.Material;
 import net.minecraft.data.recipes.*;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 
@@ -206,6 +209,58 @@ public final class RecipeUtil { //TODO Frick u method overloading functional int
                 ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, resultBlockSup.get(), 1)
                         .define('P', planksBlock.get())
                         .pattern("PP")
+                        .unlockedBy("has_" + RegistryUtil.getItemName(planksBlock.get()), PredicateUtil.has(planksBlock.get()))
+                        .save(recipeConsumer);
+            }
+        };
+    }
+
+    public static Consumer<Supplier<Block>> fencesFromPlanks(Consumer<FinishedRecipe> recipeConsumer, ItemLike planksILReference) {
+        return (resultBlockSup) -> ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, resultBlockSup.get(), 3)
+                .define('P', planksILReference)
+                .define('S', Items.STICK)
+                .pattern("PSP")
+                .pattern("PSP")
+                .unlockedBy("has_" + RegistryUtil.getItemName(planksILReference), PredicateUtil.has(planksILReference))
+                .save(recipeConsumer);
+    }
+
+    public static Consumer<Supplier<Block>> fencesFromPlanks(Consumer<FinishedRecipe> recipeConsumer) {
+        return (resultBlockSup) -> {
+            Supplier<Block> planksBlock = RegistryUtil.getPlanksFrom(resultBlockSup);
+
+            if (planksBlock != null) {
+                ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, resultBlockSup.get(), 3)
+                        .define('P', planksBlock.get())
+                        .define('S', Items.STICK)
+                        .pattern("PSP")
+                        .pattern("PSP")
+                        .unlockedBy("has_" + RegistryUtil.getItemName(planksBlock.get()), PredicateUtil.has(planksBlock.get()))
+                        .save(recipeConsumer);
+            }
+        };
+    }
+
+    public static Consumer<Supplier<Block>> fenceGateFromPlanks(Consumer<FinishedRecipe> recipeConsumer, ItemLike planksILReference) {
+        return (resultBlockSup) -> ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, resultBlockSup.get(), 1)
+                .define('P', planksILReference)
+                .define('S', Items.STICK)
+                .pattern("SPS")
+                .pattern("SPS")
+                .unlockedBy("has_" + RegistryUtil.getItemName(planksILReference), PredicateUtil.has(planksILReference))
+                .save(recipeConsumer);
+    }
+
+    public static Consumer<Supplier<Block>> fenceGateFromPlanks(Consumer<FinishedRecipe> recipeConsumer) {
+        return (resultBlockSup) -> {
+            Supplier<Block> planksBlock = RegistryUtil.getPlanksFrom(resultBlockSup);
+
+            if (planksBlock != null) {
+                ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, resultBlockSup.get(), 1)
+                        .define('P', planksBlock.get())
+                        .define('S', Items.STICK)
+                        .pattern("SPS")
+                        .pattern("SPS")
                         .unlockedBy("has_" + RegistryUtil.getItemName(planksBlock.get()), PredicateUtil.has(planksBlock.get()))
                         .save(recipeConsumer);
             }
