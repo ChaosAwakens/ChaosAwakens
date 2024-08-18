@@ -94,7 +94,7 @@ public class CACommonConfig {
 	public final BooleanValue generateWarpedEntTree;
 	public final BooleanValue generateGinkgoEntTree;
 	public final BooleanValue generateJefferyDungeonPlaceholder;
-//	public final BooleanValue generateMiningWaspNest;
+	public final BooleanValue generateWaspNest;
 
 	public final BooleanValue holidayTextures;
 
@@ -339,9 +339,9 @@ public class CACommonConfig {
 		generateJefferyDungeonPlaceholder = builder
 				.comment("Will Jeffery Dungeons (Placeholders) be generated?")
 				.define("Generate Jeffery Dungeons", true);
-//		generateWaspNest = builder
-//				.comment("Will Wasp Nests be generated?")
-//				.define("Generate Wasp Nests", true);
+		generateWaspNest = builder
+				.comment("Will Wasp Nests be generated?")
+				.define("Generate Wasp Nests", true);
 //		generateMiningWaspNest = builder
 //				.comment("Will Mining Wasp Nests be generated?")
 //				.define("Generate Mining Wasp Nests", true);

@@ -44,7 +44,7 @@ public class BiomeHandlers {
 		};
 
 		private static final Consumer<MobSpawnInfoBuilder> FOREST_MOBS = (builder) -> {
-			builder.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.BEAVER.get(), 10, 1, 2));
+			builder.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.BEAVER.get(), 14, 1, 4));
 			builder.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.STINK_BUG.get(), 20, 3, 5));
 			builder.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.BIRD.get(), 6, 2, 4));
 			builder.addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(CAEntityTypes.LETTUCE_CHICKEN.get(), 16, 4, 6));
@@ -168,6 +168,7 @@ public class BiomeHandlers {
 					
 					if (CAConfigManager.MAIN_COMMON.enableOreGen.get()) addPlainsBiomeOres(gen);
 					if (CAConfigManager.MAIN_COMMON.generateOakEntTree.get()) gen.getStructures().add(() -> CAConfiguredStructures.CONFIGURED_OAK_ENT_TREE);
+					if (CAConfigManager.MAIN_COMMON.generateWaspNest.get()) gen.getStructures().add(() -> CAConfiguredStructures.CONFIGURED_WASP_NEST);
 				}
 				
 				// Forest (Any)
@@ -208,6 +209,7 @@ public class BiomeHandlers {
 				if (location.contains("dark")) {
 					if (CAConfigManager.MAIN_COMMON.enableOreGen.get()) addDarkForestBiomeOres(gen);
 					if (CAConfigManager.MAIN_COMMON.generateDarkOakEntTree.get()) gen.getStructures().add(() -> CAConfiguredStructures.CONFIGURED_DARK_OAK_ENT_TREE);
+					if (CAConfigManager.MAIN_COMMON.generateWaspNest.get()) gen.getStructures().add(() -> CAConfiguredStructures.CONFIGURED_WASP_NEST);
 				}
 				
 				// Jungle
@@ -227,6 +229,8 @@ public class BiomeHandlers {
 				if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.SWAMP)) {
 					if (CAConfigManager.MAIN_COMMON.enableOreGen.get()) addSwampBiomeOres(gen);
 			//		if (CAConfigManager.MAIN_COMMON.generateWaspNest.get()) gen.getStructures().add(() -> CAConfiguredStructures.CONFIGURED_WASP_DUNGEON);
+
+					gen.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, CAConfiguredFeatures.FROG_POND);
 				}
 				
 				// Snowy Biomes

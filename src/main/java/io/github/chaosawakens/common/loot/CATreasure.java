@@ -30,7 +30,7 @@ public class CATreasure {
 	public static final CATreasure ENT_TREE_BROWN_MUSHROOM_LOOT = new CATreasure("ent_tree/brown_mushroom_loot"); // /give @p chest{BlockEntityTag:{LootTable:"chaosawakens:chests/ent_tree/brown_mushroom_loot"}} 1
 	public static final CATreasure ENT_TREE_RED_MUSHROOM_LOOT = new CATreasure("ent_tree/red_mushroom_loot"); // /give @p chest{BlockEntityTag:{LootTable:"chaosawakens:chests/ent_tree/red_mushroom_loot"}} 1
 	public static final CATreasure ENT_TREE_GINKGO_LOOT = new CATreasure("ent_tree/ginkgo_loot"); // /give @p chest{BlockEntityTag:{LootTable:"chaosawakens:chests/ent_tree/ginkgo_loot"}} 1
-	public static final CATreasure WASP_DUNGEON_LOOT = new CATreasure("wasp_dungeon/loot"); // /give @p chest{BlockEntityTag:{LootTable:"chaosawakens:chests/wasp_dungeon/loot"}} 1
+	public static final CATreasure WASP_NEST_LOOT = new CATreasure("wasp_nest/loot"); // /give @p chest{BlockEntityTag:{LootTable:"chaosawakens:chests/wasp_nest/loot"}} 1
 	public static final CATreasure MINING_WASP_DUNGEON_LOOT = new CATreasure("mining_wasp_dungeon/loot"); // /give @p chest{BlockEntityTag:{LootTable:"chaosawakens:chests/mining_wasp_dungeon/loot"}}
 	public static final CATreasure DESERT_ARCHAEOLOGIST_HOUSE_LOOT = new CATreasure("desert_archaeologist_house/loot"); // /give @p chest{BlockEntityTag:{LootTable:"chaosawakens:chests/desert_archaeologist_house/loot"}}
 	public static final CATreasure PLAINS_ARCHAEOLOGIST_HOUSE_LOOT = new CATreasure("plains_archaeologist_house/loot"); // /give @p chest{BlockEntityTag:{LootTable:"chaosawakens:chests/plains_archaeologist_house/loot"}}

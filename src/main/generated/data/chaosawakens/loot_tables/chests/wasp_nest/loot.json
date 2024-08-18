@@ -17,7 +17,7 @@
               }
             }
           ],
-          "name": "minecraft:honeycomb"
+          "name": "chaosawakens:butter_candy"
         },
         {
           "type": "minecraft:item",
@@ -32,7 +32,7 @@
               }
             }
           ],
-          "name": "minecraft:honeycomb"
+          "name": "chaosawakens:butter_candy"
         },
         {
           "type": "minecraft:item",
@@ -47,7 +47,7 @@
               }
             }
           ],
-          "name": "minecraft:honey_bottle"
+          "name": "minecraft:gold_nugget"
         },
         {
           "type": "minecraft:item",
@@ -62,7 +62,7 @@
               }
             }
           ],
-          "name": "minecraft:glass_bottle"
+          "name": "minecraft:gold_nugget"
         },
         {
           "type": "minecraft:item",
@@ -77,7 +77,7 @@
               }
             }
           ],
-          "name": "minecraft:glass_bottle"
+          "name": "chaosawakens:butter"
         }
       ]
     },
@@ -97,7 +97,7 @@
               }
             }
           ],
-          "name": "minecraft:honeycomb_block"
+          "name": "chaosawakens:wasp_nest_block"
         },
         {
           "type": "minecraft:item",
@@ -112,7 +112,7 @@
               }
             }
           ],
-          "name": "minecraft:honeycomb_block"
+          "name": "chaosawakens:pattern_wasp_nest_block"
         },
         {
           "type": "minecraft:item",
@@ -127,12 +127,16 @@
               }
             }
           ],
-          "name": "minecraft:honey_block"
+          "name": "chaosawakens:wasp_nest_block"
         }
       ]
     },
     {
-      "rolls": 2,
+      "rolls": {
+        "min": 0.0,
+        "max": 4.0,
+        "type": "minecraft:uniform"
+      },
       "entries": [
         {
           "type": "minecraft:item",
@@ -201,32 +205,12 @@
               "function": "minecraft:set_count",
               "count": {
                 "min": 0.0,
-                "max": 2.0,
+                "max": 3.0,
                 "type": "minecraft:uniform"
               }
             }
           ],
-          "name": "minecraft:diamond"
-        },
-        {
-          "type": "minecraft:item",
-          "conditions": [
-            {
-              "condition": "minecraft:random_chance",
-              "chance": 0.85
-            }
-          ],
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "min": 0.0,
-                "max": 2.0,
-                "type": "minecraft:uniform"
-              }
-            }
-          ],
-          "name": "minecraft:emerald"
+          "name": "chaosawakens:sun_fish"
         },
         {
           "type": "minecraft:item",
@@ -241,12 +225,12 @@
               "function": "minecraft:set_count",
               "count": {
                 "min": 0.0,
-                "max": 2.0,
+                "max": 5.0,
                 "type": "minecraft:uniform"
               }
             }
           ],
-          "name": "chaosawakens:tigers_eye"
+          "name": "minecraft:gold_ingot"
         },
         {
           "type": "minecraft:item",
@@ -261,12 +245,12 @@
               "function": "minecraft:set_count",
               "count": {
                 "min": 0.0,
-                "max": 2.0,
+                "max": 1.0,
                 "type": "minecraft:uniform"
               }
             }
           ],
-          "name": "chaosawakens:amethyst"
+          "name": "chaosawakens:rat_sword"
         }
       ]
     }

@@ -88,7 +88,10 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 	public RoboPounderEntity(EntityType<? extends MonsterEntity> type, World worldIn) {
 		super(type, worldIn);
 		this.moveControl = new MovementController(this) {
-
+			@Override
+			public boolean isWalkable(float p_234024_1_, float p_234024_2_) {
+				return super.isWalkable(p_234024_1_, p_234024_2_) || isRageRunning();
+			}
 		};
 	}
 
@@ -467,6 +470,11 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 
 	@Override
 	protected void jumpFromGround() {
+	}
+
+	@Override
+	public double getMovementThreshold() {
+		return tickCount >= 2 && isRageRunning() ? 0.55D : super.getMovementThreshold();
 	}
 
 	@Nullable

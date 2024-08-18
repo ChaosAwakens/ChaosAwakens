@@ -388,13 +388,6 @@ public class CAJER {
 		dungeonRegistry.registerCategory(CATreasure.ENT_TREE_WARPED_LOOT.stringName, CATreasure.ENT_TREE_WARPED_LOOT.langName);
 		dungeonRegistry.registerChest(CATreasure.ENT_TREE_WARPED_LOOT.stringName, CATreasure.ENT_TREE_WARPED_LOOT.lootTable);
 
-		// Uncomment: When Mushroom Dungeons are added.
-		//		dungeonRegistry.registerCategory(CATreasure.ENT_TREE_BROWN_MUSHROOM_LOOT.stringName, CATreasure.ENT_TREE_BROWN_MUSHROOM_LOOT.langName);
-		//		dungeonRegistry.registerChest(CATreasure.ENT_TREE_BROWN_MUSHROOM_LOOT.stringName, CATreasure.ENT_TREE_BROWN_MUSHROOM_LOOT.lootTable);
-		//
-		//		dungeonRegistry.registerCategory(CATreasure.ENT_TREE_RED_MUSHROOM_LOOT.stringName, CATreasure.ENT_TREE_RED_MUSHROOM_LOOT.langName);
-		// 	dungeonRegistry.registerChest(CATreasure.ENT_TREE_RED_MUSHROOM_LOOT.stringName, CATreasure.ENT_TREE_RED_MUSHROOM_LOOT.lootTable);
-
 		dungeonRegistry.registerCategory(CATreasure.ENT_TREE_GINKGO_LOOT.stringName, CATreasure.ENT_TREE_GINKGO_LOOT.langName);
 		dungeonRegistry.registerChest(CATreasure.ENT_TREE_GINKGO_LOOT.stringName, CATreasure.ENT_TREE_GINKGO_LOOT.lootTable);
 
@@ -413,13 +406,8 @@ public class CAJER {
 		dungeonRegistry.registerCategory(CATreasure.SNOWY_ARCHAEOLOGIST_HOUSE_LOOT.stringName, CATreasure.SNOWY_ARCHAEOLOGIST_HOUSE_LOOT.langName);
 		dungeonRegistry.registerChest(CATreasure.SNOWY_ARCHAEOLOGIST_HOUSE_LOOT.stringName, CATreasure.SNOWY_ARCHAEOLOGIST_HOUSE_LOOT.lootTable);
 
-		// WASP DUNGEON
-		// Uncomment: When Wasp and Wasp Dungeons are added again.
-		// 	dungeonRegistry.registerCategory(CATreasure.WASP_DUNGEON_LOOT.stringName, CATreasure.WASP_DUNGEON_LOOT.langName);
-		// 	dungeonRegistry.registerChest(CATreasure.WASP_DUNGEON_LOOT.stringName, CATreasure.WASP_DUNGEON_LOOT.lootTable);
-		//
-		//		dungeonRegistry.registerCategory(CATreasure.MINING_WASP_DUNGEON_LOOT.stringName, CATreasure.MINING_WASP_DUNGEON_LOOT.langName);
-		//		dungeonRegistry.registerChest(CATreasure.MINING_WASP_DUNGEON_LOOT.stringName, CATreasure.MINING_WASP_DUNGEON_LOOT.lootTable);
+		dungeonRegistry.registerCategory(CATreasure.WASP_NEST_LOOT.stringName, CATreasure.WASP_NEST_LOOT.langName);
+		dungeonRegistry.registerChest(CATreasure.WASP_NEST_LOOT.stringName, CATreasure.WASP_NEST_LOOT.lootTable);
 
 		ChaosAwakens.debug("MANAGER [Integration - JER]", "Successfully registered JER Dungeon/Structure Loot!");
 	}

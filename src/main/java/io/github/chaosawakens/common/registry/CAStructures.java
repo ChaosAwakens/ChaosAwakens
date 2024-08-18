@@ -29,7 +29,10 @@ public class CAStructures {
 	public static final RegistryObject<Structure<NoFeatureConfig>> SPRUCE_ENT_TREE = STRUCTURES.register("spruce_ent_tree", () -> new SurfaceStructure(NoFeatureConfig.CODEC, "ent_tree/spruce"));
 	public static final RegistryObject<Structure<NoFeatureConfig>> WARPED_ENT_TREE = STRUCTURES.register("warped_ent_tree", () -> new SurfaceStructure(NoFeatureConfig.CODEC, "ent_tree/warped"));
 	public static final RegistryObject<Structure<NoFeatureConfig>> GINKGO_ENT_TREE = STRUCTURES.register("ginkgo_ent_tree", () -> new SurfaceStructure(NoFeatureConfig.CODEC, "ent_tree/ginkgo"));
+
 	public static final RegistryObject<Structure<NoFeatureConfig>> JEFFERY_DUNGEON_PLACEHOLDER = STRUCTURES.register("jeffery_dungeon_placeholder", () -> new SurfaceStructure(NoFeatureConfig.CODEC, "robo/jeffery_dungeon/jeffery_dungeon_placeholder"));
+
+	public static final RegistryObject<Structure<NoFeatureConfig>> WASP_NEST = STRUCTURES.register("wasp_nest", () -> new SurfaceStructure(NoFeatureConfig.CODEC, "wasp/wasp_nest", new BlockPos(0, -16, 0)));
 
 //	public static final RegistryObject<Structure<NoFeatureConfig>> WASP_DUNGEON = STRUCTURES.register("wasp_dungeon", () -> new SurfaceStructure(NoFeatureConfig.CODEC, "wasp_dungeon/start_pool", new BlockPos(0, -5, 0)));
 //	public static final RegistryObject<Structure<NoFeatureConfig>> MINING_WASP_DUNGEON = STRUCTURES.register("mining_wasp_dungeon", () -> new SurfaceStructure(NoFeatureConfig.CODEC, "wasp_dungeon/mining_start_pool", new BlockPos(0, -17, 0)));
@@ -44,7 +47,10 @@ public class CAStructures {
 		setupMapSpacingAndLand(SPRUCE_ENT_TREE.get(), new StructureSeparationSettings(27, 25, 49224289), true);
 		setupMapSpacingAndLand(WARPED_ENT_TREE.get(), new StructureSeparationSettings(27, 25, 37834092), true);
 		setupMapSpacingAndLand(GINKGO_ENT_TREE.get(), new StructureSeparationSettings(27, 25, 276270520), true);
+
 		setupMapSpacingAndLand(JEFFERY_DUNGEON_PLACEHOLDER.get(), new StructureSeparationSettings(80, 65, 314159265), true);
+
+		setupMapSpacingAndLand(WASP_NEST.get(), new StructureSeparationSettings(50, 30, 644559865), true);
 
 //		setupMapSpacingAndLand(WASP_DUNGEON.get(), new StructureSeparationSettings(21, 19, 159332311), false);
 //		setupMapSpacingAndLand(MINING_WASP_DUNGEON.get(), new StructureSeparationSettings(38, 34, 159342356), false);

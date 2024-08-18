@@ -162,7 +162,10 @@ public class CACommonSetupEvents {
 			newMap.putIfAbsent(CAStructures.SPRUCE_ENT_TREE.get(), DimensionStructuresSettings.DEFAULTS.get(CAStructures.SPRUCE_ENT_TREE.get()));
 			newMap.putIfAbsent(CAStructures.WARPED_ENT_TREE.get(), DimensionStructuresSettings.DEFAULTS.get(CAStructures.WARPED_ENT_TREE.get()));
 			newMap.putIfAbsent(CAStructures.GINKGO_ENT_TREE.get(), DimensionStructuresSettings.DEFAULTS.get(CAStructures.GINKGO_ENT_TREE.get()));
+
 			newMap.putIfAbsent(CAStructures.JEFFERY_DUNGEON_PLACEHOLDER.get(), DimensionStructuresSettings.DEFAULTS.get(CAStructures.JEFFERY_DUNGEON_PLACEHOLDER.get()));
+
+			newMap.putIfAbsent(CAStructures.WASP_NEST.get(), DimensionStructuresSettings.DEFAULTS.get(CAStructures.WASP_NEST.get()));
 
 //			tempMap.putIfAbsent(CAStructures.WASP_DUNGEON.get(), DimensionStructuresSettings.DEFAULTS.get(CAStructures.WASP_DUNGEON.get()));
 //			tempMap.putIfAbsent(CAStructures.MINING_WASP_DUNGEON.get(),	DimensionStructuresSettings.DEFAULTS.get(CAStructures.MINING_WASP_DUNGEON.get()));

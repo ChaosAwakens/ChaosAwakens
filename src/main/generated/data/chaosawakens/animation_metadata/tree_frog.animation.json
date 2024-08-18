@@ -7,13 +7,13 @@
       "loop_type": "PLAY_ONCE"
     },
     {
-      "animation_name": "Blink",
-      "animation_length": 1.64,
+      "animation_name": "Idle",
+      "animation_length": 1.76,
       "loop_type": "LOOP"
     },
     {
-      "animation_name": "Idle",
-      "animation_length": 1.76,
+      "animation_name": "Blink",
+      "animation_length": 1.64,
       "loop_type": "LOOP"
     }
   ]

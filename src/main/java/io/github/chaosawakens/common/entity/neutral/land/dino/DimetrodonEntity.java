@@ -102,6 +102,7 @@ public class DimetrodonEntity extends AnimatableAngerableAnimalEntity {
 		this.targetSelector.addGoal(1, new HurtByTargetGoal(this).setAlertOthers(DimetrodonEntity.class));
 		this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<PlayerEntity>(this, PlayerEntity.class, 10, true, false, this::isAngryAt));
 		this.goalSelector.addGoal(0, new WaterAvoidingRandomWalkingGoal(this, 1.0));
+		this.goalSelector.addGoal(0, new SwimGoal(this));
 		this.goalSelector.addGoal(1, new BreedGoal(this, 1.0D));
 		this.goalSelector.addGoal(2, new TemptGoal(this, 1.2D, FOOD_ITEMS, false));
 		this.goalSelector.addGoal(2, new TemptGoal(this, 1.2D, false, FOOD_ITEMS));

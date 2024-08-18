@@ -3,18 +3,18 @@
   "animations": [
     {
       "animation_name": "Walk",
-      "animation_length": 0.6667,
+      "animation_length": 0.9167,
       "loop_type": "LOOP"
     },
     {
       "animation_name": "Idle",
-      "animation_length": 2.0,
+      "animation_length": 1.7917,
       "loop_type": "LOOP"
     },
     {
-      "animation_name": "Gnaw",
-      "animation_length": 2.0,
-      "loop_type": "LOOP"
+      "animation_name": "Chop",
+      "animation_length": 3.8,
+      "loop_type": "PLAY_ONCE"
     }
   ]
 }

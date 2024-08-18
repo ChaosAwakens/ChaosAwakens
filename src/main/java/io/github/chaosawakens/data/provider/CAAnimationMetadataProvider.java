@@ -72,9 +72,9 @@ public class CAAnimationMetadataProvider extends AnimationMetadataProvider {
                 new AnimationDataHolder("Walk", 1.8D, ILoopType.EDefaultLoopTypes.LOOP),
                 new AnimationDataHolder("Run", 1.8D, ILoopType.EDefaultLoopTypes.LOOP)));
         createAnimationMetadata(ChaosAwakens.prefix("animations/entity/creature/land/beaver.animation.json"), Lists.newArrayList(
-                new AnimationDataHolder("Idle", 2.0D, ILoopType.EDefaultLoopTypes.LOOP),
-                new AnimationDataHolder("Walk", 0.6667D, ILoopType.EDefaultLoopTypes.LOOP),
-                new AnimationDataHolder("Gnaw", 2.0D, ILoopType.EDefaultLoopTypes.LOOP)));
+                new AnimationDataHolder("Idle", 1.7917D, ILoopType.EDefaultLoopTypes.LOOP),
+                new AnimationDataHolder("Walk", 0.9167D, ILoopType.EDefaultLoopTypes.LOOP),
+                new AnimationDataHolder("Chop", 3.8D, ILoopType.EDefaultLoopTypes.PLAY_ONCE)));
         createAnimationMetadata(ChaosAwakens.prefix("animations/entity/creature/land/carrot_pig.animation.json"), Lists.newArrayList(
                 new AnimationDataHolder("Idle", 1.8D, ILoopType.EDefaultLoopTypes.LOOP),
                 new AnimationDataHolder("Walk", 1.8D, ILoopType.EDefaultLoopTypes.LOOP),

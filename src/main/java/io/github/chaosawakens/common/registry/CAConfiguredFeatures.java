@@ -198,6 +198,11 @@ public class CAConfiguredFeatures {
 			.get().configured(new NBTFeatureConfig(ChaosAwakens.prefix("feature/giant_spine_fossil"), Heightmap.Type.WORLD_SURFACE_WG, true, false))
 			.decorated(Features.Placements.HEIGHTMAP_SQUARE)
 			.chance(192));
+
+	public static final ConfiguredFeature<?, ?> FROG_POND = registerFeature("frog_pond", CAFeatures.NBT_STRUCTURE
+			.get().configured(new NBTFeatureConfig(ChaosAwakens.prefix("feature/frog_pond"), Heightmap.Type.WORLD_SURFACE_WG, true, false))
+			.decorated(Features.Placements.HEIGHTMAP_SQUARE)
+			.chance(84));
 	
 	public static final ConfiguredFeature<?, ?> MINING_ORE_RUBY_LAVA = registerFeature("mining_ore_ruby", Feature.NO_SURFACE_ORE.configured(new OreFeatureConfig(RuleTests.BASE_LAVA, States.RUBY_ORE, 8)).decorated(Placement.DEPTH_AVERAGE.configured(new DepthAverageConfig(6, 12))).squared().count(4));
 	public static final ConfiguredFeature<?, ?> MINING_ORE_AMETHYST = registerFeature("mining_ore_amethyst", Feature.ORE.configured(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, States.AMETHYST_ORE, 4)).decorated(Placement.DEPTH_AVERAGE.configured(new DepthAverageConfig(40, 16))).squared().count(4));

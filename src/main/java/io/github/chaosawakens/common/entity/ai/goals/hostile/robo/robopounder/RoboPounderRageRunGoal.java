@@ -142,7 +142,7 @@ public class RoboPounderRageRunGoal extends Goal {
 		Vector3d relevantLookPos = null;
 		
 		if (owner.getTarget() != null && owner.getTarget().isAlive() && rageRunAnim.get().isPlaying()) {
-			if (targetRageRunPos == null || owner.distanceToSqr(Vector3d.atCenterOf(targetRageRunPos)) <= 4.0D) {
+			if (targetRageRunPos == null || owner.distanceToSqr(Vector3d.atCenterOf(targetRageRunPos)) <= 4.0D || !isPathingRageRun || !owner.isMoving()) {
 				this.targetRageRunPos = BlockPosUtil.findHorizontalPositionBeyond(owner, owner.getTarget().blockPosition(), MathHelper.nextInt(owner.getRandom(), 7, 15));
 				this.isPathingRageRun = true;
 			}
@@ -159,7 +159,7 @@ public class RoboPounderRageRunGoal extends Goal {
 			
 			if (owner.isPlayingAnimation(rageRunAnim.get())) owner.getLookControl().setLookAt(relevantLookPos);
 
-			if (targetRageRunPos != null && owner.distanceToSqr(Vector3d.atCenterOf(targetRageRunPos)) <= 4.0D) {
+			if (targetRageRunPos != null && owner.distanceToSqr(Vector3d.atCenterOf(targetRageRunPos)) <= 16.0D) {
 				this.pathTries++;
 				this.isPathingRageRun = false;
 			}
