@@ -1,16 +1,19 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "###",
-    "#X#",
-    "###"
+    "WDW",
+    "DED",
+    "WDW"
   ],
   "key": {
-    "#": {
+    "E": {
+      "item": "chaosawakens:emerald_sword"
+    },
+    "D": {
       "item": "chaosawakens:dead_stink_bug"
     },
-    "X": {
-      "item": "chaosawakens:emerald_sword"
+    "W": {
+      "item": "chaosawakens:wasp_stinger"
     }
   },
   "result": {

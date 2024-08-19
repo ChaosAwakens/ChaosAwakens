@@ -2,6 +2,51 @@
   "anim_file_loc": "chaosawakens:animations/entity/hostile/robo/robo_warrior.animation.json",
   "animations": [
     {
+      "animation_name": "Idle Extras",
+      "animation_length": 1.7976931348623157E308,
+      "loop_type": "LOOP"
+    },
+    {
+      "animation_name": "Left Uppercut Attack",
+      "animation_length": 1.56,
+      "loop_type": "PLAY_ONCE"
+    },
+    {
+      "animation_name": "Death",
+      "animation_length": 3.1,
+      "loop_type": "HOLD_ON_LAST_FRAME"
+    },
+    {
+      "animation_name": "Right Uppercut Attack",
+      "animation_length": 1.56,
+      "loop_type": "PLAY_ONCE"
+    },
+    {
+      "animation_name": "Shield Destroyed",
+      "animation_length": 1.52,
+      "loop_type": "PLAY_ONCE"
+    },
+    {
+      "animation_name": "Shield Active",
+      "animation_length": 3.56,
+      "loop_type": "LOOP"
+    },
+    {
+      "animation_name": "Shield Activation",
+      "animation_length": 1.92,
+      "loop_type": "PLAY_ONCE"
+    },
+    {
+      "animation_name": "Laser Burst Attack",
+      "animation_length": 2.56,
+      "loop_type": "PLAY_ONCE"
+    },
+    {
+      "animation_name": "Walk",
+      "animation_length": 3.56,
+      "loop_type": "LOOP"
+    },
+    {
       "animation_name": "Idle",
       "animation_length": 3.56,
       "loop_type": "LOOP"
@@ -12,53 +57,8 @@
       "loop_type": "PLAY_ONCE"
     },
     {
-      "animation_name": "Idle Extras",
-      "animation_length": 1.7976931348623157E308,
-      "loop_type": "LOOP"
-    },
-    {
-      "animation_name": "Death",
-      "animation_length": 3.1,
-      "loop_type": "HOLD_ON_LAST_FRAME"
-    },
-    {
-      "animation_name": "Shield Active",
-      "animation_length": 3.56,
-      "loop_type": "LOOP"
-    },
-    {
       "animation_name": "Charged Shot Attack",
       "animation_length": 5.32,
-      "loop_type": "PLAY_ONCE"
-    },
-    {
-      "animation_name": "Shield Destroyed",
-      "animation_length": 1.52,
-      "loop_type": "PLAY_ONCE"
-    },
-    {
-      "animation_name": "Right Uppercut Attack",
-      "animation_length": 1.56,
-      "loop_type": "PLAY_ONCE"
-    },
-    {
-      "animation_name": "Laser Burst Attack",
-      "animation_length": 2.56,
-      "loop_type": "PLAY_ONCE"
-    },
-    {
-      "animation_name": "Shield Activation",
-      "animation_length": 1.92,
-      "loop_type": "PLAY_ONCE"
-    },
-    {
-      "animation_name": "Walk",
-      "animation_length": 3.56,
-      "loop_type": "LOOP"
-    },
-    {
-      "animation_name": "Left Uppercut Attack",
-      "animation_length": 1.56,
       "loop_type": "PLAY_ONCE"
     }
   ]

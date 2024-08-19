@@ -139,6 +139,8 @@ public class CAItems {
 	public static final RegistryObject<Item> BLOODSTONE = ITEMS.register("bloodstone", () -> new Item(new Item.Properties().tab(CAItemGroups.ITEMS)));
 
 	// MOB ITEMS
+	public static final RegistryObject<Item> WASP_STINGER = ITEMS.register("wasp_stinger", () -> new Item(new Item.Properties().rarity(Rarity.COMMON).tab(CAItemGroups.ITEMS)));
+
 	public static final RegistryObject<Item> BASILISK_SCALE = ITEMS.register("basilisk_scale", () -> new Item(new Item.Properties().rarity(Rarity.RARE).tab(CAItemGroups.ITEMS)));
 	public static final RegistryObject<Item> DEAD_STINK_BUG = ITEMS.register("dead_stink_bug", () -> new Item(new Item.Properties().tab(CAItemGroups.ITEMS)));
 	public static final RegistryObject<Item> EMPEROR_SCORPION_SCALE = ITEMS.register("emperor_scorpion_scale", () -> new Item(new Item.Properties().rarity(Rarity.RARE).tab(CAItemGroups.ITEMS)));

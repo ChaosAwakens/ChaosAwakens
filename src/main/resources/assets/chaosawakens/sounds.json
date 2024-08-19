@@ -18,6 +18,13 @@
     ]
   },
 
+  "entity.beaver.beaver_chainsaw": {
+    "subtitle": "subtitles.chaosawakens.entity.beaver.beaver_chainsaw",
+    "sounds": [
+      "chaosawakens:entity/creature/land/beaver/beaver_chainsaw"
+    ]
+  },
+
   "entity.hercules_beetle.docile": {
     "subtitle": "subtitles.chaosawakens.entity.hercules_beetle.docile",
     "sounds": [

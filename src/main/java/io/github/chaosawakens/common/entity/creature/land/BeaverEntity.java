@@ -7,6 +7,7 @@ import io.github.chaosawakens.api.animation.WrappedAnimationController;
 import io.github.chaosawakens.common.entity.ai.goals.passive.land.AnimatableBreakBlockGoal;
 import io.github.chaosawakens.common.entity.base.AnimatableAnimalEntity;
 import io.github.chaosawakens.common.entity.misc.CAScreenShakeEntity;
+import io.github.chaosawakens.common.registry.CASoundEvents;
 import io.github.chaosawakens.common.util.MathUtil;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.block.Block;
@@ -19,13 +20,18 @@ import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.particles.BlockParticleData;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.util.ActionResultType;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.Hand;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
@@ -86,7 +92,10 @@ public class BeaverEntity extends AnimatableAnimalEntity {
 	
 	@Override
 	protected void registerGoals() {
+		this.goalSelector.addGoal(0, new TemptGoal(this, 1.2D, false, Ingredient.of(ItemTags.SAPLINGS)));
 		this.goalSelector.addGoal(0, new AnimatableBreakBlockGoal(this, BlockTags.LOGS, 20, 20.0D, 1.2D, () -> chopAnim, 38, 60) {
+			private boolean hasPlayedChainsawSound = false;
+
 			@Override
 			public boolean canUse() {
 				return super.canUse() && !isPanicking();
@@ -100,13 +109,19 @@ public class BeaverEntity extends AnimatableAnimalEntity {
 			@Override
 			public void start() {
 				super.start();
-				if (hasReachedTarget) setChipping(true);
+				if (hasReachedTarget){
+					setChipping(true);
+					playSound(CASoundEvents.BEAVER_CHAINSAW.get(), 1.0F, 1.0F);
+					this.hasPlayedChainsawSound = true;
+				}
 			}
 
 			@Override
 			public void stop() {
 				super.stop();
 				setChipping(false);
+
+				this.hasPlayedChainsawSound = false;
 			}
 
 			@Override
@@ -122,6 +137,12 @@ public class BeaverEntity extends AnimatableAnimalEntity {
 					setChipping(true);
 
 					playAnimation(breakAnim.get(), false);
+
+					if (!hasPlayedChainsawSound) {
+						playSound(CASoundEvents.BEAVER_CHAINSAW.get(), 1.0F, 1.0F);
+
+						this.hasPlayedChainsawSound = true;
+					}
 				} else if (targetPos != null && tickCount % 100 == 0) getNavigation().moveTo(targetPos.getX(), targetPos.getY(), targetPos.getZ(), 1.15D);
 
 				if (hasReachedTarget && breakAnim.get().getWrappedAnimProgress() >= animActionStartTick) {
@@ -217,6 +238,39 @@ public class BeaverEntity extends AnimatableAnimalEntity {
 	}
 
 	@Override
+	public ActionResultType mobInteract(PlayerEntity interactingPlayer, Hand interactingHand) {
+		ItemStack targetStack = interactingPlayer.getItemInHand(interactingHand);
+
+		if (isFood(targetStack)) {
+			int curAge = getAge();
+
+			if (!level.isClientSide && curAge == 0 && canFallInLove()) {
+				usePlayerItem(interactingPlayer, targetStack);
+				setInLove(interactingPlayer);
+
+				if (!mappedDestroyedBlocks.isEmpty()) {
+					mappedDestroyedBlocks.removeIf(curBlock -> {
+						spawnAtLocation(curBlock.asItem());
+						return true;
+					});
+				}
+
+				return ActionResultType.SUCCESS;
+			}
+
+			if (isBaby()) {
+				usePlayerItem(interactingPlayer, targetStack);
+				ageUp((int) ((-curAge / 20) * 0.1D), true);
+				return ActionResultType.sidedSuccess(this.level.isClientSide);
+			}
+
+			if (this.level.isClientSide) return ActionResultType.CONSUME;
+		}
+
+		return ActionResultType.PASS;
+	}
+
+	@Override
 	public SingletonAnimationBuilder getIdleAnim() {
 		return idleAnim;
 	}
@@ -234,6 +288,11 @@ public class BeaverEntity extends AnimatableAnimalEntity {
 	@Override
 	public String getOwnerMDFileName() {
 		return BEAVER_MDF_NAME;
+	}
+
+	@Override
+	public boolean isFood(ItemStack targetStack) {
+		return Ingredient.of(ItemTags.SAPLINGS).test(targetStack);
 	}
 
 	@Override

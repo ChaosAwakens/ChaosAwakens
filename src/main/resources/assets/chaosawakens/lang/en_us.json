@@ -1405,6 +1405,7 @@
 	"block.chaosawakens.acacia_leaf_carpet": "Acacia Leaf Carpet",
 	"block.chaosawakens.dark_oak_leaf_carpet": "Dark Oak Leaf Carpet",
 
+	"item.chaosawakens.wasp_stinger": "Wasp Stinger",
 	"item.chaosawakens.dead_stink_bug": "Dead Stink Bug",
 	"item.chaosawakens.triffid_goo": "Triffid Goo",
 	"item.chaosawakens.moth_scale": "Moth Scale",
@@ -1429,6 +1430,7 @@
 	"misc.chaosawakens.wearing_backpack": "You may not wear a traveler's backpack when entering trying to access Crystalworld!",
 	"misc.chaosawakens.inaccessible_dimension": "This dimension hasn't been added to the mod yet!",
 
+	"subtitles.chaosawakens.entity.beaver.beaver_chainsaw": "Beaver Chops With Chainsaw",
 	"subtitles.chaosawakens.entity.emerald_gator.attack": "Emerald Gator bites",
 	"subtitles.chaosawakens.entity.emerald_gator.death": "Emerald Gator dies",
 	"subtitles.chaosawakens.entity.emerald_gator.hurt": "Emerald Gator hurts",

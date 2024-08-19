@@ -2,6 +2,11 @@
   "anim_file_loc": "chaosawakens:animations/entity/creature/land/beaver.animation.json",
   "animations": [
     {
+      "animation_name": "Chop",
+      "animation_length": 3.8,
+      "loop_type": "PLAY_ONCE"
+    },
+    {
       "animation_name": "Walk",
       "animation_length": 0.9167,
       "loop_type": "LOOP"
@@ -10,11 +15,6 @@
       "animation_name": "Idle",
       "animation_length": 1.7917,
       "loop_type": "LOOP"
-    },
-    {
-      "animation_name": "Chop",
-      "animation_length": 3.8,
-      "loop_type": "PLAY_ONCE"
     }
   ]
 }

@@ -252,7 +252,18 @@ public class CARecipeProvider extends RecipeProvider {
 				.unlockedBy("has_" + CAItems.GOLDEN_BEETROOT.get().asItem(), has(CAItems.GOLDEN_BEETROOT.get()))
 				.unlockedBy("has_" + Tags.Items.RODS_WOODEN.getName(), has(Tags.Items.RODS_WOODEN)).save(recipeConsumer);
 
-		surroundItem(recipeConsumer, CAItems.POISON_SWORD.get(), CAItems.DEAD_STINK_BUG.get(), CAItems.EMERALD_SWORD.get());
+		ShapedRecipeBuilder.shaped(CAItems.POISON_SWORD.get())
+				.define('E', CAItems.EMERALD_SWORD.get())
+				.define('D', CAItems.DEAD_STINK_BUG.get())
+				.define('W', CAItems.WASP_STINGER.get())
+				.pattern("WDW")
+				.pattern("DED")
+				.pattern("WDW")
+				.unlockedBy("has_" + CAItems.EMERALD_SWORD.get().asItem(), has(CAItems.EMERALD_SWORD.get()))
+				.unlockedBy("has_" + CAItems.DEAD_STINK_BUG.get().asItem(), has(CAItems.DEAD_STINK_BUG.get()))
+				.unlockedBy("has_" + CAItems.WASP_STINGER.get().asItem(), has(CAItems.WASP_STINGER.get()))
+				.save(recipeConsumer);
+
 	//	surroundItem(recipeConsumer, CAItems.SLAYER_CHAINSAW.get(), Blocks.REDSTONE_BLOCK, CAItems.ULTIMATE_AXE.get());
 		surroundItem(recipeConsumer, CAItems.EXPERIENCE_SWORD.get(), Items.EXPERIENCE_BOTTLE, CAItems.EMERALD_SWORD.get());
 		surroundItem(recipeConsumer, CAItems.EXPERIENCE_HELMET.get(), Items.EXPERIENCE_BOTTLE, CAItems.EMERALD_HELMET.get());

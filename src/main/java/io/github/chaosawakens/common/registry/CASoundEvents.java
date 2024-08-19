@@ -13,6 +13,9 @@ public class CASoundEvents {
 	public static final RegistryObject<SoundEvent> ROBO_HURT = SOUND_EVENTS.register("entity.robo.hurt", () -> new SoundEvent(ChaosAwakens.prefix("entity.robo.hurt")));
 	public static final RegistryObject<SoundEvent> ROBO_DEATH = SOUND_EVENTS.register("entity.robo.death", () -> new SoundEvent(ChaosAwakens.prefix("entity.robo.death")));
 
+	// Beaver
+	public static final RegistryObject<SoundEvent> BEAVER_CHAINSAW = SOUND_EVENTS.register("entity.beaver.beaver_chainsaw", () -> new SoundEvent(ChaosAwakens.prefix("entity.beaver.beaver_chainsaw")));
+
 	// Robo Jeffery
 	public static final RegistryObject<SoundEvent> ROBO_JEFFERY_IDLE = SOUND_EVENTS.register("entity.robo_jeffery.idle", () -> new SoundEvent(ChaosAwakens.prefix("entity.robo_jeffery.idle")));
 	public static final RegistryObject<SoundEvent> ROBO_JEFFERY_WALK = SOUND_EVENTS.register("entity.robo_jeffery.walk", () -> new SoundEvent(ChaosAwakens.prefix("entity.robo_jeffery.walk")));

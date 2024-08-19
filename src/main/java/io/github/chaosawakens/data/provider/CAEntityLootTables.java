@@ -13,7 +13,6 @@ import net.minecraft.loot.*;
 import net.minecraft.loot.conditions.EntityHasProperty;
 import net.minecraft.loot.conditions.KilledByPlayer;
 import net.minecraft.loot.conditions.RandomChance;
-import net.minecraft.loot.functions.EnchantWithLevels;
 import net.minecraft.loot.functions.LootingEnchantBonus;
 import net.minecraft.loot.functions.SetCount;
 import net.minecraft.loot.functions.Smelt;
@@ -725,10 +724,8 @@ public class CAEntityLootTables extends EntityLootTables {
 				LootTable.lootTable()
 						.withPool(LootPool.lootPool()
 								.setRolls(ConstantRange.exactly(1))
-								.add(ItemLootEntry.lootTableItem(Items.PORKCHOP)
+								.add(ItemLootEntry.lootTableItem(Items.IRON_NUGGET)
 										.apply(SetCount.setCount(RandomValueRange.between(0.0F, 2.0F)))
-										.apply(Smelt.smelted()
-												.when(EntityHasProperty.hasProperties(LootContext.EntityTarget.THIS, ENTITY_ON_FIRE)))
 										.apply(LootingEnchantBonus.lootingMultiplier(RandomValueRange.between(0.0F, 1.0F)))))
 						.withPool(LootPool.lootPool()
 								.setRolls(ConstantRange.exactly(1))
@@ -1032,6 +1029,11 @@ public class CAEntityLootTables extends EntityLootTables {
 										.when(KilledByPlayer.killedByPlayer()))));
 		add(CAEntityTypes.WASP.get(),
 				LootTable.lootTable()
+						.withPool(LootPool.lootPool()
+								.setRolls(ConstantRange.exactly(1))
+								.add(ItemLootEntry.lootTableItem(CAItems.WASP_STINGER.get())
+										.apply(SetCount.setCount(ConstantRange.exactly(1)))
+										.when(KilledByPlayer.killedByPlayer())))
 						.withPool(LootPool.lootPool()
 								.setRolls(ConstantRange.exactly(1))
 								.add(ItemLootEntry.lootTableItem(Items.GOLD_NUGGET)
