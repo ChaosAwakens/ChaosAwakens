@@ -6,6 +6,7 @@ import io.github.chaosawakens.api.tag.TagWrapper;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -33,8 +34,12 @@ public class CATags {
         public static final TagKey<Block> CHERRY_LOGS = createWrappedBlockTag("wood/logs/cherry_logs")
                 .withParentTagEntry(BlockTags.LOGS_THAT_BURN)
                 .getParentTag();
-        public static final TagKey<Block> DUPLICATION_LOGS = createWrappedBlockTag("wood/logs/duplication_logs")
+        public static final TagKey<Block> DEAD_DUPLICATOR_LOGS = createWrappedBlockTag("wood/logs/dead_duplicator_logs")
                 .withParentTagEntry(BlockTags.LOGS_THAT_BURN)
+                .getParentTag();
+        public static final TagKey<Block> DUPLICATOR_LOGS = createWrappedBlockTag("wood/logs/duplicator_logs")
+                .withParentTagEntry(BlockTags.LOGS_THAT_BURN)
+                .withTagEntry(DEAD_DUPLICATOR_LOGS)
                 .getParentTag();
         public static final TagKey<Block> PEACH_LOGS = createWrappedBlockTag("wood/logs/peach_logs")
                 .withParentTagEntry(BlockTags.LOGS_THAT_BURN)
@@ -145,14 +150,34 @@ public class CATags {
 
     @LoadEarly
     public static class CAItemTags {
-        public static final TagKey<Item> APPLE_LOGS = createItemTag("apple_logs");
-        public static final TagKey<Item> CHERRY_LOGS = createItemTag("cherry_logs");
-        public static final TagKey<Item> DUPLICATION_LOGS = createItemTag("duplication_logs");
-        public static final TagKey<Item> PEACH_LOGS = createItemTag("peach_logs");
-        public static final TagKey<Item> SKYWOOD_LOGS = createItemTag("skywood_logs");
-        public static final TagKey<Item> GINKGO_LOGS = createItemTag("ginkgo_logs");
-        public static final TagKey<Item> MESOZOIC_LOGS = createItemTag("mesozoic_logs");
-        public static final TagKey<Item> DENSEWOOD_LOGS = createItemTag("densewood_logs");
+        public static final TagKey<Item> APPLE_LOGS = createWrappedItemTag("wood/logs/apple_logs")
+                .withParentTagEntry(ItemTags.LOGS_THAT_BURN)
+                .getParentTag();
+        public static final TagKey<Item> CHERRY_LOGS = createWrappedItemTag("wood/logs/cherry_logs")
+                .withParentTagEntry(ItemTags.LOGS_THAT_BURN)
+                .getParentTag();
+        public static final TagKey<Item> DEAD_DUPLICATOR_LOGS = createWrappedItemTag("wood/logs/dead_duplicator_logs")
+                .withParentTagEntry(ItemTags.LOGS_THAT_BURN)
+                .getParentTag();
+        public static final TagKey<Item> DUPLICATOR_LOGS = createWrappedItemTag("wood/logs/duplicator_logs")
+                .withParentTagEntry(ItemTags.LOGS_THAT_BURN)
+                .withTagEntry(DEAD_DUPLICATOR_LOGS)
+                .getParentTag();
+        public static final TagKey<Item> PEACH_LOGS = createWrappedItemTag("wood/logs/peach_logs")
+                .withParentTagEntry(ItemTags.LOGS_THAT_BURN)
+                .getParentTag();
+        public static final TagKey<Item> SKYWOOD_LOGS = createWrappedItemTag("wood/logs/skywood_logs")
+                .withParentTagEntry(ItemTags.LOGS_THAT_BURN)
+                .getParentTag();
+        public static final TagKey<Item> GINKGO_LOGS = createWrappedItemTag("wood/logs/ginkgo_logs")
+                .withParentTagEntry(ItemTags.LOGS_THAT_BURN)
+                .getParentTag();
+        public static final TagKey<Item> MESOZOIC_LOGS = createWrappedItemTag("wood/logs/mesozoic_logs")
+                .withParentTagEntry(ItemTags.LOGS_THAT_BURN)
+                .getParentTag();
+        public static final TagKey<Item> DENSEWOOD_LOGS = createWrappedItemTag("wood/logs/densewood_logs")
+                .withParentTagEntry(ItemTags.LOGS_THAT_BURN)
+                .getParentTag();
 
         public static final TagKey<Item> CRYSTALWOOD_LOGS = createItemTag("crystalwood_logs");
         public static final TagKey<Item> CRYSTALWOOD_LEAVES = createItemTag("crystalwood_leaves");

@@ -1,4 +1,13 @@
-// 1.20.1	2024-08-18T16:22:15.8963953	Chaos Awakens: Item Tags
+// 1.20.1	2024-08-20T06:51:11.2380771	Chaos Awakens: Item Tags
+60fe0654e29a71a2d2b93c36c13ce2bce8f72066 data/chaosawakens/tags/items/crystalwood_logs.json
+8cc569ffadf7cb6d21c5278b136e71c79c48bae5 data/chaosawakens/tags/items/wood/logs/apple_logs.json
+a90631278f250cad2bda169dd54676d2979afcda data/chaosawakens/tags/items/wood/logs/dead_duplicator_logs.json
+0c394bf80473a7057047980ab9fd4d864d5695ee data/chaosawakens/tags/items/wood/logs/densewood_logs.json
+2e7728f7f36b5ca63a1aa1104dbd4532518ca514 data/chaosawakens/tags/items/wood/logs/duplicator_logs.json
+dfd1a4679b33bcc613029d46b05f5ea2e882c5d7 data/chaosawakens/tags/items/wood/logs/ginkgo_logs.json
+5faaf02bb6450173740f77436c203295e29cabce data/chaosawakens/tags/items/wood/logs/mesozoic_logs.json
+3e2eba549ca4846ca5c4ebc327d416bd75d3deef data/chaosawakens/tags/items/wood/logs/peach_logs.json
+37657981360327a98efcad52a76b8fa67b359794 data/chaosawakens/tags/items/wood/logs/skywood_logs.json
 0657cc92f0d5b89ccce850814f03875040484c05 data/minecraft/tags/items/fence_gates.json
 c37c447f93d36e26e649181fd5838a78f48c87e9 data/minecraft/tags/items/logs_that_burn.json
 7030e8eab3b9a7e1f1103635de23ae822665395f data/minecraft/tags/items/planks.json

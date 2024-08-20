@@ -1,9 +1,7 @@
 package io.github.chaosawakens.util;
 
 import io.github.chaosawakens.CAConstants;
-import net.minecraft.client.resources.model.Material;
 import net.minecraft.data.recipes.*;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
@@ -149,14 +147,14 @@ public final class RecipeUtil { //TODO Frick u method overloading functional int
         };
     }
 
-    public static Consumer<Supplier<Block>> buttonFromPlank(Consumer<FinishedRecipe> recipeConsumer, ItemLike planksILReference) {
+    public static Consumer<Supplier<Block>> buttonFromPlanks(Consumer<FinishedRecipe> recipeConsumer, ItemLike planksILReference) {
         return (resultBlockSup) -> ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, resultBlockSup.get(), 1)
                 .requires(planksILReference,1)
                 .unlockedBy("has_" + RegistryUtil.getItemName(planksILReference), PredicateUtil.has(planksILReference))
                 .save(recipeConsumer);
     }
 
-    public static Consumer<Supplier<Block>> buttonFromPlank(Consumer<FinishedRecipe> recipeConsumer) {
+    public static Consumer<Supplier<Block>> buttonFromPlanks(Consumer<FinishedRecipe> recipeConsumer) {
         return (resultBlockSup) -> {
             Supplier<Block> planksBlock = RegistryUtil.getPlanksFrom(resultBlockSup);
 

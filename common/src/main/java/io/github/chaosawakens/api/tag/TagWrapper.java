@@ -8,7 +8,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 /**
- * A wrapper class used to store information about tags and their pre-defined referenced in datagen to simplify creating data entries for tag.
+ * A wrapper builder class used to store information about tags and their pre-defined references in datagen to simplify creating data entries for tag entries.
  *
  * @param <T> The object type stored by the parent {@link TagKey}.
  * @param <TK> The {@link TagKey} object itself parenting the objects stored in this wrapper.

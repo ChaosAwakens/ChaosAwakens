@@ -177,7 +177,7 @@ public final class CABlockPropertyWrappers { // Commented BMD calls out because 
     public static final BlockPropertyWrapper WOODEN_BUTTON = BlockPropertyWrapper.createTemplate()
             .builder()
             .withLootTable(LootUtil::dropSelf)
-            .withRecipe(RecipeUtil::buttonFromPlank)
+            .withRecipe(RecipeUtil::buttonFromPlanks)
             .withTags(ObjectArrayList.of(BlockTags.WOODEN_BUTTONS, BlockTags.MINEABLE_WITH_AXE))
      //     .withCustomModelDefinitions(ModelUtil.button(CAConstants.prefix("base/template"), CAConstants.prefix("template_button_inventory")))
             .withBlockStateDefinition(ModelUtil::button)

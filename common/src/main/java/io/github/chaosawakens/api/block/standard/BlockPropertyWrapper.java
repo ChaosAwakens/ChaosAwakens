@@ -120,7 +120,7 @@ public class BlockPropertyWrapper { //TODO Maybe type param this for blocks
                     .build(); // Direct setting of the builder would copy the entire object itself, which would in-turn overwrite it if any calls are made to the copied BPW afterward
 
             return newTemplateWrapper;
-        } else return new BlockPropertyWrapper();
+        } else return createTemplate();
     }
 
     /**
