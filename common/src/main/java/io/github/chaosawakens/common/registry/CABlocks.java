@@ -5,6 +5,7 @@ import io.github.chaosawakens.CAConstants;
 import io.github.chaosawakens.api.asm.annotations.RegistrarEntry;
 import io.github.chaosawakens.api.block.standard.BlockPropertyWrapper;
 import io.github.chaosawakens.api.platform.CAServices;
+import io.github.chaosawakens.common.block.dungeon.general.DungeonGateBlock;
 import io.github.chaosawakens.util.ModelUtil;
 import io.github.chaosawakens.util.PredicateUtil;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
@@ -607,6 +608,94 @@ public final class CABlocks {
     public static final Supplier<Block> SKYWOOD_BUTTON = BlockPropertyWrapper.of(CABlockPropertyWrappers.WOODEN_BUTTON, registerBlock("skywood_button", () -> new ButtonBlock(BlockBehaviour.Properties.of().noCollission().strength(0.5F).pushReaction(PushReaction.DESTROY), CABlockSetTypes.SKYWOOD, 30, true)))
             .cachedBuilder()
             .withCustomModelDefinitions(ModelUtil.button(CAConstants.prefix("wood/skywood/skywood_planks"), CAConstants.prefix("block/skywood_button_inventory")))
+            .build()
+            .getParentBlock();
+
+    // Dungeon Blocks
+    public static final Supplier<Block> APPLE_GATE_BLOCK = BlockPropertyWrapper.of(CABlockPropertyWrappers.BASIC_BLOCK, registerBlock("apple_gate_block", () -> new DungeonGateBlock(BlockBehaviour.Properties.copy(APPLE_PLANKS.get()))))
+            .cachedBuilder()
+            .withCustomModelDefinition(ModelUtil.cubeBottomTop(CAConstants.prefix("wood/apple/apple_gate_block"), CAConstants.prefix("wood/apple/apple_gate_block_top"), CAConstants.prefix("wood/apple/apple_gate_block_top")))
+            .build()
+            .getParentBlock();
+    public static final Supplier<Block> CRYSTALWOOD_GATE_BLOCK = BlockPropertyWrapper.of(CABlockPropertyWrappers.BASIC_BLOCK, registerBlock("crystalwood_gate_block", () -> new DungeonGateBlock(BlockBehaviour.Properties.copy(CRYSTALWOOD_PLANKS.get()))))
+            .cachedBuilder()
+            .withCustomModelDefinition(ModelUtil.cubeBottomTop(CAConstants.prefix("wood/crystalwood/crystalwood_gate_block"), CAConstants.prefix("wood/crystalwood/crystalwood_gate_block_top"), CAConstants.prefix("wood/crystalwood/crystalwood_gate_block_top")))
+            .build()
+            .getParentBlock();
+    public static final Supplier<Block> DENSEWOOD_GATE_BLOCK = BlockPropertyWrapper.of(CABlockPropertyWrappers.BASIC_BLOCK, registerBlock("densewood_gate_block", () -> new DungeonGateBlock(BlockBehaviour.Properties.copy(DENSEWOOD_PLANKS.get()))))
+            .cachedBuilder()
+            .withCustomModelDefinition(ModelUtil.cubeBottomTop(CAConstants.prefix("wood/densewood/densewood_gate_block"), CAConstants.prefix("wood/densewood/densewood_gate_block_top"), CAConstants.prefix("wood/densewood/densewood_gate_block_top")))
+            .build()
+            .getParentBlock();
+    public static final Supplier<Block> DUPLICATOR_GATE_BLOCK = BlockPropertyWrapper.of(CABlockPropertyWrappers.BASIC_BLOCK, registerBlock("duplicator_gate_block", () -> new DungeonGateBlock(BlockBehaviour.Properties.copy(DUPLICATOR_PLANKS.get()))))
+            .cachedBuilder()
+            .withCustomModelDefinition(ModelUtil.cubeBottomTop(CAConstants.prefix("wood/duplicator/duplicator_gate_block"), CAConstants.prefix("wood/duplicator/duplicator_gate_block_top"), CAConstants.prefix("wood/duplicator/duplicator_gate_block_top")))
+            .build()
+            .getParentBlock();
+    public static final Supplier<Block> GINKGO_GATE_BLOCK = BlockPropertyWrapper.of(CABlockPropertyWrappers.BASIC_BLOCK, registerBlock("ginkgo_gate_block", () -> new DungeonGateBlock(BlockBehaviour.Properties.copy(GINKGO_PLANKS.get()))))
+            .cachedBuilder()
+            .withCustomModelDefinition(ModelUtil.cubeBottomTop(CAConstants.prefix("wood/ginkgo/ginkgo_gate_block"), CAConstants.prefix("wood/ginkgo/ginkgo_gate_block_top"), CAConstants.prefix("wood/ginkgo/ginkgo_gate_block_top")))
+            .build()
+            .getParentBlock();
+    public static final Supplier<Block> MESOZOIC_GATE_BLOCK = BlockPropertyWrapper.of(CABlockPropertyWrappers.BASIC_BLOCK, registerBlock("mesozoic_gate_block", () -> new DungeonGateBlock(BlockBehaviour.Properties.copy(MESOZOIC_PLANKS.get()))))
+            .cachedBuilder()
+            .withCustomModelDefinition(ModelUtil.cubeBottomTop(CAConstants.prefix("wood/mesozoic/mesozoic_gate_block"), CAConstants.prefix("wood/mesozoic/mesozoic_gate_block_top"), CAConstants.prefix("wood/mesozoic/mesozoic_gate_block_top")))
+            .build()
+            .getParentBlock();
+    public static final Supplier<Block> PEACH_GATE_BLOCK = BlockPropertyWrapper.of(CABlockPropertyWrappers.BASIC_BLOCK, registerBlock("peach_gate_block", () -> new DungeonGateBlock(BlockBehaviour.Properties.copy(PEACH_PLANKS.get()))))
+            .cachedBuilder()
+            .withCustomModelDefinition(ModelUtil.cubeBottomTop(CAConstants.prefix("wood/peach/peach_gate_block"), CAConstants.prefix("wood/peach/peach_gate_block_top"), CAConstants.prefix("wood/peach/peach_gate_block_top")))
+            .build()
+            .getParentBlock();
+    public static final Supplier<Block> SKYWOOD_GATE_BLOCK = BlockPropertyWrapper.of(CABlockPropertyWrappers.BASIC_BLOCK, registerBlock("skywood_gate_block", () -> new DungeonGateBlock(BlockBehaviour.Properties.copy(SKYWOOD_PLANKS.get()))))
+            .cachedBuilder()
+            .withCustomModelDefinition(ModelUtil.cubeBottomTop(CAConstants.prefix("wood/skywood/skywood_gate_block"), CAConstants.prefix("wood/skywood/skywood_gate_block_top"), CAConstants.prefix("wood/skywood/skywood_gate_block_top")))
+            .build()
+            .getParentBlock();
+
+    public static final Supplier<Block> ACACIA_GATE_BLOCK = BlockPropertyWrapper.of(CABlockPropertyWrappers.BASIC_BLOCK, registerBlock("acacia_gate_block", () -> new DungeonGateBlock(BlockBehaviour.Properties.copy(Blocks.ACACIA_PLANKS))))
+            .cachedBuilder()
+            .withCustomModelDefinition(ModelUtil.cubeBottomTop(CAConstants.prefix("wood/acacia/acacia_gate_block"), CAConstants.prefix("wood/acacia/acacia_gate_block_top"), CAConstants.prefix("wood/acacia/acacia_gate_block_top")))
+            .build()
+            .getParentBlock();
+    public static final Supplier<Block> BIRCH_GATE_BLOCK = BlockPropertyWrapper.of(CABlockPropertyWrappers.BASIC_BLOCK, registerBlock("birch_gate_block", () -> new DungeonGateBlock(BlockBehaviour.Properties.copy(Blocks.BIRCH_PLANKS))))
+            .cachedBuilder()
+            .withCustomModelDefinition(ModelUtil.cubeBottomTop(CAConstants.prefix("wood/birch/birch_gate_block"), CAConstants.prefix("wood/birch/birch_gate_block_top"), CAConstants.prefix("wood/birch/birch_gate_block_top")))
+            .build()
+            .getParentBlock();
+    public static final Supplier<Block> CHERRY_GATE_BLOCK = BlockPropertyWrapper.of(CABlockPropertyWrappers.BASIC_BLOCK, registerBlock("cherry_gate_block", () -> new DungeonGateBlock(BlockBehaviour.Properties.copy(Blocks.CHERRY_PLANKS))))
+            .cachedBuilder()
+            .withCustomModelDefinition(ModelUtil.cubeBottomTop(CAConstants.prefix("wood/cherry/cherry_gate_block"), CAConstants.prefix("wood/cherry/cherry_gate_block_top"), CAConstants.prefix("wood/cherry/cherry_gate_block_top")))
+            .build()
+            .getParentBlock();
+    public static final Supplier<Block> CRIMSON_GATE_BLOCK = BlockPropertyWrapper.of(CABlockPropertyWrappers.BASIC_BLOCK, registerBlock("crimson_gate_block", () -> new DungeonGateBlock(BlockBehaviour.Properties.copy(Blocks.CRIMSON_PLANKS))))
+            .cachedBuilder()
+            .withCustomModelDefinition(ModelUtil.cubeBottomTop(CAConstants.prefix("wood/crimson/crimson_gate_block"), CAConstants.prefix("wood/crimson/crimson_gate_block_top"), CAConstants.prefix("wood/crimson/crimson_gate_block_top")))
+            .build()
+            .getParentBlock();
+    public static final Supplier<Block> DARK_OAK_GATE_BLOCK = BlockPropertyWrapper.of(CABlockPropertyWrappers.BASIC_BLOCK, registerBlock("dark_oak_gate_block", () -> new DungeonGateBlock(BlockBehaviour.Properties.copy(Blocks.DARK_OAK_PLANKS))))
+            .cachedBuilder()
+            .withCustomModelDefinition(ModelUtil.cubeBottomTop(CAConstants.prefix("wood/dark_oak/dark_oak_gate_block"), CAConstants.prefix("wood/dark_oak/dark_oak_gate_block_top"), CAConstants.prefix("wood/dark_oak/dark_oak_gate_block_top")))
+            .build()
+            .getParentBlock();
+    /*   public static final Supplier<Block> MANGROVE_GATE_BLOCK = BlockPropertyWrapper.of(CABlockPropertyWrappers.BASIC_BLOCK, registerBlock("mangrove_gate_block", () -> new DungeonGateBlock(BlockBehaviour.Properties.copy(Blocks.MANGROVE_PLANKS))))
+               .cachedBuilder()
+               .withCustomModelDefinition(ModelUtil.cubeBottomTop(CAConstants.prefix("wood/mangrove/mangrove_gate_block"), CAConstants.prefix("wood/mangrove/mangrove_gate_block_top"), CAConstants.prefix("wood/mangrove/mangrove_gate_block_top")))
+               .build()
+               .getParentBlock(); */
+    public static final Supplier<Block> OAK_GATE_BLOCK = BlockPropertyWrapper.of(CABlockPropertyWrappers.BASIC_BLOCK, registerBlock("oak_gate_block", () -> new DungeonGateBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS))))
+            .cachedBuilder()
+            .withCustomModelDefinition(ModelUtil.cubeBottomTop(CAConstants.prefix("wood/oak/oak_gate_block"), CAConstants.prefix("wood/oak/oak_gate_block_top"), CAConstants.prefix("wood/oak/oak_gate_block_top")))
+            .build()
+            .getParentBlock();
+    public static final Supplier<Block> SPRUCE_GATE_BLOCK = BlockPropertyWrapper.of(CABlockPropertyWrappers.BASIC_BLOCK, registerBlock("spruce_gate_block", () -> new DungeonGateBlock(BlockBehaviour.Properties.copy(Blocks.SPRUCE_PLANKS))))
+            .cachedBuilder()
+            .withCustomModelDefinition(ModelUtil.cubeBottomTop(CAConstants.prefix("wood/spruce/spruce_gate_block"), CAConstants.prefix("wood/spruce/spruce_gate_block_top"), CAConstants.prefix("wood/spruce/spruce_gate_block_top")))
+            .build()
+            .getParentBlock();
+    public static final Supplier<Block> WARPED_GATE_BLOCK = BlockPropertyWrapper.of(CABlockPropertyWrappers.BASIC_BLOCK, registerBlock("warped_gate_block", () -> new DungeonGateBlock(BlockBehaviour.Properties.copy(Blocks.WARPED_PLANKS))))
+            .cachedBuilder()
+            .withCustomModelDefinition(ModelUtil.cubeBottomTop(CAConstants.prefix("wood/warped/warped_gate_block"), CAConstants.prefix("wood/warped/warped_gate_block_top"), CAConstants.prefix("wood/warped/warped_gate_block_top")))
             .build()
             .getParentBlock();
 

@@ -5,4 +5,16 @@ package io.github.chaosawakens.api.platform.services;
  * FAAL implementations alongside GeckoLib for each loader-specific implementation of this interface.
  */
 public interface IAnimationManager {
+
+    /**
+     *
+     */
+    void registerGeckoLib();
+
+    /**
+     *
+     */
+    void registerFAAL();
+
+
 }

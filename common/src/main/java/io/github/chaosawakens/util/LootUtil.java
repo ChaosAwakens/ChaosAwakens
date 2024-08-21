@@ -190,6 +190,7 @@ public final class LootUtil {
                 .when(HAS_SILK_TOUCH)
                 .add(LootItem.lootTableItem(targetBlock.get())));
     }
+
     /**
      * Creates {@link LootTable.Builder} that will drop the given {@link Block} when it's destroyed, but only if it's destroyed with shears or a tool enchanted with silk touch.
      * <p>
