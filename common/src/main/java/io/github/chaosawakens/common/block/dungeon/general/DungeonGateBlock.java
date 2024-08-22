@@ -15,12 +15,10 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class DungeonGateBlock extends Block {
     protected static final BooleanProperty ACTIVE = CABlockStateProperties.ACTIVE;
     protected static final BooleanProperty VANISHED = CABlockStateProperties.VANISHED;
-    protected static final VoxelShape VANISHED_SHAPE = box(6, 6, 6, 10, 10, 10);
     protected final boolean isConstantlyUpdated;
     protected final int baseUpdateTickTime;
 
@@ -58,13 +56,13 @@ public class DungeonGateBlock extends Block {
     @Override
     public void tick(BlockState targetState, ServerLevel curServerLevel, BlockPos targetPos, RandomSource rand) {
         if (isActive(targetState)) {
-            if (!hasVanished(targetState)) {
-                curServerLevel.setBlockAndUpdate(targetPos, targetState.setValue(VANISHED, true));
+            if (!hasVanished(targetState)) { // By the time the gate block's active, it should already be preparing to v a n i s h (also doing dir checks for other gate blocks (duh))
+                curServerLevel.setBlockAndUpdate(targetPos, setVanished(targetState));
 
                 for (Direction curDir : Direction.values()) checkAndActivate(curServerLevel.getBlockState(targetPos.relative(curDir)), targetPos.relative(curDir), curServerLevel);
 
                 curServerLevel.scheduleTick(targetPos, targetState.getBlock(), 1);
-            } else {
+            } else { // Reset blockstate properties and remove
                 curServerLevel.setBlockAndUpdate(targetPos, targetState.setValue(ACTIVE, false).setValue(VANISHED, false));
                 curServerLevel.removeBlock(targetPos, false);
             }
@@ -83,7 +81,7 @@ public class DungeonGateBlock extends Block {
 
     protected static InteractionResult checkAndActivate(BlockState targetState, BlockPos targetPos, Level curLevel) {
         if (!isActive(targetState) && !hasVanished(targetState) && targetState.getBlock() instanceof DungeonGateBlock targetDungeonGateBlock) {
-            curLevel.setBlockAndUpdate(targetPos, targetState.setValue(ACTIVE, true));
+            curLevel.setBlockAndUpdate(targetPos, setActive(targetState));
             curLevel.scheduleTick(targetPos, targetDungeonGateBlock, targetDungeonGateBlock.isConstantlyUpdated() ? targetDungeonGateBlock.getBaseUpdateTickTime() : targetDungeonGateBlock.getBaseUpdateTickTime() + RandomSource.create().nextInt(5));
 
             return InteractionResult.SUCCESS;
@@ -103,15 +101,23 @@ public class DungeonGateBlock extends Block {
         return targetState.hasProperty(ACTIVE) && targetState.getValue(ACTIVE);
     }
 
-    public static void setActive(BlockState targetState, boolean active) {
-        if (targetState.hasProperty(ACTIVE)) targetState.setValue(ACTIVE, active);
+    public static BlockState setActive(BlockState targetState, boolean active) {
+        return targetState.hasProperty(ACTIVE) ? targetState.setValue(ACTIVE, active) : targetState;
+    }
+
+    public static BlockState setActive(BlockState targetState) {
+        return setActive(targetState, true);
     }
 
     public static boolean hasVanished(BlockState targetState) {
         return targetState.hasProperty(VANISHED) && targetState.getValue(VANISHED);
     }
 
-    public static void setVanished(BlockState targetState, boolean vanished) {
-        if (targetState.hasProperty(VANISHED)) targetState.setValue(VANISHED, vanished);
+    public static BlockState setVanished(BlockState targetState, boolean vanished) {
+        return targetState.hasProperty(VANISHED) ? targetState.setValue(VANISHED, vanished) : targetState;
+    }
+
+    public static BlockState setVanished(BlockState targetState) {
+        return setVanished(targetState, true);
     }
 }

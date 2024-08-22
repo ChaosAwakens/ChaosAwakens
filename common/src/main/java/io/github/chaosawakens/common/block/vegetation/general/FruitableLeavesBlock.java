@@ -54,7 +54,7 @@ public class FruitableLeavesBlock extends LeavesBlock {
     public void randomTick(BlockState targetState, ServerLevel curLevel, BlockPos targetPos, RandomSource random) {
         super.randomTick(targetState, curLevel, targetPos, random);
 
-        if (!isRipe(targetState) && random.nextInt(probability) == 0) setRipe(targetState, true);
+        if (!isRipe(targetState) && random.nextInt(probability) == 0) curLevel.setBlockAndUpdate(targetPos, setRipe(targetState));
     }
 
     @Override
@@ -64,7 +64,7 @@ public class FruitableLeavesBlock extends LeavesBlock {
 
     protected InteractionResult extractFruit(BlockState targetState, BlockPos targetPos, Level curLevel) {
         if (isRipe(targetState)) {
-            setRipe(targetState, false);
+            curLevel.setBlockAndUpdate(targetPos, setRipe(targetState, false));
             popResource(curLevel, targetPos, new ItemStack(fruitItemSup.get(), maxFruitCount - minFruitCount < 0 ? 1 : RandomSource.create().nextInt(minFruitCount, maxFruitCount)));
 
             return InteractionResult.SUCCESS;
@@ -76,7 +76,11 @@ public class FruitableLeavesBlock extends LeavesBlock {
         return targetState.hasProperty(RIPE) && targetState.getValue(RIPE);
     }
 
-    public static void setRipe(BlockState targetState, boolean ripe) {
-        if (targetState.hasProperty(RIPE)) targetState.setValue(RIPE, ripe);
+    public static BlockState setRipe(BlockState targetState, boolean ripe) {
+        return targetState.hasProperty(RIPE) ? targetState.setValue(RIPE, ripe) : targetState;
+    }
+
+    public static BlockState setRipe(BlockState targetState) {
+        return setRipe(targetState, true);
     }
 }
