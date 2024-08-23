@@ -5,8 +5,12 @@ import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.advancements.critereon.MinMaxBounds;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
-import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.BedBlock;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.DoorBlock;
+import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.state.properties.BedPart;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.block.state.properties.SlabType;
@@ -15,12 +19,10 @@ import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.functions.ApplyExplosionDecay;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
-import net.minecraft.world.level.storage.loot.predicates.ExplosionCondition;
-import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
-import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
-import net.minecraft.world.level.storage.loot.predicates.MatchTool;
+import net.minecraft.world.level.storage.loot.predicates.*;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.NumberProvider;
+import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 
 import java.util.function.Supplier;
 
@@ -34,6 +36,8 @@ public final class LootUtil {
     public static final LootItemCondition.Builder HAS_SHEARS = MatchTool.toolMatches(ItemPredicate.Builder.item().of(Items.SHEARS));
     public static final LootItemCondition.Builder HAS_SHEARS_OR_SILK_TOUCH = HAS_SHEARS.or(HAS_SILK_TOUCH);
     public static final LootItemCondition.Builder HAS_NO_SHEARS_OR_SILK_TOUCH = HAS_SHEARS_OR_SILK_TOUCH.invert();
+    public static final float[] NORMAL_LEAVES_SAPLING_CHANCES = new float[] {0.05F, 0.0625F, 0.083333336F, 0.1F};
+    public static final float[] NORMAL_LEAVES_STICK_CHANCES = new float[] {0.02F, 0.022222223F, 0.025F, 0.033333335F, 0.1F};
 
     private LootUtil() {
         throw new IllegalAccessError("Attempted to construct Utility Class!");
@@ -222,5 +226,56 @@ public final class LootUtil {
      */
     public static LootTable.Builder noDrop(Supplier<Block> targetBlock) {
         return LootTable.lootTable();
+    }
+
+    /**
+     * Creates {@link LootTable.Builder} that will drop the given {@link Block} when it's destroyed, but only if it's destroyed with shears or a tool enchanted with silk touch. Alternatively drops
+     * saplings/sticks when mined/decaying otherwise.
+     * <p>
+     * <h2>LOOT TABLE</h2>
+     * <h3>Pool 1</h3>
+     * <ul>
+     *  <li><b>Rolls:</b> 1.0</li>
+     *  <li><b>When:</b> {@link #HAS_SHEARS_OR_SILK_TOUCH}</li>
+     *  <li><b>Drops:</b> {@code targetBlock}</li>
+     *  <li><b>Otherwise:</b> <ul>
+     *      <li><b>When:</b> {@link BonusLevelTableCondition#bonusLevelFlatChance(Enchantment, float...)} (Passes in {@link Enchantments#BLOCK_FORTUNE} and {@link #NORMAL_LEAVES_SAPLING_CHANCES} respectively)</li></li>
+     *      <li><b>When:</b> {@link ExplosionCondition#survivesExplosion()}</li></li>
+     *      <li><b>Drops:</b> {@link RegistryUtil#getSaplingFrom(Supplier<Block>)}</li></li>
+     *  </ul>
+     * </ul>
+     *
+     * <h3>Pool 2</h3>
+     * <ul>
+     *  <li><b>Rolls:</b> 1.0</li>
+     *  <li><b>When:</b> {@link #HAS_NO_SHEARS_OR_SILK_TOUCH}</li>
+     *  <li><b>Drops:</b> {@link Items#STICK} -> <ul>
+     *      <li><b>When:</b> {@link BonusLevelTableCondition#bonusLevelFlatChance(Enchantment, float...)} (Passes in {@link Enchantments#BLOCK_FORTUNE} and {@link #NORMAL_LEAVES_STICK_CHANCES} respectively)</li></li>
+     *      <li><b>Apply:</b> {@link ApplyExplosionDecay#explosionDecay()}</li></li>
+     *      <li><b>Apply:</b> {@link SetItemCountFunction#setCount(NumberProvider)} (Passes in {@link UniformGenerator#between(float, float)} [1.0F, 2.0F])</li></li>
+     *  </ul></li>
+     * </ul>
+     *
+     * @param targetBlock The {@link Supplier<Block>} representing the leaf {@link Block} that will be dropped when any shears or silk touch tool is used to mine it. Alternatively drops
+     * saplings/sticks when mined/decaying otherwise.
+     *
+     * @return A {@link LootTable.Builder} that will drop the given leaf {@link Block} when it's destroyed, but only if it's destroyed with a shears or any tool enchanted with silk touch. Alternatively drops
+     * saplings/sticks when mined/decaying.
+     */
+    public static LootTable.Builder dropLeaves(Supplier<Block> targetBlock) {
+        return LootTable.lootTable().withPool(LootPool.lootPool()
+                .setRolls(ConstantValue.exactly(1.0F))
+                .when(HAS_SHEARS_OR_SILK_TOUCH)
+                .add(LootItem.lootTableItem(targetBlock.get())
+                        .otherwise(LootItem.lootTableItem(RegistryUtil.getSaplingFrom(targetBlock).get())
+                                .when(BonusLevelTableCondition.bonusLevelFlatChance(Enchantments.BLOCK_FORTUNE, NORMAL_LEAVES_SAPLING_CHANCES))
+                                .when(ExplosionCondition.survivesExplosion()))))
+                .withPool(LootPool.lootPool()
+                        .setRolls(ConstantValue.exactly(1.0F))
+                        .when(HAS_NO_SHEARS_OR_SILK_TOUCH)
+                        .add(LootItem.lootTableItem(Items.STICK)
+                                .when(BonusLevelTableCondition.bonusLevelFlatChance(Enchantments.BLOCK_FORTUNE, NORMAL_LEAVES_STICK_CHANCES))
+                                .apply(ApplyExplosionDecay.explosionDecay())
+                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F)))));
     }
 }

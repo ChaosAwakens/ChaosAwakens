@@ -611,6 +611,43 @@ public final class CABlocks {
             .build()
             .getParentBlock();
 
+    // Leaves
+    public static final Supplier<Block> APPLE_LEAVES = BlockPropertyWrapper.of(CABlockPropertyWrappers.LEAVES, registerBlock("apple_leaves", () -> new LeavesBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LEAVES))))
+            .cachedBuilder()
+            .withCustomModelDefinition(ModelUtil.leaves(CAConstants.prefix("leaves/apple/apple_leaves")))
+            .build()
+            .getParentBlock();
+    public static final Supplier<Block> DENSEWOOD_LEAVES = BlockPropertyWrapper.of(CABlockPropertyWrappers.LEAVES, registerBlock("densewood_leaves", () -> new LeavesBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LEAVES))))
+            .cachedBuilder()
+            .withCustomModelDefinition(ModelUtil.leaves(CAConstants.prefix("leaves/densewood/densewood_leaves")))
+            .build()
+            .getParentBlock();
+    public static final Supplier<Block> DUPLICATOR_LEAVES = BlockPropertyWrapper.of(CABlockPropertyWrappers.LEAVES, registerBlock("duplicator_leaves", () -> new LeavesBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LEAVES))))
+            .cachedBuilder()
+            .withCustomModelDefinition(ModelUtil.leaves(CAConstants.prefix("leaves/duplicator/duplicator_leaves")))
+            .build()
+            .getParentBlock();
+    public static final Supplier<Block> GINKGO_LEAVES = BlockPropertyWrapper.of(CABlockPropertyWrappers.LEAVES, registerBlock("ginkgo_leaves", () -> new LeavesBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LEAVES))))
+            .cachedBuilder()
+            .withCustomModelDefinition(ModelUtil.leaves(CAConstants.prefix("leaves/ginkgo/ginkgo_leaves")))
+            .build()
+            .getParentBlock();
+    public static final Supplier<Block> MESOZOIC_LEAVES = BlockPropertyWrapper.of(CABlockPropertyWrappers.LEAVES, registerBlock("mesozoic_leaves", () -> new LeavesBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LEAVES))))
+            .cachedBuilder()
+            .withCustomModelDefinition(ModelUtil.leaves(CAConstants.prefix("leaves/mesozoic/mesozoic_leaves")))
+            .build()
+            .getParentBlock();
+    public static final Supplier<Block> PEACH_LEAVES = BlockPropertyWrapper.of(CABlockPropertyWrappers.LEAVES, registerBlock("peach_leaves", () -> new LeavesBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LEAVES))))
+            .cachedBuilder()
+            .withCustomModelDefinition(ModelUtil.leaves(CAConstants.prefix("leaves/peach/peach_leaves")))
+            .build()
+            .getParentBlock();
+    public static final Supplier<Block> SKYWOOD_LEAVES = BlockPropertyWrapper.of(CABlockPropertyWrappers.LEAVES, registerBlock("skywood_leaves", () -> new LeavesBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LEAVES))))
+            .cachedBuilder()
+            .withCustomModelDefinition(ModelUtil.leaves(CAConstants.prefix("leaves/skywood/skywood_leaves")))
+            .build()
+            .getParentBlock();
+
     // Dungeon Blocks
     public static final Supplier<Block> APPLE_GATE_BLOCK = BlockPropertyWrapper.of(CABlockPropertyWrappers.BASIC_BLOCK, registerBlock("apple_gate_block", () -> new DungeonGateBlock(BlockBehaviour.Properties.copy(APPLE_PLANKS.get()))))
             .cachedBuilder()
@@ -691,12 +728,12 @@ public final class CABlocks {
             .withCustomModelDefinition(ModelUtil.cubeBottomTop(CAConstants.prefix("wood/dark_oak/dark_oak_gate_block"), CAConstants.prefix("wood/dark_oak/dark_oak_gate_block_top"), CAConstants.prefix("wood/dark_oak/dark_oak_gate_block_top")))
             .build()
             .getParentBlock();
-    /*   public static final Supplier<Block> MANGROVE_GATE_BLOCK = BlockPropertyWrapper.of(CABlockPropertyWrappers.BASIC_BLOCK, registerBlock("mangrove_gate_block", () -> new DungeonGateBlock(BlockBehaviour.Properties.copy(Blocks.MANGROVE_PLANKS))))
-               .cachedBuilder()
-               .withCustomName("Mangrove Gate Block")
-               .withCustomModelDefinition(ModelUtil.cubeBottomTop(CAConstants.prefix("wood/mangrove/mangrove_gate_block"), CAConstants.prefix("wood/mangrove/mangrove_gate_block_top"), CAConstants.prefix("wood/mangrove/mangrove_gate_block_top")))
-               .build()
-               .getParentBlock(); */
+    public static final Supplier<Block> MANGROVE_GATE_BLOCK = BlockPropertyWrapper.of(CABlockPropertyWrappers.BASIC_BLOCK, registerBlock("mangrove_gate_block", () -> new DungeonGateBlock(BlockBehaviour.Properties.copy(Blocks.MANGROVE_PLANKS))))
+            .cachedBuilder()
+            .withCustomName("Mangrove Gate Block")
+            .withCustomModelDefinition(ModelUtil.cubeBottomTop(CAConstants.prefix("wood/mangrove/mangrove_gate_block"), CAConstants.prefix("wood/mangrove/mangrove_gate_block_top"), CAConstants.prefix("wood/mangrove/mangrove_gate_block_top")))
+            .build()
+            .getParentBlock();
     public static final Supplier<Block> OAK_GATE_BLOCK = BlockPropertyWrapper.of(CABlockPropertyWrappers.BASIC_BLOCK, registerBlock("oak_gate_block", () -> new DungeonGateBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS))))
             .cachedBuilder()
             .withCustomName("Oak Gate Block")

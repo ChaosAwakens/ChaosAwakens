@@ -1,4 +1,4 @@
-// 1.20.1	2024-08-21T13:09:34.5329148	Chaos Awakens: Block States
+// 1.20.1	2024-08-22T18:24:02.7437698	Chaos Awakens: Block States
 5c81494d06a5589da8afe9c24272dddb04a88d14 assets/chaosawakens/blockstates/acacia_gate_block.json
 df2f1e8fa81c1f360358a98fa2fc7dc23ca6f0e3 assets/chaosawakens/blockstates/apple_button.json
 c93a856954b2d70855cccf32b8282351ecd1fd66 assets/chaosawakens/blockstates/apple_door.json
@@ -66,6 +66,7 @@ a3802b96c0c8f0467590408d9ceb482eca163453 assets/chaosawakens/blockstates/ginkgo_
 c1e2898753224e46f846b9e63e8d49553b46696b assets/chaosawakens/blockstates/ginkgo_stairs.json
 abf3b2dd072a4318023d3d174a2abfa3b64fcc36 assets/chaosawakens/blockstates/ginkgo_trapdoor.json
 76482c8b3077b9f5dba8ef211d7520a3128ed8bd assets/chaosawakens/blockstates/ginkgo_wood.json
+e1084a344e14b957b2fcd20964167cf0fbf3db8f assets/chaosawakens/blockstates/mangrove_gate_block.json
 98c3aa8ccd18f4946392b9c129489d09f9259b2f assets/chaosawakens/blockstates/mesozoic_button.json
 84be4cb0000164b146ba471273a60ee60dba63b7 assets/chaosawakens/blockstates/mesozoic_door.json
 16731ddeea0d29835313b0c39ecebb51e527b733 assets/chaosawakens/blockstates/mesozoic_fence.json

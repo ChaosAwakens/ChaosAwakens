@@ -1,4 +1,4 @@
-// 1.20.1	2024-08-21T13:09:34.5769074	Chaos Awakens: Block & Block Item Models
+// 1.20.1	2024-08-22T18:24:02.7604899	Chaos Awakens: Block & Block Item Models
 545cc7a8d51438ddca6429e9262d81c625d1162d assets/chaosawakens/models/block/acacia_gate_block.json
 32bed3330bf18b5cf782cdc679df40a9845fcaad assets/chaosawakens/models/block/apple_button.json
 0b3671b602abeed4f6588f981e2e792c7403ad64 assets/chaosawakens/models/block/apple_button_inventory.json
@@ -172,6 +172,7 @@ fa93bb108301158e0af3678e537b9efe4200db97 assets/chaosawakens/models/block/ginkgo
 c743128628aa86f7f1492e227f26787c19300c18 assets/chaosawakens/models/block/ginkgo_trapdoor_open.json
 6b23d1677315212d32c4767f84c915a26c9c6d10 assets/chaosawakens/models/block/ginkgo_trapdoor_top.json
 fb91ae47d3b6f16d1d399b9a51ba03458f62865e assets/chaosawakens/models/block/ginkgo_wood.json
+7f120d6d4cd6746a5838de47eceeb45ad6b27315 assets/chaosawakens/models/block/mangrove_gate_block.json
 bd18b0b01ee59dc6129fa33755c11e4c387bafce assets/chaosawakens/models/block/mesozoic_button.json
 9a3e57310dba3d16b76245ea7ae37cd4e2b8f7a5 assets/chaosawakens/models/block/mesozoic_button_inventory.json
 fd148f8054ad1bd2eb9519d369a33b2000e21b97 assets/chaosawakens/models/block/mesozoic_button_pressed.json
@@ -367,6 +368,7 @@ e15ddddeb6c938155f3652b80841b040bcdb04c4 assets/chaosawakens/models/item/ginkgo_
 acf6f958eead32bfe3e34412c2fea4d7ff8e7b7f assets/chaosawakens/models/item/ginkgo_stairs.json
 c71c34a8c05091ee8a28d56c6a16989f6a16cca8 assets/chaosawakens/models/item/ginkgo_trapdoor.json
 c8836fc216fd8060666664ba73da9b0cea154366 assets/chaosawakens/models/item/ginkgo_wood.json
+0a9ceab5b4afa0a2f22fe774e3ed90d515077035 assets/chaosawakens/models/item/mangrove_gate_block.json
 67c34f59cb909eb9537f0f09ed9769e55715ebc0 assets/chaosawakens/models/item/mesozoic_button.json
 c69f0ba431dc3aa7cc0e21f976818546ae3fd9bb assets/chaosawakens/models/item/mesozoic_door.json
 50cd915302eacf90bdf02f7336b77e6580f7146c assets/chaosawakens/models/item/mesozoic_fence.json

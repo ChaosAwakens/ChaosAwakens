@@ -11,7 +11,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.function.Supplier;
 
 /**
- * Utility class providing shortcut methods for commonly used registry operations.
+ * Utility class providing shortcut methods for commonly used registry operations (primarily arbitrary).
  */
 public final class RegistryUtil {
 
@@ -56,5 +56,35 @@ public final class RegistryUtil {
     @Nullable
     public static Supplier<Block> getLogFrom(Supplier<Block> targetBlock) {
         return getWoodFrom(targetBlock, "_log");
+    }
+
+    @Nullable
+    public static Supplier<Block> getLeavesFrom(Supplier<Block> targetBlock) {
+        ResourceLocation targetBlockKey = BuiltInRegistries.BLOCK.getKey(targetBlock.get());
+        String copiedPath = BuiltInRegistries.BLOCK.getKey(targetBlock.get()).getPath();
+
+        return targetBlockKey.getPath().endsWith("leaf_carpet")
+                ? () -> BuiltInRegistries.BLOCK.get(targetBlockKey.withPath(copiedPath.replace("leaf_carpet", "leaves")))
+                : null;
+    }
+
+    @Nullable
+    public static Supplier<Block> getFromLeaves(Supplier<Block> targetBlock, String regNameSuffix) {
+        ResourceLocation targetBlockKey = BuiltInRegistries.BLOCK.getKey(targetBlock.get());
+        String copiedPath = BuiltInRegistries.BLOCK.getKey(targetBlock.get()).getPath();
+
+        return targetBlockKey.getPath().endsWith("leaves")
+                ? () -> BuiltInRegistries.BLOCK.get(targetBlockKey.withPath(copiedPath.replace("leaves", regNameSuffix)))
+                : null;
+    }
+
+    @Nullable
+    public static Supplier<Block> getLeafCarpetFrom(Supplier<Block> targetBlock) {
+        return getFromLeaves(targetBlock, "leaf_carpet");
+    }
+
+    @Nullable
+    public static Supplier<Block> getSaplingFrom(Supplier<Block> targetBlock) {
+        return getFromLeaves(targetBlock, "sapling");
     }
 }

@@ -200,4 +200,13 @@ public final class CABlockPropertyWrappers { // Commented BMD calls out because 
             .withRecipe(RecipeUtil::logToWood)
             .withTags(ObjectArrayList.of(BlockTags.MINEABLE_WITH_AXE, BlockTags.LOGS_THAT_BURN, ItemTags.LOGS_THAT_BURN))
             .build();
+
+    // Vegetation stuff
+    public static final BlockPropertyWrapper LEAVES = BlockPropertyWrapper.createTemplate()
+            .builder()
+            .withLootTable(LootUtil::dropLeaves)
+            .withTags(ObjectArrayList.of(BlockTags.LEAVES, ItemTags.LEAVES))
+    //      .withCustomModelDefinitions(ModelUtil.cubeAll(CAConstants.prefix("base/template")))
+            .withBlockStateDefinition(ModelUtil::simpleBlock)
+            .build();
 }

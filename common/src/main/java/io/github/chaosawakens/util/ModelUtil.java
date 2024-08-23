@@ -5,6 +5,7 @@ import io.github.chaosawakens.CAConstants;
 import io.github.chaosawakens.api.datagen.block.BlockModelDefinition;
 import io.github.chaosawakens.api.datagen.block.BlockStateDefinition;
 import io.github.chaosawakens.common.registry.CABlockStateProperties;
+import io.github.chaosawakens.common.registry.CAModelTemplates;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Direction;
@@ -16,6 +17,7 @@ import net.minecraft.data.models.model.TextureMapping;
 import net.minecraft.data.models.model.TextureSlot;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.PipeBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.properties.*;
 import org.apache.commons.lang3.StringUtils;
@@ -1675,14 +1677,201 @@ public final class ModelUtil {
         return doorLeft(doorTopTexture, doorBottomTexture, doorTopTexture, doorBottomTexture, doorItemTexture);
     }
 
+    /**
+     * Creates an {@link ObjectArrayList} of {@linkplain BlockModelDefinition BlockModelDefinitions} with all requisite right door model templates ({@link ModelTemplates#DOOR_BOTTOM_RIGHT}, {@link ModelTemplates#DOOR_BOTTOM_RIGHT_OPEN},
+     * {@link ModelTemplates#DOOR_TOP_RIGHT}, {@link ModelTemplates#DOOR_TOP_RIGHT_OPEN}).
+     * <p>
+     * <h3>Models</h3>
+     * <ul>
+     *  <li>{@link ModelTemplates#DOOR_BOTTOM_RIGHT} -> <ul>
+     *      <li>{@link TextureSlot#TOP} -> {@code dbrTopTexture}</li>
+     *      <li>{@link TextureSlot#BOTTOM} -> {@code dbrBottomTexture}</li>
+     *  </ul></li>
+     *
+     *  <li>{@link ModelTemplates#DOOR_BOTTOM_RIGHT_OPEN} -> <ul>
+     *      <li>{@link TextureSlot#TOP} -> {@code dbroTopTexture}</li>
+     *      <li>{@link TextureSlot#BOTTOM} -> {@code dbroBottomTexture}</li>
+     *  </ul></li>
+     *
+     *  <li>{@link ModelTemplates#DOOR_TOP_RIGHT} -> <ul>
+     *      <li>{@link TextureSlot#TOP} -> {@code dtrTopTexture}</li>
+     *      <li>{@link TextureSlot#BOTTOM} -> {@code dtrBottomTexture}</li>
+     *  </ul></li>
+     *
+     *  <li>{@link ModelTemplates#DOOR_TOP_RIGHT_OPEN} -> <ul>
+     *      <li>{@link TextureSlot#TOP} -> {@code dtroTopTexture}</li>
+     *      <li>{@link TextureSlot#BOTTOM} -> {@code dtroBottomTexture}</li>
+     *  </ul></li>
+     *
+     *  <li>{@link ModelTemplates#FLAT_ITEM} (Item Model) -> <ul>
+     *      <li>{@link TextureSlot#LAYER0} -> {@code doorItemTexture}</li>
+     *  </ul></li>
+     * </ul>
+     *
+     * @param dbrTopTexture The {@link ResourceLocation} representing the top texture of the door's bottom right model.
+     * @param dbrBottomTexture The {@link ResourceLocation} representing the bottom texture of the door's bottom right model.
+     * @param dbroTopTexture The {@link ResourceLocation} representing the top texture of the door's bottom open right model.
+     * @param dbroBottomTexture The {@link ResourceLocation} representing the bottom texture of the door's bottom open right model.
+     * @param dtrTopTexture The {@link ResourceLocation} representing the top texture of the door's top right model.
+     * @param dtrBottomTexture The {@link ResourceLocation} representing the bottom texture of the door's top right model.
+     * @param dtroTopTexture The {@link ResourceLocation} representing the top texture of the door's top open right model.
+     * @param dtroBottomTexture The {@link ResourceLocation} representing the bottom texture of the door's top open right model.
+     * @param doorItemTexture The {@link ResourceLocation} representing item texture of the door.
+     *
+     * @return An {@link ObjectArrayList} of all relevant door model definitions, for all of its models depending on its right hinge.
+     *
+     * @see #doorBottomLeft(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorBottomLeftOpen(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorBottomRight(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorBottomRightOpen(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorTopLeft(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorTopLeftOpen(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorTopRight(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorTopRightOpen(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorLeft(ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorLeft(ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorLeft(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorRight(ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorRight(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #door(ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #door(ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #door(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #door(ResourceLocation, ResourceLocation)
+     * @see #door(Supplier, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #door(Supplier, ResourceLocation, ResourceLocation)
+     * @see #door(Supplier)
+     */
     public static ObjectArrayList<BlockModelDefinition> doorRight(ResourceLocation dbrTopTexture, ResourceLocation dbrBottomTexture, ResourceLocation dbroTopTexture, ResourceLocation dbroBottomTexture, ResourceLocation dtrTopTexture, ResourceLocation dtrBottomTexture, ResourceLocation dtroTopTexture, ResourceLocation dtroBottomTexture, ResourceLocation doorItemTexture) {
         return ObjectArrayList.of(doorBottomRight(dbrTopTexture, dbrBottomTexture, doorItemTexture), doorBottomRightOpen(dbroTopTexture, dbroBottomTexture, doorItemTexture), doorTopRight(dtrTopTexture, dtrBottomTexture, doorItemTexture), doorTopRightOpen(dtroTopTexture, dtroBottomTexture, doorItemTexture));
     }
 
+    /**
+     * Overloaded variant of {@link #doorRight(ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation)}.
+     * Creates an {@link ObjectArrayList} of {@linkplain BlockModelDefinition BlockModelDefinitions} with all requisite right door model templates ({@link ModelTemplates#DOOR_BOTTOM_RIGHT},
+     * {@link ModelTemplates#DOOR_BOTTOM_RIGHT_OPEN}, {@link ModelTemplates#DOOR_TOP_RIGHT}, {@link ModelTemplates#DOOR_TOP_RIGHT_OPEN}). Generalizes top and bottom texture references for both top and bottom
+     * door models, for both open and closed right door variants.
+     * <p>
+     * <h3>Models</h3>
+     * <ul>
+     *  <li>{@link ModelTemplates#DOOR_BOTTOM_RIGHT} -> <ul>
+     *      <li>{@link TextureSlot#TOP} -> {@code dblTopTexture}</li>
+     *      <li>{@link TextureSlot#BOTTOM} -> {@code dblBottomTexture}</li>
+     *  </ul></li>
+     *
+     *  <li>{@link ModelTemplates#DOOR_BOTTOM_RIGHT_OPEN} -> <ul>
+     *      <li>{@link TextureSlot#TOP} -> {@code dblTopTexture}</li>
+     *      <li>{@link TextureSlot#BOTTOM} -> {@code dblBottomTexture}</li>
+     *  </ul></li>
+     *
+     *  <li>{@link ModelTemplates#DOOR_TOP_RIGHT} -> <ul>
+     *      <li>{@link TextureSlot#TOP} -> {@code dtlTopTexture}</li>
+     *      <li>{@link TextureSlot#BOTTOM} -> {@code dtlBottomTexture}</li>
+     *  </ul></li>
+     *
+     *  <li>{@link ModelTemplates#DOOR_TOP_RIGHT_OPEN} -> <ul>
+     *      <li>{@link TextureSlot#TOP} -> {@code dtlTopTexture}</li>
+     *      <li>{@link TextureSlot#BOTTOM} -> {@code dtlBottomTexture}</li>
+     *  </ul></li>
+     *
+     *  <li>{@link ModelTemplates#FLAT_ITEM} (Item Model) -> <ul>
+     *      <li>{@link TextureSlot#LAYER0} -> {@code doorItemTexture}</li>
+     *  </ul></li>
+     * </ul>
+     *
+     * @param dbrTopTexture The {@link ResourceLocation} representing the top texture of the door's bottom right model.
+     * @param dbrBottomTexture The {@link ResourceLocation} representing the bottom texture of the door's bottom right model.
+     * @param dtrTopTexture The {@link ResourceLocation} representing the top texture of the door's top right model.
+     * @param dtrBottomTexture The {@link ResourceLocation} representing the bottom texture of the door's top right model.
+     * @param doorItemTexture The {@link ResourceLocation} representing item texture of the door.
+     *
+     * @return An {@link ObjectArrayList} of all relevant door model definitions, for all of its models depending on its left hinge, with top and bottom texture references for both top and bottom door models
+     * pre-defined.
+     *
+     * @see #doorBottomLeft(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorBottomLeftOpen(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorBottomRight(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorBottomRightOpen(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorTopLeft(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorTopLeftOpen(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorTopRight(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorTopRightOpen(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorLeft(ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorLeft(ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorLeft(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorRight(ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorRight(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #door(ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #door(ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #door(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #door(ResourceLocation, ResourceLocation)
+     * @see #door(Supplier, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #door(Supplier, ResourceLocation, ResourceLocation)
+     * @see #door(Supplier)
+     */
     public static ObjectArrayList<BlockModelDefinition> doorRight(ResourceLocation dbrTopTexture, ResourceLocation dbrBottomTexture, ResourceLocation dtrTopTexture, ResourceLocation dtrBottomTexture, ResourceLocation doorItemTexture) {
         return doorRight(dbrTopTexture, dbrBottomTexture, dbrTopTexture, dbrBottomTexture, dtrTopTexture, dtrBottomTexture, dtrTopTexture, dtrBottomTexture, doorItemTexture);
     }
 
+    /**
+     * Overloaded variant of {@link #doorRight(ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation)}. Creates an {@link ObjectArrayList} of
+     * {@linkplain BlockModelDefinition BlockModelDefinitions} with all requisite right door model templates ({@link ModelTemplates#DOOR_BOTTOM_RIGHT}, {@link ModelTemplates#DOOR_BOTTOM_RIGHT_OPEN},
+     * {@link ModelTemplates#DOOR_TOP_RIGHT}, {@link ModelTemplates#DOOR_TOP_RIGHT_OPEN}). Generalizes top and bottom texture references for all right door models/variants.
+     * <p>
+     * <h3>Models</h3>
+     * <ul>
+     *  <li>{@link ModelTemplates#DOOR_BOTTOM_RIGHT} -> <ul>
+     *      <li>{@link TextureSlot#TOP} -> {@code doorTopTexture}</li>
+     *      <li>{@link TextureSlot#BOTTOM} -> {@code doorBottomTexture}</li>
+     *  </ul></li>
+     *
+     *  <li>{@link ModelTemplates#DOOR_BOTTOM_RIGHT_OPEN} -> <ul>
+     *      <li>{@link TextureSlot#TOP} -> {@code doorTopTexture}</li>
+     *      <li>{@link TextureSlot#BOTTOM} -> {@code doorBottomTexture}</li>
+     *  </ul></li>
+     *
+     *  <li>{@link ModelTemplates#DOOR_TOP_RIGHT} -> <ul>
+     *      <li>{@link TextureSlot#TOP} -> {@code doorTopTexture}</li>
+     *      <li>{@link TextureSlot#BOTTOM} -> {@code doorBottomTexture}</li>
+     *  </ul></li>
+     *
+     *  <li>{@link ModelTemplates#DOOR_TOP_RIGHT_OPEN} -> <ul>
+     *      <li>{@link TextureSlot#TOP} -> {@code doorTopTexture}</li>
+     *      <li>{@link TextureSlot#BOTTOM} -> {@code doorBottomTexture}</li>
+     *  </ul></li>
+     *
+     *  <li>{@link ModelTemplates#FLAT_ITEM} (Item Model) -> <ul>
+     *      <li>{@link TextureSlot#LAYER0} -> {@code doorItemTexture}</li>
+     *  </ul></li>
+     * </ul>
+     *
+     * @param doorTopTexture The {@link ResourceLocation} representing the top texture of the door's right model.
+     * @param doorBottomTexture The {@link ResourceLocation} representing the bottom texture of the door's right model.
+     * @param doorItemTexture The {@link ResourceLocation} representing item texture of the door.
+     *
+     * @return An {@link ObjectArrayList} of all relevant door model definitions, for all of its models depending on its right hinge, with top and bottom texture references for both top and bottom door models
+     * pre-defined.
+     *
+     * @see #doorBottomLeft(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorBottomLeftOpen(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorBottomRight(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorBottomRightOpen(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorTopLeft(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorTopLeftOpen(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorTopRight(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorTopRightOpen(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorLeft(ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorLeft(ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorLeft(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorRight(ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #doorRight(ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #door(ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #door(ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #door(ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #door(ResourceLocation, ResourceLocation)
+     * @see #door(Supplier, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation, ResourceLocation)
+     * @see #door(Supplier, ResourceLocation, ResourceLocation)
+     * @see #door(Supplier)
+     */
     public static ObjectArrayList<BlockModelDefinition> doorRight(ResourceLocation doorTopTexture, ResourceLocation doorBottomTexture, ResourceLocation doorItemTexture) {
         return doorRight(doorTopTexture, doorBottomTexture, doorTopTexture, doorBottomTexture, doorItemTexture);
     }
@@ -2433,7 +2622,8 @@ public final class ModelUtil {
                 .with(Condition.condition()
                         .term(BlockStateProperties.NORTH_WALL, WallSide.TALL), Variant.variant()
                         .with(VariantProperties.MODEL, wallSideTallModel)
-                        .with(VariantProperties.UV_LOCK, true)).with(Condition.condition()
+                        .with(VariantProperties.UV_LOCK, true))
+                .with(Condition.condition()
                         .term(BlockStateProperties.EAST_WALL, WallSide.TALL), Variant.variant()
                         .with(VariantProperties.MODEL, wallSideTallModel)
                         .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90)
@@ -2488,5 +2678,123 @@ public final class ModelUtil {
                                 .with(VariantProperties.MODEL, ripeLeavesModel))
                         .select(false, Variant.variant()
                                 .with(VariantProperties.MODEL, unripeLeavesModel))));
+    }
+
+    public static BlockModelDefinition leafCarpetDefault(ResourceLocation leafCarpetTexture, ResourceLocation leafCarpetItemModelParent) {
+        return BlockModelDefinition.of(CAModelTemplates.LEAF_CARPET)
+                .withTextureMapping(TextureMapping.defaultTexture(leafCarpetTexture.withPrefix("block/")))
+                .withCustomItemModelParent(leafCarpetItemModelParent);
+    }
+
+    public static BlockModelDefinition leafCarpetInventory(ResourceLocation leafCarpetTexture, ResourceLocation leafCarpetItemModelParent) {
+        return BlockModelDefinition.of(CAModelTemplates.LEAF_CARPET_INVENTORY)
+                .withTextureMapping(TextureMapping.defaultTexture(leafCarpetTexture.withPrefix("block/")))
+                .withCustomItemModelParent(leafCarpetItemModelParent);
+    }
+
+    public static ObjectArrayList<BlockModelDefinition> leafCarpet(ResourceLocation leafCarpetTexture, ResourceLocation leafCarpetInventoryTexture, ResourceLocation leafCarpetItemModelParent) {
+        return ObjectArrayList.of(leafCarpetInventory(leafCarpetInventoryTexture, leafCarpetItemModelParent), leafCarpetDefault(leafCarpetTexture, leafCarpetItemModelParent));
+    }
+
+    public static ObjectArrayList<BlockModelDefinition> leafCarpet(ResourceLocation leafCarpetTexture, ResourceLocation leafCarpetItemModelParent) {
+        return leafCarpet(leafCarpetTexture, leafCarpetTexture, leafCarpetItemModelParent);
+    }
+
+    public static BlockStateDefinition leafCarpet(Supplier<Block> targetBlock) {
+        ResourceLocation targetModelLoc = ModelLocationUtils.getModelLocation(targetBlock.get());
+        return BlockStateDefinition.of(targetBlock)
+                .withBlockStateSupplier(MultiPartGenerator.multiPart(targetBlock.get())
+                        .with(Condition.condition()
+                                .term(PipeBlock.NORTH, true), Variant.variant() // Gotta use PipeBlock properties or it just won't work :skull:
+                                .with(VariantProperties.MODEL, targetModelLoc))
+                        .with(Condition.condition()
+                                .term(PipeBlock.DOWN, false)
+                                .term(PipeBlock.NORTH, false)
+                                .term(PipeBlock.EAST, false)
+                                .term(PipeBlock.SOUTH, false)
+                                .term(PipeBlock.UP, false)
+                                .term(PipeBlock.WEST, false), Variant.variant()
+                                .with(VariantProperties.MODEL, targetModelLoc))
+                        .with(Condition.condition()
+                                .term(PipeBlock.EAST, true), Variant.variant()
+                                .with(VariantProperties.MODEL, targetModelLoc)
+                                .with(VariantProperties.UV_LOCK, true)
+                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90))
+                        .with(Condition.condition()
+                                .term(PipeBlock.DOWN, false)
+                                .term(PipeBlock.NORTH, false)
+                                .term(PipeBlock.EAST, false)
+                                .term(PipeBlock.SOUTH, false)
+                                .term(PipeBlock.UP, false)
+                                .term(PipeBlock.WEST, false), Variant.variant()
+                                .with(VariantProperties.MODEL, targetModelLoc)
+                                .with(VariantProperties.UV_LOCK, true)
+                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90))
+                        .with(Condition.condition()
+                                .term(PipeBlock.SOUTH, true), Variant.variant()
+                                .with(VariantProperties.MODEL, targetModelLoc)
+                                .with(VariantProperties.UV_LOCK, true)
+                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180))
+                        .with(Condition.condition()
+                                .term(PipeBlock.DOWN, false)
+                                .term(PipeBlock.NORTH, false)
+                                .term(PipeBlock.EAST, false)
+                                .term(PipeBlock.SOUTH, false)
+                                .term(PipeBlock.UP, false)
+                                .term(PipeBlock.WEST, false), Variant.variant()
+                                .with(VariantProperties.MODEL, targetModelLoc)
+                                .with(VariantProperties.UV_LOCK, true)
+                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180))
+                        .with(Condition.condition()
+                                .term(PipeBlock.WEST, true), Variant.variant()
+                                .with(VariantProperties.MODEL, targetModelLoc)
+                                .with(VariantProperties.UV_LOCK, true)
+                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270))
+                        .with(Condition.condition()
+                                .term(PipeBlock.DOWN, false)
+                                .term(PipeBlock.NORTH, false)
+                                .term(PipeBlock.EAST, false)
+                                .term(PipeBlock.SOUTH, false)
+                                .term(PipeBlock.UP, false)
+                                .term(PipeBlock.WEST, false), Variant.variant()
+                                .with(VariantProperties.MODEL, targetModelLoc)
+                                .with(VariantProperties.UV_LOCK, true)
+                                .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270))
+                        .with(Condition.condition()
+                                .term(PipeBlock.UP, true), Variant.variant()
+                                .with(VariantProperties.MODEL, targetModelLoc)
+                                .with(VariantProperties.UV_LOCK, true)
+                                .with(VariantProperties.X_ROT, VariantProperties.Rotation.R270))
+                        .with(Condition.condition()
+                                .term(PipeBlock.DOWN, false)
+                                .term(PipeBlock.NORTH, false)
+                                .term(PipeBlock.EAST, false)
+                                .term(PipeBlock.SOUTH, false)
+                                .term(PipeBlock.UP, false)
+                                .term(PipeBlock.WEST, false), Variant.variant()
+                                .with(VariantProperties.MODEL, targetModelLoc)
+                                .with(VariantProperties.UV_LOCK, true)
+                                .with(VariantProperties.X_ROT, VariantProperties.Rotation.R270))
+                        .with(Condition.condition()
+                                .term(PipeBlock.DOWN, true), Variant.variant()
+                                .with(VariantProperties.MODEL, targetModelLoc)
+                                .with(VariantProperties.UV_LOCK, true)
+                                .with(VariantProperties.X_ROT, VariantProperties.Rotation.R90))
+                        .with(Condition.condition()
+                                .term(PipeBlock.DOWN, false)
+                                .term(PipeBlock.NORTH, false)
+                                .term(PipeBlock.EAST, false)
+                                .term(PipeBlock.SOUTH, false)
+                                .term(PipeBlock.UP, false)
+                                .term(PipeBlock.WEST, false), Variant.variant()
+                                .with(VariantProperties.MODEL, targetModelLoc)
+                                .with(VariantProperties.UV_LOCK, true)
+                                .with(VariantProperties.X_ROT, VariantProperties.Rotation.R90))
+                );
+    }
+
+    public static BlockModelDefinition leaves(ResourceLocation leavesTexture) {
+        return cubeAll(leavesTexture)
+                .withBlockRenderType(new ResourceLocation(RenderType.cutoutMipped().name));
     }
 }

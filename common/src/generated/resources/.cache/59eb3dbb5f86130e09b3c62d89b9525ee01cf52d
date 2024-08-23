@@ -1,4 +1,4 @@
-// 1.20.1	2024-08-21T13:09:34.5699102	Loot Tables
+// 1.20.1	2024-08-22T18:24:02.7544152	Loot Tables
 fd5e1bc80521d0475feba0a763a4477dafb97aa2 data/chaosawakens/loot_tables/blocks/acacia_gate_block.json
 e0ee511bca34f9c60bdb2af23a96292e96f0a64c data/chaosawakens/loot_tables/blocks/apple_button.json
 129675638aede2a57513342e984c863d5f6fd889 data/chaosawakens/loot_tables/blocks/apple_door.json
@@ -66,6 +66,7 @@ ab4780b552b94d01a9c351f6aa3088bbf2cf6d47 data/chaosawakens/loot_tables/blocks/gi
 5b83986738df34cb94a8cd0eb1bf6b709bffc1c9 data/chaosawakens/loot_tables/blocks/ginkgo_stairs.json
 23c9d9a03f664facf0ac83decddd2bd2c002636a data/chaosawakens/loot_tables/blocks/ginkgo_trapdoor.json
 85da9f7bc2c9c577e9dbbc49ae43cff78c78917c data/chaosawakens/loot_tables/blocks/ginkgo_wood.json
+b83604e393005062d37d9e84c442759331c5cb3f data/chaosawakens/loot_tables/blocks/mangrove_gate_block.json
 b202c29a186837bd7dbe95a9c6322c5d419549b8 data/chaosawakens/loot_tables/blocks/mesozoic_button.json
 e7214a9ec9d4a8a70f32f624d5a4e45499507905 data/chaosawakens/loot_tables/blocks/mesozoic_door.json
 3408de5a2c6b1f129ca25990b687c05cba6d147d data/chaosawakens/loot_tables/blocks/mesozoic_fence.json
