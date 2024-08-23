@@ -28,7 +28,7 @@ public class CABlockLootTableProvider extends BlockLootSubProvider {
 
     @Override
     protected void generate() {
-        BlockPropertyWrapper.getMappedBwps().forEach(((blockSupEntry, curBpw) -> {
+        BlockPropertyWrapper.getMappedBpws().forEach(((blockSupEntry, curBpw) -> {
             Function<Supplier<Block>, LootTable.Builder> mappedBuilderFunc = curBpw.getBlockLootTableMappingFunction();
 
             if (mappedBuilderFunc != null) {

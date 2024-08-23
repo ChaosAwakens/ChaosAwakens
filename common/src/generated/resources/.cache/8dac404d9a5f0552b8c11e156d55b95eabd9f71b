@@ -1,4 +1,4 @@
-// 1.20.1	2024-08-23T21:48:14.0226954	Chaos Awakens: Block States
+// 1.20.1	2024-08-23T22:14:19.1962126	Chaos Awakens: Block States
 5c81494d06a5589da8afe9c24272dddb04a88d14 assets/chaosawakens/blockstates/acacia_gate_block.json
 df2f1e8fa81c1f360358a98fa2fc7dc23ca6f0e3 assets/chaosawakens/blockstates/apple_button.json
 c93a856954b2d70855cccf32b8282351ecd1fd66 assets/chaosawakens/blockstates/apple_door.json
@@ -114,6 +114,8 @@ ad10c92a7b262b8279a34e494e5a1668c24fbd79 assets/chaosawakens/blockstates/skywood
 d34082928d837dd6a96bbb23f85fbe1ac7b31481 assets/chaosawakens/blockstates/spruce_gate_block.json
 b2a6c48549f1cbd23c2e93d1124a701ed03e8503 assets/chaosawakens/blockstates/stripped_apple_log.json
 3e3ea63172e1785a87958f788c513a985df99e99 assets/chaosawakens/blockstates/stripped_apple_wood.json
+038d54279f8bcf910ef0f910b7435d2800b0b188 assets/chaosawakens/blockstates/stripped_crystalwood.json
+7f34cb24bc2b24414a3313499ec1a13d7f3bdf10 assets/chaosawakens/blockstates/stripped_crystalwood_log.json
 ed371d9676023212b6fe3705d37cb077bcd6766a assets/chaosawakens/blockstates/stripped_dead_duplicator_log.json
 d6db0f132a2b79b215280af7e53de31649d00082 assets/chaosawakens/blockstates/stripped_dead_duplicator_wood.json
 ee682f6d70ed2f8879bd664e8454110a2c915e42 assets/chaosawakens/blockstates/stripped_densewood.json

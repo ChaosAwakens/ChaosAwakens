@@ -26,7 +26,7 @@ import java.util.function.Supplier;
  * A wrapper class used to store information referenced in datagen to simplify creating data entries for blocks.
  */
 public class BlockPropertyWrapper { //TODO Maybe type param this for blocks
-    private static final Object2ObjectLinkedOpenHashMap<Supplier<Block>, BlockPropertyWrapper> MAPPED_BWPS = new Object2ObjectLinkedOpenHashMap<>();
+    private static final Object2ObjectLinkedOpenHashMap<Supplier<Block>, BlockPropertyWrapper> MAPPED_BPWS = new Object2ObjectLinkedOpenHashMap<>();
     @Nullable
     private final String blockRegName;
     private final Supplier<Block> parentBlock;
@@ -81,7 +81,7 @@ public class BlockPropertyWrapper { //TODO Maybe type param this for blocks
     }
 
     /**
-     * Creates a new {@link BlockPropertyWrapper} instance as a template. Template BPWs are not stored in {@link #MAPPED_BWPS} and do not store a parent {@link Block}.
+     * Creates a new {@link BlockPropertyWrapper} instance as a template. Template BPWs are not stored in {@link #MAPPED_BPWS} and do not store a parent {@link Block}.
      * They're particularly useful for re-using across multiple {@linkplain Block Blocks}.
      *
      * @return A new {@link BlockPropertyWrapper} instance, set as a template.
@@ -95,7 +95,7 @@ public class BlockPropertyWrapper { //TODO Maybe type param this for blocks
     }
 
     /**
-     * Creates a new {@link BlockPropertyWrapper} instance as a template, inheriting data from the provided BPW template. Template BPWs are not stored in {@link #MAPPED_BWPS} and do not store a parent {@link Block}.
+     * Creates a new {@link BlockPropertyWrapper} instance as a template, inheriting data from the provided BPW template. Template BPWs are not stored in {@link #MAPPED_BPWS} and do not store a parent {@link Block}.
      * They're particularly useful for re-using across multiple {@linkplain Block Blocks}.
      *
      * @param parentTemplateWrapper The parent {@link BlockPropertyWrapper} template from which {{@link #builder()}} data should be copied.
@@ -159,7 +159,7 @@ public class BlockPropertyWrapper { //TODO Maybe type param this for blocks
      * Creates a new {@link BlockPropertyWrapper} instance from an existing {@link BlockPropertyWrapper} instance based on the provided
      * {@link Supplier<Block>}. If no such existing BPW instance exists, returns {@link #create(Supplier)}.
      *
-     * @param parentBlock The parent {@link Supplier<Block>} stored in {@link #MAPPED_BWPS}. Copies its BPW instance's {@link BPWBuilder}
+     * @param parentBlock The parent {@link Supplier<Block>} stored in {@link #MAPPED_BPWS}. Copies its BPW instance's {@link BPWBuilder}
      *                    properties if it exists, or creates a clean new BPW instance if it doesn't.
      * @param newBlock The new registry entry to use for the newly constructed BPW instance.
      *
@@ -170,8 +170,8 @@ public class BlockPropertyWrapper { //TODO Maybe type param this for blocks
      * @see #of(BlockPropertyWrapper, Supplier)
      */
     public static BlockPropertyWrapper of(Supplier<Block> parentBlock, Supplier<Block> newBlock) {
-        if (MAPPED_BWPS.containsKey(parentBlock)) {
-            BlockPropertyWrapper originalWrapper = MAPPED_BWPS.get(parentBlock);
+        if (MAPPED_BPWS.containsKey(parentBlock)) {
+            BlockPropertyWrapper originalWrapper = MAPPED_BPWS.get(parentBlock);
             BlockPropertyWrapper newWrapper = new BlockPropertyWrapper(newBlock);
 
             newWrapper.builder()
@@ -192,7 +192,7 @@ public class BlockPropertyWrapper { //TODO Maybe type param this for blocks
      * Overloaded variant of {@link #of(Supplier, Supplier)} that copies the parent block's {@link BlockBehaviour.Properties}.
      *
      * @param newBlockRegName The new registry name by which the newly constructed {@link Supplier<Block>} instance will be stored.
-     * @param parentBlock The parent {@link Supplier<Block>} stored in {@link #MAPPED_BWPS}.
+     * @param parentBlock The parent {@link Supplier<Block>} stored in {@link #MAPPED_BPWS}.
      *
      * @return A new {@link BlockPropertyWrapper} instance with copied properties (including {@link BlockBehaviour.Properties}) based on the provided {@link Supplier<Block>},
      * or an entirely new/clean instance if no such BPW exists.
@@ -309,16 +309,16 @@ public class BlockPropertyWrapper { //TODO Maybe type param this for blocks
     }
 
     /**
-     * Gets an immutable view (via {@link ImmutableSortedMap}) of {@link #MAPPED_BWPS}.
+     * Gets an immutable view (via {@link ImmutableSortedMap}) of {@link #MAPPED_BPWS}.
      *
-     * @return An immutable view (via {@link ImmutableSortedMap}) of {@link #MAPPED_BWPS}.
+     * @return An immutable view (via {@link ImmutableSortedMap}) of {@link #MAPPED_BPWS}.
      */
-    public static ImmutableSortedMap<Supplier<Block>, BlockPropertyWrapper> getMappedBwps() {
-        return ImmutableSortedMap.copyOf(MAPPED_BWPS);
+    public static ImmutableSortedMap<Supplier<Block>, BlockPropertyWrapper> getMappedBpws() {
+        return ImmutableSortedMap.copyOf(MAPPED_BPWS);
     }
 
     /**
-     * Whether this BPW instance is a template. Templates are not stored in {@link #getMappedBwps()} and have no parent {@link Block}.
+     * Whether this BPW instance is a template. Templates are not stored in {@link #getMappedBpws()} and have no parent {@link Block}.
      *
      * @return Whether this BPW instance is a template.
      *
@@ -550,7 +550,7 @@ public class BlockPropertyWrapper { //TODO Maybe type param this for blocks
          * @see BlockPropertyWrapper#isTemplate()
          */
         public BlockPropertyWrapper build() {
-            if (!ownerWrapper.isTemplate) MAPPED_BWPS.putIfAbsent(ownerWrapper.blockRegName == null ? ownerWrapper.parentBlock : () -> BuiltInRegistries.BLOCK.get(CAConstants.prefix(ownerWrapper.blockRegName)), ownerWrapper);
+            if (!ownerWrapper.isTemplate) MAPPED_BPWS.putIfAbsent(ownerWrapper.blockRegName == null ? ownerWrapper.parentBlock : () -> BuiltInRegistries.BLOCK.get(CAConstants.prefix(ownerWrapper.blockRegName)), ownerWrapper);
             return ownerWrapper;
         }
     }

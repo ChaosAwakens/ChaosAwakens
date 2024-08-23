@@ -18,7 +18,7 @@ public class ChaosAwakensClientFabric implements ClientModInitializer {
     }
 
     private static void handleBlockRenderLayers() {
-        BlockPropertyWrapper.getMappedBwps().forEach((blockSupEntry, curBwp) -> {
+        BlockPropertyWrapper.getMappedBpws().forEach((blockSupEntry, curBwp) -> {
             ObjectArrayList<BlockModelDefinition> allPresentModels = new ObjectArrayList<>(curBwp.getModelDefinitions());
 
             if (!allPresentModels.isEmpty()) {

@@ -1,4 +1,4 @@
-// 1.20.1	2024-08-23T21:48:14.0447057	Chaos Awakens: Block & Block Item Models
+// 1.20.1	2024-08-23T22:14:19.2192122	Chaos Awakens: Block & Block Item Models
 545cc7a8d51438ddca6429e9262d81c625d1162d assets/chaosawakens/models/block/acacia_gate_block.json
 32bed3330bf18b5cf782cdc679df40a9845fcaad assets/chaosawakens/models/block/apple_button.json
 0b3671b602abeed4f6588f981e2e792c7403ad64 assets/chaosawakens/models/block/apple_button_inventory.json
@@ -284,6 +284,9 @@ b16e4f15e432028a70171e8fff8b7f8eabdaf086 assets/chaosawakens/models/block/spruce
 514fef2f0a6ed2c995681a4b86afc0f2f4168d5c assets/chaosawakens/models/block/stripped_apple_log.json
 a7fb36c96e331369aa072afe2d1f1482f2d413d7 assets/chaosawakens/models/block/stripped_apple_log_horizontal.json
 732c931fdab1bbd073190974c67a8408a49646ce assets/chaosawakens/models/block/stripped_apple_wood.json
+e4e695e9c2bc9ca55b574f535d974f04e6c1ac91 assets/chaosawakens/models/block/stripped_crystalwood.json
+010229799f9740952166ada44d4414ab85a15744 assets/chaosawakens/models/block/stripped_crystalwood_log.json
+2cc5fa4576fa2ff59b50d81c792151556bae7308 assets/chaosawakens/models/block/stripped_crystalwood_log_horizontal.json
 a1cf5cf41cb96dd75b3b0b2f5ffc3684b37eac5d assets/chaosawakens/models/block/stripped_dead_duplicator_log.json
 c319a9bd55dcebb65abefef0b64651905fa7f78c assets/chaosawakens/models/block/stripped_dead_duplicator_log_horizontal.json
 6c27cb0f68bd39e8a6054adc1a7773f5a871e7f8 assets/chaosawakens/models/block/stripped_dead_duplicator_wood.json
@@ -423,6 +426,8 @@ de597f4cdd23d2431dacf819e2eee18893a6af13 assets/chaosawakens/models/item/skywood
 4a3ea5ee4bb6dae1991ada6554d75dea5e4bfd4f assets/chaosawakens/models/item/spruce_gate_block.json
 6a03665cf414656c4e51169e51ad8ee1fbcf2132 assets/chaosawakens/models/item/stripped_apple_log.json
 bad41817f26ef62a1635f40e6d580d2dfea6993d assets/chaosawakens/models/item/stripped_apple_wood.json
+aecf57759f204ae300a95a20b5757c6bbc1253d8 assets/chaosawakens/models/item/stripped_crystalwood.json
+374b8b96e77d1ddb0bbbfdd581cd26a31116e520 assets/chaosawakens/models/item/stripped_crystalwood_log.json
 b0a9592f6cc582ccf3ef5b4b482f636444cc5bf0 assets/chaosawakens/models/item/stripped_dead_duplicator_log.json
 302ff91797f14dd535e7315736ee6f681b56e2c6 assets/chaosawakens/models/item/stripped_dead_duplicator_wood.json
 431b019df08ba152f34e63a97750742ce09a9bbb assets/chaosawakens/models/item/stripped_densewood.json

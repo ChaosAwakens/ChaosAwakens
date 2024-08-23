@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "chaosawakens:block/wood/crystalwood/stripped_crystalwood_log_top",
+    "side": "chaosawakens:block/wood/crystalwood/stripped_crystalwood_log"
+  }
+}

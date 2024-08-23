@@ -28,8 +28,8 @@ public class CAItemTagsProvider extends ItemTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider provider) {
-        if (!BlockPropertyWrapper.getMappedBwps().isEmpty()) {
-            BlockPropertyWrapper.getMappedBwps().forEach((blockSupEntry, curBwp) -> {
+        if (!BlockPropertyWrapper.getMappedBpws().isEmpty()) {
+            BlockPropertyWrapper.getMappedBpws().forEach((blockSupEntry, curBwp) -> {
                 List<TagKey<?>> parentTags = curBwp.getParentTags();
 
                 if (!parentTags.isEmpty()){

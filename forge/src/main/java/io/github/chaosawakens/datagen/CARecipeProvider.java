@@ -20,8 +20,8 @@ public class CARecipeProvider extends RecipeProvider {
 
     @Override
     protected void buildRecipes(@NotNull Consumer<FinishedRecipe> pWriter) {
-        if (!BlockPropertyWrapper.getMappedBwps().isEmpty()) {
-            BlockPropertyWrapper.getMappedBwps().forEach((blockSupEntry, bpwEntry) -> {
+        if (!BlockPropertyWrapper.getMappedBpws().isEmpty()) {
+            BlockPropertyWrapper.getMappedBpws().forEach((blockSupEntry, bpwEntry) -> {
                 Function<Consumer<FinishedRecipe>, Consumer<Supplier<Block>>> recipeFunc = bpwEntry.getRecipeMappingFunction() == null ? null : bpwEntry.getRecipeMappingFunction(); // Otherwise doesn't work (don't ask)
 
                 if (recipeFunc != null) {

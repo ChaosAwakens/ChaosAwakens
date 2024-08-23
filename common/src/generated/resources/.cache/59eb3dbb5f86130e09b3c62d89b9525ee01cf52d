@@ -1,4 +1,4 @@
-// 1.20.1	2024-08-23T21:48:14.0386957	Loot Tables
+// 1.20.1	2024-08-23T22:14:19.2112234	Loot Tables
 fd5e1bc80521d0475feba0a763a4477dafb97aa2 data/chaosawakens/loot_tables/blocks/acacia_gate_block.json
 e0ee511bca34f9c60bdb2af23a96292e96f0a64c data/chaosawakens/loot_tables/blocks/apple_button.json
 129675638aede2a57513342e984c863d5f6fd889 data/chaosawakens/loot_tables/blocks/apple_door.json
@@ -114,6 +114,8 @@ ffcfbc9f2ca86766828ea8c1ccaf67b94df0caff data/chaosawakens/loot_tables/blocks/sk
 7e929d4aac9302a0f525b1d38cd8c3730a8f50d3 data/chaosawakens/loot_tables/blocks/spruce_gate_block.json
 0027433abd002962e39b26c35d9af8303ba9801d data/chaosawakens/loot_tables/blocks/stripped_apple_log.json
 363bfe448539e6ed3cbf5dc6138cfa360c6ea342 data/chaosawakens/loot_tables/blocks/stripped_apple_wood.json
+df0bd18710c3a5e1c09667c04c477c897ae6cbe3 data/chaosawakens/loot_tables/blocks/stripped_crystalwood.json
+176221a50f1631215a4a13e37a06fa7e58dcc1b4 data/chaosawakens/loot_tables/blocks/stripped_crystalwood_log.json
 184559a8adeace3fd27798ec1ee3d5f3f0a3474a data/chaosawakens/loot_tables/blocks/stripped_dead_duplicator_log.json
 a87e8a6fefbf6278ff24758360294e649b999cbd data/chaosawakens/loot_tables/blocks/stripped_dead_duplicator_wood.json
 93d73f0914ea400a87c6c6ae04b709ec713083c5 data/chaosawakens/loot_tables/blocks/stripped_densewood.json

@@ -109,18 +109,18 @@ public final class CABlocks {
             .withCustomModelDefinition(ModelUtil.cubeColumn(CAConstants.prefix("wood/crystalwood/crystalwood_log")))
             .build()
             .getParentBlock();
-    /*   public static final Supplier<Block> STRIPPED_CRYSTALWOOD_LOG = BlockPropertyWrapper.of(CABlockPropertyWrappers.LOG, registerBlock("stripped_crystalwood_log", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(CRYSTALWOOD_LOG.get()).mapColor((appleLogBlock) -> appleLogBlock.getValue(RotatedPillarBlock.AXIS) == Direction.Axis.Y ? MapColor.TERRACOTTA_ORANGE : MapColor.COLOR_ORANGE))))
-               .cachedBuilder()
-               .withTags(ObjectArrayList.of(CATags.CABlockTags.CRYSTALWOOD_LOGS, CATags.CAItemTags.CRYSTALWOOD_LOGS))
-               .withCustomModelDefinitions(ModelUtil.rotatedPillarBlock(CAConstants.prefix("wood/crystalwood/stripped_crystalwood_log"), CAConstants.prefix("wood/crystalwood/stripped_crystalwood_log_top")))
-               .build()
-               .getParentBlock();
-       public static final Supplier<Block> STRIPPED_CRYSTALWOOD = BlockPropertyWrapper.of(CABlockPropertyWrappers.WOOD, registerBlock("stripped_crystalwood", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(CRYSTALWOOD.get()))))
-               .cachedBuilder()
-               .withTags(ObjectArrayList.of(CATags.CABlockTags.CRYSTALWOOD_LOGS, CATags.CAItemTags.CRYSTALWOOD_LOGS))
-               .withCustomModelDefinition(ModelUtil.cubeColumn(CAConstants.prefix("wood/crystalwood/stripped_crystalwood_log")))
-               .build()
-               .getParentBlock(); */
+    public static final Supplier<Block> STRIPPED_CRYSTALWOOD_LOG = BlockPropertyWrapper.of(CABlockPropertyWrappers.LOG, registerBlock("stripped_crystalwood_log", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(CRYSTALWOOD_LOG.get()).mapColor((appleLogBlock) -> appleLogBlock.getValue(RotatedPillarBlock.AXIS) == Direction.Axis.Y ? MapColor.TERRACOTTA_ORANGE : MapColor.COLOR_ORANGE))))
+            .cachedBuilder()
+            .withTags(ObjectArrayList.of(CATags.CABlockTags.CRYSTALWOOD_LOGS, CATags.CAItemTags.CRYSTALWOOD_LOGS))
+            .withCustomModelDefinitions(ModelUtil.rotatedPillarBlock(CAConstants.prefix("wood/crystalwood/stripped_crystalwood_log"), CAConstants.prefix("wood/crystalwood/stripped_crystalwood_log_top")))
+            .build()
+            .getParentBlock();
+    public static final Supplier<Block> STRIPPED_CRYSTALWOOD = BlockPropertyWrapper.of(CABlockPropertyWrappers.WOOD, registerBlock("stripped_crystalwood", () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(CRYSTALWOOD.get()))))
+            .cachedBuilder()
+            .withTags(ObjectArrayList.of(CATags.CABlockTags.CRYSTALWOOD_LOGS, CATags.CAItemTags.CRYSTALWOOD_LOGS))
+            .withCustomModelDefinition(ModelUtil.cubeColumn(CAConstants.prefix("wood/crystalwood/stripped_crystalwood_log")))
+            .build()
+            .getParentBlock();
     public static final Supplier<Block> CRYSTALWOOD_PLANKS = BlockPropertyWrapper.of(CABlockPropertyWrappers.WOODEN_PLANKS, registerBlock("crystalwood_planks", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_ORANGE).instrument(NoteBlockInstrument.BASS).strength(2.0F, 3.0F).sound(SoundType.WOOD).ignitedByLava())))
             .cachedBuilder()
             .withCustomModelDefinition(ModelUtil.cubeAll(CAConstants.prefix("wood/crystalwood/crystalwood_planks")))

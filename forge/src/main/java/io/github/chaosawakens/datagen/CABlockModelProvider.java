@@ -45,8 +45,8 @@ public class CABlockModelProvider extends BlockModelProvider {
 
     @Override
     protected void registerModels() {
-        if (!BlockPropertyWrapper.getMappedBwps().isEmpty()) {
-            BlockPropertyWrapper.getMappedBwps().forEach((blockSupEntry, mappedBpw) -> {
+        if (!BlockPropertyWrapper.getMappedBpws().isEmpty()) {
+            BlockPropertyWrapper.getMappedBpws().forEach((blockSupEntry, mappedBpw) -> {
                 List<BlockModelDefinition> curModelDefs = mappedBpw.getModelDefinitions();
 
                 if (!curModelDefs.isEmpty()) {

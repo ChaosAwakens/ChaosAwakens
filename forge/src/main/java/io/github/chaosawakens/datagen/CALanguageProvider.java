@@ -163,8 +163,8 @@ public class CALanguageProvider extends LanguageProvider {
     }
 
     protected void translateBlocks() {
-        if (!BlockPropertyWrapper.getMappedBwps().isEmpty()) {
-            BlockPropertyWrapper.getMappedBwps().forEach((blockRegNameEntry, curBwp) -> { //TODO Optimize and update logging :trol:
+        if (!BlockPropertyWrapper.getMappedBpws().isEmpty()) {
+            BlockPropertyWrapper.getMappedBpws().forEach((blockRegNameEntry, curBwp) -> { //TODO Optimize and update logging :trol:
                 if (!curBwp.getManuallyUnlocalizedBlockName().isBlank()) addManualTranslation(blockRegNameEntry.get().getDescriptionId(), curBwp.getManuallyUnlocalizedBlockName());
                 else if (!curBwp.getDefinedSeparatorWords().isEmpty()) localizeGeneralRegistryName(blockRegNameEntry.get().getDescriptionId(), Lists.asList(DEFAULT_SEPARATORS.get(0), DEFAULT_SEPARATORS.get(1), curBwp.getDefinedSeparatorWords().toArray(String[]::new)), ObjectArrayList.of());
             });

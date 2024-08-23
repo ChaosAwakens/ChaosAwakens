@@ -40,8 +40,8 @@ public class CABlockStateProvider extends BlockStateProvider {
 
     @Override
     protected void registerStatesAndModels() {
-        if (!BlockPropertyWrapper.getMappedBwps().isEmpty()) {
-            BlockPropertyWrapper.getMappedBwps().forEach((blockSupEntry, curBwp) -> {
+        if (!BlockPropertyWrapper.getMappedBpws().isEmpty()) {
+            BlockPropertyWrapper.getMappedBpws().forEach((blockSupEntry, curBwp) -> {
                 BlockStateDefinition curStateDef = curBwp.getBlockStateDefinitionMappingFunction() == null ? null : curBwp.getBlockStateDefinitionMappingFunction().apply(blockSupEntry);
 
                 if (curStateDef != null) {
