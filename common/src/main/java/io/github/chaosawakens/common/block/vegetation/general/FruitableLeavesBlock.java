@@ -20,7 +20,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import java.util.function.Supplier;
 
 public class FruitableLeavesBlock extends LeavesBlock {
-    protected static final BooleanProperty RIPE = CABlockStateProperties.RIPE;
+    public static final BooleanProperty RIPE = CABlockStateProperties.RIPE;
     protected final Supplier<Item> fruitItemSup;
     protected final int probability; // 1 in {probability}
     protected final int minFruitCount;
@@ -65,11 +65,31 @@ public class FruitableLeavesBlock extends LeavesBlock {
     protected InteractionResult extractFruit(BlockState targetState, BlockPos targetPos, Level curLevel) {
         if (isRipe(targetState)) {
             curLevel.setBlockAndUpdate(targetPos, setRipe(targetState, false));
-            popResource(curLevel, targetPos, new ItemStack(fruitItemSup.get(), maxFruitCount - minFruitCount < 0 ? 1 : RandomSource.create().nextInt(minFruitCount, maxFruitCount)));
+            popResource(curLevel, targetPos, new ItemStack(fruitItemSup.get(), calculateRandomFruitDrop()));
 
             return InteractionResult.SUCCESS;
         }
         return InteractionResult.PASS; // Not the best practice to not return super() method instead but eh, future problem for future me (if ever)
+    }
+
+    public Supplier<Item> getFruitItem() {
+        return fruitItemSup;
+    }
+
+    public int getMinFruitCount() {
+        return minFruitCount;
+    }
+
+    public int getMaxFruitCount() {
+        return maxFruitCount;
+    }
+
+    public int getFruitDropProbability() {
+        return probability;
+    }
+
+    public int calculateRandomFruitDrop() {
+        return maxFruitCount - minFruitCount < 0 ? 1 : RandomSource.create().nextInt(minFruitCount, maxFruitCount);
     }
 
     public static boolean isRipe(BlockState targetState) {

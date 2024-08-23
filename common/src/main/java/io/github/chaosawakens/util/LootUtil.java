@@ -1,5 +1,6 @@
 package io.github.chaosawakens.util;
 
+import io.github.chaosawakens.common.block.vegetation.general.FruitableLeavesBlock;
 import net.minecraft.advancements.critereon.EnchantmentPredicate;
 import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.advancements.critereon.MinMaxBounds;
@@ -267,9 +268,9 @@ public final class LootUtil {
                 .setRolls(ConstantValue.exactly(1.0F))
                 .when(HAS_SHEARS_OR_SILK_TOUCH)
                 .add(LootItem.lootTableItem(targetBlock.get())
-                        .otherwise(LootItem.lootTableItem(RegistryUtil.getSaplingFrom(targetBlock).get())
+                    /*    .otherwise(LootItem.lootTableItem(RegistryUtil.getSaplingFrom(targetBlock).get())
                                 .when(BonusLevelTableCondition.bonusLevelFlatChance(Enchantments.BLOCK_FORTUNE, NORMAL_LEAVES_SAPLING_CHANCES))
-                                .when(ExplosionCondition.survivesExplosion()))))
+                                .when(ExplosionCondition.survivesExplosion())) */))
                 .withPool(LootPool.lootPool()
                         .setRolls(ConstantValue.exactly(1.0F))
                         .when(HAS_NO_SHEARS_OR_SILK_TOUCH)
@@ -277,5 +278,56 @@ public final class LootUtil {
                                 .when(BonusLevelTableCondition.bonusLevelFlatChance(Enchantments.BLOCK_FORTUNE, NORMAL_LEAVES_STICK_CHANCES))
                                 .apply(ApplyExplosionDecay.explosionDecay())
                                 .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F)))));
+    }
+
+    /**
+     * Overloaded variant of {@link #dropLeaves(Supplier)}. Creates {@link LootTable.Builder} that will drop the given {@link Block} when it's destroyed, but only if it's destroyed with shears or a tool enchanted with silk touch.
+     * Alternatively drops saplings/sticks when mined/decaying otherwise. Assumes the supplied {@link Block} is a {@link FruitableLeavesBlock} and drops its respective fruit item if it's ripe.
+     * <p>
+     * <h2>LOOT TABLE</h2>
+     * <h3>Pool 1</h3>
+     * <ul>
+     *  <li><b>Rolls:</b> 1.0</li>
+     *  <li><b>When:</b> {@link #HAS_SHEARS_OR_SILK_TOUCH}</li>
+     *  <li><b>Drops:</b> {@code targetBlock}</li>
+     *  <li><b>Otherwise:</b> <ul>
+     *      <li><b>When:</b> {@link BonusLevelTableCondition#bonusLevelFlatChance(Enchantment, float...)} (Passes in {@link Enchantments#BLOCK_FORTUNE} and {@link #NORMAL_LEAVES_SAPLING_CHANCES} respectively)</li></li>
+     *      <li><b>When:</b> {@link ExplosionCondition#survivesExplosion()}</li></li>
+     *      <li><b>Drops:</b> {@link RegistryUtil#getSaplingFrom(Supplier<Block>)}</li></li>
+     *  </ul>
+     * </ul>
+     *
+     * <h3>Pool 2</h3>
+     * <ul>
+     *  <li><b>Rolls:</b> 1.0</li>
+     *  <li><b>When:</b> {@link #HAS_NO_SHEARS_OR_SILK_TOUCH}</li>
+     *  <li><b>Drops:</b> {@link Items#STICK} -> <ul>
+     *      <li><b>When:</b> {@link BonusLevelTableCondition#bonusLevelFlatChance(Enchantment, float...)} (Passes in {@link Enchantments#BLOCK_FORTUNE} and {@link #NORMAL_LEAVES_STICK_CHANCES} respectively)</li></li>
+     *      <li><b>Apply:</b> {@link ApplyExplosionDecay#explosionDecay()}</li></li>
+     *      <li><b>Apply:</b> {@link SetItemCountFunction#setCount(NumberProvider)} (Passes in {@link UniformGenerator#between(float, float)} [1.0F, 2.0F])</li></li>
+     *  </ul></li>
+     * </ul>
+     *
+     * <h3>Pool 3</h3>
+     * <ul>
+     *  <li><b>Rolls:</b> 1.0</li>
+     *  <li><b>When:</b> {@link LootItemBlockStatePropertyCondition#hasBlockStateProperties(Block)} (Checks if {@link FruitableLeavesBlock#RIPE} is {@code true})</li>
+     *  <li><b>Drops:</b> {@link FruitableLeavesBlock#getFruitItem()} -> <ul>
+     *      <li><b>Apply:</b> {@link ApplyExplosionDecay#explosionDecay()}</li></li>
+     *  </ul></li>
+     * </ul>
+     *
+     * @param targetBlock The {@link Supplier<Block>} representing the leaf {@link Block} that will be dropped when any shears or silk touch tool is used to mine it. Alternatively drops
+     * saplings/sticks when mined/decaying otherwise. Drops fruits if ripe.
+     *
+     * @return A {@link LootTable.Builder} that will drop the given leaf {@link Block} when it's destroyed, but only if it's destroyed with a shears or any tool enchanted with silk touch. Alternatively drops
+     * saplings/sticks when mined/decaying, dropping fruits if it's ripe.
+     */
+    public static LootTable.Builder dropLeavesRipe(Supplier<Block> targetBlock) {
+        return dropLeaves(targetBlock).withPool(LootPool.lootPool()
+                .setRolls(ConstantValue.exactly(1.0F))
+                .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(targetBlock.get()).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(FruitableLeavesBlock.RIPE, true)))
+                .add(LootItem.lootTableItem(((FruitableLeavesBlock) targetBlock.get()).getFruitItem().get())
+                        .apply(SetItemCountFunction.setCount(ConstantValue.exactly(((FruitableLeavesBlock) targetBlock.get()).calculateRandomFruitDrop())))));
     }
 }

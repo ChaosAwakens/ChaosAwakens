@@ -206,7 +206,14 @@ public final class CABlockPropertyWrappers { // Commented BMD calls out because 
             .builder()
             .withLootTable(LootUtil::dropLeaves)
             .withTags(ObjectArrayList.of(BlockTags.LEAVES, ItemTags.LEAVES))
-    //      .withCustomModelDefinitions(ModelUtil.cubeAll(CAConstants.prefix("base/template")))
+    //      .withCustomModelDefinitions(ModelUtil.cubeAll(CAConstants.prefix("base/template_leaves")))
             .withBlockStateDefinition(ModelUtil::simpleBlock)
+            .build();
+    public static final BlockPropertyWrapper FRUITABLE_LEAVES = BlockPropertyWrapper.createTemplate()
+            .builder()
+            .withLootTable(LootUtil::dropLeavesRipe)
+            .withTags(ObjectArrayList.of(BlockTags.LEAVES, ItemTags.LEAVES))
+   //       .withCustomModelDefinitions(ModelUtil.fruitableLeaves(CAConstants.prefix("base/template_leaves"), CAConstants.prefix("base/template_leaves_ripe")))
+            .withBlockStateDefinition(ModelUtil::fruitableLeaves)
             .build();
 }

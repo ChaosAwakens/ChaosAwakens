@@ -23,4 +23,8 @@ public class CAModelTemplates {
     private static ModelTemplate createTemplate(ResourceLocation templateModelFileLoc, String modelFileSuffix, TextureSlot... textureSlots) {
         return new ModelTemplate(Optional.of(templateModelFileLoc), Optional.of(modelFileSuffix), textureSlots);
     }
+
+    public static ModelTemplate of(ResourceLocation modelLoc) {
+        return new ModelTemplate(Optional.of(modelLoc), Optional.of(""));
+    }
 }

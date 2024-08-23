@@ -92,7 +92,7 @@ public class CABlockModelProvider extends BlockModelProvider {
                                 BlockModelDefinition.getCachedModelDefinitions().putIfAbsent(blockSupEntry, curModelDef); // JIC
 
                                 String itemModelFileName = curBlock.getDescriptionId().substring(curBlock.getDescriptionId().lastIndexOf(".") + 1);
-                                ResourceLocation customBlockModelItemParent = curModelDef.getCustomItemModelParent();
+                                ResourceLocation customBlockModelItemParent = curModelDef.getItemParentModelLocation();
                                 ItemModelBuilder resultItemBuilder = withExistingItemParent(itemModelFileName, itemModelTextureMapping == null ? customBlockModelItemParent != null ? customBlockModelItemParent : CAConstants.prefix(BLOCK_FOLDER + "/" + itemModelFileName) : itemParentModelLoc);
                                 TextureMapping textureLayerDefinitionMap = curModelDef.getItemModelTextureMapping();
                                 Map<Map<ResourceLocation, Float>, ResourceLocation> textureOverrides = curModelDef.getItemModelTextureOverrides();

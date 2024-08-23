@@ -4,6 +4,7 @@ import com.google.common.collect.Sets;
 import io.github.chaosawakens.CAConstants;
 import io.github.chaosawakens.api.datagen.block.BlockModelDefinition;
 import io.github.chaosawakens.api.datagen.block.BlockStateDefinition;
+import io.github.chaosawakens.api.datagen.item.ItemModelDefinition;
 import io.github.chaosawakens.common.registry.CABlockStateProperties;
 import io.github.chaosawakens.common.registry.CAModelTemplates;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
@@ -676,8 +677,8 @@ public final class ModelUtil {
     public static BlockModelDefinition cross(ResourceLocation baseCrossTexture) {
         return BlockModelDefinition.of(ModelTemplates.CROSS)
                 .withTextureMapping(TextureMapping.cross(baseCrossTexture.withPrefix("block/")))
-                .withItemParentModel(ModelTemplates.FLAT_ITEM)
-                .withItemModelTextureMapping(TextureMapping.layer0(baseCrossTexture.withPrefix("block/")));
+                .withCustomItemModel(ItemModelDefinition.of(ModelTemplates.FLAT_ITEM)
+                        .withTextureMapping(TextureMapping.layer0(baseCrossTexture.withPrefix("block/"))));
     }
 
     /**
@@ -1131,8 +1132,8 @@ public final class ModelUtil {
         return BlockModelDefinition.of(ModelTemplates.DOOR_BOTTOM_LEFT)
                 .withTextureMapping(TextureMapping.door(doorTopTexture.withPrefix("block/"), doorBottomTexture.withPrefix("block/")))
                 .withBlockRenderType(new ResourceLocation(RenderType.cutout().name))
-                .withItemParentModel(ModelTemplates.FLAT_ITEM)
-                .withItemModelTextureMapping(TextureMapping.layer0(doorItemTexture.withPrefix("item/")));
+                .withCustomItemModel(ItemModelDefinition.of(ModelTemplates.FLAT_ITEM)
+                        .withTextureMapping(TextureMapping.layer0(doorItemTexture.withPrefix("item/"))));
     }
 
     /**
@@ -1180,8 +1181,8 @@ public final class ModelUtil {
         return BlockModelDefinition.of(ModelTemplates.DOOR_BOTTOM_LEFT_OPEN)
                 .withTextureMapping(TextureMapping.door(doorTopTexture.withPrefix("block/"), doorBottomTexture.withPrefix("block/")))
                 .withBlockRenderType(new ResourceLocation(RenderType.cutout().name))
-                .withItemParentModel(ModelTemplates.FLAT_ITEM)
-                .withItemModelTextureMapping(TextureMapping.layer0(doorItemTexture.withPrefix("item/")));
+                .withCustomItemModel(ItemModelDefinition.of(ModelTemplates.FLAT_ITEM)
+                        .withTextureMapping(TextureMapping.layer0(doorItemTexture.withPrefix("item/"))));
     }
 
     /**
@@ -1229,8 +1230,8 @@ public final class ModelUtil {
         return BlockModelDefinition.of(ModelTemplates.DOOR_TOP_LEFT)
                 .withTextureMapping(TextureMapping.door(doorTopTexture.withPrefix("block/"), doorBottomTexture.withPrefix("block/")))
                 .withBlockRenderType(new ResourceLocation(RenderType.cutout().name))
-                .withItemParentModel(ModelTemplates.FLAT_ITEM)
-                .withItemModelTextureMapping(TextureMapping.layer0(doorItemTexture.withPrefix("item/")));
+                .withCustomItemModel(ItemModelDefinition.of(ModelTemplates.FLAT_ITEM)
+                        .withTextureMapping(TextureMapping.layer0(doorItemTexture.withPrefix("item/"))));
     }
 
     /**
@@ -1278,8 +1279,8 @@ public final class ModelUtil {
         return BlockModelDefinition.of(ModelTemplates.DOOR_TOP_LEFT_OPEN)
                 .withTextureMapping(TextureMapping.door(doorTopTexture.withPrefix("block/"), doorBottomTexture.withPrefix("block/")))
                 .withBlockRenderType(new ResourceLocation(RenderType.cutout().name))
-                .withItemParentModel(ModelTemplates.FLAT_ITEM)
-                .withItemModelTextureMapping(TextureMapping.layer0(doorItemTexture.withPrefix("item/")));
+                .withCustomItemModel(ItemModelDefinition.of(ModelTemplates.FLAT_ITEM)
+                        .withTextureMapping(TextureMapping.layer0(doorItemTexture.withPrefix("item/"))));
     }
 
     /**
@@ -1327,8 +1328,8 @@ public final class ModelUtil {
         return BlockModelDefinition.of(ModelTemplates.DOOR_BOTTOM_RIGHT)
                 .withTextureMapping(TextureMapping.door(doorTopTexture.withPrefix("block/"), doorBottomTexture.withPrefix("block/")))
                 .withBlockRenderType(new ResourceLocation(RenderType.cutout().name))
-                .withItemParentModel(ModelTemplates.FLAT_ITEM)
-                .withItemModelTextureMapping(TextureMapping.layer0(doorItemTexture.withPrefix("item/")));
+                .withCustomItemModel(ItemModelDefinition.of(ModelTemplates.FLAT_ITEM)
+                        .withTextureMapping(TextureMapping.layer0(doorItemTexture.withPrefix("item/"))));
     }
 
     /**
@@ -1376,8 +1377,8 @@ public final class ModelUtil {
         return BlockModelDefinition.of(ModelTemplates.DOOR_BOTTOM_RIGHT_OPEN)
                 .withTextureMapping(TextureMapping.door(doorTopTexture.withPrefix("block/"), doorBottomTexture.withPrefix("block/")))
                 .withBlockRenderType(new ResourceLocation(RenderType.cutout().name))
-                .withItemParentModel(ModelTemplates.FLAT_ITEM)
-                .withItemModelTextureMapping(TextureMapping.layer0(doorItemTexture.withPrefix("item/")));
+                .withCustomItemModel(ItemModelDefinition.of(ModelTemplates.FLAT_ITEM)
+                        .withTextureMapping(TextureMapping.layer0(doorItemTexture.withPrefix("item/"))));
     }
 
     /**
@@ -1425,8 +1426,8 @@ public final class ModelUtil {
         return BlockModelDefinition.of(ModelTemplates.DOOR_TOP_RIGHT)
                 .withTextureMapping(TextureMapping.door(doorTopTexture.withPrefix("block/"), doorBottomTexture.withPrefix("block/")))
                 .withBlockRenderType(new ResourceLocation(RenderType.cutout().name))
-                .withItemParentModel(ModelTemplates.FLAT_ITEM)
-                .withItemModelTextureMapping(TextureMapping.layer0(doorItemTexture.withPrefix("item/")));
+                .withCustomItemModel(ItemModelDefinition.of(ModelTemplates.FLAT_ITEM)
+                        .withTextureMapping(TextureMapping.layer0(doorItemTexture.withPrefix("item/"))));
     }
 
     /**
@@ -1474,8 +1475,8 @@ public final class ModelUtil {
         return BlockModelDefinition.of(ModelTemplates.DOOR_TOP_RIGHT_OPEN)
                 .withTextureMapping(TextureMapping.door(doorTopTexture.withPrefix("block/"), doorBottomTexture.withPrefix("block/")))
                 .withBlockRenderType(new ResourceLocation(RenderType.cutout().name))
-                .withItemParentModel(ModelTemplates.FLAT_ITEM)
-                .withItemModelTextureMapping(TextureMapping.layer0(doorItemTexture.withPrefix("item/")));
+                .withCustomItemModel(ItemModelDefinition.of(ModelTemplates.FLAT_ITEM)
+                        .withTextureMapping(TextureMapping.layer0(doorItemTexture.withPrefix("item/"))));
     }
 
     /**
@@ -2002,21 +2003,21 @@ public final class ModelUtil {
         return BlockModelDefinition.of(ModelTemplates.TRAPDOOR_OPEN)
                 .withTextureMapping(TextureMapping.defaultTexture(trapdoorTexture.withPrefix("block/")))
                 .withBlockRenderType(new ResourceLocation(RenderType.cutout().name))
-                .withCustomItemModelParent(trapDoorItemParentBlockModel);
+                .withCustomItemModel(ItemModelDefinition.of(CAModelTemplates.of(trapDoorItemParentBlockModel)));
     }
 
     public static BlockModelDefinition trapdoorTop(ResourceLocation trapdoorTexture, ResourceLocation trapDoorItemParentBlockModel) {
         return BlockModelDefinition.of(ModelTemplates.TRAPDOOR_TOP)
                 .withTextureMapping(TextureMapping.defaultTexture(trapdoorTexture.withPrefix("block/")))
                 .withBlockRenderType(new ResourceLocation(RenderType.cutout().name))
-                .withCustomItemModelParent(trapDoorItemParentBlockModel);
+                .withCustomItemModel(ItemModelDefinition.of(CAModelTemplates.of(trapDoorItemParentBlockModel)));
     }
 
     public static BlockModelDefinition trapdoorBottom(ResourceLocation trapdoorTexture, ResourceLocation trapDoorItemParentBlockModel) {
         return BlockModelDefinition.of(ModelTemplates.TRAPDOOR_BOTTOM)
                 .withTextureMapping(TextureMapping.defaultTexture(trapdoorTexture.withPrefix("block/")))
                 .withBlockRenderType(new ResourceLocation(RenderType.cutout().name))
-                .withCustomItemModelParent(trapDoorItemParentBlockModel);
+                .withCustomItemModel(ItemModelDefinition.of(CAModelTemplates.of(trapDoorItemParentBlockModel)));
     }
 
     public static ObjectArrayList<BlockModelDefinition> trapdoor(ResourceLocation trapdoorOpenTexture, ResourceLocation trapDoorTopTexture, ResourceLocation trapdoorBottomTexture, ResourceLocation trapDoorItemParentBlockModel) {
@@ -2102,8 +2103,8 @@ public final class ModelUtil {
     public static BlockModelDefinition sign(ResourceLocation signParticleTexture, ResourceLocation signItemTexture) {
         return BlockModelDefinition.of(ModelTemplates.PARTICLE_ONLY)
                 .withTextureMapping(TextureMapping.particle(signParticleTexture.withPrefix("block/")))
-                .withItemParentModel(ModelTemplates.FLAT_ITEM)
-                .withItemModelTextureMapping(TextureMapping.layer0(signItemTexture.withPrefix("item/")));
+                .withCustomItemModel(ItemModelDefinition.of(ModelTemplates.FLAT_ITEM)
+                        .withTextureMapping(TextureMapping.layer0(signItemTexture.withPrefix("item/"))));
     }
 
     public static ObjectArrayList<BlockModelDefinition> sign(ResourceLocation signParticleTexture, ResourceLocation ceilingHangingSignTexture, ResourceLocation signItemTexture, String ceilingHangingSignModelName) {
@@ -2337,19 +2338,19 @@ public final class ModelUtil {
     public static BlockModelDefinition buttonDefault(ResourceLocation buttonTexture, ResourceLocation buttonItemParentBlockModel) {
         return BlockModelDefinition.of(ModelTemplates.BUTTON)
                 .withTextureMapping(TextureMapping.defaultTexture(buttonTexture.withPrefix("block/")))
-                .withCustomItemModelParent(buttonItemParentBlockModel);
+                .withCustomItemModel(ItemModelDefinition.of(CAModelTemplates.of(buttonItemParentBlockModel)));
     }
 
     public static BlockModelDefinition buttonPressed(ResourceLocation buttonTexture, ResourceLocation buttonItemParentBlockModel) {
         return BlockModelDefinition.of(ModelTemplates.BUTTON_PRESSED)
                 .withTextureMapping(TextureMapping.defaultTexture(buttonTexture.withPrefix("block/")))
-                .withCustomItemModelParent(buttonItemParentBlockModel);
+                .withCustomItemModel(ItemModelDefinition.of(CAModelTemplates.of(buttonItemParentBlockModel)));
     }
 
     public static BlockModelDefinition buttonInventory(ResourceLocation buttonTexture, ResourceLocation buttonItemParentBlockModel) {
         return BlockModelDefinition.of(ModelTemplates.BUTTON_INVENTORY)
                 .withTextureMapping(TextureMapping.defaultTexture(buttonTexture.withPrefix("block/")))
-                .withCustomItemModelParent(buttonItemParentBlockModel);
+                .withCustomItemModel(ItemModelDefinition.of(CAModelTemplates.of(buttonItemParentBlockModel)));
     }
 
     public static ObjectArrayList<BlockModelDefinition> button(ResourceLocation buttonTexture, ResourceLocation buttonPressedTexture, ResourceLocation buttonInventoryTexture, ResourceLocation buttonItemParentBlockModel) {
@@ -2448,19 +2449,19 @@ public final class ModelUtil {
     public static BlockModelDefinition fencePost(ResourceLocation fenceTexture, ResourceLocation fenceItemParentBlockModel) {
         return BlockModelDefinition.of(ModelTemplates.FENCE_POST)
                 .withTextureMapping(TextureMapping.defaultTexture(fenceTexture.withPrefix("block/")))
-                .withCustomItemModelParent(fenceItemParentBlockModel);
+                .withCustomItemModel(ItemModelDefinition.of(CAModelTemplates.of(fenceItemParentBlockModel)));
     }
 
     public static BlockModelDefinition fenceSide(ResourceLocation fenceTexture, ResourceLocation fenceItemParentBlockModel) {
         return BlockModelDefinition.of(ModelTemplates.FENCE_SIDE)
                 .withTextureMapping(TextureMapping.defaultTexture(fenceTexture.withPrefix("block/")))
-                .withCustomItemModelParent(fenceItemParentBlockModel);
+                .withCustomItemModel(ItemModelDefinition.of(CAModelTemplates.of(fenceItemParentBlockModel)));
     }
 
     public static BlockModelDefinition fenceInventory(ResourceLocation fenceTexture, ResourceLocation fenceItemParentBlockModel) {
         return BlockModelDefinition.of(ModelTemplates.FENCE_INVENTORY)
                 .withTextureMapping(TextureMapping.defaultTexture(fenceTexture.withPrefix("block/")))
-                .withCustomItemModelParent(fenceItemParentBlockModel);
+                .withCustomItemModel(ItemModelDefinition.of(CAModelTemplates.of(fenceItemParentBlockModel)));
     }
 
     public static ObjectArrayList<BlockModelDefinition> fence(ResourceLocation fencePostTexture, ResourceLocation fenceSideTexture, ResourceLocation fenceInventoryTexture, ResourceLocation fenceItemParentBlockModel) {
@@ -2566,25 +2567,25 @@ public final class ModelUtil {
     public static BlockModelDefinition wallPost(ResourceLocation wallPostTexture, ResourceLocation wallInventoryModel) {
         return BlockModelDefinition.of(ModelTemplates.WALL_POST)
                 .withTextureMapping(new TextureMapping().put(TextureSlot.WALL, wallPostTexture.withPrefix("block/")))
-                .withCustomItemModelParent(wallInventoryModel);
+                .withCustomItemModel(ItemModelDefinition.of(CAModelTemplates.of(wallInventoryModel)));
     }
 
     public static BlockModelDefinition wallSide(ResourceLocation wallSideTexture, ResourceLocation wallInventoryModel) {
         return BlockModelDefinition.of(ModelTemplates.WALL_LOW_SIDE)
                 .withTextureMapping(new TextureMapping().put(TextureSlot.WALL, wallSideTexture.withPrefix("block/")))
-                .withCustomItemModelParent(wallInventoryModel);
+                .withCustomItemModel(ItemModelDefinition.of(CAModelTemplates.of(wallInventoryModel)));
     }
 
     public static BlockModelDefinition wallSideTall(ResourceLocation wallSideTallTexture, ResourceLocation wallInventoryModel) {
         return BlockModelDefinition.of(ModelTemplates.WALL_TALL_SIDE)
                 .withTextureMapping(new TextureMapping().put(TextureSlot.WALL, wallSideTallTexture.withPrefix("block/")))
-                .withCustomItemModelParent(wallInventoryModel);
+                .withCustomItemModel(ItemModelDefinition.of(CAModelTemplates.of(wallInventoryModel)));
     }
 
     public static BlockModelDefinition wallInventory(ResourceLocation wallInventoryTexture, ResourceLocation wallInventoryModel) {
         return BlockModelDefinition.of(ModelTemplates.WALL_INVENTORY)
                 .withTextureMapping(new TextureMapping().put(TextureSlot.WALL, wallInventoryTexture.withPrefix("block/")))
-                .withCustomItemModelParent(wallInventoryModel);
+                .withCustomItemModel(ItemModelDefinition.of(CAModelTemplates.of(wallInventoryModel)));
     }
 
     public static ObjectArrayList<BlockModelDefinition> wall(ResourceLocation wallPostTexture, ResourceLocation wallSideTexture, ResourceLocation wallSideTallTexture, ResourceLocation wallInventoryTexture, ResourceLocation wallInventoryModel) {
@@ -2647,15 +2648,15 @@ public final class ModelUtil {
     public static BlockModelDefinition standingTorch(ResourceLocation torchTexture, ResourceLocation torchItemTexture) {
         return BlockModelDefinition.of(ModelTemplates.TORCH)
                 .withTextureMapping(TextureMapping.torch(torchTexture.withPrefix("block/")))
-                .withItemParentModel(ModelTemplates.FLAT_ITEM)
-                .withItemModelTextureMapping(TextureMapping.layer0(torchItemTexture.withPrefix("item/")));
+                .withCustomItemModel(ItemModelDefinition.of(ModelTemplates.FLAT_ITEM)
+                        .withTextureMapping(TextureMapping.layer0(torchItemTexture.withPrefix("item/"))));
     }
 
     public static BlockModelDefinition wallTorch(ResourceLocation torchTexture, ResourceLocation torchItemTexture) {
         return BlockModelDefinition.of(ModelTemplates.WALL_TORCH)
                 .withTextureMapping(TextureMapping.torch(torchTexture.withPrefix("block/")))
-                .withItemParentModel(ModelTemplates.FLAT_ITEM)
-                .withItemModelTextureMapping(TextureMapping.layer0(torchItemTexture.withPrefix("item/")));
+                .withCustomItemModel(ItemModelDefinition.of(ModelTemplates.FLAT_ITEM)
+                        .withTextureMapping(TextureMapping.layer0(torchItemTexture.withPrefix("item/"))));
     }
 
     public static ObjectArrayList<BlockModelDefinition> torch(ResourceLocation torchTexture, ResourceLocation wallTorchTexture, ResourceLocation torchItemTexture) {
@@ -2667,7 +2668,7 @@ public final class ModelUtil {
     }
 
     public static ObjectArrayList<BlockModelDefinition> fruitableLeaves(ResourceLocation unripeLeavesTexture, ResourceLocation ripeLeavesTexture) {
-        return ObjectArrayList.of(cubeAll(unripeLeavesTexture).withBlockRenderType(new ResourceLocation(RenderType.cutoutMipped().name)), cubeAll(ripeLeavesTexture).withBlockRenderType(new ResourceLocation(RenderType.cutoutMipped().name)));
+        return ObjectArrayList.of(cubeAll(unripeLeavesTexture).withBlockRenderType(new ResourceLocation(RenderType.cutoutMipped().name)), cubeAll(ripeLeavesTexture).withBlockRenderType(new ResourceLocation(RenderType.cutoutMipped().name)).withCustomModelName(ripeLeavesTexture.getPath().substring(ripeLeavesTexture.getPath().lastIndexOf("/") + 1)));
     }
 
     public static BlockStateDefinition fruitableLeaves(Supplier<Block> targetBlock, ResourceLocation unripeLeavesModel, ResourceLocation ripeLeavesModel) {
@@ -2680,16 +2681,20 @@ public final class ModelUtil {
                                 .with(VariantProperties.MODEL, unripeLeavesModel))));
     }
 
+    public static BlockStateDefinition fruitableLeaves(Supplier<Block> targetBlock) {
+        return fruitableLeaves(targetBlock, ModelLocationUtils.getModelLocation(targetBlock.get()), ModelLocationUtils.getModelLocation(targetBlock.get()).withSuffix("_ripe"));
+    }
+
     public static BlockModelDefinition leafCarpetDefault(ResourceLocation leafCarpetTexture, ResourceLocation leafCarpetItemModelParent) {
         return BlockModelDefinition.of(CAModelTemplates.LEAF_CARPET)
                 .withTextureMapping(TextureMapping.defaultTexture(leafCarpetTexture.withPrefix("block/")))
-                .withCustomItemModelParent(leafCarpetItemModelParent);
+                .withCustomItemModel(ItemModelDefinition.of(CAModelTemplates.of(leafCarpetItemModelParent)));
     }
 
     public static BlockModelDefinition leafCarpetInventory(ResourceLocation leafCarpetTexture, ResourceLocation leafCarpetItemModelParent) {
         return BlockModelDefinition.of(CAModelTemplates.LEAF_CARPET_INVENTORY)
                 .withTextureMapping(TextureMapping.defaultTexture(leafCarpetTexture.withPrefix("block/")))
-                .withCustomItemModelParent(leafCarpetItemModelParent);
+                .withCustomItemModel(ItemModelDefinition.of(CAModelTemplates.of(leafCarpetItemModelParent)));
     }
 
     public static ObjectArrayList<BlockModelDefinition> leafCarpet(ResourceLocation leafCarpetTexture, ResourceLocation leafCarpetInventoryTexture, ResourceLocation leafCarpetItemModelParent) {
