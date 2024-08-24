@@ -52,3 +52,6 @@ accessible method net/minecraft/world/level/block/state/properties/BlockSetType 
 
 # WoodType
 accessible method net/minecraft/world/level/block/state/properties/WoodType register (Lnet/minecraft/world/level/block/state/properties/WoodType;)Lnet/minecraft/world/level/block/state/properties/WoodType;
+
+# Item.Properties
+accessible field net/minecraft/world/item/Item$Properties requiredFeatures Lnet/minecraft/world/flag/FeatureFlagSet;

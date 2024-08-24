@@ -22,6 +22,10 @@ public final class CAItems {
         return registeredItemSup;
     }
 
+    public static Supplier<Item> registerExternalItem(String id, Supplier<Item> itemSup) {
+        return registerItem(id, itemSup);
+    }
+
     public static ImmutableList<Supplier<Item>> getItems() {
         return ImmutableList.copyOf(ITEMS);
     }

@@ -30,9 +30,9 @@ public class BlockPropertyWrapper { //TODO Maybe type param this for blocks
     @Nullable
     private final String blockRegName;
     private final Supplier<Block> parentBlock;
+    private final boolean isTemplate;
     @Nullable
     private BPWBuilder builder;
-    private final boolean isTemplate;
 
     private BlockPropertyWrapper(@Nullable String blockRegName, Supplier<Block> parentBlock) {
         this.blockRegName = blockRegName;
@@ -59,6 +59,11 @@ public class BlockPropertyWrapper { //TODO Maybe type param this for blocks
      * @param parentBlock The parent {@link Supplier<Block>} stored in the newly-initialized BPW instance.
      *
      * @return A new {@link BlockPropertyWrapper} instance.
+     *
+     * @see #create(Supplier)
+     * @see #of(Supplier, Supplier)
+     * @see #of(String, Supplier)
+     * @see #of(BlockPropertyWrapper, Supplier)
      */
     public static BlockPropertyWrapper create(String blockRegName, Supplier<Block> parentBlock) {
         return new BlockPropertyWrapper(blockRegName, parentBlock);
@@ -72,6 +77,7 @@ public class BlockPropertyWrapper { //TODO Maybe type param this for blocks
      *
      * @return A new {@link BlockPropertyWrapper} instance.
      *
+     * @see #create(String, Supplier)
      * @see #of(Supplier, Supplier)
      * @see #of(String, Supplier)
      * @see #of(BlockPropertyWrapper, Supplier)
@@ -110,7 +116,7 @@ public class BlockPropertyWrapper { //TODO Maybe type param this for blocks
             BlockPropertyWrapper newTemplateWrapper = new BlockPropertyWrapper();
 
             newTemplateWrapper.builder()
-                    .withCustomName(parentTemplateWrapper.builder.manuallyUnlocalizedBlockName)
+                    .withCustomName(parentTemplateWrapper.builder.manuallyLocalizedBlockName)
                     .withCustomSeparatorWords(parentTemplateWrapper.builder.definedSeparatorWords)
                     .withSetTags(parentTemplateWrapper.builder.parentTags)
                     .withLootTable(parentTemplateWrapper.builder.blockLootTableBuilder)
@@ -135,6 +141,7 @@ public class BlockPropertyWrapper { //TODO Maybe type param this for blocks
      * @see #of(Supplier, Supplier)
      * @see #of(String, Supplier)
      * @see #create(Supplier)
+     * @see #create(String, Supplier)
      * @see #createTemplate()
      */
     public static BlockPropertyWrapper of(BlockPropertyWrapper parentWrapper, Supplier<Block> newBlock) {
@@ -142,7 +149,7 @@ public class BlockPropertyWrapper { //TODO Maybe type param this for blocks
             BlockPropertyWrapper newWrapper = new BlockPropertyWrapper(newBlock);
 
             newWrapper.builder()
-                    .withCustomName(parentWrapper.builder.manuallyUnlocalizedBlockName)
+                    .withCustomName(parentWrapper.builder.manuallyLocalizedBlockName)
                     .withCustomSeparatorWords(parentWrapper.builder.definedSeparatorWords)
                     .withSetTags(List.copyOf(parentWrapper.builder.parentTags))
                     .withLootTable(parentWrapper.builder.blockLootTableBuilder)
@@ -166,6 +173,7 @@ public class BlockPropertyWrapper { //TODO Maybe type param this for blocks
      * @return A new {@link BlockPropertyWrapper} instance with copied properties based on the provided {@link Supplier<Block>}, or an entirely new/clean instance if no such BPW exists.
      *
      * @see #create(Supplier)
+     * @see #create(String, Supplier)
      * @see #of(String, Supplier)
      * @see #of(BlockPropertyWrapper, Supplier)
      */
@@ -175,7 +183,7 @@ public class BlockPropertyWrapper { //TODO Maybe type param this for blocks
             BlockPropertyWrapper newWrapper = new BlockPropertyWrapper(newBlock);
 
             newWrapper.builder()
-                    .withCustomName(originalWrapper.builder.manuallyUnlocalizedBlockName)
+                    .withCustomName(originalWrapper.builder.manuallyLocalizedBlockName)
                     .withCustomSeparatorWords(originalWrapper.builder.definedSeparatorWords)
                     .withSetTags(List.copyOf(originalWrapper.builder.parentTags))
                     .withLootTable(originalWrapper.builder.blockLootTableBuilder)
@@ -200,6 +208,7 @@ public class BlockPropertyWrapper { //TODO Maybe type param this for blocks
      * @see #of(BlockPropertyWrapper, Supplier)
      * @see #of(Supplier, Supplier)
      * @see #create(Supplier)
+     * @see #create(String, Supplier)
      */
     public static BlockPropertyWrapper of(String newBlockRegName, Supplier<Block> parentBlock) {
         return of(parentBlock, CABlocks.registerExternalBlock(newBlockRegName, () -> new Block(BlockBehaviour.Properties.copy(parentBlock.get()))));
@@ -216,10 +225,10 @@ public class BlockPropertyWrapper { //TODO Maybe type param this for blocks
     }
 
     /**
-     * Gets the cached {@link BPWBuilder} instance from the {@link #builder()} if the builder exists. May be {@code null}. Useful for
-     * overriding specific properties after having copied another BPW instance.
+     * Gets the cached {@link BPWBuilder} instance from the {@link #builder} if it exists. May be {@code null}. Useful for
+     * overriding specific properties after having copied another BPW instance/already set a BPWBuilder.
      *
-     * @return The cached {@link BPWBuilder} instance, or {@code null} if the {@link #builder()} is {@code null}.
+     * @return The cached {@link BPWBuilder} instance, or {@code null} if the {@link #builder} is {@code null}.
      *
      * @see #of(String, Supplier)
      * @see #of(Supplier, Supplier)
@@ -239,12 +248,12 @@ public class BlockPropertyWrapper { //TODO Maybe type param this for blocks
     }
 
     /**
-     * Gets the manually unlocalized block name from the {@link #builder()} if the builder exists.
+     * Gets the manually localized block name from the {@link #builder()} if the builder exists.
      *
-     * @return The manually unlocalized block name, or an empty {@code String} if the {@link #builder()} is {@code null}.
+     * @return The manually localized block name, or an empty {@code String} if the {@link #builder()} is {@code null}.
      */
-    public String getManuallyUnlocalizedBlockName() {
-        return builder == null ? "" : builder.manuallyUnlocalizedBlockName;
+    public String getManuallyLocalizedBlockName() {
+        return builder == null ? "" : builder.manuallyLocalizedBlockName;
     }
 
     /**
@@ -282,7 +291,7 @@ public class BlockPropertyWrapper { //TODO Maybe type param this for blocks
      *
      * @return The {@link List} of {@linkplain BlockModelDefinition BlockModelDefinitions}, or an empty {@link ObjectArrayList} if the {@link #builder()} is {@code null}.
      */
-    public List<BlockModelDefinition> getModelDefinitions() {
+    public List<BlockModelDefinition> getBlockModelDefinitions() {
         return builder == null ? ObjectArrayList.of() : builder.blockModelDefinitions;
     }
 
@@ -309,15 +318,6 @@ public class BlockPropertyWrapper { //TODO Maybe type param this for blocks
     }
 
     /**
-     * Gets an immutable view (via {@link ImmutableSortedMap}) of {@link #MAPPED_BPWS}.
-     *
-     * @return An immutable view (via {@link ImmutableSortedMap}) of {@link #MAPPED_BPWS}.
-     */
-    public static ImmutableSortedMap<Supplier<Block>, BlockPropertyWrapper> getMappedBpws() {
-        return ImmutableSortedMap.copyOf(MAPPED_BPWS);
-    }
-
-    /**
      * Whether this BPW instance is a template. Templates are not stored in {@link #getMappedBpws()} and have no parent {@link Block}.
      *
      * @return Whether this BPW instance is a template.
@@ -330,21 +330,29 @@ public class BlockPropertyWrapper { //TODO Maybe type param this for blocks
     }
 
     /**
+     * Gets an immutable view (via {@link ImmutableSortedMap}) of {@link #MAPPED_BPWS}.
+     *
+     * @return An immutable view (via {@link ImmutableSortedMap}) of {@link #MAPPED_BPWS}.
+     */
+    public static ImmutableSortedMap<Supplier<Block>, BlockPropertyWrapper> getMappedBpws() {
+        return ImmutableSortedMap.copyOf(MAPPED_BPWS);
+    }
+
+    /**
      * A builder class used to construct certain block-related data for datagen.
      */
     public static class BPWBuilder {
         private final BlockPropertyWrapper ownerWrapper;
         private final Supplier<Block> parentBlock;
-        private String manuallyUnlocalizedBlockName = "";
+        private String manuallyLocalizedBlockName = "";
         private List<String> definedSeparatorWords = ObjectArrayList.of();
         @Nullable
         private Function<Supplier<Block>, LootTable.Builder> blockLootTableBuilder;
-        private List<TagKey<?>> parentTags = ObjectArrayList.of();
-        private List<BlockModelDefinition> blockModelDefinitions = ObjectArrayList.of();
+        private final List<TagKey<?>> parentTags = ObjectArrayList.of();
+        private final List<BlockModelDefinition> blockModelDefinitions = ObjectArrayList.of();
         @Nullable
         private Function<Supplier<Block>, BlockStateDefinition> blockStateDefinition;
-        @Nullable
-        private List<Function<Consumer<FinishedRecipe>, Consumer<Supplier<Block>>>> recipeBuilderFunctions = ObjectArrayList.of();
+        private final List<Function<Consumer<FinishedRecipe>, Consumer<Supplier<Block>>>> recipeBuilderFunctions = ObjectArrayList.of();
 
         private BPWBuilder(BlockPropertyWrapper ownerWrapper, Supplier<Block> parentBlock) {
             this.ownerWrapper = ownerWrapper;
@@ -352,13 +360,13 @@ public class BlockPropertyWrapper { //TODO Maybe type param this for blocks
         }
 
         /**
-         * Assigns a custom translation key for datagen. By default, a basic regex algorithm is used to automatically de-localize
+         * Assigns a custom translation key for datagen. By default, a basic regex algorithm is used to automatically localize
          * the block name into something more legible (I.E. The names you see in-game). This property is simply an override
          * mechanic which aims to give the end-developer more control over the resulting name instead of being forced to rely on
          * the aforementioned algorithm.
          * <p></p>
          * The algorithm in question, in a nutshell, works as follows (the code block below is purely demonstrative of the
-         * de-localization process and has nothing to do with how the algorithm is actually written):
+         * localization process and has nothing to do with how the algorithm is actually written):
          * <pre>
          *     {@code
          *      public class AlgorithmExampleDescriptor {
@@ -383,19 +391,19 @@ public class BlockPropertyWrapper { //TODO Maybe type param this for blocks
          * <b>NOTE:</b> Block registry names ending with "_block" (e.g. "block.chaosawakens.royal_guardian_scale_block") have the "_block" part pruned and the result string is prepended with "Block of"
          * during the translation process (the registry name stays the same, of course). You may use this method to bypass that step if needed.
          *
-         * @param manuallyUnlocalizedBlockName The name override used to de-localize the parent {@linkplain Block Block's} registry name.
+         * @param manuallyLocalizedBlockName The name override used to localize the parent {@linkplain Block Block's} registry name.
          *
          * @return {@code this} (builder method).
          *
          * @see #withCustomSeparatorWords(List)
          */
-        public BPWBuilder withCustomName(String manuallyUnlocalizedBlockName) {
-            this.manuallyUnlocalizedBlockName = manuallyUnlocalizedBlockName;
+        public BPWBuilder withCustomName(String manuallyLocalizedBlockName) {
+            this.manuallyLocalizedBlockName = manuallyLocalizedBlockName;
             return this;
         }
 
         /**
-         * Assigns a {@link List} of custom separator words which are lowercased during the algorithm's de-localization process. This is ignored if {@link #manuallyUnlocalizedBlockName} is defined.
+         * Assigns a {@link List} of custom separator words which are lowercased during the algorithm's de-localization process. This is ignored if {@link #manuallyLocalizedBlockName} is defined.
          * The default entries for this are {"Of", "And"}. This {@link List} is appended to the default separator definitions rather than replacing them.
          *
          * @param definedSeparatorWords The {@link List} of custom separator words to lowercase while the algorithm is running.
@@ -425,9 +433,9 @@ public class BlockPropertyWrapper { //TODO Maybe type param this for blocks
         }
 
         /**
-         * Tags this BPWBuilder's parent block with the provided {@link TagKey<?>}.
+         * Tags this BPWBuilder's parent {@link Block} with the provided {@link TagKey<?>}.
          *
-         * @param parentBlockTag The {@link TagKey<?>} with which this BPW's parent block will be tagged. May generally be of types {@link Item} or {@link Block}.
+         * @param parentBlockTag The {@link TagKey<?>} with which this BPW's parent {@link Block} will be tagged. May generally be of types {@link Item} or {@link Block}.
          *
          * @return {@code this} (builder method).
          */
@@ -437,9 +445,9 @@ public class BlockPropertyWrapper { //TODO Maybe type param this for blocks
         }
 
         /**
-         * Tags this BPWBuilder's parent block with the provided {@linkplain TagKey<?> Tags}. Appends to the existing list.
+         * Tags this BPWBuilder's parent {@link Block} with the provided {@linkplain TagKey<?> Tags}. Appends to the existing list.
          *
-         * @param parentBlockTags The {@linkplain TagKey<?> TagKeys} with which this BPW's parent block will be tagged. May generally be of types {@link Item} or {@link Block}.
+         * @param parentBlockTags The {@linkplain TagKey<?> TagKeys} with which this BPW's parent {@link Block} will be tagged. May generally be of types {@link Item} or {@link Block}.
          *
          * @return {@code this} (builder method).
          *
@@ -451,9 +459,9 @@ public class BlockPropertyWrapper { //TODO Maybe type param this for blocks
         }
 
         /**
-         * Tags this BPWBuilder's parent block with the provided {@linkplain TagKey<?> Tags}. Overwrites the existing list.
+         * Tags this BPWBuilder's parent {@link Block} with the provided {@linkplain TagKey<?> Tags}. Overwrites the existing list.
          *
-         * @param parentBlockTags The {@linkplain TagKey<?> TagKeys} with which this BPW's parent block will be tagged. May generally be of types {@link Item} or {@link Block}.
+         * @param parentBlockTags The {@linkplain TagKey<?> TagKeys} with which this BPW's parent {@link Block} will be tagged. May generally be of types {@link Item} or {@link Block}.
          *
          * @return {@code this} (builder method).
          *
@@ -470,14 +478,14 @@ public class BlockPropertyWrapper { //TODO Maybe type param this for blocks
          * type checks (E.G. Doors, walls, fences, rotatable blocks, etc.). You can use this method if your custom block requires a
          * different model definition that isn't natively handled.
          *
-         * @param blockStateDefinition The {@link BlockModelDefinition} used to build this BPWBuilder's parent block's model(s) in datagen.
+         * @param blockModelDefinition The {@link BlockModelDefinition} used to build this BPWBuilder's parent block's model(s) in datagen.
          *
          * @return {@code this} (builder method).
          *
          * @see #withCustomModelDefinitions(List)
          */
-        public BPWBuilder withCustomModelDefinition(BlockModelDefinition blockStateDefinition) {
-            this.blockModelDefinitions.add(blockStateDefinition);
+        public BPWBuilder withCustomModelDefinition(BlockModelDefinition blockModelDefinition) {
+            this.blockModelDefinitions.add(blockModelDefinition);
             return this;
         }
 
@@ -532,6 +540,7 @@ public class BlockPropertyWrapper { //TODO Maybe type param this for blocks
         /**
          * Defines a custom mapping function representing the parent {@linkplain Block Block's} recipe. BPWBuilders accepting more than 1 recipe function assume that each recipe has a unique recipe ID,
          * and thus recipes are generated under that constraint. Appends to the existing {@link ObjectArrayList}.
+         *
          * @param recipeBuilderFunction The mapping function accepting a representation of the parent {@linkplain Block Block's} recipe.
          *
          * @return {@code this} (builder method).
