@@ -8,6 +8,7 @@ import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -22,12 +23,14 @@ public class CARecipeProvider extends RecipeProvider {
     protected void buildRecipes(@NotNull Consumer<FinishedRecipe> pWriter) {
         if (!BlockPropertyWrapper.getMappedBpws().isEmpty()) {
             BlockPropertyWrapper.getMappedBpws().forEach((blockSupEntry, bpwEntry) -> {
-                Function<Consumer<FinishedRecipe>, Consumer<Supplier<Block>>> recipeFunc = bpwEntry.getRecipeMappingFunction() == null ? null : bpwEntry.getRecipeMappingFunction(); // Otherwise doesn't work (don't ask)
+                List<Function<Consumer<FinishedRecipe>, Consumer<Supplier<Block>>>> mappedRecipes = bpwEntry.getRecipeMappingFunctions();
 
-                if (recipeFunc != null) {
-                    CAConstants.LOGGER.debug("[Generating Block Recipe]: " + blockSupEntry.get().getDescriptionId());
+                if (!mappedRecipes.isEmpty()) {
+                    mappedRecipes.forEach(mappedRecipe -> {
+                        CAConstants.LOGGER.debug("[Generating Block Recipe]: " + blockSupEntry.get().getDescriptionId());
 
-                    recipeFunc.apply(pWriter).accept(blockSupEntry);
+                        mappedRecipe.apply(pWriter).accept(blockSupEntry);
+                    });
                 }
             });
         }

@@ -6,7 +6,9 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 
+import java.util.List;
 import java.util.function.Consumer;
+import java.util.function.Function;
 import java.util.function.Supplier;
 
 /**
@@ -263,5 +265,9 @@ public final class RecipeUtil { //TODO Frick u method overloading functional int
                         .save(recipeConsumer);
             }
         };
+    }
+
+    public static List<Function<Consumer<FinishedRecipe>, Consumer<Supplier<Block>>>> test() {
+        return List.of();
     }
 }

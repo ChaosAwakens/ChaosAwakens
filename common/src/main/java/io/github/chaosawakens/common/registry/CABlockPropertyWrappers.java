@@ -201,7 +201,7 @@ public final class CABlockPropertyWrappers { // Commented BMD calls out because 
             .withTags(ObjectArrayList.of(BlockTags.MINEABLE_WITH_AXE, BlockTags.LOGS_THAT_BURN, ItemTags.LOGS_THAT_BURN))
             .build();
 
-    // Vegetation stuff
+    // Vegetation
     public static final BlockPropertyWrapper LEAVES = BlockPropertyWrapper.createTemplate()
             .builder()
             .withLootTable(LootUtil::dropLeaves)

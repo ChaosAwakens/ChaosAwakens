@@ -231,7 +231,7 @@ public final class LootUtil {
 
     /**
      * Creates {@link LootTable.Builder} that will drop the given {@link Block} when it's destroyed, but only if it's destroyed with shears or a tool enchanted with silk touch. Alternatively drops
-     * saplings/sticks when mined/decaying otherwise.
+     * saplings/sticks when mined/decaying otherwise. Assumes that the supplied {@link Block} has a sapling pertaining to it (E.G. Skywood Leaves being passed in would imply the existence of a Skywood Sapling).
      * <p>
      * <h2>LOOT TABLE</h2>
      * <h3>Pool 1</h3>
@@ -282,7 +282,8 @@ public final class LootUtil {
 
     /**
      * Overloaded variant of {@link #dropLeaves(Supplier)}. Creates {@link LootTable.Builder} that will drop the given {@link Block} when it's destroyed, but only if it's destroyed with shears or a tool enchanted with silk touch.
-     * Alternatively drops saplings/sticks when mined/decaying otherwise. Assumes the supplied {@link Block} is a {@link FruitableLeavesBlock} and drops its respective fruit item if it's ripe.
+     * Alternatively drops saplings/sticks when mined/decaying otherwise. Assumes that the supplied {@link Block} has a sapling pertaining to it (E.G. Skywood Leaves being passed in would imply the existence of a Skywood Sapling).
+     * Assumes the supplied {@link Block} is a {@link FruitableLeavesBlock} and drops its respective fruit item if it's ripe.
      * <p>
      * <h2>LOOT TABLE</h2>
      * <h3>Pool 1</h3>
