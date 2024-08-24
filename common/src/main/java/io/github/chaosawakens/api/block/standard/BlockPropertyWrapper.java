@@ -122,7 +122,7 @@ public class BlockPropertyWrapper { //TODO Maybe type param this for blocks
                     .withLootTable(parentTemplateWrapper.builder.blockLootTableBuilder)
                     .withSetCustomModelDefinitions(parentTemplateWrapper.builder.blockModelDefinitions)
                     .withBlockStateDefinition(parentTemplateWrapper.builder.blockStateDefinition)
-                    .withSetRecipes(parentTemplateWrapper.builder.recipeBuilderFunctions)
+                    .withRecipe(parentTemplateWrapper.builder.recipeBuilderFunction)
                     .build(); // Direct setting of the builder would copy the entire object itself, which would in-turn overwrite it if any calls are made to the copied BPW afterward
 
             return newTemplateWrapper;
@@ -155,7 +155,7 @@ public class BlockPropertyWrapper { //TODO Maybe type param this for blocks
                     .withLootTable(parentWrapper.builder.blockLootTableBuilder)
                     .withSetCustomModelDefinitions(List.copyOf(parentWrapper.builder.blockModelDefinitions))
                     .withBlockStateDefinition(parentWrapper.builder.blockStateDefinition)
-                    .withSetRecipes(parentWrapper.builder.recipeBuilderFunctions)
+                    .withRecipe(parentWrapper.builder.recipeBuilderFunction)
                     .build(); // Direct setting of the builder would copy the entire object itself, which would in-turn overwrite it if any calls are made to the copied BPW afterward
 
             return newWrapper;
@@ -189,7 +189,7 @@ public class BlockPropertyWrapper { //TODO Maybe type param this for blocks
                     .withLootTable(originalWrapper.builder.blockLootTableBuilder)
                     .withSetCustomModelDefinitions(List.copyOf(originalWrapper.builder.blockModelDefinitions))
                     .withBlockStateDefinition(originalWrapper.builder.blockStateDefinition)
-                    .withSetRecipes(originalWrapper.builder.recipeBuilderFunctions)
+                    .withRecipe(originalWrapper.builder.recipeBuilderFunction)
                     .build(); // Direct setting of the builder would copy the entire object itself, which would in-turn overwrite it if any calls are made to the copied BPW afterward
 
             return newWrapper;
@@ -307,14 +307,14 @@ public class BlockPropertyWrapper { //TODO Maybe type param this for blocks
     }
 
     /**
-     * Gets the {@code List<Function<Consumer<FinishedRecipe>, Consumer<Supplier<Block>>>>} from the {@link #builder()} if the builder exists, and it is defined within said builder.
+     * Gets the {@code Function<Consumer<FinishedRecipe>, Consumer<Supplier<Block>>>} from the {@link #builder()} if the builder exists, and it is defined within said builder.
      * May be {@code null}.
      *
-     * @return The {@code List<Function<Consumer<FinishedRecipe>, Consumer<Supplier<Block>>>>}, or {@code null} if the {@link #builder()} is {@code null} || it isn't defined within said builder.
+     * @return The {@code Function<Consumer<FinishedRecipe>, Consumer<Supplier<Block>>>}, or {@code null} if the {@link #builder()} is {@code null} || it isn't defined within said builder.
      */
     @Nullable
-    public List<Function<Consumer<FinishedRecipe>, Consumer<Supplier<Block>>>> getRecipeMappingFunctions() {
-        return builder == null ? null : builder.recipeBuilderFunctions;
+    public Function<Consumer<FinishedRecipe>, Consumer<Supplier<Block>>> getRecipeMappingFunction() {
+        return builder == null ? null : builder.recipeBuilderFunction;
     }
 
     /**
@@ -352,7 +352,8 @@ public class BlockPropertyWrapper { //TODO Maybe type param this for blocks
         private final List<BlockModelDefinition> blockModelDefinitions = ObjectArrayList.of();
         @Nullable
         private Function<Supplier<Block>, BlockStateDefinition> blockStateDefinition;
-        private final List<Function<Consumer<FinishedRecipe>, Consumer<Supplier<Block>>>> recipeBuilderFunctions = ObjectArrayList.of();
+        @Nullable
+        private Function<Consumer<FinishedRecipe>, Consumer<Supplier<Block>>> recipeBuilderFunction;
 
         private BPWBuilder(BlockPropertyWrapper ownerWrapper, Supplier<Block> parentBlock) {
             this.ownerWrapper = ownerWrapper;
@@ -539,41 +540,14 @@ public class BlockPropertyWrapper { //TODO Maybe type param this for blocks
 
         /**
          * Defines a custom mapping function representing the parent {@linkplain Block Block's} recipe. BPWBuilders accepting more than 1 recipe function assume that each recipe has a unique recipe ID,
-         * and thus recipes are generated under that constraint. Appends to the existing {@link ObjectArrayList}.
+         * and thus recipes are generated under that constraint.
          *
          * @param recipeBuilderFunction The mapping function accepting a representation of the parent {@linkplain Block Block's} recipe.
          *
          * @return {@code this} (builder method).
          */
         public BPWBuilder withRecipe(Function<Consumer<FinishedRecipe>, Consumer<Supplier<Block>>> recipeBuilderFunction) {
-            this.recipeBuilderFunctions.add(recipeBuilderFunction);
-            return this;
-        }
-
-        /**
-         * Defines {@link List} of a custom mapping function representing the parent {@linkplain Block Block's} recipe. BPWBuilders accepting more than 1 recipe function assume that each recipe has a unique recipe ID,
-         * and thus recipes are generated under that constraint. Appends to the existing {@link ObjectArrayList}.
-         *
-         * @param recipeBuilderFunction The {@link List} of mapping functions accepting a representation of the parent {@linkplain Block Block's} recipe.
-         *
-         * @return {@code this} (builder method).
-         */
-        public BPWBuilder withRecipes(List<Function<Consumer<FinishedRecipe>, Consumer<Supplier<Block>>>> recipeBuilderFunction) {
-            this.recipeBuilderFunctions.addAll(recipeBuilderFunction);
-            return this;
-        }
-
-        /**
-         * Defines {@link List} of a custom mapping function representing the parent {@linkplain Block Block's} recipe. BPWBuilders accepting more than 1 recipe function assume that each recipe has a unique recipe ID,
-         * and thus recipes are generated under that constraint. Replaces the existing {@link ObjectArrayList}.
-         *
-         * @param recipeBuilderFunctions The {@link List} of mapping functions accepting a representation of the parent {@linkplain Block Block's} recipe.
-         *
-         * @return {@code this} (builder method).
-         */
-        public BPWBuilder withSetRecipes(List<Function<Consumer<FinishedRecipe>, Consumer<Supplier<Block>>>> recipeBuilderFunctions) {
-            this.recipeBuilderFunctions.clear();
-            this.recipeBuilderFunctions.addAll(recipeBuilderFunctions);
+            this.recipeBuilderFunction = recipeBuilderFunction;
             return this;
         }
 

@@ -111,7 +111,7 @@ public class ItemPropertyWrapper {
                     .withCustomSeparatorWords(parentTemplateWrapper.builder.definedSeparatorWords)
                     .withSetTags(List.copyOf(parentTemplateWrapper.builder.parentTags))
                     .withSetCustomModelDefinitions(List.copyOf(parentTemplateWrapper.builder.itemModelDefinitions))
-                    .withSetRecipes(parentTemplateWrapper.builder.recipeBuilderFunctions)
+                    .withRecipe(parentTemplateWrapper.builder.recipeBuilderFunction)
                     .build(); // Direct setting of the builder would copy the entire object itself, which would in-turn overwrite it if any calls are made to the copied IPW afterward
 
             return newTemplateWrapper;
@@ -142,7 +142,7 @@ public class ItemPropertyWrapper {
                     .withCustomSeparatorWords(parentWrapper.builder.definedSeparatorWords)
                     .withSetTags(List.copyOf(parentWrapper.builder.parentTags))
                     .withSetCustomModelDefinitions(List.copyOf(parentWrapper.builder.itemModelDefinitions))
-                    .withSetRecipes(parentWrapper.builder.recipeBuilderFunctions)
+                    .withRecipe(parentWrapper.builder.recipeBuilderFunction)
                     .build(); // Direct setting of the builder would copy the entire object itself, which would in-turn overwrite it if any calls are made to the copied IPW afterward
 
             return newWrapper;
@@ -174,7 +174,7 @@ public class ItemPropertyWrapper {
                     .withCustomSeparatorWords(originalWrapper.builder.definedSeparatorWords)
                     .withSetTags(List.copyOf(originalWrapper.builder.parentTags))
                     .withSetCustomModelDefinitions(List.copyOf(originalWrapper.builder.itemModelDefinitions))
-                    .withSetRecipes(originalWrapper.builder.recipeBuilderFunctions)
+                    .withRecipe(originalWrapper.builder.recipeBuilderFunction)
                     .build(); // Direct setting of the builder would copy the entire object itself, which would in-turn overwrite it if any calls are made to the copied IPW afterward
 
             return newWrapper;
@@ -281,14 +281,14 @@ public class ItemPropertyWrapper {
     }
 
     /**
-     * Gets the {@code List<Function<Consumer<FinishedRecipe>, Consumer<Supplier<Item>>>>} from the {@link #builder()} if the builder exists, and it is defined within said builder.
+     * Gets the {@code Function<Consumer<FinishedRecipe>, Consumer<Supplier<Item>>>} from the {@link #builder()} if the builder exists, and it is defined within said builder.
      * May be {@code null}.
      *
-     * @return The {@code List<Function<Consumer<FinishedRecipe>, Consumer<Supplier<Item>>>>}, or {@code null} if the {@link #builder()} is {@code null} || it isn't defined within said builder.
+     * @return The {@code Function<Consumer<FinishedRecipe>, Consumer<Supplier<Item>>>}, or {@code null} if the {@link #builder()} is {@code null} || it isn't defined within said builder.
      */
     @Nullable
-    public List<Function<Consumer<FinishedRecipe>, Consumer<Supplier<Item>>>> getRecipeMappingFunctions() {
-        return builder == null ? null : builder.recipeBuilderFunctions;
+    public Function<Consumer<FinishedRecipe>, Consumer<Supplier<Item>>> getRecipeMappingFunction() {
+        return builder == null ? null : builder.recipeBuilderFunction;
     }
 
     /**
@@ -322,7 +322,8 @@ public class ItemPropertyWrapper {
         private List<String> definedSeparatorWords = ObjectArrayList.of();
         private final List<TagKey<Item>> parentTags = ObjectArrayList.of();
         private final List<ItemModelDefinition> itemModelDefinitions = ObjectArrayList.of();
-        private final List<Function<Consumer<FinishedRecipe>, Consumer<Supplier<Item>>>> recipeBuilderFunctions = ObjectArrayList.of();
+        @Nullable
+        private Function<Consumer<FinishedRecipe>, Consumer<Supplier<Item>>> recipeBuilderFunction;
 
         private IPWBuilder(ItemPropertyWrapper ownerWrapper, Supplier<Item> itemParent) {
             this.ownerWrapper = ownerWrapper;
@@ -472,41 +473,14 @@ public class ItemPropertyWrapper {
 
         /**
          * Defines a custom mapping function representing the parent {@linkplain Item Item's} recipe. IPWBuilders accepting more than 1 recipe function assume that each recipe has a unique recipe ID,
-         * and thus recipes are generated under that constraint. Appends to the existing {@link ObjectArrayList}.
+         * and thus recipes are generated under that constraint.
          *
          * @param recipeBuilderFunction The mapping function accepting a representation of the parent {@linkplain Item Item's} recipe.
          *
          * @return {@code this} (builder method).
          */
         public IPWBuilder withRecipe(Function<Consumer<FinishedRecipe>, Consumer<Supplier<Item>>> recipeBuilderFunction) {
-            this.recipeBuilderFunctions.add(recipeBuilderFunction);
-            return this;
-        }
-
-        /**
-         * Defines {@link List} of a custom mapping function representing the parent {@linkplain Item Item's} recipe. IPWBuilders accepting more than 1 recipe function assume that each recipe has a unique recipe ID,
-         * and thus recipes are generated under that constraint. Appends to the existing {@link ObjectArrayList}.
-         *
-         * @param recipeBuilderFunction The {@link List} of mapping functions accepting a representation of the parent {@linkplain Item Item's} recipe.
-         *
-         * @return {@code this} (builder method).
-         */
-        public IPWBuilder withRecipes(List<Function<Consumer<FinishedRecipe>, Consumer<Supplier<Item>>>> recipeBuilderFunction) {
-            this.recipeBuilderFunctions.addAll(recipeBuilderFunction);
-            return this;
-        }
-
-        /**
-         * Defines {@link List} of a custom mapping function representing the parent {@linkplain Item Item's} recipe. IPWBuilders accepting more than 1 recipe function assume that each recipe has a unique recipe ID,
-         * and thus recipes are generated under that constraint. Replaces the existing {@link ObjectArrayList}.
-         *
-         * @param recipeBuilderFunctions The {@link List} of mapping functions accepting a representation of the parent {@linkplain Item Item's} recipe.
-         *
-         * @return {@code this} (builder method).
-         */
-        public IPWBuilder withSetRecipes(List<Function<Consumer<FinishedRecipe>, Consumer<Supplier<Item>>>> recipeBuilderFunctions) {
-            this.recipeBuilderFunctions.clear();
-            this.recipeBuilderFunctions.addAll(recipeBuilderFunctions);
+            this.recipeBuilderFunction = recipeBuilderFunction;
             return this;
         }
 

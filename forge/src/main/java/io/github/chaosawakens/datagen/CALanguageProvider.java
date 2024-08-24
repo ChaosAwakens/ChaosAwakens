@@ -4,6 +4,7 @@ import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Lists;
 import io.github.chaosawakens.CAConstants;
 import io.github.chaosawakens.api.block.standard.BlockPropertyWrapper;
+import io.github.chaosawakens.api.item.ItemPropertyWrapper;
 import io.github.chaosawakens.common.registry.CABlocks;
 import io.github.chaosawakens.common.registry.CACreativeModeTabs;
 import io.github.chaosawakens.common.registry.CAItems;
@@ -197,6 +198,13 @@ public class CALanguageProvider extends LanguageProvider {
     }
 
     protected void translateItems() {
+        if (!ItemPropertyWrapper.getMappedIpws().isEmpty()) {
+            ItemPropertyWrapper.getMappedIpws().forEach((itemRegNameEntry, curIwp) -> { //TODO Optimize and update logging :trol:
+                if (!curIwp.getManuallyLocalizedItemName().isBlank()) addManualTranslation(itemRegNameEntry.get().getDescriptionId(), curIwp.getManuallyLocalizedItemName());
+                else if (!curIwp.getDefinedSeparatorWords().isEmpty()) localizeGeneralRegistryName(itemRegNameEntry.get().getDescriptionId(), Lists.asList(DEFAULT_SEPARATORS.get(0), DEFAULT_SEPARATORS.get(1), curIwp.getDefinedSeparatorWords().toArray(String[]::new)), ObjectArrayList.of());
+            });
+        }
+
         CAItems.getItems().forEach(itemRegEntry -> {
             Item itemEntry = itemRegEntry.get();
             String itemRegName = itemEntry.getDescriptionId();

@@ -2,6 +2,7 @@ package io.github.chaosawakens.datagen;
 
 import io.github.chaosawakens.CAConstants;
 import io.github.chaosawakens.api.block.standard.BlockPropertyWrapper;
+import io.github.chaosawakens.api.item.ItemPropertyWrapper;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
@@ -39,6 +40,20 @@ public class CAItemTagsProvider extends ItemTagsProvider {
 
                             tag((TagKey<Item>) curBlockItemTag).add(blockSupEntry.get().asItem());
                         }
+                    });
+                }
+            });
+        }
+
+        if (!ItemPropertyWrapper.getMappedIpws().isEmpty()) {
+            ItemPropertyWrapper.getMappedIpws().forEach((itemSupEntry, curIwp) -> {
+                List<TagKey<Item>> parentItemTags = curIwp.getParentTags();
+
+                if (!parentItemTags.isEmpty()) {
+                    parentItemTags.forEach(curItemTag -> {
+                        CAConstants.LOGGER.debug("[Tagging Item]: " + itemSupEntry.get().getDescriptionId() + " -> " + curItemTag);
+
+                        tag(curItemTag).add(itemSupEntry.get());
                     });
                 }
             });

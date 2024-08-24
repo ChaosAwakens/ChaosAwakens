@@ -5,6 +5,7 @@ import io.github.chaosawakens.CAConstants;
 import io.github.chaosawakens.api.datagen.block.BlockModelDefinition;
 import io.github.chaosawakens.api.block.standard.BlockPropertyWrapper;
 import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
+import net.minecraft.client.renderer.block.model.BlockModel;
 import net.minecraft.client.renderer.block.model.ItemTransform;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;
@@ -29,7 +30,6 @@ import java.util.concurrent.CompletableFuture;
 import java.util.function.Function;
 
 public class CABlockModelProvider extends BlockModelProvider {
-    public static final ResourceLocation ITEM_GENERATED = new ResourceLocation("item/generated");
     protected final Object2ObjectLinkedOpenHashMap<ResourceLocation, ItemModelBuilder> generatedBlockItemModels = new Object2ObjectLinkedOpenHashMap<>();
     protected final Function<ResourceLocation, ItemModelBuilder> itemModelFactory = targetLoc -> new ItemModelBuilder(targetLoc, existingFileHelper);
 
@@ -55,8 +55,9 @@ public class CABlockModelProvider extends BlockModelProvider {
                     curModelDefs.forEach(curModelDef -> {
                         ResourceLocation parentModelLoc = curModelDef.getParentModelLocation();
                         Block curBlock = blockSupEntry.get();
-                        String formattedBlockRegName = ModelLocationUtils.getModelLocation(curBlock, curModelDef.getParentModel().suffix.orElse("")).getPath();
-                        formattedBlockRegName = formattedBlockRegName.substring(formattedBlockRegName.lastIndexOf("/") + 1);
+                        ModelTemplate parentModel = curModelDef.getParentModel();
+                        String formattedBlockRegName = ModelLocationUtils.getModelLocation(curBlock, parentModel.suffix.orElse("")).getPath();
+                        formattedBlockRegName = formattedBlockRegName.substring(formattedBlockRegName.lastIndexOf("/") + 1); // Avoid stacking calls to avoid dumb concurrency issues with string concat/building (how)
                         String customModelName = curModelDef.getCustomModelName();
 
                         if (curModelDef != null && parentModelLoc != null) { //TODO Add GuiLight & ElementBuilder support
@@ -65,18 +66,22 @@ public class CABlockModelProvider extends BlockModelProvider {
                             ModelTemplate itemModelTextureMapping = curModelDef.getItemParentModel();
                             boolean curBMDHasAO = curModelDef.hasAmbientOcclusion();
                             Map<ItemDisplayContext, ItemTransform> itemTransforms = curModelDef.getItemModelTransforms();
+                            BlockModel.GuiLight targetGuiLight = curModelDef.getBlockModelGuiLight();
                             String modelFileName = customModelName != null ? customModelName.toLowerCase(Locale.ROOT).trim().replaceAll("\\s+", "_") : formattedBlockRegName;
                             BlockModelBuilder resultBuilder = withExistingParent(modelFileName, parentModelLoc)
-                                    .ao(curBMDHasAO); // Can't utilise ModelTemplate#create cuz then I'd also have to re-invent vanilla datagen here. No thanks. Much more customizable anyway :l
+                                    .ao(curBMDHasAO);
 
-                            curModelDef.getParentModel().requiredSlots.forEach(requiredTexSlot -> {
-                                String requiredTexSlotId = requiredTexSlot.getId();
-                                ResourceLocation mappedTextureLocation = curModelDef.getTextureMapping().get(requiredTexSlot); // Explicit get() call for exception handling + readability
+                            if (parentModel.requiredSlots != null && !parentModel.requiredSlots.isEmpty()) { // JIC
+                                parentModel.requiredSlots.forEach(requiredTexSlot -> {
+                                    String requiredTexSlotId = requiredTexSlot.getId();
+                                    ResourceLocation mappedTextureLocation = curModelDef.getTextureMapping().get(requiredTexSlot); // Explicit get() call for exception handling + readability
 
-                                resultBuilder.texture(requiredTexSlotId, mappedTextureLocation);
-                            });
+                                    resultBuilder.texture(requiredTexSlotId, mappedTextureLocation);
+                                });
+                            }
 
                             if (curBlockModelRenderTypeLoc != null) resultBuilder.renderType(curBlockModelRenderTypeLoc);
+                            if (targetGuiLight != null) resultBuilder.guiLight(targetGuiLight);
                             if (!itemTransforms.isEmpty()) {
                                 itemTransforms.forEach((curDisplayCtx, curItemTransform) -> resultBuilder.transforms()
                                         .transform(curDisplayCtx)
@@ -88,16 +93,19 @@ public class CABlockModelProvider extends BlockModelProvider {
                                         .end());
                             }
 
+                            // Block Item model handling
                             if (!BlockModelDefinition.getCachedModelDefinitions().containsKey(blockSupEntry)) {
                                 BlockModelDefinition.getCachedModelDefinitions().putIfAbsent(blockSupEntry, curModelDef); // JIC
 
                                 String itemModelFileName = curBlock.getDescriptionId().substring(curBlock.getDescriptionId().lastIndexOf(".") + 1);
                                 ResourceLocation customBlockModelItemParent = curModelDef.getItemParentModelLocation();
+                                ModelTemplate itemParentModel = curModelDef.getItemParentModel();
                                 ItemModelBuilder resultItemBuilder = withExistingItemParent(itemModelFileName, itemModelTextureMapping == null ? customBlockModelItemParent != null ? customBlockModelItemParent : CAConstants.prefix(BLOCK_FOLDER + "/" + itemModelFileName) : itemParentModelLoc);
                                 TextureMapping textureLayerDefinitionMap = curModelDef.getItemModelTextureMapping();
+                                BlockModel.GuiLight targetItemGuiLight = curModelDef.getCustomItemModel() == null ? null : curModelDef.getCustomItemModel().getItemModelGuiLight();
                                 Map<Map<ResourceLocation, Float>, ResourceLocation> textureOverrides = curModelDef.getItemModelTextureOverrides();
 
-                                if (itemModelTextureMapping != null && !itemParentModelLoc.equals(CAConstants.prefix(BLOCK_FOLDER + "/" + itemModelFileName))) {
+                                if (itemModelTextureMapping != null && itemParentModel.requiredSlots != null && !itemParentModel.requiredSlots.isEmpty()) {
                                     itemModelTextureMapping.requiredSlots.forEach(requiredTexSlot -> {
                                         String requiredTexSlotId = requiredTexSlot.getId();
                                         ResourceLocation mappedTextureLocation = textureLayerDefinitionMap.get(requiredTexSlot); // Explicit get() call for exception handling + readability
@@ -105,6 +113,8 @@ public class CABlockModelProvider extends BlockModelProvider {
                                         resultItemBuilder.texture(requiredTexSlotId, mappedTextureLocation);
                                     });
                                 }
+
+                                if (targetItemGuiLight != null) resultItemBuilder.guiLight(targetItemGuiLight);
                                 if (!textureOverrides.isEmpty()) {
                                     textureOverrides.forEach((modelPredicates, resultingDelegateModel) -> {
                                         ItemModelBuilder.OverrideBuilder itemModelOverrides = resultItemBuilder.override();

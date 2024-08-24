@@ -3,6 +3,7 @@ package io.github.chaosawakens.api.datagen.block;
 import io.github.chaosawakens.api.datagen.item.ItemModelDefinition;
 import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.block.model.BlockModel;
 import net.minecraft.client.renderer.block.model.ItemTransform;
 import net.minecraft.client.renderer.block.model.ItemTransforms;
 import net.minecraft.data.models.model.*;
@@ -31,6 +32,8 @@ public class BlockModelDefinition {
     private String customModelName;
     @Nullable
     private ItemModelDefinition customItemModel;
+    @Nullable
+    private BlockModel.GuiLight blockModelGuiLight;
 
     private BlockModelDefinition(ModelTemplate parentModel) {
         this.parentModel = parentModel;
@@ -130,6 +133,19 @@ public class BlockModelDefinition {
      */
     public BlockModelDefinition withCustomModelName(String customModelName) {
         this.customModelName = customModelName;
+        return this;
+    }
+
+    /**
+     * Defines a custom {@link BlockModel.GuiLight} to render this block model with. Primarily used for perspective aware/block models. Contrary to the name of the superclass in which GuiLight is nested,
+     * this is applicable to item models, too.
+     *
+     * @param targetGuiLight The {@link BlockModel.GuiLight} to render this block model with. May be {@code null}.
+     *
+     * @return {@code this} (builder method).
+     */
+    public BlockModelDefinition withGuiLight(BlockModel.GuiLight targetGuiLight) {
+        this.blockModelGuiLight = targetGuiLight;
         return this;
     }
 
@@ -256,6 +272,16 @@ public class BlockModelDefinition {
     @Nullable
     public String getCustomModelName() {
         return customModelName;
+    }
+
+    /**
+     * Gets the {@link BlockModel.GuiLight} with which this block model is rendered. May be {@code null}.
+     *
+     * @return The stored {@link BlockModel.GuiLight}. May be {@code null}.
+     */
+    @Nullable
+    public BlockModel.GuiLight getBlockModelGuiLight() {
+        return blockModelGuiLight;
     }
 
     /**
