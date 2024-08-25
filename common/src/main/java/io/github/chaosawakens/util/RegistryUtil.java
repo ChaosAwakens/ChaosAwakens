@@ -3,6 +3,7 @@ package io.github.chaosawakens.util;
 import net.minecraft.core.DefaultedRegistry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import org.apache.commons.lang3.StringUtils;
@@ -86,5 +87,25 @@ public final class RegistryUtil {
     @Nullable
     public static Supplier<Block> getSaplingFrom(Supplier<Block> targetBlock) {
         return getFromLeaves(targetBlock, "sapling");
+    }
+
+    @Nullable
+    public static Supplier<Item> getCookedFoodFrom(Supplier<Item> targetItem) {
+        ResourceLocation targetItemKey = BuiltInRegistries.ITEM.getKey(targetItem.get());
+        String copiedPath = BuiltInRegistries.ITEM.getKey(targetItem.get()).getPath();
+
+        return !BuiltInRegistries.ITEM.get(targetItemKey.withPrefix("cooked_")).getDescriptionId().equals("block.minecraft.air")
+                ? () -> BuiltInRegistries.ITEM.get(targetItemKey.withPrefix("cooked_"))
+                : null;
+    }
+
+    @Nullable
+    public static Supplier<Item> getFromCookedFood(Supplier<Item> targetItem) {
+        ResourceLocation targetItemKey = BuiltInRegistries.ITEM.getKey(targetItem.get());
+        String copiedPath = BuiltInRegistries.ITEM.getKey(targetItem.get()).getPath();
+
+        return copiedPath.startsWith("cooked_")
+                ? () -> BuiltInRegistries.ITEM.get(targetItemKey.withPath(StringUtils.substringAfter(copiedPath, "cooked_")))
+                : null;
     }
 }

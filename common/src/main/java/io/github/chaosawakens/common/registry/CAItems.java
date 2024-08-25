@@ -14,7 +14,9 @@ import java.util.function.Supplier;
 public final class CAItems {
     private static final ObjectArrayList<Supplier<Item>> ITEMS = new ObjectArrayList<>();
 
+    // Meat
 
+    // Minerals
 
     private static Supplier<Item> registerItem(String id, Supplier<Item> itemSup) {
         Supplier<Item> registeredItemSup = CAServices.REGISTRAR.registerObject(CAConstants.prefix(id), itemSup, BuiltInRegistries.ITEM); // Otherwise reference to the item sup is null cuz it needs to be registered b4hand

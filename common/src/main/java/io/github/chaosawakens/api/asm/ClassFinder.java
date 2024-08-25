@@ -14,7 +14,7 @@ import java.nio.file.Path;
 import java.util.List;
 import java.util.stream.Stream;
 
-public final class ClassFinder {
+public final class ClassFinder {//TODO Service this
 
     /**
      * Uses {@code org.objectweb.asm} in order to discover (and load) classes annotated with the specified annotation type class, or an empty list if there aren't any/the {@code annotationType} passed in isn't an annotation.
