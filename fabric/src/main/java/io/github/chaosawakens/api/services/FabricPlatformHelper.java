@@ -6,10 +6,7 @@ import io.github.chaosawakens.api.loader.ModLoader;
 import io.github.chaosawakens.api.platform.services.IPlatformHelper;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.fabricmc.loader.api.FabricLoader;
-import org.objectweb.asm.AnnotationVisitor;
-import org.objectweb.asm.ClassReader;
-import org.objectweb.asm.ClassVisitor;
-import org.objectweb.asm.Opcodes;
+import org.objectweb.asm.*;
 
 import java.io.IOException;
 import java.lang.annotation.Annotation;
@@ -40,7 +37,7 @@ public class FabricPlatformHelper implements IPlatformHelper {
                     .getAllClasses()
                     .stream()
                     .filter(curClassInfo -> {
-                        boolean foundValidAnnotation = false;
+                        final boolean[] foundValidAnnotation = {false};
                         ClassReader reader = null;
 
                         try {
@@ -59,11 +56,12 @@ public class FabricPlatformHelper implements IPlatformHelper {
 
                             @Override
                             public AnnotationVisitor visitAnnotation(String desc, boolean visible) {
+                                if (Type.getDescriptor(annotationTypeClazz).equals(desc)) foundValidAnnotation[0] = true;
                                 return super.visitAnnotation(desc, visible);
                             }
                         };
                         reader.accept(visitor, 0);
-                        return foundValidAnnotation;
+                        return foundValidAnnotation[0];
                     })
                     .map(ClassPath.ClassInfo::getName)
                     .map(ClassFinder::forName)
