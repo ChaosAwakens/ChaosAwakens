@@ -1,6 +1,5 @@
 package io.github.chaosawakens;
 
-import io.github.chaosawakens.api.asm.ClassFinder;
 import io.github.chaosawakens.api.asm.annotations.LoadEarly;
 import io.github.chaosawakens.api.platform.CAServices;
 
@@ -10,11 +9,11 @@ public class ChaosAwakens {
      * The main method responsible for initializing pretty much all Chaos Awakens content and whatnot.
      */
     public static void setup() {
-        ClassFinder.discoverAnnotatedClasses(LoadEarly.class);
+        CAServices.PLATFORM.discoverAnnotatedClasses(LoadEarly.class);
 
         CAServices.REGISTRAR.setupRegistrar();
 
-        if (CAServices.PLATFORM.getPlatformName().equals("Fabric")) CAServices.NETWORK_MANAGER.setupNetworkHandler();
+        if (CAServices.PLATFORM.getPlatform().equals("Fabric")) CAServices.NETWORK_MANAGER.setupNetworkHandler();
     }
 
     /**

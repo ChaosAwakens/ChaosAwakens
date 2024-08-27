@@ -1,11 +1,11 @@
 package io.github.chaosawakens.api.services;
 
 import io.github.chaosawakens.CAConstants;
-import io.github.chaosawakens.api.asm.ClassFinder;
 import io.github.chaosawakens.api.asm.annotations.NetworkRegistrarEntry;
 import io.github.chaosawakens.api.network.BasePacket;
 import io.github.chaosawakens.api.network.NetworkSide;
 import io.github.chaosawakens.api.network.PacketContext;
+import io.github.chaosawakens.api.platform.CAServices;
 import io.github.chaosawakens.api.platform.services.INetworkManager;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -38,7 +38,7 @@ public class ForgeNetworkManager implements INetworkManager {
 
     @Override
     public void setupNetworkHandler() {
-        ClassFinder.discoverAnnotatedClasses(NetworkRegistrarEntry.class);
+        CAServices.PLATFORM.discoverAnnotatedClasses(NetworkRegistrarEntry.class);
     }
 
     @Override

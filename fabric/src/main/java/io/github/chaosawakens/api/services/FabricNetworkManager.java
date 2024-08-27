@@ -2,10 +2,10 @@ package io.github.chaosawakens.api.services;
 
 import io.github.chaosawakens.CAConstants;
 import io.github.chaosawakens.FabricServerHooks;
-import io.github.chaosawakens.api.asm.ClassFinder;
 import io.github.chaosawakens.api.asm.annotations.NetworkRegistrarEntry;
 import io.github.chaosawakens.api.network.BasePacket;
 import io.github.chaosawakens.api.network.NetworkSide;
+import io.github.chaosawakens.api.platform.CAServices;
 import io.github.chaosawakens.api.platform.services.INetworkManager;
 import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
@@ -27,7 +27,7 @@ public class FabricNetworkManager implements INetworkManager {
 
     @Override
     public void setupNetworkHandler() {
-        ClassFinder.discoverAnnotatedClasses(NetworkRegistrarEntry.class);
+        CAServices.PLATFORM.discoverAnnotatedClasses(NetworkRegistrarEntry.class);
     }
 
     @Override

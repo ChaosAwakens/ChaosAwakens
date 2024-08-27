@@ -2,8 +2,8 @@ package io.github.chaosawakens.api.services;
 
 import com.google.common.collect.ImmutableMap;
 import io.github.chaosawakens.CAConstants;
-import io.github.chaosawakens.api.asm.ClassFinder;
 import io.github.chaosawakens.api.asm.annotations.RegistrarEntry;
+import io.github.chaosawakens.api.platform.CAServices;
 import io.github.chaosawakens.api.platform.services.IRegistrar;
 import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
 import net.minecraft.core.Registry;
@@ -21,7 +21,7 @@ public class ForgeRegistrar implements IRegistrar {
 
     @Override
     public void setupRegistrar() {
-        ClassFinder.discoverAnnotatedClasses(RegistrarEntry.class);
+        CAServices.PLATFORM.discoverAnnotatedClasses(RegistrarEntry.class);
     }
 
     @Override

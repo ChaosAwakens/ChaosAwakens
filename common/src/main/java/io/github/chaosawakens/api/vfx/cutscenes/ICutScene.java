@@ -17,6 +17,8 @@ import java.util.List;
 public interface ICutScene {
 
     /**
+     * Gets the {@link LevelAccessor} this {@link ICutScene} instance takes place in.
+     *
      * @return The {@link LevelAccessor} this {@link ICutScene} instance takes place in.
      */
     LevelAccessor getLevel();
