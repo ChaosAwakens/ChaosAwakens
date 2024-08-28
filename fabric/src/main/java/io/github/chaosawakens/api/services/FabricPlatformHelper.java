@@ -32,43 +32,81 @@ public class FabricPlatformHelper implements IPlatformHelper {
 
     @Override
     public List<Class<?>> discoverAnnotatedClasses(Class<? extends Annotation> annotationTypeClazz) {
-        try {
-            return ClassPath.from(FabricLoader.getInstance().getClass().getClassLoader())
-                    .getAllClasses()
-                    .stream()
-                    .filter(curClassInfo -> {
-                        final boolean[] foundValidAnnotation = {false};
-                        ClassReader reader = null;
+        return getFilteredAvailableClasses(annotationTypeClazz);
+    }
 
-                        try {
-                            reader = new ClassReader(curClassInfo.getName());
-                        } catch (IOException e) {
-                            e.printStackTrace();
+    protected List<Class<?>> getFilteredAvailableClasses(Class<? extends Annotation> annotationTypeClazz) {
+        if (isDevelopmentEnvironment()) {
+            try {
+                return ClassPath.from(getClass().getClassLoader())
+                        .getAllClasses()
+                        .stream()
+                        .filter(curClassInfo -> {
+                            final boolean[] foundValidAnnotation = {false};
+                            ClassReader reader = null;
+
+                            try {
+                                reader = new ClassReader(curClassInfo.getName());
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+
+                            ClassVisitor visitor = new ClassVisitor(Opcodes.ASM9) {
+                                private String className;
+
+                                @Override
+                                public void visit(int version, int access, String name, String signature, String superName, String[] interfaces) {
+                                    this.className = name.replace('/', '.');
+                                }
+
+                                @Override
+                                public AnnotationVisitor visitAnnotation(String desc, boolean visible) {
+                                    if (Type.getDescriptor(annotationTypeClazz).equals(desc)) foundValidAnnotation[0] = true;
+                                    return super.visitAnnotation(desc, visible);
+                                }
+                            };
+                            reader.accept(visitor, 0);
+                            return foundValidAnnotation[0];
+                        })
+                        .map(ClassPath.ClassInfo::getName)
+                        .map(ClassFinder::forName)
+                        .collect(Collectors.toCollection(ObjectArrayList::new));
+            } catch (IOException e) {
+                e.printStackTrace();
+                return ObjectArrayList.of();
+            }
+        } return FabricLoader.getInstance().getAllMods().stream()
+                .flatMap(modContainer -> modContainer.getRootPaths().stream())
+                .map(curPath -> curPath.toString().replaceAll("/", curPath.getFileSystem().getSeparator()))
+                .filter(name -> {
+                    final boolean[] foundValidAnnotation = {false};
+                    ClassReader reader = null;
+
+                    try {
+                        reader = new ClassReader(name);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    ClassVisitor visitor = new ClassVisitor(Opcodes.ASM9) {
+                        private String className;
+
+
+                        @Override
+                        public void visit(int version, int access, String name, String signature, String superName, String[] interfaces) {
+                            this.className = name.replace('/', '.');
                         }
 
-                        ClassVisitor visitor = new ClassVisitor(Opcodes.ASM9) {
-                            private String className;
-
-                            @Override
-                            public void visit(int version, int access, String name, String signature, String superName, String[] interfaces) {
-                                this.className = name.replace('/', '.');
-                            }
-
-                            @Override
-                            public AnnotationVisitor visitAnnotation(String desc, boolean visible) {
-                                if (Type.getDescriptor(annotationTypeClazz).equals(desc)) foundValidAnnotation[0] = true;
-                                return super.visitAnnotation(desc, visible);
-                            }
-                        };
-                        reader.accept(visitor, 0);
-                        return foundValidAnnotation[0];
-                    })
-                    .map(ClassPath.ClassInfo::getName)
-                    .map(ClassFinder::forName)
-                    .collect(Collectors.toCollection(ObjectArrayList::new));
-        } catch (IOException e) {
-            e.printStackTrace();
-            return ObjectArrayList.of();
-        }
+                        @Override
+                        public AnnotationVisitor visitAnnotation(String desc, boolean visible) {
+                            if (Type.getDescriptor(annotationTypeClazz).equals(desc)) foundValidAnnotation[0] = true;
+                            return super.visitAnnotation(desc, visible);
+                        }
+                    };
+                    reader.accept(visitor, 0);
+                    return foundValidAnnotation[0];
+                })
+                .map(ClassFinder::forName)
+                .collect(Collectors.toCollection(ObjectArrayList::new));
     }
 }
