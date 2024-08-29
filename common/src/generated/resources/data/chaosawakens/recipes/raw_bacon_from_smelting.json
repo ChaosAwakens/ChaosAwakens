@@ -1,11 +1,11 @@
 {
-  "type": "minecraft:smoking",
+  "type": "minecraft:smelting",
   "category": "food",
-  "cookingtime": 100,
+  "cookingtime": 200,
   "experience": 0.35,
   "group": "chaosawakens",
   "ingredient": {
-    "item": "chaosawakens:bacon"
+    "item": "chaosawakens:raw_bacon"
   },
   "result": "chaosawakens:cooked_bacon"
 }

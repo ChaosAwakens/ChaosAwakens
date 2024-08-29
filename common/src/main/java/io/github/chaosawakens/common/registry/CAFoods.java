@@ -5,14 +5,18 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.food.FoodProperties;
 
 public final class CAFoods {
+    // DAIRY
+    public static final FoodProperties FOOD_BUTTER = new FoodProperties.Builder().nutrition(2).saturationMod(0.2F).build();
+    public static final FoodProperties FOOD_CHEESE = new FoodProperties.Builder().nutrition(4).saturationMod(0.5F).build();
+
     // MEAT
     public static final FoodProperties FOOD_RAW_BACON = new FoodProperties.Builder().nutrition(3).saturationMod(0.33F).meat().build();
     public static final FoodProperties FOOD_COOKED_BACON = new FoodProperties.Builder().nutrition(8).saturationMod(1F).meat().build();
     public static final FoodProperties FOOD_RAW_CORNDOG = new FoodProperties.Builder().nutrition(4).saturationMod(0.25F).build();
     public static final FoodProperties FOOD_COOKED_CORNDOG = new FoodProperties.Builder().nutrition(8).saturationMod(1F).build();
-    public static final FoodProperties FOOD_CRAB_MEAT = new FoodProperties.Builder().nutrition(3).saturationMod(0.25F).meat().build();
+    public static final FoodProperties FOOD_RAW_CRAB_MEAT = new FoodProperties.Builder().nutrition(3).saturationMod(0.25F).meat().build();
     public static final FoodProperties FOOD_COOKED_CRAB_MEAT = new FoodProperties.Builder().nutrition(6).saturationMod(0.75F).meat().build();
-    public static final FoodProperties FOOD_PEACOCK_LEG = new FoodProperties.Builder().nutrition(2).saturationMod(0.5F).build();
+    public static final FoodProperties FOOD_RAW_PEACOCK_LEG = new FoodProperties.Builder().nutrition(2).saturationMod(0.5F).build();
     public static final FoodProperties FOOD_COOKED_PEACOCK_LEG = new FoodProperties.Builder().nutrition(6).saturationMod(0.8F).build();
     public static final FoodProperties FOOD_RAW_VENISON = new FoodProperties.Builder().nutrition(2).saturationMod(0.5F).meat().build();
     public static final FoodProperties FOOD_COOKED_VENISON = new FoodProperties.Builder().nutrition(6).saturationMod(0.8F).meat().build();
@@ -35,7 +39,6 @@ public final class CAFoods {
 
     // MANUFACTURED
     public static final FoodProperties FOOD_BLT_SANDWICH = new FoodProperties.Builder().nutrition(9).saturationMod(1.1F).build();
-    public static final FoodProperties FOOD_CHEESE = new FoodProperties.Builder().nutrition(4).saturationMod(0.5F).build();
     public static final FoodProperties FOOD_GARDEN_SALAD = new FoodProperties.Builder().nutrition(5).saturationMod(0.95F).build();
     public static final FoodProperties FOOD_SEAFOOD_PATTY = new FoodProperties.Builder().nutrition(8).saturationMod(0.9F).build();
     public static final FoodProperties FOOD_RADISH_STEW = new FoodProperties.Builder().nutrition(5).saturationMod(0.75F).build();

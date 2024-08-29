@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_bacon": {
+    "has_raw_bacon": {
       "conditions": {
         "items": [
           {
             "items": [
-              "chaosawakens:bacon"
+              "chaosawakens:raw_bacon"
             ]
           }
         ]
@@ -15,20 +15,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "chaosawakens:bacon_from_smoking"
+        "recipe": "chaosawakens:raw_bacon_from_campfire_cooking"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_bacon",
+      "has_raw_bacon",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "chaosawakens:bacon_from_smoking"
+      "chaosawakens:raw_bacon_from_campfire_cooking"
     ]
   },
   "sends_telemetry_event": false

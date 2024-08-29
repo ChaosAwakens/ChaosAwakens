@@ -103,9 +103,12 @@ public final class RegistryUtil {
     public static Supplier<Item> getFromCookedFood(Supplier<Item> targetItem) {
         ResourceLocation targetItemKey = BuiltInRegistries.ITEM.getKey(targetItem.get());
         String copiedPath = BuiltInRegistries.ITEM.getKey(targetItem.get()).getPath();
+        Supplier<Item> assumedCookedFood = () -> BuiltInRegistries.ITEM.get(targetItemKey.withPath(StringUtils.substringAfter(copiedPath, "cooked_")));
 
         return copiedPath.startsWith("cooked_")
-                ? () -> BuiltInRegistries.ITEM.get(targetItemKey.withPath(StringUtils.substringAfter(copiedPath, "cooked_")))
+                ? assumedCookedFood.get().getDescriptionId().equals("block.minecraft.air")
+                ? () -> BuiltInRegistries.ITEM.get(targetItemKey.withPath(copiedPath.replace("cooked_", "raw_")))
+                : assumedCookedFood
                 : null;
     }
 }

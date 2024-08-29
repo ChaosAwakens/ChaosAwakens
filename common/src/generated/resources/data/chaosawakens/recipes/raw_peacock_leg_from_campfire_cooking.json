@@ -5,7 +5,7 @@
   "experience": 0.35,
   "group": "chaosawakens",
   "ingredient": {
-    "item": "chaosawakens:bacon"
+    "item": "chaosawakens:raw_peacock_leg"
   },
-  "result": "chaosawakens:cooked_bacon"
+  "result": "chaosawakens:cooked_peacock_leg"
 }
