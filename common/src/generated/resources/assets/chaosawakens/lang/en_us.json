@@ -138,14 +138,22 @@
   "creativemodetab.chaosawakens.chaos_awakens_items": "Chaos Awakens: Items",
   "item.chaosawakens.butter": "Butter",
   "item.chaosawakens.cheese": "Cheese",
+  "item.chaosawakens.cherries": "Cherries",
   "item.chaosawakens.cooked_bacon": "Cooked Bacon",
   "item.chaosawakens.cooked_corndog": "Cooked Corndog",
   "item.chaosawakens.cooked_crab_meat": "Cooked Crab Meat",
   "item.chaosawakens.cooked_peacock_leg": "Cooked Peacock Leg",
   "item.chaosawakens.cooked_venison": "Cooked Venison",
+  "item.chaosawakens.corn": "Corn",
+  "item.chaosawakens.lettuce": "Lettuce",
+  "item.chaosawakens.peach": "Peach",
+  "item.chaosawakens.quinoa": "Quinoa",
+  "item.chaosawakens.radish": "Radish",
   "item.chaosawakens.raw_bacon": "Raw Bacon",
   "item.chaosawakens.raw_corndog": "Raw Corndog",
   "item.chaosawakens.raw_crab_meat": "Raw Crab Meat",
   "item.chaosawakens.raw_peacock_leg": "Raw Peacock Leg",
-  "item.chaosawakens.raw_venison": "Raw Venison"
+  "item.chaosawakens.raw_venison": "Raw Venison",
+  "item.chaosawakens.strawberry": "Strawberry",
+  "item.chaosawakens.tomato": "Tomato"
 }
