@@ -2802,4 +2802,9 @@ public final class ModelUtil {
         return cubeAll(leavesTexture)
                 .withBlockRenderType(new ResourceLocation(RenderType.cutoutMipped().name));
     }
+
+    public static ItemModelDefinition generated(ResourceLocation itemTexture) {
+        return ItemModelDefinition.of(ModelTemplates.FLAT_ITEM)
+                .withTextureMapping(TextureMapping.layer0(itemTexture.withPrefix("item/")));
+    }
 }

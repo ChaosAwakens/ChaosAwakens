@@ -3,7 +3,9 @@ package io.github.chaosawakens.common.registry;
 import com.google.common.collect.ImmutableList;
 import io.github.chaosawakens.CAConstants;
 import io.github.chaosawakens.api.asm.annotations.RegistrarEntry;
+import io.github.chaosawakens.api.item.ItemPropertyWrapper;
 import io.github.chaosawakens.api.platform.CAServices;
+import io.github.chaosawakens.util.ModelUtil;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.Item;
@@ -15,6 +17,16 @@ public final class CAItems {
     private static final ObjectArrayList<Supplier<Item>> ITEMS = new ObjectArrayList<>();
 
     // Meat
+    public static final Supplier<Item> BACON = ItemPropertyWrapper.create(registerItem("bacon", () -> new Item(new Item.Properties().food(CAFoods.FOOD_RAW_BACON))))
+            .builder()
+            .withCustomModelDefinition(ModelUtil.generated(CAConstants.prefix("food/organic/meat/raw/bacon")))
+            .build()
+            .getParentItem();
+    public static final Supplier<Item> COOKED_BACON = ItemPropertyWrapper.of(CAItemPropertyWrappers.COOKED_FOOD, registerItem("cooked_bacon", () -> new Item(new Item.Properties().food(CAFoods.FOOD_COOKED_BACON))))
+            .cachedBuilder()
+            .withCustomModelDefinition(ModelUtil.generated(CAConstants.prefix("food/organic/meat/cooked/cooked_bacon")))
+            .build()
+            .getParentItem();
 
     // Minerals
 

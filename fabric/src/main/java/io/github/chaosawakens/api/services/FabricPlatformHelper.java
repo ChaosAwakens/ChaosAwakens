@@ -35,7 +35,7 @@ public class FabricPlatformHelper implements IPlatformHelper {
         return getFilteredAvailableClasses(annotationTypeClazz);
     }
 
-    protected List<Class<?>> getFilteredAvailableClasses(Class<? extends Annotation> annotationTypeClazz) {
+    protected List<Class<?>> getFilteredAvailableClasses(Class<? extends Annotation> annotationTypeClazz) { // I'm sorry (CBF to set up compile-time annotations ATM)
         if (isDevelopmentEnvironment()) {
             try {
                 return ClassPath.from(getClass().getClassLoader())
@@ -75,7 +75,7 @@ public class FabricPlatformHelper implements IPlatformHelper {
                 e.printStackTrace();
                 return ObjectArrayList.of();
             }
-        } return FabricLoader.getInstance().getAllMods().stream()
+        } else return FabricLoader.getInstance().getAllMods().stream()
                 .flatMap(modContainer -> modContainer.getRootPaths().stream())
                 .map(curPath -> curPath.toString().replaceAll("/", curPath.getFileSystem().getSeparator()))
                 .filter(name -> {

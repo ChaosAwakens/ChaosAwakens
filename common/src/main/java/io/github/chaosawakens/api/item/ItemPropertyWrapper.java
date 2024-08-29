@@ -44,7 +44,7 @@ public class ItemPropertyWrapper {
     private ItemPropertyWrapper() {
         this.itemRegName = null;
         this.parentItem = null;
-        this.isTemplate = false; // Otherwise can't set with constructor overloading (Laziness:tm:)
+        this.isTemplate = true; // Otherwise can't set with constructor overloading (Laziness:tm:)
     }
 
     /**
