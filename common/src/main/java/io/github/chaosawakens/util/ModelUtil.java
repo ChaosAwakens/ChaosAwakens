@@ -2671,6 +2671,10 @@ public final class ModelUtil {
         return ObjectArrayList.of(cubeAll(unripeLeavesTexture).withBlockRenderType(new ResourceLocation(RenderType.cutoutMipped().name)), cubeAll(ripeLeavesTexture).withBlockRenderType(new ResourceLocation(RenderType.cutoutMipped().name)).withCustomModelName(ripeLeavesTexture.getPath().substring(ripeLeavesTexture.getPath().lastIndexOf("/") + 1)));
     }
 
+    public static ObjectArrayList<BlockModelDefinition> fruitableLeaves(ResourceLocation leavesTexture) {
+        return fruitableLeaves(leavesTexture, leavesTexture.withSuffix("_ripe"));
+    }
+
     public static BlockStateDefinition fruitableLeaves(Supplier<Block> targetBlock, ResourceLocation unripeLeavesModel, ResourceLocation ripeLeavesModel) {
         return BlockStateDefinition.of(targetBlock).withBlockStateSupplier(MultiVariantGenerator.multiVariant(targetBlock.get())
                 .with(PropertyDispatch

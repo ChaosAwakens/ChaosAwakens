@@ -80,6 +80,57 @@ public final class CAItems {
             .build()
             .getParentItem();
 
+    public static final Supplier<Item> BLUE_FISH = ItemPropertyWrapper.create(registerItem("blue_fish", () -> new Item(new Item.Properties().food(CAFoods.FOOD_BLUE_FISH))))
+            .builder()
+            .withCustomModelDefinition(ModelUtil.generated(CAConstants.prefix("food/organic/meat/fish/blue_fish")))
+            .build()
+            .getParentItem();
+    public static final Supplier<Item> FIRE_FISH = ItemPropertyWrapper.create(registerItem("fire_fish", () -> new Item(new Item.Properties().food(CAFoods.FOOD_FIRE_FISH))))
+            .builder()
+            .withCustomModelDefinition(ModelUtil.generated(CAConstants.prefix("food/organic/meat/fish/fire_fish")))
+            .build()
+            .getParentItem();
+    public static final Supplier<Item> GRAY_FISH = ItemPropertyWrapper.create(registerItem("gray_fish", () -> new Item(new Item.Properties().food(CAFoods.FOOD_GRAY_FISH))))
+            .builder()
+            .withCustomModelDefinition(ModelUtil.generated(CAConstants.prefix("food/organic/meat/fish/gray_fish")))
+            .build()
+            .getParentItem();
+    public static final Supplier<Item> GREEN_FISH = ItemPropertyWrapper.create(registerItem("green_fish", () -> new Item(new Item.Properties().food(CAFoods.FOOD_GREEN_FISH))))
+            .builder()
+            .withCustomModelDefinition(ModelUtil.generated(CAConstants.prefix("food/organic/meat/fish/green_fish")))
+            .build()
+            .getParentItem();
+    public static final Supplier<Item> LAVA_EEL = ItemPropertyWrapper.create(registerItem("lava_eel", () -> new Item(new Item.Properties().food(CAFoods.FOOD_LAVA_EEL))))
+            .builder()
+            .withCustomModelDefinition(ModelUtil.generated(CAConstants.prefix("food/organic/meat/fish/lava_eel")))
+            .build()
+            .getParentItem();
+    public static final Supplier<Item> PINK_FISH = ItemPropertyWrapper.create(registerItem("pink_fish", () -> new Item(new Item.Properties().food(CAFoods.FOOD_PINK_FISH))))
+            .builder()
+            .withCustomModelDefinition(ModelUtil.generated(CAConstants.prefix("food/organic/meat/fish/pink_fish")))
+            .build()
+            .getParentItem();
+    public static final Supplier<Item> ROCK_FISH = ItemPropertyWrapper.create(registerItem("rock_fish", () -> new Item(new Item.Properties().food(CAFoods.FOOD_ROCK_FISH))))
+            .builder()
+            .withCustomModelDefinition(ModelUtil.generated(CAConstants.prefix("food/organic/meat/fish/rock_fish")))
+            .build()
+            .getParentItem();
+    public static final Supplier<Item> SPARK_FISH = ItemPropertyWrapper.create(registerItem("spark_fish", () -> new Item(new Item.Properties().food(CAFoods.FOOD_SPARK_FISH))))
+            .builder()
+            .withCustomModelDefinition(ModelUtil.generated(CAConstants.prefix("food/organic/meat/fish/spark_fish")))
+            .build()
+            .getParentItem();
+    public static final Supplier<Item> SUN_FISH = ItemPropertyWrapper.create(registerItem("sun_fish", () -> new Item(new Item.Properties().food(CAFoods.FOOD_SUN_FISH))))
+            .builder()
+            .withCustomModelDefinition(ModelUtil.generated(CAConstants.prefix("food/organic/meat/fish/sun_fish")))
+            .build()
+            .getParentItem();
+    public static final Supplier<Item> WOOD_FISH = ItemPropertyWrapper.create(registerItem("wood_fish", () -> new Item(new Item.Properties().food(CAFoods.FOOD_WOOD_FISH))))
+            .builder()
+            .withCustomModelDefinition(ModelUtil.generated(CAConstants.prefix("food/organic/meat/fish/wood_fish")))
+            .build()
+            .getParentItem();
+
     // Plant
     public static final Supplier<Item> CHERRIES = ItemPropertyWrapper.create(registerItem("cherries", () -> new Item(new Item.Properties().food(CAFoods.FOOD_CHERRIES))))
             .builder()
@@ -119,6 +170,27 @@ public final class CAItems {
     public static final Supplier<Item> TOMATO = ItemPropertyWrapper.create(registerItem("tomato", () -> new Item(new Item.Properties().food(CAFoods.FOOD_TOMATO))))
             .builder()
             .withCustomModelDefinition(ModelUtil.generated(CAConstants.prefix("food/organic/plant/vegetable/tomato")))
+            .build()
+            .getParentItem();
+
+    public static final Supplier<Item> CRYSTAL_APPLE = ItemPropertyWrapper.create(registerItem("crystal_apple", () -> new Item(new Item.Properties().food(CAFoods.FOOD_CRYSTAL_APPLE))))
+            .builder()
+            .withCustomModelDefinition(ModelUtil.generated(CAConstants.prefix("food/organic/plant/fruit/crystal_apple")))
+            .build()
+            .getParentItem();
+    public static final Supplier<Item> CRYSTAL_BEETROOT = ItemPropertyWrapper.create(registerItem("crystal_beetroot", () -> new Item(new Item.Properties().food(CAFoods.FOOD_CRYSTAL_BEETROOT))))
+            .builder()
+            .withCustomModelDefinition(ModelUtil.generated(CAConstants.prefix("food/organic/plant/vegetable/crystal_beetroot")))
+            .build()
+            .getParentItem();
+    public static final Supplier<Item> CRYSTAL_CARROT = ItemPropertyWrapper.create(registerItem("crystal_carrot", () -> new Item(new Item.Properties().food(CAFoods.FOOD_CRYSTAL_CARROT))))
+            .builder()
+            .withCustomModelDefinition(ModelUtil.generated(CAConstants.prefix("food/organic/plant/vegetable/crystal_carrot")))
+            .build()
+            .getParentItem();
+    public static final Supplier<Item> CRYSTAL_POTATO = ItemPropertyWrapper.create(registerItem("crystal_potato", () -> new Item(new Item.Properties().food(CAFoods.FOOD_CRYSTAL_POTATO))))
+            .builder()
+            .withCustomModelDefinition(ModelUtil.generated(CAConstants.prefix("food/organic/plant/vegetable/crystal_potato")))
             .build()
             .getParentItem();
 

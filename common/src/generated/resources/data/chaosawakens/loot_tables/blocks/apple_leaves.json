@@ -106,6 +106,32 @@
         }
       ],
       "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "chaosawakens:apple_leaves",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "ripe": "true"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": 2.0,
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "minecraft:apple"
+        }
+      ],
+      "rolls": 1.0
     }
   ],
   "random_sequence": "chaosawakens:blocks/apple_leaves"

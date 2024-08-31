@@ -1,4 +1,4 @@
-// 1.20.1	2024-08-23T22:14:19.2192122	Chaos Awakens: Block & Block Item Models
+// 1.20.1	2024-08-30T13:52:37.9283534	Chaos Awakens: Block & Block Item Models
 545cc7a8d51438ddca6429e9262d81c625d1162d assets/chaosawakens/models/block/acacia_gate_block.json
 32bed3330bf18b5cf782cdc679df40a9845fcaad assets/chaosawakens/models/block/apple_button.json
 0b3671b602abeed4f6588f981e2e792c7403ad64 assets/chaosawakens/models/block/apple_button_inventory.json
@@ -20,6 +20,7 @@ ef205208f382474fc3d940eaf0eacd6930822ac4 assets/chaosawakens/models/block/apple_
 87fa6058eb21bd252d2b67544ce3a48be02fcc65 assets/chaosawakens/models/block/apple_fence_side.json
 3625b378415e7d8ba29d2800e9141a183cf65048 assets/chaosawakens/models/block/apple_gate_block.json
 5c6ca885a0dae32d39223fe912cb6669dd08fda9 assets/chaosawakens/models/block/apple_leaves.json
+1b158e2f4fcde687fccb6ad5d24aa729f4bb9d30 assets/chaosawakens/models/block/apple_leaves_ripe.json
 579acb7d445c43ac35bef9e1eff63fe22f667390 assets/chaosawakens/models/block/apple_log.json
 ff705e467cf3ea1e3e5b7af5947b42cee6c4d3bd assets/chaosawakens/models/block/apple_log_horizontal.json
 2f6d31aa41b558cae4481b15a824ad13e6ac9e12 assets/chaosawakens/models/block/apple_planks.json
@@ -232,6 +233,7 @@ f295069bd41527bc6447913417699178901ba67b assets/chaosawakens/models/block/peach_
 5f9228905cf9b6e8169baf8b584e74d8d78ba0fb assets/chaosawakens/models/block/peach_fence_side.json
 382a353ea548b7ee569a5d7c04443292e923cdef assets/chaosawakens/models/block/peach_gate_block.json
 90e18c1650773b164f9cbb95cdec0349ba864d25 assets/chaosawakens/models/block/peach_leaves.json
+402d5bc3dc5e4cf1b0495b34c04e62c706e2fae0 assets/chaosawakens/models/block/peach_leaves_ripe.json
 90e977b7f21559ff7f31f574f4a0dedd4d9a0a8a assets/chaosawakens/models/block/peach_log.json
 0ef5ddad2f3f101e8ada554bc5f75f68aa1355ce assets/chaosawakens/models/block/peach_log_horizontal.json
 139ff2553c0fe6a13944e3cf39d58d592f172b32 assets/chaosawakens/models/block/peach_planks.json

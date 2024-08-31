@@ -6,6 +6,7 @@ import io.github.chaosawakens.api.asm.annotations.RegistrarEntry;
 import io.github.chaosawakens.api.block.standard.BlockPropertyWrapper;
 import io.github.chaosawakens.api.platform.CAServices;
 import io.github.chaosawakens.common.block.dungeon.general.DungeonGateBlock;
+import io.github.chaosawakens.common.block.vegetation.general.FruitableLeavesBlock;
 import io.github.chaosawakens.util.ModelUtil;
 import io.github.chaosawakens.util.PredicateUtil;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
@@ -13,6 +14,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
@@ -612,9 +614,9 @@ public final class CABlocks {
             .getParentBlock();
 
     // Leaves
-    public static final Supplier<Block> APPLE_LEAVES = BlockPropertyWrapper.of(CABlockPropertyWrappers.LEAVES, registerBlock("apple_leaves", () -> new LeavesBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LEAVES))))
+    public static final Supplier<Block> APPLE_LEAVES = BlockPropertyWrapper.of(CABlockPropertyWrappers.FRUITABLE_LEAVES, registerBlock("apple_leaves", () -> new FruitableLeavesBlock(() -> Items.APPLE, BlockBehaviour.Properties.copy(Blocks.OAK_LEAVES))))
             .cachedBuilder()
-            .withCustomModelDefinition(ModelUtil.leaves(CAConstants.prefix("leaves/apple/apple_leaves")))
+            .withCustomModelDefinitions(ModelUtil.fruitableLeaves(CAConstants.prefix("leaves/apple/apple_leaves")))
             .build()
             .getParentBlock();
     public static final Supplier<Block> DENSEWOOD_LEAVES = BlockPropertyWrapper.of(CABlockPropertyWrappers.LEAVES, registerBlock("densewood_leaves", () -> new LeavesBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LEAVES))))
@@ -637,9 +639,9 @@ public final class CABlocks {
             .withCustomModelDefinition(ModelUtil.leaves(CAConstants.prefix("leaves/mesozoic/mesozoic_leaves")))
             .build()
             .getParentBlock();
-    public static final Supplier<Block> PEACH_LEAVES = BlockPropertyWrapper.of(CABlockPropertyWrappers.LEAVES, registerBlock("peach_leaves", () -> new LeavesBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LEAVES))))
+    public static final Supplier<Block> PEACH_LEAVES = BlockPropertyWrapper.of(CABlockPropertyWrappers.FRUITABLE_LEAVES, registerBlock("peach_leaves", () -> new FruitableLeavesBlock(CAItems.PEACH, BlockBehaviour.Properties.copy(Blocks.OAK_LEAVES))))
             .cachedBuilder()
-            .withCustomModelDefinition(ModelUtil.leaves(CAConstants.prefix("leaves/peach/peach_leaves")))
+            .withCustomModelDefinitions(ModelUtil.fruitableLeaves(CAConstants.prefix("leaves/peach/peach_leaves")))
             .build()
             .getParentBlock();
     public static final Supplier<Block> SKYWOOD_LEAVES = BlockPropertyWrapper.of(CABlockPropertyWrappers.LEAVES, registerBlock("skywood_leaves", () -> new LeavesBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LEAVES))))

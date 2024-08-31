@@ -58,11 +58,13 @@ public final class CAFoods {
     public static final FoodProperties FOOD_BLUE_FISH = new FoodProperties.Builder().nutrition(5).saturationMod(0.6F).build();
     public static final FoodProperties FOOD_GRAY_FISH = new FoodProperties.Builder().nutrition(5).saturationMod(0.6F).build();
     public static final FoodProperties FOOD_GREEN_FISH = new FoodProperties.Builder().nutrition(5).saturationMod(0.6F).build();
+    public static final FoodProperties FOOD_ROCK_FISH = new FoodProperties.Builder().nutrition(4).saturationMod(0.8F).build();
     public static final FoodProperties FOOD_PINK_FISH = new FoodProperties.Builder().nutrition(5).saturationMod(0.6F).build();
     public static final FoodProperties FOOD_SPARK_FISH = new FoodProperties.Builder().nutrition(3).saturationMod(0.2F).alwaysEat().effect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 100, 0), 1.0F).build();
     public static final FoodProperties FOOD_FIRE_FISH = new FoodProperties.Builder().nutrition(3).saturationMod(0.4F).alwaysEat().effect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 200, 0), 1.0F).build();
     public static final FoodProperties FOOD_LAVA_EEL = new FoodProperties.Builder().nutrition(4).saturationMod(0.4F).alwaysEat().effect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 400, 0), 1.0F).build();
     public static final FoodProperties FOOD_SUN_FISH = new FoodProperties.Builder().nutrition(4).saturationMod(0.6F).alwaysEat().effect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 600, 0), 1.0F).build();
+    public static final FoodProperties FOOD_WOOD_FISH = new FoodProperties.Builder().nutrition(2).saturationMod(0.4F).build();
 
     // GOLDEN FOOD
     public static final FoodProperties FOOD_GOLDEN_MELON_SLICE = new FoodProperties.Builder().nutrition(2).saturationMod(0.45F).alwaysEat().build();

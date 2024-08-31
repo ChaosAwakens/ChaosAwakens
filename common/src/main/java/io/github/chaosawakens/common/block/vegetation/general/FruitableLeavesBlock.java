@@ -51,10 +51,15 @@ public class FruitableLeavesBlock extends LeavesBlock {
     }
 
     @Override
+    public boolean isRandomlyTicking(BlockState targetState) {
+        return super.isRandomlyTicking(targetState) || !isRipe(targetState);
+    }
+
+    @Override
     public void randomTick(BlockState targetState, ServerLevel curLevel, BlockPos targetPos, RandomSource random) {
         super.randomTick(targetState, curLevel, targetPos, random);
 
-        if (!isRipe(targetState) && random.nextInt(probability) == 0) curLevel.setBlockAndUpdate(targetPos, setRipe(targetState));
+        if (!isRipe(targetState) && random.nextInt(probability) == 0 && (!decaying(targetState) || isPersistent(targetState))) curLevel.setBlockAndUpdate(targetPos, setRipe(targetState));
     }
 
     @Override
@@ -102,5 +107,17 @@ public class FruitableLeavesBlock extends LeavesBlock {
 
     public static BlockState setRipe(BlockState targetState) {
         return setRipe(targetState, true);
+    }
+
+    public static boolean isPersistent(BlockState targetState) {
+        return targetState.hasProperty(PERSISTENT) && targetState.getValue(PERSISTENT);
+    }
+
+    public static BlockState setPersistent(BlockState targetState, boolean persistent) {
+        return targetState.hasProperty(PERSISTENT) ? targetState.setValue(PERSISTENT, persistent) : targetState;
+    }
+
+    public static BlockState setPersistent(BlockState targetState) {
+        return setPersistent(targetState, true);
     }
 }
