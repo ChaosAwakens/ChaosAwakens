@@ -192,7 +192,12 @@ public class AOEHitboxEntity extends Entity {
 		if (CUR_RADIUS.equals(pKey)) refreshDimensions();
 		super.onSyncedDataUpdated(pKey);
 	}
-	
+
+	@Override
+	public boolean displayFireAnimation() {
+		return false;
+	}
+
 	@Override
 	public PushReaction getPistonPushReaction() {
 		return PushReaction.IGNORE;

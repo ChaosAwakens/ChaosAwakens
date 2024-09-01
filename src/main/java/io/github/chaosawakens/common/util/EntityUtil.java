@@ -294,12 +294,12 @@ public final class EntityUtil {
 
 			LivingEntity target = (LivingEntity) reachedEntityHitResult.getEntity();
 			boolean isValidTarget = (reachedEntityHitResult != null ? target : null) != null && reachedEntityHitResult.getType() == RayTraceResult.Type.ENTITY;
-			double distanceToTargetSqr = owner.distanceToSqr(target);
+			double distanceToTargetSqr = owner == null || target == null ? 0 : owner.distanceToSqr(target);
 
 			if (isValidTarget) {
-				if (target != null && reachSqr >= distanceToTargetSqr && owner != null && owner.swingingArm.equals(Hand.MAIN_HAND) && (!(owner instanceof PlayerEntity) || !target.interact((PlayerEntity) owner, Hand.MAIN_HAND).consumesAction())) {
-					target.hurt(DamageSource.mobAttack(owner), attackDamage);
-					heldStack.getItem().hurtEnemy(heldStack, target, owner);
+				if (target != null && reachSqr >= distanceToTargetSqr && owner != null && owner.swingingArm != null && owner.swingingArm.equals(Hand.MAIN_HAND) && (!(owner instanceof PlayerEntity) || !target.interact((PlayerEntity) owner, Hand.MAIN_HAND).consumesAction())) {
+					if (target != null) target.hurt(DamageSource.mobAttack(owner), attackDamage);
+					if (target != null && owner != null) heldStack.getItem().hurtEnemy(heldStack, target, owner);
 				}
 			}
 		}

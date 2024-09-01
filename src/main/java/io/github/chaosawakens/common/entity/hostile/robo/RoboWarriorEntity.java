@@ -35,7 +35,6 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
-import net.minecraft.particles.ParticleTypes;
 import net.minecraft.scoreboard.Team;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
@@ -43,6 +42,7 @@ import net.minecraft.util.math.RayTraceContext;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.ModList;
 import software.bernie.geckolib3.core.AnimationState;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.ILoopType.EDefaultLoopTypes;
@@ -420,7 +420,7 @@ public class RoboWarriorEntity extends AnimatableMonsterEntity {
 
 	@Override
 	public double getMovementThreshold() {
-		return super.getMovementThreshold() * 200;
+		return ModList.get().isLoaded("performant") ? Vector3d.ZERO.length() : super.getMovementThreshold() * 200;
 	}
 
 	@Override

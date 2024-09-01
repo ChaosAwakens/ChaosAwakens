@@ -36,6 +36,7 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.network.NetworkHooks;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
@@ -191,7 +192,7 @@ public abstract class AnimatableMonsterEntity extends MonsterEntity implements I
 	}
 	
 	public double getMovementThreshold() {
-		return 2.500000277905201E-7;
+		return ModList.get().isLoaded("performant") ? Vector3d.ZERO.length() : 2.500000277905201E-7;
 	}
 	
 	public boolean shouldAllowDismount() {
