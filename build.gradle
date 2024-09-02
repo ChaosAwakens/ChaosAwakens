@@ -154,6 +154,7 @@ dependencies {
 	implementation fg.deobf("curse.maven:datafixerslayer-416519:${dfs_version}")
 
 	// Temp
+	implementation fg.deobf("curse.maven:performant-354143:4562378")
 //	implementation fg.deobf("curse.maven:modernfix-790626:5259338")
 //	implementation fg.deobf("curse.maven:ferritecore-429235:4074330")
 }

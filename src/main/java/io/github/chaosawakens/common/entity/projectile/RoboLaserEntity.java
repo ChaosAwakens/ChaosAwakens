@@ -4,6 +4,10 @@ import io.github.chaosawakens.api.animation.IAnimatableEntity;
 import io.github.chaosawakens.api.animation.IAnimationBuilder;
 import io.github.chaosawakens.api.animation.SingletonAnimationBuilder;
 import io.github.chaosawakens.api.animation.WrappedAnimationController;
+import io.github.chaosawakens.common.entity.boss.robo.RoboJefferyEntity;
+import io.github.chaosawakens.common.entity.hostile.robo.RoboPounderEntity;
+import io.github.chaosawakens.common.entity.hostile.robo.RoboSniperEntity;
+import io.github.chaosawakens.common.entity.hostile.robo.RoboWarriorEntity;
 import io.github.chaosawakens.common.registry.CAEntityTypes;
 import io.github.chaosawakens.common.registry.CASoundEvents;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
@@ -97,7 +101,7 @@ public class RoboLaserEntity extends DamagingProjectileEntity implements IAnimat
 	@Override
 	protected void onHitEntity(EntityRayTraceResult pResult) {
 		Entity targetEntity = pResult.getEntity();
-		targetEntity.hurt(DamageSource.thrown(this, getOwner()), getDamagePower());
+		if (!(targetEntity instanceof RoboWarriorEntity) && !(targetEntity instanceof RoboSniperEntity) && !(targetEntity instanceof RoboPounderEntity) && !(targetEntity instanceof RoboJefferyEntity)) targetEntity.hurt(DamageSource.thrown(this, getOwner()), getDamagePower());
 	}
 	
 	public void setPower(float damagePower, float explosivePower, boolean canCauseFire) {

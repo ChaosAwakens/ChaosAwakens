@@ -17,7 +17,6 @@ import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.network.NetworkHooks;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
@@ -99,7 +98,7 @@ public abstract class AnimatableAnimalEntity extends AnimalEntity implements IAn
 	}
 	
 	public double getMovementThreshold() {
-		return ModList.get().isLoaded("performant") ? Vector3d.ZERO.length() : 2.500000277905201E-7;
+		return 2.500000277905201E-7;
 	}
 	
 	public boolean canBeKnockedBack() {

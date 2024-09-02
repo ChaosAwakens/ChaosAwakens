@@ -42,7 +42,6 @@ import net.minecraft.util.math.RayTraceContext;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.ModList;
 import software.bernie.geckolib3.core.AnimationState;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.ILoopType.EDefaultLoopTypes;
@@ -420,7 +419,7 @@ public class RoboWarriorEntity extends AnimatableMonsterEntity {
 
 	@Override
 	public double getMovementThreshold() {
-		return ModList.get().isLoaded("performant") ? Vector3d.ZERO.length() : super.getMovementThreshold() * 200;
+		return super.getMovementThreshold() * 200;
 	}
 
 	@Override
