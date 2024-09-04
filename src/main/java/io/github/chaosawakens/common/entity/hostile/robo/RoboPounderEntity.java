@@ -41,7 +41,6 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.ModList;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.ILoopType.EDefaultLoopTypes;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
@@ -475,7 +474,7 @@ public class RoboPounderEntity extends AnimatableMonsterEntity {
 
 	@Override
 	public double getMovementThreshold() {
-		return ModList.get().isLoaded("performant") ? Vector3d.ZERO.length() : tickCount >= 2 && isRageRunning() ? 0.55D : super.getMovementThreshold();
+		return tickCount >= 2 && isRageRunning() ? 0.55D : super.getMovementThreshold();
 	}
 
 	@Nullable
