@@ -111,6 +111,7 @@ public class ItemPropertyWrapper {
                     .withCustomSeparatorWords(parentTemplateWrapper.builder.definedSeparatorWords)
                     .withSetTags(List.copyOf(parentTemplateWrapper.builder.parentTags))
                     .withSetCustomModelDefinitions(List.copyOf(parentTemplateWrapper.builder.itemModelDefinitions))
+                    .withCustomModelDefinitions(parentTemplateWrapper.builder.imdMappingFunc)
                     .withRecipe(parentTemplateWrapper.builder.recipeBuilderFunction)
                     .build(); // Direct setting of the builder would copy the entire object itself, which would in-turn overwrite it if any calls are made to the copied IPW afterward
 
@@ -142,6 +143,7 @@ public class ItemPropertyWrapper {
                     .withCustomSeparatorWords(parentWrapper.builder.definedSeparatorWords)
                     .withSetTags(List.copyOf(parentWrapper.builder.parentTags))
                     .withSetCustomModelDefinitions(List.copyOf(parentWrapper.builder.itemModelDefinitions))
+                    .withCustomModelDefinitions(parentWrapper.builder.imdMappingFunc)
                     .withRecipe(parentWrapper.builder.recipeBuilderFunction)
                     .build(); // Direct setting of the builder would copy the entire object itself, which would in-turn overwrite it if any calls are made to the copied IPW afterward
 
@@ -174,6 +176,7 @@ public class ItemPropertyWrapper {
                     .withCustomSeparatorWords(originalWrapper.builder.definedSeparatorWords)
                     .withSetTags(List.copyOf(originalWrapper.builder.parentTags))
                     .withSetCustomModelDefinitions(List.copyOf(originalWrapper.builder.itemModelDefinitions))
+                    .withCustomModelDefinitions(originalWrapper.builder.imdMappingFunc)
                     .withRecipe(originalWrapper.builder.recipeBuilderFunction)
                     .build(); // Direct setting of the builder would copy the entire object itself, which would in-turn overwrite it if any calls are made to the copied IPW afterward
 
@@ -281,6 +284,17 @@ public class ItemPropertyWrapper {
     }
 
     /**
+     * Gets the {@code Function<Supplier<Item>, List<ItemModelDefinition>>} from the {@link #builder()} if the builder exists, and it is defined within said builder.
+     * May be {@code null}.
+     *
+     * @return The {@code Function<Supplier<Item>, List<ItemModelDefinition>>}, or {@code null} if the {@link #builder()} is {@code null} || it isn't defined within said builder.
+     */
+    @Nullable
+    public Function<Supplier<Item>, List<ItemModelDefinition>> getIMDMappingFunction() {
+        return builder == null ? null : builder.imdMappingFunc;
+    }
+
+    /**
      * Gets the {@code Function<Consumer<FinishedRecipe>, Consumer<Supplier<Item>>>} from the {@link #builder()} if the builder exists, and it is defined within said builder.
      * May be {@code null}.
      *
@@ -324,6 +338,8 @@ public class ItemPropertyWrapper {
         private final List<ItemModelDefinition> itemModelDefinitions = ObjectArrayList.of();
         @Nullable
         private Function<Consumer<FinishedRecipe>, Consumer<Supplier<Item>>> recipeBuilderFunction;
+        @Nullable
+        private Function<Supplier<Item>, List<ItemModelDefinition>> imdMappingFunc;
 
         private IPWBuilder(ItemPropertyWrapper ownerWrapper, Supplier<Item> itemParent) {
             this.ownerWrapper = ownerWrapper;
@@ -435,6 +451,7 @@ public class ItemPropertyWrapper {
          * @return {@code this} (builder method).
          *
          * @see #withCustomModelDefinitions(List)
+         * @see #withCustomModelDefinitions(Function)
          */
         public IPWBuilder withCustomModelDefinition(ItemModelDefinition itemModelDefinition) {
             this.itemModelDefinitions.add(itemModelDefinition);
@@ -452,6 +469,20 @@ public class ItemPropertyWrapper {
          */
         public IPWBuilder withCustomModelDefinitions(List<ItemModelDefinition> itemModelDefinitions) {
             this.itemModelDefinitions.addAll(itemModelDefinitions);
+            return this;
+        }
+
+        /**
+         * Sets the {@link #imdMappingFunc} of this IPWBuilder. This is used in conjunction with {@link #itemModelDefinitions} in order to generate models for the parent IPW's {@link Item}.
+         *
+         * @param imdMappingFunc The mapping {@link Function} used to build this IPWBuilder's parent item's model in datagen.
+         *
+         * @return {@code this} (builder method).
+         *
+         * @see #withCustomModelDefinition(ItemModelDefinition)
+         */
+        public IPWBuilder withCustomModelDefinitions(Function<Supplier<Item>, List<ItemModelDefinition>> imdMappingFunc) {
+            this.imdMappingFunc = imdMappingFunc;
             return this;
         }
 

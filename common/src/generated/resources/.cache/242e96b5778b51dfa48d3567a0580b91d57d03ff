@@ -1,6 +1,9 @@
-// 1.20.1	2024-08-31T20:00:38.5898015	Chaos Awakens: Item Models
+// 1.20.1	2024-09-07T06:24:45.2975481	Chaos Awakens: Item Models
+116ba16f2c38441701e46ddc6529d51385ff1239 assets/chaosawakens/models/item/blt_sandwich.json
 94e1f2c5fc83cb085eee91919be466e6eedc2310 assets/chaosawakens/models/item/blue_fish.json
 75c61853bc548eb17e6f58617c597352ffde52a8 assets/chaosawakens/models/item/butter.json
+8e6afba8d177f5a840cef3d1d70bb4c1efe3efa7 assets/chaosawakens/models/item/butter_candy.json
+744c8b146cec0e045892875f6e9aa3e37de37bea assets/chaosawakens/models/item/candycane.json
 20d450322a6fb1cde46110271919d3dbe1c08c4b assets/chaosawakens/models/item/cheese.json
 d8f82467de05e53fd5f5ea4b454d14f0923cc32f assets/chaosawakens/models/item/cherries.json
 4f6c0c33ff6dcd546ee9c243bd09f797ca54701a assets/chaosawakens/models/item/cooked_bacon.json
@@ -14,6 +17,7 @@ f234f551c9847977fafd0fcbc03dc45478b18aac assets/chaosawakens/models/item/crystal
 b6d3275bc7ed434cd0c01880ea7e7f84893b81f6 assets/chaosawakens/models/item/crystal_carrot.json
 6d20c5af800ce946a9c8e00f38bbe04e14ec16b2 assets/chaosawakens/models/item/crystal_potato.json
 eaafcb93cf54f76d534c7c30627f64d06d6b745a assets/chaosawakens/models/item/fire_fish.json
+953d3a07a16b1599e6761e83764a1b583c49f4c0 assets/chaosawakens/models/item/garden_salad.json
 f8109115fa17d21aae45864b42b5ba99f3618886 assets/chaosawakens/models/item/gray_fish.json
 8b69881e5aa58846dd49404e0de5ec42b32d1164 assets/chaosawakens/models/item/green_fish.json
 d203efbf30a4312ea3ffef5f112dc2eda8eec750 assets/chaosawakens/models/item/lava_eel.json
@@ -21,13 +25,16 @@ d203efbf30a4312ea3ffef5f112dc2eda8eec750 assets/chaosawakens/models/item/lava_ee
 bbf3cf8b4d1b55110a456067dac76a36bd4de790 assets/chaosawakens/models/item/peach.json
 b1ee38661403055cae9b0b2d0c9103a4301d767b assets/chaosawakens/models/item/pink_fish.json
 e640a87e5f62b73a7dbc7c77a3a527d7ed04b046 assets/chaosawakens/models/item/quinoa.json
+ed16516e33c5a84eb38433aab7aaa0dffc5c0432 assets/chaosawakens/models/item/quinoa_salad.json
 9892f1f193b7f38c40c703df36f2c67f73d262c3 assets/chaosawakens/models/item/radish.json
-92d0d1cd0a3e7dea76dc8c38d8be9b71cea86111 assets/chaosawakens/models/item/raw_bacon.json
-9eed7a1944ef6fa4261965c40dfd6a204c3cb87a assets/chaosawakens/models/item/raw_corndog.json
-fc93abcf787b52c26e326289d83582720a1f24e2 assets/chaosawakens/models/item/raw_crab_meat.json
-c3c511f3707e6d91d267ad59e65a043337b07442 assets/chaosawakens/models/item/raw_peacock_leg.json
-23f7cbe19ed99a5540e9dbd41343dca7ab548de4 assets/chaosawakens/models/item/raw_venison.json
+46983c88b016d7f0288d36cacdb3eb855bbe9043 assets/chaosawakens/models/item/radish_stew.json
+7bd2c887ed9ad1d97ccbb49d22178b82307b66a7 assets/chaosawakens/models/item/raw_bacon.json
+9acd02cf6f700c6b9b0ad1d20f507b3ecf11ab45 assets/chaosawakens/models/item/raw_corndog.json
+c67e7108b9c25dc3ff252d1229784684308aef32 assets/chaosawakens/models/item/raw_crab_meat.json
+b2672becf559b15466a770df6b5a8103d06c0386 assets/chaosawakens/models/item/raw_peacock_leg.json
+e87ada66035e29e7e0efde671cd2922c8f5011e4 assets/chaosawakens/models/item/raw_venison.json
 c1aa47b81b3a0a1e7a1c3f577fc59173f8da71bf assets/chaosawakens/models/item/rock_fish.json
+d6d66efdab41f85b3b6400d26102dcf1cc0897b7 assets/chaosawakens/models/item/seafood_patty.json
 f61ec0bb5ba7fe991df9bb78c382a3c876ad1ded assets/chaosawakens/models/item/spark_fish.json
 2881bff84fdd7f538863cdef9bc8321870bea61f assets/chaosawakens/models/item/strawberry.json
 170f72e76a496cf5fd8f1cdbc27180a76e99fe2b assets/chaosawakens/models/item/sun_fish.json

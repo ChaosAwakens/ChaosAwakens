@@ -1,5 +1,6 @@
 package io.github.chaosawakens.util;
 
+import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.core.DefaultedRegistry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
@@ -9,12 +10,19 @@ import net.minecraft.world.level.block.Block;
 import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.Nullable;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.FileVisitOption;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.function.Supplier;
+import java.util.stream.Stream;
 
 /**
  * Utility class providing shortcut methods for commonly used registry operations (primarily arbitrary).
  */
 public final class RegistryUtil {
+    private static final ObjectArrayList<File> CACHED_PNG_TEXTURES = new ObjectArrayList<>(); // Cache datagen found textures instead of creating a new list for each iteration/method call
 
     private RegistryUtil() {
         throw new IllegalAccessError("Attempted to construct Utility Class!");
@@ -29,6 +37,104 @@ public final class RegistryUtil {
      */
     public static String getItemName(ItemLike targetItemLike) {
         return BuiltInRegistries.ITEM.getKey(targetItemLike.asItem()).getPath();
+    }
+
+    /**
+     * Attempts to retrieve the texture for the supplied {@link Item}. <b>IDE/DEV-ENV ONLY!!!</b> This will not work outside of datagen in the dev environment, as it's only meant to be used to generate data
+     * based on located textures. Mind that the registry name of the object attempting to utilise this method must EXACTLY match the name of the target texture to locate.
+     *
+     * @param targetItem The {@link Item} for which a PNG file with a matching name should be located.
+     *
+     * @return A {@link ResourceLocation}, formatted and leading to the location of the target {@linkplain Item Item's} texture path, or {@code null} if none could be found.
+     */
+    @Nullable
+    public static ResourceLocation getItemTexture(Supplier<Item> targetItem) {
+        String modId = BuiltInRegistries.ITEM.getKey(targetItem.get()).getNamespace();
+        String registryName = BuiltInRegistries.ITEM.getKey(targetItem.get()).getPath();
+        String formattedRegName = registryName.concat(".png");
+        String classpath = System.getProperty("java.class.path");
+
+        if (CACHED_PNG_TEXTURES.isEmpty()) {
+            for (String curClassPath : classpath.split(File.pathSeparator)) {
+                File curFile = new File(curClassPath);
+
+                if (curFile.isDirectory()) {
+                    try (Stream<Path> allExistingPaths = Files.walk(curFile.toPath(), FileVisitOption.FOLLOW_LINKS)) {
+                        allExistingPaths.filter(Files::isRegularFile)
+                                .filter(curPath -> curPath.toString().endsWith(".png"))
+                                .forEach(curVerifiedPath -> CACHED_PNG_TEXTURES.add(curVerifiedPath.toFile()));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
+
+        for (File curFile : CACHED_PNG_TEXTURES) {
+            if (curFile.getName().equals(formattedRegName) && curFile.getPath().contains(modId) && curFile.getPath().contains("textures\\item")) {
+                String name = curFile.getPath().replace("\\", "/");
+                name = name.substring(name.lastIndexOf("item") + "item/".length(), name.indexOf(".png"));
+
+                return new ResourceLocation(modId, name);
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * Attempts to retrieve the texture for the supplied {@link Block}. <b>IDE/DEV-ENV ONLY!!!</b> This will not work outside of datagen in the dev environment, as it's only meant to be used to generate data
+     * based on located textures. Mind that the registry name of the object attempting to utilise this method must EXACTLY match the name of the target texture to locate.
+     *
+     * @param targetBlock The {@link Block} for which a PNG file with a matching name should be located.
+     *
+     * @return A {@link ResourceLocation}, formatted and leading to the location of the target {@linkplain Block Block's} texture path, or {@code null} if none could be found.
+     */
+    @Nullable
+    public static ResourceLocation getBlockTexture(Supplier<Block> targetBlock) {
+        String modId = BuiltInRegistries.BLOCK.getKey(targetBlock.get()).getNamespace();
+        String registryName = BuiltInRegistries.BLOCK.getKey(targetBlock.get()).getPath();
+        String formattedRegName = registryName.concat(".png");
+        String classpath = System.getProperty("java.class.path");
+
+        if (CACHED_PNG_TEXTURES.isEmpty()) {
+            for (String curClassPath : classpath.split(File.pathSeparator)) {
+                File curFile = new File(curClassPath);
+
+                if (curFile.isDirectory()) {
+                    try (Stream<Path> allExistingPaths = Files.walk(curFile.toPath(), FileVisitOption.FOLLOW_LINKS)) {
+                        allExistingPaths.filter(Files::isRegularFile)
+                                .filter(curPath -> curPath.toString().endsWith(".png"))
+                                .forEach(curVerifiedPath -> CACHED_PNG_TEXTURES.add(curVerifiedPath.toFile()));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
+
+        for (File curFile : CACHED_PNG_TEXTURES) {
+            if (curFile.getName().equals(formattedRegName) && curFile.getPath().contains(modId) && curFile.getPath().contains("textures\\block")) {
+                String name = curFile.getPath().replace("\\", "/");
+                name = name.substring(name.lastIndexOf("block") + "block/".length(), name.indexOf(".png"));
+
+                return new ResourceLocation(modId, name);
+            }
+        }
+
+        return null;
+    }
+
+    public static ResourceLocation pickPrefix(ResourceLocation baseLoc, String prefix) {
+        return baseLoc.getPath().startsWith(prefix) ? baseLoc : baseLoc.withPrefix(prefix);
+    }
+
+    public static ResourceLocation pickBlockPrefix(ResourceLocation baseBlockLoc) {
+        return pickPrefix(baseBlockLoc, "block/");
+    }
+
+    public static ResourceLocation pickItemPrefix(ResourceLocation baseItemLoc) {
+        return pickPrefix(baseItemLoc, "item/");
     }
 
     @Nullable

@@ -2,8 +2,8 @@ package io.github.chaosawakens.datagen;
 
 import com.google.common.base.Preconditions;
 import io.github.chaosawakens.CAConstants;
-import io.github.chaosawakens.api.datagen.block.BlockModelDefinition;
 import io.github.chaosawakens.api.block.standard.BlockPropertyWrapper;
+import io.github.chaosawakens.api.datagen.block.BlockModelDefinition;
 import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
 import net.minecraft.client.renderer.block.model.BlockModel;
 import net.minecraft.client.renderer.block.model.ItemTransform;

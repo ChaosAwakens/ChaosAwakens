@@ -19,6 +19,8 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.function.Function;
+import java.util.function.Supplier;
 
 public class CAItemModelProvider extends ItemModelProvider {
 
@@ -41,6 +43,9 @@ public class CAItemModelProvider extends ItemModelProvider {
         if (!ItemPropertyWrapper.getMappedIpws().isEmpty()) {
             ItemPropertyWrapper.getMappedIpws().forEach((itemSupEntry, mappedIpw) -> {
                 List<ItemModelDefinition> curModelDefs = mappedIpw.getItemModelDefinitions();
+                Function<Supplier<Item>, List<ItemModelDefinition>> imdMappingFunc = mappedIpw.getIMDMappingFunction();
+
+                if (imdMappingFunc != null) curModelDefs.addAll(imdMappingFunc.apply(itemSupEntry));
 
                 if (!curModelDefs.isEmpty()) {
                     CAConstants.LOGGER.debug("[Setting Item Model]: " + itemSupEntry.get().getDescriptionId());

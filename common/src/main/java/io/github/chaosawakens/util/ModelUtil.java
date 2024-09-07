@@ -46,7 +46,8 @@ public final class ModelUtil {
      *
      * @param sixSideBlockTexture The {@link ResourceLocation} representing the texture of every side of a standard cube block.
      *                            Points to the {@code "block/"} path by default (applies to all BMD methods in this class. If they need item locations,
-     *                            those point to the {@code "item/"} path by default, with some automatically pointing towards {@code "item/block_items/"}).
+     *                            those point to the {@code "item/"} path by default, with some automatically pointing towards {@code "item/block_items/"}. Only applies
+     *                            if the path towards those textures is not auto-located by {@link RegistryUtil#getBlockTexture(Supplier)} or equivalent methods).
      *
      * @return A {@link BlockModelDefinition} with the {@link ModelTemplates#CUBE_ALL} template.
      *
@@ -54,7 +55,7 @@ public final class ModelUtil {
      */
     public static BlockModelDefinition cubeAll(ResourceLocation sixSideBlockTexture) {
         return BlockModelDefinition.of(ModelTemplates.CUBE_ALL)
-                .withTextureMapping(TextureMapping.cube(sixSideBlockTexture.withPrefix("block/")));
+                .withTextureMapping(TextureMapping.cube(RegistryUtil.pickBlockPrefix(sixSideBlockTexture)));
     }
 
     /**
@@ -106,9 +107,9 @@ public final class ModelUtil {
     public static BlockModelDefinition cubeBottomTop(ResourceLocation sideTexture, ResourceLocation bottomTexture, ResourceLocation topTexture) {
         return BlockModelDefinition.of(ModelTemplates.CUBE_BOTTOM_TOP)
                 .withTextureMapping(new TextureMapping()
-                        .put(TextureSlot.SIDE, sideTexture.withPrefix("block/"))
-                        .put(TextureSlot.BOTTOM, bottomTexture.withPrefix("block/"))
-                        .put(TextureSlot.TOP, topTexture.withPrefix("block/")));
+                        .put(TextureSlot.SIDE, RegistryUtil.pickBlockPrefix(sideTexture))
+                        .put(TextureSlot.BOTTOM, RegistryUtil.pickBlockPrefix(bottomTexture))
+                        .put(TextureSlot.TOP, RegistryUtil.pickBlockPrefix(topTexture)));
     }
 
     /**
@@ -191,9 +192,9 @@ public final class ModelUtil {
     public static BlockModelDefinition slabBottom(ResourceLocation sideTexture, ResourceLocation bottomTexture, ResourceLocation topTexture) {
         return BlockModelDefinition.of(ModelTemplates.SLAB_BOTTOM)
                 .withTextureMapping(new TextureMapping()
-                        .put(TextureSlot.SIDE, sideTexture.withPrefix("block/"))
-                        .put(TextureSlot.BOTTOM, bottomTexture.withPrefix("block/"))
-                        .put(TextureSlot.TOP, topTexture.withPrefix("block/")));
+                        .put(TextureSlot.SIDE, RegistryUtil.pickBlockPrefix(sideTexture))
+                        .put(TextureSlot.BOTTOM, RegistryUtil.pickBlockPrefix(bottomTexture))
+                        .put(TextureSlot.TOP, RegistryUtil.pickBlockPrefix(topTexture)));
     }
 
     /**
@@ -289,9 +290,9 @@ public final class ModelUtil {
     public static BlockModelDefinition slabTop(ResourceLocation sideTexture, ResourceLocation bottomTexture, ResourceLocation topTexture) {
         return BlockModelDefinition.of(ModelTemplates.SLAB_TOP)
                 .withTextureMapping(new TextureMapping()
-                        .put(TextureSlot.SIDE, sideTexture.withPrefix("block/"))
-                        .put(TextureSlot.BOTTOM, bottomTexture.withPrefix("block/"))
-                        .put(TextureSlot.TOP, topTexture.withPrefix("block/")));
+                        .put(TextureSlot.SIDE, RegistryUtil.pickBlockPrefix(sideTexture))
+                        .put(TextureSlot.BOTTOM, RegistryUtil.pickBlockPrefix(bottomTexture))
+                        .put(TextureSlot.TOP, RegistryUtil.pickBlockPrefix(topTexture)));
     }
 
     /**
@@ -676,9 +677,9 @@ public final class ModelUtil {
      */
     public static BlockModelDefinition cross(ResourceLocation baseCrossTexture) {
         return BlockModelDefinition.of(ModelTemplates.CROSS)
-                .withTextureMapping(TextureMapping.cross(baseCrossTexture.withPrefix("block/")))
+                .withTextureMapping(TextureMapping.cross(RegistryUtil.pickBlockPrefix(baseCrossTexture)))
                 .withCustomItemModel(ItemModelDefinition.of(ModelTemplates.FLAT_ITEM)
-                        .withTextureMapping(TextureMapping.layer0(baseCrossTexture.withPrefix("block/"))));
+                        .withTextureMapping(TextureMapping.layer0(RegistryUtil.pickBlockPrefix(baseCrossTexture))));
     }
 
     /**
@@ -727,7 +728,7 @@ public final class ModelUtil {
      */
     public static BlockModelDefinition cubeColumn(ResourceLocation sideTexture, ResourceLocation endTexture) {
         return BlockModelDefinition.of(ModelTemplates.CUBE_COLUMN)
-                .withTextureMapping(TextureMapping.column(sideTexture.withPrefix("block/"), endTexture.withPrefix("block/")));
+                .withTextureMapping(TextureMapping.column(RegistryUtil.pickBlockPrefix(sideTexture), RegistryUtil.pickBlockPrefix(endTexture)));
     }
 
     /**
@@ -782,7 +783,7 @@ public final class ModelUtil {
      */
     public static BlockModelDefinition cubeColumnHorizontal(ResourceLocation sideTexture, ResourceLocation endTexture) {
         return BlockModelDefinition.of(ModelTemplates.CUBE_COLUMN_HORIZONTAL)
-                .withTextureMapping(TextureMapping.column(sideTexture.withPrefix("block/"), endTexture.withPrefix("block/")));
+                .withTextureMapping(TextureMapping.column(RegistryUtil.pickBlockPrefix(sideTexture), RegistryUtil.pickBlockPrefix(endTexture)));
     }
 
     /**
@@ -1130,10 +1131,10 @@ public final class ModelUtil {
      */
     public static BlockModelDefinition doorBottomLeft(ResourceLocation doorTopTexture, ResourceLocation doorBottomTexture, ResourceLocation doorItemTexture) {
         return BlockModelDefinition.of(ModelTemplates.DOOR_BOTTOM_LEFT)
-                .withTextureMapping(TextureMapping.door(doorTopTexture.withPrefix("block/"), doorBottomTexture.withPrefix("block/")))
+                .withTextureMapping(TextureMapping.door(RegistryUtil.pickBlockPrefix(doorTopTexture), RegistryUtil.pickBlockPrefix(doorBottomTexture)))
                 .withBlockRenderType(new ResourceLocation(RenderType.cutout().name))
                 .withCustomItemModel(ItemModelDefinition.of(ModelTemplates.FLAT_ITEM)
-                        .withTextureMapping(TextureMapping.layer0(doorItemTexture.withPrefix("item/"))));
+                        .withTextureMapping(TextureMapping.layer0(RegistryUtil.pickItemPrefix(doorItemTexture))));
     }
 
     /**
@@ -1179,10 +1180,10 @@ public final class ModelUtil {
      */
     public static BlockModelDefinition doorBottomLeftOpen(ResourceLocation doorTopTexture, ResourceLocation doorBottomTexture, ResourceLocation doorItemTexture) {
         return BlockModelDefinition.of(ModelTemplates.DOOR_BOTTOM_LEFT_OPEN)
-                .withTextureMapping(TextureMapping.door(doorTopTexture.withPrefix("block/"), doorBottomTexture.withPrefix("block/")))
+                .withTextureMapping(TextureMapping.door(RegistryUtil.pickBlockPrefix(doorTopTexture), RegistryUtil.pickBlockPrefix(doorBottomTexture)))
                 .withBlockRenderType(new ResourceLocation(RenderType.cutout().name))
                 .withCustomItemModel(ItemModelDefinition.of(ModelTemplates.FLAT_ITEM)
-                        .withTextureMapping(TextureMapping.layer0(doorItemTexture.withPrefix("item/"))));
+                        .withTextureMapping(TextureMapping.layer0(RegistryUtil.pickItemPrefix(doorItemTexture))));
     }
 
     /**
@@ -1228,10 +1229,10 @@ public final class ModelUtil {
      */
     public static BlockModelDefinition doorTopLeft(ResourceLocation doorTopTexture, ResourceLocation doorBottomTexture, ResourceLocation doorItemTexture) {
         return BlockModelDefinition.of(ModelTemplates.DOOR_TOP_LEFT)
-                .withTextureMapping(TextureMapping.door(doorTopTexture.withPrefix("block/"), doorBottomTexture.withPrefix("block/")))
+                .withTextureMapping(TextureMapping.door(RegistryUtil.pickBlockPrefix(doorTopTexture), RegistryUtil.pickBlockPrefix(doorBottomTexture)))
                 .withBlockRenderType(new ResourceLocation(RenderType.cutout().name))
                 .withCustomItemModel(ItemModelDefinition.of(ModelTemplates.FLAT_ITEM)
-                        .withTextureMapping(TextureMapping.layer0(doorItemTexture.withPrefix("item/"))));
+                        .withTextureMapping(TextureMapping.layer0(RegistryUtil.pickItemPrefix(doorItemTexture))));
     }
 
     /**
@@ -1277,10 +1278,10 @@ public final class ModelUtil {
      */
     public static BlockModelDefinition doorTopLeftOpen(ResourceLocation doorTopTexture, ResourceLocation doorBottomTexture, ResourceLocation doorItemTexture) {
         return BlockModelDefinition.of(ModelTemplates.DOOR_TOP_LEFT_OPEN)
-                .withTextureMapping(TextureMapping.door(doorTopTexture.withPrefix("block/"), doorBottomTexture.withPrefix("block/")))
+                .withTextureMapping(TextureMapping.door(RegistryUtil.pickBlockPrefix(doorTopTexture), RegistryUtil.pickBlockPrefix(doorBottomTexture)))
                 .withBlockRenderType(new ResourceLocation(RenderType.cutout().name))
                 .withCustomItemModel(ItemModelDefinition.of(ModelTemplates.FLAT_ITEM)
-                        .withTextureMapping(TextureMapping.layer0(doorItemTexture.withPrefix("item/"))));
+                        .withTextureMapping(TextureMapping.layer0(RegistryUtil.pickItemPrefix(doorItemTexture))));
     }
 
     /**
@@ -1326,10 +1327,10 @@ public final class ModelUtil {
      */
     public static BlockModelDefinition doorBottomRight(ResourceLocation doorTopTexture, ResourceLocation doorBottomTexture, ResourceLocation doorItemTexture) {
         return BlockModelDefinition.of(ModelTemplates.DOOR_BOTTOM_RIGHT)
-                .withTextureMapping(TextureMapping.door(doorTopTexture.withPrefix("block/"), doorBottomTexture.withPrefix("block/")))
+                .withTextureMapping(TextureMapping.door(RegistryUtil.pickBlockPrefix(doorTopTexture), RegistryUtil.pickBlockPrefix(doorBottomTexture)))
                 .withBlockRenderType(new ResourceLocation(RenderType.cutout().name))
                 .withCustomItemModel(ItemModelDefinition.of(ModelTemplates.FLAT_ITEM)
-                        .withTextureMapping(TextureMapping.layer0(doorItemTexture.withPrefix("item/"))));
+                        .withTextureMapping(TextureMapping.layer0(RegistryUtil.pickItemPrefix(doorItemTexture))));
     }
 
     /**
@@ -1375,10 +1376,10 @@ public final class ModelUtil {
      */
     public static BlockModelDefinition doorBottomRightOpen(ResourceLocation doorTopTexture, ResourceLocation doorBottomTexture, ResourceLocation doorItemTexture) {
         return BlockModelDefinition.of(ModelTemplates.DOOR_BOTTOM_RIGHT_OPEN)
-                .withTextureMapping(TextureMapping.door(doorTopTexture.withPrefix("block/"), doorBottomTexture.withPrefix("block/")))
+                .withTextureMapping(TextureMapping.door(RegistryUtil.pickBlockPrefix(doorTopTexture), RegistryUtil.pickBlockPrefix(doorBottomTexture)))
                 .withBlockRenderType(new ResourceLocation(RenderType.cutout().name))
                 .withCustomItemModel(ItemModelDefinition.of(ModelTemplates.FLAT_ITEM)
-                        .withTextureMapping(TextureMapping.layer0(doorItemTexture.withPrefix("item/"))));
+                        .withTextureMapping(TextureMapping.layer0(RegistryUtil.pickItemPrefix(doorItemTexture))));
     }
 
     /**
@@ -1424,10 +1425,10 @@ public final class ModelUtil {
      */
     public static BlockModelDefinition doorTopRight(ResourceLocation doorTopTexture, ResourceLocation doorBottomTexture, ResourceLocation doorItemTexture) {
         return BlockModelDefinition.of(ModelTemplates.DOOR_TOP_RIGHT)
-                .withTextureMapping(TextureMapping.door(doorTopTexture.withPrefix("block/"), doorBottomTexture.withPrefix("block/")))
+                .withTextureMapping(TextureMapping.door(RegistryUtil.pickBlockPrefix(doorTopTexture), RegistryUtil.pickBlockPrefix(doorBottomTexture)))
                 .withBlockRenderType(new ResourceLocation(RenderType.cutout().name))
                 .withCustomItemModel(ItemModelDefinition.of(ModelTemplates.FLAT_ITEM)
-                        .withTextureMapping(TextureMapping.layer0(doorItemTexture.withPrefix("item/"))));
+                        .withTextureMapping(TextureMapping.layer0(RegistryUtil.pickItemPrefix(doorItemTexture))));
     }
 
     /**
@@ -1473,10 +1474,10 @@ public final class ModelUtil {
      */
     public static BlockModelDefinition doorTopRightOpen(ResourceLocation doorTopTexture, ResourceLocation doorBottomTexture, ResourceLocation doorItemTexture) {
         return BlockModelDefinition.of(ModelTemplates.DOOR_TOP_RIGHT_OPEN)
-                .withTextureMapping(TextureMapping.door(doorTopTexture.withPrefix("block/"), doorBottomTexture.withPrefix("block/")))
+                .withTextureMapping(TextureMapping.door(RegistryUtil.pickBlockPrefix(doorTopTexture), RegistryUtil.pickBlockPrefix(doorBottomTexture)))
                 .withBlockRenderType(new ResourceLocation(RenderType.cutout().name))
                 .withCustomItemModel(ItemModelDefinition.of(ModelTemplates.FLAT_ITEM)
-                        .withTextureMapping(TextureMapping.layer0(doorItemTexture.withPrefix("item/"))));
+                        .withTextureMapping(TextureMapping.layer0(RegistryUtil.pickItemPrefix(doorItemTexture))));
     }
 
     /**
@@ -2001,21 +2002,21 @@ public final class ModelUtil {
 
     public static BlockModelDefinition trapdoorOpen(ResourceLocation trapdoorTexture, ResourceLocation trapDoorItemParentBlockModel) {
         return BlockModelDefinition.of(ModelTemplates.TRAPDOOR_OPEN)
-                .withTextureMapping(TextureMapping.defaultTexture(trapdoorTexture.withPrefix("block/")))
+                .withTextureMapping(TextureMapping.defaultTexture(RegistryUtil.pickBlockPrefix(trapdoorTexture)))
                 .withBlockRenderType(new ResourceLocation(RenderType.cutout().name))
                 .withCustomItemModel(ItemModelDefinition.of(CAModelTemplates.of(trapDoorItemParentBlockModel)));
     }
 
     public static BlockModelDefinition trapdoorTop(ResourceLocation trapdoorTexture, ResourceLocation trapDoorItemParentBlockModel) {
         return BlockModelDefinition.of(ModelTemplates.TRAPDOOR_TOP)
-                .withTextureMapping(TextureMapping.defaultTexture(trapdoorTexture.withPrefix("block/")))
+                .withTextureMapping(TextureMapping.defaultTexture(RegistryUtil.pickBlockPrefix(trapdoorTexture)))
                 .withBlockRenderType(new ResourceLocation(RenderType.cutout().name))
                 .withCustomItemModel(ItemModelDefinition.of(CAModelTemplates.of(trapDoorItemParentBlockModel)));
     }
 
     public static BlockModelDefinition trapdoorBottom(ResourceLocation trapdoorTexture, ResourceLocation trapDoorItemParentBlockModel) {
         return BlockModelDefinition.of(ModelTemplates.TRAPDOOR_BOTTOM)
-                .withTextureMapping(TextureMapping.defaultTexture(trapdoorTexture.withPrefix("block/")))
+                .withTextureMapping(TextureMapping.defaultTexture(RegistryUtil.pickBlockPrefix(trapdoorTexture)))
                 .withBlockRenderType(new ResourceLocation(RenderType.cutout().name))
                 .withCustomItemModel(ItemModelDefinition.of(CAModelTemplates.of(trapDoorItemParentBlockModel)));
     }
@@ -2102,9 +2103,9 @@ public final class ModelUtil {
      */
     public static BlockModelDefinition sign(ResourceLocation signParticleTexture, ResourceLocation signItemTexture) {
         return BlockModelDefinition.of(ModelTemplates.PARTICLE_ONLY)
-                .withTextureMapping(TextureMapping.particle(signParticleTexture.withPrefix("block/")))
+                .withTextureMapping(TextureMapping.particle(RegistryUtil.pickBlockPrefix(signParticleTexture)))
                 .withCustomItemModel(ItemModelDefinition.of(ModelTemplates.FLAT_ITEM)
-                        .withTextureMapping(TextureMapping.layer0(signItemTexture.withPrefix("item/"))));
+                        .withTextureMapping(TextureMapping.layer0(RegistryUtil.pickItemPrefix(signItemTexture))));
     }
 
     public static ObjectArrayList<BlockModelDefinition> sign(ResourceLocation signParticleTexture, ResourceLocation ceilingHangingSignTexture, ResourceLocation signItemTexture, String ceilingHangingSignModelName) {
@@ -2115,9 +2116,9 @@ public final class ModelUtil {
     public static BlockModelDefinition stairsStraight(ResourceLocation straightStairsTopTexture, ResourceLocation straightStairsSideTexture, ResourceLocation straightStairsBottomTexture) {
         return BlockModelDefinition.of(ModelTemplates.STAIRS_STRAIGHT)
                 .withTextureMapping(new TextureMapping()
-                        .put(TextureSlot.TOP, straightStairsTopTexture.withPrefix("block/"))
-                        .put(TextureSlot.SIDE, straightStairsSideTexture.withPrefix("block/"))
-                        .put(TextureSlot.BOTTOM, straightStairsBottomTexture.withPrefix("block/")));
+                        .put(TextureSlot.TOP, RegistryUtil.pickBlockPrefix(straightStairsTopTexture))
+                        .put(TextureSlot.SIDE, RegistryUtil.pickBlockPrefix(straightStairsSideTexture))
+                        .put(TextureSlot.BOTTOM, RegistryUtil.pickBlockPrefix(straightStairsBottomTexture)));
     }
 
     public static BlockModelDefinition stairsStraight(ResourceLocation straightStairsTexture) {
@@ -2127,9 +2128,9 @@ public final class ModelUtil {
     public static BlockModelDefinition stairsInner(ResourceLocation innerStairsTopTexture, ResourceLocation innerStairsSideTexture, ResourceLocation innerStairsBottomTexture) {
         return BlockModelDefinition.of(ModelTemplates.STAIRS_INNER)
                 .withTextureMapping(new TextureMapping()
-                        .put(TextureSlot.TOP, innerStairsTopTexture.withPrefix("block/"))
-                        .put(TextureSlot.SIDE, innerStairsSideTexture.withPrefix("block/"))
-                        .put(TextureSlot.BOTTOM, innerStairsBottomTexture.withPrefix("block/")));
+                        .put(TextureSlot.TOP, RegistryUtil.pickBlockPrefix(innerStairsTopTexture))
+                        .put(TextureSlot.SIDE, RegistryUtil.pickBlockPrefix(innerStairsSideTexture))
+                        .put(TextureSlot.BOTTOM, RegistryUtil.pickBlockPrefix(innerStairsBottomTexture)));
     }
 
     public static BlockModelDefinition stairsInner(ResourceLocation innerStairsTexture) {
@@ -2139,9 +2140,9 @@ public final class ModelUtil {
     public static BlockModelDefinition stairsOuter(ResourceLocation outerStairsTopTexture, ResourceLocation outerStairsSideTexture, ResourceLocation outerStairsBottomTexture) {
         return BlockModelDefinition.of(ModelTemplates.STAIRS_OUTER)
                 .withTextureMapping(new TextureMapping()
-                        .put(TextureSlot.TOP, outerStairsTopTexture.withPrefix("block/"))
-                        .put(TextureSlot.SIDE, outerStairsSideTexture.withPrefix("block/"))
-                        .put(TextureSlot.BOTTOM, outerStairsBottomTexture.withPrefix("block/")));
+                        .put(TextureSlot.TOP, RegistryUtil.pickBlockPrefix(outerStairsTopTexture))
+                        .put(TextureSlot.SIDE, RegistryUtil.pickBlockPrefix(outerStairsSideTexture))
+                        .put(TextureSlot.BOTTOM, RegistryUtil.pickBlockPrefix(outerStairsBottomTexture)));
     }
 
     public static BlockModelDefinition stairsOuter(ResourceLocation outerStairsTexture) {
@@ -2337,19 +2338,19 @@ public final class ModelUtil {
 
     public static BlockModelDefinition buttonDefault(ResourceLocation buttonTexture, ResourceLocation buttonItemParentBlockModel) {
         return BlockModelDefinition.of(ModelTemplates.BUTTON)
-                .withTextureMapping(TextureMapping.defaultTexture(buttonTexture.withPrefix("block/")))
+                .withTextureMapping(TextureMapping.defaultTexture(RegistryUtil.pickBlockPrefix(buttonTexture)))
                 .withCustomItemModel(ItemModelDefinition.of(CAModelTemplates.of(buttonItemParentBlockModel)));
     }
 
     public static BlockModelDefinition buttonPressed(ResourceLocation buttonTexture, ResourceLocation buttonItemParentBlockModel) {
         return BlockModelDefinition.of(ModelTemplates.BUTTON_PRESSED)
-                .withTextureMapping(TextureMapping.defaultTexture(buttonTexture.withPrefix("block/")))
+                .withTextureMapping(TextureMapping.defaultTexture(RegistryUtil.pickBlockPrefix(buttonTexture)))
                 .withCustomItemModel(ItemModelDefinition.of(CAModelTemplates.of(buttonItemParentBlockModel)));
     }
 
     public static BlockModelDefinition buttonInventory(ResourceLocation buttonTexture, ResourceLocation buttonItemParentBlockModel) {
         return BlockModelDefinition.of(ModelTemplates.BUTTON_INVENTORY)
-                .withTextureMapping(TextureMapping.defaultTexture(buttonTexture.withPrefix("block/")))
+                .withTextureMapping(TextureMapping.defaultTexture(RegistryUtil.pickBlockPrefix(buttonTexture)))
                 .withCustomItemModel(ItemModelDefinition.of(CAModelTemplates.of(buttonItemParentBlockModel)));
     }
 
@@ -2416,12 +2417,12 @@ public final class ModelUtil {
 
     public static BlockModelDefinition pressurePlateDown(ResourceLocation pressurePlateTexture) {
         return BlockModelDefinition.of(ModelTemplates.PRESSURE_PLATE_DOWN)
-                .withTextureMapping(TextureMapping.defaultTexture(pressurePlateTexture.withPrefix("block/")));
+                .withTextureMapping(TextureMapping.defaultTexture(RegistryUtil.pickBlockPrefix(pressurePlateTexture)));
     }
 
     public static BlockModelDefinition pressurePlateUp(ResourceLocation pressurePlateTexture) {
         return BlockModelDefinition.of(ModelTemplates.PRESSURE_PLATE_UP)
-                .withTextureMapping(TextureMapping.defaultTexture(pressurePlateTexture.withPrefix("block/")));
+                .withTextureMapping(TextureMapping.defaultTexture(RegistryUtil.pickBlockPrefix(pressurePlateTexture)));
     }
 
     public static ObjectArrayList<BlockModelDefinition> pressurePlate(ResourceLocation pressurePlateDownTexture, ResourceLocation pressurePlateUpTexture) {
@@ -2448,19 +2449,19 @@ public final class ModelUtil {
 
     public static BlockModelDefinition fencePost(ResourceLocation fenceTexture, ResourceLocation fenceItemParentBlockModel) {
         return BlockModelDefinition.of(ModelTemplates.FENCE_POST)
-                .withTextureMapping(TextureMapping.defaultTexture(fenceTexture.withPrefix("block/")))
+                .withTextureMapping(TextureMapping.defaultTexture(RegistryUtil.pickBlockPrefix(fenceTexture)))
                 .withCustomItemModel(ItemModelDefinition.of(CAModelTemplates.of(fenceItemParentBlockModel)));
     }
 
     public static BlockModelDefinition fenceSide(ResourceLocation fenceTexture, ResourceLocation fenceItemParentBlockModel) {
         return BlockModelDefinition.of(ModelTemplates.FENCE_SIDE)
-                .withTextureMapping(TextureMapping.defaultTexture(fenceTexture.withPrefix("block/")))
+                .withTextureMapping(TextureMapping.defaultTexture(RegistryUtil.pickBlockPrefix(fenceTexture)))
                 .withCustomItemModel(ItemModelDefinition.of(CAModelTemplates.of(fenceItemParentBlockModel)));
     }
 
     public static BlockModelDefinition fenceInventory(ResourceLocation fenceTexture, ResourceLocation fenceItemParentBlockModel) {
         return BlockModelDefinition.of(ModelTemplates.FENCE_INVENTORY)
-                .withTextureMapping(TextureMapping.defaultTexture(fenceTexture.withPrefix("block/")))
+                .withTextureMapping(TextureMapping.defaultTexture(RegistryUtil.pickBlockPrefix(fenceTexture)))
                 .withCustomItemModel(ItemModelDefinition.of(CAModelTemplates.of(fenceItemParentBlockModel)));
     }
 
@@ -2503,22 +2504,22 @@ public final class ModelUtil {
 
     public static BlockModelDefinition fenceGateClosed(ResourceLocation fenceGateTexture) {
         return BlockModelDefinition.of(ModelTemplates.FENCE_GATE_CLOSED)
-                .withTextureMapping(TextureMapping.defaultTexture(fenceGateTexture.withPrefix("block/")));
+                .withTextureMapping(TextureMapping.defaultTexture(RegistryUtil.pickBlockPrefix(fenceGateTexture)));
     }
 
     public static BlockModelDefinition fenceGateOpen(ResourceLocation fenceGateOpenTexture) {
         return BlockModelDefinition.of(ModelTemplates.FENCE_GATE_OPEN)
-                .withTextureMapping(TextureMapping.defaultTexture(fenceGateOpenTexture.withPrefix("block/")));
+                .withTextureMapping(TextureMapping.defaultTexture(RegistryUtil.pickBlockPrefix(fenceGateOpenTexture)));
     }
 
     public static BlockModelDefinition fenceGateWall(ResourceLocation fenceGateWallTexture) {
         return BlockModelDefinition.of(ModelTemplates.FENCE_GATE_WALL_CLOSED)
-                .withTextureMapping(TextureMapping.defaultTexture(fenceGateWallTexture.withPrefix("block/")));
+                .withTextureMapping(TextureMapping.defaultTexture(RegistryUtil.pickBlockPrefix(fenceGateWallTexture)));
     }
 
     public static BlockModelDefinition fenceGateWallOpen(ResourceLocation fenceGateWallOpenTexture) {
         return BlockModelDefinition.of(ModelTemplates.FENCE_GATE_WALL_OPEN)
-                .withTextureMapping(TextureMapping.defaultTexture(fenceGateWallOpenTexture.withPrefix("block/")));
+                .withTextureMapping(TextureMapping.defaultTexture(RegistryUtil.pickBlockPrefix(fenceGateWallOpenTexture)));
     }
 
     public static ObjectArrayList<BlockModelDefinition> fenceGate(ResourceLocation fenceGateTexture, ResourceLocation fenceGateOpenTexture, ResourceLocation fenceGateWallTexture, ResourceLocation fenceGateWallOpenTexture) {
@@ -2566,25 +2567,25 @@ public final class ModelUtil {
 
     public static BlockModelDefinition wallPost(ResourceLocation wallPostTexture, ResourceLocation wallInventoryModel) {
         return BlockModelDefinition.of(ModelTemplates.WALL_POST)
-                .withTextureMapping(new TextureMapping().put(TextureSlot.WALL, wallPostTexture.withPrefix("block/")))
+                .withTextureMapping(new TextureMapping().put(TextureSlot.WALL, RegistryUtil.pickBlockPrefix(wallPostTexture)))
                 .withCustomItemModel(ItemModelDefinition.of(CAModelTemplates.of(wallInventoryModel)));
     }
 
     public static BlockModelDefinition wallSide(ResourceLocation wallSideTexture, ResourceLocation wallInventoryModel) {
         return BlockModelDefinition.of(ModelTemplates.WALL_LOW_SIDE)
-                .withTextureMapping(new TextureMapping().put(TextureSlot.WALL, wallSideTexture.withPrefix("block/")))
+                .withTextureMapping(new TextureMapping().put(TextureSlot.WALL, RegistryUtil.pickBlockPrefix(wallSideTexture)))
                 .withCustomItemModel(ItemModelDefinition.of(CAModelTemplates.of(wallInventoryModel)));
     }
 
     public static BlockModelDefinition wallSideTall(ResourceLocation wallSideTallTexture, ResourceLocation wallInventoryModel) {
         return BlockModelDefinition.of(ModelTemplates.WALL_TALL_SIDE)
-                .withTextureMapping(new TextureMapping().put(TextureSlot.WALL, wallSideTallTexture.withPrefix("block/")))
+                .withTextureMapping(new TextureMapping().put(TextureSlot.WALL, RegistryUtil.pickBlockPrefix(wallSideTallTexture)))
                 .withCustomItemModel(ItemModelDefinition.of(CAModelTemplates.of(wallInventoryModel)));
     }
 
     public static BlockModelDefinition wallInventory(ResourceLocation wallInventoryTexture, ResourceLocation wallInventoryModel) {
         return BlockModelDefinition.of(ModelTemplates.WALL_INVENTORY)
-                .withTextureMapping(new TextureMapping().put(TextureSlot.WALL, wallInventoryTexture.withPrefix("block/")))
+                .withTextureMapping(new TextureMapping().put(TextureSlot.WALL, RegistryUtil.pickBlockPrefix(wallInventoryTexture)))
                 .withCustomItemModel(ItemModelDefinition.of(CAModelTemplates.of(wallInventoryModel)));
     }
 
@@ -2647,16 +2648,16 @@ public final class ModelUtil {
 
     public static BlockModelDefinition standingTorch(ResourceLocation torchTexture, ResourceLocation torchItemTexture) {
         return BlockModelDefinition.of(ModelTemplates.TORCH)
-                .withTextureMapping(TextureMapping.torch(torchTexture.withPrefix("block/")))
+                .withTextureMapping(TextureMapping.torch(RegistryUtil.pickBlockPrefix(torchTexture)))
                 .withCustomItemModel(ItemModelDefinition.of(ModelTemplates.FLAT_ITEM)
-                        .withTextureMapping(TextureMapping.layer0(torchItemTexture.withPrefix("item/"))));
+                        .withTextureMapping(TextureMapping.layer0(RegistryUtil.pickItemPrefix(torchItemTexture))));
     }
 
     public static BlockModelDefinition wallTorch(ResourceLocation torchTexture, ResourceLocation torchItemTexture) {
         return BlockModelDefinition.of(ModelTemplates.WALL_TORCH)
-                .withTextureMapping(TextureMapping.torch(torchTexture.withPrefix("block/")))
+                .withTextureMapping(TextureMapping.torch(RegistryUtil.pickBlockPrefix(torchTexture)))
                 .withCustomItemModel(ItemModelDefinition.of(ModelTemplates.FLAT_ITEM)
-                        .withTextureMapping(TextureMapping.layer0(torchItemTexture.withPrefix("item/"))));
+                        .withTextureMapping(TextureMapping.layer0(RegistryUtil.pickItemPrefix(torchItemTexture))));
     }
 
     public static ObjectArrayList<BlockModelDefinition> torch(ResourceLocation torchTexture, ResourceLocation wallTorchTexture, ResourceLocation torchItemTexture) {
@@ -2809,6 +2810,11 @@ public final class ModelUtil {
 
     public static ItemModelDefinition generated(ResourceLocation itemTexture) {
         return ItemModelDefinition.of(ModelTemplates.FLAT_ITEM)
-                .withTextureMapping(TextureMapping.layer0(itemTexture.withPrefix("item/")));
+                .withTextureMapping(TextureMapping.layer0(RegistryUtil.pickItemPrefix(itemTexture)));
+    }
+
+    public static ItemModelDefinition handheld(ResourceLocation itemTexture) {
+        return ItemModelDefinition.of(ModelTemplates.FLAT_HANDHELD_ITEM)
+                .withTextureMapping(TextureMapping.layer0(RegistryUtil.pickItemPrefix(itemTexture)));
     }
 }
