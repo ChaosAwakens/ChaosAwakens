@@ -11,6 +11,7 @@ import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -121,8 +122,10 @@ public class BlockPropertyWrapper { //TODO Maybe type param this for blocks
                     .withSetTags(parentTemplateWrapper.builder.parentTags)
                     .withLootTable(parentTemplateWrapper.builder.blockLootTableBuilder)
                     .withSetCustomModelDefinitions(parentTemplateWrapper.builder.blockModelDefinitions)
+                    .withCustomModelDefinitions(parentTemplateWrapper.builder.bmdMappingFunc)
                     .withBlockStateDefinition(parentTemplateWrapper.builder.blockStateDefinition)
                     .withRecipe(parentTemplateWrapper.builder.recipeBuilderFunction)
+                    .withSetParentCreativeModeTabs(List.copyOf(parentTemplateWrapper.builder.parentTabs))
                     .build(); // Direct setting of the builder would copy the entire object itself, which would in-turn overwrite it if any calls are made to the copied BPW afterward
 
             return newTemplateWrapper;
@@ -154,8 +157,10 @@ public class BlockPropertyWrapper { //TODO Maybe type param this for blocks
                     .withSetTags(List.copyOf(parentWrapper.builder.parentTags))
                     .withLootTable(parentWrapper.builder.blockLootTableBuilder)
                     .withSetCustomModelDefinitions(List.copyOf(parentWrapper.builder.blockModelDefinitions))
+                    .withCustomModelDefinitions(parentWrapper.builder.bmdMappingFunc)
                     .withBlockStateDefinition(parentWrapper.builder.blockStateDefinition)
                     .withRecipe(parentWrapper.builder.recipeBuilderFunction)
+                    .withSetParentCreativeModeTabs(List.copyOf(parentWrapper.builder.parentTabs))
                     .build(); // Direct setting of the builder would copy the entire object itself, which would in-turn overwrite it if any calls are made to the copied BPW afterward
 
             return newWrapper;
@@ -188,8 +193,10 @@ public class BlockPropertyWrapper { //TODO Maybe type param this for blocks
                     .withSetTags(List.copyOf(originalWrapper.builder.parentTags))
                     .withLootTable(originalWrapper.builder.blockLootTableBuilder)
                     .withSetCustomModelDefinitions(List.copyOf(originalWrapper.builder.blockModelDefinitions))
+                    .withCustomModelDefinitions(originalWrapper.builder.bmdMappingFunc)
                     .withBlockStateDefinition(originalWrapper.builder.blockStateDefinition)
                     .withRecipe(originalWrapper.builder.recipeBuilderFunction)
+                    .withSetParentCreativeModeTabs(List.copyOf(originalWrapper.builder.parentTabs))
                     .build(); // Direct setting of the builder would copy the entire object itself, which would in-turn overwrite it if any calls are made to the copied BPW afterward
 
             return newWrapper;
@@ -296,6 +303,18 @@ public class BlockPropertyWrapper { //TODO Maybe type param this for blocks
     }
 
     /**
+     * Gets the {@code Function<Supplier<Block>, List<BlockModelDefinition>>} from the {@link #builder()} if the builder exists, and it is defined within said builder.
+     * May be {@code null}.
+     *
+     * @return The {@code Function<Supplier<Block>, List<BlockModelDefinition>>}, or {@code null} if the {@link #builder()} is {@code null} || it isn't defined within said builder.
+     */
+    @Nullable
+    public Function<Supplier<Block>, List<BlockModelDefinition>> getBMDMappingFunction() {
+        return builder == null ? null : builder.bmdMappingFunc;
+    }
+
+
+    /**
      * Gets the {@code Function<Supplier<Block>, BlockStateDefinition>} from the {@link #builder()} if the builder exists, and it is defined within said builder.
      * May be {@code null}.
      *
@@ -315,6 +334,16 @@ public class BlockPropertyWrapper { //TODO Maybe type param this for blocks
     @Nullable
     public Function<Consumer<FinishedRecipe>, Consumer<Supplier<Block>>> getRecipeMappingFunction() {
         return builder == null ? null : builder.recipeBuilderFunction;
+    }
+
+    /**
+     * Gets the {@link List} of parent {@linkplain CreativeModeTab CreativeModeTabs} from the {@link #builder()} if the builder exists, and it is defined within said builder.
+     * May be empty.
+     *
+     * @return The {@link List} of parent {@linkplain CreativeModeTab CreativeModeTabs}, or an empty {@link ObjectArrayList} if the {@link #builder()} is {@code null}.
+     */
+    public List<CreativeModeTab> getParentCreativeModeTabs() {
+        return builder == null ? ObjectArrayList.of() : builder.parentTabs;
     }
 
     /**
@@ -354,6 +383,9 @@ public class BlockPropertyWrapper { //TODO Maybe type param this for blocks
         private Function<Supplier<Block>, BlockStateDefinition> blockStateDefinition;
         @Nullable
         private Function<Consumer<FinishedRecipe>, Consumer<Supplier<Block>>> recipeBuilderFunction;
+        @Nullable
+        private Function<Supplier<Block>, List<BlockModelDefinition>> bmdMappingFunc;
+        private List<CreativeModeTab> parentTabs = new ObjectArrayList<>(); // Not datagen-related but whatever
 
         private BPWBuilder(BlockPropertyWrapper ownerWrapper, Supplier<Block> parentBlock) {
             this.ownerWrapper = ownerWrapper;
@@ -484,6 +516,7 @@ public class BlockPropertyWrapper { //TODO Maybe type param this for blocks
          * @return {@code this} (builder method).
          *
          * @see #withCustomModelDefinitions(List)
+         * @see #withCustomModelDefinitions(Function)
          */
         public BPWBuilder withCustomModelDefinition(BlockModelDefinition blockModelDefinition) {
             this.blockModelDefinitions.add(blockModelDefinition);
@@ -501,8 +534,22 @@ public class BlockPropertyWrapper { //TODO Maybe type param this for blocks
          *
          * @see #withCustomModelDefinition(BlockModelDefinition)
          */
-        public BPWBuilder withCustomModelDefinitions(List<BlockModelDefinition> blockModelDefinitions) { //TODO Actually add the native handling so that we can finally prune all these method calls
+        public BPWBuilder withCustomModelDefinitions(List<BlockModelDefinition> blockModelDefinitions) {
             this.blockModelDefinitions.addAll(blockModelDefinitions);
+            return this;
+        }
+
+        /**
+         * Sets the {@link #bmdMappingFunc} of this BPWBuilder. This is used in conjunction with {@link #blockModelDefinitions} in order to generate models for the parent BPW's {@link Block}.
+         *
+         * @param bmdMappingFunc The mapping {@link Function} used to build this BPWBuilder's parent block's model in datagen.
+         *
+         * @return {@code this} (builder method).
+         *
+         * @see #withCustomModelDefinition(BlockModelDefinition)
+         */
+        public BPWBuilder withCustomModelDefinitions(Function<Supplier<Block>, List<BlockModelDefinition>> bmdMappingFunc) {
+            this.bmdMappingFunc = bmdMappingFunc;
             return this;
         }
 
@@ -548,6 +595,43 @@ public class BlockPropertyWrapper { //TODO Maybe type param this for blocks
          */
         public BPWBuilder withRecipe(Function<Consumer<FinishedRecipe>, Consumer<Supplier<Block>>> recipeBuilderFunction) {
             this.recipeBuilderFunction = recipeBuilderFunction;
+            return this;
+        }
+
+        /**
+         * Appends a parent {@link CreativeModeTab} for the parent BPW's {@link Block} to show up in.
+         *
+         * @param parentTab The {@link CreativeModeTab} under which the parent BPW's {@link Block} will be listed/show up.
+         *
+         * @return {@code this} (builder method).
+         */
+        public BPWBuilder withParentCreativeModeTab(CreativeModeTab parentTab) {
+            this.parentTabs.add(parentTab);
+            return this;
+        }
+
+        /**
+         * Appends a {@link List} of parent {@linkplain CreativeModeTab CreativeModeTabs} for the parent BPW's {@link Block} to show up in.
+         *
+         * @param parentTabs A {@link List} of {@linkplain CreativeModeTab CreativeModeTabs} under which the parent BPW's {@link Block} will be listed/show up.
+         *
+         * @return {@code this} (builder method).
+         */
+        public BPWBuilder withParentCreativeModeTabs(List<CreativeModeTab> parentTabs) {
+            this.parentTabs.addAll(parentTabs);
+            return this;
+        }
+
+        /**
+         * Sets (does NOT append) a {@link List} of parent {@linkplain CreativeModeTab CreativeModeTabs} for the parent BPW's {@link Block} to show up in.
+         *
+         * @param parentTabs A {@link List} of {@linkplain CreativeModeTab CreativeModeTabs} under which the parent BPW's {@link Block} will be listed/show up.
+         *
+         * @return {@code this} (builder method).
+         */
+        public BPWBuilder withSetParentCreativeModeTabs(List<CreativeModeTab> parentTabs) {
+            this.parentTabs.clear();
+            this.parentTabs.addAll(parentTabs);
             return this;
         }
 

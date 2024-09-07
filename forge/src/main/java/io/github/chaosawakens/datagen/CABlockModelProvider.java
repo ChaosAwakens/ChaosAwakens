@@ -28,6 +28,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Function;
+import java.util.function.Supplier;
 
 public class CABlockModelProvider extends BlockModelProvider {
     protected final Object2ObjectLinkedOpenHashMap<ResourceLocation, ItemModelBuilder> generatedBlockItemModels = new Object2ObjectLinkedOpenHashMap<>();
@@ -48,6 +49,9 @@ public class CABlockModelProvider extends BlockModelProvider {
         if (!BlockPropertyWrapper.getMappedBpws().isEmpty()) {
             BlockPropertyWrapper.getMappedBpws().forEach((blockSupEntry, mappedBpw) -> {
                 List<BlockModelDefinition> curModelDefs = mappedBpw.getBlockModelDefinitions();
+                Function<Supplier<Block>, List<BlockModelDefinition>> bmdMappingFunc = mappedBpw.getBMDMappingFunction();
+
+                if (bmdMappingFunc != null) curModelDefs.addAll(bmdMappingFunc.apply(blockSupEntry));
 
                 if (!curModelDefs.isEmpty()) {
                     CAConstants.LOGGER.debug("[Setting Block & Item Model]: " + blockSupEntry.get().getDescriptionId());

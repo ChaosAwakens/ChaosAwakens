@@ -11,6 +11,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.flag.FeatureFlags;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import org.jetbrains.annotations.Nullable;
 
@@ -20,7 +21,7 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 
 /**
- * A wrapper class used to store information referenced in datagen to simplify creating data entries for items.
+ * A wrapper class used primarily to store information referenced in datagen to simplify creating data entries for items.
  */
 public class ItemPropertyWrapper {
     private static final Object2ObjectLinkedOpenHashMap<Supplier<Item>, ItemPropertyWrapper> MAPPED_IPWS = new Object2ObjectLinkedOpenHashMap<>();
@@ -113,6 +114,7 @@ public class ItemPropertyWrapper {
                     .withSetCustomModelDefinitions(List.copyOf(parentTemplateWrapper.builder.itemModelDefinitions))
                     .withCustomModelDefinitions(parentTemplateWrapper.builder.imdMappingFunc)
                     .withRecipe(parentTemplateWrapper.builder.recipeBuilderFunction)
+                    .withSetParentCreativeModeTabs(List.copyOf(parentTemplateWrapper.builder.parentTabs))
                     .build(); // Direct setting of the builder would copy the entire object itself, which would in-turn overwrite it if any calls are made to the copied IPW afterward
 
             return newTemplateWrapper;
@@ -145,6 +147,7 @@ public class ItemPropertyWrapper {
                     .withSetCustomModelDefinitions(List.copyOf(parentWrapper.builder.itemModelDefinitions))
                     .withCustomModelDefinitions(parentWrapper.builder.imdMappingFunc)
                     .withRecipe(parentWrapper.builder.recipeBuilderFunction)
+                    .withSetParentCreativeModeTabs(List.copyOf(parentWrapper.builder.parentTabs))
                     .build(); // Direct setting of the builder would copy the entire object itself, which would in-turn overwrite it if any calls are made to the copied IPW afterward
 
             return newWrapper;
@@ -178,6 +181,7 @@ public class ItemPropertyWrapper {
                     .withSetCustomModelDefinitions(List.copyOf(originalWrapper.builder.itemModelDefinitions))
                     .withCustomModelDefinitions(originalWrapper.builder.imdMappingFunc)
                     .withRecipe(originalWrapper.builder.recipeBuilderFunction)
+                    .withSetParentCreativeModeTabs(List.copyOf(originalWrapper.builder.parentTabs))
                     .build(); // Direct setting of the builder would copy the entire object itself, which would in-turn overwrite it if any calls are made to the copied IPW afterward
 
             return newWrapper;
@@ -208,7 +212,7 @@ public class ItemPropertyWrapper {
         if (parentAsItem.hasCraftingRemainingItem()) copiedProperties.craftRemainder(parentAsItem.getCraftingRemainingItem());
         if (parentAsItem.getFoodProperties() != null) copiedProperties.food(parentAsItem.getFoodProperties());
         if (parentAsItem.isFireResistant()) copiedProperties.fireResistant();
-        if (parentAsItem.requiredFeatures() != FeatureFlags.VANILLA_SET) copiedProperties.requiredFeatures = parentAsItem.requiredFeatures(); // Direct setting cuz the builder method is about as useful as FeatureFlags themselves in MC
+        if (parentAsItem.requiredFeatures() != FeatureFlags.VANILLA_SET) copiedProperties.requiredFeatures = parentAsItem.requiredFeatures(); // Direct setting cuz the builder method is about as useful as FeatureFlags themselves in vanilla MC
 
         return of(parentItem, CAItems.registerExternalItem(newItemRegName, () -> new Item(copiedProperties)));
     }
@@ -275,7 +279,7 @@ public class ItemPropertyWrapper {
 
     /**
      * Gets the {@link List} of {@linkplain ItemModelDefinition ItemModelDefinitions} from the {@link #builder()} if the builder exists, and it is defined within said builder.
-     * May be {@code null}.
+     * May be empty.
      *
      * @return The {@link List} of {@linkplain ItemModelDefinition ItemModelDefinitions}, or an empty {@link ObjectArrayList} if the {@link #builder()} is {@code null}.
      */
@@ -303,6 +307,16 @@ public class ItemPropertyWrapper {
     @Nullable
     public Function<Consumer<FinishedRecipe>, Consumer<Supplier<Item>>> getRecipeMappingFunction() {
         return builder == null ? null : builder.recipeBuilderFunction;
+    }
+
+    /**
+     * Gets the {@link List} of parent {@linkplain CreativeModeTab CreativeModeTabs} from the {@link #builder()} if the builder exists, and it is defined within said builder.
+     * May be empty.
+     *
+     * @return The {@link List} of parent {@linkplain CreativeModeTab CreativeModeTabs}, or an empty {@link ObjectArrayList} if the {@link #builder()} is {@code null}.
+     */
+    public List<CreativeModeTab> getParentCreativeModeTabs() {
+        return builder == null ? ObjectArrayList.of() : builder.parentTabs;
     }
 
     /**
@@ -340,6 +354,7 @@ public class ItemPropertyWrapper {
         private Function<Consumer<FinishedRecipe>, Consumer<Supplier<Item>>> recipeBuilderFunction;
         @Nullable
         private Function<Supplier<Item>, List<ItemModelDefinition>> imdMappingFunc;
+        private List<CreativeModeTab> parentTabs = new ObjectArrayList<>(); // Not datagen-related but whatever
 
         private IPWBuilder(ItemPropertyWrapper ownerWrapper, Supplier<Item> itemParent) {
             this.ownerWrapper = ownerWrapper;
@@ -512,6 +527,43 @@ public class ItemPropertyWrapper {
          */
         public IPWBuilder withRecipe(Function<Consumer<FinishedRecipe>, Consumer<Supplier<Item>>> recipeBuilderFunction) {
             this.recipeBuilderFunction = recipeBuilderFunction;
+            return this;
+        }
+
+        /**
+         * Appends a parent {@link CreativeModeTab} for the parent IPW's {@link Item} to show up in.
+         *
+         * @param parentTab The {@link CreativeModeTab} under which the parent IPW's {@link Item} will be listed/show up.
+         *
+         * @return {@code this} (builder method).
+         */
+        public IPWBuilder withParentCreativeModeTab(CreativeModeTab parentTab) {
+            this.parentTabs.add(parentTab);
+            return this;
+        }
+
+        /**
+         * Appends a {@link List} of parent {@linkplain CreativeModeTab CreativeModeTabs} for the parent IPW's {@link Item} to show up in.
+         *
+         * @param parentTabs A {@link List} of {@linkplain CreativeModeTab CreativeModeTabs} under which the parent IPW's {@link Item} will be listed/show up.
+         *
+         * @return {@code this} (builder method).
+         */
+        public IPWBuilder withParentCreativeModeTabs(List<CreativeModeTab> parentTabs) {
+            this.parentTabs.addAll(parentTabs);
+            return this;
+        }
+
+        /**
+         * Sets (does NOT append) a {@link List} of parent {@linkplain CreativeModeTab CreativeModeTabs} for the parent IPW's {@link Item} to show up in.
+         *
+         * @param parentTabs A {@link List} of {@linkplain CreativeModeTab CreativeModeTabs} under which the parent IPW's {@link Item} will be listed/show up.
+         *
+         * @return {@code this} (builder method).
+         */
+        public IPWBuilder withSetParentCreativeModeTabs(List<CreativeModeTab> parentTabs) {
+            this.parentTabs.clear();
+            this.parentTabs.addAll(parentTabs);
             return this;
         }
 

@@ -1,5 +1,10 @@
 package io.github.chaosawakens.util;
 
+import io.github.chaosawakens.api.block.standard.BlockPropertyWrapper;
+import io.github.chaosawakens.api.item.ItemPropertyWrapper;
+import io.github.chaosawakens.common.registry.CABlocks;
+import io.github.chaosawakens.common.registry.CACreativeModeTabs;
+import io.github.chaosawakens.common.registry.CAItems;
 import net.minecraft.advancements.critereon.ContextAwarePredicate;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.advancements.critereon.ItemPredicate;
@@ -16,6 +21,10 @@ import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
+
+import java.util.Optional;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.function.Supplier;
 
 /**
  * Utility class providing commonly used predicates represented as shortcut methods.
@@ -77,11 +86,35 @@ public final class PredicateUtil {
     /**
      *
      * @param stackToTest
+     * @param targetParentTab
+     *
+     * @return
+     */
+    public static boolean hasParentTab(ItemStack stackToTest, CreativeModeTab targetParentTab) { // Necessary workaround for preservation of order
+        AtomicBoolean foundMatch = new AtomicBoolean(false);
+        Optional<Supplier<Item>> optionalCAItemSup = CAItems.getItems().stream()
+                .filter(itemSup -> itemSup.get().getDescriptionId().equals(stackToTest.getDescriptionId()))
+                .findFirst();
+        Optional<Supplier<Block>> optionalCABlockSup = CABlocks.getBlocks().stream()
+                .filter(itemSup -> itemSup.get().getDescriptionId().equals(stackToTest.getDescriptionId()))
+                .findFirst();
+
+        optionalCAItemSup.ifPresent(caItemSup -> foundMatch.set(ItemPropertyWrapper.getMappedIpws().get(caItemSup).getParentCreativeModeTabs().contains(targetParentTab)));
+        optionalCABlockSup.ifPresent(caBlockSup -> foundMatch.set(BlockPropertyWrapper.getMappedBpws().get(caBlockSup).getParentCreativeModeTabs().contains(targetParentTab)));
+
+        if (!foundMatch.get()) foundMatch.set(targetParentTab.getDisplayItems().contains(stackToTest));
+
+        return foundMatch.get();
+    }
+
+    /**
+     *
+     * @param stackToTest
      *
      * @return
      */
     public static boolean isFood(ItemStack stackToTest) {
-        return stackToTest.getItem().getFoodProperties() != null;
+        return stackToTest.getItem().getFoodProperties() != null || hasParentTab(stackToTest, CACreativeModeTabs.CHAOS_AWAKENS_FOOD.get());
     }
 
     /**
@@ -121,7 +154,7 @@ public final class PredicateUtil {
      * @return
      */
     public static boolean isRegularItem(ItemStack stackToTest) {
-        return !isFood(stackToTest) && !isArmor(stackToTest) && !isEquipable(stackToTest) && !isTiered(stackToTest) && !isBlockItem(stackToTest);
+        return (!isFood(stackToTest) && !isArmor(stackToTest) && !isEquipable(stackToTest) && !isTiered(stackToTest) && !isBlockItem(stackToTest)) || hasParentTab(stackToTest, CACreativeModeTabs.CHAOS_AWAKENS_ITEMS.get());
     }
 
     /**
@@ -134,14 +167,13 @@ public final class PredicateUtil {
         return stackToTest.getItem() instanceof BlockItem;
     }
 
-
     /**
      *
      * @param stackToTest
      *
      * @return
      */
-    public static boolean isRegularBlock(ItemStack stackToTest) { //TODO Add misc checks for stuff like fossil blocks and such later on
-        return isBlockItem(stackToTest);
+    public static boolean isRegularBlock(ItemStack stackToTest) {
+        return isBlockItem(stackToTest) || hasParentTab(stackToTest, CACreativeModeTabs.CHAOS_AWAKENS_BLOCKS.get());
     }
 }

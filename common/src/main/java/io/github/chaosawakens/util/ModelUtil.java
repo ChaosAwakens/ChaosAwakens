@@ -1897,6 +1897,10 @@ public final class ModelUtil {
                         : doorTopTexture.getPath())));
     }
 
+    public static ObjectArrayList<BlockModelDefinition> door(ResourceLocation doorTexture) {
+        return door(doorTexture.withSuffix("_top"), doorTexture.withSuffix("_bottom"));
+    }
+
     public static BlockStateDefinition door(Supplier<Block> targetBlock, ResourceLocation topLeftDoorModel, ResourceLocation topLeftDoorOpenModel, ResourceLocation bottomLeftDoorModel, ResourceLocation bottomLeftDoorOpenModel, ResourceLocation topRightDoorModel, ResourceLocation topRightDoorOpenModel, ResourceLocation bottomRightDoorModel, ResourceLocation bottomRightDoorOpenModel) {
         return BlockStateDefinition.of(targetBlock).withBlockStateSupplier(MultiVariantGenerator.multiVariant(targetBlock.get()).with(
                 PropertyDispatch

@@ -29,7 +29,7 @@ public final class RegistryUtil {
     }
 
     /**
-     * Retrieves the registry name of the provided {@link ItemLike} via {@link DefaultedRegistry#getKey(Object)} (from the {@link BuiltInRegistries#ITEM} registry).
+     * Retrieves the registry name of the provided {@link ItemLike} via {@link DefaultedRegistry#getKey(Object)} (from the {@link BuiltInRegistries#ITEM}} registry).
      *
      * @param targetItemLike The {@link ItemLike} to retrieve the registry name of.
      *
@@ -40,18 +40,17 @@ public final class RegistryUtil {
     }
 
     /**
-     * Attempts to retrieve the texture for the supplied {@link Item}. <b>IDE/DEV-ENV ONLY!!!</b> This will not work outside of datagen in the dev environment, as it's only meant to be used to generate data
+     * Attempts to retrieve the texture for the supplied {@link Item} filename. <b>IDE/DEV-ENV ONLY!!!</b> This will not work outside of datagen in the dev environment, as it's only meant to be used to generate data
      * based on located textures. Mind that the registry name of the object attempting to utilise this method must EXACTLY match the name of the target texture to locate.
      *
-     * @param targetItem The {@link Item} for which a PNG file with a matching name should be located.
+     * @param modid The modid under which the texture file should be validated against and located.
+     * @param targetItemFileName The {@link String} for which a PNG file with a matching name should be located.
      *
      * @return A {@link ResourceLocation}, formatted and leading to the location of the target {@linkplain Item Item's} texture path, or {@code null} if none could be found.
      */
     @Nullable
-    public static ResourceLocation getItemTexture(Supplier<Item> targetItem) {
-        String modId = BuiltInRegistries.ITEM.getKey(targetItem.get()).getNamespace();
-        String registryName = BuiltInRegistries.ITEM.getKey(targetItem.get()).getPath();
-        String formattedRegName = registryName.concat(".png");
+    public static ResourceLocation getItemTexture(String modid, String targetItemFileName) {
+        String formattedRegName = targetItemFileName.concat(".png");
         String classpath = System.getProperty("java.class.path");
 
         if (CACHED_PNG_TEXTURES.isEmpty()) {
@@ -71,11 +70,11 @@ public final class RegistryUtil {
         }
 
         for (File curFile : CACHED_PNG_TEXTURES) {
-            if (curFile.getName().equals(formattedRegName) && curFile.getPath().contains(modId) && curFile.getPath().contains("textures\\item")) {
+            if (curFile.getName().equals(formattedRegName) && curFile.getPath().contains(modid) && curFile.getPath().contains("textures\\item")) {
                 String name = curFile.getPath().replace("\\", "/");
-                name = name.substring(name.lastIndexOf("item") + "item/".length(), name.indexOf(".png"));
+                name = name.substring(name.indexOf("item") + "item/".length(), name.indexOf(".png"));
 
-                return new ResourceLocation(modId, name);
+                return new ResourceLocation(modid, name);
             }
         }
 
@@ -83,18 +82,17 @@ public final class RegistryUtil {
     }
 
     /**
-     * Attempts to retrieve the texture for the supplied {@link Block}. <b>IDE/DEV-ENV ONLY!!!</b> This will not work outside of datagen in the dev environment, as it's only meant to be used to generate data
+     * Attempts to retrieve the texture for the supplied {@link Block} filename. <b>IDE/DEV-ENV ONLY!!!</b> This will not work outside of datagen in the dev environment, as it's only meant to be used to generate data
      * based on located textures. Mind that the registry name of the object attempting to utilise this method must EXACTLY match the name of the target texture to locate.
      *
-     * @param targetBlock The {@link Block} for which a PNG file with a matching name should be located.
+     * @param modid The modid under which the texture file should be validated against and located.
+     * @param targetBlockFileName The {@link String} for which a PNG file with a matching name should be located.
      *
      * @return A {@link ResourceLocation}, formatted and leading to the location of the target {@linkplain Block Block's} texture path, or {@code null} if none could be found.
      */
     @Nullable
-    public static ResourceLocation getBlockTexture(Supplier<Block> targetBlock) {
-        String modId = BuiltInRegistries.BLOCK.getKey(targetBlock.get()).getNamespace();
-        String registryName = BuiltInRegistries.BLOCK.getKey(targetBlock.get()).getPath();
-        String formattedRegName = registryName.concat(".png");
+    public static ResourceLocation getBlockTexture(String modid, String targetBlockFileName) {
+        String formattedRegName = targetBlockFileName.concat(".png");
         String classpath = System.getProperty("java.class.path");
 
         if (CACHED_PNG_TEXTURES.isEmpty()) {
@@ -114,15 +112,43 @@ public final class RegistryUtil {
         }
 
         for (File curFile : CACHED_PNG_TEXTURES) {
-            if (curFile.getName().equals(formattedRegName) && curFile.getPath().contains(modId) && curFile.getPath().contains("textures\\block")) {
+            if (curFile.getName().equals(formattedRegName) && curFile.getPath().contains(modid) && curFile.getPath().contains("textures\\block")) {
                 String name = curFile.getPath().replace("\\", "/");
-                name = name.substring(name.lastIndexOf("block") + "block/".length(), name.indexOf(".png"));
+                name = name.substring(name.indexOf("block") + "block/".length(), name.indexOf(".png"));
 
-                return new ResourceLocation(modId, name);
+                return new ResourceLocation(modid, name);
             }
         }
 
         return null;
+    }
+
+    /**
+     * Overloaded variant of {@link #getItemTexture(String, String)}. Attempts to retrieve the texture for the supplied {@link Item}. <b>IDE/DEV-ENV ONLY!!!</b> This will not work outside of datagen
+     * in the dev environment, as it's only meant to be used to generate data based on located textures. Mind that the registry name of the object attempting to utilise this method must EXACTLY match
+     * the name of the target texture to locate.
+     *
+     * @param targetItem The {@link Item} for which a PNG file with a matching name should be located.
+     *
+     * @return A {@link ResourceLocation}, formatted and leading to the location of the target {@linkplain Item Item's} texture path, or {@code null} if none could be found.
+     */
+    @Nullable
+    public static ResourceLocation getItemTexture(Supplier<Item> targetItem) {
+        return getItemTexture(BuiltInRegistries.ITEM.getKey(targetItem.get()).getNamespace(), BuiltInRegistries.ITEM.getKey(targetItem.get()).getPath());
+    }
+
+    /**
+     * Overloaded variant of {@link #getBlockTexture(String, String)}}. Attempts to retrieve the texture for the supplied {@link Block}. <b>IDE/DEV-ENV ONLY!!!</b> This will not work outside of datagen
+     * in the dev environment, as it's only meant to be used to generate data based on located textures. Mind that the registry name of the object attempting to utilise this method must EXACTLY match
+     * the name of the target texture to locate.
+     *
+     * @param targetBlock The {@link Block} for which a PNG file with a matching name should be located.
+     *
+     * @return A {@link ResourceLocation}, formatted and leading to the location of the target {@linkplain Block Block's} texture path, or {@code null} if none could be found.
+     */
+    @Nullable
+    public static ResourceLocation getBlockTexture(Supplier<Block> targetBlock) {
+        return getBlockTexture(BuiltInRegistries.BLOCK.getKey(targetBlock.get()).getNamespace(), BuiltInRegistries.BLOCK.getKey(targetBlock.get()).getPath());
     }
 
     public static ResourceLocation pickPrefix(ResourceLocation baseLoc, String prefix) {
@@ -138,7 +164,7 @@ public final class RegistryUtil {
     }
 
     @Nullable
-    public static Supplier<Block> getWoodFrom(Supplier<Block> targetBlock, String regNameSuffix) {
+    public static Supplier<Block> getFromWood(Supplier<Block> targetBlock, String regNameSuffix) {
         ResourceLocation targetBlockKey = BuiltInRegistries.BLOCK.getKey(targetBlock.get());
         String copiedPath = BuiltInRegistries.BLOCK.getKey(targetBlock.get()).getPath();
 
@@ -157,12 +183,12 @@ public final class RegistryUtil {
 
     @Nullable
     public static Supplier<Block> getPlanksFrom(Supplier<Block> targetBlock) {
-        return getWoodFrom(targetBlock, "_planks");
+        return getFromWood(targetBlock, "_planks");
     }
 
     @Nullable
     public static Supplier<Block> getLogFrom(Supplier<Block> targetBlock) {
-        return getWoodFrom(targetBlock, "_log");
+        return getFromWood(targetBlock, "_log");
     }
 
     @Nullable
@@ -200,8 +226,10 @@ public final class RegistryUtil {
         ResourceLocation targetItemKey = BuiltInRegistries.ITEM.getKey(targetItem.get());
         String copiedPath = BuiltInRegistries.ITEM.getKey(targetItem.get()).getPath();
 
-        return !BuiltInRegistries.ITEM.get(targetItemKey.withPrefix("cooked_")).getDescriptionId().equals("block.minecraft.air")
+        return !targetItemKey.getPath().startsWith("raw")
                 ? () -> BuiltInRegistries.ITEM.get(targetItemKey.withPrefix("cooked_"))
+                : copiedPath.startsWith("raw")
+                ? () -> BuiltInRegistries.ITEM.get(targetItemKey.withPath(copiedPath.replace("raw_", "cooked_")))
                 : null;
     }
 
@@ -211,7 +239,7 @@ public final class RegistryUtil {
         String copiedPath = BuiltInRegistries.ITEM.getKey(targetItem.get()).getPath();
         Supplier<Item> assumedCookedFood = () -> BuiltInRegistries.ITEM.get(targetItemKey.withPath(StringUtils.substringAfter(copiedPath, "cooked_")));
 
-        return copiedPath.startsWith("cooked_")
+        return targetItemKey.getPath().startsWith("cooked_")
                 ? assumedCookedFood.get().getDescriptionId().equals("block.minecraft.air")
                 ? () -> BuiltInRegistries.ITEM.get(targetItemKey.withPath(copiedPath.replace("cooked_", "raw_")))
                 : assumedCookedFood

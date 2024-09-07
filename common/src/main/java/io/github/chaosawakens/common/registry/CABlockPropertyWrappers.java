@@ -1,20 +1,21 @@
 package io.github.chaosawakens.common.registry;
 
+import io.github.chaosawakens.CAConstants;
 import io.github.chaosawakens.api.block.standard.BlockPropertyWrapper;
 import io.github.chaosawakens.util.LootUtil;
 import io.github.chaosawakens.util.ModelUtil;
 import io.github.chaosawakens.util.RecipeUtil;
+import io.github.chaosawakens.util.RegistryUtil;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 
-public final class CABlockPropertyWrappers { // Commented BMD calls out because they're meant to be examples and are actually useless in templates. Keeping them would constrain the end-developer to using setter methods rather than being free to choose between those and addendum methods
-
+public final class CABlockPropertyWrappers {
     // Basic
     public static final BlockPropertyWrapper BASIC_BLOCK = BlockPropertyWrapper.createTemplate()
             .builder()
             .withLootTable(LootUtil::dropSelf)
-    //      .withCustomModelDefinition(ModelUtil.cubeAll(CAConstants.prefix("base/template")))
+            .withCustomModelDefinitions(parentBlock -> ObjectArrayList.of(ModelUtil.cubeAll(RegistryUtil.getBlockTexture(parentBlock))))
             .withBlockStateDefinition(ModelUtil::simpleBlock)
             .build();
 
@@ -106,13 +107,13 @@ public final class CABlockPropertyWrappers { // Commented BMD calls out because 
     public static final BlockPropertyWrapper BASIC_ROTATED_PILLAR_BLOCK = BlockPropertyWrapper.createTemplate()
             .builder()
             .withLootTable(LootUtil::dropSelf)
-     //     .withCustomModelDefinitions(ModelUtil.rotatedPillarBlock(CAConstants.prefix("base/template_side"), CAConstants.prefix("base/template_end")))
+            .withCustomModelDefinitions(parentBlock -> ModelUtil.rotatedPillarBlock(RegistryUtil.getBlockTexture(parentBlock).withSuffix("_side"), RegistryUtil.getBlockTexture(parentBlock).withSuffix("_end")))
             .withBlockStateDefinition(ModelUtil::rotatedPillarBlock)
             .build();
     public static final BlockPropertyWrapper BASIC_AXIS_ALIGNED_BLOCK = BlockPropertyWrapper.createTemplate()
             .builder()
             .withLootTable(LootUtil::dropSelf)
-     //     .withCustomModelDefinition(ModelUtil.cubeColumn(CAConstants.prefix("base/template")))
+            .withCustomModelDefinitions(parentBlock -> ObjectArrayList.of(ModelUtil.cubeColumn(RegistryUtil.getBlockTexture(parentBlock))))
             .withBlockStateDefinition(ModelUtil::axisAlignedBlock)
             .build();
 
@@ -127,7 +128,7 @@ public final class CABlockPropertyWrappers { // Commented BMD calls out because 
             .withLootTable(LootUtil::dropSlab)
             .withRecipe(RecipeUtil::slabsFromPlanks)
             .withTags(ObjectArrayList.of(BlockTags.WOODEN_SLABS, BlockTags.MINEABLE_WITH_AXE, ItemTags.WOODEN_SLABS))
-  //        .withCustomModelDefinitions(ModelUtil.slab(CAConstants.prefix("base/template")))
+            .withCustomModelDefinitions(parentBlock -> ModelUtil.slab(RegistryUtil.getBlockTexture(RegistryUtil.getPlanksFrom(parentBlock))))
             .withBlockStateDefinition(ModelUtil::woodenSlab)
             .build();
 
@@ -136,7 +137,7 @@ public final class CABlockPropertyWrappers { // Commented BMD calls out because 
             .withLootTable(LootUtil::dropDoor)
             .withRecipe(RecipeUtil::doorsFromPlanks)
             .withTags(ObjectArrayList.of(BlockTags.WOODEN_DOORS, BlockTags.MINEABLE_WITH_AXE, ItemTags.WOODEN_DOORS))
-  //        .withCustomModelDefinitions(ModelUtil.door(CAConstants.prefix("base/template_door_top"), CAConstants.prefix("base/template_door_bottom")))
+            .withCustomModelDefinitions(parentBlock -> ModelUtil.door(RegistryUtil.getBlockTexture(CAConstants.MODID, RegistryUtil.getItemName(parentBlock.get()).concat("_top")), RegistryUtil.getBlockTexture(CAConstants.MODID, RegistryUtil.getItemName(parentBlock.get()).concat("_bottom"))))
             .withBlockStateDefinition(ModelUtil::door)
             .build();
     public static final BlockPropertyWrapper WOODEN_TRAPDOOR = BlockPropertyWrapper.createTemplate()
@@ -144,7 +145,7 @@ public final class CABlockPropertyWrappers { // Commented BMD calls out because 
             .withLootTable(LootUtil::dropSelf)
             .withRecipe(RecipeUtil::trapdoorsFromPlanks)
             .withTags(ObjectArrayList.of(BlockTags.WOODEN_TRAPDOORS, BlockTags.MINEABLE_WITH_AXE, ItemTags.WOODEN_TRAPDOORS))
-  //        .withCustomModelDefinitions(ModelUtil.trapdoor(CAConstants.prefix("base/template_trapdoor"), CAConstants.prefix("block/template_trapdoor_bottom")))
+            .withCustomModelDefinitions(parentBlock -> ModelUtil.trapdoor(RegistryUtil.getBlockTexture(parentBlock), CAConstants.prefix(RegistryUtil.getItemName(parentBlock.get())).withSuffix("_bottom").withPrefix("block/")))
             .withBlockStateDefinition(ModelUtil::trapdoor)
             .build();
 
@@ -153,7 +154,7 @@ public final class CABlockPropertyWrappers { // Commented BMD calls out because 
             .withLootTable(LootUtil::dropSelf)
             .withRecipe(RecipeUtil::fencesFromPlanks)
             .withTags(ObjectArrayList.of(BlockTags.WOODEN_FENCES, BlockTags.MINEABLE_WITH_AXE, ItemTags.WOODEN_FENCES))
-   //       .withCustomModelDefinitions(ModelUtil.fence(CAConstants.prefix("base/template"), CAConstants.prefix("template_fence_inventory")))
+            .withCustomModelDefinitions(parentBlock -> ModelUtil.fence(RegistryUtil.getBlockTexture(RegistryUtil.getPlanksFrom(parentBlock)), CAConstants.prefix(RegistryUtil.getItemName(parentBlock.get()).concat("_inventory")).withPrefix("block/")))
             .withBlockStateDefinition(ModelUtil::fence)
             .build();
     public static final BlockPropertyWrapper WOODEN_FENCE_GATE = BlockPropertyWrapper.createTemplate()
@@ -161,7 +162,7 @@ public final class CABlockPropertyWrappers { // Commented BMD calls out because 
             .withLootTable(LootUtil::dropSelf)
             .withRecipe(RecipeUtil::fenceGateFromPlanks)
             .withTags(ObjectArrayList.of(BlockTags.FENCE_GATES, BlockTags.MINEABLE_WITH_AXE, ItemTags.FENCE_GATES))
-    //      .withCustomModelDefinitions(ModelUtil.fenceGate(CAConstants.prefix("base/template")))
+            .withCustomModelDefinitions(parentBlock -> ModelUtil.fenceGate(RegistryUtil.getBlockTexture(RegistryUtil.getPlanksFrom(parentBlock))))
             .withBlockStateDefinition(ModelUtil::fenceGate)
             .build();
 
@@ -170,7 +171,7 @@ public final class CABlockPropertyWrappers { // Commented BMD calls out because 
             .withLootTable(LootUtil::dropSelf)
             .withRecipe(RecipeUtil::stairsFromPlanks)
             .withTags(ObjectArrayList.of(BlockTags.WOODEN_STAIRS, BlockTags.MINEABLE_WITH_AXE, ItemTags.WOODEN_STAIRS))
-     //     .withCustomModelDefinitions(ModelUtil.stairs(CAConstants.prefix("base/template")))
+            .withCustomModelDefinitions(parentBlock -> ModelUtil.stairs(RegistryUtil.getBlockTexture(RegistryUtil.getPlanksFrom(parentBlock))))
             .withBlockStateDefinition(ModelUtil::stairs)
             .build();
 
@@ -179,7 +180,7 @@ public final class CABlockPropertyWrappers { // Commented BMD calls out because 
             .withLootTable(LootUtil::dropSelf)
             .withRecipe(RecipeUtil::buttonFromPlanks)
             .withTags(ObjectArrayList.of(BlockTags.WOODEN_BUTTONS, BlockTags.MINEABLE_WITH_AXE))
-     //     .withCustomModelDefinitions(ModelUtil.button(CAConstants.prefix("base/template"), CAConstants.prefix("template_button_inventory")))
+            .withCustomModelDefinitions(parentBlock -> ModelUtil.button(RegistryUtil.getBlockTexture(RegistryUtil.getPlanksFrom(parentBlock)), CAConstants.prefix(RegistryUtil.getItemName(parentBlock.get()).concat("_inventory")).withPrefix("block/")))
             .withBlockStateDefinition(ModelUtil::button)
             .build();
     public static final BlockPropertyWrapper WOODEN_PRESSURE_PLATE = BlockPropertyWrapper.createTemplate()
@@ -187,18 +188,25 @@ public final class CABlockPropertyWrappers { // Commented BMD calls out because 
             .withLootTable(LootUtil::dropSelf)
             .withRecipe(RecipeUtil::pressurePlateFromPlanks)
             .withTags(ObjectArrayList.of(BlockTags.WOODEN_PRESSURE_PLATES, BlockTags.MINEABLE_WITH_AXE))
-     //     .withCustomModelDefinitions(ModelUtil.pressurePlate(CAConstants.prefix("base/template")))
+            .withCustomModelDefinitions(parentBlock -> ModelUtil.pressurePlate(RegistryUtil.getBlockTexture(RegistryUtil.getPlanksFrom(parentBlock))))
             .withBlockStateDefinition(ModelUtil::pressurePlate)
             .build();
 
     public static final BlockPropertyWrapper LOG = BlockPropertyWrapper.ofTemplate(BASIC_ROTATED_PILLAR_BLOCK)
             .cachedBuilder()
             .withTags(ObjectArrayList.of(BlockTags.MINEABLE_WITH_AXE, BlockTags.LOGS_THAT_BURN, ItemTags.LOGS_THAT_BURN))
+            .withCustomModelDefinitions(parentBlock -> ModelUtil.rotatedPillarBlock(RegistryUtil.getBlockTexture(parentBlock), RegistryUtil.getBlockTexture(parentBlock).withSuffix("_top")))
             .build();
     public static final BlockPropertyWrapper WOOD = BlockPropertyWrapper.ofTemplate(BASIC_AXIS_ALIGNED_BLOCK)
             .cachedBuilder()
             .withRecipe(RecipeUtil::logToWood)
             .withTags(ObjectArrayList.of(BlockTags.MINEABLE_WITH_AXE, BlockTags.LOGS_THAT_BURN, ItemTags.LOGS_THAT_BURN))
+            .withCustomModelDefinitions(parentBlock -> ObjectArrayList.of(ModelUtil.cubeColumn(RegistryUtil.getBlockTexture(RegistryUtil.getLogFrom(parentBlock)))))
+            .build();
+
+    public static final BlockPropertyWrapper GATE_BLOCK = BlockPropertyWrapper.ofTemplate(BASIC_BLOCK)
+            .cachedBuilder()
+            .withCustomModelDefinitions(parentBlock -> ObjectArrayList.of(ModelUtil.cubeBottomTop(RegistryUtil.getBlockTexture(parentBlock), RegistryUtil.getBlockTexture(parentBlock).withSuffix("_top"), RegistryUtil.getBlockTexture(parentBlock).withSuffix("_top"))))
             .build();
 
     // Vegetation
@@ -206,14 +214,14 @@ public final class CABlockPropertyWrappers { // Commented BMD calls out because 
             .builder()
             .withLootTable(LootUtil::dropLeaves)
             .withTags(ObjectArrayList.of(BlockTags.LEAVES, ItemTags.LEAVES))
-    //      .withCustomModelDefinitions(ModelUtil.cubeAll(CAConstants.prefix("base/template_leaves")))
+            .withCustomModelDefinitions(parentBlock -> ObjectArrayList.of(ModelUtil.leaves(RegistryUtil.getBlockTexture(parentBlock))))
             .withBlockStateDefinition(ModelUtil::simpleBlock)
             .build();
     public static final BlockPropertyWrapper FRUITABLE_LEAVES = BlockPropertyWrapper.createTemplate()
             .builder()
             .withLootTable(LootUtil::dropLeavesRipe)
             .withTags(ObjectArrayList.of(BlockTags.LEAVES, ItemTags.LEAVES))
-   //       .withCustomModelDefinitions(ModelUtil.fruitableLeaves(CAConstants.prefix("base/template_leaves"), CAConstants.prefix("base/template_leaves_ripe")))
+            .withCustomModelDefinitions(parentBlock -> ModelUtil.fruitableLeaves(RegistryUtil.getBlockTexture(parentBlock)))
             .withBlockStateDefinition(ModelUtil::fruitableLeaves)
             .build();
 }

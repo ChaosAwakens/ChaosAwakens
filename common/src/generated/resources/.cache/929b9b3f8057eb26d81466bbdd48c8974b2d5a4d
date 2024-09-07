@@ -1,4 +1,4 @@
-// 1.20.1	2024-08-23T22:14:19.2091931	Chaos Awakens: Block Tags
+// 1.20.1	2024-09-07T09:05:28.9142593	Chaos Awakens: Block Tags
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/chaosawakens/tags/blocks/base_stone_crystal.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/chaosawakens/tags/blocks/base_stone_mining.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/chaosawakens/tags/blocks/base_stone_village.json
@@ -40,21 +40,19 @@ ce9339126a705d600ed3540de0f1dae1c9603889 data/chaosawakens/tags/blocks/miners_dr
 7b73d6e38919b26eba0831d9b725aa36f1678b71 data/chaosawakens/tags/blocks/stalagmite_ore.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/chaosawakens/tags/blocks/stalagmite_ore/common.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/chaosawakens/tags/blocks/stalagmite_ore/rare.json
-8cc569ffadf7cb6d21c5278b136e71c79c48bae5 data/chaosawakens/tags/blocks/wood/logs/apple_logs.json
-35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/chaosawakens/tags/blocks/wood/logs/cherry_logs.json
-16615fd532d0b8225819af38628d9ef1b3e66f4f data/chaosawakens/tags/blocks/wood/logs/crystalwood_logs.json
-a90631278f250cad2bda169dd54676d2979afcda data/chaosawakens/tags/blocks/wood/logs/dead_duplicator_logs.json
-0c394bf80473a7057047980ab9fd4d864d5695ee data/chaosawakens/tags/blocks/wood/logs/densewood_logs.json
-8e1a57f3366d8644a72d5f93a1f609cb291f416b data/chaosawakens/tags/blocks/wood/logs/duplicator_logs.json
-dfd1a4679b33bcc613029d46b05f5ea2e882c5d7 data/chaosawakens/tags/blocks/wood/logs/ginkgo_logs.json
-5faaf02bb6450173740f77436c203295e29cabce data/chaosawakens/tags/blocks/wood/logs/mesozoic_logs.json
-3e2eba549ca4846ca5c4ebc327d416bd75d3deef data/chaosawakens/tags/blocks/wood/logs/peach_logs.json
-37657981360327a98efcad52a76b8fa67b359794 data/chaosawakens/tags/blocks/wood/logs/skywood_logs.json
+35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/chaosawakens/tags/blocks/wood/logs/apple_logs.json
+35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/chaosawakens/tags/blocks/wood/logs/dead_duplicator_logs.json
+35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/chaosawakens/tags/blocks/wood/logs/densewood_logs.json
+f96e8f951c00e400373b31ca88fd1985fd73f7de data/chaosawakens/tags/blocks/wood/logs/duplicator_logs.json
+35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/chaosawakens/tags/blocks/wood/logs/ginkgo_logs.json
+35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/chaosawakens/tags/blocks/wood/logs/mesozoic_logs.json
+35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/chaosawakens/tags/blocks/wood/logs/peach_logs.json
+35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/chaosawakens/tags/blocks/wood/logs/skywood_logs.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/minecraft/tags/blocks/base_stone_nether.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/minecraft/tags/blocks/base_stone_overworld.json
 0657cc92f0d5b89ccce850814f03875040484c05 data/minecraft/tags/blocks/fence_gates.json
 539c63c2e9813b8dde94400c01cf7869f0822dad data/minecraft/tags/blocks/leaves.json
-f55be115c734c50f3caba8fbccf3359054e7094b data/minecraft/tags/blocks/logs_that_burn.json
+2c3a4af37be58291aadbee3781c0fd38c6aa1ded data/minecraft/tags/blocks/logs_that_burn.json
 c3b00ae107dbd0f5689ebd1f8622bca88d077106 data/minecraft/tags/blocks/mineable/axe.json
 4b14eb2420cc42cf0cd2c35d056a047f364e4f0f data/minecraft/tags/blocks/mineable/pickaxe.json
 4b14eb2420cc42cf0cd2c35d056a047f364e4f0f data/minecraft/tags/blocks/needs_diamond_tool.json
