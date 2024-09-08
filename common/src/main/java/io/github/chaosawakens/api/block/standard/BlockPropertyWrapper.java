@@ -342,7 +342,7 @@ public class BlockPropertyWrapper { //TODO Maybe type param this for blocks
      *
      * @return The {@link List} of parent {@linkplain CreativeModeTab CreativeModeTabs}, or an empty {@link ObjectArrayList} if the {@link #builder()} is {@code null}.
      */
-    public List<CreativeModeTab> getParentCreativeModeTabs() {
+    public List<Supplier<CreativeModeTab>> getParentCreativeModeTabs() {
         return builder == null ? ObjectArrayList.of() : builder.parentTabs;
     }
 
@@ -385,7 +385,7 @@ public class BlockPropertyWrapper { //TODO Maybe type param this for blocks
         private Function<Consumer<FinishedRecipe>, Consumer<Supplier<Block>>> recipeBuilderFunction;
         @Nullable
         private Function<Supplier<Block>, List<BlockModelDefinition>> bmdMappingFunc;
-        private List<CreativeModeTab> parentTabs = new ObjectArrayList<>(); // Not datagen-related but whatever
+        private List<Supplier<CreativeModeTab>> parentTabs = new ObjectArrayList<>(); // Not datagen-related but whatever
 
         private BPWBuilder(BlockPropertyWrapper ownerWrapper, Supplier<Block> parentBlock) {
             this.ownerWrapper = ownerWrapper;
@@ -605,7 +605,7 @@ public class BlockPropertyWrapper { //TODO Maybe type param this for blocks
          *
          * @return {@code this} (builder method).
          */
-        public BPWBuilder withParentCreativeModeTab(CreativeModeTab parentTab) {
+        public BPWBuilder withParentCreativeModeTab(Supplier<CreativeModeTab> parentTab) {
             this.parentTabs.add(parentTab);
             return this;
         }
@@ -617,7 +617,7 @@ public class BlockPropertyWrapper { //TODO Maybe type param this for blocks
          *
          * @return {@code this} (builder method).
          */
-        public BPWBuilder withParentCreativeModeTabs(List<CreativeModeTab> parentTabs) {
+        public BPWBuilder withParentCreativeModeTabs(List<Supplier<CreativeModeTab>> parentTabs) {
             this.parentTabs.addAll(parentTabs);
             return this;
         }
@@ -629,7 +629,7 @@ public class BlockPropertyWrapper { //TODO Maybe type param this for blocks
          *
          * @return {@code this} (builder method).
          */
-        public BPWBuilder withSetParentCreativeModeTabs(List<CreativeModeTab> parentTabs) {
+        public BPWBuilder withSetParentCreativeModeTabs(List<Supplier<CreativeModeTab>> parentTabs) {
             this.parentTabs.clear();
             this.parentTabs.addAll(parentTabs);
             return this;

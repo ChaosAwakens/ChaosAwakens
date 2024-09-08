@@ -315,7 +315,7 @@ public class ItemPropertyWrapper {
      *
      * @return The {@link List} of parent {@linkplain CreativeModeTab CreativeModeTabs}, or an empty {@link ObjectArrayList} if the {@link #builder()} is {@code null}.
      */
-    public List<CreativeModeTab> getParentCreativeModeTabs() {
+    public List<Supplier<CreativeModeTab>> getParentCreativeModeTabs() {
         return builder == null ? ObjectArrayList.of() : builder.parentTabs;
     }
 
@@ -354,7 +354,7 @@ public class ItemPropertyWrapper {
         private Function<Consumer<FinishedRecipe>, Consumer<Supplier<Item>>> recipeBuilderFunction;
         @Nullable
         private Function<Supplier<Item>, List<ItemModelDefinition>> imdMappingFunc;
-        private List<CreativeModeTab> parentTabs = new ObjectArrayList<>(); // Not datagen-related but whatever
+        private List<Supplier<CreativeModeTab>> parentTabs = new ObjectArrayList<>(); // Not datagen-related but whatever
 
         private IPWBuilder(ItemPropertyWrapper ownerWrapper, Supplier<Item> itemParent) {
             this.ownerWrapper = ownerWrapper;
@@ -537,7 +537,7 @@ public class ItemPropertyWrapper {
          *
          * @return {@code this} (builder method).
          */
-        public IPWBuilder withParentCreativeModeTab(CreativeModeTab parentTab) {
+        public IPWBuilder withParentCreativeModeTab(Supplier<CreativeModeTab> parentTab) {
             this.parentTabs.add(parentTab);
             return this;
         }
@@ -549,7 +549,7 @@ public class ItemPropertyWrapper {
          *
          * @return {@code this} (builder method).
          */
-        public IPWBuilder withParentCreativeModeTabs(List<CreativeModeTab> parentTabs) {
+        public IPWBuilder withParentCreativeModeTabs(List<Supplier<CreativeModeTab>> parentTabs) {
             this.parentTabs.addAll(parentTabs);
             return this;
         }
@@ -561,7 +561,7 @@ public class ItemPropertyWrapper {
          *
          * @return {@code this} (builder method).
          */
-        public IPWBuilder withSetParentCreativeModeTabs(List<CreativeModeTab> parentTabs) {
+        public IPWBuilder withSetParentCreativeModeTabs(List<Supplier<CreativeModeTab>> parentTabs) {
             this.parentTabs.clear();
             this.parentTabs.addAll(parentTabs);
             return this;

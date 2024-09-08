@@ -18,13 +18,12 @@ public class CAItemPropertyWrappers {
             .build();
 
     // Food
-    public static final ItemPropertyWrapper RAW_FOOD = ItemPropertyWrapper.createTemplate()
-            .builder()
-            .withCustomModelDefinitions(parentItem -> ObjectArrayList.of(ModelUtil.generated(RegistryUtil.getItemTexture(parentItem))))
+    public static final ItemPropertyWrapper RAW_FOOD = ItemPropertyWrapper.ofTemplate(BASIC_GENERATED)
+            .cachedBuilder()
+            .withParentCreativeModeTab(CACreativeModeTabs.CHAOS_AWAKENS_FOOD)
             .build();
-    public static final ItemPropertyWrapper COOKED_FOOD = ItemPropertyWrapper.createTemplate()
-            .builder()
-            .withCustomModelDefinitions(parentItem -> ObjectArrayList.of(ModelUtil.generated(RegistryUtil.getItemTexture(parentItem))))
+    public static final ItemPropertyWrapper COOKED_FOOD = ItemPropertyWrapper.ofTemplate(RAW_FOOD)
+            .cachedBuilder()
             .withRecipe(RecipeUtil::cookedFood)
             .build();
 }

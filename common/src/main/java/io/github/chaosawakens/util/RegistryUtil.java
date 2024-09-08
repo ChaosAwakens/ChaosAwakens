@@ -1,6 +1,7 @@
 package io.github.chaosawakens.util;
 
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.DefaultedRegistry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
@@ -41,12 +42,17 @@ public final class RegistryUtil {
 
     /**
      * Attempts to retrieve the texture for the supplied {@link Item} filename. <b>IDE/DEV-ENV ONLY!!!</b> This will not work outside of datagen in the dev environment, as it's only meant to be used to generate data
-     * based on located textures. Mind that the registry name of the object attempting to utilise this method must EXACTLY match the name of the target texture to locate.
+     * based on located textures. Mind that the registry name of the object attempting to utilise this method must EXACTLY match the name of the target texture to locate. This method (and its equivalents) is meant
+     * to substitute for a lack of {@link Minecraft} in datagen, which by extension means a lack of texture management and whatnot.
      *
      * @param modid The modid under which the texture file should be validated against and located.
      * @param targetItemFileName The {@link String} for which a PNG file with a matching name should be located.
      *
      * @return A {@link ResourceLocation}, formatted and leading to the location of the target {@linkplain Item Item's} texture path, or {@code null} if none could be found.
+     *
+     * @see #getItemTexture(Supplier)
+     * @see #getBlockTexture(String, String)
+     * @see #getBlockTexture(Supplier)
      */
     @Nullable
     public static ResourceLocation getItemTexture(String modid, String targetItemFileName) {
@@ -83,12 +89,17 @@ public final class RegistryUtil {
 
     /**
      * Attempts to retrieve the texture for the supplied {@link Block} filename. <b>IDE/DEV-ENV ONLY!!!</b> This will not work outside of datagen in the dev environment, as it's only meant to be used to generate data
-     * based on located textures. Mind that the registry name of the object attempting to utilise this method must EXACTLY match the name of the target texture to locate.
+     * based on located textures. Mind that the registry name of the object attempting to utilise this method must EXACTLY match the name of the target texture to locate. This method (and its equivalents) is meant
+     * to substitute for a lack of {@link Minecraft} in datagen, which by extension means a lack of texture management and whatnot.
      *
      * @param modid The modid under which the texture file should be validated against and located.
      * @param targetBlockFileName The {@link String} for which a PNG file with a matching name should be located.
      *
      * @return A {@link ResourceLocation}, formatted and leading to the location of the target {@linkplain Block Block's} texture path, or {@code null} if none could be found.
+     *
+     * @see #getBlockTexture(Supplier)
+     * @see #getItemTexture(String, String)
+     * @see #getItemTexture(Supplier)
      */
     @Nullable
     public static ResourceLocation getBlockTexture(String modid, String targetBlockFileName) {
@@ -126,11 +137,16 @@ public final class RegistryUtil {
     /**
      * Overloaded variant of {@link #getItemTexture(String, String)}. Attempts to retrieve the texture for the supplied {@link Item}. <b>IDE/DEV-ENV ONLY!!!</b> This will not work outside of datagen
      * in the dev environment, as it's only meant to be used to generate data based on located textures. Mind that the registry name of the object attempting to utilise this method must EXACTLY match
-     * the name of the target texture to locate.
+     * the name of the target texture to locate. This method (and its equivalents) is meant to substitute for a lack of {@link Minecraft} in datagen, which by extension means a lack of texture management
+     * and whatnot.
      *
      * @param targetItem The {@link Item} for which a PNG file with a matching name should be located.
      *
      * @return A {@link ResourceLocation}, formatted and leading to the location of the target {@linkplain Item Item's} texture path, or {@code null} if none could be found.
+     *
+     * @see #getItemTexture(String, String)
+     * @see #getBlockTexture(String, String)
+     * @see #getBlockTexture(Supplier)
      */
     @Nullable
     public static ResourceLocation getItemTexture(Supplier<Item> targetItem) {
@@ -140,11 +156,16 @@ public final class RegistryUtil {
     /**
      * Overloaded variant of {@link #getBlockTexture(String, String)}}. Attempts to retrieve the texture for the supplied {@link Block}. <b>IDE/DEV-ENV ONLY!!!</b> This will not work outside of datagen
      * in the dev environment, as it's only meant to be used to generate data based on located textures. Mind that the registry name of the object attempting to utilise this method must EXACTLY match
-     * the name of the target texture to locate.
+     * the name of the target texture to locate. This method (and its equivalents) is meant to substitute for a lack of {@link Minecraft} in datagen, which by extension means a lack of texture management
+     * and whatnot.
      *
      * @param targetBlock The {@link Block} for which a PNG file with a matching name should be located.
      *
      * @return A {@link ResourceLocation}, formatted and leading to the location of the target {@linkplain Block Block's} texture path, or {@code null} if none could be found.
+     *
+     * @see #getBlockTexture(String, String)
+     * @see #getItemTexture(String, String)
+     * @see #getItemTexture(Supplier)
      */
     @Nullable
     public static ResourceLocation getBlockTexture(Supplier<Block> targetBlock) {

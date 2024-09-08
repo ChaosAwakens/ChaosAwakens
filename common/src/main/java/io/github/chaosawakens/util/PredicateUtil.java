@@ -2,9 +2,7 @@ package io.github.chaosawakens.util;
 
 import io.github.chaosawakens.api.block.standard.BlockPropertyWrapper;
 import io.github.chaosawakens.api.item.ItemPropertyWrapper;
-import io.github.chaosawakens.common.registry.CABlocks;
 import io.github.chaosawakens.common.registry.CACreativeModeTabs;
-import io.github.chaosawakens.common.registry.CAItems;
 import net.minecraft.advancements.critereon.ContextAwarePredicate;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.advancements.critereon.ItemPredicate;
@@ -22,7 +20,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 
-import java.util.Optional;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Supplier;
 
@@ -90,19 +87,22 @@ public final class PredicateUtil {
      *
      * @return
      */
-    public static boolean hasParentTab(ItemStack stackToTest, CreativeModeTab targetParentTab) { // Necessary workaround for preservation of order
+    public static boolean hasParentTab(ItemStack stackToTest, Supplier<CreativeModeTab> targetParentTab) { // Necessary workaround for preservation of order. Works since display items are apparently cached when tabs are opened the first time.
         AtomicBoolean foundMatch = new AtomicBoolean(false);
-        Optional<Supplier<Item>> optionalCAItemSup = CAItems.getItems().stream()
-                .filter(itemSup -> itemSup.get().getDescriptionId().equals(stackToTest.getDescriptionId()))
-                .findFirst();
-        Optional<Supplier<Block>> optionalCABlockSup = CABlocks.getBlocks().stream()
-                .filter(itemSup -> itemSup.get().getDescriptionId().equals(stackToTest.getDescriptionId()))
-                .findFirst();
 
-        optionalCAItemSup.ifPresent(caItemSup -> foundMatch.set(ItemPropertyWrapper.getMappedIpws().get(caItemSup).getParentCreativeModeTabs().contains(targetParentTab)));
-        optionalCABlockSup.ifPresent(caBlockSup -> foundMatch.set(BlockPropertyWrapper.getMappedBpws().get(caBlockSup).getParentCreativeModeTabs().contains(targetParentTab)));
+        ItemPropertyWrapper.getMappedIpws().forEach((itemSup, ipwEntry) -> {
+            if (foundMatch.get()) return; // Break
 
-        if (!foundMatch.get()) foundMatch.set(targetParentTab.getDisplayItems().contains(stackToTest));
+            foundMatch.set(itemSup.get().getDescriptionId().equals(stackToTest.getItem().getDescriptionId()) && ipwEntry.getParentCreativeModeTabs().contains(targetParentTab));
+        });
+
+        BlockPropertyWrapper.getMappedBpws().forEach((blockSup, bpwEntry) -> {
+            if (foundMatch.get()) return; // Break
+
+            foundMatch.set(blockSup.get().asItem().getDescriptionId().equals(stackToTest.getItem().getDescriptionId()) && bpwEntry.getParentCreativeModeTabs().contains(targetParentTab));
+        });
+
+        if (!foundMatch.get()) foundMatch.set(targetParentTab.get().getDisplayItems().contains(stackToTest));
 
         return foundMatch.get();
     }
@@ -114,7 +114,7 @@ public final class PredicateUtil {
      * @return
      */
     public static boolean isFood(ItemStack stackToTest) {
-        return stackToTest.getItem().getFoodProperties() != null || hasParentTab(stackToTest, CACreativeModeTabs.CHAOS_AWAKENS_FOOD.get());
+        return stackToTest.getItem().getFoodProperties() != null || hasParentTab(stackToTest, CACreativeModeTabs.CHAOS_AWAKENS_FOOD);
     }
 
     /**
@@ -154,7 +154,7 @@ public final class PredicateUtil {
      * @return
      */
     public static boolean isRegularItem(ItemStack stackToTest) {
-        return (!isFood(stackToTest) && !isArmor(stackToTest) && !isEquipable(stackToTest) && !isTiered(stackToTest) && !isBlockItem(stackToTest)) || hasParentTab(stackToTest, CACreativeModeTabs.CHAOS_AWAKENS_ITEMS.get());
+        return (!isFood(stackToTest) && !isArmor(stackToTest) && !isEquipable(stackToTest) && !isTiered(stackToTest) && !isBlockItem(stackToTest)) || hasParentTab(stackToTest, CACreativeModeTabs.CHAOS_AWAKENS_ITEMS);
     }
 
     /**
@@ -174,6 +174,6 @@ public final class PredicateUtil {
      * @return
      */
     public static boolean isRegularBlock(ItemStack stackToTest) {
-        return isBlockItem(stackToTest) || hasParentTab(stackToTest, CACreativeModeTabs.CHAOS_AWAKENS_BLOCKS.get());
+        return isBlockItem(stackToTest) || hasParentTab(stackToTest, CACreativeModeTabs.CHAOS_AWAKENS_BLOCKS);
     }
 }
