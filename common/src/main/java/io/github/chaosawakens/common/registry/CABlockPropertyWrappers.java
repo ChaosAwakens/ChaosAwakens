@@ -224,4 +224,29 @@ public final class CABlockPropertyWrappers {
             .withCustomModelDefinitions(parentBlock -> ModelUtil.fruitableLeaves(RegistryUtil.getBlockTexture(parentBlock)))
             .withBlockStateDefinition(ModelUtil::fruitableLeaves)
             .build();
+
+    // Solid
+    public static final BlockPropertyWrapper SOLID_ROTATED_PILLAR_BLOCK = BlockPropertyWrapper.ofTemplate(BASIC_ROTATED_PILLAR_BLOCK)
+            .cachedBuilder()
+            .withTag(BlockTags.MINEABLE_WITH_PICKAXE)
+            .build();
+    public static final BlockPropertyWrapper SOLID_AXIS_ALIGNED_BLOCK = BlockPropertyWrapper.ofTemplate(BASIC_AXIS_ALIGNED_BLOCK)
+            .cachedBuilder()
+            .withTag(BlockTags.MINEABLE_WITH_PICKAXE)
+            .build();
+
+    public static final BlockPropertyWrapper SOLID_SLAB = BlockPropertyWrapper.ofTemplate(WOODEN_STAIRS)
+            .cachedBuilder()
+            .withRecipe(RecipeUtil::stairsFromSolidBlock)
+            .withSetTags(ObjectArrayList.of(BlockTags.SLABS, BlockTags.MINEABLE_WITH_PICKAXE, ItemTags.SLABS))
+            .build();
+
+    public static final BlockPropertyWrapper STANDARD_WALL = BlockPropertyWrapper.createTemplate()
+            .builder()
+            .withLootTable(LootUtil::dropSelf)
+            .withRecipe(RecipeUtil::wallsFromSolidBlock)
+            .withTags(ObjectArrayList.of(BlockTags.WALLS, ItemTags.WALLS, BlockTags.MINEABLE_WITH_PICKAXE))
+            .withCustomModelDefinitions(parentBlock -> ModelUtil.wall(RegistryUtil.getBlockTexture(CAConstants.MODID, RegistryUtil.getItemName(parentBlock.get()).replace("_wall", "_block")), CAConstants.prefix(RegistryUtil.getItemName(parentBlock.get()).concat("_inventory")).withPrefix("block/")))
+            .withBlockStateDefinition(ModelUtil::wall)
+            .build();
 }

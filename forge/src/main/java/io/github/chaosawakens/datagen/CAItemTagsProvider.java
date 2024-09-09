@@ -70,7 +70,7 @@ public class CAItemTagsProvider extends ItemTagsProvider {
                             Item itemTagEntry = tagEntry.get() instanceof Block ? ((Block) tagEntry.get()).asItem() : (Item) tagEntry.get();
 
                             if (itemTagEntry != null) {
-                                CAConstants.LOGGER.debug("[Tagging Item]: " + itemTagEntry.getDescriptionId() + " -> " + curItemTag);
+                                CAConstants.LOGGER.debug((tagEntry.get() instanceof Block ? "[Tagging Block Item]: " : "[Tagging Item]: ") + itemTagEntry.getDescriptionId() + " -> " + curItemTag);
 
                                 tag((TagKey<Item>) curItemTag).add(itemTagEntry);
                             }

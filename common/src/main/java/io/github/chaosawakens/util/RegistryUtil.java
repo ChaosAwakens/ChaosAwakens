@@ -285,4 +285,74 @@ public final class RegistryUtil {
                 : assumedCookedFood
                 : null;
     }
+
+    @Nullable
+    public static Supplier<Block> getFromSolidBlock(Supplier<Block> targetBlock, String regNameSuffix) {
+        ResourceLocation targetBlockKey = BuiltInRegistries.BLOCK.getKey(targetBlock.get());
+        String copiedPath = BuiltInRegistries.BLOCK.getKey(targetBlock.get()).getPath();
+
+        if (copiedPath.contains("bricks")) copiedPath.replace("bricks", "brick");
+
+        return targetBlockKey.getPath().endsWith("_block")
+                ? () -> BuiltInRegistries.BLOCK.get(targetBlockKey.withPath(copiedPath.replace("_block", regNameSuffix)))
+                : !BuiltInRegistries.BLOCK.get(targetBlockKey.withPath(copiedPath.concat(regNameSuffix))).getDescriptionId().equals("block.minecraft.air")
+                ? () -> BuiltInRegistries.BLOCK.get(targetBlockKey.withPath(copiedPath.concat(regNameSuffix)))
+                : null;
+    }
+
+    @Nullable
+    public static Supplier<Block> getSlabFromSolidBlock(Supplier<Block> targetBlock) {
+        return getFromSolidBlock(targetBlock, "_slab");
+    }
+
+    @Nullable
+    public static Supplier<Block> getStairsFromSolidBlock(Supplier<Block> targetBlock) {
+        return getFromSolidBlock(targetBlock, "_stairs");
+    }
+
+    @Nullable
+    public static Supplier<Block> getPillarFromSolidBlock(Supplier<Block> targetBlock) {
+        return getFromSolidBlock(targetBlock, "_pillar");
+    }
+
+    @Nullable
+    public static Supplier<Block> getWallFromSolidBlock(Supplier<Block> targetBlock) {
+        return getFromSolidBlock(targetBlock, "_wall");
+    }
+
+    @Nullable
+    public static Supplier<Block> getSolidBlockFrom(Supplier<Block> targetBlock, String targetRegNameSuffix) {
+        ResourceLocation targetBlockKey = BuiltInRegistries.BLOCK.getKey(targetBlock.get());
+        String copiedPath = BuiltInRegistries.BLOCK.getKey(targetBlock.get()).getPath();
+
+        if (copiedPath.contains("brick")) copiedPath.replace("brick", "bricks");
+
+        return targetBlockKey.getPath().endsWith(targetRegNameSuffix)
+                ? !BuiltInRegistries.BLOCK.get(targetBlockKey.withPath(copiedPath.replace(targetRegNameSuffix, "_block"))).getDescriptionId().equals("block.minecraft.air")
+                ? () -> BuiltInRegistries.BLOCK.get(targetBlockKey.withPath(copiedPath.replace(targetRegNameSuffix, "_block")))
+                : !BuiltInRegistries.BLOCK.get(targetBlockKey.withPath(copiedPath.replace(targetRegNameSuffix, ""))).getDescriptionId().equals("block.minecraft.air")
+                ? () -> BuiltInRegistries.BLOCK.get(targetBlockKey.withPath(copiedPath.replace(targetRegNameSuffix, "")))
+                : null
+                : null;
+    }
+
+    @Nullable
+    public static Supplier<Block> getSolidBlockFromSlab(Supplier<Block> targetBlock) {
+        return getFromSolidBlock(targetBlock, "_slab");
+    }
+
+    @Nullable
+    public static Supplier<Block> getSolidBlockFromStairs(Supplier<Block> targetBlock) {
+        return getFromSolidBlock(targetBlock, "_stairs");
+    }
+
+    @Nullable
+    public static Supplier<Block> getSolidBlockFromPillar(Supplier<Block> targetBlock) {
+        return getFromSolidBlock(targetBlock, "_pillar");
+    }
+
+    @Nullable
+    public static Supplier<Block> getSolidBlockFromWall(Supplier<Block> targetBlock) {
+        return getFromSolidBlock(targetBlock, "_wall");
+    }
 }
