@@ -1,5 +1,6 @@
 package io.github.chaosawakens.util;
 
+import io.github.chaosawakens.common.registry.CABlocks;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.DefaultedRegistry;
@@ -16,7 +17,9 @@ import java.io.IOException;
 import java.nio.file.FileVisitOption;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
@@ -200,6 +203,22 @@ public final class RegistryUtil {
                 : targetBlockKey.getPath().contains("_")
                 ? () -> BuiltInRegistries.BLOCK.get(targetBlockKey.withPath(StringUtils.substringBefore(copiedPath, "_").concat(regNameSuffix)))
                 : null; // Force nullity rather than air delegate
+    }
+
+    @Nullable
+    public static Supplier<Item> getBlockAsItemSup(Supplier<Block> targetBlock) {
+        return CABlocks.getBlockItems().get(CABlocks.getBlocks().indexOf(targetBlock)); // TOP 10 UNSAFE PRACTICES: NUMBER 10: WHY
+    }
+
+    public static List<Supplier<Item>> getBlocksAsItemSups(List<Supplier<Block>> targetBlocks) {
+        return targetBlocks.stream()
+                .filter(curBlockSup -> CABlocks.getBlocks().contains(curBlockSup) && CABlocks.getBlockItems().get(CABlocks.getBlocks().indexOf(curBlockSup)) != null)
+                .map(RegistryUtil::getBlockAsItemSup)
+                .collect(Collectors.toCollection(ObjectArrayList::new));
+    }
+
+    public static List<Supplier<Item>> getBlocksAsItemSups(Supplier<Block>... targetBlocks) {
+        return targetBlocks == null || targetBlocks.length == 0 ? ObjectArrayList.of() : getBlocksAsItemSups(ObjectArrayList.of(targetBlocks));
     }
 
     @Nullable

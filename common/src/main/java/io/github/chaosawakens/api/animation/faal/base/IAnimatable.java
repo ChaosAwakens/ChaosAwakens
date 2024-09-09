@@ -5,8 +5,8 @@ import io.github.chaosawakens.api.animation.faal.item.IAnimatableItem;
 
 /**
  * The base interface representing any type of object that wants to be animated utilising GeckoLib and FAAL. This interface contains the lowest-level implementations required to
- * implement animatable objects of any given type. On its own, this is effectively useless. See this interface's implementations if you want to work with natively supported (or otherwise existing)
- * animatable types.
+ * implement animatable objects of any given type. When applied to fleshed-out objects on its own, this is effectively useless. See this interface's implementations if you want to
+ * work with natively supported (or otherwise existing) animatable types.
  *
  * @see IAnimatableEntity
  * @see IAnimatableItem

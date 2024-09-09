@@ -327,7 +327,9 @@ public final class LootUtil {
     public static LootTable.Builder dropLeavesRipe(Supplier<Block> targetBlock) {
         return dropLeaves(targetBlock).withPool(LootPool.lootPool()
                 .setRolls(ConstantValue.exactly(1.0F))
-                .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(targetBlock.get()).setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(FruitableLeavesBlock.RIPE, true)))
+                .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(targetBlock.get())
+                        .setProperties(StatePropertiesPredicate.Builder.properties()
+                        .hasProperty(FruitableLeavesBlock.RIPE, true)))
                 .add(LootItem.lootTableItem(((FruitableLeavesBlock) targetBlock.get()).getFruitItem().get())
                         .apply(SetItemCountFunction.setCount(ConstantValue.exactly(((FruitableLeavesBlock) targetBlock.get()).calculateRandomFruitDrop())))));
     }

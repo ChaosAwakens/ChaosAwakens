@@ -3,6 +3,7 @@ package io.github.chaosawakens.datagen;
 import io.github.chaosawakens.CAConstants;
 import io.github.chaosawakens.api.block.standard.BlockPropertyWrapper;
 import io.github.chaosawakens.api.item.ItemPropertyWrapper;
+import io.github.chaosawakens.api.tag.TagWrapper;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
@@ -55,6 +56,46 @@ public class CAItemTagsProvider extends ItemTagsProvider {
 
                         tag(curItemTag).add(itemSupEntry.get());
                     });
+                }
+            });
+        }
+
+        if (!TagWrapper.getCachedTWEntries().isEmpty()) {
+            TagWrapper.getCachedTWEntries().forEach(twEntry -> {
+                if (twEntry.getParentTag().isFor(Registries.ITEM)) {
+                    TagKey<?> curItemTag = twEntry.getParentTag();
+
+                    if (curItemTag != null) {
+                        twEntry.getPredefinedTagEntries().forEach(tagEntry -> {
+                            Item itemTagEntry = tagEntry.get() instanceof Block ? ((Block) tagEntry.get()).asItem() : (Item) tagEntry.get();
+
+                            if (itemTagEntry != null) {
+                                CAConstants.LOGGER.debug("[Tagging Item]: " + itemTagEntry.getDescriptionId() + " -> " + curItemTag);
+
+                                tag((TagKey<Item>) curItemTag).add(itemTagEntry);
+                            }
+                        });
+
+                        twEntry.getStoredTags().forEach(tagKeyEntry -> {
+                            if (tagKeyEntry != null) {
+
+                                CAConstants.LOGGER.debug("[Tagging Item Tag]: " + tagKeyEntry + " -> " + curItemTag);
+
+                                tag((TagKey<Item>) tagKeyEntry); // Force the existingFileHelper to track the tag to be added (otherwise throws exception). Goofy ahh patch.
+                                tag((TagKey<Item>) curItemTag).addTag((TagKey<Item>) tagKeyEntry);
+                            }
+                        });
+
+                        twEntry.getParentTags().forEach(parentTagKeyEntry -> {
+                            if (parentTagKeyEntry != null) {
+
+                                CAConstants.LOGGER.debug("[Tagging Item Tag]: " + curItemTag + " -> " + parentTagKeyEntry);
+
+                                tag((TagKey<Item>) curItemTag); // Force the existingFileHelper to track the tag to be added (otherwise throws exception). Goofy ahh patch.
+                                tag((TagKey<Item>) parentTagKeyEntry).addTag((TagKey<Item>) curItemTag);
+                            }
+                        });
+                    }
                 }
             });
         }

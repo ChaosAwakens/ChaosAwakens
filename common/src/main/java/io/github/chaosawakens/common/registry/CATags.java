@@ -3,6 +3,7 @@ package io.github.chaosawakens.common.registry;
 import io.github.chaosawakens.CAConstants;
 import io.github.chaosawakens.api.asm.annotations.LoadEarly;
 import io.github.chaosawakens.api.tag.TagWrapper;
+import io.github.chaosawakens.util.RegistryUtil;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.BlockTags;
@@ -30,31 +31,41 @@ public class CATags {
 
         public static final TagKey<Block> APPLE_LOGS = createWrappedBlockTag("wood/logs/apple_logs")
                 .withParentTagEntry(BlockTags.LOGS_THAT_BURN)
+                .withEntries(ObjectArrayList.of(CABlocks.APPLE_LOG, CABlocks.APPLE_WOOD, CABlocks.STRIPPED_APPLE_LOG, CABlocks.STRIPPED_APPLE_WOOD))
                 .getParentTag();
         public static final TagKey<Block> DEAD_DUPLICATOR_LOGS = createWrappedBlockTag("wood/logs/dead_duplicator_logs")
                 .withParentTagEntry(BlockTags.LOGS_THAT_BURN)
+                .withEntries(ObjectArrayList.of(CABlocks.DEAD_DUPLICATOR_LOG, CABlocks.DEAD_DUPLICATOR_WOOD, CABlocks.STRIPPED_DEAD_DUPLICATOR_LOG, CABlocks.STRIPPED_DEAD_DUPLICATOR_WOOD))
                 .getParentTag();
         public static final TagKey<Block> DUPLICATOR_LOGS = createWrappedBlockTag("wood/logs/duplicator_logs")
                 .withParentTagEntry(BlockTags.LOGS_THAT_BURN)
                 .withTagEntry(DEAD_DUPLICATOR_LOGS)
+                .withEntries(ObjectArrayList.of(CABlocks.DUPLICATOR_LOG, CABlocks.DUPLICATOR_WOOD, CABlocks.STRIPPED_DUPLICATOR_LOG, CABlocks.STRIPPED_DUPLICATOR_WOOD))
                 .getParentTag();
         public static final TagKey<Block> PEACH_LOGS = createWrappedBlockTag("wood/logs/peach_logs")
                 .withParentTagEntry(BlockTags.LOGS_THAT_BURN)
+                .withEntries(ObjectArrayList.of(CABlocks.PEACH_LOG, CABlocks.PEACH_WOOD, CABlocks.STRIPPED_PEACH_LOG, CABlocks.STRIPPED_PEACH_WOOD))
                 .getParentTag();
         public static final TagKey<Block> SKYWOOD_LOGS = createWrappedBlockTag("wood/logs/skywood_logs")
                 .withParentTagEntry(BlockTags.LOGS_THAT_BURN)
+                .withEntries(ObjectArrayList.of(CABlocks.SKYWOOD_LOG, CABlocks.SKYWOOD, CABlocks.STRIPPED_SKYWOOD_LOG, CABlocks.STRIPPED_SKYWOOD))
                 .getParentTag();
         public static final TagKey<Block> GINKGO_LOGS = createWrappedBlockTag("wood/logs/ginkgo_logs")
                 .withParentTagEntry(BlockTags.LOGS_THAT_BURN)
+                .withEntries(ObjectArrayList.of(CABlocks.GINKGO_LOG, CABlocks.GINKGO_WOOD, CABlocks.STRIPPED_GINKGO_LOG, CABlocks.STRIPPED_GINKGO_WOOD))
                 .getParentTag();
         public static final TagKey<Block> MESOZOIC_LOGS = createWrappedBlockTag("wood/logs/mesozoic_logs")
                 .withParentTagEntry(BlockTags.LOGS_THAT_BURN)
+                .withEntries(ObjectArrayList.of(CABlocks.MESOZOIC_LOG, CABlocks.MESOZOIC_WOOD, CABlocks.STRIPPED_MESOZOIC_LOG, CABlocks.STRIPPED_MESOZOIC_WOOD))
                 .getParentTag();
         public static final TagKey<Block> DENSEWOOD_LOGS = createWrappedBlockTag("wood/logs/densewood_logs")
                 .withParentTagEntry(BlockTags.LOGS_THAT_BURN)
+                .withEntries(ObjectArrayList.of(CABlocks.DENSEWOOD_LOG, CABlocks.DENSEWOOD, CABlocks.STRIPPED_DENSEWOOD_LOG, CABlocks.STRIPPED_DENSEWOOD))
                 .getParentTag();
 
-        public static final TagKey<Block> CRYSTALWOOD_LOGS = createBlockTag("wood/logs/crystalwood_logs");
+        public static final TagKey<Block> CRYSTALWOOD_LOGS = createWrappedBlockTag("wood/logs/crystalwood_logs")
+                .withEntries(ObjectArrayList.of(CABlocks.CRYSTALWOOD_LOG, CABlocks.CRYSTALWOOD, CABlocks.STRIPPED_CRYSTALWOOD_LOG, CABlocks.STRIPPED_CRYSTALWOOD))
+                .getParentTag();
         public static final TagKey<Block> CRYSTALWOOD_LEAVES = createBlockTag("wood/leaves/crystalwood_leaves");
         public static final TagKey<Block> CRYSTALWOOD_SAPLINGS = createBlockTag("wood/saplings/crystalwood_saplings");
 
@@ -149,31 +160,41 @@ public class CATags {
     public static class CAItemTags {
         public static final TagKey<Item> APPLE_LOGS = createWrappedItemTag("wood/logs/apple_logs")
                 .withParentTagEntry(ItemTags.LOGS_THAT_BURN)
+                .withEntries(RegistryUtil.getBlocksAsItemSups(CABlocks.APPLE_LOG, CABlocks.APPLE_WOOD, CABlocks.STRIPPED_APPLE_LOG, CABlocks.STRIPPED_APPLE_WOOD))
                 .getParentTag();
         public static final TagKey<Item> DEAD_DUPLICATOR_LOGS = createWrappedItemTag("wood/logs/dead_duplicator_logs")
                 .withParentTagEntry(ItemTags.LOGS_THAT_BURN)
+                .withEntries(RegistryUtil.getBlocksAsItemSups(CABlocks.DEAD_DUPLICATOR_LOG, CABlocks.DEAD_DUPLICATOR_WOOD, CABlocks.STRIPPED_DEAD_DUPLICATOR_LOG, CABlocks.STRIPPED_DEAD_DUPLICATOR_WOOD))
                 .getParentTag();
         public static final TagKey<Item> DUPLICATOR_LOGS = createWrappedItemTag("wood/logs/duplicator_logs")
                 .withParentTagEntry(ItemTags.LOGS_THAT_BURN)
                 .withTagEntry(DEAD_DUPLICATOR_LOGS)
+                .withEntries(RegistryUtil.getBlocksAsItemSups(CABlocks.DUPLICATOR_LOG, CABlocks.DUPLICATOR_WOOD, CABlocks.STRIPPED_DUPLICATOR_LOG, CABlocks.STRIPPED_DUPLICATOR_WOOD))
                 .getParentTag();
         public static final TagKey<Item> PEACH_LOGS = createWrappedItemTag("wood/logs/peach_logs")
                 .withParentTagEntry(ItemTags.LOGS_THAT_BURN)
+                .withEntries(RegistryUtil.getBlocksAsItemSups(CABlocks.PEACH_LOG, CABlocks.PEACH_WOOD, CABlocks.STRIPPED_PEACH_LOG, CABlocks.STRIPPED_PEACH_WOOD))
                 .getParentTag();
         public static final TagKey<Item> SKYWOOD_LOGS = createWrappedItemTag("wood/logs/skywood_logs")
                 .withParentTagEntry(ItemTags.LOGS_THAT_BURN)
+                .withEntries(RegistryUtil.getBlocksAsItemSups(CABlocks.SKYWOOD_LOG, CABlocks.SKYWOOD, CABlocks.STRIPPED_SKYWOOD_LOG, CABlocks.STRIPPED_SKYWOOD))
                 .getParentTag();
         public static final TagKey<Item> GINKGO_LOGS = createWrappedItemTag("wood/logs/ginkgo_logs")
                 .withParentTagEntry(ItemTags.LOGS_THAT_BURN)
+                .withEntries(RegistryUtil.getBlocksAsItemSups(CABlocks.GINKGO_LOG, CABlocks.GINKGO_WOOD, CABlocks.STRIPPED_GINKGO_LOG, CABlocks.STRIPPED_GINKGO_WOOD))
                 .getParentTag();
         public static final TagKey<Item> MESOZOIC_LOGS = createWrappedItemTag("wood/logs/mesozoic_logs")
                 .withParentTagEntry(ItemTags.LOGS_THAT_BURN)
+                .withEntries(RegistryUtil.getBlocksAsItemSups(CABlocks.MESOZOIC_LOG, CABlocks.MESOZOIC_WOOD, CABlocks.STRIPPED_MESOZOIC_LOG, CABlocks.STRIPPED_MESOZOIC_WOOD))
                 .getParentTag();
         public static final TagKey<Item> DENSEWOOD_LOGS = createWrappedItemTag("wood/logs/densewood_logs")
                 .withParentTagEntry(ItemTags.LOGS_THAT_BURN)
+                .withEntries(RegistryUtil.getBlocksAsItemSups(CABlocks.DENSEWOOD_LOG, CABlocks.DENSEWOOD, CABlocks.STRIPPED_DENSEWOOD_LOG, CABlocks.STRIPPED_DENSEWOOD))
                 .getParentTag();
 
-        public static final TagKey<Item> CRYSTALWOOD_LOGS = createItemTag("crystalwood_logs");
+        public static final TagKey<Item> CRYSTALWOOD_LOGS = createWrappedItemTag("crystalwood_logs")
+                .withEntries(RegistryUtil.getBlocksAsItemSups(CABlocks.CRYSTALWOOD_LOG, CABlocks.CRYSTALWOOD, CABlocks.STRIPPED_CRYSTALWOOD_LOG, CABlocks.STRIPPED_CRYSTALWOOD))
+                .getParentTag();
         public static final TagKey<Item> CRYSTALWOOD_LEAVES = createItemTag("crystalwood_leaves");
         public static final TagKey<Item> CRYSTALWOOD_SAPLING = createItemTag("crystalwood_saplings");
 

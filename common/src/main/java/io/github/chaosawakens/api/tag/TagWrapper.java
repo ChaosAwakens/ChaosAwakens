@@ -6,6 +6,7 @@ import net.minecraft.tags.TagKey;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
+import java.util.function.Supplier;
 
 /**
  * A wrapper builder class used to store information about tags and their pre-defined references in datagen to simplify creating data entries for tag entries.
@@ -17,7 +18,7 @@ public class TagWrapper<T, TK extends TagKey<T>> {
     private static final ObjectArrayList<TagWrapper<?, ? extends TagKey<?>>> CACHED_WRAPPERS = new ObjectArrayList<>();
     @NotNull
     protected final TK parentTag;
-    protected ObjectArrayList<T> storedTaggedObjects = new ObjectArrayList<>();
+    protected ObjectArrayList<Supplier<T>> storedTaggedObjects = new ObjectArrayList<>();
     protected ObjectArrayList<TK> storedCopiedTags = new ObjectArrayList<>();
     protected ObjectArrayList<TK> storedParentTags = new ObjectArrayList<>();
 
@@ -54,7 +55,7 @@ public class TagWrapper<T, TK extends TagKey<T>> {
      * @see #withParentTagEntry(TagKey)
      * @see #withParentTagEntries(List)
      */
-    public TagWrapper<T, TK> withEntry(T tagEntry) {
+    public TagWrapper<T, TK> withEntry(Supplier<T> tagEntry) {
         this.storedTaggedObjects.add(tagEntry);
         return this;
     }
@@ -66,13 +67,13 @@ public class TagWrapper<T, TK extends TagKey<T>> {
      *
      * @return {@code this} (builder method).
      *
-     * @see #withEntry(T)
+     * @see #withEntry(Supplier)
      * @see #withTagEntry(TK)
      * @see #withTagEntries(List)
      * @see #withParentTagEntry(TagKey)
      * @see #withParentTagEntries(List)
      */
-    public TagWrapper<T, TK> withEntries(List<T> tagEntries) {
+    public TagWrapper<T, TK> withEntries(List<Supplier<T>> tagEntries) {
         this.storedTaggedObjects.addAll(tagEntries);
         return this;
     }
@@ -84,7 +85,7 @@ public class TagWrapper<T, TK extends TagKey<T>> {
      *
      * @return {@code this} (builder method).
      *
-     * @see #withEntry(T)
+     * @see #withEntry(Supplier)
      * @see #withEntries(List)
      * @see #withTagEntries(List)
      * @see #withParentTagEntry(TagKey)
@@ -102,7 +103,7 @@ public class TagWrapper<T, TK extends TagKey<T>> {
      *
      * @return {@code this} (builder method).
      *
-     * @see #withEntry(T)
+     * @see #withEntry(Supplier)
      * @see #withEntries(List)
      * @see #withTagEntry(TK)
      * @see #withParentTagEntry(TagKey)
@@ -120,7 +121,7 @@ public class TagWrapper<T, TK extends TagKey<T>> {
      *
      * @return {@code this} (builder method).
      *
-     * @see #withEntry(T)
+     * @see #withEntry(Supplier)
      * @see #withEntries(List)
      * @see #withTagEntries(List)
      * @see #withParentTagEntries(List)
@@ -137,7 +138,7 @@ public class TagWrapper<T, TK extends TagKey<T>> {
      *
      * @return {@code this} (builder method).
      *
-     * @see #withEntry(T)
+     * @see #withEntry(Supplier)
      * @see #withEntries(List)
      * @see #withTagEntry(TK)
      * @see #withParentTagEntry(TagKey)
@@ -157,7 +158,7 @@ public class TagWrapper<T, TK extends TagKey<T>> {
         return parentTag;
     }
 
-    public ImmutableList<T> getPredefinedTagEntries() {
+    public ImmutableList<Supplier<T>> getPredefinedTagEntries() {
         return ImmutableList.copyOf(storedTaggedObjects);
     }
 
@@ -170,7 +171,7 @@ public class TagWrapper<T, TK extends TagKey<T>> {
     }
 
     /**
-     * Gets a {@link ImmutableList} representing all created TW entries, cached in a {@code static} collection.
+     * Gets an {@link ImmutableList} representing all created TW entries, cached in a {@code static} collection.
      *
      * @return An immutable view of {@link #CACHED_WRAPPERS}.
      */

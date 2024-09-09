@@ -51,7 +51,7 @@ public class CABlockTagsProvider extends BlockTagsProvider {
 
                     if (curBlockTag != null) {
                         twEntry.getPredefinedTagEntries().forEach(tagEntry -> {
-                            Block blockTagEntry = (Block) tagEntry;
+                            Block blockTagEntry = (Block) tagEntry.get();
 
                             if (blockTagEntry != null) {
                                 CAConstants.LOGGER.debug("[Tagging Block]: " + blockTagEntry.getDescriptionId() + " -> " + curBlockTag);

@@ -10,6 +10,7 @@ public class CAItemPropertyWrappers {
     // Basic
     public static final ItemPropertyWrapper BASIC_GENERATED = ItemPropertyWrapper.createTemplate()
             .builder()
+            .withParentCreativeModeTab(CACreativeModeTabs.CHAOS_AWAKENS_ITEMS)
             .withCustomModelDefinitions(parentItem -> ObjectArrayList.of(ModelUtil.generated(RegistryUtil.getItemTexture(parentItem))))
             .build();
     public static final ItemPropertyWrapper BASIC_HANDHELD = ItemPropertyWrapper.createTemplate()
@@ -18,9 +19,10 @@ public class CAItemPropertyWrappers {
             .build();
 
     // Food
-    public static final ItemPropertyWrapper RAW_FOOD = ItemPropertyWrapper.ofTemplate(BASIC_GENERATED)
-            .cachedBuilder()
+    public static final ItemPropertyWrapper RAW_FOOD = ItemPropertyWrapper.createTemplate()
+            .builder()
             .withParentCreativeModeTab(CACreativeModeTabs.CHAOS_AWAKENS_FOOD)
+            .withCustomModelDefinitions(parentItem -> ObjectArrayList.of(ModelUtil.generated(RegistryUtil.getItemTexture(parentItem))))
             .build();
     public static final ItemPropertyWrapper COOKED_FOOD = ItemPropertyWrapper.ofTemplate(RAW_FOOD)
             .cachedBuilder()
