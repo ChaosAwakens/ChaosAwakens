@@ -1,10 +1,13 @@
 package io.github.chaosawakens.util;
 
+import io.github.chaosawakens.CAConstants;
 import io.github.chaosawakens.common.registry.CABlocks;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.DefaultedRegistry;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.data.BlockFamilies;
+import net.minecraft.data.BlockFamily;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
@@ -18,6 +21,7 @@ import java.nio.file.FileVisitOption;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -35,17 +39,50 @@ public final class RegistryUtil {
     /**
      * Retrieves the registry name of the provided {@link ItemLike} via {@link DefaultedRegistry#getKey(Object)} (from the {@link BuiltInRegistries#ITEM}} registry).
      *
-     * @param targetItemLike The {@link ItemLike} to retrieve the registry name of.
+     * @param targetItemLike The {@link ItemLike} to retrieve the registry name for.
      *
      * @return The registry name of the provided {@link ItemLike}.
+     *
+     * @see #getItemModId(ItemLike)
+     * @see #getItemKey(ItemLike)
      */
     public static String getItemName(ItemLike targetItemLike) {
         return BuiltInRegistries.ITEM.getKey(targetItemLike.asItem()).getPath();
     }
 
     /**
+     * Retrieves the modid of the provided {@link ItemLike} via {@link DefaultedRegistry#getKey(Object)} (from the {@link BuiltInRegistries#ITEM}} registry).
+     *
+     * @param targetItemLike The {@link ItemLike} to retrieve the registry name for.
+     *
+     * @return The origin modid of the provided {@link ItemLike}.
+     *
+     * @see #getItemName(ItemLike)
+     * @see #getItemKey(ItemLike)
+     */
+    public static String getItemModId(ItemLike targetItemLike) {
+        return BuiltInRegistries.ITEM.getKey(targetItemLike.asItem()).getNamespace();
+    }
+
+    /**
+     * Retrieves and returns a {@link ResourceLocation} representing the full registry key of the given {@link ItemLike}.
+     *
+     * @param targetItemLike The {@link ItemLike} to retrieve the registry key for.
+     *
+     * @return A {@link ResourceLocation} representing the full key of the target {@link ItemLike} (may be an air delegate ({"minecraft:air"}) if no such key exists in accordance to the methods this one overloads).
+     *
+     * @see #getItemModId(ItemLike)
+     * @see #getItemName(ItemLike)
+     */
+    public static ResourceLocation getItemKey(ItemLike targetItemLike) {
+        return new ResourceLocation(getItemModId(targetItemLike), getItemName(targetItemLike));
+    }
+
+    /**
      * Attempts to retrieve the texture for the supplied {@link Item} filename. <b>IDE/DEV-ENV ONLY!!!</b> This will not work outside of datagen in the dev environment, as it's only meant to be used to generate data
-     * based on located textures. Mind that the registry name of the object attempting to utilise this method must EXACTLY match the name of the target texture to locate. This method (and its equivalents) is meant
+     * based on located textures within the {@code "build/resources"} directory from the Java Classpath.
+     * <p></p>
+     * Mind that the registry name of the object attempting to utilise this method must EXACTLY match the name of the target texture to locate. This method (and its equivalents) is meant
      * to substitute for a lack of {@link Minecraft} in datagen, which by extension means a lack of texture management and whatnot.
      *
      * @param modid The modid under which the texture file should be validated against and located.
@@ -72,7 +109,7 @@ public final class RegistryUtil {
                                 .filter(curPath -> curPath.toString().endsWith(".png"))
                                 .forEach(curVerifiedPath -> CACHED_PNG_TEXTURES.add(curVerifiedPath.toFile()));
                     } catch (IOException e) {
-                        e.printStackTrace();
+                        CAConstants.LOGGER.error("Failed to walk system classpath. Ensure that you're in your IDE and calling this method in datagen-related code, as it is otherwise not designed to work with non-literal/non-regular directories/files.", e);
                     }
                 }
             }
@@ -92,7 +129,9 @@ public final class RegistryUtil {
 
     /**
      * Attempts to retrieve the texture for the supplied {@link Block} filename. <b>IDE/DEV-ENV ONLY!!!</b> This will not work outside of datagen in the dev environment, as it's only meant to be used to generate data
-     * based on located textures. Mind that the registry name of the object attempting to utilise this method must EXACTLY match the name of the target texture to locate. This method (and its equivalents) is meant
+     * based on located textures within the {@code "build/resources"} directory from the Java Classpath.
+     * <p></p>
+     * Mind that the registry name of the object attempting to utilise this method must EXACTLY match the name of the target texture to locate. This method (and its equivalents) is meant
      * to substitute for a lack of {@link Minecraft} in datagen, which by extension means a lack of texture management and whatnot.
      *
      * @param modid The modid under which the texture file should be validated against and located.
@@ -119,7 +158,7 @@ public final class RegistryUtil {
                                 .filter(curPath -> curPath.toString().endsWith(".png"))
                                 .forEach(curVerifiedPath -> CACHED_PNG_TEXTURES.add(curVerifiedPath.toFile()));
                     } catch (IOException e) {
-                        e.printStackTrace();
+                        CAConstants.LOGGER.error("Failed to walk system classpath. Ensure that you're in your IDE and calling this method in datagen-related code, as it is otherwise not designed to work with non-literal/non-regular directories/files.", e);
                     }
                 }
             }
@@ -139,7 +178,9 @@ public final class RegistryUtil {
 
     /**
      * Overloaded variant of {@link #getItemTexture(String, String)}. Attempts to retrieve the texture for the supplied {@link Item}. <b>IDE/DEV-ENV ONLY!!!</b> This will not work outside of datagen
-     * in the dev environment, as it's only meant to be used to generate data based on located textures. Mind that the registry name of the object attempting to utilise this method must EXACTLY match
+     * in the dev environment, as it's only meant to be used to generate data based on located textures within the {@code "build/resources"} directory from the Java Classpath.
+     * <p></p>
+     * Mind that the registry name of the object attempting to utilise this method must EXACTLY match
      * the name of the target texture to locate. This method (and its equivalents) is meant to substitute for a lack of {@link Minecraft} in datagen, which by extension means a lack of texture management
      * and whatnot.
      *
@@ -158,7 +199,9 @@ public final class RegistryUtil {
 
     /**
      * Overloaded variant of {@link #getBlockTexture(String, String)}}. Attempts to retrieve the texture for the supplied {@link Block}. <b>IDE/DEV-ENV ONLY!!!</b> This will not work outside of datagen
-     * in the dev environment, as it's only meant to be used to generate data based on located textures. Mind that the registry name of the object attempting to utilise this method must EXACTLY match
+     * in the dev environment, as it's only meant to be used to generate data based on located textures within the {@code "build/resources"} directory from the Java Classpath.
+     * <p></p>
+     * Mind that the registry name of the object attempting to utilise this method must EXACTLY match
      * the name of the target texture to locate. This method (and its equivalents) is meant to substitute for a lack of {@link Minecraft} in datagen, which by extension means a lack of texture management
      * and whatnot.
      *
@@ -175,14 +218,47 @@ public final class RegistryUtil {
         return getBlockTexture(BuiltInRegistries.BLOCK.getKey(targetBlock.get()).getNamespace(), BuiltInRegistries.BLOCK.getKey(targetBlock.get()).getPath());
     }
 
+    /**
+     * Modifies the {@link ResourceLocation} passed in by prepending the provided {@code prefix} to its path if it isn't already... prefixed with said {@code prefix} (duh).
+     *
+     * @param baseLoc The {@link ResourceLocation} to pick the provided {@code prefix} for.
+     * @param prefix The path prefix to search for/prepend the provided {@code baseLoc} with.
+     *
+     * @return A modified variant of the provided {@code baseLoc} with the provided {@code prefix} picked/appropriately and safely prepended.
+     *
+     * @see #pickBlockPrefix(ResourceLocation)
+     * @see #pickItemPrefix(ResourceLocation)
+     */
     public static ResourceLocation pickPrefix(ResourceLocation baseLoc, String prefix) {
         return baseLoc.getPath().startsWith(prefix) ? baseLoc : baseLoc.withPrefix(prefix);
     }
 
+    /**
+     * Overloaded variant of {@link #pickPrefix(ResourceLocation, String)}. Modifies the {@link ResourceLocation} passed in by prepending the {@code "block/"} prefix to its path if it isn't already prefixed
+     * with said prefix (duh).
+     *
+     * @param baseBlockLoc The {@link ResourceLocation} to pick the {@code "block/"} prefix for.
+     *
+     * @return A modified variant of the provided {@code baseBlockLoc} with the {@code "block/"} prefix picked/appropriately and safely prepended.
+     *
+     * @see #pickPrefix(ResourceLocation, String)
+     * @see #pickItemPrefix(ResourceLocation)
+     */
     public static ResourceLocation pickBlockPrefix(ResourceLocation baseBlockLoc) {
         return pickPrefix(baseBlockLoc, "block/");
     }
 
+    /**
+     * Overloaded variant of {@link #pickPrefix(ResourceLocation, String)}. Modifies the {@link ResourceLocation} passed in by prepending the {@code "item/"} prefix to its path if it isn't already prefixed
+     * with said prefix (duh).
+     *
+     * @param baseItemLoc The {@link ResourceLocation} to pick the {@code "item/"} prefix for.
+     *
+     * @return A modified variant of the provided {@code baseItemLoc} with the {@code "item/"} prefix picked/appropriately and safely prepended.
+     *
+     * @see #pickPrefix(ResourceLocation, String)
+     * @see #pickBlockPrefix(ResourceLocation)
+     */
     public static ResourceLocation pickItemPrefix(ResourceLocation baseItemLoc) {
         return pickPrefix(baseItemLoc, "item/");
     }
@@ -291,12 +367,14 @@ public final class RegistryUtil {
         ResourceLocation targetBlockKey = BuiltInRegistries.BLOCK.getKey(targetBlock.get());
         String copiedPath = BuiltInRegistries.BLOCK.getKey(targetBlock.get()).getPath();
 
-        if (copiedPath.contains("bricks")) copiedPath.replace("bricks", "brick");
+        if (copiedPath.contains("bricks")) copiedPath = copiedPath.replace("bricks", "brick");
+
+        String finalCopiedPath = copiedPath; // Needed cuz WE LOVE TEROP!!!
 
         return targetBlockKey.getPath().endsWith("_block")
-                ? () -> BuiltInRegistries.BLOCK.get(targetBlockKey.withPath(copiedPath.replace("_block", regNameSuffix)))
-                : !BuiltInRegistries.BLOCK.get(targetBlockKey.withPath(copiedPath.concat(regNameSuffix))).getDescriptionId().equals("block.minecraft.air")
-                ? () -> BuiltInRegistries.BLOCK.get(targetBlockKey.withPath(copiedPath.concat(regNameSuffix)))
+                ? () -> BuiltInRegistries.BLOCK.get(targetBlockKey.withPath(finalCopiedPath.replace("_block", regNameSuffix)))
+                : !BuiltInRegistries.BLOCK.get(targetBlockKey.withPath(finalCopiedPath.concat(regNameSuffix))).getDescriptionId().equals("block.minecraft.air")
+                ? () -> BuiltInRegistries.BLOCK.get(targetBlockKey.withPath(finalCopiedPath.concat(regNameSuffix)))
                 : null;
     }
 
@@ -325,13 +403,15 @@ public final class RegistryUtil {
         ResourceLocation targetBlockKey = BuiltInRegistries.BLOCK.getKey(targetBlock.get());
         String copiedPath = BuiltInRegistries.BLOCK.getKey(targetBlock.get()).getPath();
 
-        if (copiedPath.contains("brick")) copiedPath.replace("brick", "bricks");
+        if (copiedPath.contains("brick")) copiedPath = copiedPath.replace("brick", "bricks");
+
+        String finalCopiedPath = copiedPath; // Needed cuz WE LOVE TEROP!!!
 
         return targetBlockKey.getPath().endsWith(targetRegNameSuffix)
-                ? !BuiltInRegistries.BLOCK.get(targetBlockKey.withPath(copiedPath.replace(targetRegNameSuffix, "_block"))).getDescriptionId().equals("block.minecraft.air")
-                ? () -> BuiltInRegistries.BLOCK.get(targetBlockKey.withPath(copiedPath.replace(targetRegNameSuffix, "_block")))
-                : !BuiltInRegistries.BLOCK.get(targetBlockKey.withPath(copiedPath.replace(targetRegNameSuffix, ""))).getDescriptionId().equals("block.minecraft.air")
-                ? () -> BuiltInRegistries.BLOCK.get(targetBlockKey.withPath(copiedPath.replace(targetRegNameSuffix, "")))
+                ? !BuiltInRegistries.BLOCK.get(targetBlockKey.withPath(finalCopiedPath.replace(targetRegNameSuffix, "_block"))).getDescriptionId().equals("block.minecraft.air")
+                ? () -> BuiltInRegistries.BLOCK.get(targetBlockKey.withPath(finalCopiedPath.replace(targetRegNameSuffix, "_block")))
+                : !BuiltInRegistries.BLOCK.get(targetBlockKey.withPath(finalCopiedPath.replace(targetRegNameSuffix, ""))).getDescriptionId().equals("block.minecraft.air")
+                ? () -> BuiltInRegistries.BLOCK.get(targetBlockKey.withPath(finalCopiedPath.replace(targetRegNameSuffix, "")))
                 : null
                 : null;
     }
@@ -354,5 +434,28 @@ public final class RegistryUtil {
     @Nullable
     public static Supplier<Block> getSolidBlockFromWall(Supplier<Block> targetBlock) {
         return getFromSolidBlock(targetBlock, "_wall");
+    }
+
+    @Nullable
+    public static BlockFamily getFamilyFor(Supplier<Block> targetBlock, boolean literalFamily) {
+        Block targetLiteralBlock = targetBlock.get();
+        String copiedName = getItemName(targetLiteralBlock);
+        Block baseBlock = !targetLiteralBlock.getClass().equals(Block.class) ? getSolidBlockFrom(targetBlock, getItemName(targetLiteralBlock).substring(copiedName.lastIndexOf("_") - 1)).get() : targetLiteralBlock; // Bold ahh assumptions
+        Optional<BlockFamily> existingFamily = BlockFamilies.getAllFamilies()
+                .filter(curFam -> literalFamily ? curFam.getBaseBlock() == baseBlock : curFam.getVariants().containsValue(targetLiteralBlock) || curFam.getBaseBlock() == targetLiteralBlock)
+                .findFirst();
+
+        return existingFamily.orElseGet(() -> { // TODO
+            
+
+            return BlockFamilies.familyBuilder(baseBlock)
+                    .getFamily();
+        });
+
+    }
+
+    @Nullable
+    public static BlockFamily getFamilyFor(Supplier<Block> targetBlock) {
+        return getFamilyFor(targetBlock, false);
     }
 }

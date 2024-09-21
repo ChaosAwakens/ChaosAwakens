@@ -47,7 +47,7 @@ public interface ICutScene {
     /**
      * Gets the object representing the bounding box, or level space, encompassed by this {@link ICutScene} instance.
      *
-     * @return The bounding box, or level space, encompassed by this {@link ICutScene} instance.
+     * @return The bounding box (level space, in blocks) encapsulated by this {@link ICutScene} instance.
      */
     CutSceneSpace getCutSceneSpace();
 
@@ -94,7 +94,7 @@ public interface ICutScene {
     Camera getMainCamera();
 
     /**
-     * Gets a {@link List} of additional {@link Camera Cameras} associated with this {@link ICutScene} instance. Useful for cutscenes with effects that require "split" views or similar effects.
+     * Gets a {@link List} of additional {@link Camera Cameras} associated with this {@link ICutScene} instance. Useful for cutscenes with effects that require split views or similar effects.
      *
      * @return A {@link List} of additional {@link Camera Cameras} associated with this {@link ICutScene} instance. May be empty.
      *

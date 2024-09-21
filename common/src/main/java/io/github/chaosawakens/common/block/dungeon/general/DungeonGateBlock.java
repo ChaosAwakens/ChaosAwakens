@@ -79,6 +79,14 @@ public class DungeonGateBlock extends Block {
         return isActive(targetState) ? 0.0F : super.getDestroyProgress(targetState, miningPlayer, curLevel, targetPos);
     }
 
+    public boolean isConstantlyUpdated() {
+        return isConstantlyUpdated;
+    }
+
+    public int getBaseUpdateTickTime() {
+        return baseUpdateTickTime;
+    }
+
     protected static InteractionResult checkAndActivate(BlockState targetState, BlockPos targetPos, Level curLevel) {
         if (!isActive(targetState) && !hasVanished(targetState) && targetState.getBlock() instanceof DungeonGateBlock targetDungeonGateBlock) {
             curLevel.setBlockAndUpdate(targetPos, setActive(targetState));
@@ -87,14 +95,6 @@ public class DungeonGateBlock extends Block {
             return InteractionResult.SUCCESS;
         }
         return InteractionResult.PASS;
-    }
-
-    public boolean isConstantlyUpdated() {
-        return isConstantlyUpdated;
-    }
-
-    public int getBaseUpdateTickTime() {
-        return baseUpdateTickTime;
     }
 
     public static boolean isActive(BlockState targetState) {

@@ -1,7 +1,9 @@
 package io.github.chaosawakens.util;
 
-import io.github.chaosawakens.CAConstants;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.data.BlockFamily;
 import net.minecraft.data.recipes.*;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -13,7 +15,7 @@ import java.util.function.Supplier;
 
 /**
  * Utility class containing helper methods (generally also found in datagen classes) aimed at reducing boilerplate code by providing
- * common/redundant {@link RecipeBuilder} patterns.
+ * common/redundant {@link RecipeBuilder} patterns. Partially arbitrary.
  */
 public final class RecipeUtil {
 
@@ -28,7 +30,7 @@ public final class RecipeUtil {
                 .pattern("MMM")
                 .pattern("MMM")
                 .unlockedBy("has_" + RegistryUtil.getItemName(materialItem), PredicateUtil.has(materialItem))
-                .save(recipeConsumer, CAConstants.prefix(RegistryUtil.getItemName(materialItem) + "_to_" + RegistryUtil.getItemName(resultBlockSup.get())));
+                .save(recipeConsumer, new ResourceLocation(RegistryUtil.getItemModId(resultBlockSup.get()), RegistryUtil.getItemName(materialItem) + "_to_" + RegistryUtil.getItemName(resultBlockSup.get())));
     }
 
     public static Consumer<Supplier<Block>> logToPlanks(Consumer<FinishedRecipe> recipeConsumer, ItemLike logILReference) {
@@ -159,25 +161,32 @@ public final class RecipeUtil {
         return (resultBlockSup) -> fenceGateFromPlanks(recipeConsumer, RegistryUtil.getPlanksFrom(resultBlockSup).get()).accept(resultBlockSup);
     }
 
+    public static Consumer<Supplier<Block>> standardBlockSmelting(Consumer<FinishedRecipe> recipeConsumer, ItemLike inputIngredientILReference) {
+        return (resultItemSup) -> SimpleCookingRecipeBuilder.smelting(Ingredient.of(inputIngredientILReference), RecipeCategory.BUILDING_BLOCKS, resultItemSup.get(), 0.35F, 200)
+                .group(RegistryUtil.getItemModId(inputIngredientILReference))
+                .unlockedBy("has_" + RegistryUtil.getItemName(inputIngredientILReference), PredicateUtil.has(inputIngredientILReference))
+                .save(recipeConsumer, new ResourceLocation(RegistryUtil.getItemModId(resultItemSup.get()), RegistryUtil.getItemName(resultItemSup.get()) + "_from_smelting"));
+    }
+
     public static Consumer<Supplier<Item>> cookedFoodFromSmelting(Consumer<FinishedRecipe> recipeConsumer, ItemLike rawFoodILReference) {
         return (resultItemSup) -> SimpleCookingRecipeBuilder.smelting(Ingredient.of(rawFoodILReference), RecipeCategory.FOOD, resultItemSup.get(), 0.35F, 200)
-                .group(CAConstants.MODID)
+                .group(RegistryUtil.getItemModId(rawFoodILReference))
                 .unlockedBy("has_" + RegistryUtil.getItemName(rawFoodILReference), PredicateUtil.has(rawFoodILReference))
-                .save(recipeConsumer, CAConstants.prefix(RegistryUtil.getItemName(rawFoodILReference) + "_from_smelting"));
+                .save(recipeConsumer, new ResourceLocation(RegistryUtil.getItemModId(resultItemSup.get()), RegistryUtil.getItemName(resultItemSup.get()) + "_from_smelting"));
     }
 
     public static Consumer<Supplier<Item>> foodSmokingRecipe(Consumer<FinishedRecipe> recipeConsumer, ItemLike rawFoodILReference) {
         return (resultItemSup) -> SimpleCookingRecipeBuilder.smoking(Ingredient.of(rawFoodILReference), RecipeCategory.FOOD, resultItemSup.get(), 0.35F, 100)
-                .group(CAConstants.MODID)
+                .group(RegistryUtil.getItemModId(rawFoodILReference))
                 .unlockedBy("has_" + RegistryUtil.getItemName(rawFoodILReference), PredicateUtil.has(rawFoodILReference))
-                .save(recipeConsumer, CAConstants.prefix(RegistryUtil.getItemName(rawFoodILReference) + "_from_smoking"));
+                .save(recipeConsumer, new ResourceLocation(RegistryUtil.getItemModId(resultItemSup.get()), RegistryUtil.getItemName(resultItemSup.get()) + "_from_smelting"));
     }
 
     public static Consumer<Supplier<Item>> foodCampfireSmokingRecipe(Consumer<FinishedRecipe> recipeConsumer, ItemLike rawFoodILReference) {
         return (resultItemSup) -> SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(rawFoodILReference), RecipeCategory.FOOD, resultItemSup.get(), 0.35F, 600)
-                .group(CAConstants.MODID)
+                .group(RegistryUtil.getItemModId(rawFoodILReference))
                 .unlockedBy("has_" + RegistryUtil.getItemName(rawFoodILReference), PredicateUtil.has(rawFoodILReference))
-                .save(recipeConsumer, CAConstants.prefix(RegistryUtil.getItemName(rawFoodILReference) + "_from_campfire_cooking"));
+                .save(recipeConsumer, new ResourceLocation(RegistryUtil.getItemModId(resultItemSup.get()), RegistryUtil.getItemName(resultItemSup.get()) + "_from_smelting"));
     }
 
     public static Consumer<Supplier<Item>> cookedFood(Consumer<FinishedRecipe> recipeConsumer, ItemLike rawFoodILReference) {
@@ -190,6 +199,45 @@ public final class RecipeUtil {
 
     public static Consumer<Supplier<Item>> cookedFood(Consumer<FinishedRecipe> recipeConsumer) {
         return (resultItemSup) -> cookedFood(recipeConsumer, RegistryUtil.getFromCookedFood(resultItemSup).get()).accept(resultItemSup);
+    }
+
+    public static Consumer<Supplier<Block>> solidBlockFromSolidBlock(Consumer<FinishedRecipe> recipeConsumer, ItemLike solidBlockILReference, int resultBlockCount) {
+        return (resultBlockSup) -> ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, resultBlockSup.get(), resultBlockCount)
+                .define('S', solidBlockILReference)
+                .pattern("SS")
+                .pattern("SS")
+                .unlockedBy("has_" + RegistryUtil.getItemName(solidBlockILReference), PredicateUtil.has(solidBlockILReference))
+                .save(recipeConsumer);
+    }
+
+    public static Consumer<Supplier<Block>> solidBlockFromSolidBlock(Consumer<FinishedRecipe> recipeConsumer, ItemLike solidBlockILReference) {
+        return (resultBlockSup) -> solidBlockFromSolidBlock(recipeConsumer, solidBlockILReference, 3).accept(resultBlockSup);
+    }
+
+    public static Consumer<Supplier<Block>> solidPillarFromSolidBlock(Consumer<FinishedRecipe> recipeConsumer, ItemLike solidBlockILReference, int resultBlockCount) {
+        return (resultBlockSup) -> ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, resultBlockSup.get(), resultBlockCount)
+                .define('S', solidBlockILReference)
+                .pattern("S")
+                .pattern("S")
+                .unlockedBy("has_" + RegistryUtil.getItemName(solidBlockILReference), PredicateUtil.has(solidBlockILReference))
+                .save(recipeConsumer);
+    }
+
+    public static Consumer<Supplier<Block>> solidPillarFromSolidBlock(Consumer<FinishedRecipe> recipeConsumer, ItemLike solidBlockILReference) {
+        return (resultBlockSup) -> solidPillarFromSolidBlock(recipeConsumer, solidBlockILReference, 1).accept(resultBlockSup);
+    }
+
+    public static Consumer<Supplier<Block>> solidBlockFromSlab(Consumer<FinishedRecipe> recipeConsumer, ItemLike solidBlockILReference) {
+        return (resultBlockSup) -> ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, resultBlockSup.get())
+                .define('S', solidBlockILReference)
+                .pattern("S")
+                .pattern("S")
+                .unlockedBy("has_" + RegistryUtil.getItemName(solidBlockILReference), PredicateUtil.has(solidBlockILReference))
+                .save(recipeConsumer);
+    }
+
+    public static Consumer<Supplier<Block>> solidBlockFromSlab(Consumer<FinishedRecipe> recipeConsumer) {
+        return (resultBlockSup) -> solidBlockFromSlab(recipeConsumer, RegistryUtil.getSlabFromSolidBlock(resultBlockSup).get()).accept(resultBlockSup);
     }
 
     public static Consumer<Supplier<Block>> slabsFromSolidBlock(Consumer<FinishedRecipe> recipeConsumer, ItemLike solidBlockILReference) {
@@ -231,10 +279,16 @@ public final class RecipeUtil {
         return (resultBlockSup) -> wallsFromSolidBlock(recipeConsumer, RegistryUtil.getSolidBlockFromWall(resultBlockSup).get()).accept(resultBlockSup);
     }
 
+    public static Consumer<Supplier<Block>> solidBlockFromStoneCuttingSolidBlock(Consumer<FinishedRecipe> recipeConsumer, ItemLike solidBlockILReference) {
+        return (resultBlockSup) -> SingleItemRecipeBuilder.stonecutting(Ingredient.of(solidBlockILReference), RecipeCategory.BUILDING_BLOCKS, resultBlockSup.get())
+                .unlockedBy("has_" + RegistryUtil.getItemName(solidBlockILReference), PredicateUtil.has(solidBlockILReference))
+                .save(recipeConsumer, new ResourceLocation(RegistryUtil.getItemModId(resultBlockSup.get()), RegistryUtil.getItemName(resultBlockSup.get()) + "_from_stonecutting_" + RegistryUtil.getItemName(solidBlockILReference)));
+    }
+
     public static Consumer<Supplier<Block>> slabsFromStoneCuttingSolidBlock(Consumer<FinishedRecipe> recipeConsumer, ItemLike solidBlockILReference) {
         return (resultBlockSup) -> SingleItemRecipeBuilder.stonecutting(Ingredient.of(solidBlockILReference), RecipeCategory.BUILDING_BLOCKS, resultBlockSup.get(), 2)
                 .unlockedBy("has_" + RegistryUtil.getItemName(solidBlockILReference), PredicateUtil.has(solidBlockILReference))
-                .save(recipeConsumer, CAConstants.prefix(RegistryUtil.getItemName(resultBlockSup.get()) + "_from_stonecutting_" + RegistryUtil.getItemName(solidBlockILReference)));
+                .save(recipeConsumer, new ResourceLocation(RegistryUtil.getItemModId(resultBlockSup.get()), RegistryUtil.getItemName(resultBlockSup.get()) + "_from_stonecutting_" + RegistryUtil.getItemName(solidBlockILReference)));
     }
 
     public static Consumer<Supplier<Block>> slabsFromStoneCuttingSolidBlock(Consumer<FinishedRecipe> recipeConsumer) {
@@ -244,7 +298,7 @@ public final class RecipeUtil {
     public static Consumer<Supplier<Block>> stairsFromStoneCuttingSolidBlock(Consumer<FinishedRecipe> recipeConsumer, ItemLike solidBlockILReference) {
         return (resultBlockSup) -> SingleItemRecipeBuilder.stonecutting(Ingredient.of(solidBlockILReference), RecipeCategory.BUILDING_BLOCKS, resultBlockSup.get())
                 .unlockedBy("has_" + RegistryUtil.getItemName(solidBlockILReference), PredicateUtil.has(solidBlockILReference))
-                .save(recipeConsumer, CAConstants.prefix(RegistryUtil.getItemName(resultBlockSup.get()) + "_from_stonecutting_" + RegistryUtil.getItemName(solidBlockILReference)));
+                .save(recipeConsumer, new ResourceLocation(RegistryUtil.getItemModId(resultBlockSup.get()), RegistryUtil.getItemName(resultBlockSup.get()) + "_from_stonecutting_" + RegistryUtil.getItemName(solidBlockILReference)));
     }
 
     public static Consumer<Supplier<Block>> stairsFromStoneCuttingSolidBlock(Consumer<FinishedRecipe> recipeConsumer) {
@@ -254,10 +308,91 @@ public final class RecipeUtil {
     public static Consumer<Supplier<Block>> wallFromStoneCuttingSolidBlock(Consumer<FinishedRecipe> recipeConsumer, ItemLike solidBlockILReference) {
         return (resultBlockSup) -> SingleItemRecipeBuilder.stonecutting(Ingredient.of(solidBlockILReference), RecipeCategory.BUILDING_BLOCKS, resultBlockSup.get())
                 .unlockedBy("has_" + RegistryUtil.getItemName(solidBlockILReference), PredicateUtil.has(solidBlockILReference))
-                .save(recipeConsumer, CAConstants.prefix(RegistryUtil.getItemName(resultBlockSup.get()) + "_from_stonecutting_" + RegistryUtil.getItemName(solidBlockILReference)));
+                .save(recipeConsumer, new ResourceLocation(RegistryUtil.getItemModId(resultBlockSup.get()), RegistryUtil.getItemName(resultBlockSup.get()) + "_from_stonecutting_" + RegistryUtil.getItemName(solidBlockILReference)));
     }
 
     public static Consumer<Supplier<Block>> wallFromStoneCuttingSolidBlock(Consumer<FinishedRecipe> recipeConsumer) {
         return (resultBlockSup) -> wallFromStoneCuttingSolidBlock(recipeConsumer, RegistryUtil.getSolidBlockFromWall(resultBlockSup).get()).accept(resultBlockSup);
+    }
+
+    public static Consumer<Supplier<Block>> solidBlockRecipe(Consumer<FinishedRecipe> recipeConsumer) {
+        return (resultBlockSup) -> {
+            Block resultBlock = resultBlockSup.get();
+            BlockFamily parentFamily = RegistryUtil.getFamilyFor(resultBlockSup);
+
+            if (parentFamily != null) {
+                String baseBlockPath = RegistryUtil.getItemName(parentFamily.getBaseBlock());
+                ResourceLocation brickBlockKey = baseBlockPath.endsWith("_block") ? RegistryUtil.getItemKey(parentFamily.getBaseBlock()).withPath(baseBlockPath.replace("_block", "_bricks")) : RegistryUtil.getItemKey(parentFamily.getBaseBlock()).withSuffix("_bricks");
+                ResourceLocation pillarBlockKey = baseBlockPath.endsWith("_block") ? RegistryUtil.getItemKey(parentFamily.getBaseBlock()).withPath(baseBlockPath.replace("_block", "_pillar")) : RegistryUtil.getItemKey(parentFamily.getBaseBlock()).withSuffix("_pillar");
+                BlockFamily brickVariantFamily = RegistryUtil.getFamilyFor(() -> BuiltInRegistries.BLOCK.get(brickBlockKey), true); // There is no existing Variant for bricks/pillars supplied by vanilla and I CBA to create a whole custom impl just for that particular purpose
+                BlockFamily pillarVariantFamily = RegistryUtil.getFamilyFor(() -> BuiltInRegistries.BLOCK.get(pillarBlockKey), true);
+                Supplier<Block> brickResultBlockSlab = brickVariantFamily == null ? null : RegistryUtil.getSlabFromSolidBlock(brickVariantFamily::getBaseBlock);
+
+                Block baseResultBlock = parentFamily.getBaseBlock();
+                Block brickResultBlock = brickVariantFamily == null ? null : brickVariantFamily.getBaseBlock(); // May be null from here (not annotating every single local variable with @Nullable :skull:)
+                Block chiseledResultBlock = parentFamily.get(BlockFamily.Variant.CHISELED);
+                Block crackedResultBlock = parentFamily.get(BlockFamily.Variant.CRACKED);
+                Block pillarResultBlock = pillarVariantFamily == null ? null : pillarVariantFamily.getBaseBlock();
+                Block polishedResultBlock = parentFamily.get(BlockFamily.Variant.POLISHED);
+
+                if (brickResultBlock == resultBlock) { // Yodatyping my beloved (in certain circumstances :moyai:)
+                    if (polishedResultBlock != null) {
+                        solidBlockFromSolidBlock(recipeConsumer, polishedResultBlock).accept(resultBlockSup);
+
+                        solidBlockFromStoneCuttingSolidBlock(recipeConsumer, polishedResultBlock).accept(resultBlockSup);
+                    }
+
+                    if (baseResultBlock != null) solidBlockFromStoneCuttingSolidBlock(recipeConsumer, baseResultBlock).accept(resultBlockSup);
+                } else if (chiseledResultBlock == resultBlock) {
+                    if (brickResultBlockSlab != null) solidBlockFromSlab(recipeConsumer, brickResultBlockSlab.get()).accept(resultBlockSup);
+
+                    if (baseResultBlock != null) solidBlockFromStoneCuttingSolidBlock(recipeConsumer, baseResultBlock).accept(resultBlockSup);
+                    if (brickResultBlock != null) solidBlockFromStoneCuttingSolidBlock(recipeConsumer, brickResultBlock).accept(resultBlockSup);
+                    if (polishedResultBlock != null) solidBlockFromStoneCuttingSolidBlock(recipeConsumer, polishedResultBlock).accept(resultBlockSup);
+                } else if (crackedResultBlock == resultBlock) {
+                    if (brickResultBlock != null) standardBlockSmelting(recipeConsumer, brickResultBlock).accept(resultBlockSup);
+                } else if (polishedResultBlock == resultBlock) {
+                    if (baseResultBlock != null) {
+                        solidBlockFromSolidBlock(recipeConsumer, baseResultBlock).accept(resultBlockSup);
+
+                        solidBlockFromStoneCuttingSolidBlock(recipeConsumer, baseResultBlock).accept(resultBlockSup);
+                    }
+                } else if (pillarResultBlock == resultBlock) {
+                    if (polishedResultBlock != null) solidPillarFromSolidBlock(recipeConsumer, polishedResultBlock).accept(resultBlockSup);
+
+                    if (baseResultBlock != null) solidBlockFromStoneCuttingSolidBlock(recipeConsumer, baseResultBlock).accept(resultBlockSup);
+                }
+            }
+        };
+    }
+
+    public static Consumer<Supplier<Block>> solidSlabRecipe(Consumer<FinishedRecipe> recipeConsumer) {
+        return (resultBlockSup) -> {
+
+        };
+    }
+
+    public static Consumer<Supplier<Block>> solidStairsRecipe(Consumer<FinishedRecipe> recipeConsumer) {
+        return (resultBlockSup) -> {
+
+        };
+    }
+
+    public static Consumer<Supplier<Block>> solidWallRecipe(Consumer<FinishedRecipe> recipeConsumer) {
+        return (resultBlockSup) -> {
+
+        };
+    }
+
+    public static Consumer<Supplier<Item>> nuggetsToIngot(Consumer<FinishedRecipe> recipeConsumer, ItemLike nuggetILReference) {
+        return (resultItemSup) -> {
+          ShapedRecipeBuilder.shaped(RecipeCategory.MISC, resultItemSup.get())
+                  .define('N', nuggetILReference)
+                  .pattern("NNN")
+                  .pattern("NNN")
+                  .pattern("NNN")
+                  .unlockedBy("has_" + RegistryUtil.getItemName(nuggetILReference), PredicateUtil.has(nuggetILReference))
+                  .save(recipeConsumer, new ResourceLocation(RegistryUtil.getItemModId(resultItemSup.get()), RegistryUtil.getItemName(resultItemSup.get()) + "_from_" + RegistryUtil.getItemName(nuggetILReference)));
+        };
     }
 }

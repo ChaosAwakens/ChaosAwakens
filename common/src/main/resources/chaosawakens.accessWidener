@@ -55,3 +55,6 @@ accessible method net/minecraft/world/level/block/state/properties/WoodType regi
 
 # Item.Properties
 accessible field net/minecraft/world/item/Item$Properties requiredFeatures Lnet/minecraft/world/flag/FeatureFlagSet;
+
+# BlockFamilies
+accessible method net/minecraft/data/BlockFamilies familyBuilder (Lnet/minecraft/world/level/block/Block;)Lnet/minecraft/data/BlockFamily$Builder;

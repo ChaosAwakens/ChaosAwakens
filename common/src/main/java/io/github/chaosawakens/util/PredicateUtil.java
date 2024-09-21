@@ -33,7 +33,7 @@ public final class PredicateUtil {
     }
 
     /**
-     * Dummy {@code static} OR (object-represented) predicate, typically used in {@link BlockBehaviour.Properties#isValidSpawn(BlockBehaviour.StateArgumentPredicate)} in order to prevent any kind of entity
+     * Dummy {@code static} OR (object-represented) predicate method, typically passed into {@link BlockBehaviour.Properties#isValidSpawn(BlockBehaviour.StateArgumentPredicate)} in order to prevent any kind of entity
      * from any given {@link MobCategory} from spawning on the parent {@link Block} composed of said properties.
      *
      * @param targetState The target {@link BlockState} on which no entity from any given {@link MobCategory} can naturally spawn.

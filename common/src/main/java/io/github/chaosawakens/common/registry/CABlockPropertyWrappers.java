@@ -137,7 +137,7 @@ public final class CABlockPropertyWrappers {
             .withLootTable(LootUtil::dropDoor)
             .withRecipe(RecipeUtil::doorsFromPlanks)
             .withTags(ObjectArrayList.of(BlockTags.WOODEN_DOORS, BlockTags.MINEABLE_WITH_AXE, ItemTags.WOODEN_DOORS))
-            .withCustomModelDefinitions(parentBlock -> ModelUtil.door(RegistryUtil.getBlockTexture(CAConstants.MODID, RegistryUtil.getItemName(parentBlock.get()).concat("_top")), RegistryUtil.getBlockTexture(CAConstants.MODID, RegistryUtil.getItemName(parentBlock.get()).concat("_bottom"))))
+            .withCustomModelDefinitions(parentBlock -> ModelUtil.door(RegistryUtil.getBlockTexture(RegistryUtil.getItemModId(parentBlock.get()), RegistryUtil.getItemName(parentBlock.get()).concat("_top")), RegistryUtil.getBlockTexture(RegistryUtil.getItemModId(parentBlock.get()), RegistryUtil.getItemName(parentBlock.get()).concat("_bottom"))))
             .withBlockStateDefinition(ModelUtil::door)
             .build();
     public static final BlockPropertyWrapper WOODEN_TRAPDOOR = BlockPropertyWrapper.createTemplate()
@@ -226,27 +226,42 @@ public final class CABlockPropertyWrappers {
             .build();
 
     // Solid
+    public static final BlockPropertyWrapper SOLID_BLOCK = BlockPropertyWrapper.ofTemplate(BASIC_BLOCK_PICKAXE)
+            .cachedBuilder()
+            .withRecipe(RecipeUtil::solidBlockRecipe)
+            .build();
+
     public static final BlockPropertyWrapper SOLID_ROTATED_PILLAR_BLOCK = BlockPropertyWrapper.ofTemplate(BASIC_ROTATED_PILLAR_BLOCK)
             .cachedBuilder()
+            .withRecipe(RecipeUtil::solidBlockRecipe)
             .withTag(BlockTags.MINEABLE_WITH_PICKAXE)
             .build();
     public static final BlockPropertyWrapper SOLID_AXIS_ALIGNED_BLOCK = BlockPropertyWrapper.ofTemplate(BASIC_AXIS_ALIGNED_BLOCK)
             .cachedBuilder()
+            .withRecipe(RecipeUtil::solidBlockRecipe)
             .withTag(BlockTags.MINEABLE_WITH_PICKAXE)
             .build();
 
-    public static final BlockPropertyWrapper SOLID_SLAB = BlockPropertyWrapper.ofTemplate(WOODEN_STAIRS)
+    public static final BlockPropertyWrapper SOLID_SLAB = BlockPropertyWrapper.ofTemplate(WOODEN_SLAB)
             .cachedBuilder()
-            .withRecipe(RecipeUtil::stairsFromSolidBlock)
+            .withRecipe(RecipeUtil::solidSlabRecipe)
+            .withCustomModelDefinitions(parentBlock -> ModelUtil.slab(RegistryUtil.getBlockTexture(RegistryUtil.getSolidBlockFromSlab(parentBlock))))
             .withSetTags(ObjectArrayList.of(BlockTags.SLABS, BlockTags.MINEABLE_WITH_PICKAXE, ItemTags.SLABS))
             .build();
 
-    public static final BlockPropertyWrapper STANDARD_WALL = BlockPropertyWrapper.createTemplate()
+    public static final BlockPropertyWrapper SOLID_STAIRS = BlockPropertyWrapper.ofTemplate(WOODEN_STAIRS)
+            .cachedBuilder()
+            .withRecipe(RecipeUtil::solidStairsRecipe)
+            .withCustomModelDefinitions(parentBlock -> ModelUtil.stairs(RegistryUtil.getBlockTexture(RegistryUtil.getSolidBlockFromStairs(parentBlock))))
+            .withSetTags(ObjectArrayList.of(BlockTags.STAIRS, BlockTags.MINEABLE_WITH_PICKAXE, ItemTags.STAIRS))
+            .build();
+
+    public static final BlockPropertyWrapper SOLID_WALL = BlockPropertyWrapper.createTemplate()
             .builder()
             .withLootTable(LootUtil::dropSelf)
-            .withRecipe(RecipeUtil::wallsFromSolidBlock)
+            .withRecipe(RecipeUtil::solidWallRecipe)
             .withTags(ObjectArrayList.of(BlockTags.WALLS, ItemTags.WALLS, BlockTags.MINEABLE_WITH_PICKAXE))
-            .withCustomModelDefinitions(parentBlock -> ModelUtil.wall(RegistryUtil.getBlockTexture(CAConstants.MODID, RegistryUtil.getItemName(parentBlock.get()).replace("_wall", "_block")), CAConstants.prefix(RegistryUtil.getItemName(parentBlock.get()).concat("_inventory")).withPrefix("block/")))
+            .withCustomModelDefinitions(parentBlock -> ModelUtil.wall(RegistryUtil.getBlockTexture(RegistryUtil.getItemModId(parentBlock.get()), RegistryUtil.getItemName(parentBlock.get()).replace("_wall", "_block")), CAConstants.prefix(RegistryUtil.getItemName(parentBlock.get()).concat("_inventory")).withPrefix("block/")))
             .withBlockStateDefinition(ModelUtil::wall)
             .build();
 }

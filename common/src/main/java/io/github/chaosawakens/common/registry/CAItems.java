@@ -37,10 +37,10 @@ public final class CAItems {
     public static final Supplier<Item> GREEN_FISH = ItemPropertyWrapper.of(CAItemPropertyWrappers.RAW_FOOD, registerItem("green_fish", () -> new Item(new Item.Properties().food(CAFoods.FOOD_GREEN_FISH)))).getParentItem();
     public static final Supplier<Item> LAVA_EEL = ItemPropertyWrapper.of(CAItemPropertyWrappers.RAW_FOOD, registerItem("lava_eel", () -> new Item(new Item.Properties().food(CAFoods.FOOD_LAVA_EEL)))).getParentItem();
     public static final Supplier<Item> PINK_FISH = ItemPropertyWrapper.of(CAItemPropertyWrappers.RAW_FOOD, registerItem("pink_fish", () -> new Item(new Item.Properties().food(CAFoods.FOOD_PINK_FISH)))).getParentItem();
-    public static final Supplier<Item> ROCK_FISH = ItemPropertyWrapper.of(CAItemPropertyWrappers.RAW_FOOD, registerItem("rock_fish", () -> new Item(new Item.Properties().food(CAFoods.FOOD_ROCK_FISH)))).getParentItem();
+    public static final Supplier<Item> ROCK_FISH = ItemPropertyWrapper.of(CAItemPropertyWrappers.RAW_FOOD, registerItem("rock_fish", () -> new Item(new Item.Properties()))).getParentItem();
     public static final Supplier<Item> SPARK_FISH = ItemPropertyWrapper.of(CAItemPropertyWrappers.RAW_FOOD, registerItem("spark_fish", () -> new Item(new Item.Properties().food(CAFoods.FOOD_SPARK_FISH)))).getParentItem();
     public static final Supplier<Item> SUN_FISH = ItemPropertyWrapper.of(CAItemPropertyWrappers.RAW_FOOD, registerItem("sun_fish", () -> new Item(new Item.Properties().food(CAFoods.FOOD_SUN_FISH)))).getParentItem();
-    public static final Supplier<Item> WOOD_FISH = ItemPropertyWrapper.of(CAItemPropertyWrappers.RAW_FOOD, registerItem("wood_fish", () -> new Item(new Item.Properties().food(CAFoods.FOOD_WOOD_FISH)))).getParentItem();
+    public static final Supplier<Item> WOOD_FISH = ItemPropertyWrapper.of(CAItemPropertyWrappers.RAW_FOOD, registerItem("wood_fish", () -> new Item(new Item.Properties()))).getParentItem();
 
     // Plant
     public static final Supplier<Item> CHERRIES = ItemPropertyWrapper.of(CAItemPropertyWrappers.RAW_FOOD, registerItem("cherries", () -> new Item(new Item.Properties().food(CAFoods.FOOD_CHERRIES)))).getParentItem();
@@ -73,6 +73,8 @@ public final class CAItems {
     // Special
 
     // Minerals
+    public static final Supplier<Item> TITANIUM_INGOT = ItemPropertyWrapper.of(CAItemPropertyWrappers.STANDARD_INGOT, registerItem("titanium_ingot", () -> new Item(new Item.Properties().fireResistant()))).getParentItem();
+    public static final Supplier<Item> URANIUM_INGOT = ItemPropertyWrapper.of(CAItemPropertyWrappers.STANDARD_INGOT, registerItem("uranium_ingot", () -> new Item(new Item.Properties().fireResistant()))).getParentItem();
 
     private static Supplier<Item> registerItem(String id, Supplier<Item> itemSup) {
         Supplier<Item> registeredItemSup = CAServices.REGISTRAR.registerObject(CAConstants.prefix(id), itemSup, BuiltInRegistries.ITEM); // Otherwise reference to the item sup is null cuz it needs to be registered b4hand

@@ -12,7 +12,7 @@ import java.util.List;
 public interface IPlatformHelper {
 
     /**
-     * Gets the {@link ModLoader} representation of the current platform
+     * Gets the {@link ModLoader} representation of the current platform.
      *
      * @return The {@link ModLoader} representation of the current platform.
      */
@@ -35,7 +35,7 @@ public interface IPlatformHelper {
     boolean isDevelopmentEnvironment();
 
     /**
-     * Discovers all (mod) classes that are annotated with the specified annotation type and compiles them into a {@link List}. Take note that this method <b>loads</b> discovered classes.
+     * Discovers all (mod) classes that are annotated with the specified annotation type and compiles them into a {@link List}. Take note that this method <b>loads</b> (valid) discovered classes.
      *
      * @param annotationTypeClazz The annotation type class.
      *

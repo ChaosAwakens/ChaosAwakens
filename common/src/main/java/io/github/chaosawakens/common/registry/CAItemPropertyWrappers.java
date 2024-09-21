@@ -28,4 +28,9 @@ public class CAItemPropertyWrappers {
             .cachedBuilder()
             .withRecipe(RecipeUtil::cookedFood)
             .build();
+
+    // Mineral
+    public static final ItemPropertyWrapper STANDARD_INGOT = ItemPropertyWrapper.ofTemplate(BASIC_GENERATED)
+            .cachedBuilder()
+            .build();
 }
