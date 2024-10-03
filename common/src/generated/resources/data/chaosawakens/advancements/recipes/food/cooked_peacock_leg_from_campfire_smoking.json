@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_raw_peacock_leg": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "chaosawakens:raw_peacock_leg"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "chaosawakens:cooked_peacock_leg_from_campfire_smoking"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_raw_peacock_leg",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "chaosawakens:cooked_peacock_leg_from_campfire_smoking"
+    ]
+  },
+  "sends_telemetry_event": false
+}

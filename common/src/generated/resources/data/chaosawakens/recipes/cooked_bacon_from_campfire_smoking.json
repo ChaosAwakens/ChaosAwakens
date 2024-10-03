@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:campfire_cooking",
+  "category": "food",
+  "cookingtime": 600,
+  "experience": 0.35,
+  "group": "chaosawakens",
+  "ingredient": {
+    "item": "chaosawakens:raw_bacon"
+  },
+  "result": "chaosawakens:cooked_bacon"
+}
