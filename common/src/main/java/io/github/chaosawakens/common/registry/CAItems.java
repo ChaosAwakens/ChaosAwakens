@@ -73,6 +73,9 @@ public final class CAItems {
     // Special
 
     // Minerals
+    public static final Supplier<Item> TITANIUM_NUGGET = ItemPropertyWrapper.of(CAItemPropertyWrappers.STANDARD_NUGGET, registerItem("titanium_nugget", () -> new Item(new Item.Properties().fireResistant()))).getParentItem();
+    public static final Supplier<Item> URANIUM_NUGGET = ItemPropertyWrapper.of(CAItemPropertyWrappers.STANDARD_NUGGET, registerItem("uranium_nugget", () -> new Item(new Item.Properties().fireResistant()))).getParentItem();
+
     public static final Supplier<Item> TITANIUM_INGOT = ItemPropertyWrapper.of(CAItemPropertyWrappers.STANDARD_INGOT, registerItem("titanium_ingot", () -> new Item(new Item.Properties().fireResistant()))).getParentItem();
     public static final Supplier<Item> URANIUM_INGOT = ItemPropertyWrapper.of(CAItemPropertyWrappers.STANDARD_INGOT, registerItem("uranium_ingot", () -> new Item(new Item.Properties().fireResistant()))).getParentItem();
 

@@ -1,4 +1,4 @@
-// 1.20.1	2024-09-07T06:24:45.2975481	Chaos Awakens: Item Models
+// 1.20.1	2024-10-03T17:57:20.8736206	Chaos Awakens: Item Models
 116ba16f2c38441701e46ddc6529d51385ff1239 assets/chaosawakens/models/item/blt_sandwich.json
 94e1f2c5fc83cb085eee91919be466e6eedc2310 assets/chaosawakens/models/item/blue_fish.json
 75c61853bc548eb17e6f58617c597352ffde52a8 assets/chaosawakens/models/item/butter.json
@@ -38,5 +38,9 @@ d6d66efdab41f85b3b6400d26102dcf1cc0897b7 assets/chaosawakens/models/item/seafood
 f61ec0bb5ba7fe991df9bb78c382a3c876ad1ded assets/chaosawakens/models/item/spark_fish.json
 2881bff84fdd7f538863cdef9bc8321870bea61f assets/chaosawakens/models/item/strawberry.json
 170f72e76a496cf5fd8f1cdbc27180a76e99fe2b assets/chaosawakens/models/item/sun_fish.json
+4d7f20d45016db9b80371276e1c2f835ba2d88ba assets/chaosawakens/models/item/titanium_ingot.json
+2257e71cc6f4da02c028c5768b30745a5a7cb297 assets/chaosawakens/models/item/titanium_nugget.json
 7aa3365a9c8451754c9a688bbcf2404aa7fcb2fe assets/chaosawakens/models/item/tomato.json
+ad479ea6c5de3f6eb654ea3009918909b7293742 assets/chaosawakens/models/item/uranium_ingot.json
+d1e43e6134fbaf2f73ff17f8342e18fbf7a1deae assets/chaosawakens/models/item/uranium_nugget.json
 a8ee4ac1932a5480b495bca7106c2c0d6830c994 assets/chaosawakens/models/item/wood_fish.json

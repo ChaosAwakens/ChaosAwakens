@@ -21,6 +21,7 @@ import java.nio.file.FileVisitOption;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
@@ -265,8 +266,8 @@ public final class RegistryUtil {
 
     @Nullable
     public static Supplier<Block> getFromWood(Supplier<Block> targetBlock, String regNameSuffix) {
-        ResourceLocation targetBlockKey = BuiltInRegistries.BLOCK.getKey(targetBlock.get());
-        String copiedPath = BuiltInRegistries.BLOCK.getKey(targetBlock.get()).getPath();
+        ResourceLocation targetBlockKey = getItemKey(targetBlock.get());
+        String copiedPath = getItemName(targetBlock.get());
 
         return targetBlockKey.getPath().startsWith("stripped")
                 ? targetBlockKey.getPath().endsWith("wood") && targetBlockKey.getPath().charAt(targetBlockKey.getPath().indexOf("wood") - 1) != '_'
@@ -293,6 +294,7 @@ public final class RegistryUtil {
                 .collect(Collectors.toCollection(ObjectArrayList::new));
     }
 
+    @SafeVarargs
     public static List<Supplier<Item>> getBlocksAsItemSups(Supplier<Block>... targetBlocks) {
         return targetBlocks == null || targetBlocks.length == 0 ? ObjectArrayList.of() : getBlocksAsItemSups(ObjectArrayList.of(targetBlocks));
     }
@@ -309,8 +311,8 @@ public final class RegistryUtil {
 
     @Nullable
     public static Supplier<Block> getLeavesFrom(Supplier<Block> targetBlock) {
-        ResourceLocation targetBlockKey = BuiltInRegistries.BLOCK.getKey(targetBlock.get());
-        String copiedPath = BuiltInRegistries.BLOCK.getKey(targetBlock.get()).getPath();
+        ResourceLocation targetBlockKey = getItemKey(targetBlock.get());
+        String copiedPath = getItemName(targetBlock.get());
 
         return targetBlockKey.getPath().endsWith("leaf_carpet")
                 ? () -> BuiltInRegistries.BLOCK.get(targetBlockKey.withPath(copiedPath.replace("leaf_carpet", "leaves")))
@@ -319,8 +321,8 @@ public final class RegistryUtil {
 
     @Nullable
     public static Supplier<Block> getFromLeaves(Supplier<Block> targetBlock, String regNameSuffix) {
-        ResourceLocation targetBlockKey = BuiltInRegistries.BLOCK.getKey(targetBlock.get());
-        String copiedPath = BuiltInRegistries.BLOCK.getKey(targetBlock.get()).getPath();
+        ResourceLocation targetBlockKey = getItemKey(targetBlock.get());
+        String copiedPath = getItemName(targetBlock.get());
 
         return targetBlockKey.getPath().endsWith("leaves")
                 ? () -> BuiltInRegistries.BLOCK.get(targetBlockKey.withPath(copiedPath.replace("leaves", regNameSuffix)))
@@ -339,8 +341,8 @@ public final class RegistryUtil {
 
     @Nullable
     public static Supplier<Item> getCookedFoodFrom(Supplier<Item> targetItem) {
-        ResourceLocation targetItemKey = BuiltInRegistries.ITEM.getKey(targetItem.get());
-        String copiedPath = BuiltInRegistries.ITEM.getKey(targetItem.get()).getPath();
+        ResourceLocation targetItemKey = getItemKey(targetItem.get());
+        String copiedPath = getItemName(targetItem.get());
 
         return !targetItemKey.getPath().startsWith("raw")
                 ? () -> BuiltInRegistries.ITEM.get(targetItemKey.withPrefix("cooked_"))
@@ -350,9 +352,9 @@ public final class RegistryUtil {
     }
 
     @Nullable
-    public static Supplier<Item> getFromCookedFood(Supplier<Item> targetItem) {
-        ResourceLocation targetItemKey = BuiltInRegistries.ITEM.getKey(targetItem.get());
-        String copiedPath = BuiltInRegistries.ITEM.getKey(targetItem.get()).getPath();
+    public static Supplier<Item> getRawFoodFromCookedFood(Supplier<Item> targetItem) {
+        ResourceLocation targetItemKey = getItemKey(targetItem.get());
+        String copiedPath = getItemName(targetItem.get());
         Supplier<Item> assumedCookedFood = () -> BuiltInRegistries.ITEM.get(targetItemKey.withPath(StringUtils.substringAfter(copiedPath, "cooked_")));
 
         return targetItemKey.getPath().startsWith("cooked_")
@@ -364,8 +366,8 @@ public final class RegistryUtil {
 
     @Nullable
     public static Supplier<Block> getFromSolidBlock(Supplier<Block> targetBlock, String regNameSuffix) {
-        ResourceLocation targetBlockKey = BuiltInRegistries.BLOCK.getKey(targetBlock.get());
-        String copiedPath = BuiltInRegistries.BLOCK.getKey(targetBlock.get()).getPath();
+        ResourceLocation targetBlockKey = getItemKey(targetBlock.get());
+        String copiedPath = getItemName(targetBlock.get());
 
         if (copiedPath.contains("bricks")) copiedPath = copiedPath.replace("bricks", "brick");
 
@@ -400,8 +402,8 @@ public final class RegistryUtil {
 
     @Nullable
     public static Supplier<Block> getSolidBlockFrom(Supplier<Block> targetBlock, String targetRegNameSuffix) {
-        ResourceLocation targetBlockKey = BuiltInRegistries.BLOCK.getKey(targetBlock.get());
-        String copiedPath = BuiltInRegistries.BLOCK.getKey(targetBlock.get()).getPath();
+        ResourceLocation targetBlockKey = getItemKey(targetBlock.get());
+        String copiedPath = getItemName(targetBlock.get());
 
         if (copiedPath.contains("brick")) copiedPath = copiedPath.replace("brick", "bricks");
 
@@ -437,10 +439,105 @@ public final class RegistryUtil {
     }
 
     @Nullable
+    public static Supplier<Block> getBlockBasedOnSuffix(Supplier<Block> targetBlock, String targetRegNameSuffix, String suffixReplacement) {
+        ResourceLocation targetBlockKey = getItemKey(targetBlock.get());
+        String copiedBlockPath = getItemName(targetBlock.get());
+
+        return targetBlockKey.getPath().endsWith(targetRegNameSuffix)
+                ? () -> BuiltInRegistries.BLOCK.get(targetBlockKey.withPath(copiedBlockPath.replace(targetRegNameSuffix, suffixReplacement)))
+                : null;
+    }
+
+    @Nullable
+    public static Supplier<Item> getItemBasedOnSuffix(Supplier<Item> targetItem, String targetRegNameSuffix, String suffixReplacement) {
+        ResourceLocation targetItemKey = getItemKey(targetItem.get());
+        String copiedItemPath = getItemName(targetItem.get());
+
+        return targetItemKey.getPath().endsWith(targetRegNameSuffix)
+                ? () -> BuiltInRegistries.ITEM.get(targetItemKey.withPath(copiedItemPath.replace(targetRegNameSuffix, suffixReplacement)))
+                : null;
+    }
+
+    @Nullable
+    public static Supplier<Item> getIngotFrom(Supplier<Item> targetItem, String targetRegNameSuffix) {
+        return getItemBasedOnSuffix(targetItem, targetRegNameSuffix, "_ingot");
+    }
+
+    @Nullable
+    public static Supplier<Item> getNuggetFrom(Supplier<Item> targetItem, String targetRegNameSuffix) {
+        return getItemBasedOnSuffix(targetItem, targetRegNameSuffix, "_nugget");
+    }
+
+    @Nullable
+    public static Supplier<Item> getMaterialBlockFrom(Supplier<Item> targetItem, String targetRegNameSuffix) {
+        return getItemBasedOnSuffix(targetItem, targetRegNameSuffix, "_block");
+    }
+
+    @Nullable
+    public static Supplier<Item> getOreFrom(Supplier<Item> targetItem, String targetRegNameSuffix) {
+        return getItemBasedOnSuffix(targetItem, targetRegNameSuffix, "_ore");
+    }
+
+    @Nullable
+    public static Supplier<Item> getOreFromIngot(Supplier<Item> targetItem) {
+        return getOreFrom(targetItem, "_ingot");
+    }
+
+    @Nullable
+    public static Supplier<Item> getOreFromNugget(Supplier<Item> targetItem) {
+        return getOreFrom(targetItem, "_nugget");
+    }
+
+    @Nullable
+    public static Supplier<Item> getIngotFromNugget(Supplier<Item> targetItem) {
+        return getIngotFrom(targetItem, "_nugget");
+    }
+
+    @Nullable
+    public static Supplier<Item> getIngotFromOre(Supplier<Item> targetItem) {
+        return getIngotFrom(targetItem, "_ore");
+    }
+
+    @Nullable
+    public static Supplier<Item> getIngotFromMaterialBlock(Supplier<Item> targetItem) {
+        return getIngotFrom(targetItem, "_block");
+    }
+
+    @Nullable
+    public static Supplier<Item> getNuggetFromIngot(Supplier<Item> targetItem) {
+        return getNuggetFrom(targetItem, "_ingot");
+    }
+
+    @Nullable
+    public static Supplier<Item> getNuggetFromOre(Supplier<Item> targetItem) {
+        return getNuggetFrom(targetItem, "_ore");
+    }
+
+    @Nullable
+    public static Supplier<Item> getNuggetFromMaterialBlock(Supplier<Item> targetItem) {
+        return getNuggetFrom(targetItem, "_block");
+    }
+
+    @Nullable
+    public static Supplier<Item> getMaterialBlockFromIngot(Supplier<Item> targetItem) {
+        return getMaterialBlockFrom(targetItem, "_ingot");
+    }
+
+    @Nullable
+    public static Supplier<Item> getMaterialBlockFromOre(Supplier<Item> targetItem) {
+        return getMaterialBlockFrom(targetItem, "_ore");
+    }
+
+    @Nullable
+    public static Supplier<Item> getMaterialBlockFromNugget(Supplier<Item> targetItem) {
+        return getMaterialBlockFrom(targetItem, "_nugget");
+    }
+
+    @Nullable
     public static BlockFamily getFamilyFor(Supplier<Block> targetBlock, boolean literalFamily) {
         Block targetLiteralBlock = targetBlock.get();
         String copiedName = getItemName(targetLiteralBlock);
-        Block baseBlock = !targetLiteralBlock.getClass().equals(Block.class) ? getSolidBlockFrom(targetBlock, getItemName(targetLiteralBlock).substring(copiedName.lastIndexOf("_") - 1)).get() : targetLiteralBlock; // Bold ahh assumptions
+        Block baseBlock = !targetLiteralBlock.getClass().equals(Block.class) ? Objects.requireNonNull(getSolidBlockFrom(targetBlock, getItemName(targetLiteralBlock).substring(copiedName.lastIndexOf("_") - 1))).get() : targetLiteralBlock; // Bold ahh assumptions
         Optional<BlockFamily> existingFamily = BlockFamilies.getAllFamilies()
                 .filter(curFam -> literalFamily ? curFam.getBaseBlock() == baseBlock : curFam.getVariants().containsValue(targetLiteralBlock) || curFam.getBaseBlock() == targetLiteralBlock)
                 .findFirst();
@@ -451,7 +548,6 @@ public final class RegistryUtil {
             return BlockFamilies.familyBuilder(baseBlock)
                     .getFamily();
         });
-
     }
 
     @Nullable

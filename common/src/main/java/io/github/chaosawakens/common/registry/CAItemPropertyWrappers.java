@@ -32,5 +32,11 @@ public class CAItemPropertyWrappers {
     // Mineral
     public static final ItemPropertyWrapper STANDARD_INGOT = ItemPropertyWrapper.ofTemplate(BASIC_GENERATED)
             .cachedBuilder()
+            .withRecipe(RecipeUtil::standardIngot)
+            .build();
+
+    public static final ItemPropertyWrapper STANDARD_NUGGET = ItemPropertyWrapper.ofTemplate(BASIC_GENERATED)
+            .cachedBuilder()
+            .withRecipe(RecipeUtil::standardNugget)
             .build();
 }

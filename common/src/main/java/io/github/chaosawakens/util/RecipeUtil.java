@@ -162,10 +162,10 @@ public final class RecipeUtil {
     }
 
     public static Consumer<Supplier<Block>> standardBlockSmelting(Consumer<FinishedRecipe> recipeConsumer, ItemLike inputIngredientILReference) {
-        return (resultItemSup) -> SimpleCookingRecipeBuilder.smelting(Ingredient.of(inputIngredientILReference), RecipeCategory.BUILDING_BLOCKS, resultItemSup.get(), 0.35F, 200)
+        return (resultBlockSup) -> SimpleCookingRecipeBuilder.smelting(Ingredient.of(inputIngredientILReference), RecipeCategory.BUILDING_BLOCKS, resultBlockSup.get(), 0.35F, 200)
                 .group(RegistryUtil.getItemModId(inputIngredientILReference))
                 .unlockedBy("has_" + RegistryUtil.getItemName(inputIngredientILReference), PredicateUtil.has(inputIngredientILReference))
-                .save(recipeConsumer, new ResourceLocation(RegistryUtil.getItemModId(resultItemSup.get()), RegistryUtil.getItemName(resultItemSup.get()) + "_from_smelting"));
+                .save(recipeConsumer, new ResourceLocation(RegistryUtil.getItemModId(resultBlockSup.get()), RegistryUtil.getItemName(resultBlockSup.get()) + "_from_smelting"));
     }
 
     public static Consumer<Supplier<Item>> cookedFoodFromSmelting(Consumer<FinishedRecipe> recipeConsumer, ItemLike rawFoodILReference) {
@@ -179,14 +179,14 @@ public final class RecipeUtil {
         return (resultItemSup) -> SimpleCookingRecipeBuilder.smoking(Ingredient.of(rawFoodILReference), RecipeCategory.FOOD, resultItemSup.get(), 0.35F, 100)
                 .group(RegistryUtil.getItemModId(rawFoodILReference))
                 .unlockedBy("has_" + RegistryUtil.getItemName(rawFoodILReference), PredicateUtil.has(rawFoodILReference))
-                .save(recipeConsumer, new ResourceLocation(RegistryUtil.getItemModId(resultItemSup.get()), RegistryUtil.getItemName(resultItemSup.get()) + "_from_smelting"));
+                .save(recipeConsumer, new ResourceLocation(RegistryUtil.getItemModId(resultItemSup.get()), RegistryUtil.getItemName(resultItemSup.get()) + "_from_smoking"));
     }
 
     public static Consumer<Supplier<Item>> foodCampfireSmokingRecipe(Consumer<FinishedRecipe> recipeConsumer, ItemLike rawFoodILReference) {
         return (resultItemSup) -> SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(rawFoodILReference), RecipeCategory.FOOD, resultItemSup.get(), 0.35F, 600)
                 .group(RegistryUtil.getItemModId(rawFoodILReference))
                 .unlockedBy("has_" + RegistryUtil.getItemName(rawFoodILReference), PredicateUtil.has(rawFoodILReference))
-                .save(recipeConsumer, new ResourceLocation(RegistryUtil.getItemModId(resultItemSup.get()), RegistryUtil.getItemName(resultItemSup.get()) + "_from_smelting"));
+                .save(recipeConsumer, new ResourceLocation(RegistryUtil.getItemModId(resultItemSup.get()), RegistryUtil.getItemName(resultItemSup.get()) + "_from_campfire_smoking"));
     }
 
     public static Consumer<Supplier<Item>> cookedFood(Consumer<FinishedRecipe> recipeConsumer, ItemLike rawFoodILReference) {
@@ -198,7 +198,7 @@ public final class RecipeUtil {
     }
 
     public static Consumer<Supplier<Item>> cookedFood(Consumer<FinishedRecipe> recipeConsumer) {
-        return (resultItemSup) -> cookedFood(recipeConsumer, RegistryUtil.getFromCookedFood(resultItemSup).get()).accept(resultItemSup);
+        return (resultItemSup) -> cookedFood(recipeConsumer, RegistryUtil.getRawFoodFromCookedFood(resultItemSup).get()).accept(resultItemSup);
     }
 
     public static Consumer<Supplier<Block>> solidBlockFromSolidBlock(Consumer<FinishedRecipe> recipeConsumer, ItemLike solidBlockILReference, int resultBlockCount) {
@@ -385,14 +385,69 @@ public final class RecipeUtil {
     }
 
     public static Consumer<Supplier<Item>> nuggetsToIngot(Consumer<FinishedRecipe> recipeConsumer, ItemLike nuggetILReference) {
+        return (resultItemSup) -> ShapedRecipeBuilder.shaped(RecipeCategory.MISC, resultItemSup.get())
+                .define('N', nuggetILReference)
+                .pattern("NNN")
+                .pattern("NNN")
+                .pattern("NNN")
+                .unlockedBy("has_" + RegistryUtil.getItemName(nuggetILReference), PredicateUtil.has(nuggetILReference))
+                .save(recipeConsumer, new ResourceLocation(RegistryUtil.getItemModId(resultItemSup.get()), RegistryUtil.getItemName(resultItemSup.get()) + "_from_" + RegistryUtil.getItemName(nuggetILReference)));
+    }
+
+    public static Consumer<Supplier<Item>> nuggetsToIngot(Consumer<FinishedRecipe> recipeConsumer) {
+        return (resultItemSup) -> nuggetsToIngot(recipeConsumer, RegistryUtil.getNuggetFromIngot(resultItemSup).get()).accept(resultItemSup);
+    }
+
+    public static Consumer<Supplier<Item>> oreToIngotSmelting(Consumer<FinishedRecipe> recipeConsumer, ItemLike oreILReference) {
+        return (resultItemSup) -> SimpleCookingRecipeBuilder.smelting(Ingredient.of(oreILReference), RecipeCategory.MISC, resultItemSup.get(), 0.35F, 200)
+                .group(RegistryUtil.getItemModId(oreILReference))
+                .unlockedBy("has_" + RegistryUtil.getItemName(oreILReference), PredicateUtil.has(oreILReference))
+                .save(recipeConsumer, new ResourceLocation(RegistryUtil.getItemModId(resultItemSup.get()), RegistryUtil.getItemName(resultItemSup.get()) + "_from_smelting"));
+    }
+
+    public static Consumer<Supplier<Item>> oreToIngotBlasting(Consumer<FinishedRecipe> recipeConsumer, ItemLike oreILReference) {
+        return (resultItemSup) -> SimpleCookingRecipeBuilder.blasting(Ingredient.of(oreILReference), RecipeCategory.MISC, resultItemSup.get(), 0.35F, 100)
+                .group(RegistryUtil.getItemModId(oreILReference))
+                .unlockedBy("has_" + RegistryUtil.getItemName(oreILReference), PredicateUtil.has(oreILReference))
+                .save(recipeConsumer, new ResourceLocation(RegistryUtil.getItemModId(resultItemSup.get()), RegistryUtil.getItemName(resultItemSup.get()) + "_from_blasting"));
+    }
+
+    public static Consumer<Supplier<Item>> materialBlockToIngot(Consumer<FinishedRecipe> recipeConsumer, ItemLike materialBlockILReference) {
+        return (resultItemSup) -> ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, resultItemSup.get(), 9)
+                .requires(materialBlockILReference)
+                .unlockedBy("has_" + RegistryUtil.getItemName(materialBlockILReference), PredicateUtil.has(materialBlockILReference))
+                .save(recipeConsumer, new ResourceLocation(RegistryUtil.getItemModId(resultItemSup.get()), RegistryUtil.getItemName(resultItemSup.get()) + "_from_" + RegistryUtil.getItemName(materialBlockILReference)));
+    }
+
+    public static Consumer<Supplier<Item>> materialBlockToIngot(Consumer<FinishedRecipe> recipeConsumer) {
+        return (resultItemSup) -> materialBlockToIngot(recipeConsumer, RegistryUtil.getMaterialBlockFromIngot(resultItemSup).get()).accept(resultItemSup);
+    }
+
+    public static Consumer<Supplier<Item>> standardIngot(Consumer<FinishedRecipe> recipeConsumer) {
         return (resultItemSup) -> {
-          ShapedRecipeBuilder.shaped(RecipeCategory.MISC, resultItemSup.get())
-                  .define('N', nuggetILReference)
-                  .pattern("NNN")
-                  .pattern("NNN")
-                  .pattern("NNN")
-                  .unlockedBy("has_" + RegistryUtil.getItemName(nuggetILReference), PredicateUtil.has(nuggetILReference))
-                  .save(recipeConsumer, new ResourceLocation(RegistryUtil.getItemModId(resultItemSup.get()), RegistryUtil.getItemName(resultItemSup.get()) + "_from_" + RegistryUtil.getItemName(nuggetILReference)));
+            if (RegistryUtil.getNuggetFromIngot(resultItemSup) != null) nuggetsToIngot(recipeConsumer).accept(resultItemSup);
+            if (RegistryUtil.getMaterialBlockFromIngot(resultItemSup) != null) materialBlockToIngot(recipeConsumer).accept(resultItemSup);
+            if (RegistryUtil.getOreFromIngot(resultItemSup) != null){
+                oreToIngotSmelting(recipeConsumer, RegistryUtil.getOreFromIngot(resultItemSup).get()).accept(resultItemSup);
+                oreToIngotBlasting(recipeConsumer, RegistryUtil.getOreFromIngot(resultItemSup).get()).accept(resultItemSup);
+            }
+        };
+    }
+
+    public static Consumer<Supplier<Item>> ingotToNuggets(Consumer<FinishedRecipe> recipeConsumer, ItemLike ingotILReference) {
+        return (resultItemSup) -> ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, resultItemSup.get(), 9)
+                .requires(ingotILReference)
+                .unlockedBy("has_" + RegistryUtil.getItemName(ingotILReference), PredicateUtil.has(ingotILReference))
+                .save(recipeConsumer, new ResourceLocation(RegistryUtil.getItemModId(resultItemSup.get()), RegistryUtil.getItemName(resultItemSup.get()) + "_from_" + RegistryUtil.getItemName(ingotILReference)));
+    }
+
+    public static Consumer<Supplier<Item>> ingotToNuggets(Consumer<FinishedRecipe> recipeConsumer) {
+        return (resultItemSup) -> ingotToNuggets(recipeConsumer, RegistryUtil.getIngotFromNugget(resultItemSup).get()).accept(resultItemSup);
+    }
+
+    public static Consumer<Supplier<Item>> standardNugget(Consumer<FinishedRecipe> recipeConsumer) {
+        return (resultItemSup) -> {
+            if (RegistryUtil.getIngotFromNugget(resultItemSup) != null) ingotToNuggets(recipeConsumer, RegistryUtil.getIngotFromNugget(resultItemSup).get()).accept(resultItemSup);
         };
     }
 }

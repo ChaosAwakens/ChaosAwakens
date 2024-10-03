@@ -1,11 +1,12 @@
 package io.github.chaosawakens;
 
-import io.github.chaosawakens.api.datagen.block.BlockModelDefinition;
 import io.github.chaosawakens.api.block.standard.BlockPropertyWrapper;
-import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+import io.github.chaosawakens.api.datagen.block.BlockModelDefinition;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.minecraft.client.renderer.RenderType;
+
+import java.util.List;
 
 /**
  * Needed for some loader-specific optimizations/implementations
@@ -19,7 +20,7 @@ public class ChaosAwakensClientFabric implements ClientModInitializer {
 
     private static void handleBlockRenderLayers() {
         BlockPropertyWrapper.getMappedBpws().forEach((blockSupEntry, curBwp) -> {
-            ObjectArrayList<BlockModelDefinition> allPresentModels = new ObjectArrayList<>(curBwp.getBlockModelDefinitions());
+            List<BlockModelDefinition> allPresentModels = curBwp.getBlockModelDefinitions();
 
             if (!allPresentModels.isEmpty()) {
                 allPresentModels.forEach((curBmd) -> {

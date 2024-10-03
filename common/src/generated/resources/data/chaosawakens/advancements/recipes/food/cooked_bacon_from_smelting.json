@@ -15,7 +15,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "chaosawakens:raw_bacon_from_smelting"
+        "recipe": "chaosawakens:cooked_bacon_from_smelting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -28,7 +28,7 @@
   ],
   "rewards": {
     "recipes": [
-      "chaosawakens:raw_bacon_from_smelting"
+      "chaosawakens:cooked_bacon_from_smelting"
     ]
   },
   "sends_telemetry_event": false

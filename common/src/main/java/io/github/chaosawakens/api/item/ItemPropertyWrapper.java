@@ -354,7 +354,7 @@ public class ItemPropertyWrapper {
         private Function<Consumer<FinishedRecipe>, Consumer<Supplier<Item>>> recipeBuilderFunction;
         @Nullable
         private Function<Supplier<Item>, List<ItemModelDefinition>> imdMappingFunc;
-        private List<Supplier<CreativeModeTab>> parentTabs = new ObjectArrayList<>(); // Not datagen-related but whatever
+        private final List<Supplier<CreativeModeTab>> parentTabs = new ObjectArrayList<>(); // Not datagen-related but whatever
 
         private IPWBuilder(ItemPropertyWrapper ownerWrapper, Supplier<Item> itemParent) {
             this.ownerWrapper = ownerWrapper;

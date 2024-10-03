@@ -5,6 +5,7 @@ package io.github.chaosawakens.api.loader;
  */
 public enum ModLoader {
     FORGE("Forge"),
+    NEOFORGE("NeoForge"),
     FABRIC("Fabric");
 
     private final String platformName;

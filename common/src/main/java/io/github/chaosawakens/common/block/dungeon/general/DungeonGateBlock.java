@@ -94,6 +94,7 @@ public class DungeonGateBlock extends Block {
 
             return InteractionResult.SUCCESS;
         }
+
         return InteractionResult.PASS;
     }
 
