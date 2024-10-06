@@ -1,6 +1,7 @@
 package io.github.chaosawakens;
 
 import io.github.chaosawakens.api.asm.annotations.LoadEarly;
+import io.github.chaosawakens.api.loader.ModLoader;
 import io.github.chaosawakens.api.platform.CAServices;
 
 public class ChaosAwakens {
@@ -13,7 +14,7 @@ public class ChaosAwakens {
 
         CAServices.REGISTRAR.setupRegistrar();
 
-        if (CAServices.PLATFORM.getPlatform().equals("Fabric")) CAServices.NETWORK_MANAGER.setupNetworkHandler();
+        if (CAServices.PLATFORM.getPlatform().equals(ModLoader.FABRIC)) CAServices.NETWORK_MANAGER.setupNetworkHandler();
     }
 
     /**

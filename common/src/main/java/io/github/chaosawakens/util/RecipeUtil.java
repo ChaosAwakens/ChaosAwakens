@@ -1,7 +1,5 @@
 package io.github.chaosawakens.util;
 
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.data.BlockFamily;
 import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
@@ -317,52 +315,25 @@ public final class RecipeUtil {
 
     public static Consumer<Supplier<Block>> solidBlockRecipe(Consumer<FinishedRecipe> recipeConsumer) {
         return (resultBlockSup) -> {
-            Block resultBlock = resultBlockSup.get();
-            BlockFamily parentFamily = RegistryUtil.getFamilyFor(resultBlockSup);
 
-            if (parentFamily != null) {
-                String baseBlockPath = RegistryUtil.getItemName(parentFamily.getBaseBlock());
-                ResourceLocation brickBlockKey = baseBlockPath.endsWith("_block") ? RegistryUtil.getItemKey(parentFamily.getBaseBlock()).withPath(baseBlockPath.replace("_block", "_bricks")) : RegistryUtil.getItemKey(parentFamily.getBaseBlock()).withSuffix("_bricks");
-                ResourceLocation pillarBlockKey = baseBlockPath.endsWith("_block") ? RegistryUtil.getItemKey(parentFamily.getBaseBlock()).withPath(baseBlockPath.replace("_block", "_pillar")) : RegistryUtil.getItemKey(parentFamily.getBaseBlock()).withSuffix("_pillar");
-                BlockFamily brickVariantFamily = RegistryUtil.getFamilyFor(() -> BuiltInRegistries.BLOCK.get(brickBlockKey), true); // There is no existing Variant for bricks/pillars supplied by vanilla and I CBA to create a whole custom impl just for that particular purpose
-                BlockFamily pillarVariantFamily = RegistryUtil.getFamilyFor(() -> BuiltInRegistries.BLOCK.get(pillarBlockKey), true);
-                Supplier<Block> brickResultBlockSlab = brickVariantFamily == null ? null : RegistryUtil.getSlabFromSolidBlock(brickVariantFamily::getBaseBlock);
+        };
+    }
 
-                Block baseResultBlock = parentFamily.getBaseBlock();
-                Block brickResultBlock = brickVariantFamily == null ? null : brickVariantFamily.getBaseBlock(); // May be null from here (not annotating every single local variable with @Nullable :skull:)
-                Block chiseledResultBlock = parentFamily.get(BlockFamily.Variant.CHISELED);
-                Block crackedResultBlock = parentFamily.get(BlockFamily.Variant.CRACKED);
-                Block pillarResultBlock = pillarVariantFamily == null ? null : pillarVariantFamily.getBaseBlock();
-                Block polishedResultBlock = parentFamily.get(BlockFamily.Variant.POLISHED);
+    public static Consumer<Supplier<Block>> solidBrickBlockRecipe(Consumer<FinishedRecipe> recipeConsumer) {
+        return (resultBlockSup) -> {
 
-                if (brickResultBlock == resultBlock) { // Yodatyping my beloved (in certain circumstances :moyai:)
-                    if (polishedResultBlock != null) {
-                        solidBlockFromSolidBlock(recipeConsumer, polishedResultBlock).accept(resultBlockSup);
+        };
+    }
 
-                        solidBlockFromStoneCuttingSolidBlock(recipeConsumer, polishedResultBlock).accept(resultBlockSup);
-                    }
+    public static Consumer<Supplier<Block>> solidChiseledBlockRecipe(Consumer<FinishedRecipe> recipeConsumer) {
+        return (resultBlockSup) -> {
 
-                    if (baseResultBlock != null) solidBlockFromStoneCuttingSolidBlock(recipeConsumer, baseResultBlock).accept(resultBlockSup);
-                } else if (chiseledResultBlock == resultBlock) {
-                    if (brickResultBlockSlab != null) solidBlockFromSlab(recipeConsumer, brickResultBlockSlab.get()).accept(resultBlockSup);
+        };
+    }
 
-                    if (baseResultBlock != null) solidBlockFromStoneCuttingSolidBlock(recipeConsumer, baseResultBlock).accept(resultBlockSup);
-                    if (brickResultBlock != null) solidBlockFromStoneCuttingSolidBlock(recipeConsumer, brickResultBlock).accept(resultBlockSup);
-                    if (polishedResultBlock != null) solidBlockFromStoneCuttingSolidBlock(recipeConsumer, polishedResultBlock).accept(resultBlockSup);
-                } else if (crackedResultBlock == resultBlock) {
-                    if (brickResultBlock != null) standardBlockSmelting(recipeConsumer, brickResultBlock).accept(resultBlockSup);
-                } else if (polishedResultBlock == resultBlock) {
-                    if (baseResultBlock != null) {
-                        solidBlockFromSolidBlock(recipeConsumer, baseResultBlock).accept(resultBlockSup);
+    public static Consumer<Supplier<Block>> solidCrackedBlockRecipe(Consumer<FinishedRecipe> recipeConsumer) {
+        return (resultBlockSup) -> {
 
-                        solidBlockFromStoneCuttingSolidBlock(recipeConsumer, baseResultBlock).accept(resultBlockSup);
-                    }
-                } else if (pillarResultBlock == resultBlock) {
-                    if (polishedResultBlock != null) solidPillarFromSolidBlock(recipeConsumer, polishedResultBlock).accept(resultBlockSup);
-
-                    if (baseResultBlock != null) solidBlockFromStoneCuttingSolidBlock(recipeConsumer, baseResultBlock).accept(resultBlockSup);
-                }
-            }
         };
     }
 
@@ -427,7 +398,7 @@ public final class RecipeUtil {
         return (resultItemSup) -> {
             if (RegistryUtil.getNuggetFromIngot(resultItemSup) != null) nuggetsToIngot(recipeConsumer).accept(resultItemSup);
             if (RegistryUtil.getMaterialBlockFromIngot(resultItemSup) != null) materialBlockToIngot(recipeConsumer).accept(resultItemSup);
-            if (RegistryUtil.getOreFromIngot(resultItemSup) != null){
+            if (RegistryUtil.getOreFromIngot(resultItemSup) != null) {
                 oreToIngotSmelting(recipeConsumer, RegistryUtil.getOreFromIngot(resultItemSup).get()).accept(resultItemSup);
                 oreToIngotBlasting(recipeConsumer, RegistryUtil.getOreFromIngot(resultItemSup).get()).accept(resultItemSup);
             }

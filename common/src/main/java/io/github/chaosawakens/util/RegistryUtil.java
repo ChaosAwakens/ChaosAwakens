@@ -6,8 +6,6 @@ import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.DefaultedRegistry;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.data.BlockFamilies;
-import net.minecraft.data.BlockFamily;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
@@ -21,8 +19,6 @@ import java.nio.file.FileVisitOption;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -420,22 +416,22 @@ public final class RegistryUtil {
 
     @Nullable
     public static Supplier<Block> getSolidBlockFromSlab(Supplier<Block> targetBlock) {
-        return getFromSolidBlock(targetBlock, "_slab");
+        return getSolidBlockFrom(targetBlock, "_slab");
     }
 
     @Nullable
     public static Supplier<Block> getSolidBlockFromStairs(Supplier<Block> targetBlock) {
-        return getFromSolidBlock(targetBlock, "_stairs");
+        return getSolidBlockFrom(targetBlock, "_stairs");
     }
 
     @Nullable
     public static Supplier<Block> getSolidBlockFromPillar(Supplier<Block> targetBlock) {
-        return getFromSolidBlock(targetBlock, "_pillar");
+        return getSolidBlockFrom(targetBlock, "_pillar");
     }
 
     @Nullable
     public static Supplier<Block> getSolidBlockFromWall(Supplier<Block> targetBlock) {
-        return getFromSolidBlock(targetBlock, "_wall");
+        return getSolidBlockFrom(targetBlock, "_wall");
     }
 
     @Nullable
@@ -531,27 +527,5 @@ public final class RegistryUtil {
     @Nullable
     public static Supplier<Item> getMaterialBlockFromNugget(Supplier<Item> targetItem) {
         return getMaterialBlockFrom(targetItem, "_nugget");
-    }
-
-    @Nullable
-    public static BlockFamily getFamilyFor(Supplier<Block> targetBlock, boolean literalFamily) {
-        Block targetLiteralBlock = targetBlock.get();
-        String copiedName = getItemName(targetLiteralBlock);
-        Block baseBlock = !targetLiteralBlock.getClass().equals(Block.class) ? Objects.requireNonNull(getSolidBlockFrom(targetBlock, getItemName(targetLiteralBlock).substring(copiedName.lastIndexOf("_") - 1))).get() : targetLiteralBlock; // Bold ahh assumptions
-        Optional<BlockFamily> existingFamily = BlockFamilies.getAllFamilies()
-                .filter(curFam -> literalFamily ? curFam.getBaseBlock() == baseBlock : curFam.getVariants().containsValue(targetLiteralBlock) || curFam.getBaseBlock() == targetLiteralBlock)
-                .findFirst();
-
-        return existingFamily.orElseGet(() -> { // TODO
-            
-
-            return BlockFamilies.familyBuilder(baseBlock)
-                    .getFamily();
-        });
-    }
-
-    @Nullable
-    public static BlockFamily getFamilyFor(Supplier<Block> targetBlock) {
-        return getFamilyFor(targetBlock, false);
     }
 }
