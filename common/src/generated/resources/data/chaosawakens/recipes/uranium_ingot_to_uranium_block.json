@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "M": {
+      "item": "chaosawakens:uranium_ingot"
+    }
+  },
+  "pattern": [
+    "MMM",
+    "MMM",
+    "MMM"
+  ],
+  "result": {
+    "item": "chaosawakens:uranium_block"
+  },
+  "show_notification": true
+}

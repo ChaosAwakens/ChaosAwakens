@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "chaosawakens:titanium_ingot_to_titanium_block"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_titanium_ingot": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "chaosawakens:titanium_ingot"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_titanium_ingot",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "chaosawakens:titanium_ingot_to_titanium_block"
+    ]
+  },
+  "sends_telemetry_event": false
+}

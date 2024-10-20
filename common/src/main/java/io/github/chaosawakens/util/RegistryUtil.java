@@ -460,6 +460,11 @@ public final class RegistryUtil {
     }
 
     @Nullable
+    public static Supplier<Item> getLumpFrom(Supplier<Item> targetItem, String targetRegNameSuffix) {
+        return getItemBasedOnSuffix(targetItem, targetRegNameSuffix, "_lump");
+    }
+
+    @Nullable
     public static Supplier<Item> getNuggetFrom(Supplier<Item> targetItem, String targetRegNameSuffix) {
         return getItemBasedOnSuffix(targetItem, targetRegNameSuffix, "_nugget");
     }
@@ -497,6 +502,18 @@ public final class RegistryUtil {
     @Nullable
     public static Supplier<Item> getIngotFromMaterialBlock(Supplier<Item> targetItem) {
         return getIngotFrom(targetItem, "_block");
+    }
+
+    @Nullable
+    public static Supplier<Item> getLumpFromMaterialBlock(Supplier<Item> targetItem) {
+        return getLumpFrom(targetItem, "_block");
+    }
+
+    @Nullable
+    public static Supplier<Item> getMaterialFromMaterialBlock(Supplier<Item> targetItem) {
+        return getIngotFromMaterialBlock(targetItem) == null
+                ? getLumpFromMaterialBlock(targetItem)
+                : getIngotFromMaterialBlock(targetItem);
     }
 
     @Nullable

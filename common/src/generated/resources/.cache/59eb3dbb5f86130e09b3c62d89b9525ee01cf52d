@@ -1,4 +1,4 @@
-// 1.20.1	2024-10-03T18:02:20.0394043	Loot Tables
+// 1.20.1	2024-10-20T21:09:30.6463965	Loot Tables
 fd5e1bc80521d0475feba0a763a4477dafb97aa2 data/chaosawakens/loot_tables/blocks/acacia_gate_block.json
 e0ee511bca34f9c60bdb2af23a96292e96f0a64c data/chaosawakens/loot_tables/blocks/apple_button.json
 129675638aede2a57513342e984c863d5f6fd889 data/chaosawakens/loot_tables/blocks/apple_door.json
@@ -90,7 +90,7 @@ a43910a755dfc06047e1861f8f27b911bfb48523 data/chaosawakens/loot_tables/blocks/pe
 597ab28fc6f589d2269d35bbf8d05ac6e702e604 data/chaosawakens/loot_tables/blocks/peach_fence.json
 954c71788c69ff45552aa285c1b64a84a831a541 data/chaosawakens/loot_tables/blocks/peach_fence_gate.json
 efbdeaa20d75c7306666f2848d798ea42701e61f data/chaosawakens/loot_tables/blocks/peach_gate_block.json
-6089d1e47bef6a839bbf5a119cc488e597b1296f data/chaosawakens/loot_tables/blocks/peach_leaves.json
+dbb0af2166ed1d01ed6245b33530a579208f4b85 data/chaosawakens/loot_tables/blocks/peach_leaves.json
 62a338bf3606ba3201021906193190f8eacb0bd7 data/chaosawakens/loot_tables/blocks/peach_log.json
 458c561463dbe339b162d5dc0a970665a8c97d59 data/chaosawakens/loot_tables/blocks/peach_planks.json
 f7ab17393096621b95f2cf598e2aa48638e84516 data/chaosawakens/loot_tables/blocks/peach_pressure_plate.json

@@ -135,31 +135,6 @@ public class CABlockModelProvider extends BlockModelProvider {
                 }
             });
         }
-
-    /*    ObjectArrayList<Supplier<Block>> distinctBlocks = Stream.concat(CABlocks.getBlocks().stream(), BlockModelDefinition.getCachedModelDefinitions().keySet().stream()) // At this point, BMDs have been mapped/cached
-                .distinct()
-                .collect(Collectors.toCollection(ObjectArrayList::new));
-
-        distinctBlocks.forEach(blockSupEntry -> {
-            Block blockEntry = blockSupEntry.get();
-            String formattedBlockRegName = blockEntry.getDescriptionId().substring(blockEntry.getDescriptionId().lastIndexOf(".") + 1);
-
-            if (blockEntry instanceof SlabBlock slabBlockEntry) {
-
-            }
-
-            if (blockEntry instanceof StairBlock stairBlockEntry) {
-
-            }
-
-            if (blockEntry instanceof RotatedPillarBlock rotatedPillarBlockEntry) {
-
-            }
-
-            if (blockEntry instanceof WallBlock wallBlockEntry) {
-
-            }
-        }); */ //TODO Figure out how to map texture locations such that we can get an actually consistent and useful algorithm instead of this yanderedev looking ahh code block
     }
 
     @Override

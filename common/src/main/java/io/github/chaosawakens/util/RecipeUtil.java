@@ -31,6 +31,10 @@ public final class RecipeUtil {
                 .save(recipeConsumer, new ResourceLocation(RegistryUtil.getItemModId(resultBlockSup.get()), RegistryUtil.getItemName(materialItem) + "_to_" + RegistryUtil.getItemName(resultBlockSup.get())));
     }
 
+    public static Consumer<Supplier<Block>> materialToBlock(Consumer<FinishedRecipe> recipeConsumer) {
+        return (resultBlockSup) -> materialToBlock(recipeConsumer, RegistryUtil.getMaterialFromMaterialBlock(resultBlockSup.get()::asItem).get()).accept(resultBlockSup);
+    }
+
     public static Consumer<Supplier<Block>> logToPlanks(Consumer<FinishedRecipe> recipeConsumer, ItemLike logILReference) {
         return (resultBlockSup) -> ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, resultBlockSup.get(), 4)
                 .requires(logILReference)

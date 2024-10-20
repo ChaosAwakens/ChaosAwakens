@@ -209,6 +209,16 @@ public final class CABlockPropertyWrappers {
             .withCustomModelDefinitions(parentBlock -> ObjectArrayList.of(ModelUtil.cubeBottomTop(RegistryUtil.getBlockTexture(parentBlock), RegistryUtil.getBlockTexture(parentBlock).withSuffix("_top"), RegistryUtil.getBlockTexture(parentBlock).withSuffix("_top"))))
             .build();
 
+    // Material
+    public static final BlockPropertyWrapper MATERIAL_BLOCK_IRON = BlockPropertyWrapper.ofTemplate(BASIC_BLOCK_PICKAXE_IRON)
+            .cachedBuilder()
+            .withRecipe(RecipeUtil::materialToBlock)
+            .build();
+    public static final BlockPropertyWrapper MATERIAL_BLOCK_DIAMOND = BlockPropertyWrapper.ofTemplate(BASIC_BLOCK_PICKAXE_DIAMOND)
+            .cachedBuilder()
+            .withRecipe(RecipeUtil::materialToBlock)
+            .build();
+
     // Vegetation
     public static final BlockPropertyWrapper LEAVES = BlockPropertyWrapper.createTemplate()
             .builder()
