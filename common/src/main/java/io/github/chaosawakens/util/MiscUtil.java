@@ -28,7 +28,7 @@ public final class MiscUtil {
     }
 
     public static String wrapSuffixInBrackets(String targetString) {
-        int lastSpaceIndex = targetString.lastIndexOf(" ");
+        int lastSpaceIndex = targetString.endsWith("End Stone") ? targetString.length() - 9 : targetString.lastIndexOf(" ");
         return lastSpaceIndex == -1 ? targetString : targetString.substring(0, lastSpaceIndex) + " (" + targetString.substring(lastSpaceIndex + 1) + ")";
     }
 }

@@ -46,7 +46,7 @@ public class FabricPlatformHelper implements IPlatformHelper {
         return getFilteredAvailableClasses(annotationTypeClazz);
     }
 
-    protected static List<Class<?>> getFilteredAvailableClasses(Class<? extends Annotation> annotationTypeClazz) { // I'm sorry (CBF to set up compile-time annotations ATM)
+    protected static List<Class<?>> getFilteredAvailableClasses(Class<? extends Annotation> annotationTypeClazz) { // I'm sorry (CBA to set up compile-time annotations ATM)
         ObjectArrayList<Class<?>> filteredClasses = new ObjectArrayList<>();
 
         FabricLoader.getInstance().getAllMods().stream()
