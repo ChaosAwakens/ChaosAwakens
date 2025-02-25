@@ -342,7 +342,8 @@ public class RoboPounderModel<RP extends RoboPounder> extends WrappedHierarchica
 		super.setupAnim(pEntity, pLimbSwing, pLimbSwingAmount, pAgeInTicks, pNetHeadYaw, pHeadPitch);
 
 		// Base
-		animate(pEntity.idleAnimState, RoboPounderBaseAnimation.IDLE, pAgeInTicks);
+		if (!pEntity.isMoving()) animate(pEntity.idleAnimState, RoboPounderBaseAnimation.IDLE, pAgeInTicks);
+
 		animate(pEntity.deathAnimState, RoboPounderBaseAnimation.DEATH, pAgeInTicks);
 
 		// Attack
@@ -360,8 +361,10 @@ public class RoboPounderModel<RP extends RoboPounder> extends WrappedHierarchica
 		animate(pEntity.groundSlamAttackAnim, RoboPounderAOEAttackAnimation.GROUND_SLAM_ATTACK, pAgeInTicks);
 
 		// Walk Cycle
-		animate(pEntity.walkAnimState, RoboPounderBaseAnimation.WALK_BODY, pAgeInTicks);
-		animate(pEntity.walkAnimState, RoboPounderBaseAnimation.WALK_LEGS, pAgeInTicks);
+		if (pEntity.isMoving() && !pEntity.isFunctionallyAnimatingAttack() && !pEntity.isDeadOrDying()) {
+			animateWalk(RoboPounderBaseAnimation.WALK_BODY, pLimbSwing, pLimbSwingAmount, 1.245F, 1.0F);
+			animateWalk(RoboPounderBaseAnimation.WALK_LEGS, pLimbSwing, pLimbSwingAmount, 1.245F, 1.0F);
+		}
 	}
 
 	@Override

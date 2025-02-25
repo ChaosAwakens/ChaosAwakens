@@ -751,14 +751,16 @@ public final class RegistryUtil {
     public static String formatFossilName(String localizedBlockName) {
         String[] basicSuffixIdentifiers = new String[] {"Stone", "Deepslate", "Sandstone", "Ice", "Sand", "Gravel", "Blackstone", "Netherrack", "Soul Soil", "End Stone", "Kyanite"};
         boolean hasSuffix = false;
+        String selectSuffix = "";
 
         for (String suffix : basicSuffixIdentifiers) {
             if (localizedBlockName.endsWith(suffix)) {
                 hasSuffix = true;
+                selectSuffix = suffix;
                 break;
             }
         }
 
-        return hasSuffix ? MiscUtil.wrapSuffixInBrackets(localizedBlockName) : localizedBlockName;
+        return hasSuffix ? MiscUtil.wrapSuffixInBrackets(localizedBlockName, selectSuffix) : localizedBlockName;
     }
 }
