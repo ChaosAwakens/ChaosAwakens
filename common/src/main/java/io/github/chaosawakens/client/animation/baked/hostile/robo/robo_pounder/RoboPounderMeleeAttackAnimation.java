@@ -6,7 +6,7 @@ import net.minecraft.client.animation.Keyframe;
 import net.minecraft.client.animation.KeyframeAnimations;
 
 public class RoboPounderMeleeAttackAnimation {
-	public static final AnimationDefinition PISTON_PUNCH_ATTACK_RIGHT = AnimationDefinition.Builder.withLength(1.75F)
+	public static final AnimationDefinition PISTON_PUNCH_ATTACK_RIGHT = AnimationDefinition.Builder.withLength(2.75F)
 			.addAnimation("Head", new AnimationChannel(AnimationChannel.Targets.ROTATION,
 					new Keyframe(0.0F, KeyframeAnimations.degreeVec(22.5F, 0.0F, 0.0F), AnimationChannel.Interpolations.CATMULLROM),
 					new Keyframe(0.5F, KeyframeAnimations.degreeVec(0.0F, -65.0F, 0.0F), AnimationChannel.Interpolations.LINEAR),
@@ -247,7 +247,7 @@ public class RoboPounderMeleeAttackAnimation {
 			))
 			.build();
 
-	public static final AnimationDefinition PISTON_PUNCH_ATTACK_LEFT = AnimationDefinition.Builder.withLength(1.75F)
+	public static final AnimationDefinition PISTON_PUNCH_ATTACK_LEFT = AnimationDefinition.Builder.withLength(2.75F)
 			.addAnimation("Head", new AnimationChannel(AnimationChannel.Targets.ROTATION,
 					new Keyframe(0.0F, KeyframeAnimations.degreeVec(22.5F, 0.0F, 0.0F), AnimationChannel.Interpolations.CATMULLROM),
 					new Keyframe(0.5F, KeyframeAnimations.degreeVec(0.0F, 65.0F, 0.0F), AnimationChannel.Interpolations.LINEAR),

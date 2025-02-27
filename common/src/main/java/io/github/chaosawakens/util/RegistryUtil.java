@@ -749,7 +749,7 @@ public final class RegistryUtil {
     }
 
     public static String formatFossilName(String localizedBlockName) {
-        String[] basicSuffixIdentifiers = new String[] {"Stone", "Deepslate", "Sandstone", "Ice", "Sand", "Gravel", "Blackstone", "Netherrack", "Soul Soil", "End Stone", "Kyanite"};
+        String[] basicSuffixIdentifiers = new String[] {"End Stone", "Deepslate", "Sandstone", "Ice", "Sand", "Gravel", "Blackstone", "Netherrack", "Soul Soil", "Stone", "Kyanite"};
         boolean hasSuffix = false;
         String selectSuffix = "";
 

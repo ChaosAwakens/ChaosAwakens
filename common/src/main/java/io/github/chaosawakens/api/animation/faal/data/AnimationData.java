@@ -1,4 +1,5 @@
 package io.github.chaosawakens.api.animation.faal.data;
 
-public class AnimationData {
+public record AnimationData() {
+
 }
