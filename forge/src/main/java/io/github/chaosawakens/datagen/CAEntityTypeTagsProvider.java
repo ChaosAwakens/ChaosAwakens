@@ -33,8 +33,12 @@ public class CAEntityTypeTagsProvider extends EntityTypeTagsProvider {
     protected void addTags(HolderLookup.Provider pProvider) {
         if (!EntityTypePropertyWrapper.getMappedEtpws().isEmpty()) {
             EntityTypePropertyWrapper.getMappedEtpws().forEach((entityTypeSupEntry, curEtpw) -> {
-                List<TagKey<?>> parentTags = curEtpw.getParentTags().stream().map(Supplier::get).collect(Collectors.toCollection(ObjectArrayList::new));
-                ObjectArrayList<TagKey<? extends EntityType<?>>> parentEntityTypesTags = curEtpw.getParentTags().stream().map(Supplier::get).collect(Collectors.toCollection(ObjectArrayList::new));
+                List<TagKey<?>> parentTags = curEtpw.getParentTags().stream()
+                        .map(Supplier::get)
+                        .collect(Collectors.toCollection(ObjectArrayList::new));
+                ObjectArrayList<TagKey<? extends EntityType<?>>> parentEntityTypesTags = curEtpw.getParentTags().stream()
+                        .map(Supplier::get)
+                        .collect(Collectors.toCollection(ObjectArrayList::new));
 
                 if (!parentTags.isEmpty()) {
                     parentTags.forEach(curEntityTypeTag -> {

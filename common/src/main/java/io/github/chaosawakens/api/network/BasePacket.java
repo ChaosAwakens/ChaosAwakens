@@ -9,10 +9,10 @@ import java.util.function.BiConsumer;
 import java.util.function.Function;
 
 /**
- * The base class holding all relevant packet data used for networking.
+ * The base {@code record} holding all relevant packet data used for networking.
  *
  * @param packetId The {@linkplain ResourceLocation identifier} of this packet. Primarily used in Fabric for packet registration.
- * @param packetClass The class representing the rest of this packet's data. Can be any custom object that stores the required packet handler methods (encoding, decoding, handling).
+ * @param packetClass The {@code class} representing the rest of this packet's data. Can be any custom object that stores the required packet handler methods (encoding, decoding, handling).
  * @param packetEncoder The encoding method used to encode this packet's data into a {@link FriendlyByteBuf} on the initial side.
  * @param packetDecoder The decoding method used to decode this packet's data from a {@link FriendlyByteBuf} on the target side.
  * @param packetHandler The interface responsible for both representing the target side and handling this packet's data on the target side, represented as a {@link Function} taking an input of the packet itself for access to

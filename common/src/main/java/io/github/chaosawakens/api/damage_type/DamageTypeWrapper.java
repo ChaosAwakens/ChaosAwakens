@@ -1,7 +1,6 @@
 package io.github.chaosawakens.api.damage_type;
 
 import com.google.common.collect.ImmutableSortedMap;
-import io.github.chaosawakens.api.block.standard.BlockPropertyWrapper;
 import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
@@ -26,11 +25,11 @@ public class DamageTypeWrapper {
 
     /**
      * Creates a new {@link DamageTypeWrapper} instance. This is usually where you'll begin chaining {@link #builder()} method calls if needed. Use this variant if you want to create a DTW instance with a stored registration call,
-     * such that its parent {@link Supplier<ResourceKey<DamageType>>} is not an air delegate/{@code null}.
+     * such that its parent {@link Supplier<ResourceKey<DamageType>>} is not a generic delegate/{@code null}.
      *
      * @param ownerDamageTypeHolder The parent {@link Supplier<ResourceKey<DamageType>>} stored in the newly-initialized DTW instance, typically obtained through {@link Level#registryAccess()}.
      *
-     * @return A new {@link BlockPropertyWrapper} instance.
+     * @return A new {@link DamageTypeWrapper} instance.
      */
     public static DamageTypeWrapper create(Supplier<ResourceKey<DamageType>> ownerDamageTypeHolder) {
         return new DamageTypeWrapper(ownerDamageTypeHolder);

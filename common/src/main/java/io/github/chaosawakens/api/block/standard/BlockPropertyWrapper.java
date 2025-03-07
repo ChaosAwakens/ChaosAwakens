@@ -996,7 +996,7 @@ public class BlockPropertyWrapper { //TODO Maybe type param this for blocks
          * Defines a custom mapping function representing the parent {@linkplain Block Block's} optional oxidation to another {@link Block}.
          *
          * @param blockOxidizationMappingFunc The mapping function accepting a representation of the parent {@linkplain Block Block's} optional oxidation to another {@link Block}, like the copper block's
-         *                                    oxidization overtime if not waxed.
+         *                                    oxidization over time if not waxed.
          *
          * @return {@code this} (builder method).
          */
@@ -1009,7 +1009,7 @@ public class BlockPropertyWrapper { //TODO Maybe type param this for blocks
          * Defines a custom mapping function representing the parent {@linkplain Block Block's} optional waxing to another {@link Block}.
          *
          * @param blockWaxingMappingFunc The mapping function accepting a representation of the parent {@linkplain Block Block's} optional waxing to another {@link Block}, like the copper block
-         *                               getting waxed using honey combs.
+         *                               getting waxed, using honey combs.
          *
          * @return {@code this} (builder method).
          */
