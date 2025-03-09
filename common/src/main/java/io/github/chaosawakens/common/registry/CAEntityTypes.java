@@ -5,7 +5,7 @@ import io.github.chaosawakens.CAConstants;
 import io.github.chaosawakens.api.asm.annotations.RegistrarEntry;
 import io.github.chaosawakens.api.entity.EntityTypePropertyWrapper;
 import io.github.chaosawakens.api.platform.CAServices;
-import io.github.chaosawakens.common.entity.hostile.robo.RoboPounder;
+import io.github.chaosawakens.common.entity.prototype.robo.RoboPounder;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;

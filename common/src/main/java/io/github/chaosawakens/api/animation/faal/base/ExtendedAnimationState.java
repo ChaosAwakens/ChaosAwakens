@@ -97,7 +97,7 @@ public interface ExtendedAnimationState {
      * Gets this animation instance's milli progress.
      * <br></br>
      * On the client, this provides an accurate millisecond reading since it's updated per partial tick/frame time. On the server, this usually returns thousand-divisible
-     * millisecond reading based on the TPS (e.g. 1000, 2000, 3000 at 20, 40, and 60 ticks respectively).
+     * millisecond reading based on the TPS (e.g. 1000, 2000, 3000 ms at 20, 40, and 60 ticks respectively).
      *
      * @return This animation instance's side-specific milli progress.
      *
@@ -133,7 +133,7 @@ public interface ExtendedAnimationState {
     /**
      * Whether this animation instance is currently playing at all.
      * <br></br>
-     * This is usually determined by a basic condition (e.g. {@code lastTime} being reset to {@link Long#MAX_VALUE}), though this is implementation-specific.
+     * This is usually determined by a basic condition (e.g. {@code lastTime} being reset to {@link Long#MAX_VALUE}), though it is ultimately implementation-specific.
      *
      * @return Whether this animation instance is currently playing at all.
      */

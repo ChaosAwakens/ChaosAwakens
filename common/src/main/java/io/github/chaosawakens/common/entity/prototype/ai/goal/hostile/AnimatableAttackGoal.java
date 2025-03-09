@@ -1,10 +1,10 @@
-package io.github.chaosawakens.common.entity.ai.goal.hostile;
+package io.github.chaosawakens.common.entity.prototype.ai.goal.hostile;
 
 
 import io.github.chaosawakens.api.animation.faal.base.ExtendedAnimationState;
 import io.github.chaosawakens.api.animation.faal.entity.WrappedAnimatableEntity;
 import io.github.chaosawakens.api.misc.QuadConsumer;
-import io.github.chaosawakens.common.entity.base.AnimatableMonster;
+import io.github.chaosawakens.common.entity.prototype.base.AnimatableMonster;
 import io.github.chaosawakens.util.EntityUtil;
 import io.github.chaosawakens.util.MathUtil;
 import it.unimi.dsi.fastutil.doubles.DoubleDoubleMutablePair;

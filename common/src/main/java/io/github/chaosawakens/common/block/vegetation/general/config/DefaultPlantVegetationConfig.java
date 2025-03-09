@@ -28,7 +28,11 @@ public class DefaultPlantVegetationConfig implements PlantVegetationConfig {
     }
 
     public DefaultPlantVegetationConfig(Supplier<Block> plantBlock) {
-        this(plantBlock.get().getDescriptionId().contains("tall_") ? RegistryUtil.getBlockBasedOnPrefix(plantBlock, "tall_", "") : plantBlock, plantBlock.get().getDescriptionId().contains("tall_") ? plantBlock : RegistryUtil.getBlockBasedOnPrefix(plantBlock, "", "tall_"));
+        this(plantBlock.get().getDescriptionId().contains("tall_")
+                ? RegistryUtil.getBlockBasedOnPrefix(plantBlock, "tall_", "")
+                : plantBlock, plantBlock.get().getDescriptionId().contains("tall_")
+                ? plantBlock
+                : RegistryUtil.getBlockBasedOnPrefix(plantBlock, "", "tall_"));
     }
 
     public DefaultPlantVegetationConfig() {

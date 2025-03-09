@@ -1,6 +1,6 @@
-package io.github.chaosawakens.common.entity.ai.goal.hostile;
+package io.github.chaosawakens.common.entity.prototype.ai.goal.hostile;
 
-import io.github.chaosawakens.common.entity.base.AnimatableMonster;
+import io.github.chaosawakens.common.entity.prototype.base.AnimatableMonster;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EntitySelector;
 import net.minecraft.world.entity.LivingEntity;

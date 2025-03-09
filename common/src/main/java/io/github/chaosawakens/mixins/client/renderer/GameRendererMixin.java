@@ -23,7 +23,7 @@ public abstract class GameRendererMixin {
     @Shadow
     public abstract Camera getMainCamera();
 
-    @Inject(method = "renderLevel", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/Camera;setup(Lnet/minecraft/world/level/BlockGetter;Lnet/minecraft/world/entity/Entity;ZZF)V", shift = At.Shift.AFTER), cancellable = true)
+    @Inject(method = "renderLevel", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/Camera;setup(Lnet/minecraft/world/level/BlockGetter;Lnet/minecraft/world/entity/Entity;ZZF)V", shift = At.Shift.AFTER))
     private void chaosawakens$renderLevel(float partialTicks, long endTimeNanos, PoseStack stack, CallbackInfo ci) {
         if (ScreenShakeEffect.getEnqueuedShakes().isEmpty()) return;
 
@@ -39,7 +39,7 @@ public abstract class GameRendererMixin {
                     float ticksExistedDelta = (float) mainCam.getEntity().tickCount + delta;
 
                     double distance = mainCam.getEntity().getEyePosition().distanceTo(Vec3.atCenterOf(shake.getData().getOriginPos()));
-                    float distanceScale = Math.max(0, 1 - (float)(distance / shake.getData().getRange()));
+                    float distanceScale = Math.max(0, 1 - (float) (distance / shake.getData().getRange()));
 
                     float finalAmp = (float) ((shake.getData().getMagnitude() * (shake.getData().getDuration() / (shake.getData().getFadeOut() == 0 ? 1 : shake.getData().getFadeOut()))) * Math.pow(distanceScale, 2)); // Avoid division by 0
 

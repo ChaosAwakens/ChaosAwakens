@@ -1,4 +1,4 @@
-package io.github.chaosawakens.common.entity.ai.path_navigation;
+package io.github.chaosawakens.common.entity.prototype.ai.path_navigation;
 
 import io.github.chaosawakens.CAConstants;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;

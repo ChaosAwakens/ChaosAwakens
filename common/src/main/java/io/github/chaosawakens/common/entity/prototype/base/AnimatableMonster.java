@@ -1,12 +1,12 @@
-package io.github.chaosawakens.common.entity.base;
+package io.github.chaosawakens.common.entity.prototype.base;
 
 import io.github.chaosawakens.api.animation.faal.base.ExtendedAnimationState;
 import io.github.chaosawakens.api.animation.faal.base.WrappedAnimation;
 import io.github.chaosawakens.api.animation.faal.entity.WrappedAnimatableEntity;
 import io.github.chaosawakens.api.platform.CAServices;
-import io.github.chaosawakens.common.entity.ai.body_rotation_control.BandaidBodyRotationControl;
-import io.github.chaosawakens.common.entity.ai.move_control.ReinforcedMoveControl;
-import io.github.chaosawakens.common.entity.ai.path_navigation.DirectGroundPathNavigation;
+import io.github.chaosawakens.common.entity.prototype.ai.body_rotation_control.BandaidBodyRotationControl;
+import io.github.chaosawakens.common.entity.prototype.ai.move_control.ReinforcedMoveControl;
+import io.github.chaosawakens.common.entity.prototype.ai.path_navigation.DirectGroundPathNavigation;
 import io.github.chaosawakens.common.networking.packets.s2c.AnimationPlayPacket;
 import io.github.chaosawakens.common.networking.packets.s2c.AnimationStopPacket;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;

@@ -1,4 +1,4 @@
-package io.github.chaosawakens.common.entity.ai.body_rotation_control;
+package io.github.chaosawakens.common.entity.prototype.ai.body_rotation_control;
 
 import io.github.chaosawakens.api.animation.faal.entity.WrappedAnimatableEntity;
 import net.minecraft.util.Mth;
