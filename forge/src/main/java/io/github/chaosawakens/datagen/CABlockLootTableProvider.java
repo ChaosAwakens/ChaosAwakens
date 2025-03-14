@@ -26,7 +26,7 @@ public class CABlockLootTableProvider extends BlockLootSubProvider {
             Function<Supplier<Block>, LootTable.Builder> mappedBuilderFunc = curBpw.getBlockLootTableMappingFunction();
 
             if (mappedBuilderFunc != null) {
-                CAConstants.LOGGER.debug("[Adding Loot Table]: " + blockSupEntry.get().getDescriptionId());
+                CAConstants.LOGGER.debug("[Adding Block Loot Table]: " + blockSupEntry.get().getDescriptionId());
                 add(blockSupEntry.get(), mappedBuilderFunc.apply(blockSupEntry));
             }
         }));

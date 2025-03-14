@@ -6,7 +6,7 @@ import io.github.chaosawakens.client.animation.baked.hostile.robo.robo_pounder.R
 import io.github.chaosawakens.client.animation.baked.hostile.robo.robo_pounder.RoboPounderBaseAnimation;
 import io.github.chaosawakens.client.animation.baked.hostile.robo.robo_pounder.RoboPounderMeleeAttackAnimation;
 import io.github.chaosawakens.client.model.base.WrappedHierarchicalModel;
-import io.github.chaosawakens.common.entity.prototype.robo.RoboPounder;
+import io.github.chaosawakens.common.entity.prototype.hostile.robo.RoboPounder;
 import net.minecraft.client.animation.AnimationDefinition;
 import net.minecraft.client.animation.KeyframeAnimations;
 import net.minecraft.client.model.geom.ModelLayerLocation;

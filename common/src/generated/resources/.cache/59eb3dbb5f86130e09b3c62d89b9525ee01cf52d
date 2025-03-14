@@ -1,4 +1,4 @@
-// 1.20.1	2025-02-27T17:33:33.0232429	Loot Tables
+// 1.20.1	2025-03-14T20:38:12.762608	Loot Tables
 fd5e1bc80521d0475feba0a763a4477dafb97aa2 data/chaosawakens/loot_tables/blocks/acacia_gate_block.json
 da9b4c2ed45126af19c82b0d58a8c8627c8fef0f data/chaosawakens/loot_tables/blocks/acacia_leaf_carpet.json
 4d3db4f92f67deb769d5bd31d80b918cf577c90f data/chaosawakens/loot_tables/blocks/alstroemeriat.json
@@ -327,3 +327,10 @@ d5a5b1fe5f17f74a2afa52366f5173ada9cd9a3d data/chaosawakens/loot_tables/blocks/wa
 7b58238da649ae3702f6f2eec60976e22255a735 data/chaosawakens/loot_tables/blocks/water_dragon_scale_block.json
 7d927a1c27b0fd5920617439ff4b4647fa977934 data/chaosawakens/loot_tables/blocks/yellow_crystal_flower.json
 cbdf07d6cf728b1d7eab7dafd915a55c08c76ca5 data/chaosawakens/loot_tables/blocks/yellow_crystal_growth.json
+f617cb8b85d071ce450143c9506be376b3cd4d11 data/chaosawakens/loot_tables/entities/apple_cow.json
+eca37f87ff0801c36b4edf8819eb21eded419327 data/chaosawakens/loot_tables/entities/carrot_pig.json
+0e469841ff0d20343977d0507ee4a4bc24a177c9 data/chaosawakens/loot_tables/entities/enchanted_golden_apple_cow.json
+c7f8c19f277058f71d5e12c4eef7585c4ba3ea6f data/chaosawakens/loot_tables/entities/enchanted_golden_carrot_pig.json
+e700206851e014abbe64a5d680140370393a7272 data/chaosawakens/loot_tables/entities/golden_apple_cow.json
+3a978588c633f1c6560be2746d76ccfd2a3a5ac2 data/chaosawakens/loot_tables/entities/golden_carrot_pig.json
+fabcdf841dc1b30188435d5491d53c308a87d83e data/chaosawakens/loot_tables/entities/robo_pounder.json

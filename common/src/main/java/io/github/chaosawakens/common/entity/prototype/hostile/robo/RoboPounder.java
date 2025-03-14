@@ -1,10 +1,11 @@
-package io.github.chaosawakens.common.entity.prototype.robo;
+package io.github.chaosawakens.common.entity.prototype.hostile.robo;
 
 import io.github.chaosawakens.api.animation.faal.base.ExtendedAnimationState;
 import io.github.chaosawakens.api.vfx.basic.ScreenShakeEffect;
 import io.github.chaosawakens.common.entity.prototype.ai.goal.hostile.AnimatableAttackGoal;
 import io.github.chaosawakens.common.entity.prototype.ai.goal.hostile.BandaidMoveToTargetGoal;
 import io.github.chaosawakens.common.entity.prototype.base.AnimatableMonster;
+import io.github.chaosawakens.common.registry.CAItems;
 import io.github.chaosawakens.util.EntityUtil;
 import io.github.chaosawakens.util.MathUtil;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
@@ -20,8 +21,19 @@ import net.minecraft.world.entity.animal.AbstractGolem;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.npc.AbstractVillager;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.storage.loot.LootPool;
+import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.level.storage.loot.entries.LootItem;
+import net.minecraft.world.level.storage.loot.functions.LootingEnchantFunction;
+import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
+import net.minecraft.world.level.storage.loot.predicates.LootItemKilledByPlayerCondition;
+import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
+import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.function.Supplier;
 
 public class RoboPounder extends AnimatableMonster {
     public static final byte PISTON_PUNCH_ATTACK_ID = 1;
@@ -69,6 +81,70 @@ public class RoboPounder extends AnimatableMonster {
                 .add(Attributes.ATTACK_KNOCKBACK, 10)
                 .add(Attributes.FOLLOW_RANGE, 60);
     }
+    
+    public static LootTable.Builder createLootTable(Supplier<EntityType<RoboPounder>> ownerType) {
+        return LootTable.lootTable()
+                .withPool(LootPool.lootPool()
+                        .setRolls(ConstantValue.exactly(1))
+                        .add(LootItem.lootTableItem(Items.REDSTONE_BLOCK)
+                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 4.0F)))
+                                .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                                .when(LootItemKilledByPlayerCondition.killedByPlayer()))
+                        .add(LootItem.lootTableItem(Items.REDSTONE)
+                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(20.0F, 32.0F)))
+                                .apply(LootingEnchantFunction.lootingMultiplier(UniformGenerator.between(0.0F, 1.0F)))
+                                .when(LootItemKilledByPlayerCondition.killedByPlayer())))
+                .withPool(LootPool.lootPool()
+                        .setRolls(ConstantValue.exactly(1))
+                        .add(LootItem.lootTableItem(Items.REPEATER)
+                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F)))
+                                .when(LootItemKilledByPlayerCondition.killedByPlayer()))
+                        .add(LootItem.lootTableItem(Items.COMPARATOR)
+                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F)))
+                                .when(LootItemKilledByPlayerCondition.killedByPlayer())))
+                .withPool(LootPool.lootPool()
+                        .setRolls(ConstantValue.exactly(1))
+                        .add(LootItem.lootTableItem(Items.PISTON)
+                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F)))
+                                .when(LootItemKilledByPlayerCondition.killedByPlayer()))
+                        .add(LootItem.lootTableItem(Items.STICKY_PISTON)
+                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F)))
+                                .when(LootItemKilledByPlayerCondition.killedByPlayer())))
+                .withPool(LootPool.lootPool()
+                        .setRolls(ConstantValue.exactly(1))
+                        .add(LootItem.lootTableItem(Items.DROPPER)
+                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F)))
+                                .when(LootItemKilledByPlayerCondition.killedByPlayer()))
+                        .add(LootItem.lootTableItem(Items.DISPENSER)
+                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F)))
+                                .when(LootItemKilledByPlayerCondition.killedByPlayer())))
+                .withPool(LootPool.lootPool()
+                        .setRolls(ConstantValue.exactly(1))
+                        .add(LootItem.lootTableItem(Items.HOPPER)
+                                .when(LootItemKilledByPlayerCondition.killedByPlayer()))
+                        .add(LootItem.lootTableItem(Items.OBSERVER)
+                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F)))
+                                .when(LootItemKilledByPlayerCondition.killedByPlayer())))
+                .withPool(LootPool.lootPool()
+                        .setRolls(ConstantValue.exactly(1))
+                 /*       .add(LootItem.lootTableItem(CAItems.ALUMINUM_POWER_CHIP.get())
+                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(5.0F, 8.0F)))
+                                .when(LootItemKilledByPlayerCondition.killedByPlayer())) */
+                        .add(LootItem.lootTableItem(CAItems.URANIUM_NUGGET.get())
+                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F)))
+                                .when(LootItemKilledByPlayerCondition.killedByPlayer()))
+                        .add(LootItem.lootTableItem(CAItems.TITANIUM_NUGGET.get())
+                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F)))
+                                .when(LootItemKilledByPlayerCondition.killedByPlayer())))
+                .withPool(LootPool.lootPool()
+                        .setRolls(ConstantValue.exactly(1))
+                        .add(LootItem.lootTableItem(Items.REDSTONE_TORCH)
+                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F)))
+                                .when(LootItemKilledByPlayerCondition.killedByPlayer()))
+                        .add(LootItem.lootTableItem(Items.REDSTONE_LAMP)
+                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 2.0F)))
+                                .when(LootItemKilledByPlayerCondition.killedByPlayer())));
+    }
 
     @Override
     public boolean isFunctionallyAnimatingAttack() {
@@ -92,7 +168,6 @@ public class RoboPounder extends AnimatableMonster {
                 .initiationRange(4.0D)
                 .additionalStartConditions(animatable -> animatable.getRandom().nextDouble() < 0.8D)
                 .actionOnStart((animatable, target, potentialTargets, curTick) -> {
-              //      animatable.playSound(getRandom().nextBoolean() ? DRSoundEvents.REDSTONE_GOLEM_SIDE_SWEEP_ATTACK_RIGHT.get() : DRSoundEvents.REDSTONE_GOLEM_SIDE_SWEEP_ATTACK_LEFT.get(), 1.0F, 1.0F);
                     animatable.stopAnimation(idleAnimState);
                 })
                 .actionOnAttack((animatable, target, potentialTargets, curTick) -> new ScreenShakeEffect(animatable.blockPosition(), 15.5D, 0.0028F, 12.5F, 1.0F).enqueue(animatable.level()))
@@ -117,7 +192,6 @@ public class RoboPounder extends AnimatableMonster {
                 .initiationRange(5.0D)
                 .additionalStartConditions(animatable -> animatable.getRandom().nextDouble() < 0.6D && EntityUtil.getAllEntitiesAround(animatable, 7.0D, 5.0D, 7.0D, 7.0D).size() >= 2)
                 .actionOnStart((animatable, target, potentialTargets, curTick) -> {
-                    //      animatable.playSound(getRandom().nextBoolean() ? DRSoundEvents.REDSTONE_GOLEM_SIDE_SWEEP_ATTACK_RIGHT.get() : DRSoundEvents.REDSTONE_GOLEM_SIDE_SWEEP_ATTACK_LEFT.get(), 1.0F, 1.0F);
                     animatable.stopAnimation(idleAnimState);
                 })
                 .actionOnAttack((animatable, target, potentialTargets, curTick) -> {

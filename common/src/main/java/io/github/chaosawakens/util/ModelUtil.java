@@ -2839,6 +2839,11 @@ public final class ModelUtil {
                 .withTextureMapping(TextureMapping.layer0(RegistryUtil.pickItemPrefix(itemTexture)));
     }
 
+    public static ItemModelDefinition handheldRod(ResourceLocation itemTexture) {
+        return ItemModelDefinition.of(ModelTemplates.FLAT_HANDHELD_ROD_ITEM)
+                .withTextureMapping(TextureMapping.layer0(RegistryUtil.pickItemPrefix(itemTexture)));
+    }
+
     public static BlockModelDefinition grassBlock(ResourceLocation particleTexture, ResourceLocation bottomTexture, ResourceLocation topTexture, ResourceLocation sideTexture, ResourceLocation overlayTexture) {
         return BlockModelDefinition.of(CAModelTemplates.GRASS_BLOCK)
                 .withTextureMapping(CATextureSlots.grassBlock(RegistryUtil.pickBlockPrefix(particleTexture), RegistryUtil.pickBlockPrefix(bottomTexture), RegistryUtil.pickBlockPrefix(topTexture), RegistryUtil.pickBlockPrefix(sideTexture), RegistryUtil.pickBlockPrefix(overlayTexture)))

@@ -29,6 +29,11 @@ public class CAItemPropertyWrappers {
             .withRecipe(RecipeUtil::cookedFood)
             .build();
 
+    public static final ItemPropertyWrapper FOOD_ON_A_STICK = ItemPropertyWrapper.ofTemplate(RAW_FOOD)
+            .cachedBuilder()
+            .withCustomModelDefinitions(parentItem -> ObjectArrayList.of(ModelUtil.handheldRod(RegistryUtil.getItemTexture(parentItem))))
+            .build();
+
     // Mineral
     public static final ItemPropertyWrapper STANDARD_INGOT = ItemPropertyWrapper.ofTemplate(BASIC_GENERATED)
             .cachedBuilder()

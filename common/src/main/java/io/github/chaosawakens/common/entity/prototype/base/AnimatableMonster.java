@@ -1,14 +1,10 @@
 package io.github.chaosawakens.common.entity.prototype.base;
 
 import io.github.chaosawakens.api.animation.faal.base.ExtendedAnimationState;
-import io.github.chaosawakens.api.animation.faal.base.WrappedAnimation;
 import io.github.chaosawakens.api.animation.faal.entity.WrappedAnimatableEntity;
-import io.github.chaosawakens.api.platform.CAServices;
 import io.github.chaosawakens.common.entity.prototype.ai.body_rotation_control.BandaidBodyRotationControl;
 import io.github.chaosawakens.common.entity.prototype.ai.move_control.ReinforcedMoveControl;
 import io.github.chaosawakens.common.entity.prototype.ai.path_navigation.DirectGroundPathNavigation;
-import io.github.chaosawakens.common.networking.packets.s2c.AnimationPlayPacket;
-import io.github.chaosawakens.common.networking.packets.s2c.AnimationStopPacket;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -21,9 +17,6 @@ import net.minecraft.world.entity.ai.control.BodyRotationControl;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.level.Level;
-import org.jetbrains.annotations.Nullable;
-
-import java.util.Optional;
 
 public abstract class AnimatableMonster extends Monster implements WrappedAnimatableEntity {
     private static final EntityDataAccessor<Byte> ATTACK_ID = SynchedEntityData.defineId(AnimatableMonster.class, EntityDataSerializers.BYTE);
@@ -45,59 +38,6 @@ public abstract class AnimatableMonster extends Monster implements WrappedAnimat
     @Override
     public boolean requiresServerAnimationTicking() {
         return requiresServerAnimTicking;
-    }
-
-    @Override
-    public ExtendedAnimationState wrapState(String animationName, int tickDuration) {
-        ExtendedAnimationState defState = new WrappedAnimation(animationName, tickDuration);
-
-        if (!cachedAnimationStates.contains(defState)) cachedAnimationStates.add(defState);
-
-        return defState;
-    }
-
-    @Override
-    public void playAnimation(String animationStateName, boolean forcePose) {
-        Optional<ExtendedAnimationState> targetAnimOptional = getCachedAnimationStates().stream().filter(curAnimState -> curAnimState.getAnimationName().equals(animationStateName)).findFirst();
-
-        targetAnimOptional.ifPresent(targetAnim -> {
-            if (!level().isClientSide()) {
-                CAServices.NETWORK_MANAGER.sendToTrackingClients(new AnimationPlayPacket(getId(), animationStateName, forcePose), this);
-
-                if (targetAnim.isServerTickable() && !targetAnim.isStarted()) targetAnim.start(tickCount);
-            } else { // Extra guard check
-                if (forcePose) getCachedAnimationStates().stream().filter(curAnimState -> !curAnimState.getAnimationName().equals(animationStateName)).forEach(this::stopAnimation);
-                if (!targetAnim.isStarted()) targetAnim.start(tickCount);
-            }
-        });
-    }
-
-    @Override
-    public @Nullable ExtendedAnimationState getAnimation(String animName) {
-        return getCachedAnimationStates().stream().filter(curAnimState -> curAnimState.getAnimationName().equals(animName)).findFirst().get();
-    }
-
-    @Override
-    public void stopAnimation(String animationStateName) {
-        Optional<ExtendedAnimationState> targetAnimOptional = getCachedAnimationStates().stream().filter(curAnimState -> curAnimState.getAnimationName().equals(animationStateName)).findFirst();
-
-        targetAnimOptional.ifPresent(targetAnim -> {
-            if (!level().isClientSide()) {
-                CAServices.NETWORK_MANAGER.sendToTrackingClients(new AnimationStopPacket(getId(), animationStateName), this);
-
-                if (targetAnim.isServerTickable() && targetAnim.isStarted()) targetAnim.stop();
-            } else targetAnim.stop();
-        });
-    }
-
-    @Override
-    public void playAnimation(ExtendedAnimationState animationState, boolean forcePose) {
-        playAnimation(animationState.getAnimationName(), forcePose);
-    }
-
-    @Override
-    public void stopAnimation(ExtendedAnimationState animationState) {
-        stopAnimation(animationState.getAnimationName());
     }
 
     @Override

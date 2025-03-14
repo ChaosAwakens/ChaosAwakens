@@ -2,7 +2,7 @@ package io.github.chaosawakens.client.renderer.hostile.robo;
 
 import io.github.chaosawakens.CAConstants;
 import io.github.chaosawakens.client.model.hostile.robo.RoboPounderModel;
-import io.github.chaosawakens.common.entity.prototype.robo.RoboPounder;
+import io.github.chaosawakens.common.entity.prototype.hostile.robo.RoboPounder;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;

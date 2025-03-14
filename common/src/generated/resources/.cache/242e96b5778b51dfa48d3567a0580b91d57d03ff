@@ -1,5 +1,7 @@
-// 1.20.1	2024-12-27T00:03:26.649699	Chaos Awakens: Item Models
+// 1.20.1	2025-03-14T20:38:12.7736021	Chaos Awakens: Item Models
+7739a52b8dd3174f4785a96a252de9259a260a4a assets/chaosawakens/models/item/baked_golden_potato.json
 09e2e3cba220805db46a5a502d1bbff2c28752ae assets/chaosawakens/models/item/basilisk_scale.json
+c4e9490a06afc1baaee8b7884aced09fe7dbd5af assets/chaosawakens/models/item/beetroot_on_a_stick.json
 27a25f54da34292817a2e5e2a9966421e3cff40f assets/chaosawakens/models/item/big_bertha_blade.json
 3a72b3ff807badea9842b5dcdec0f1972b9e6aca assets/chaosawakens/models/item/big_bertha_guard.json
 8d7483e8b9deb0e77b325c35755c9b63aa9e649a assets/chaosawakens/models/item/big_bertha_handle.json
@@ -23,9 +25,14 @@ b6d3275bc7ed434cd0c01880ea7e7f84893b81f6 assets/chaosawakens/models/item/crystal
 6d20c5af800ce946a9c8e00f38bbe04e14ec16b2 assets/chaosawakens/models/item/crystal_potato.json
 233256b0d2581d643cfde79a3417bf961ab253e9 assets/chaosawakens/models/item/dead_stink_bug.json
 382313614fa59e58122f9d3aaf7cbd4f9561dce4 assets/chaosawakens/models/item/emperor_scorpion_scale.json
+b7c31d41b5e999e9d0060d50afae33e784b0fed4 assets/chaosawakens/models/item/enchanted_golden_carrot.json
 4da087137db8611f0c3f13d83b0f3b7124596494 assets/chaosawakens/models/item/ender_dragon_scale.json
 eaafcb93cf54f76d534c7c30627f64d06d6b745a assets/chaosawakens/models/item/fire_fish.json
 953d3a07a16b1599e6761e83764a1b583c49f4c0 assets/chaosawakens/models/item/garden_salad.json
+912857ccf019f5ea3600b2999ed6baf45d7d2d25 assets/chaosawakens/models/item/golden_beetroot.json
+d4d731c7a4fceabad8354641f53035c1f1c923ba assets/chaosawakens/models/item/golden_beetroot_on_a_stick.json
+bb07622a5635f1ef65243c2fa0df27c97484b699 assets/chaosawakens/models/item/golden_melon_slice.json
+7739a52b8dd3174f4785a96a252de9259a260a4a assets/chaosawakens/models/item/golden_potato.json
 f8109115fa17d21aae45864b42b5ba99f3618886 assets/chaosawakens/models/item/gray_fish.json
 8b69881e5aa58846dd49404e0de5ec42b32d1164 assets/chaosawakens/models/item/green_fish.json
 87c5efcb40ec920f20164da888b07680ed4d4afb assets/chaosawakens/models/item/jeffery_core.json
@@ -61,6 +68,7 @@ f61ec0bb5ba7fe991df9bb78c382a3c876ad1ded assets/chaosawakens/models/item/spark_f
 2257e71cc6f4da02c028c5768b30745a5a7cb297 assets/chaosawakens/models/item/titanium_nugget.json
 7aa3365a9c8451754c9a688bbcf2404aa7fcb2fe assets/chaosawakens/models/item/tomato.json
 4f34e989284177982814c7957d4962c68f1d946d assets/chaosawakens/models/item/triffid_goo.json
+0ba90112796c802069f5c360455ba1e355fb0dfe assets/chaosawakens/models/item/ultimate_apple.json
 ad479ea6c5de3f6eb654ea3009918909b7293742 assets/chaosawakens/models/item/uranium_ingot.json
 d1e43e6134fbaf2f73ff17f8342e18fbf7a1deae assets/chaosawakens/models/item/uranium_nugget.json
 cd6b89dc7c50dba57e00722ac510ecdd3467aeb8 assets/chaosawakens/models/item/vortex_eye.json

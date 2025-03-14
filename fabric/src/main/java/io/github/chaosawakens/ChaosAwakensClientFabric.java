@@ -15,6 +15,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.block.Block;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
@@ -36,10 +37,12 @@ public class ChaosAwakensClientFabric implements ClientModInitializer {
         CAClientDataEntries.getClientDataEntries().forEach(((curEntry) -> EntityModelLayerRegistry.registerModelLayer(curEntry.get().modelPair().left().get(), () -> curEntry.get().modelPair().right().get())));
 
         EntityTypePropertyWrapper.getMappedEtpws().forEach((parentEntityTypeSup, curEtpw) -> {
-            CAClientDataEntries.getClientDataEntries().stream()
+            Optional.of(curEtpw.getClientDataEntry().get()).ifPresentOrElse(
+                    curEntry -> EntityRendererRegistry.register(parentEntityTypeSup.get(), (ctx) -> curEntry.renderFactory().apply(() -> ctx).get()),
+                    () -> CAClientDataEntries.getClientDataEntries().stream()
                     .filter(curEntry -> BuiltInRegistries.ENTITY_TYPE.getKey(parentEntityTypeSup.get()).equals(curEntry.get().entityTypeId()))
                     .findFirst()
-                    .ifPresent(curEntry -> EntityRendererRegistry.register(parentEntityTypeSup.get(), (ctx) -> curEntry.get().renderFactory().apply(() -> ctx).get()));
+                    .ifPresent(curEntry -> EntityRendererRegistry.register(parentEntityTypeSup.get(), (ctx) -> curEntry.get().renderFactory().apply(() -> ctx).get())));
         });
     }
 

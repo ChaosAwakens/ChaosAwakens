@@ -2,6 +2,7 @@ package io.github.chaosawakens.api.entity;
 
 import com.google.common.collect.ImmutableSortedMap;
 import io.github.chaosawakens.CAConstants;
+import io.github.chaosawakens.util.LootUtil;
 import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -9,6 +10,7 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.level.storage.loot.LootTable;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -169,8 +171,9 @@ public class EntityTypePropertyWrapper<E extends Entity> {
     public static <E extends Entity> EntityTypePropertyWrapper<E> copyProperties(EntityTypePropertyWrapper<E> from, EntityTypePropertyWrapper<E> to) {
         return to.builder()
                 .withCustomName(from.builder.manuallyLocalizedItemName)
-                .withCustomSeparatorWords(from.builder.definedSeparatorWords)
+                .withCustomSeparatorWords(List.copyOf(from.builder.definedSeparatorWords))
                 .withLocalization(from.builder.entityTypeTranslationFunc)
+                .withLootTable(from.builder.entityLootTableBuilder)
                 .withSetTags(List.copyOf(from.builder.parentTags))
                 .literalTranslation(from.builder.literalTranslation)
                 .build(); // Direct setting of the builder would copy the entire object itself, which would in-turn overwrite it if any calls are made to the copied ETPW afterward
@@ -248,6 +251,17 @@ public class EntityTypePropertyWrapper<E extends Entity> {
     }
 
     /**
+     * Gets the {@code Function<Supplier<EntityType<E>>, LootTable.Builder>} from the {@link #builder()} if the builder exists, and it is defined within said builder.
+     * May be {@code null}.
+     *
+     * @return The {@code Function<Supplier<EntityType<E>>, LootTable.Builder>}, or {@code null} if the {@link #builder()} is {@code null} || it isn't defined within said builder.
+     */
+    @Nullable
+    public Function<Supplier<EntityType<E>>, LootTable.Builder> getEntityLootTableMappingFunction() {
+        return builder == null ? null : builder.entityLootTableBuilder;
+    }
+
+    /**
      * Gets the defined parent {@linkplain Supplier<TagKey<EntityType<E>>> Tags} from the {@link #builder()} if the builder exists.
      *
      * @return The defined parent {@linkplain Supplier<TagKey<EntityType<E>>> Tags}, or an empty {@link ObjectArrayList} if the {@link #builder()} is {@code null}.
@@ -307,12 +321,15 @@ public class EntityTypePropertyWrapper<E extends Entity> {
         private final Supplier<EntityType<E>> entityTypeParent;
         private String manuallyLocalizedItemName = "";
         private List<String> definedSeparatorWords = ObjectArrayList.of();
+        @Nullable
+        private Function<Supplier<EntityType<E>>, LootTable.Builder> entityLootTableBuilder;
         private final List<Supplier<TagKey<EntityType<E>>>> parentTags = ObjectArrayList.of();
         @Nullable
         private Function<String, String> entityTypeTranslationFunc;
         private boolean literalTranslation = false;
         private Supplier<AttributeSupplier.Builder> attribBuilder;
         private Supplier<ClientDataEntry> clientDataEntry;
+
 
         private ETPWBuilder(EntityTypePropertyWrapper<E> ownerWrapper, Supplier<EntityType<E>> entityTypeParent) {
             this.ownerWrapper = ownerWrapper;
@@ -418,6 +435,21 @@ public class EntityTypePropertyWrapper<E extends Entity> {
          */
         public ETPWBuilder<E> literalTranslation() {
             return literalTranslation(true);
+        }
+
+        /**
+         * Assigns a given {@link LootTable.Builder} to this builder via the input function. Can be {@code null}.
+         *
+         * @param entityLootTableBuilder The mapping {@code Function<Supplier<EntityType<E>>, LootTable.Builder>}
+         *                              used to build this ETPWBuilder's parent entity's loot table in datagen.
+         *
+         * @return {@code this} (builder method).
+         *
+         * @see LootUtil
+         */
+        public ETPWBuilder<E> withLootTable(Function<Supplier<EntityType<E>>, LootTable.Builder> entityLootTableBuilder) {
+            this.entityLootTableBuilder = entityLootTableBuilder;
+            return this;
         }
 
         /**

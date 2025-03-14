@@ -5,8 +5,10 @@ import io.github.chaosawakens.CAConstants;
 import io.github.chaosawakens.api.asm.annotations.RegistrarEntry;
 import io.github.chaosawakens.api.item.ItemPropertyWrapper;
 import io.github.chaosawakens.api.platform.CAServices;
+import io.github.chaosawakens.common.block.misc.EnchantedItem;
 import io.github.chaosawakens.common.item.misc.CritterCageItem;
 import io.github.chaosawakens.common.item.misc.MinersDreamItem;
+import io.github.chaosawakens.common.item.mob.WrappedFoodOnAStickItem;
 import io.github.chaosawakens.util.RecipeUtil;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -58,6 +60,7 @@ public final class CAItems {
     public static final Supplier<Item> STRAWBERRY = ItemPropertyWrapper.of(CAItemPropertyWrappers.RAW_FOOD, registerItem("strawberry", () -> new Item(new Item.Properties().food(CAFoods.FOOD_STRAWBERRY)))).getParentItem();
     public static final Supplier<Item> TOMATO = ItemPropertyWrapper.of(CAItemPropertyWrappers.RAW_FOOD, registerItem("tomato", () -> new Item(new Item.Properties().food(CAFoods.FOOD_TOMATO)))).getParentItem();
 
+    // Crystal
     public static final Supplier<Item> CRYSTAL_APPLE = ItemPropertyWrapper.of(CAItemPropertyWrappers.RAW_FOOD, registerItem("crystal_apple", () -> new Item(new Item.Properties().food(CAFoods.FOOD_CRYSTAL_APPLE)))).getParentItem();
     public static final Supplier<Item> CRYSTAL_BEETROOT = ItemPropertyWrapper.of(CAItemPropertyWrappers.RAW_FOOD, registerItem("crystal_beetroot", () -> new Item(new Item.Properties().food(CAFoods.FOOD_CRYSTAL_BEETROOT)))).getParentItem();
     public static final Supplier<Item> CRYSTAL_CARROT = ItemPropertyWrapper.of(CAItemPropertyWrappers.RAW_FOOD, registerItem("crystal_carrot", () -> new Item(new Item.Properties().food(CAFoods.FOOD_CRYSTAL_CARROT)))).getParentItem();
@@ -76,12 +79,26 @@ public final class CAItems {
 
     // Snack
 
+    // Golden
+    public static final Supplier<Item> GOLDEN_MELON_SLICE = ItemPropertyWrapper.of(CAItemPropertyWrappers.RAW_FOOD, registerItem("golden_melon_slice", () -> new Item(new Item.Properties().food(CAFoods.FOOD_GOLDEN_MELON_SLICE)))).getParentItem();
+    public static final Supplier<Item> GOLDEN_BEETROOT = ItemPropertyWrapper.of(CAItemPropertyWrappers.RAW_FOOD, registerItem("golden_beetroot", () -> new Item(new Item.Properties().food(CAFoods.FOOD_GOLDEN_BEETROOT)))).getParentItem();
+    public static final Supplier<Item> GOLDEN_POTATO = ItemPropertyWrapper.of(CAItemPropertyWrappers.RAW_FOOD, registerItem("golden_potato", () -> new Item(new Item.Properties().food(CAFoods.FOOD_GOLDEN_POTATO)))).getParentItem();
+    public static final Supplier<Item> BAKED_GOLDEN_POTATO = ItemPropertyWrapper.of(CAItemPropertyWrappers.COOKED_FOOD, registerItem("baked_golden_potato", () -> new Item(new Item.Properties().food(CAFoods.FOOD_BAKED_GOLDEN_POTATO)))).getParentItem();
+    public static final Supplier<Item> ENCHANTED_GOLDEN_CARROT = ItemPropertyWrapper.of(CAItemPropertyWrappers.RAW_FOOD, registerItem("enchanted_golden_carrot", () -> new EnchantedItem(new Item.Properties().food(CAFoods.FOOD_BAKED_GOLDEN_POTATO)))).getParentItem();
+
+    // Powerful
+    public static final Supplier<Item> ULTIMATE_APPLE = ItemPropertyWrapper.of(CAItemPropertyWrappers.RAW_FOOD, registerItem("ultimate_apple", () -> new EnchantedItem(new Item.Properties().food(CAFoods.FOOD_ULTIMATE_APPLE)))).getParentItem();
+
     // Special
     public static final Supplier<Item> SALT = ItemPropertyWrapper.of(CAItemPropertyWrappers.RAW_FOOD, registerItem("salt", () -> new Item(new Item.Properties())))
             .cachedBuilder()
             .withRecipe(RecipeUtil::componentMaterial)
             .build()
             .getParentItem();
+
+    // Food On A Stick
+    public static final Supplier<Item> BEETROOT_ON_A_STICK = ItemPropertyWrapper.of(CAItemPropertyWrappers.FOOD_ON_A_STICK, registerItem("beetroot_on_a_stick", () -> new WrappedFoodOnAStickItem<>(new Item.Properties().durability(25), CAEntityTypes.CARROT_PIG, 7))).getParentItem();
+    public static final Supplier<Item> GOLDEN_BEETROOT_ON_A_STICK = ItemPropertyWrapper.of(CAItemPropertyWrappers.FOOD_ON_A_STICK, registerItem("golden_beetroot_on_a_stick", () -> new WrappedFoodOnAStickItem<>(new Item.Properties().durability(25), CAEntityTypes.GOLDEN_CARROT_PIG, 7))).getParentItem();
 
     // Minerals
     public static final Supplier<Item> KUNZITE = ItemPropertyWrapper.of(CAItemPropertyWrappers.STANDARD_MINERAL, registerItem("kunzite", () -> new Item(new Item.Properties()))).getParentItem();

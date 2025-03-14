@@ -1,9 +1,13 @@
 package io.github.chaosawakens.util;
 
+import io.github.chaosawakens.CAConstants;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 
 import java.util.List;
@@ -44,5 +48,45 @@ public final class EntityUtil {
 
         target.yRotO = target.getYRot();
         target.xRotO = target.getXRot();
+    }
+
+    public static <E extends LivingEntity> boolean convertEntity(E targetEntity, EntityType<? extends E> targetConversionType) {
+        if (targetEntity != null) {
+            Level curLevel = targetEntity.level();
+
+            if (!curLevel.isClientSide()) {
+                E convertedEntity = targetConversionType.create(curLevel);
+
+                if (convertedEntity == null) {
+                    CAConstants.LOGGER.warn("Failed to convert entity {} to type {}, resultant entity was null", targetEntity.getType().getDescriptionId(), targetConversionType.getDescriptionId());
+
+                    return false;
+                }
+
+                convertedEntity.moveTo(targetEntity.getX(), targetEntity.getY(), targetEntity.getZ(), targetEntity.getYRot(), targetEntity.getXRot());
+
+                if (targetEntity.hasCustomName()) {
+                    convertedEntity.setCustomName(targetEntity.getCustomName());
+                    convertedEntity.setCustomNameVisible(targetEntity.isCustomNameVisible());
+                }
+
+                if (convertedEntity instanceof Mob convertedMob) {
+                    if (targetEntity instanceof Mob ownerMob) {
+                        convertedMob.setNoAi(ownerMob.isNoAi());
+
+                        if (ownerMob.isPersistenceRequired()) convertedMob.setPersistenceRequired();
+                    }
+
+                    convertedMob.setBaby(targetEntity.isBaby());
+                }
+
+                // No fancy schmancy Forge hooks here (we're inside common, goofy)
+                curLevel.addFreshEntity(convertedEntity);
+                targetEntity.discard();
+                return true;
+            }
+        }
+
+        return false;
     }
 }
