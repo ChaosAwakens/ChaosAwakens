@@ -10,6 +10,7 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityEvent;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.BodyRotationControl;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
@@ -117,13 +118,13 @@ public abstract class AnimatableAnimal extends Animal implements WrappedAnimatab
     }
 
     @Override
-    public boolean hurt(DamageSource pSource, float pAmount) {
-        if (pSource.getEntity() != null && !canBeKnockedBack()) {
-            super.hurt(pSource, pAmount);
+    public boolean hurt(DamageSource lastSrc, float dmgAmount) {
+        if (lastSrc.getEntity() != null && !canBeKnockedBack()) {
+            super.hurt(lastSrc, dmgAmount);
             return false;
         }
 
-        return super.hurt(pSource, pAmount);
+        return super.hurt(lastSrc, dmgAmount);
     }
 
     @Override
@@ -148,14 +149,22 @@ public abstract class AnimatableAnimal extends Animal implements WrappedAnimatab
             public void start() {
                 super.start();
 
-                if (mob instanceof Panickable panickableOwner) panickableOwner.setPanicking(true);
+                if (mob instanceof Panickable panickableOwner) {
+                    panickableOwner.setPanicking(true);
+
+                    if (panickableOwner.getPanicSpeedModifier() != null) mob.getAttribute(Attributes.MOVEMENT_SPEED).addTransientModifier(panickableOwner.getPanicSpeedModifier());
+                }
             }
 
             @Override
             public void stop() {
                 super.stop();
 
-                if (mob instanceof Panickable panickableOwner) panickableOwner.setPanicking(false);
+                if (mob instanceof Panickable panickableOwner) {
+                    panickableOwner.setPanicking(false);
+
+                    if (panickableOwner.getPanicSpeedModifier() != null) mob.getAttribute(Attributes.MOVEMENT_SPEED).removeModifier(panickableOwner.getPanicSpeedModifier());
+                }
             }
         });
         this.goalSelector.addGoal(1, new AvoidEntityGoal<Monster>(this, Monster.class, 12.0F, 1.2D, 2.0D) {

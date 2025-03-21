@@ -6,10 +6,12 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.Nullable;
 
 public abstract class AnimatablePanickingSaddleableAnimal extends AnimatableSaddleableAnimal implements Panickable {
     private static final EntityDataAccessor<Boolean> IS_PANICKING = SynchedEntityData.defineId(AnimatablePanickingSaddleableAnimal.class, EntityDataSerializers.BOOLEAN);
@@ -40,6 +42,11 @@ public abstract class AnimatablePanickingSaddleableAnimal extends AnimatableSadd
         super.tickDeath();
 
         setPanicking(false);
+    }
+
+    @Override
+    public @Nullable AttributeModifier getPanicSpeedModifier() {
+        return null;
     }
 
     @Override

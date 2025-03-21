@@ -7,7 +7,7 @@ import net.minecraft.world.entity.ai.control.BodyRotationControl;
 
 public class BandaidBodyRotationControl extends BodyRotationControl {
     protected final Mob owner;
-    protected static final int ROT_TICK_THRESHOLD = 7;
+    protected static final int ROT_TICK_THRESHOLD = 10;
     protected static final int ROT_THRESHOLD = 75;
     protected int curRotTime;
     protected float targetHeadRot;

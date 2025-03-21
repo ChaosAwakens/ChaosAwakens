@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:entity",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "chaosawakens:dead_stink_bug"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "chaosawakens:entities/stink_bug"
+}

@@ -46,9 +46,9 @@ import java.util.function.Supplier;
 public class AppleCow extends AnimatablePanickingAnimal implements Shearable {
     private static final EntityDataAccessor<Boolean> IS_SHEARED = SynchedEntityData.defineId(AppleCow.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Integer> SHEARED_TIME = SynchedEntityData.defineId(AppleCow.class, EntityDataSerializers.INT);
+    public static final int TICKS_UNTIL_REGROWN = 12000;
     public static final String IDLE_ANIM = "Idle";
     public final ExtendedAnimationState idleAnimState = wrapState(IDLE_ANIM);
-    public static final int TICKS_UNTIL_REGROWN = 12000;
 
     public AppleCow(EntityType<? extends AnimatableAnimal> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);

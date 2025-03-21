@@ -103,6 +103,7 @@ public class CritterCageItem extends Item {
                     case 5 -> "Master";
                     default -> "";
                 };
+
                 if (villager.getVillagerData().getProfession().equals(VillagerProfession.NONE)) toAppend = "None";
                 if (!toAppend.isEmpty()) tooltip.add(Component.literal("Trading Level: ").withStyle(ChatFormatting.BLUE).append(Component.literal(toAppend).withStyle(ChatFormatting.GRAY)));
             }
@@ -131,7 +132,6 @@ public class CritterCageItem extends Item {
         if (target.getBbWidth() >= 3.35F || target.getBbHeight() >= 4.225F) return false; // Ent size or larger
 
         CompoundTag critterCageData = new CompoundTag();
-
         CompoundTag entityData = new CompoundTag();
 
         target.stopRiding();

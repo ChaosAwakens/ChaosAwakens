@@ -84,7 +84,7 @@ public final class CAItems {
     public static final Supplier<Item> GOLDEN_BEETROOT = ItemPropertyWrapper.of(CAItemPropertyWrappers.RAW_FOOD, registerItem("golden_beetroot", () -> new Item(new Item.Properties().food(CAFoods.FOOD_GOLDEN_BEETROOT)))).getParentItem();
     public static final Supplier<Item> GOLDEN_POTATO = ItemPropertyWrapper.of(CAItemPropertyWrappers.RAW_FOOD, registerItem("golden_potato", () -> new Item(new Item.Properties().food(CAFoods.FOOD_GOLDEN_POTATO)))).getParentItem();
     public static final Supplier<Item> BAKED_GOLDEN_POTATO = ItemPropertyWrapper.of(CAItemPropertyWrappers.COOKED_FOOD, registerItem("baked_golden_potato", () -> new Item(new Item.Properties().food(CAFoods.FOOD_BAKED_GOLDEN_POTATO)))).getParentItem();
-    public static final Supplier<Item> ENCHANTED_GOLDEN_CARROT = ItemPropertyWrapper.of(CAItemPropertyWrappers.RAW_FOOD, registerItem("enchanted_golden_carrot", () -> new EnchantedItem(new Item.Properties().food(CAFoods.FOOD_BAKED_GOLDEN_POTATO)))).getParentItem();
+    public static final Supplier<Item> ENCHANTED_GOLDEN_CARROT = ItemPropertyWrapper.of(CAItemPropertyWrappers.RAW_FOOD, registerItem("enchanted_golden_carrot", () -> new EnchantedItem(new Item.Properties().food(CAFoods.FOOD_ENCHANTED_GOLDEN_CARROT)))).getParentItem();
 
     // Powerful
     public static final Supplier<Item> ULTIMATE_APPLE = ItemPropertyWrapper.of(CAItemPropertyWrappers.RAW_FOOD, registerItem("ultimate_apple", () -> new EnchantedItem(new Item.Properties().food(CAFoods.FOOD_ULTIMATE_APPLE)))).getParentItem();

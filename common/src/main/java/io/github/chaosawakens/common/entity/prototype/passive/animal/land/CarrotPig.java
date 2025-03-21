@@ -52,13 +52,13 @@ import java.util.function.Supplier;
 public class CarrotPig extends AnimatablePanickingSaddleableAnimal implements Shearable {
     private static final EntityDataAccessor<Boolean> IS_SHEARED = SynchedEntityData.defineId(CarrotPig.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Integer> SHEARED_TIME = SynchedEntityData.defineId(CarrotPig.class, EntityDataSerializers.INT);
-    public static final String IDLE_ANIM = "Idle";
-    public final ExtendedAnimationState idleAnimState = wrapState(IDLE_ANIM);
     public static final Ingredient FOOD_ITEMS = Ingredient.of(Items.BEETROOT, Items.POTATO, CAItems.BEETROOT_ON_A_STICK.get());
     public static final Ingredient GOLDEN_FOOD_ITEMS = Ingredient.of(CAItems.GOLDEN_BEETROOT.get(), CAItems.GOLDEN_POTATO.get(), CAItems.GOLDEN_BEETROOT_ON_A_STICK.get());
     public static final Ingredient STANDARD_CONTROLLER_ITEMS = Ingredient.of(CAItems.BEETROOT_ON_A_STICK.get());
     public static final Ingredient GOLDEN_CONTROLLER_ITEMS = Ingredient.of(CAItems.GOLDEN_BEETROOT_ON_A_STICK.get());
     public static final int TICKS_UNTIL_REGROWN = 12000;
+    public static final String IDLE_ANIM = "Idle";
+    public final ExtendedAnimationState idleAnimState = wrapState(IDLE_ANIM);
 
     public CarrotPig(EntityType<? extends AnimatableAnimal> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
