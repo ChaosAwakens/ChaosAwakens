@@ -8,6 +8,7 @@ import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class CarrotPigModel<CP extends CarrotPig> extends WrappedAgeableHierarchalModel<CP> {
@@ -97,7 +98,7 @@ public class CarrotPigModel<CP extends CarrotPig> extends WrappedAgeableHierarch
 	}
 
 	@Override
-	public ModelPart root() {
+	public @NotNull ModelPart root() {
 		return root;
 	}
 }

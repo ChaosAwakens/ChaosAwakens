@@ -50,6 +50,7 @@ public class FabricPlatformHelper implements IPlatformHelper {
         ObjectArrayList<Class<?>> filteredClasses = new ObjectArrayList<>();
 
         FabricLoader.getInstance().getAllMods().stream()
+                .filter(curMod -> !Objects.equals(curMod.getMetadata().getId(), "minecraft"))
                 .map(ModContainer::getOrigin) // getRootPaths() is completely useless, returns weird ahh paths consisting of a singular "/" or null :sob:
                 .filter(Objects::nonNull)
                 .filter(curOrigin -> curOrigin.getKind() == ModOrigin.Kind.PATH) //TODO Perhaps add support for nested mods

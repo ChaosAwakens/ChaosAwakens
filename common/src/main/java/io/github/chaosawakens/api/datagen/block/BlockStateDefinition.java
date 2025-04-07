@@ -23,7 +23,7 @@ public class BlockStateDefinition {
     /**
      * Creates a new {@link BlockStateDefinition}.
      *
-     * @param parentBlock The parent {@link Supplier<Block>} targeted for blockstate datagen,
+     * @param parentBlock The parent {@code Supplier<Block>} targeted for blockstate datagen,
      *                   stored in the newly-initialized {@link BlockStateDefinition} instance.
      *
      * @return A new {@link BlockStateDefinition}.
@@ -51,9 +51,9 @@ public class BlockStateDefinition {
     }
 
     /**
-     * Gets the parent {@link Supplier<Block>} targeted and used for blockstate datagen.
+     * Gets the parent {@code Supplier<Block>} targeted and used for blockstate datagen.
      *
-     * @return The parent {@link Supplier<Block>}.
+     * @return The parent {@code Supplier<Block>}.
      */
     public Supplier<Block> getParentBlock() {
         return parentBlock;
@@ -62,10 +62,11 @@ public class BlockStateDefinition {
     /**
      * Gets the {@link BlockStateGenerator} targeted and parsed/used for blockstate datagen.
      *
-     * @return The {@link BlockStateGenerator}.
+     * @return The {@link BlockStateGenerator}. May be {@code null}.
      *
      * @see #withBlockStateSupplier(BlockStateGenerator)
      */
+    @Nullable
     public BlockStateGenerator getBlockStateSupplier() {
         return blockStateSupplier;
     }

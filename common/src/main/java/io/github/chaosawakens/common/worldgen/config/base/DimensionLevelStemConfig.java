@@ -11,7 +11,7 @@ import java.util.function.Supplier;
 
 /**
  * Base interface for centralization of dimension configs in code through rote/simplistic inheritance and modularization. Primarily used to register custom {@linkplain LevelStem LevelStems}. This is usually where
- * higher-level worldgen mechanics, most notably chunk generation, are handled. Lower-level worldgen settings/mechanics (placed features, structures, etc.) are handled by biomes.
+ * lower-level worldgen mechanics, most notably chunk generation, are handled. Higher-level worldgen settings/mechanics (placed features, structures, etc.) are handled by biomes.
  *
  * @see BiomeConfig
  */

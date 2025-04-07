@@ -148,10 +148,11 @@ public class ItemModelDefinition {
     /**
      * Gets the parent {@link ModelTemplate} from which base model data will be serialized during datagen.
      *
-     * @return The parent {@link ModelTemplate}.
+     * @return The parent {@link ModelTemplate}. May be {@code null}.
      *
      * @see ModelTemplates
      */
+    @Nullable
     public ModelTemplate getParentModel() {
         return parentModel;
     }

@@ -26,7 +26,7 @@ import java.util.OptionalLong;
 import java.util.function.Supplier;
 
 public class MiningParadiseDimensionConfig implements DimensionLevelStemConfig {
-    public static final NoiseSettings BASE_MP_NOISE_SETTINGS = NoiseSettings.create(-256, 736, 1, 2);
+    public static final NoiseSettings BASE_NOISE_SETTINGS = NoiseSettings.create(-256, 736, 1, 2);
 
     public MiningParadiseDimensionConfig() {
     }
@@ -52,7 +52,7 @@ public class MiningParadiseDimensionConfig implements DimensionLevelStemConfig {
     }
 
     public static Supplier<NoiseGeneratorSettings> createMiningParadiseNoiseGenSettings(BootstapContext<NoiseGeneratorSettings> regCtx) {
-        return () -> new NoiseGeneratorSettings(BASE_MP_NOISE_SETTINGS, Blocks.STONE.defaultBlockState(), Blocks.WATER.defaultBlockState(), createMiningParadiseNoiseRouter(regCtx), createMiningParadiseSurfaceRules(), createMiningParadiseBiomes(regCtx), 121, false, true, true, false);
+        return () -> new NoiseGeneratorSettings(BASE_NOISE_SETTINGS, Blocks.STONE.defaultBlockState(), Blocks.WATER.defaultBlockState(), createMiningParadiseNoiseRouter(regCtx), createMiningParadiseSurfaceRules(), createMiningParadiseBiomes(regCtx), 121, false, true, true, false);
     }
 
     protected static SurfaceRules.RuleSource createMiningParadiseSurfaceRules() {
@@ -88,8 +88,8 @@ public class MiningParadiseDimensionConfig implements DimensionLevelStemConfig {
         DensityFunction zero = DensityFunctions.zero();
         DensityFunction shiftX = CADensityFunctions.getWrappedDensityFunctionHolder(regCtx, CADensityFunctions.SHIFT_X);
         DensityFunction shiftZ = CADensityFunctions.getWrappedDensityFunctionHolder(regCtx, CADensityFunctions.SHIFT_Z);
-        DensityFunction shiftedTemperature = DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.25D, regCtx.lookup(Registries.NOISE).getOrThrow(Noises.TEMPERATURE));
-        DensityFunction shiftedVegetation = DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.25D, regCtx.lookup(Registries.NOISE).getOrThrow(Noises.VEGETATION));
+        DensityFunction shiftedTemperature = DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.5D, regCtx.lookup(Registries.NOISE).getOrThrow(Noises.TEMPERATURE));
+        DensityFunction shiftedVegetation = DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.5D, regCtx.lookup(Registries.NOISE).getOrThrow(Noises.VEGETATION));
         DensityFunction landContinents = CADensityFunctions.getWrappedDensityFunctionHolder(regCtx, CADensityFunctions.MINING_PARADISE_CONTINENTS);
         DensityFunction landErosion = CADensityFunctions.getWrappedDensityFunctionHolder(regCtx, CADensityFunctions.MINING_PARADISE_EROSION);
         DensityFunction terrainJaggedness = CADensityFunctions.getWrappedDensityFunctionHolder(regCtx, CADensityFunctions.MINING_PARADISE_JAGGEDNESS);
