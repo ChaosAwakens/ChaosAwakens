@@ -215,7 +215,7 @@ public final class RegistryUtil {
     public static ResourceLocation getTexture(String modid, String targetBlockFileName) {
         populateCachedPNGTextures(modid);
 
-        return CACHED_PNG_TEXTURES.stream().filter(curRL -> !modid.isBlank() && curRL.getPath().endsWith(targetBlockFileName) && curRL.getNamespace().equals(modid)).findFirst().orElse(CAServices.PLATFORM.isDevelopmentEnvironment() ? null : CAConstants.prefix("null_tex")); // Fabric uses BMDs to assign render types cuz it doesn't parse them directly from the block's model file (Thanks Fabric :skull:)
+        return CACHED_PNG_TEXTURES.stream().filter(curRL -> !modid.isBlank() && curRL.getPath().endsWith("/" + targetBlockFileName) && curRL.getNamespace().equals(modid)).findFirst().orElse(CAServices.PLATFORM.isDevelopmentEnvironment() ? null : CAConstants.prefix("null_tex")); // Fabric uses BMDs to assign render types cuz it doesn't parse them directly from the block's model file (Thanks Fabric :skull:)
     }
 
     @Nullable
@@ -473,7 +473,7 @@ public final class RegistryUtil {
         ResourceLocation targetBlockKey = getItemKey(targetBlock.get());
         String copiedPath = getItemName(targetBlock.get());
 
-        if (copiedPath.contains("brick")) copiedPath = copiedPath.replace("brick", "bricks");
+        if (copiedPath.endsWith("brick")) copiedPath = copiedPath.replace("brick", "bricks");
 
         String finalCopiedPath = copiedPath; // Needed cuz WE LOVE TEROP!!!
 
@@ -521,12 +521,40 @@ public final class RegistryUtil {
     }
 
     @Nullable
+    public static Supplier<Block> getBlockBasedOnSuffixWithPrefix(Supplier<Block> targetBlock, String targetRegNameSuffix, String prefixReplacement) {
+        ResourceLocation targetBlockKey = getItemKey(targetBlock.get());
+        String copiedBlockPath = getItemName(targetBlock.get());
+        String targetPath = targetRegNameSuffix.isBlank() ? copiedBlockPath.concat(prefixReplacement) : prefixReplacement + copiedBlockPath.replace(targetRegNameSuffix, "");
+
+        return targetBlockKey.getPath().endsWith(targetRegNameSuffix)
+                && !BuiltInRegistries.BLOCK.get(targetBlockKey.withPath(targetPath)).getDescriptionId().equals("block.minecraft.air")
+                ? () -> BuiltInRegistries.BLOCK.get(targetBlockKey.withPath(targetPath))
+                : !BuiltInRegistries.BLOCK.get(new ResourceLocation(targetPath)).getDescriptionId().equals("block.minecraft.air")
+                ? () -> BuiltInRegistries.BLOCK.get(new ResourceLocation(targetPath))
+                : null;
+    }
+
+    @Nullable
     public static Supplier<Block> getBlockBasedOnPrefix(Supplier<Block> targetBlock, String targetRegNamePrefix, String prefixReplacement) {
         ResourceLocation targetBlockKey = getItemKey(targetBlock.get());
         String copiedBlockPath = getItemName(targetBlock.get());
         String targetPath = targetRegNamePrefix.isBlank() ? prefixReplacement.concat(copiedBlockPath) : copiedBlockPath.replace(targetRegNamePrefix, prefixReplacement);
 
         return targetBlockKey.getPath().endsWith(targetRegNamePrefix)
+                && !BuiltInRegistries.BLOCK.get(targetBlockKey.withPath(targetPath)).getDescriptionId().equals("block.minecraft.air")
+                ? () -> BuiltInRegistries.BLOCK.get(targetBlockKey.withPath(targetPath))
+                : !BuiltInRegistries.BLOCK.get(new ResourceLocation(targetPath)).getDescriptionId().equals("block.minecraft.air")
+                ? () -> BuiltInRegistries.BLOCK.get(new ResourceLocation(targetPath))
+                : null;
+    }
+
+    @Nullable
+    public static Supplier<Block> getBlockBasedOnPrefixWithSuffix(Supplier<Block> targetBlock, String targetRegNameSuffix, String suffixReplacement) {
+        ResourceLocation targetBlockKey = getItemKey(targetBlock.get());
+        String copiedBlockPath = getItemName(targetBlock.get());
+        String targetPath = targetRegNameSuffix.isBlank() ? copiedBlockPath.concat(suffixReplacement) : copiedBlockPath.replace(targetRegNameSuffix, "").concat(suffixReplacement);
+
+        return targetBlockKey.getPath().endsWith(targetRegNameSuffix)
                 && !BuiltInRegistries.BLOCK.get(targetBlockKey.withPath(targetPath)).getDescriptionId().equals("block.minecraft.air")
                 ? () -> BuiltInRegistries.BLOCK.get(targetBlockKey.withPath(targetPath))
                 : !BuiltInRegistries.BLOCK.get(new ResourceLocation(targetPath)).getDescriptionId().equals("block.minecraft.air")

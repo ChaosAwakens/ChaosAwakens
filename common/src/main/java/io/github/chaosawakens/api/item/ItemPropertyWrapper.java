@@ -2,11 +2,12 @@ package io.github.chaosawakens.api.item;
 
 import com.google.common.collect.ImmutableSortedMap;
 import io.github.chaosawakens.CAConstants;
-import io.github.chaosawakens.api.block.standard.BlockPropertyWrapper;
 import io.github.chaosawakens.api.datagen.item.ItemModelDefinition;
 import io.github.chaosawakens.common.registry.CAItems;
 import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
+import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+import net.minecraft.client.renderer.item.ClampedItemPropertyFunction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.resources.ResourceLocation;
@@ -17,6 +18,7 @@ import net.minecraft.world.item.Item;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.Map;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -136,7 +138,7 @@ public class ItemPropertyWrapper {
     }
 
     /**
-     * Creates a new {@link ItemPropertyWrapper} instance from an existing {@link BlockPropertyWrapper} instance based on the provided
+     * Creates a new {@link ItemPropertyWrapper} instance from an existing {@link ItemPropertyWrapper} instance based on the provided
      * {@link Supplier<Item>}. If no such existing IPW instance exists, returns {@link #create(Supplier)}.
      *
      * @param parentItem The parent {@link Supplier<Item>} stored in {@link #MAPPED_IPWS}. Copies its IPW instance's {@link IPWBuilder}
@@ -209,6 +211,7 @@ public class ItemPropertyWrapper {
                 .asCompostable(from.builder.itemCompostingMappingFunc)
                 .asFuel(from.builder.itemFuelMappingFunc)
                 .literalTranslation(from.builder.literalTranslation)
+                .withSetModelOverrideFunctions(Map.copyOf(from.builder.customModelOverrideFunctions))
                 .build(); // Direct setting of the builder would copy the entire object itself, which would in-turn overwrite it if any calls are made to the copied IPW afterward
     }
 
@@ -357,6 +360,16 @@ public class ItemPropertyWrapper {
     }
 
     /**
+     * Gets the {@link Map} of {@linkplain ClampedItemPropertyFunction ClampedItemPropertyFunctions} from the {@link #builder()} if the builder exists, and it is defined within said builder.
+     * May be empty.
+     *
+     * @return The {@link Map} of {@linkplain ClampedItemPropertyFunction ClampedItemPropertyFunctions}, or an empty {@link ObjectArrayList} if the {@link #builder()} is {@code null}.
+     */
+    public Object2ObjectOpenHashMap<ResourceLocation, ClampedItemPropertyFunction> getCustomModelOverrideFunctions() {
+        return builder == null ? new Object2ObjectOpenHashMap<>() : builder.customModelOverrideFunctions;
+    }
+
+    /**
      * Whether this IPW instance is a template. Templates are not stored in {@link #getMappedIpws()} and have no parent {@link Item}.
      *
      * @return Whether this IPW instance is a template.
@@ -399,6 +412,7 @@ public class ItemPropertyWrapper {
         @Nullable
         private Function<String, String> itemTranslationFunc;
         private boolean literalTranslation = false;
+        private Object2ObjectOpenHashMap<ResourceLocation, ClampedItemPropertyFunction> customModelOverrideFunctions = new Object2ObjectOpenHashMap<>();
 
         private IPWBuilder(ItemPropertyWrapper ownerWrapper, Supplier<Item> itemParent) {
             this.ownerWrapper = ownerWrapper;
@@ -679,6 +693,63 @@ public class ItemPropertyWrapper {
          */
         public IPWBuilder asFuel(Function<Supplier<Item>, Integer> itemFuelMappingFunc) {
             this.itemFuelMappingFunc = itemFuelMappingFunc;
+            return this;
+        }
+
+        /**
+         * Defines an {@link ClampedItemPropertyFunction} to be properly registered for use on the client in terms of texture
+         * overrides.
+         *
+         * @param modelOverrideFunctionId The name representing the {@link ClampedItemPropertyFunction} to register. Should be
+         *                                unique.
+         * @param modelOverrideFunction The {@link ClampedItemPropertyFunction} to register. Must be registered if you plan on
+         *                              adding any custom overrides. This should preferably be a {@code static} constant
+         *                              stored somewhere.
+         *
+         * @return {@code this} (builder method).
+         *
+         * @see #withModelOverrideFunctions(Map)
+         * @see #withSetModelOverrideFunctions(Map)
+         */
+        public IPWBuilder withModelOverrideFunction(ResourceLocation modelOverrideFunctionId, ClampedItemPropertyFunction modelOverrideFunction) {
+            customModelOverrideFunctions.put(modelOverrideFunctionId, modelOverrideFunction); // No need for putIfAbsent, we can just do value overrides instead (just cuz :fire:)
+            return this;
+        }
+
+        /**
+         * Defines a {@link Map} of {@link ClampedItemPropertyFunction} to be properly registered for use on the client in terms of texture
+         * overrides, mapped to key {@link ResourceLocation} objects representing their names. This method appends to the existing {@link Map}.
+         *
+         * @param modelOverrideFunctions A {@link Map} of {@link ClampedItemPropertyFunction} objects to register, mapped to their key names.
+         *                               Must be registered if you plan on adding any custom overrides. This should
+         *                               preferably be a {@code static} constant stored somewhere.
+         *
+         * @return {@code this} (builder method).
+         *
+         * @see #withModelOverrideFunction(ResourceLocation, ClampedItemPropertyFunction)
+         * @see #withSetModelOverrideFunctions(Map)
+         */
+        public IPWBuilder withModelOverrideFunctions(Map<ResourceLocation, ClampedItemPropertyFunction> modelOverrideFunctions) {
+            customModelOverrideFunctions.putAll(modelOverrideFunctions);
+            return this;
+        }
+
+        /**
+         * Defines a {@link Map} of {@link ClampedItemPropertyFunction} to be properly registered for use on the client in terms of texture
+         * overrides, mapped to key {@link ResourceLocation} objects representing their names. This method overrides the existing {@link List}.
+         *
+         * @param modelOverrideFunctions A {@link Map} of {@link ClampedItemPropertyFunction} objects to register, mapped to their key names.
+         *                               Must be registered if you plan on adding any custom overrides. This should
+         *                               preferably be a {@code static} constant stored somewhere.
+         *
+         * @return {@code this} (builder method).
+         *
+         * @see #withModelOverrideFunction(ResourceLocation, ClampedItemPropertyFunction)
+         * @see #withModelOverrideFunctions(Map) (Map)
+         */
+        public IPWBuilder withSetModelOverrideFunctions(Map<ResourceLocation, ClampedItemPropertyFunction> modelOverrideFunctions) {
+            customModelOverrideFunctions.clear();
+            customModelOverrideFunctions.putAll(modelOverrideFunctions);
             return this;
         }
 

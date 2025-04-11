@@ -243,7 +243,7 @@ public final class RecipeUtil {
     }
 
     public static Consumer<Supplier<Block>> solidBlockFromSolidBlock(Consumer<FinishedRecipe> recipeConsumer, ItemLike solidBlockILReference) {
-        return (resultBlockSup) -> solidBlockFromSolidBlock(recipeConsumer, solidBlockILReference, 3).accept(resultBlockSup);
+        return (resultBlockSup) -> solidBlockFromSolidBlock(recipeConsumer, solidBlockILReference, 4).accept(resultBlockSup);
     }
 
     public static Consumer<Supplier<Block>> solidPillarFromSolidBlock(Consumer<FinishedRecipe> recipeConsumer, ItemLike solidBlockILReference, int resultBlockCount) {
@@ -353,21 +353,43 @@ public final class RecipeUtil {
         };
     }
 
-    public static Consumer<Supplier<Block>> solidBrickBlockRecipe(Consumer<FinishedRecipe> recipeConsumer) {
+    public static Consumer<Supplier<Block>> solidBrickBlockRecipe(Consumer<FinishedRecipe> recipeConsumer, ItemLike standardBlockILReference) {
         return (resultBlockSup) -> {
+            // Stonecutting
+            solidBlockFromStoneCuttingSolidBlock(recipeConsumer, standardBlockILReference).accept(resultBlockSup);
 
+            // Crafting
+            solidBlockFromSolidBlock(recipeConsumer, standardBlockILReference).accept(resultBlockSup);
+        };
+    }
+
+    public static Consumer<Supplier<Block>> solidBrickBlockRecipe(Consumer<FinishedRecipe> recipeConsumer) {
+        return (resultBlockSup) -> solidBrickBlockRecipe(recipeConsumer, RegistryUtil.getSolidBlockFrom(resultBlockSup, "_bricks").get()).accept(resultBlockSup);
+    }
+
+    public static Consumer<Supplier<Block>> solidChiseledBlockRecipe(Consumer<FinishedRecipe> recipeConsumer, ItemLike standardBlockILReference, ItemLike brickBlockILReference, ItemLike brickSlabILReference) {
+        return (resultBlockSup) -> {
+            // Stonecutting
+            solidBlockFromStoneCuttingSolidBlock(recipeConsumer, standardBlockILReference).accept(resultBlockSup);
+            solidBlockFromStoneCuttingSolidBlock(recipeConsumer, brickBlockILReference).accept(resultBlockSup);
+
+            // Crafting
+            solidBlockFromSlab(recipeConsumer, brickSlabILReference).accept(resultBlockSup);
         };
     }
 
     public static Consumer<Supplier<Block>> solidChiseledBlockRecipe(Consumer<FinishedRecipe> recipeConsumer) {
-        return (resultBlockSup) -> {
-
-        };
+        return (resultBlockSup) -> solidChiseledBlockRecipe(recipeConsumer,
+                RegistryUtil.getSolidBlockFrom(resultBlockSup, "chiseled_").get(),
+                RegistryUtil.getWallFromSolidBlock(
+                        RegistryUtil.getBlockBasedOnPrefixWithSuffix(resultBlockSup, "chiseled_", "_bricks")).get(),
+                RegistryUtil.getSlabFromSolidBlock(
+                        RegistryUtil.getBlockBasedOnPrefixWithSuffix(resultBlockSup, "chiseled_", "_bricks")).get()).accept(resultBlockSup);
     }
 
     public static Consumer<Supplier<Block>> solidCrackedBlockRecipe(Consumer<FinishedRecipe> recipeConsumer) {
         return (resultBlockSup) -> {
-
+            // TBD
         };
     }
 

@@ -165,7 +165,7 @@
       "shift_x": "chaosawakens:vanilla/shift_x",
       "shift_y": 0.0,
       "shift_z": "chaosawakens:vanilla/shift_z",
-      "xz_scale": 0.25,
+      "xz_scale": 0.5,
       "y_scale": 0.0
     },
     "vegetation": {
@@ -174,7 +174,7 @@
       "shift_x": "chaosawakens:vanilla/shift_x",
       "shift_y": 0.0,
       "shift_z": "chaosawakens:vanilla/shift_z",
-      "xz_scale": 0.25,
+      "xz_scale": 0.5,
       "y_scale": 0.0
     },
     "vein_gap": 0.0,

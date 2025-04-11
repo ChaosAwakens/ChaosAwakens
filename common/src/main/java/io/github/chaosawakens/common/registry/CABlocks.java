@@ -223,6 +223,15 @@ public final class CABlocks {
 
     // Deepslate Ores
 
+    // Mining Paradise Stones
+    public static final Supplier<Block> DREDGESTONE = BlockPropertyWrapper.of(CABlockPropertyWrappers.BASIC_BLOCK_PICKAXE, registerBlock("dredgestone", () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE)))).getParentBlock();
+    public static final Supplier<Block> DREDGESTONE_BRICKS = BlockPropertyWrapper.of(CABlockPropertyWrappers.SOLID_BRICKS, registerBlock("dredgestone_bricks", () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE_BRICKS)))).getParentBlock();
+ //   public static final Supplier<Block> CHISELED_DREDGESTONE = BlockPropertyWrapper.of(CABlockPropertyWrappers.SOLID_CHISELED_BLOCK, registerBlock("chiseled_dredgestone", () -> new Block(BlockBehaviour.Properties.copy(Blocks.CHISELED_STONE_BRICKS)))).getParentBlock();
+
+    public static final Supplier<Block> GLOOMSTONE = BlockPropertyWrapper.of(CABlockPropertyWrappers.BASIC_BLOCK_PICKAXE_STONE, registerBlock("gloomstone", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE)))).getParentBlock();
+    public static final Supplier<Block> GLOOMSTONE_BRICKS = BlockPropertyWrapper.of(CABlockPropertyWrappers.SOLID_BRICKS_STONE, registerBlock("gloomstone_bricks", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_BRICKS)))).getParentBlock();
+  //  public static final Supplier<Block> CHISELED_GLOOMSTONE = BlockPropertyWrapper.of(CABlockPropertyWrappers.SOLID_CHISELED_BLOCK_STONE, registerBlock("chiseled_gloomstone", () -> new Block(BlockBehaviour.Properties.copy(Blocks.CHISELED_DEEPSLATE)))).getParentBlock();
+
     // Lamp & Mining Blocks
     public static final Supplier<Block> MINING_LAMP = BlockPropertyWrapper.of(CABlockPropertyWrappers.BASIC_BLOCK, registerBlock("mining_lamp", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.SAND).instrument(NoteBlockInstrument.PLING).strength(0.3F).sound(SoundType.GLASS).lightLevel((curState) -> 15)))).getParentBlock();
 

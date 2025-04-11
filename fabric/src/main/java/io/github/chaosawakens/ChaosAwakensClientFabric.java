@@ -3,7 +3,9 @@ package io.github.chaosawakens;
 import io.github.chaosawakens.api.block.standard.BlockPropertyWrapper;
 import io.github.chaosawakens.api.datagen.block.BlockModelDefinition;
 import io.github.chaosawakens.api.entity.EntityTypePropertyWrapper;
+import io.github.chaosawakens.api.item.ItemPropertyWrapper;
 import io.github.chaosawakens.common.registry.CAClientDataEntries;
+import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
@@ -11,7 +13,11 @@ import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.minecraft.client.color.block.BlockColor;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.item.ClampedItemPropertyFunction;
+import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 
 import java.util.List;
@@ -31,6 +37,8 @@ public class ChaosAwakensClientFabric implements ClientModInitializer {
 
         registerBlockColorProviders();
         registerItemColorProviders();
+
+        registerItemModelPredicates();
     }
 
     private static void handleClientEntityData() {
@@ -92,6 +100,15 @@ public class ChaosAwakensClientFabric implements ClientModInitializer {
             if (curMappedBlockColor == null) return; // Failsafe for initial nullity (how)
 
             ColorProviderRegistry.ITEM.register((curStack, tintIdx) -> curMappedBlockColor.getColor(blockSupEntry.get().defaultBlockState(), null, null, tintIdx), blockSupEntry.get());
+        });
+    }
+
+    private static void registerItemModelPredicates() {
+        ItemPropertyWrapper.getMappedIpws().entrySet().stream().filter(curEntry -> !curEntry.getValue().getCustomModelOverrideFunctions().isEmpty()).forEach(curEntry -> {
+            Supplier<Item> itemSupEntry = curEntry.getKey();
+            Object2ObjectOpenHashMap<ResourceLocation, ClampedItemPropertyFunction> definedModelPredicateFunctions = curEntry.getValue().getCustomModelOverrideFunctions();
+
+            definedModelPredicateFunctions.forEach((curName, curFunc) -> ItemProperties.register(itemSupEntry.get(), curName, curFunc));
         });
     }
 }

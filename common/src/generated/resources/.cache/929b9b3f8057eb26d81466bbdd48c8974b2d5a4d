@@ -1,4 +1,4 @@
-// 1.20.1	2025-01-24T16:11:24.2341803	Chaos Awakens: Block Tags
+// 1.20.1	2025-04-11T23:40:26.1479455	Chaos Awakens: Block Tags
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/chaosawakens/tags/blocks/base_stone_crystal.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/chaosawakens/tags/blocks/base_stone_mining.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/chaosawakens/tags/blocks/base_stone_village.json
@@ -67,10 +67,11 @@ e270a0dc2572cac0a853e3e27da1a1afa0b3919d data/minecraft/tags/blocks/flowers.json
 2c3a4af37be58291aadbee3781c0fd38c6aa1ded data/minecraft/tags/blocks/logs_that_burn.json
 b95e07ccdca2e6b613945397dda9e04c79800366 data/minecraft/tags/blocks/mineable/axe.json
 d89fc4326b85b6d39178241f56e9b9c6ea779b1f data/minecraft/tags/blocks/mineable/hoe.json
-a44be2a3ce535110c638102b3b9beac23fe035fd data/minecraft/tags/blocks/mineable/pickaxe.json
+1018d0437a893a063c2286a14d7f26e43b9750ff data/minecraft/tags/blocks/mineable/pickaxe.json
 8e6857fca40e1dd7b123e76ee8bc8977496b72b5 data/minecraft/tags/blocks/mineable/shovel.json
 77231706f171152530a4de03b16c0b791383dc79 data/minecraft/tags/blocks/needs_diamond_tool.json
 a7a7dc7f4f5ba9eda4b4cc81482933b822d0ca21 data/minecraft/tags/blocks/needs_iron_tool.json
+3c962affbda1191050a63fe6cd5ade1b9bd9fc04 data/minecraft/tags/blocks/needs_stone_tool.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/minecraft/tags/blocks/nether_carver_replaceables.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/minecraft/tags/blocks/overworld_carver_replaceables.json
 5c1e7c4f5a2e2ce5b0eaed151ea4f12828aa6956 data/minecraft/tags/blocks/planks.json

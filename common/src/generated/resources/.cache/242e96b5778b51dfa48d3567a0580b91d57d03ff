@@ -1,4 +1,4 @@
-// 1.20.1	2025-03-14T20:38:12.7736021	Chaos Awakens: Item Models
+// 1.20.1	2025-04-11T17:02:22.3763115	Chaos Awakens: Item Models
 7739a52b8dd3174f4785a96a252de9259a260a4a assets/chaosawakens/models/item/baked_golden_potato.json
 09e2e3cba220805db46a5a502d1bbff2c28752ae assets/chaosawakens/models/item/basilisk_scale.json
 c4e9490a06afc1baaee8b7884aced09fe7dbd5af assets/chaosawakens/models/item/beetroot_on_a_stick.json
@@ -32,7 +32,7 @@ eaafcb93cf54f76d534c7c30627f64d06d6b745a assets/chaosawakens/models/item/fire_fi
 912857ccf019f5ea3600b2999ed6baf45d7d2d25 assets/chaosawakens/models/item/golden_beetroot.json
 d4d731c7a4fceabad8354641f53035c1f1c923ba assets/chaosawakens/models/item/golden_beetroot_on_a_stick.json
 bb07622a5635f1ef65243c2fa0df27c97484b699 assets/chaosawakens/models/item/golden_melon_slice.json
-7739a52b8dd3174f4785a96a252de9259a260a4a assets/chaosawakens/models/item/golden_potato.json
+de01978d7f3faebd3296c549de1db842e0e47651 assets/chaosawakens/models/item/golden_potato.json
 f8109115fa17d21aae45864b42b5ba99f3618886 assets/chaosawakens/models/item/gray_fish.json
 8b69881e5aa58846dd49404e0de5ec42b32d1164 assets/chaosawakens/models/item/green_fish.json
 87c5efcb40ec920f20164da888b07680ed4d4afb assets/chaosawakens/models/item/jeffery_core.json

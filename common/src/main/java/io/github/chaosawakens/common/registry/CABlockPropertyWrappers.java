@@ -415,6 +415,40 @@ public final class CABlockPropertyWrappers {
             .build();
 
     // Solid
+    public static final BlockPropertyWrapper SOLID_BRICKS = BlockPropertyWrapper.ofTemplate(BASIC_BLOCK_PICKAXE)
+            .cachedBuilder()
+            .withRecipe(RecipeUtil::solidBrickBlockRecipe)
+            .build();
+    public static final BlockPropertyWrapper SOLID_BRICKS_STONE = BlockPropertyWrapper.ofTemplate(BASIC_BLOCK_PICKAXE_STONE)
+            .cachedBuilder()
+            .withRecipe(RecipeUtil::solidBrickBlockRecipe)
+            .build();
+    public static final BlockPropertyWrapper SOLID_IRON = BlockPropertyWrapper.ofTemplate(BASIC_BLOCK_PICKAXE_IRON)
+            .cachedBuilder()
+            .withRecipe(RecipeUtil::solidBrickBlockRecipe)
+            .build();
+    public static final BlockPropertyWrapper SOLID_DIAMOND = BlockPropertyWrapper.ofTemplate(BASIC_BLOCK_PICKAXE_DIAMOND)
+            .cachedBuilder()
+            .withRecipe(RecipeUtil::solidBrickBlockRecipe)
+            .build();
+
+    public static final BlockPropertyWrapper SOLID_CHISELED_BLOCK = BlockPropertyWrapper.ofTemplate(BASIC_BLOCK_PICKAXE)
+            .cachedBuilder()
+            .withRecipe(RecipeUtil::solidChiseledBlockRecipe)
+            .build();
+    public static final BlockPropertyWrapper SOLID_CHISELED_BLOCK_STONE = BlockPropertyWrapper.ofTemplate(BASIC_BLOCK_PICKAXE_STONE)
+            .cachedBuilder()
+            .withRecipe(RecipeUtil::solidChiseledBlockRecipe)
+            .build();
+    public static final BlockPropertyWrapper SOLID_CHISELED_BLOCK_IRON = BlockPropertyWrapper.ofTemplate(BASIC_BLOCK_PICKAXE_IRON)
+            .cachedBuilder()
+            .withRecipe(RecipeUtil::solidChiseledBlockRecipe)
+            .build();
+    public static final BlockPropertyWrapper SOLID_CHISELED_BLOCK_DIAMOND = BlockPropertyWrapper.ofTemplate(BASIC_BLOCK_PICKAXE_DIAMOND)
+            .cachedBuilder()
+            .withRecipe(RecipeUtil::solidChiseledBlockRecipe)
+            .build();
+
     public static final BlockPropertyWrapper SOLID_SLAB = BlockPropertyWrapper.ofTemplate(WOODEN_SLAB)
             .cachedBuilder()
             .withRecipe(RecipeUtil::solidSlabRecipe)

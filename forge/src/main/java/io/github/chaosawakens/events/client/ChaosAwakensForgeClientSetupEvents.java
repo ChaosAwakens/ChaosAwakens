@@ -3,20 +3,38 @@ package io.github.chaosawakens.events.client;
 import io.github.chaosawakens.CAConstants;
 import io.github.chaosawakens.api.block.standard.BlockPropertyWrapper;
 import io.github.chaosawakens.api.entity.EntityTypePropertyWrapper;
+import io.github.chaosawakens.api.item.ItemPropertyWrapper;
 import io.github.chaosawakens.common.registry.CAClientDataEntries;
+import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.minecraft.client.color.block.BlockColor;
+import net.minecraft.client.renderer.item.ClampedItemPropertyFunction;
+import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.RegisterColorHandlersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
 import java.util.Optional;
 import java.util.function.Supplier;
 
 @Mod.EventBusSubscriber(modid = CAConstants.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ChaosAwakensForgeClientSetupEvents {
+
+    @SubscribeEvent
+    public static void onFMLClientSetupEvent(FMLClientSetupEvent event) {
+        // Item Model Properties
+        ItemPropertyWrapper.getMappedIpws().entrySet().stream().filter(curEntry -> !curEntry.getValue().getCustomModelOverrideFunctions().isEmpty()).forEach(curEntry -> {
+            Supplier<Item> itemSupEntry = curEntry.getKey();
+            Object2ObjectOpenHashMap<ResourceLocation, ClampedItemPropertyFunction> definedModelPredicateFunctions = curEntry.getValue().getCustomModelOverrideFunctions();
+
+            definedModelPredicateFunctions.forEach((curName, curFunc) -> ItemProperties.register(itemSupEntry.get(), curName, curFunc));
+        });
+    }
 
     @SubscribeEvent
     public static void onRegisterEntityRenderersEvent(EntityRenderersEvent.RegisterRenderers event) {
