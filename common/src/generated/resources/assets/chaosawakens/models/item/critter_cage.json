@@ -1,5 +1,199 @@
 {
   "parent": "minecraft:item/generated",
+  "overrides": [
+    {
+      "model": "chaosawakens:item/default",
+      "predicate": {
+        "chaosawakens:default": 1.0
+      }
+    },
+    {
+      "model": "chaosawakens:item/apple_cow",
+      "predicate": {
+        "chaosawakens:apple_cow": 1.0
+      }
+    },
+    {
+      "model": "chaosawakens:item/bee",
+      "predicate": {
+        "chaosawakens:bee": 1.0
+      }
+    },
+    {
+      "model": "chaosawakens:item/bird",
+      "predicate": {
+        "chaosawakens:bird": 1.0
+      }
+    },
+    {
+      "model": "chaosawakens:item/carrot_pig",
+      "predicate": {
+        "chaosawakens:carrot_pig": 1.0
+      }
+    },
+    {
+      "model": "chaosawakens:item/cat",
+      "predicate": {
+        "chaosawakens:cat": 1.0
+      }
+    },
+    {
+      "model": "chaosawakens:item/cave_spider",
+      "predicate": {
+        "chaosawakens:cave_spider": 1.0
+      }
+    },
+    {
+      "model": "chaosawakens:item/cow",
+      "predicate": {
+        "chaosawakens:cow": 1.0
+      }
+    },
+    {
+      "model": "chaosawakens:item/creeper",
+      "predicate": {
+        "chaosawakens:creeper": 1.0
+      }
+    },
+    {
+      "model": "chaosawakens:item/donkey",
+      "predicate": {
+        "chaosawakens:donkey": 1.0
+      }
+    },
+    {
+      "model": "chaosawakens:item/drowned",
+      "predicate": {
+        "chaosawakens:drowned": 1.0
+      }
+    },
+    {
+      "model": "chaosawakens:item/enderman",
+      "predicate": {
+        "chaosawakens:enderman": 1.0
+      }
+    },
+    {
+      "model": "chaosawakens:item/fox",
+      "predicate": {
+        "chaosawakens:fox": 1.0
+      }
+    },
+    {
+      "model": "chaosawakens:item/horse",
+      "predicate": {
+        "chaosawakens:horse": 1.0
+      }
+    },
+    {
+      "model": "chaosawakens:item/husk",
+      "predicate": {
+        "chaosawakens:husk": 1.0
+      }
+    },
+    {
+      "model": "chaosawakens:item/llama",
+      "predicate": {
+        "chaosawakens:llama": 1.0
+      }
+    },
+    {
+      "model": "chaosawakens:item/mooshroom",
+      "predicate": {
+        "chaosawakens:mooshroom": 1.0
+      }
+    },
+    {
+      "model": "chaosawakens:item/ostrich",
+      "predicate": {
+        "chaosawakens:ostrich": 1.0
+      }
+    },
+    {
+      "model": "chaosawakens:item/panda",
+      "predicate": {
+        "chaosawakens:panda": 1.0
+      }
+    },
+    {
+      "model": "chaosawakens:item/pig",
+      "predicate": {
+        "chaosawakens:pig": 1.0
+      }
+    },
+    {
+      "model": "chaosawakens:item/piraporu",
+      "predicate": {
+        "chaosawakens:piraporu": 1.0
+      }
+    },
+    {
+      "model": "chaosawakens:item/polar_bear",
+      "predicate": {
+        "chaosawakens:polar_bear": 1.0
+      }
+    },
+    {
+      "model": "chaosawakens:item/rabbit",
+      "predicate": {
+        "chaosawakens:rabbit": 1.0
+      }
+    },
+    {
+      "model": "chaosawakens:item/sheep",
+      "predicate": {
+        "chaosawakens:sheep": 1.0
+      }
+    },
+    {
+      "model": "chaosawakens:item/skeleton",
+      "predicate": {
+        "chaosawakens:skeleton": 1.0
+      }
+    },
+    {
+      "model": "chaosawakens:item/slime",
+      "predicate": {
+        "chaosawakens:slime": 1.0
+      }
+    },
+    {
+      "model": "chaosawakens:item/spider",
+      "predicate": {
+        "chaosawakens:spider": 1.0
+      }
+    },
+    {
+      "model": "chaosawakens:item/stray",
+      "predicate": {
+        "chaosawakens:stray": 1.0
+      }
+    },
+    {
+      "model": "chaosawakens:item/wasp",
+      "predicate": {
+        "chaosawakens:wasp": 1.0
+      }
+    },
+    {
+      "model": "chaosawakens:item/wolf",
+      "predicate": {
+        "chaosawakens:wolf": 1.0
+      }
+    },
+    {
+      "model": "chaosawakens:item/zombie_villager",
+      "predicate": {
+        "chaosawakens:zombie_villager": 1.0
+      }
+    },
+    {
+      "model": "chaosawakens:item/zombie",
+      "predicate": {
+        "chaosawakens:zombie": 1.0
+      }
+    }
+  ],
   "textures": {
     "layer0": "chaosawakens:item/utility/critter_cage"
   }

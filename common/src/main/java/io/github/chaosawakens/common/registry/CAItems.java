@@ -9,7 +9,9 @@ import io.github.chaosawakens.common.block.misc.EnchantedItem;
 import io.github.chaosawakens.common.item.misc.CritterCageItem;
 import io.github.chaosawakens.common.item.misc.MinersDreamItem;
 import io.github.chaosawakens.common.item.mob.WrappedFoodOnAStickItem;
+import io.github.chaosawakens.util.ModelUtil;
 import io.github.chaosawakens.util.RecipeUtil;
+import io.github.chaosawakens.util.RegistryUtil;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
@@ -142,8 +144,11 @@ public final class CAItems {
             .build()
             .getParentItem();
 
-    public static final Supplier<Item> CRITTER_CAGE = ItemPropertyWrapper.of(CAItemPropertyWrappers.BASIC_GENERATED, registerItem("critter_cage", () -> new CritterCageItem(new Item.Properties().stacksTo(16))))
-            .cachedBuilder()
+    public static final Supplier<Item> CRITTER_CAGE = ItemPropertyWrapper.create(registerItem("critter_cage", () -> new CritterCageItem(new Item.Properties().stacksTo(16))))
+            .builder()
+            .withParentCreativeModeTab(CACreativeModeTabs.CHAOS_AWAKENS_ITEMS)
+            .withCustomModelDefinitions(parentItem -> ModelUtil.critterCage(RegistryUtil.getItemTexture(parentItem)))
+            .withModelOverrideFunctions(ModelUtil.critterCagePredicates())
             .withRecipe(recipeConsumer -> RecipeUtil.cageRecipe(recipeConsumer, Items.STICK, Items.IRON_INGOT, 2))
             .build()
             .getParentItem();
