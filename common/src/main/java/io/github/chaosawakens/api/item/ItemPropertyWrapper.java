@@ -2,12 +2,12 @@ package io.github.chaosawakens.api.item;
 
 import com.google.common.collect.ImmutableSortedMap;
 import io.github.chaosawakens.CAConstants;
+import io.github.chaosawakens.api.client.WrappedClampedItemPropertyFunction;
 import io.github.chaosawakens.api.datagen.item.ItemModelDefinition;
 import io.github.chaosawakens.common.registry.CAItems;
 import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
-import net.minecraft.client.renderer.item.ClampedItemPropertyFunction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.resources.ResourceLocation;
@@ -360,12 +360,12 @@ public class ItemPropertyWrapper {
     }
 
     /**
-     * Gets the {@link Map} of {@linkplain ClampedItemPropertyFunction ClampedItemPropertyFunctions} from the {@link #builder()} if the builder exists, and it is defined within said builder.
+     * Gets the {@link Map} of {@linkplain WrappedClampedItemPropertyFunction WrappedClampedItemPropertyFunctions} from the {@link #builder()} if the builder exists, and it is defined within said builder.
      * May be empty.
      *
-     * @return The {@link Map} of {@linkplain ClampedItemPropertyFunction ClampedItemPropertyFunctions}, or an empty {@link ObjectArrayList} if the {@link #builder()} is {@code null}.
+     * @return The {@link Map} of {@linkplain WrappedClampedItemPropertyFunction WrappedClampedItemPropertyFunctions}, or an empty {@link ObjectArrayList} if the {@link #builder()} is {@code null}.
      */
-    public Object2ObjectOpenHashMap<ResourceLocation, ClampedItemPropertyFunction> getCustomModelOverrideFunctions() {
+    public Object2ObjectOpenHashMap<ResourceLocation, WrappedClampedItemPropertyFunction> getCustomModelOverrideFunctions() {
         return builder == null ? new Object2ObjectOpenHashMap<>() : builder.customModelOverrideFunctions;
     }
 
@@ -412,7 +412,7 @@ public class ItemPropertyWrapper {
         @Nullable
         private Function<String, String> itemTranslationFunc;
         private boolean literalTranslation = false;
-        private Object2ObjectOpenHashMap<ResourceLocation, ClampedItemPropertyFunction> customModelOverrideFunctions = new Object2ObjectOpenHashMap<>();
+        private Object2ObjectOpenHashMap<ResourceLocation, WrappedClampedItemPropertyFunction> customModelOverrideFunctions = new Object2ObjectOpenHashMap<>();
 
         private IPWBuilder(ItemPropertyWrapper ownerWrapper, Supplier<Item> itemParent) {
             this.ownerWrapper = ownerWrapper;
@@ -697,12 +697,12 @@ public class ItemPropertyWrapper {
         }
 
         /**
-         * Defines an {@link ClampedItemPropertyFunction} to be properly registered for use on the client in terms of texture
+         * Defines an {@link WrappedClampedItemPropertyFunction} to be properly registered for use on the client in terms of texture
          * overrides.
          *
-         * @param modelOverrideFunctionId The name representing the {@link ClampedItemPropertyFunction} to register. Should be
+         * @param modelOverrideFunctionId The name representing the {@link WrappedClampedItemPropertyFunction} to register. Should be
          *                                unique.
-         * @param modelOverrideFunction The {@link ClampedItemPropertyFunction} to register. Must be registered if you plan on
+         * @param modelOverrideFunction The {@link WrappedClampedItemPropertyFunction} to register. Must be registered if you plan on
          *                              adding any custom overrides. This should preferably be a {@code static} constant
          *                              stored somewhere.
          *
@@ -711,43 +711,43 @@ public class ItemPropertyWrapper {
          * @see #withModelOverrideFunctions(Map)
          * @see #withSetModelOverrideFunctions(Map)
          */
-        public IPWBuilder withModelOverrideFunction(ResourceLocation modelOverrideFunctionId, ClampedItemPropertyFunction modelOverrideFunction) {
+        public IPWBuilder withModelOverrideFunction(ResourceLocation modelOverrideFunctionId, WrappedClampedItemPropertyFunction modelOverrideFunction) {
             customModelOverrideFunctions.put(modelOverrideFunctionId, modelOverrideFunction); // No need for putIfAbsent, we can just do value overrides instead (just cuz :fire:)
             return this;
         }
 
         /**
-         * Defines a {@link Map} of {@link ClampedItemPropertyFunction} to be properly registered for use on the client in terms of texture
+         * Defines a {@link Map} of {@link WrappedClampedItemPropertyFunction} to be properly registered for use on the client in terms of texture
          * overrides, mapped to key {@link ResourceLocation} objects representing their names. This method appends to the existing {@link Map}.
          *
-         * @param modelOverrideFunctions A {@link Map} of {@link ClampedItemPropertyFunction} objects to register, mapped to their key names.
+         * @param modelOverrideFunctions A {@link Map} of {@link WrappedClampedItemPropertyFunction} objects to register, mapped to their key names.
          *                               Must be registered if you plan on adding any custom overrides. This should
          *                               preferably be a {@code static} constant stored somewhere.
          *
          * @return {@code this} (builder method).
          *
-         * @see #withModelOverrideFunction(ResourceLocation, ClampedItemPropertyFunction)
+         * @see #withModelOverrideFunction(ResourceLocation, WrappedClampedItemPropertyFunction)
          * @see #withSetModelOverrideFunctions(Map)
          */
-        public IPWBuilder withModelOverrideFunctions(Map<ResourceLocation, ClampedItemPropertyFunction> modelOverrideFunctions) {
+        public IPWBuilder withModelOverrideFunctions(Map<ResourceLocation, WrappedClampedItemPropertyFunction> modelOverrideFunctions) {
             customModelOverrideFunctions.putAll(modelOverrideFunctions);
             return this;
         }
 
         /**
-         * Defines a {@link Map} of {@link ClampedItemPropertyFunction} to be properly registered for use on the client in terms of texture
+         * Defines a {@link Map} of {@link WrappedClampedItemPropertyFunction} to be properly registered for use on the client in terms of texture
          * overrides, mapped to key {@link ResourceLocation} objects representing their names. This method overrides the existing {@link List}.
          *
-         * @param modelOverrideFunctions A {@link Map} of {@link ClampedItemPropertyFunction} objects to register, mapped to their key names.
+         * @param modelOverrideFunctions A {@link Map} of {@link WrappedClampedItemPropertyFunction} objects to register, mapped to their key names.
          *                               Must be registered if you plan on adding any custom overrides. This should
          *                               preferably be a {@code static} constant stored somewhere.
          *
          * @return {@code this} (builder method).
          *
-         * @see #withModelOverrideFunction(ResourceLocation, ClampedItemPropertyFunction)
+         * @see #withModelOverrideFunction(ResourceLocation, WrappedClampedItemPropertyFunction)
          * @see #withModelOverrideFunctions(Map) (Map)
          */
-        public IPWBuilder withSetModelOverrideFunctions(Map<ResourceLocation, ClampedItemPropertyFunction> modelOverrideFunctions) {
+        public IPWBuilder withSetModelOverrideFunctions(Map<ResourceLocation, WrappedClampedItemPropertyFunction> modelOverrideFunctions) {
             customModelOverrideFunctions.clear();
             customModelOverrideFunctions.putAll(modelOverrideFunctions);
             return this;

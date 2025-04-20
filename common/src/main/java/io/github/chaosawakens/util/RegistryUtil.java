@@ -2,13 +2,13 @@ package io.github.chaosawakens.util;
 
 import com.google.common.base.Suppliers;
 import io.github.chaosawakens.CAConstants;
+import io.github.chaosawakens.api.client.WrappedBlockColor;
 import io.github.chaosawakens.api.platform.CAServices;
 import io.github.chaosawakens.common.registry.CABlocks;
 import it.unimi.dsi.fastutil.ints.IntIntMutablePair;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import it.unimi.dsi.fastutil.objects.ObjectObjectMutablePair;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.color.block.BlockColor;
 import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.core.DefaultedRegistry;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -731,7 +731,7 @@ public final class RegistryUtil {
     }
 
     @Nullable
-    public static BlockColor getVanillaLeafColorFor(Supplier<Block> targetBlock) {
+    public static WrappedBlockColor getVanillaLeafColorFor(Supplier<Block> targetBlock) {
         return getItemModId(getLeavesFrom(targetBlock).get()).equals("minecraft") && !getItemName(targetBlock.get()).startsWith("cherry") ? (targetState, tintGetter, targetPos, tint) -> {
             String targetBlockItemName = getItemName(getLeavesFrom(targetBlock).get());
 
@@ -752,7 +752,7 @@ public final class RegistryUtil {
     }
 
     @NotNull
-    public static BlockColor getVanillaGrassColorFor(Supplier<Block> targetBlock) {
+    public static WrappedBlockColor getVanillaGrassColorFor(Supplier<Block> targetBlock) {
         return (targetState, tintGetter, targetPos, tint) -> tintGetter != null && targetPos != null ? BiomeColors.getAverageGrassColor(tintGetter, targetPos) : GrassColor.get(0.5D, 1.0D);
     }
 

@@ -1,10 +1,13 @@
 package io.github.chaosawakens.api.services;
 
 import io.github.chaosawakens.api.asm.ClassFinder;
+import io.github.chaosawakens.api.loader.EnvironmentSide;
 import io.github.chaosawakens.api.loader.ModLoader;
 import io.github.chaosawakens.api.platform.services.IPlatformHelper;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.ModList;
+import net.minecraftforge.fml.loading.FMLEnvironment;
 import net.minecraftforge.fml.loading.FMLLoader;
 import net.minecraftforge.forgespi.language.ModFileScanData;
 import org.objectweb.asm.Type;
@@ -43,5 +46,10 @@ public class ForgePlatformHelper implements IPlatformHelper {
                 .sorted(String::compareTo)
                 .map(ClassFinder::forName)
                 .collect(Collectors.toCollection(ObjectArrayList::new));
+    }
+
+    @Override
+    public EnvironmentSide getEnvironmentSide() {
+        return FMLEnvironment.dist == Dist.CLIENT ? EnvironmentSide.CLIENT : EnvironmentSide.DEDICATED_SERVER;
     }
 }

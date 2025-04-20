@@ -3,7 +3,6 @@ package io.github.chaosawakens.common.registry;
 import com.google.common.base.Suppliers;
 import com.google.common.collect.ImmutableList;
 import io.github.chaosawakens.CAConstants;
-import io.github.chaosawakens.api.asm.annotations.RegistrarEntry;
 import io.github.chaosawakens.api.entity.ClientDataEntry;
 import io.github.chaosawakens.client.model.hostile.robo.RoboPounderModel;
 import io.github.chaosawakens.client.model.passive.animal.land.AppleCowModel;
@@ -20,7 +19,6 @@ import it.unimi.dsi.fastutil.objects.ObjectObjectImmutablePair;
 
 import java.util.function.Supplier;
 
-@RegistrarEntry
 public class CAClientDataEntries {
     private static final ObjectArrayList<Supplier<ClientDataEntry>> CLIENT_DATA_ENTRIES = new ObjectArrayList<>();
 

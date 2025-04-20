@@ -1,5 +1,6 @@
 package io.github.chaosawakens.api.platform.services;
 
+import io.github.chaosawakens.api.loader.EnvironmentSide;
 import io.github.chaosawakens.api.loader.ModLoader;
 
 import java.lang.annotation.Annotation;
@@ -17,6 +18,13 @@ public interface IPlatformHelper {
      * @return The {@link ModLoader} representation of the current platform.
      */
     ModLoader getPlatform();
+
+    /**
+     * Gets the current physical side.
+     *
+     * @return The current physical side.
+     */
+    EnvironmentSide getEnvironmentSide();
 
     /**
      * Checks if a mod with the given id is loaded.

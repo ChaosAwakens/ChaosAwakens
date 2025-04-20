@@ -2,6 +2,7 @@ package io.github.chaosawakens.api.block.standard;
 
 import com.google.common.collect.ImmutableSortedMap;
 import io.github.chaosawakens.CAConstants;
+import io.github.chaosawakens.api.client.WrappedBlockColor;
 import io.github.chaosawakens.api.datagen.block.BlockModelDefinition;
 import io.github.chaosawakens.api.datagen.block.BlockStateDefinition;
 import io.github.chaosawakens.common.registry.CABlocks;
@@ -10,7 +11,6 @@ import it.unimi.dsi.fastutil.ints.IntIntMutablePair;
 import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import it.unimi.dsi.fastutil.objects.ObjectObjectMutablePair;
-import net.minecraft.client.color.block.BlockColor;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.tags.TagKey;
@@ -213,7 +213,7 @@ public class BlockPropertyWrapper { //TODO Maybe type param this for blocks
                 .withBlockStateDefinition(from.builder.blockStateDefinition)
                 .withRecipe(from.builder.recipeBuilderFunction)
                 .withSetParentCreativeModeTabs(List.copyOf(from.builder.parentTabs))
-                .withBlockColor(from.builder.blockColorMappingFunc)
+                .withBlockColor(from.builder.wrappedBlockColorMappingFunc)
                 .withFlammability(from.builder.flammabilityMappingFunc)
                 .withAxeStripping(from.builder.blockStrippingMappingFunc)
                 .withHoeTilling(from.builder.blockTillingMappingFunc)
@@ -390,14 +390,14 @@ public class BlockPropertyWrapper { //TODO Maybe type param this for blocks
     }
 
     /**
-     * Gets the {@link BlockColor} {@code Function<Supplier<Block>, BlockColor>} from the {@link #builder()} if the builder exists, and it is defined within said builder.
+     * Gets the {@link WrappedBlockColor} {@code Function<Supplier<Block>, WrappedBlockColor>} from the {@link #builder()} if the builder exists, and it is defined within said builder.
      * May be {@code null}.
      *
-     * @return The {@code Function<Supplier<Block>, BlockColor>}, or {@code null} if the {@link #builder()} is {@code null} || it isn't defined within said builder.
+     * @return The {@code Function<Supplier<Block>, WrappedBlockColor>}, or {@code null} if the {@link #builder()} is {@code null} || it isn't defined within said builder.
      */
     @Nullable
-    public Function<Supplier<Block>, BlockColor> getBlockColorMappingFunc() {
-        return builder == null ? null : builder.blockColorMappingFunc;
+    public Function<Supplier<Block>, WrappedBlockColor> getBlockColorMappingFunc() {
+        return builder == null ? null : builder.wrappedBlockColorMappingFunc;
     }
 
     /**
@@ -531,7 +531,7 @@ public class BlockPropertyWrapper { //TODO Maybe type param this for blocks
         private Function<Supplier<Block>, List<BlockModelDefinition>> bmdMappingFunc;
         private List<Supplier<CreativeModeTab>> parentTabs = new ObjectArrayList<>();
         @Nullable
-        private Function<Supplier<Block>, BlockColor> blockColorMappingFunc;
+        private Function<Supplier<Block>, WrappedBlockColor> wrappedBlockColorMappingFunc;
         @Nullable
         private Function<Supplier<Block>, IntIntMutablePair> flammabilityMappingFunc;
         @Nullable
@@ -929,14 +929,14 @@ public class BlockPropertyWrapper { //TODO Maybe type param this for blocks
         }
 
         /**
-         * Defines a custom mapping function representing the parent {@linkplain Block Block's} optional {@link BlockColor}.
+         * Defines a custom mapping function representing the parent {@linkplain Block Block's} optional {@link WrappedBlockColor}.
          *
-         * @param blockColorMappingFunc The mapping function accepting a representation of the parent {@linkplain Block Block's} optional {@link BlockColor}.
+         * @param wrappedBlockColorMappingFunc The mapping function accepting a representation of the parent {@linkplain Block Block's} optional {@link WrappedBlockColor}.
          *
          * @return {@code this} (builder method).
          */
-        public BPWBuilder withBlockColor(Function<Supplier<Block>, BlockColor> blockColorMappingFunc) {
-            this.blockColorMappingFunc = blockColorMappingFunc;
+        public BPWBuilder withBlockColor(Function<Supplier<Block>, WrappedBlockColor> wrappedBlockColorMappingFunc) {
+            this.wrappedBlockColorMappingFunc = wrappedBlockColorMappingFunc;
             return this;
         }
 

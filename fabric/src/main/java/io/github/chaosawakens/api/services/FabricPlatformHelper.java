@@ -2,9 +2,11 @@ package io.github.chaosawakens.api.services;
 
 import io.github.chaosawakens.CAConstants;
 import io.github.chaosawakens.api.asm.ClassFinder;
+import io.github.chaosawakens.api.loader.EnvironmentSide;
 import io.github.chaosawakens.api.loader.ModLoader;
 import io.github.chaosawakens.api.platform.services.IPlatformHelper;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+import net.fabricmc.api.EnvType;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.ModContainer;
 import net.fabricmc.loader.api.metadata.ModOrigin;
@@ -125,5 +127,10 @@ public class FabricPlatformHelper implements IPlatformHelper {
         reader.accept(visitor, 0);
 
         return foundValidAnnotation[0];
+    }
+
+    @Override
+    public EnvironmentSide getEnvironmentSide() {
+        return FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT ? EnvironmentSide.CLIENT : EnvironmentSide.DEDICATED_SERVER;
     }
 }

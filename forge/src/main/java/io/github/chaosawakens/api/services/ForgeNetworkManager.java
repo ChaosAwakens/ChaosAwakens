@@ -7,8 +7,8 @@ import io.github.chaosawakens.api.network.NetworkSide;
 import io.github.chaosawakens.api.network.PacketContext;
 import io.github.chaosawakens.api.platform.CAServices;
 import io.github.chaosawakens.api.platform.services.INetworkManager;
+import io.github.chaosawakens.util.ClientUtil;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerPlayer;
@@ -94,7 +94,7 @@ public class ForgeNetworkManager implements INetworkManager {
                 LogicalSide curSide = ctx.get().getDirection().getReceptionSide().isServer() ? LogicalSide.SERVER : LogicalSide.CLIENT;
                 ServerPlayer playerSender = ctx.get().getSender();
 
-                handler.apply(msg).handlePacket(playerSender == null ? Minecraft.getInstance().player : playerSender, playerSender == null ? LogicalSidedProvider.CLIENTWORLD.get(curSide).filter(ClientLevel.class::isInstance).orElse(Minecraft.getInstance().level) : playerSender.serverLevel(), curSide.isServer() ? NetworkSide.C2S : NetworkSide.S2C);
+                handler.apply(msg).handlePacket(playerSender == null ? ClientUtil.getClientPlayer() : playerSender, playerSender == null ? LogicalSidedProvider.CLIENTWORLD.get(curSide).orElse(ClientUtil.getClientLevel()) : playerSender.serverLevel(), curSide.isServer() ? NetworkSide.C2S : NetworkSide.S2C);
             });
 
             ctx.get().setPacketHandled(true);

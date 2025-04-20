@@ -3,6 +3,7 @@ package io.github.chaosawakens.common.registry;
 import com.google.common.collect.ImmutableList;
 import io.github.chaosawakens.CAConstants;
 import io.github.chaosawakens.api.asm.annotations.RegistrarEntry;
+import io.github.chaosawakens.api.entity.ClientDataEntry;
 import io.github.chaosawakens.api.entity.EntityTypePropertyWrapper;
 import io.github.chaosawakens.api.platform.CAServices;
 import io.github.chaosawakens.common.entity.prototype.hostile.robo.RoboPounder;
@@ -16,6 +17,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Supplier;
 
@@ -32,7 +34,7 @@ public class CAEntityTypes {
             .builder()
             .withAttributes(AppleCow::createAttributes)
             .withLootTable(AppleCow::createStandardLootTable)
-            .withClientDataEntry(CAClientDataEntries.APPLE_COW)
+            .withClientDataEntry(getSideSafeClientDataEntry("apple_cow"))
             .build()
             .getParentEntityType();
     public static final Supplier<EntityType<AppleCow>> GOLDEN_APPLE_COW = EntityTypePropertyWrapper.create(
@@ -43,7 +45,7 @@ public class CAEntityTypes {
             .builder()
             .withAttributes(AppleCow::createAttributes)
             .withLootTable(AppleCow::createGoldenLootTable)
-            .withClientDataEntry(CAClientDataEntries.APPLE_COW)
+            .withClientDataEntry(getSideSafeClientDataEntry("apple_cow"))
             .build()
             .getParentEntityType();
     public static final Supplier<EntityType<AppleCow>> ENCHANTED_GOLDEN_APPLE_COW = EntityTypePropertyWrapper.create(
@@ -54,7 +56,7 @@ public class CAEntityTypes {
             .builder()
             .withAttributes(AppleCow::createAttributes)
             .withLootTable(AppleCow::createEnchantedLootTable)
-            .withClientDataEntry(CAClientDataEntries.APPLE_COW)
+            .withClientDataEntry(getSideSafeClientDataEntry("apple_cow"))
             .build()
             .getParentEntityType();
 
@@ -67,7 +69,7 @@ public class CAEntityTypes {
             .builder()
             .withAttributes(CarrotPig::createAttributes)
             .withLootTable(CarrotPig::createStandardLootTable)
-            .withClientDataEntry(CAClientDataEntries.CARROT_PIG)
+            .withClientDataEntry(getSideSafeClientDataEntry("carrot_pig"))
             .build()
             .getParentEntityType();
     public static final Supplier<EntityType<CarrotPig>> GOLDEN_CARROT_PIG = EntityTypePropertyWrapper.create(
@@ -78,7 +80,7 @@ public class CAEntityTypes {
             .builder()
             .withAttributes(CarrotPig::createAttributes)
             .withLootTable(CarrotPig::createGoldenLootTable)
-            .withClientDataEntry(CAClientDataEntries.CARROT_PIG)
+            .withClientDataEntry(getSideSafeClientDataEntry("carrot_pig"))
             .build()
             .getParentEntityType();
     public static final Supplier<EntityType<CarrotPig>> ENCHANTED_GOLDEN_CARROT_PIG = EntityTypePropertyWrapper.create(
@@ -89,7 +91,7 @@ public class CAEntityTypes {
             .builder()
             .withAttributes(CarrotPig::createAttributes)
             .withLootTable(CarrotPig::createEnchantedLootTable)
-            .withClientDataEntry(CAClientDataEntries.CARROT_PIG)
+            .withClientDataEntry(getSideSafeClientDataEntry("carrot_pig"))
             .build()
             .getParentEntityType();
 
@@ -102,7 +104,7 @@ public class CAEntityTypes {
             .builder()
             .withAttributes(LettuceChicken::createAttributes)
             .withLootTable(LettuceChicken::createLootTable)
-            .withClientDataEntry(CAClientDataEntries.LETTUCE_CHICKEN)
+            .withClientDataEntry(getSideSafeClientDataEntry("lettuce_chicken"))
             .build()
             .getParentEntityType();
 
@@ -115,7 +117,7 @@ public class CAEntityTypes {
             .builder()
             .withAttributes(StinkBug::createAttributes)
             .withLootTable(StinkBug::createLootTable)
-            .withClientDataEntry(CAClientDataEntries.STINK_BUG)
+            .withClientDataEntry(getSideSafeClientDataEntry("stink_bug"))
             .build()
             .getParentEntityType();
 
@@ -128,7 +130,7 @@ public class CAEntityTypes {
             .builder()
             .withAttributes(RoboPounder::createAttributes)
             .withLootTable(RoboPounder::createLootTable)
-            .withClientDataEntry(CAClientDataEntries.ROBO_POUNDER)
+            .withClientDataEntry(getSideSafeClientDataEntry("robo_pounder"))
             .build()
             .getParentEntityType();
 
@@ -140,6 +142,19 @@ public class CAEntityTypes {
 
     private static <E extends Entity> Supplier<EntityType<E>> registerEntityType(String id, Supplier<EntityType<E>> entityTypeSup) {
         return registerEntityType(CAConstants.prefix(id), entityTypeSup);
+    }
+
+    @Nullable
+    public static Supplier<ClientDataEntry> getSideSafeClientDataEntry(ResourceLocation mappedName) {
+        return CAServices.PLATFORM.getEnvironmentSide().isClient() ? CAClientDataEntries.getClientDataEntries().stream()
+                .filter(curEntry -> curEntry.get().entityTypeId().equals(mappedName))
+                .findFirst()
+                .get(): null;
+    }
+
+    @Nullable
+    public static Supplier<ClientDataEntry> getSideSafeClientDataEntry(String mappedName) {
+        return getSideSafeClientDataEntry(CAConstants.prefix(mappedName));
     }
 
     public static ImmutableList<Supplier<? extends EntityType<?>>> getEntityTypes() {

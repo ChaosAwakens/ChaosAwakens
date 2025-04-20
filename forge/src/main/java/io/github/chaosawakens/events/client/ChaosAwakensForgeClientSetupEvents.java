@@ -2,17 +2,19 @@ package io.github.chaosawakens.events.client;
 
 import io.github.chaosawakens.CAConstants;
 import io.github.chaosawakens.api.block.standard.BlockPropertyWrapper;
+import io.github.chaosawakens.api.client.WrappedClampedItemPropertyFunction;
 import io.github.chaosawakens.api.entity.EntityTypePropertyWrapper;
 import io.github.chaosawakens.api.item.ItemPropertyWrapper;
 import io.github.chaosawakens.common.registry.CAClientDataEntries;
+import io.github.chaosawakens.util.ClientUtil;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.minecraft.client.color.block.BlockColor;
-import net.minecraft.client.renderer.item.ClampedItemPropertyFunction;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.RegisterColorHandlersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -22,7 +24,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import java.util.Optional;
 import java.util.function.Supplier;
 
-@Mod.EventBusSubscriber(modid = CAConstants.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
+@Mod.EventBusSubscriber(modid = CAConstants.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ChaosAwakensForgeClientSetupEvents {
 
     @SubscribeEvent
@@ -30,9 +32,9 @@ public class ChaosAwakensForgeClientSetupEvents {
         // Item Model Properties
         ItemPropertyWrapper.getMappedIpws().entrySet().stream().filter(curEntry -> !curEntry.getValue().getCustomModelOverrideFunctions().isEmpty()).forEach(curEntry -> {
             Supplier<Item> itemSupEntry = curEntry.getKey();
-            Object2ObjectOpenHashMap<ResourceLocation, ClampedItemPropertyFunction> definedModelPredicateFunctions = curEntry.getValue().getCustomModelOverrideFunctions();
+            Object2ObjectOpenHashMap<ResourceLocation, WrappedClampedItemPropertyFunction> definedModelPredicateFunctions = curEntry.getValue().getCustomModelOverrideFunctions();
 
-            definedModelPredicateFunctions.forEach((curName, curFunc) -> ItemProperties.register(itemSupEntry.get(), curName, curFunc));
+            definedModelPredicateFunctions.forEach((curName, curFunc) -> ItemProperties.register(itemSupEntry.get(), curName, ClientUtil.toClampedItemPropertyFunction(curFunc)));
         });
     }
 
@@ -57,7 +59,7 @@ public class ChaosAwakensForgeClientSetupEvents {
     public static void onRegisterBlockColorHandlersEvent(RegisterColorHandlersEvent.Block event) {
         BlockPropertyWrapper.getMappedBpws().entrySet().stream().filter(curBwpEntry -> curBwpEntry.getValue().getBlockColorMappingFunc() != null).forEach(curBwpEntry -> {
             Supplier<Block> blockSupEntry = curBwpEntry.getKey();
-            BlockColor curMappedBlockColor = curBwpEntry.getValue().getBlockColorMappingFunc().apply(blockSupEntry);
+            BlockColor curMappedBlockColor = ClientUtil.toBlockColor(curBwpEntry.getValue().getBlockColorMappingFunc().apply(blockSupEntry));
 
             event.register(curMappedBlockColor, blockSupEntry.get());
         });

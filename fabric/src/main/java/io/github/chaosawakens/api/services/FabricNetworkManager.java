@@ -7,6 +7,7 @@ import io.github.chaosawakens.api.network.BasePacket;
 import io.github.chaosawakens.api.network.NetworkSide;
 import io.github.chaosawakens.api.platform.CAServices;
 import io.github.chaosawakens.api.platform.services.INetworkManager;
+import io.github.chaosawakens.util.ClientUtil;
 import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
@@ -51,7 +52,7 @@ public class FabricNetworkManager implements INetworkManager {
             ClientPlayNetworking.registerGlobalReceiver(packet.packetId(), ((targetClient, clientPacketListener, buf, fabricPacketSender) -> {
                 buf.readByte(); // Forge discriminator handling (monke see monke do)
 
-                packet.packetHandler().apply(packet.packetDecoder().apply(buf)).handlePacket(targetClient.player, targetClient.level, NetworkSide.S2C);
+                packet.packetHandler().apply(packet.packetDecoder().apply(buf)).handlePacket(ClientUtil.getClientPlayer(), ClientUtil.getClientLevel(), NetworkSide.S2C);
             }));
         }
         return packet;

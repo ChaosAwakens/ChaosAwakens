@@ -2,6 +2,7 @@ package io.github.chaosawakens.util;
 
 import com.google.common.collect.Sets;
 import io.github.chaosawakens.CAConstants;
+import io.github.chaosawakens.api.client.WrappedClampedItemPropertyFunction;
 import io.github.chaosawakens.api.datagen.block.BlockModelDefinition;
 import io.github.chaosawakens.api.datagen.block.BlockStateDefinition;
 import io.github.chaosawakens.api.datagen.item.ItemModelDefinition;
@@ -12,7 +13,6 @@ import io.github.chaosawakens.common.registry.CATextureSlots;
 import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.item.ClampedItemPropertyFunction;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.models.blockstates.*;
@@ -2827,25 +2827,6 @@ public final class ModelUtil {
         return cubeAll(leavesTexture)
                 .withBlockRenderType(new ResourceLocation(RenderType.cutoutMipped().name));
     }
-    
-    public static Map<ResourceLocation, ClampedItemPropertyFunction> critterCagePredicates() {
-        final ResourceLocation defaultRL = CAConstants.prefix("default");
-        String[][] names = new String[][] {{"apple_cow", "bee", "bird", "carrot_pig", "cat", "cave_spider", "cow", "creeper", "donkey", "drowned", "enderman", "fox", "horse", "husk", "llama", "mooshroom", "ostrich", "panda", "pig", "piraporu", "polar_bear", "rabbit", "sheep", "skeleton", "slime", "spider", "stray", "wasp", "wolf", "zombie_villager", "zombie"},
-                {"Apple Cow", "Bee", "Bird", "Carrot Pig", "Cat", "Cave Spider", "Cow", "Creeper", "Donkey", "Drowned", "Enderman", "Fox", "Horse", "Husk", "Llama", "Mooshroom", "Ostrich", "Panda", "Pig", "Piraporu", "Polar Bear", "Rabbit", "Sheep", "Skeleton", "Slime", "Spider", "Stray", "Wasp", "Wolf", "Zombie Villager", "Zombie"}};
-        Map<ResourceLocation, ClampedItemPropertyFunction> functions = new Object2ObjectLinkedOpenHashMap<>();
-        functions.put(defaultRL, (stack, world, living, i) -> {
-            if (stack.getTag() == null) return 0.0F;
-            return stack.getTag().contains("storedEntity") ? 1.0F : 0.0F;
-        });
-        for (int index = 0; index < names[0].length; index++) {
-            final String entityName = names[1][index];
-            functions.put(CAConstants.prefix(names[0][index]), (stack, world, living, i) -> {
-                if (stack.getTag() == null) return 0.0F;
-                return stack.getTag().contains("storedEntity") && stack.getTag().getString("entityName").equals(entityName) ? 1.0F : 0.0F;
-            });
-        }
-        return functions;
-    }
 
     public static ItemModelDefinition generatedBlock(ResourceLocation itemTexture) {
         return ItemModelDefinition.of(ModelTemplates.FLAT_ITEM)
@@ -2855,27 +2836,6 @@ public final class ModelUtil {
     public static ItemModelDefinition generated(ResourceLocation itemTexture) {
         return ItemModelDefinition.of(ModelTemplates.FLAT_ITEM)
                 .withTextureMapping(TextureMapping.layer0(RegistryUtil.pickItemPrefix(itemTexture)));
-    }
-
-    public static ObjectArrayList<ItemModelDefinition> critterCage(ResourceLocation itemTexture) {
-        ObjectArrayList<ItemModelDefinition> models = new ObjectArrayList<>();
-
-        String[] names = new String[] {"default", "apple_cow", "bee", "bird", "carrot_pig", "cat", "cave_spider", "cow", "creeper", "donkey", "drowned", "enderman", "fox", "horse", "husk", "llama", "mooshroom", "ostrich", "panda", "pig", "piraporu", "polar_bear", "rabbit", "sheep", "skeleton", "slime", "spider", "stray", "wasp", "wolf", "zombie_villager", "zombie"};
-
-        Map<Map<ResourceLocation, Float>, ResourceLocation> overrides = new Object2ObjectLinkedOpenHashMap<>();
-        for (String name : names) {
-            ResourceLocation loc = RegistryUtil.getTexture(CAConstants.prefix(name));
-            models.add(ItemModelDefinition.of(ModelTemplates.FLAT_ITEM)
-                    .withCustomModelName(name)
-                    .withTextureMapping(TextureMapping.layer0(RegistryUtil.pickItemPrefix(loc))));
-
-            overrides.put(Map.of(CAConstants.prefix(name), 1.0F), RegistryUtil.pickItemPrefix(CAConstants.prefix(name)));
-        }
-
-        models.add(ItemModelDefinition.of(ModelTemplates.FLAT_ITEM)
-                .withTextureMapping(TextureMapping.layer0(RegistryUtil.pickItemPrefix(itemTexture)))
-                .withItemModelTextureOverrides(overrides));
-        return models;
     }
 
     public static ItemModelDefinition handheld(ResourceLocation itemTexture) {
@@ -3034,5 +2994,47 @@ public final class ModelUtil {
 
         return BlockStateDefinition.of(targetBlock)
                 .withBlockStateSupplier(stateGen);
+    }
+
+    public static Map<ResourceLocation, WrappedClampedItemPropertyFunction> critterCagePredicates() {
+        final ResourceLocation defaultRL = CAConstants.prefix("default");
+        String[][] names = new String[][] {{"apple_cow", "bee", "bird", "carrot_pig", "cat", "cave_spider", "cow", "creeper", "donkey", "drowned", "enderman", "fox", "horse", "husk", "llama", "mooshroom", "ostrich", "panda", "pig", "piraporu", "polar_bear", "rabbit", "sheep", "skeleton", "slime", "spider", "stray", "wasp", "wolf", "zombie_villager", "zombie"},
+                {"Apple Cow", "Bee", "Bird", "Carrot Pig", "Cat", "Cave Spider", "Cow", "Creeper", "Donkey", "Drowned", "Enderman", "Fox", "Horse", "Husk", "Llama", "Mooshroom", "Ostrich", "Panda", "Pig", "Piraporu", "Polar Bear", "Rabbit", "Sheep", "Skeleton", "Slime", "Spider", "Stray", "Wasp", "Wolf", "Zombie Villager", "Zombie"}};
+        Map<ResourceLocation, WrappedClampedItemPropertyFunction> functions = new Object2ObjectLinkedOpenHashMap<>();
+
+        functions.put(defaultRL, (stack, world, living, i) -> {
+            if (stack.getTag() == null) return 0.0F;
+            return stack.getTag().contains("storedEntity") ? 1.0F : 0.0F;
+        });
+
+        for (int index = 0; index < names[0].length; index++) {
+            final String entityName = names[1][index];
+            functions.put(CAConstants.prefix(names[0][index]), (stack, world, living, i) -> {
+                if (stack.getTag() == null) return 0.0F;
+                return stack.getTag().contains("storedEntity") && stack.getTag().getString("entityName").equals(entityName) ? 1.0F : 0.0F;
+            });
+        }
+        return functions;
+    }
+
+    public static ObjectArrayList<ItemModelDefinition> critterCage(ResourceLocation itemTexture) {
+        ObjectArrayList<ItemModelDefinition> models = new ObjectArrayList<>();
+
+        String[] names = new String[] {"default", "apple_cow", "bee", "bird", "carrot_pig", "cat", "cave_spider", "cow", "creeper", "donkey", "drowned", "enderman", "fox", "horse", "husk", "llama", "mooshroom", "ostrich", "panda", "pig", "piraporu", "polar_bear", "rabbit", "sheep", "skeleton", "slime", "spider", "stray", "wasp", "wolf", "zombie_villager", "zombie"};
+
+        Map<Map<ResourceLocation, Float>, ResourceLocation> overrides = new Object2ObjectLinkedOpenHashMap<>();
+        for (String name : names) {
+            ResourceLocation loc = RegistryUtil.getTexture(CAConstants.prefix(name));
+            models.add(ItemModelDefinition.of(ModelTemplates.FLAT_ITEM)
+                    .withCustomModelName(name)
+                    .withTextureMapping(TextureMapping.layer0(RegistryUtil.pickItemPrefix(loc))));
+
+            overrides.put(Map.of(CAConstants.prefix(name), 1.0F), RegistryUtil.pickItemPrefix(CAConstants.prefix(name)));
+        }
+
+        models.add(ItemModelDefinition.of(ModelTemplates.FLAT_ITEM)
+                .withTextureMapping(TextureMapping.layer0(RegistryUtil.pickItemPrefix(itemTexture)))
+                .withItemModelTextureOverrides(overrides));
+        return models;
     }
 }
