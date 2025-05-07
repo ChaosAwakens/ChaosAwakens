@@ -1,7 +1,7 @@
 {
   "aquifers_enabled": true,
   "default_block": {
-    "Name": "minecraft:stone"
+    "Name": "chaosawakens:dredgestone"
   },
   "default_fluid": {
     "Name": "minecraft:water",

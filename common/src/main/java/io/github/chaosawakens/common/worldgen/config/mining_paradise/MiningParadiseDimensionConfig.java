@@ -52,7 +52,7 @@ public class MiningParadiseDimensionConfig implements DimensionLevelStemConfig {
     }
 
     public static Supplier<NoiseGeneratorSettings> createMiningParadiseNoiseGenSettings(BootstapContext<NoiseGeneratorSettings> regCtx) {
-        return () -> new NoiseGeneratorSettings(BASE_NOISE_SETTINGS, Blocks.STONE.defaultBlockState(), Blocks.WATER.defaultBlockState(), createMiningParadiseNoiseRouter(regCtx), createMiningParadiseSurfaceRules(), createMiningParadiseBiomes(regCtx), 121, false, true, true, false);
+        return () -> new NoiseGeneratorSettings(BASE_NOISE_SETTINGS, CABlocks.DREDGESTONE.get().defaultBlockState(), Blocks.WATER.defaultBlockState(), createMiningParadiseNoiseRouter(regCtx), createMiningParadiseSurfaceRules(), createMiningParadiseBiomes(regCtx), 121, false, true, true, false);
     }
 
     protected static SurfaceRules.RuleSource createMiningParadiseSurfaceRules() {

@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:mul",
+  "argument1": -2.75,
+  "argument2": {
+    "type": "minecraft:add",
+    "argument1": -0.4166666666666667,
+    "argument2": {
+      "type": "minecraft:abs",
+      "argument": {
+        "type": "minecraft:add",
+        "argument1": -0.5,
+        "argument2": {
+          "type": "minecraft:abs",
+          "argument": "chaosawakens:vanilla/land/ridges"
+        }
+      }
+    }
+  }
+}
