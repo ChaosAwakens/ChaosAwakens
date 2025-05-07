@@ -23,10 +23,10 @@ public final class WorldGenUtil {
         CubicSpline<C, I> erosionOffsetSplineFromExtremeLand = TerrainProvider.buildErosionOffsetSpline(erosionSplineCoord, foldedRidgesSplineCoord, -0.18F, 0.26F, 1.4F, 1.5F, 0.3F, 0.011F, true, true, noTransform);
 
         return CubicSpline.builder(continentSplineCoord, noTransform) // Depth
-                .addPoint(-1.009F, 0.217F)
-                .addPoint(-0.888F, -0.254F)
-                .addPoint(-0.338F, -0.256F, 0.01F)
-                .addPoint(-0.262F, -0.015F, -0.213F)
+                .addPoint(-1.009F, -0.217F)
+                .addPoint(-0.888F, -0.154F)
+                .addPoint(-0.338F, -0.0F, 0.01F)
+                .addPoint(-0.262F, 0.015F, -0.213F)
                 .addPoint(-0.054F, -0.005F, -0.519F)
                 .addPoint(0.0F, erosionOffsetSplineFromDeepWater)
                 .addPoint(0.16F, erosionOffsetSplineFromShallowWater)

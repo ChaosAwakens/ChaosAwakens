@@ -33,7 +33,7 @@
             "type": "minecraft:blend_density",
             "argument": {
               "type": "minecraft:add",
-              "argument1": -0.1271875,
+              "argument1": 0.578125,
               "argument2": {
                 "type": "minecraft:mul",
                 "argument1": {
@@ -45,7 +45,7 @@
                 },
                 "argument2": {
                   "type": "minecraft:add",
-                  "argument1": 0.1271875,
+                  "argument1": -0.578125,
                   "argument2": {
                     "type": "minecraft:add",
                     "argument1": -0.538425,
@@ -54,9 +54,9 @@
                       "argument1": {
                         "type": "minecraft:y_clamped_gradient",
                         "from_value": 1.0,
-                        "from_y": 73,
+                        "from_y": 29,
                         "to_value": 0.0,
-                        "to_y": 224
+                        "to_y": 480
                       },
                       "argument2": {
                         "type": "minecraft:add",
@@ -65,7 +65,7 @@
                           "type": "minecraft:clamp",
                           "input": {
                             "type": "minecraft:add",
-                            "argument1": -0.603125,
+                            "argument1": 10.703125,
                             "argument2": {
                               "type": "minecraft:mul",
                               "argument1": 4.0,
@@ -99,7 +99,7 @@
     "fluid_level_spread": 0.0,
     "initial_density_without_jaggedness": {
       "type": "minecraft:add",
-      "argument1": -0.1271875,
+      "argument1": 0.578125,
       "argument2": {
         "type": "minecraft:mul",
         "argument1": {
@@ -111,7 +111,7 @@
         },
         "argument2": {
           "type": "minecraft:add",
-          "argument1": 0.1271875,
+          "argument1": -0.578125,
           "argument2": {
             "type": "minecraft:add",
             "argument1": -0.538425,
@@ -120,9 +120,9 @@
               "argument1": {
                 "type": "minecraft:y_clamped_gradient",
                 "from_value": 1.0,
-                "from_y": 73,
+                "from_y": 29,
                 "to_value": 0.0,
-                "to_y": 224
+                "to_y": 480
               },
               "argument2": {
                 "type": "minecraft:add",
@@ -131,7 +131,7 @@
                   "type": "minecraft:clamp",
                   "input": {
                     "type": "minecraft:add",
-                    "argument1": -0.603125,
+                    "argument1": 10.703125,
                     "argument2": {
                       "type": "minecraft:mul",
                       "argument1": 4.0,
