@@ -2,10 +2,10 @@
   "type": "minecraft:add",
   "argument1": {
     "type": "minecraft:y_clamped_gradient",
-    "from_value": 25.0,
-    "from_y": -256,
-    "to_value": -25.0,
-    "to_y": 480
+    "from_value": 4.0,
+    "from_y": -436,
+    "to_value": -6.0,
+    "to_y": 550
   },
   "argument2": "chaosawakens:mining_paradise/land/offset"
 }

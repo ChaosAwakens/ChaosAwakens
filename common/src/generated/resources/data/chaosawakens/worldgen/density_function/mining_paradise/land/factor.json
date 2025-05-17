@@ -21,7 +21,7 @@
                 {
                   "derivative": 0.0,
                   "location": -0.19,
-                  "value": 4.95
+                  "value": 4.75
                 },
                 {
                   "derivative": 0.0,
@@ -423,7 +423,7 @@
                 },
                 {
                   "derivative": 0.0,
-                  "location": 0.03,
+                  "location": 0.1,
                   "value": {
                     "coordinate": "chaosawakens:vanilla/land/continents",
                     "points": [
@@ -622,7 +622,7 @@
                 },
                 {
                   "derivative": 0.0,
-                  "location": 0.06,
+                  "location": 0.19,
                   "value": {
                     "coordinate": "chaosawakens:vanilla/land/continents",
                     "points": [
