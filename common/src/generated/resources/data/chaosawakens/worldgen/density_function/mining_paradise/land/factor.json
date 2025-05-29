@@ -4,7 +4,7 @@
     "type": "minecraft:cache_2d",
     "argument": {
       "type": "minecraft:add",
-      "argument1": 25.0,
+      "argument1": 1.0,
       "argument2": {
         "type": "minecraft:mul",
         "argument1": {
@@ -12,7 +12,7 @@
         },
         "argument2": {
           "type": "minecraft:add",
-          "argument1": -25.0,
+          "argument1": -1.0,
           "argument2": {
             "type": "minecraft:spline",
             "spline": {

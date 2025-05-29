@@ -17,8 +17,8 @@ public class CANoiseParameters {
     private static final ObjectArrayList<Supplier<ResourceKey<NormalNoise.NoiseParameters>>> NOISE_PARAMETERS = new ObjectArrayList<>();
 
     // Mining Paradise
-    public static final Supplier<ResourceKey<NormalNoise.NoiseParameters>> MINING_PARADISE_CONTINENTALNESS = registerNoiseParameter("mining_paradise/continentalness", () -> new NormalNoise.NoiseParameters(-10, 2, 9, 8, 7, 9, 4, 3, 2, 2, 1, 1, 9, 1));
-    public static final Supplier<ResourceKey<NormalNoise.NoiseParameters>> MINING_PARADISE_EROSION = registerNoiseParameter("mining_paradise/erosion", () -> new NormalNoise.NoiseParameters(-11, 3.75D, 0.875D, 0.0D, 2.0D, 0.0D, 1.0D, 1.5D));
+    public static final Supplier<ResourceKey<NormalNoise.NoiseParameters>> MINING_PARADISE_CONTINENTALNESS = registerNoiseParameter("mining_paradise/continentalness", () -> new NormalNoise.NoiseParameters(-10, 1.0D, 4.5D, 4.0D, 3.5D, 4.5D, 2.0D, 1.5D, 1.0D, 1.0D, .5D, 0.5D, 4.5D, 0.5D));
+    public static final Supplier<ResourceKey<NormalNoise.NoiseParameters>> MINING_PARADISE_EROSION = registerNoiseParameter("mining_paradise/erosion", () -> new NormalNoise.NoiseParameters(-11, 3.0D, 0.5D, 0.0D, 1.5D, 0.0D, 0.75D, 1.0D));
 
     private static Supplier<ResourceKey<NormalNoise.NoiseParameters>> registerNoiseParameter(ResourceLocation id, Supplier<NormalNoise.NoiseParameters> actualNoiseParamSup) {
         Supplier<ResourceKey<NormalNoise.NoiseParameters>> noiseParamSup = CAServices.REGISTRAR.registerDatapackObject(id, b -> actualNoiseParamSup, Registries.NOISE);
