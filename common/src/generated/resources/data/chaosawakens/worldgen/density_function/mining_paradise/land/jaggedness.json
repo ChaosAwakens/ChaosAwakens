@@ -20,12 +20,27 @@
               "points": [
                 {
                   "derivative": 0.0,
+                  "location": -0.2,
+                  "value": 0.0
+                },
+                {
+                  "derivative": 0.0,
                   "location": -0.11,
                   "value": 0.0
                 },
                 {
                   "derivative": 0.0,
-                  "location": 0.2,
+                  "location": -0.05,
+                  "value": 0.2
+                },
+                {
+                  "derivative": 0.0,
+                  "location": 0.0,
+                  "value": 0.8
+                },
+                {
+                  "derivative": 0.0,
+                  "location": 0.1,
                   "value": {
                     "coordinate": "chaosawakens:vanilla/land/erosion",
                     "points": [
@@ -43,7 +58,21 @@
                             {
                               "derivative": 0.0,
                               "location": 0.44999996,
-                              "value": 0.0
+                              "value": {
+                                "coordinate": "chaosawakens:vanilla/land/ridges",
+                                "points": [
+                                  {
+                                    "derivative": 0.0,
+                                    "location": -0.01,
+                                    "value": 0.126
+                                  },
+                                  {
+                                    "derivative": 0.0,
+                                    "location": 0.01,
+                                    "value": 0.060000002
+                                  }
+                                ]
+                              }
                             },
                             {
                               "derivative": 0.0,
@@ -54,12 +83,12 @@
                                   {
                                     "derivative": 0.0,
                                     "location": -0.01,
-                                    "value": 0.63
+                                    "value": 0.75600004
                                   },
                                   {
                                     "derivative": 0.0,
                                     "location": 0.01,
-                                    "value": 0.3
+                                    "value": 0.36
                                   }
                                 ]
                               }
@@ -92,12 +121,12 @@
                                   {
                                     "derivative": 0.0,
                                     "location": -0.01,
-                                    "value": 0.315
+                                    "value": 0.44099998
                                   },
                                   {
                                     "derivative": 0.0,
                                     "location": 0.01,
-                                    "value": 0.15
+                                    "value": 0.21000001
                                   }
                                 ]
                               }
@@ -130,12 +159,12 @@
                                   {
                                     "derivative": 0.0,
                                     "location": -0.01,
-                                    "value": 0.315
+                                    "value": 0.44099998
                                   },
                                   {
                                     "derivative": 0.0,
                                     "location": 0.01,
-                                    "value": 0.15
+                                    "value": 0.21000001
                                   }
                                 ]
                               }
@@ -150,6 +179,11 @@
                       }
                     ]
                   }
+                },
+                {
+                  "derivative": 0.0,
+                  "location": 0.15,
+                  "value": 1.5
                 },
                 {
                   "derivative": 0.0,
@@ -177,12 +211,12 @@
                                   {
                                     "derivative": 0.0,
                                     "location": -0.01,
-                                    "value": 0.63
+                                    "value": 0.504
                                   },
                                   {
                                     "derivative": 0.0,
                                     "location": 0.01,
-                                    "value": 0.3
+                                    "value": 0.24000001
                                   }
                                 ]
                               }
@@ -196,12 +230,12 @@
                                   {
                                     "derivative": 0.0,
                                     "location": -0.01,
-                                    "value": 0.63
+                                    "value": 0.945
                                   },
                                   {
                                     "derivative": 0.0,
                                     "location": 0.01,
-                                    "value": 0.3
+                                    "value": 0.45000002
                                   }
                                 ]
                               }
@@ -223,7 +257,21 @@
                             {
                               "derivative": 0.0,
                               "location": 0.44999996,
-                              "value": 0.0
+                              "value": {
+                                "coordinate": "chaosawakens:vanilla/land/ridges",
+                                "points": [
+                                  {
+                                    "derivative": 0.0,
+                                    "location": -0.01,
+                                    "value": 0.126
+                                  },
+                                  {
+                                    "derivative": 0.0,
+                                    "location": 0.01,
+                                    "value": 0.060000002
+                                  }
+                                ]
+                              }
                             },
                             {
                               "derivative": 0.0,
@@ -234,12 +282,12 @@
                                   {
                                     "derivative": 0.0,
                                     "location": -0.01,
-                                    "value": 0.63
+                                    "value": 0.75600004
                                   },
                                   {
                                     "derivative": 0.0,
                                     "location": 0.01,
-                                    "value": 0.3
+                                    "value": 0.36
                                   }
                                 ]
                               }
@@ -261,7 +309,21 @@
                             {
                               "derivative": 0.0,
                               "location": 0.44999996,
-                              "value": 0.0
+                              "value": {
+                                "coordinate": "chaosawakens:vanilla/land/ridges",
+                                "points": [
+                                  {
+                                    "derivative": 0.0,
+                                    "location": -0.01,
+                                    "value": 0.126
+                                  },
+                                  {
+                                    "derivative": 0.0,
+                                    "location": 0.01,
+                                    "value": 0.060000002
+                                  }
+                                ]
+                              }
                             },
                             {
                               "derivative": 0.0,
@@ -272,12 +334,12 @@
                                   {
                                     "derivative": 0.0,
                                     "location": -0.01,
-                                    "value": 0.63
+                                    "value": 0.75600004
                                   },
                                   {
                                     "derivative": 0.0,
                                     "location": 0.01,
-                                    "value": 0.3
+                                    "value": 0.36
                                   }
                                 ]
                               }
@@ -292,6 +354,11 @@
                       }
                     ]
                   }
+                },
+                {
+                  "derivative": 0.0,
+                  "location": 0.81,
+                  "value": 1.8
                 }
               ]
             }
