@@ -58,6 +58,7 @@ public class DensePlainsBiomeConfig implements BiomeConfig {
         // Vegetation
         biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, placedFeatureGetter.getOrThrow(CAFeatures.CAPlacedFeatures.DENSE_GRASS_PATCH.get()));
 
+
         return biomeBuilder.build();
     }
 

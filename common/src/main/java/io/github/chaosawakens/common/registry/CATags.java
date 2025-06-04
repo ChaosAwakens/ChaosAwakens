@@ -25,7 +25,7 @@ public class CATags {
         public static final Supplier<TagKey<Block>> BASE_STONE_VILLAGE = createWrappedBlockTag("base_stone_village").getParentTag();
 
         public static final Supplier<TagKey<Block>> MINERS_DREAM_MINEABLE = createWrappedBlockTag("miners_dream_mineable")
-                .withTagEntries(ObjectArrayList.of(BASE_STONE_CRYSTAL, BASE_STONE_MINING, BASE_STONE_VILLAGE, () -> BlockTags.OVERWORLD_CARVER_REPLACEABLES, () -> BlockTags.NETHER_CARVER_REPLACEABLES, () -> BlockTags.DIRT, () -> BlockTags.SAND, () -> BlockTags.ICE, () -> BlockTags.CAVE_VINES, () -> BlockTags.LEAVES, () -> BlockTags.CROPS, () -> BlockTags.FLOWERS))
+                .withTagEntries(ObjectArrayList.of(BASE_STONE_CRYSTAL, BASE_STONE_MINING, BASE_STONE_VILLAGE, () -> BlockTags.BASE_STONE_OVERWORLD, () -> BlockTags.BASE_STONE_NETHER, () -> BlockTags.DIRT, () -> BlockTags.SAND, () -> BlockTags.ICE, () -> BlockTags.CAVE_VINES, () -> BlockTags.LEAVES, () -> BlockTags.CROPS, () -> BlockTags.FLOWERS))
                 .withEntries(ObjectArrayList.of(() -> Blocks.GRAVEL, () -> Blocks.SUSPICIOUS_GRAVEL, () -> Blocks.CLAY, () -> Blocks.SANDSTONE, () -> Blocks.SMALL_DRIPLEAF, () -> Blocks.SOUL_SAND, () -> Blocks.MAGMA_BLOCK, () -> Blocks.SOUL_SOIL, () -> Blocks.BIG_DRIPLEAF, () -> Blocks.DRIPSTONE_BLOCK, () -> Blocks.POINTED_DRIPSTONE))
                 .getParentTag();
         public static final Supplier<TagKey<Block>> MINING_WOOD = createWrappedBlockTag("wood/mining_wood")

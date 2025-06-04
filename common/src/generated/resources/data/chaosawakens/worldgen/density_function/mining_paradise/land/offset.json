@@ -15,6 +15,11 @@
               "coordinate": "chaosawakens:vanilla/land/continents",
               "points": [
                 {
+                  "derivative": 0.0,
+                  "location": -1.44,
+                  "value": -0.517
+                },
+                {
                   "derivative": 0.2,
                   "location": -1.009,
                   "value": -0.217

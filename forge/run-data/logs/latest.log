@@ -1,48 +1,51 @@
-[29May2025 14:37:23.495] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher running: args [--launchTarget, forgedatauserdev, --assetIndex, 5, --assetsDir, C:\Users\rdand\.gradle\caches\forge_gradle\assets, --gameDir, ., --fml.forgeVersion, 47.3.27, --fml.mcVersion, 1.20.1, --fml.forgeGroup, net.minecraftforge, --fml.mcpVersion, 20230612.114412, --mod, chaosawakens, --all, --output, C:\GitHub\New folder\ChaosAwakens\common\src\generated\resources, --existing, C:\GitHub\New folder\ChaosAwakens\common\src\main\resources, --mixin.config, chaosawakens.mixins.json, --mixin.config, chaosawakens.forge.mixins.json]
-[29May2025 14:37:23.505] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher 10.0.9+10.0.9+main.dcd20f30 starting: java version 17.0.13 by Eclipse Adoptium; OS Windows 11 arch amd64 version 10.0
-[29May2025 14:37:23.737] [main/INFO] [net.minecraftforge.fml.loading.ImmediateWindowHandler/]: ImmediateWindowProvider not loading because launch target is forgedatauserdev
-[29May2025 14:37:23.853] [main/INFO] [mixin/]: SpongePowered MIXIN Subsystem Version=0.8.5 Source=union:/C:/Users/rdand/.gradle/caches/modules-2/files-2.1/org.spongepowered/mixin/0.8.5/9d1c0c3a304ae6697ecd477218fa61b850bf57fc/mixin-0.8.5.jar%23132!/ Service=ModLauncher Env=CLIENT
-[29May2025 14:37:24.501] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file C:\Users\rdand\.gradle\caches\modules-2\files-2.1\net.minecraftforge\javafmllanguage\1.20.1-47.3.27\8001575a8be1ded39093805ca80ef976b5149b3f\javafmllanguage-1.20.1-47.3.27.jar is missing mods.toml file
-[29May2025 14:37:24.505] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file C:\Users\rdand\.gradle\caches\modules-2\files-2.1\net.minecraftforge\lowcodelanguage\1.20.1-47.3.27\17ff592420fbc1f933420f0a473783943ac176ce\lowcodelanguage-1.20.1-47.3.27.jar is missing mods.toml file
-[29May2025 14:37:24.511] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file C:\Users\rdand\.gradle\caches\modules-2\files-2.1\net.minecraftforge\mclanguage\1.20.1-47.3.27\48269e2cdbd3c44641fb99a6b05f205b63efa37b\mclanguage-1.20.1-47.3.27.jar is missing mods.toml file
-[29May2025 14:37:24.517] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file C:\Users\rdand\.gradle\caches\modules-2\files-2.1\net.minecraftforge\fmlcore\1.20.1-47.3.27\8e7f3f29ab42d8116b9ee3f9f06fc8e8fa0fd12f\fmlcore-1.20.1-47.3.27.jar is missing mods.toml file
-[29May2025 14:37:24.840] [main/INFO] [net.minecraftforge.fml.loading.moddiscovery.JarInJarDependencyLocator/]: No dependencies to load found. Skipping!
-[29May2025 14:37:28.748] [main/INFO] [mixin/]: Compatibility level set to JAVA_17
-[29May2025 14:37:28.772] [main/INFO] [cpw.mods.modlauncher.LaunchServiceHandler/MODLAUNCHER]: Launching target 'forgedatauserdev' with arguments [--gameDir, ., --assetsDir, C:\Users\rdand\.gradle\caches\forge_gradle\assets, --assetIndex, 5, --mod, chaosawakens, --all, --output, C:\GitHub\New folder\ChaosAwakens\common\src\generated\resources, --existing, C:\GitHub\New folder\ChaosAwakens\common\src\main\resources]
-[29May2025 14:37:28.945] [main/WARN] [mixin/]: Reference map 'chaosawakens.refmap.json' for chaosawakens.mixins.json could not be read. If this is a development environment you can ignore this message
-[29May2025 14:37:28.948] [main/WARN] [mixin/]: Reference map 'chaosawakens.refmap.json' for chaosawakens.forge.mixins.json could not be read. If this is a development environment you can ignore this message
-[29May2025 14:37:29.271] [main/INFO] [mixin/]: Remapping refMap configured.refmap.json using C:\GitHub\New folder\ChaosAwakens\forge/build/createSrgToMcp/output.srg
-[29May2025 14:37:29.272] [main/INFO] [mixin/]: Remapping refMap jade.refmap.json using C:\GitHub\New folder\ChaosAwakens\forge/build/createSrgToMcp/output.srg
-[29May2025 14:37:29.275] [main/INFO] [mixin/]: Remapping refMap gamemenumodoption.refmap.json using C:\GitHub\New folder\ChaosAwakens\forge/build/createSrgToMcp/output.srg
-[29May2025 14:37:29.277] [main/INFO] [mixin/]: Remapping refMap jeed-common-refmap.json using C:\GitHub\New folder\ChaosAwakens\forge/build/createSrgToMcp/output.srg
-[29May2025 14:37:29.278] [main/WARN] [mixin/]: Reference map 'jeed-forge-refmap.json' for jeed.mixins.json could not be read. If this is a development environment you can ignore this message
-[29May2025 14:37:30.174] [main/INFO] [net.minecraftforge.data.loading.DatagenModLoader/]: Initializing Data Gatherer for mods [chaosawakens]
-[29May2025 14:37:37.654] [modloading-worker-0/INFO] [net.minecraftforge.common.ForgeMod/FORGEMOD]: Forge mod loading, version 47.3.27, for MC 1.20.1 with MCP 20230612.114412
-[29May2025 14:37:37.657] [modloading-worker-0/INFO] [net.minecraftforge.common.MinecraftForge/FORGE]: MinecraftForge v47.3.27 Initialized
-[29May2025 14:37:37.799] [modloading-worker-0/WARN] [mixin/]: @Inject(@At("INVOKE_ASSIGN")) Shift.BY=3 on jeed-common.mixins.json:EffectRenderingInventoryScreenMixin::handler$zzp000$captureEffect exceeds the maximum allowed value: 0. Increase the value of maxShiftBy to suppress this warning.
-[29May2025 14:37:38.282] [modloading-worker-0/INFO] [mezz.jei.library.load.PluginCaller/]: Sending ConfigManager...
-[29May2025 14:37:38.296] [modloading-worker-0/INFO] [mezz.jei.library.load.PluginCaller/]: Sending ConfigManager took 8.333 ms
-[29May2025 14:37:39.065] [main/WARN] [net.minecraft.server.packs.VanillaPackResourcesBuilder/]: Assets URL 'union:/C:/GitHub/New%20folder/ChaosAwakens/forge/build/fg_cache/net/minecraftforge/forge/1.20.1-47.3.27_mapped_parchment_2023.09.03-1.20.1/forge-1.20.1-47.3.27_mapped_parchment_2023.09.03-1.20.1.jar%23191!/assets/.mcassetsroot' uses unexpected schema
-[29May2025 14:37:39.065] [main/WARN] [net.minecraft.server.packs.VanillaPackResourcesBuilder/]: Assets URL 'union:/C:/GitHub/New%20folder/ChaosAwakens/forge/build/fg_cache/net/minecraftforge/forge/1.20.1-47.3.27_mapped_parchment_2023.09.03-1.20.1/forge-1.20.1-47.3.27_mapped_parchment_2023.09.03-1.20.1.jar%23191!/data/.mcassetsroot' uses unexpected schema
-[29May2025 14:37:39.445] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Chaos Awakens: Language Provider (en_us)
-[29May2025 14:37:39.619] [main/INFO] [net.minecraft.data.DataGenerator/]: Chaos Awakens: Language Provider (en_us) finished after 173 ms
-[29May2025 14:37:39.620] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Chaos Awakens: Item Models
-[29May2025 14:37:40.377] [main/INFO] [net.minecraft.data.DataGenerator/]: Chaos Awakens: Item Models finished after 757 ms
-[29May2025 14:37:40.378] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Chaos Awakens: Block & Block Item Models
-[29May2025 14:37:40.890] [main/INFO] [net.minecraft.data.DataGenerator/]: Chaos Awakens: Block & Block Item Models finished after 511 ms
-[29May2025 14:37:40.890] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Chaos Awakens: Block States
-[29May2025 14:37:40.967] [main/INFO] [net.minecraft.data.DataGenerator/]: Chaos Awakens: Block States finished after 77 ms
-[29May2025 14:37:40.968] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Loot Tables
-[29May2025 14:37:41.215] [main/INFO] [net.minecraft.data.DataGenerator/]: Loot Tables finished after 247 ms
-[29May2025 14:37:41.216] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Chaos Awakens: Block Tags
-[29May2025 14:37:41.289] [main/INFO] [net.minecraft.data.DataGenerator/]: Chaos Awakens: Block Tags finished after 74 ms
-[29May2025 14:37:41.290] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Chaos Awakens: Item Tags
-[29May2025 14:37:41.318] [main/INFO] [net.minecraft.data.DataGenerator/]: Chaos Awakens: Item Tags finished after 27 ms
-[29May2025 14:37:41.318] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Chaos Awakens: EntityType Tags
-[29May2025 14:37:41.319] [main/INFO] [net.minecraft.data.DataGenerator/]: Chaos Awakens: EntityType Tags finished after 1 ms
-[29May2025 14:37:41.320] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Recipes
-[29May2025 14:37:41.413] [main/INFO] [net.minecraft.data.DataGenerator/]: Recipes finished after 93 ms
-[29May2025 14:37:41.414] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Chaos Awakens Datapack Registries
-[29May2025 14:37:41.467] [main/INFO] [net.minecraft.data.DataGenerator/]: Chaos Awakens Datapack Registries finished after 53 ms
-[29May2025 14:37:41.467] [main/INFO] [net.minecraft.data.DataGenerator/]: All providers took: 2023 ms
-[29May2025 14:37:41.658] [main/INFO] [net.minecraft.data.HashCache/]: Caching: total files: 2145, old count: 2145, new count: 2146, removed stale: 0, written: 2
+[04Jun2025 18:58:48.725] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher running: args [--launchTarget, forgedatauserdev, --assetIndex, 5, --assetsDir, E:\gradle\caches\forge_gradle\assets, --gameDir, ., --fml.forgeVersion, 47.3.27, --fml.mcVersion, 1.20.1, --fml.forgeGroup, net.minecraftforge, --fml.mcpVersion, 20230612.114412, --mod, chaosawakens, --all, --output, E:\Desktop2\Mods\Multiloader\1201\ChaosAwakens\common\src\generated\resources, --existing, E:\Desktop2\Mods\Multiloader\1201\ChaosAwakens\common\src\main\resources, --mixin.config, chaosawakens.mixins.json, --mixin.config, chaosawakens.forge.mixins.json]
+[04Jun2025 18:58:48.736] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher 10.0.9+10.0.9+main.dcd20f30 starting: java version 17.0.12 by JetBrains s.r.o.; OS Windows 10 arch amd64 version 10.0
+[04Jun2025 18:58:48.938] [main/INFO] [net.minecraftforge.fml.loading.ImmediateWindowHandler/]: ImmediateWindowProvider not loading because launch target is forgedatauserdev
+[04Jun2025 18:58:49.012] [main/INFO] [mixin/]: SpongePowered MIXIN Subsystem Version=0.8.5 Source=union:/E:/gradle/caches/modules-2/files-2.1/org.spongepowered/mixin/0.8.5/9d1c0c3a304ae6697ecd477218fa61b850bf57fc/mixin-0.8.5.jar%23132!/ Service=ModLauncher Env=CLIENT
+[04Jun2025 18:58:49.646] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file E:\gradle\caches\modules-2\files-2.1\net.minecraftforge\javafmllanguage\1.20.1-47.3.27\8001575a8be1ded39093805ca80ef976b5149b3f\javafmllanguage-1.20.1-47.3.27.jar is missing mods.toml file
+[04Jun2025 18:58:49.652] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file E:\gradle\caches\modules-2\files-2.1\net.minecraftforge\lowcodelanguage\1.20.1-47.3.27\17ff592420fbc1f933420f0a473783943ac176ce\lowcodelanguage-1.20.1-47.3.27.jar is missing mods.toml file
+[04Jun2025 18:58:49.658] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file E:\gradle\caches\modules-2\files-2.1\net.minecraftforge\mclanguage\1.20.1-47.3.27\48269e2cdbd3c44641fb99a6b05f205b63efa37b\mclanguage-1.20.1-47.3.27.jar is missing mods.toml file
+[04Jun2025 18:58:49.663] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file E:\gradle\caches\modules-2\files-2.1\net.minecraftforge\fmlcore\1.20.1-47.3.27\8e7f3f29ab42d8116b9ee3f9f06fc8e8fa0fd12f\fmlcore-1.20.1-47.3.27.jar is missing mods.toml file
+[04Jun2025 18:58:50.085] [main/INFO] [net.minecraftforge.fml.loading.moddiscovery.JarInJarDependencyLocator/]: Found 1 dependencies adding them to mods collection
+[04Jun2025 18:58:53.206] [main/INFO] [mixin/]: Compatibility level set to JAVA_17
+[04Jun2025 18:58:53.252] [main/INFO] [cpw.mods.modlauncher.LaunchServiceHandler/MODLAUNCHER]: Launching target 'forgedatauserdev' with arguments [--gameDir, ., --assetsDir, E:\gradle\caches\forge_gradle\assets, --assetIndex, 5, --mod, chaosawakens, --all, --output, E:\Desktop2\Mods\Multiloader\1201\ChaosAwakens\common\src\generated\resources, --existing, E:\Desktop2\Mods\Multiloader\1201\ChaosAwakens\common\src\main\resources]
+[04Jun2025 18:58:53.366] [main/INFO] [mixin/]: Attempting to load Fernflower decompiler (Threaded mode)
+[04Jun2025 18:58:53.371] [main/INFO] [mixin/]: Fernflower could not be loaded, exported classes will not be decompiled. NoClassDefFoundError: org/jetbrains/java/decompiler/main/extern/IResultSaver
+[04Jun2025 18:58:53.420] [main/WARN] [mixin/]: Reference map 'chaosawakens.refmap.json' for chaosawakens.mixins.json could not be read. If this is a development environment you can ignore this message
+[04Jun2025 18:58:53.442] [main/WARN] [mixin/]: Reference map 'chaosawakens.refmap.json' for chaosawakens.forge.mixins.json could not be read. If this is a development environment you can ignore this message
+[04Jun2025 18:58:53.798] [main/INFO] [mixin/]: Remapping refMap configured.refmap.json using E:\Desktop2\Mods\Multiloader\1201\ChaosAwakens\forge/build/createSrgToMcp/output.srg
+[04Jun2025 18:58:53.803] [main/INFO] [mixin/]: Remapping refMap jade.refmap.json using E:\Desktop2\Mods\Multiloader\1201\ChaosAwakens\forge/build/createSrgToMcp/output.srg
+[04Jun2025 18:58:53.807] [main/INFO] [mixin/]: Remapping refMap gamemenumodoption.refmap.json using E:\Desktop2\Mods\Multiloader\1201\ChaosAwakens\forge/build/createSrgToMcp/output.srg
+[04Jun2025 18:58:53.812] [main/INFO] [mixin/]: Remapping refMap jeed-common-refmap.json using E:\Desktop2\Mods\Multiloader\1201\ChaosAwakens\forge/build/createSrgToMcp/output.srg
+[04Jun2025 18:58:53.825] [main/WARN] [mixin/]: Reference map 'jeed-forge-refmap.json' for jeed.mixins.json could not be read. If this is a development environment you can ignore this message
+[04Jun2025 18:58:55.501] [main/INFO] [net.minecraftforge.data.loading.DatagenModLoader/]: Initializing Data Gatherer for mods [chaosawakens]
+[04Jun2025 18:58:55.662] [main/INFO] [MixinExtras|Service/]: Initializing MixinExtras via com.llamalad7.mixinextras.service.MixinExtrasServiceImpl(version=0.5.0-rc.2).
+[04Jun2025 18:59:03.180] [modloading-worker-0/INFO] [net.minecraftforge.common.ForgeMod/FORGEMOD]: Forge mod loading, version 47.3.27, for MC 1.20.1 with MCP 20230612.114412
+[04Jun2025 18:59:03.182] [modloading-worker-0/INFO] [net.minecraftforge.common.MinecraftForge/FORGE]: MinecraftForge v47.3.27 Initialized
+[04Jun2025 18:59:03.278] [modloading-worker-0/WARN] [mixin/]: @Inject(@At("INVOKE_ASSIGN")) Shift.BY=3 on jeed-common.mixins.json:EffectRenderingInventoryScreenMixin::handler$zzp000$captureEffect exceeds the maximum allowed value: 0. Increase the value of maxShiftBy to suppress this warning.
+[04Jun2025 18:59:03.759] [modloading-worker-0/INFO] [mezz.jei.library.load.PluginCaller/]: Sending ConfigManager...
+[04Jun2025 18:59:03.771] [modloading-worker-0/INFO] [mezz.jei.library.load.PluginCaller/]: Sending ConfigManager took 8.778 ms
+[04Jun2025 18:59:04.556] [main/WARN] [net.minecraft.server.packs.VanillaPackResourcesBuilder/]: Assets URL 'union:/E:/Desktop2/Mods/Multiloader/1201/ChaosAwakens/forge/build/fg_cache/net/minecraftforge/forge/1.20.1-47.3.27_mapped_parchment_2023.09.03-1.20.1/forge-1.20.1-47.3.27_mapped_parchment_2023.09.03-1.20.1-recomp.jar%23191!/assets/.mcassetsroot' uses unexpected schema
+[04Jun2025 18:59:04.557] [main/WARN] [net.minecraft.server.packs.VanillaPackResourcesBuilder/]: Assets URL 'union:/E:/Desktop2/Mods/Multiloader/1201/ChaosAwakens/forge/build/fg_cache/net/minecraftforge/forge/1.20.1-47.3.27_mapped_parchment_2023.09.03-1.20.1/forge-1.20.1-47.3.27_mapped_parchment_2023.09.03-1.20.1-recomp.jar%23191!/data/.mcassetsroot' uses unexpected schema
+[04Jun2025 18:59:05.221] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Chaos Awakens: Language Provider (en_us)
+[04Jun2025 18:59:05.385] [main/INFO] [net.minecraft.data.DataGenerator/]: Chaos Awakens: Language Provider (en_us) finished after 162 ms
+[04Jun2025 18:59:05.385] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Chaos Awakens: Item Models
+[04Jun2025 18:59:06.202] [main/INFO] [net.minecraft.data.DataGenerator/]: Chaos Awakens: Item Models finished after 817 ms
+[04Jun2025 18:59:06.203] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Chaos Awakens: Block & Block Item Models
+[04Jun2025 18:59:07.063] [main/INFO] [net.minecraft.data.DataGenerator/]: Chaos Awakens: Block & Block Item Models finished after 860 ms
+[04Jun2025 18:59:07.063] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Chaos Awakens: Block States
+[04Jun2025 18:59:07.145] [main/INFO] [net.minecraft.data.DataGenerator/]: Chaos Awakens: Block States finished after 81 ms
+[04Jun2025 18:59:07.145] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Loot Tables
+[04Jun2025 18:59:07.417] [main/INFO] [net.minecraft.data.DataGenerator/]: Loot Tables finished after 270 ms
+[04Jun2025 18:59:07.417] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Chaos Awakens: Block Tags
+[04Jun2025 18:59:07.486] [main/INFO] [net.minecraft.data.DataGenerator/]: Chaos Awakens: Block Tags finished after 69 ms
+[04Jun2025 18:59:07.486] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Chaos Awakens: Item Tags
+[04Jun2025 18:59:07.521] [main/INFO] [net.minecraft.data.DataGenerator/]: Chaos Awakens: Item Tags finished after 34 ms
+[04Jun2025 18:59:07.521] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Chaos Awakens: EntityType Tags
+[04Jun2025 18:59:07.524] [main/INFO] [net.minecraft.data.DataGenerator/]: Chaos Awakens: EntityType Tags finished after 2 ms
+[04Jun2025 18:59:07.524] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Recipes
+[04Jun2025 18:59:07.663] [main/INFO] [net.minecraft.data.DataGenerator/]: Recipes finished after 138 ms
+[04Jun2025 18:59:07.663] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Chaos Awakens Datapack Registries
+[04Jun2025 18:59:07.736] [main/INFO] [net.minecraft.data.DataGenerator/]: Chaos Awakens Datapack Registries finished after 72 ms
+[04Jun2025 18:59:07.736] [main/INFO] [net.minecraft.data.DataGenerator/]: All providers took: 2514 ms
+[04Jun2025 18:59:07.823] [main/INFO] [net.minecraft.data.HashCache/]: Caching: total files: 2145, old count: 2145, new count: 2146, removed stale: 0, written: 2

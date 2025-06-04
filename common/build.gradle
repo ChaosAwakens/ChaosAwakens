@@ -17,6 +17,7 @@ minecraft {
 dependencies {
     // Base
     compileOnly group: 'org.spongepowered', name: 'mixin', version: '0.8.5'
+    compileOnly group: 'io.github.llamalad7', name: 'mixinextras-common', version:'0.5.0-rc.2'
 }
 
 publishing {

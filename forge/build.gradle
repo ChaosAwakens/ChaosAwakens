@@ -40,7 +40,7 @@ minecraft {
 
             args '--username', "Dev####"
 
-            jvmArgs "-Xms12G", "-Xmx16G", "-XX:+UseG1GC", "-XX:+UnlockExperimentalVMOptions", "-XX:MaxGCPauseMillis=100", "-XX:+DisableExplicitGC", "-XX:TargetSurvivorRatio=90", "-XX:G1NewSizePercent=35", "-XX:G1MaxNewSizePercent=60", "-XX:G1MixedGCLiveThresholdPercent=50", "-XX:+AlwaysPreTouch", "-Dterminal.ansi=true"
+            jvmArgs "-Xms12G", "-Xmx16G", "-XX:+UseG1GC", "-XX:+UnlockExperimentalVMOptions", "-XX:MaxGCPauseMillis=100", "-XX:+DisableExplicitGC", "-XX:TargetSurvivorRatio=90", "-XX:G1NewSizePercent=35", "-XX:G1MaxNewSizePercent=60", "-XX:G1MixedGCLiveThresholdPercent=50", "-XX:+AlwaysPreTouch", "-Dterminal.ansi=true", "-Dmixin.debug.export=true"
 
             mods {
                 modClientRun {
@@ -62,7 +62,7 @@ minecraft {
             property "mixin.env.remapRefMap", "true"
             property "mixin.env.refMapRemappingFile", "${projectDir}/build/createSrgToMcp/output.srg"
 
-            jvmArgs "-Xms12G", "-Xmx16G", "-XX:+UseG1GC", "-XX:+UnlockExperimentalVMOptions", "-XX:MaxGCPauseMillis=100", "-XX:+DisableExplicitGC", "-XX:TargetSurvivorRatio=90", "-XX:G1NewSizePercent=35", "-XX:G1MaxNewSizePercent=60", "-XX:G1MixedGCLiveThresholdPercent=50", "-XX:+AlwaysPreTouch", "-Dterminal.ansi=true"
+            jvmArgs "-Xms12G", "-Xmx16G", "-XX:+UseG1GC", "-XX:+UnlockExperimentalVMOptions", "-XX:MaxGCPauseMillis=100", "-XX:+DisableExplicitGC", "-XX:TargetSurvivorRatio=90", "-XX:G1NewSizePercent=35", "-XX:G1MaxNewSizePercent=60", "-XX:G1MixedGCLiveThresholdPercent=50", "-XX:+AlwaysPreTouch", "-Dterminal.ansi=true", "-Dmixin.debug.export=true"
 
             mods {
                 modServerRun {
@@ -84,7 +84,7 @@ minecraft {
             property 'mixin.env.remapRefMap', 'true'
             property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
 
-            jvmArgs "-Xms12G", "-Xmx16G", "-XX:+UseG1GC", "-XX:+UnlockExperimentalVMOptions", "-XX:MaxGCPauseMillis=100", "-XX:+DisableExplicitGC", "-XX:TargetSurvivorRatio=90", "-XX:G1NewSizePercent=35", "-XX:G1MaxNewSizePercent=60", "-XX:G1MixedGCLiveThresholdPercent=50", "-XX:+AlwaysPreTouch", "-Dterminal.ansi=true"
+            jvmArgs "-Xms12G", "-Xmx16G", "-XX:+UseG1GC", "-XX:+UnlockExperimentalVMOptions", "-XX:MaxGCPauseMillis=100", "-XX:+DisableExplicitGC", "-XX:TargetSurvivorRatio=90", "-XX:G1NewSizePercent=35", "-XX:G1MaxNewSizePercent=60", "-XX:G1MixedGCLiveThresholdPercent=50", "-XX:+AlwaysPreTouch", "-Dterminal.ansi=true", "-Dmixin.debug.export=true"
 
             args "--mod", mod_id, "--all", "--output", project(':common').file('src/generated/resources/'), "--existing",  project(':common').file('src/main/resources/')
             mods {
@@ -104,6 +104,11 @@ dependencies {
     minecraft("net.minecraftforge:forge:${minecraft_version}-${forge_version}")
     annotationProcessor("org.spongepowered:mixin:${mixin_version}:processor")
 
+    compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:${mixinextras_version}"))
+    implementation(jarJar("io.github.llamalad7:mixinextras-forge:${mixinextras_version}")) {
+        jarJar.ranged(it, "[${mixinextras_version},)")
+    }
+
     compileOnly project(":common")
 
     // Dependencies (Optional)
@@ -122,6 +127,9 @@ dependencies {
 
     compileOnly fg.deobf("squeek.appleskin:appleskin-forge:${forge_appleskin_version}:api")
     runtimeOnly fg.deobf("squeek.appleskin:appleskin-forge:${forge_appleskin_version}")
+
+    // Dependencies (Temp)
+    runtimeOnly fg.deobf("curse.maven:journeymap-32274:5789363")
 }
 
 tasks.withType(JavaCompile).configureEach { source(project(":common").sourceSets.main.allSource) }
