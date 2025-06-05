@@ -7,7 +7,9 @@
   "mixins": [
     "block.BlockMixin",
     "datagen.TagsProviderMixin",
-    "item.HoeItemMixin"
+    "item.HoeItemMixin",
+    "temp.BlockInfoLayerMixin",
+    "temp.MapStateMixin"
   ],
   "client": [
   ],

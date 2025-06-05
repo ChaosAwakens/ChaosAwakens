@@ -1,4 +1,4 @@
-package io.github.chaosawakens.common.worldgen.config.mining_paradise.biome;
+package io.github.chaosawakens.common.worldgen.config.mining_paradise.biome.surface.level_2;
 
 import io.github.chaosawakens.common.registry.CAFeatures;
 import io.github.chaosawakens.common.worldgen.config.base.BiomeConfig;

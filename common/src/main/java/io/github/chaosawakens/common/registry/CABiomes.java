@@ -5,7 +5,7 @@ import io.github.chaosawakens.CAConstants;
 import io.github.chaosawakens.api.asm.annotations.RegistrarEntry;
 import io.github.chaosawakens.api.platform.CAServices;
 import io.github.chaosawakens.common.worldgen.config.base.BiomeConfig;
-import io.github.chaosawakens.common.worldgen.config.mining_paradise.biome.DensePlainsBiomeConfig;
+import io.github.chaosawakens.common.worldgen.config.mining_paradise.biome.surface.level_2.DensePlainsBiomeConfig;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;

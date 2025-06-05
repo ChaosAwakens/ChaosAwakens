@@ -54,7 +54,7 @@
                       "argument1": {
                         "type": "minecraft:y_clamped_gradient",
                         "from_value": 1.0,
-                        "from_y": 29,
+                        "from_y": 0,
                         "to_value": 0.0,
                         "to_y": 480
                       },
@@ -120,7 +120,7 @@
               "argument1": {
                 "type": "minecraft:y_clamped_gradient",
                 "from_value": 1.0,
-                "from_y": 29,
+                "from_y": 0,
                 "to_value": 0.0,
                 "to_y": 480
               },
@@ -158,7 +158,7 @@
       }
     },
     "lava": 0.0,
-    "ridges": "chaosawakens:vanilla/land/ridges",
+    "ridges": "chaosawakens:mining_paradise/land/ridges",
     "temperature": {
       "type": "minecraft:shifted_noise",
       "noise": "minecraft:temperature",

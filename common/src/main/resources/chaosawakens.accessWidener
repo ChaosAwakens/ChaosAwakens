@@ -91,3 +91,10 @@ accessible method net/minecraft/data/worldgen/TerrainProvider calculateMountainR
 
 # HierarchicalModel
 accessible field net/minecraft/client/model/HierarchicalModel ANIMATION_VECTOR_CACHE Lorg/joml/Vector3f;
+
+# MultiNoiseBiomeSourceParameterList$Preset
+accessible field net/minecraft/world/level/biome/MultiNoiseBiomeSourceParameterList$Preset BY_NAME Ljava/util/Map;
+mutable field net/minecraft/world/level/biome/MultiNoiseBiomeSourceParameterList$Preset BY_NAME Ljava/util/Map;
+
+# MultiNoiseBiomeSourceParameterList$Preset$SourceProvider
+accessible class net/minecraft/world/level/biome/MultiNoiseBiomeSourceParameterList$Preset$SourceProvider

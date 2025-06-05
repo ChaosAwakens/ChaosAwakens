@@ -33,9 +33,6 @@ dependencies {
     modCompileOnly("squeek.appleskin:appleskin-fabric:${fabric_appleskin_version}:api") { transitive = false }
 
     modImplementation("com.terraformersmc:modmenu:${fabric_modmenu_version}")
-
-    // Dependencies (Temp)
-    modRuntimeOnly("curse.maven:journeymap-32274:5789354")
 }
 
 loom {

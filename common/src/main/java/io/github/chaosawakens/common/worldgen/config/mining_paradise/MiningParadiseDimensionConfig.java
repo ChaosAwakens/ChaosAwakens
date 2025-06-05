@@ -1,7 +1,10 @@
 package io.github.chaosawakens.common.worldgen.config.mining_paradise;
 
+import com.google.common.collect.ImmutableList;
+import com.mojang.datafixers.util.Pair;
 import io.github.chaosawakens.common.registry.*;
 import io.github.chaosawakens.common.worldgen.config.base.DimensionLevelStemConfig;
+import io.github.chaosawakens.common.worldgen.config.mining_paradise.biome.MiningParadiseBiomeBuilder;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderGetter;
@@ -10,10 +13,7 @@ import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.valueproviders.ConstantInt;
-import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.biome.BiomeSource;
-import net.minecraft.world.level.biome.Climate;
-import net.minecraft.world.level.biome.FixedBiomeSource;
+import net.minecraft.world.level.biome.*;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.dimension.BuiltinDimensionTypes;
@@ -23,6 +23,7 @@ import net.minecraft.world.level.levelgen.*;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.OptionalLong;
+import java.util.function.Function;
 import java.util.function.Supplier;
 
 public class MiningParadiseDimensionConfig implements DimensionLevelStemConfig {
@@ -40,8 +41,9 @@ public class MiningParadiseDimensionConfig implements DimensionLevelStemConfig {
     public @NotNull ChunkGenerator createLevelChunkGen(BootstapContext<LevelStem> regCtx) {
         HolderGetter<Biome> biomeLookup = regCtx.lookup(Registries.BIOME);
         HolderGetter<NoiseGeneratorSettings> noiseGenSettingsLookup = regCtx.lookup(Registries.NOISE_SETTINGS);
+        HolderGetter<MultiNoiseBiomeSourceParameterList> biomeSrcParamListLookup = regCtx.lookup(Registries.MULTI_NOISE_BIOME_SOURCE_PARAMETER_LIST);
 
-        BiomeSource src = new FixedBiomeSource(biomeLookup.getOrThrow(CABiomes.DENSE_PLAINS.get()));
+        BiomeSource src = MultiNoiseBiomeSource.createFromPreset(biomeSrcParamListLookup.getOrThrow(CAMultiNoiseBiomeSourceParameterLists.MINING_PARADISE_BIOME_LIST.get()));
         Holder.Reference<NoiseGeneratorSettings> settings = noiseGenSettingsLookup.getOrThrow(CANoiseGeneratorSettings.MINING_PARADISE.get());
 
         return new NoiseBasedChunkGenerator(src, settings);
@@ -52,7 +54,19 @@ public class MiningParadiseDimensionConfig implements DimensionLevelStemConfig {
     }
 
     public static Supplier<NoiseGeneratorSettings> createMiningParadiseNoiseGenSettings(BootstapContext<NoiseGeneratorSettings> regCtx) {
-        return () -> new NoiseGeneratorSettings(BASE_NOISE_SETTINGS, CABlocks.DREDGESTONE.get().defaultBlockState(), Blocks.WATER.defaultBlockState(), createMiningParadiseNoiseRouter(regCtx), createMiningParadiseSurfaceRules(), createMiningParadiseBiomes(regCtx), 121, false, true, true, false);
+        return () -> new NoiseGeneratorSettings(BASE_NOISE_SETTINGS, CABlocks.DREDGESTONE.get().defaultBlockState(), Blocks.WATER.defaultBlockState(), createMiningParadiseNoiseRouter(regCtx), createMiningParadiseSurfaceRules(), createMiningParadiseClimateSpawnConfiguration(regCtx), 121, false, true, true, false);
+    }
+
+    public static Supplier<MultiNoiseBiomeSourceParameterList> createMiningParadiseNoiseBiomes(BootstapContext<MultiNoiseBiomeSourceParameterList> regCtx) {
+        return () -> new MultiNoiseBiomeSourceParameterList(CAMultiNoiseBiomeSourceParameterLists.Presets.MINING_PARADISE_BIOME_SOURCE_PRESET.get(), regCtx.lookup(Registries.BIOME));
+    }
+
+    public static <T> Climate.ParameterList<T> generateMiningParadiseBiomes(Function<ResourceKey<Biome>, T> biomeValueMapper) {
+        ImmutableList.Builder<Pair<Climate.ParameterPoint, T>> mappedClimateParameterPointList = ImmutableList.builder();
+
+        new MiningParadiseBiomeBuilder().mapBiomes(mappedBiome -> mappedClimateParameterPointList.add(mappedBiome.mapSecond(biomeValueMapper)));
+
+        return new Climate.ParameterList<>(mappedClimateParameterPointList.build());
     }
 
     protected static SurfaceRules.RuleSource createMiningParadiseSurfaceRules() {
@@ -95,8 +109,8 @@ public class MiningParadiseDimensionConfig implements DimensionLevelStemConfig {
         DensityFunction terrainJaggedness = CADensityFunctions.getWrappedDensityFunctionHolder(regCtx, CADensityFunctions.MINING_PARADISE_JAGGEDNESS);
         DensityFunction terrainFactor = CADensityFunctions.getWrappedDensityFunctionHolder(regCtx, CADensityFunctions.MINING_PARADISE_FACTOR);
         DensityFunction terrainDepth = CADensityFunctions.getWrappedDensityFunctionHolder(regCtx, CADensityFunctions.MINING_PARADISE_DEPTH);
-        DensityFunction continentRidges = CADensityFunctions.getWrappedDensityFunctionHolder(regCtx, CADensityFunctions.RIDGES);
-        DensityFunction initialLandDensity = NoiseRouterData.slide(DensityFunctions.add(NoiseRouterData.noiseGradientDensity(DensityFunctions.cache2d(terrainFactor), terrainDepth), DensityFunctions.constant(10.703125D)).clamp(-66.0D, 64.0D), -256, 736, 451, 0, -0.538425D, 22, 44, 0.578125D);
+        DensityFunction continentRidges = CADensityFunctions.getWrappedDensityFunctionHolder(regCtx, CADensityFunctions.MINING_PARADISE_RIDGES);
+        DensityFunction initialLandDensity = NoiseRouterData.slide(DensityFunctions.add(NoiseRouterData.noiseGradientDensity(DensityFunctions.cache2d(terrainFactor), terrainDepth), DensityFunctions.constant(10.703125D)).clamp(-66.0D, 64.0D), -256, 736, 480, 0, -0.538425D, 22, 44, 0.578125D);
         DensityFunction finalLandDensity = DensityFunctions.mul(DensityFunctions.interpolated(DensityFunctions.blendDensity(initialLandDensity)), DensityFunctions.constant(0.16D)).squeeze();
 
         return new NoiseRouter(
@@ -117,7 +131,7 @@ public class MiningParadiseDimensionConfig implements DimensionLevelStemConfig {
                 zero);
     }
 
-    protected static ObjectArrayList<Climate.ParameterPoint> createMiningParadiseBiomes(BootstapContext<NoiseGeneratorSettings> regCtx) {
+    protected static ObjectArrayList<Climate.ParameterPoint> createMiningParadiseClimateSpawnConfiguration(BootstapContext<NoiseGeneratorSettings> regCtx) {
         return ObjectArrayList.of();
     }
 }

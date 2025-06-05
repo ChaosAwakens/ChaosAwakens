@@ -129,7 +129,7 @@ dependencies {
     runtimeOnly fg.deobf("squeek.appleskin:appleskin-forge:${forge_appleskin_version}")
 
     // Dependencies (Temp)
-    runtimeOnly fg.deobf("curse.maven:journeymap-32274:5789363")
+    implementation fg.deobf("curse.maven:journeymap-32274:5789363")
 }
 
 tasks.withType(JavaCompile).configureEach { source(project(":common").sourceSets.main.allSource) }
