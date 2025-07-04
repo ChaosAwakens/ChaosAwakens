@@ -1,6 +1,5 @@
-package io.github.chaosawakens.common.worldgen.config.mining_paradise.biome.surface.level_2;
+package io.github.chaosawakens.common.worldgen.config.mining_paradise.biome.surface.level_4;
 
-import io.github.chaosawakens.common.registry.CAFeatures;
 import io.github.chaosawakens.common.worldgen.config.base.BiomeConfig;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
@@ -9,12 +8,11 @@ import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
 import net.minecraft.world.level.biome.BiomeSpecialEffects;
 import net.minecraft.world.level.biome.MobSpawnSettings;
-import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.carver.ConfiguredWorldCarver;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import org.jetbrains.annotations.Nullable;
 
-public class DensePlainsBiomeConfig implements BiomeConfig {
+public class DenseMountainsBiomeConfig implements BiomeConfig {
     public static final BiomeSpecialEffects EFFECTS = new BiomeSpecialEffects.Builder()
             .fogColor(4080490)
             .waterColor(4159204)
@@ -22,7 +20,7 @@ public class DensePlainsBiomeConfig implements BiomeConfig {
             .skyColor(3622254)
             .build();
 
-    public DensePlainsBiomeConfig() {}
+    public DenseMountainsBiomeConfig() {}
 
     @Override
     public boolean hasPrecipitation() {
@@ -31,7 +29,7 @@ public class DensePlainsBiomeConfig implements BiomeConfig {
 
     @Override
     public float getTemperature() {
-        return 0.8F;
+        return 0.75F;
     }
 
     @Override
@@ -57,7 +55,7 @@ public class DensePlainsBiomeConfig implements BiomeConfig {
         BiomeGenerationSettings.Builder biomeBuilder = new BiomeGenerationSettings.Builder(placedFeatureGetter, configuredWorldCarverGetter);
 
         // Vegetation
-        biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, placedFeatureGetter.getOrThrow(CAFeatures.CAPlacedFeatures.DENSE_GRASS_PATCH.get()));
+
 
         return biomeBuilder.build();
     }

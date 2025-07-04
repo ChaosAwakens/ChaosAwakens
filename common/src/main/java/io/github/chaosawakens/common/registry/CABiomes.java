@@ -6,6 +6,7 @@ import io.github.chaosawakens.api.asm.annotations.RegistrarEntry;
 import io.github.chaosawakens.api.platform.CAServices;
 import io.github.chaosawakens.common.worldgen.config.base.BiomeConfig;
 import io.github.chaosawakens.common.worldgen.config.mining_paradise.biome.surface.level_2.DensePlainsBiomeConfig;
+import io.github.chaosawakens.common.worldgen.config.mining_paradise.biome.surface.level_4.DenseMountainsBiomeConfig;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
@@ -19,6 +20,7 @@ public class CABiomes {
     private static final ObjectArrayList<Supplier<ResourceKey<Biome>>> BIOMES = new ObjectArrayList<>();
 
     // Mining Paradise
+    public static final Supplier<ResourceKey<Biome>> DENSE_MOUNTAINS = registerBiome("dense_mountains", DenseMountainsBiomeConfig::new);
     public static final Supplier<ResourceKey<Biome>> DENSE_PLAINS = registerBiome("dense_plains", DensePlainsBiomeConfig::new);
 
     private static Supplier<ResourceKey<Biome>> registerBiome(ResourceLocation id, Supplier<BiomeConfig> biomeConfigSup) {

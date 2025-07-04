@@ -1,5 +1,7 @@
 package io.github.chaosawakens.mixins.common.block;
 
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import io.github.chaosawakens.common.registry.CATags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
@@ -9,7 +11,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(CropBlock.class)
@@ -27,8 +28,8 @@ public final class CropBlockMixin { // Screw you arbitrary loader hooks (Literal
         cir.setReturnValue(modifiedReturn);
     }
 
-    @Redirect(method = "getGrowthSpeed", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/state/BlockState;is(Lnet/minecraft/world/level/block/Block;)Z", ordinal = 0))
-    private static boolean chaosawakens$getGrowthSpeed(BlockState originalState, Block originalBlock) {
-        return originalState.is(CATags.CABlockTags.FARMLAND_BLOCKS.get()) || originalState.is(originalBlock);
+    @WrapOperation(method = "getGrowthSpeed", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/state/BlockState;is(Lnet/minecraft/world/level/block/Block;)Z", ordinal = 0))
+    private static boolean chaosawakens$getGrowthSpeed(BlockState originalState, Block originalBlock, Operation<Boolean> original) {
+        return original.call(originalState, originalBlock) || originalState.is(CATags.CABlockTags.FARMLAND_BLOCKS.get());
     }
 }

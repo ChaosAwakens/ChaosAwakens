@@ -27,7 +27,7 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 
 public class MiningParadiseDimensionConfig implements DimensionLevelStemConfig {
-    public static final NoiseSettings BASE_NOISE_SETTINGS = NoiseSettings.create(-256, 736, 1, 2);
+    public static final NoiseSettings BASE_NOISE_SETTINGS = NoiseSettings.create(-256, 736, 1, 4);
 
     public MiningParadiseDimensionConfig() {
     }
@@ -92,10 +92,33 @@ public class MiningParadiseDimensionConfig implements DimensionLevelStemConfig {
                         )
                 )
         );
-        SurfaceRules.RuleSource densePlainsRuleSource = SurfaceRules.sequence(SurfaceRules.ifTrue(SurfaceRules.isBiome(CABiomes.DENSE_PLAINS.get()), defaultSurfaceRuleSource));
+        SurfaceRules.RuleSource denseMountainsSurfaceRuleSource = SurfaceRules.sequence(
+                SurfaceRules.ifTrue(
+                        SurfaceRules.abovePreliminarySurface(),
+                        SurfaceRules.ifTrue(
+                                SurfaceRules.ON_FLOOR,
+                                SurfaceRules.sequence(
+                                        SurfaceRules.ifTrue(
+                                                CASurfaceRules.CAConditionSources.AT_ABOVE_WATER_LEVEL,
+                                                CASurfaceRules.CAStateRules.DENSE_DIRT
+                                        ),
+                                        CASurfaceRules.CAStateRules.DENSE_GRASS_BLOCK
+                                )
+                        )
+                ),
+                SurfaceRules.ifTrue(
+                        SurfaceRules.UNDER_FLOOR,
+                        SurfaceRules.ifTrue(
+                                SurfaceRules.not(SurfaceRules.hole()),
+                                CASurfaceRules.CAStateRules.DENSE_DIRT
+                        )
+                )
+        );
+        SurfaceRules.RuleSource densePlainsRuleSource = SurfaceRules.ifTrue(SurfaceRules.isBiome(CABiomes.DENSE_PLAINS.get()), defaultSurfaceRuleSource);
+        SurfaceRules.RuleSource denseMountainsRuleSource = SurfaceRules.ifTrue(SurfaceRules.isBiome(CABiomes.DENSE_MOUNTAINS.get()), denseMountainsSurfaceRuleSource);
         SurfaceRules.RuleSource bedrockFloorRuleSource = SurfaceRules.ifTrue(SurfaceRules.verticalGradient("bedrock_floor", VerticalAnchor.bottom(), VerticalAnchor.aboveBottom(5)), CASurfaceRules.CAStateRules.BEDROCK);
 
-        return SurfaceRules.sequence(densePlainsRuleSource, bedrockFloorRuleSource);
+        return SurfaceRules.sequence(densePlainsRuleSource, denseMountainsRuleSource, bedrockFloorRuleSource);
     }
 
     protected static NoiseRouter createMiningParadiseNoiseRouter(BootstapContext<NoiseGeneratorSettings> regCtx) {
