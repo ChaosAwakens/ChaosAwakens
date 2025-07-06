@@ -3,6 +3,8 @@ package io.github.chaosawakens.util;
 import net.minecraft.data.worldgen.TerrainProvider;
 import net.minecraft.util.CubicSpline;
 import net.minecraft.util.ToFloatFunction;
+import net.minecraft.world.level.levelgen.DensityFunction;
+import net.minecraft.world.level.levelgen.DensityFunctions;
 
 /**
  * Utility class containing part-general part-arbitrary helper/shortcut methods for world/terrain generation.
@@ -55,7 +57,11 @@ public final class WorldGenUtil {
                 
                 // Drop back down with some variation
                 .addPoint(1.3F, 1.0F, -1.0F)
-                .addPoint(1.5F, 0.0F, 0.0F)      // Back to water level
+                .addPoint(1.4F, 0.8F, -0.4F)
+                .addPoint(1.5F, 0.6F, 0.0F)
+                .addPoint(1.6F, 0.4F, 0.0F)
+                .addPoint(1.7F, 0.2F, -1.0F)
+                .addPoint(1.9F, 0.0F, 0.0F)      // Back to water level
                 .build();
     }
 
@@ -133,5 +139,10 @@ public final class WorldGenUtil {
                 // Continue high jaggedness for extreme peaks
                 .addPoint(jaggednessThreshold + 0.1F, 1.8F)
                 .build();
+    }
+
+    public static DensityFunction noiseGradientDensity(DensityFunction firstDF, DensityFunction secondDF, float gradientMultiplier) {
+        DensityFunction productDF = DensityFunctions.mul(firstDF, secondDF);
+        return DensityFunctions.mul(DensityFunctions.constant(gradientMultiplier), productDF.quarterNegative());
     }
 }

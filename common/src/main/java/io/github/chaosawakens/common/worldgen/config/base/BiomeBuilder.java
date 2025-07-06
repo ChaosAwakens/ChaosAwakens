@@ -50,7 +50,7 @@ public interface BiomeBuilder {
      * @param erosion The erosion noise parameter the specified biome should be placed in. Represents a mental model for
      *                how "eroded" (or flattened) a biome is.
      * @param weirdness The weirdness noise parameter the specified biome should be placed in. In Vanilla, this is used
-     *                  to sort of allow for different biome variants (e.g. "Bamboo Jungle" VS "Normal Jungle). This one's
+     *                  to sort of allow for different biome variants (e.g. "Bamboo Jungle" VS "Normal Jungle"). This one's
      *                  a bit of a niche and often unused parameter, set to 0 most of the time.
      * @param offset The vertical offset the specified biome should be placed in account of.
      * @param actualBiomeToPlace The biome in question.
@@ -82,7 +82,7 @@ public interface BiomeBuilder {
      * @param erosion The erosion noise parameter the specified biome should be placed in. Represents a mental model for
      *                how "eroded" (or flattened) a biome is.
      * @param weirdness The weirdness noise parameter the specified biome should be placed in. In Vanilla, this is used
-     *                  to sort of allow for different biome variants (e.g. "Bamboo Jungle" VS "Normal Jungle). This one's
+     *                  to sort of allow for different biome variants (e.g. "Bamboo Jungle" VS "Normal Jungle"). This one's
      *                  a bit of a niche and often unused parameter, set to 0 most of the time.
      * @param offset The vertical offset the specified biome should be placed in account of.
      * @param actualBiomeToPlace The biome in question.
@@ -113,7 +113,7 @@ public interface BiomeBuilder {
      * @param erosion The erosion noise parameter the specified biome should be placed in. Represents a mental model for
      *                how "eroded" (or flattened) a biome is.
      * @param weirdness The weirdness noise parameter the specified biome should be placed in. In Vanilla, this is used
-     *                  to sort of allow for different biome variants (e.g. "Bamboo Jungle" VS "Normal Jungle). This one's
+     *                  to sort of allow for different biome variants (e.g. "Bamboo Jungle" VS "Normal Jungle"). This one's
      *                  a bit of a niche and often unused parameter, set to 0 most of the time.
      * @param offset The vertical offset the specified biome should be placed in account of.
      * @param actualBiomeToPlace The biome in question.
@@ -143,7 +143,7 @@ public interface BiomeBuilder {
     /**
      * The range (or point) determining the depth at which "underground" biomes are placed.
      *
-     * @return The depth of underground/cave biomes. Default is ranged between {@code 0.9F - 0.2F}.
+     * @return The depth of underground/cave biomes. Default is ranged between {@code 0.2F - 0.9F}.
      */
     default Climate.Parameter getUndergroundDepth() {
         return Climate.Parameter.span(0.2F, 0.9F);
