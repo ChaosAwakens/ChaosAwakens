@@ -7,7 +7,26 @@
     "water_color": 4159204,
     "water_fog_color": 429011
   },
-  "features": [],
+  "features": [
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [
+      "chaosawakens:dense_grass_patch",
+      "chaosawakens:alstroemeriat_patch",
+      "chaosawakens:small_carnivorous_plant_patch",
+      "chaosawakens:big_carnivorous_plant_patch",
+      "chaosawakens:bush_patch",
+      "chaosawakens:tall_bush_patch",
+      "chaosawakens:large_mesozoic_bush_patch"
+    ]
+  ],
   "has_precipitation": true,
   "spawn_costs": {},
   "spawners": {

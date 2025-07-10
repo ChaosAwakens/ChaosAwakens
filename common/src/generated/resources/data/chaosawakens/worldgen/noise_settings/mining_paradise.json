@@ -394,7 +394,10 @@
                       "then_run": {
                         "type": "minecraft:block",
                         "result_state": {
-                          "Name": "chaosawakens:tar"
+                          "Name": "chaosawakens:dense_grass_block",
+                          "Properties": {
+                            "snowy": "false"
+                          }
                         }
                       }
                     },

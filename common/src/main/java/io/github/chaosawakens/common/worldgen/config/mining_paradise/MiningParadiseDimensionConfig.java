@@ -125,7 +125,7 @@ public class MiningParadiseDimensionConfig implements DimensionLevelStemConfig {
                                 SurfaceRules.sequence(
                                         SurfaceRules.ifTrue(
                                                 CASurfaceRules.CAConditionSources.AT_ABOVE_WATER_LEVEL,
-                                                CASurfaceRules.CAStateRules.TAR
+                                                CASurfaceRules.CAStateRules.DENSE_GRASS_BLOCK
                                         ),
                                         CASurfaceRules.CAStateRules.DENSE_DIRT
                                 )
