@@ -209,8 +209,8 @@ public class RefactoredTerrainProvider {
     public static <C, I extends ToFloatFunction<C>> CubicSpline<C, I> buildWeirdnessJaggednessSpline(
             I weirdnessInput, float multiplier, ToFloatFunction<Float> transformFunction) {
         // Adds a small amount of jaggedness that varies slightly with weirdness.
-        float lowWeirdnessJaggedness = 0.63F * multiplier;
-        float highWeirdnessJaggedness = 0.3F * multiplier;
+        float lowWeirdnessJaggedness = 0.063F * multiplier;
+        float highWeirdnessJaggedness = 0.03F * multiplier;
         return CubicSpline.builder(weirdnessInput, transformFunction)
                 .addPoint(-0.01F, lowWeirdnessJaggedness)
                 .addPoint(0.01F, highWeirdnessJaggedness)
@@ -234,7 +234,7 @@ public class RefactoredTerrainProvider {
 
         // Base spline influenced by weirdness
         CubicSpline<C, I> baseWeirdnessSpline = CubicSpline.builder(weirdnessInput, transformFunction)
-                .addPoint(-0.4F, 6.3F) // High factor at low weirdness
+                .addPoint(-0.2F, 6.3F) // High factor at low weirdness
                 .addPoint(0.2F, targetFactor) // Target factor at higher weirdness
                 .build();
 
@@ -246,7 +246,7 @@ public class RefactoredTerrainProvider {
                 .addPoint(-0.35F, baseWeirdnessSpline)
                 .addPoint(-0.25F, baseWeirdnessSpline)
                 .addPoint(-0.1F, CubicSpline.builder(weirdnessInput, transformFunction) // Another nested spline
-                        .addPoint(-0.05F, 5.1F)
+                        .addPoint(-0.05F, 2.67F)
                         .addPoint(0.05F, 6.3F).build())
                 .addPoint(0.03F, baseWeirdnessSpline);
 
@@ -278,6 +278,32 @@ public class RefactoredTerrainProvider {
                     .addPoint(0.55F, pvIndependentSplinePart1)
                     .addPoint(0.58F, targetFactor);
         }
+
+        return erosionSplineBuilder.build();
+    }
+
+    public static <C, I extends ToFloatFunction<C>> CubicSpline<C, I> getPlateauErosionFactor(
+            I erosionInput, I weirdnessInput,
+            float targetFactor, ToFloatFunction<Float> transformFunction) {
+
+        // Base spline influenced by weirdness
+        CubicSpline<C, I> baseWeirdnessSpline = CubicSpline.builder(weirdnessInput, transformFunction)
+                .addPoint(-0.4F, targetFactor + 0.1F) // High factor at low weirdness
+                .addPoint(0.2F, targetFactor) // Target factor at higher weirdness
+                .build();
+
+        CubicSpline.Builder<C, I> erosionSplineBuilder = CubicSpline.builder(erosionInput, transformFunction)
+                .addPoint(-0.6F, baseWeirdnessSpline)
+                .addPoint(-0.5F, CubicSpline.builder(weirdnessInput, transformFunction) // Nested spline for specific erosion range
+                        .addPoint(-0.05F, targetFactor + 0.2F)
+                        .addPoint(0.05F, targetFactor - 0.1F).build())
+                .addPoint(-0.35F, baseWeirdnessSpline)
+                .addPoint(-0.25F, baseWeirdnessSpline)
+                .addPoint(-0.1F, CubicSpline.builder(weirdnessInput, transformFunction) // Another nested spline
+                        .addPoint(-0.05F, targetFactor - 0.2F)
+                        .addPoint(0.05F, targetFactor + 0.1F).build())
+                .addPoint(0.03F, baseWeirdnessSpline)
+                .addPoint(0.58F, targetFactor);
 
         return erosionSplineBuilder.build();
     }
