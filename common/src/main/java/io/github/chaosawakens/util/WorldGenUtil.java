@@ -47,18 +47,18 @@ public final class WorldGenUtil {
 
     public static <C, I extends ToFloatFunction<C>> CubicSpline<C, I> miningParadiseFactor(I continentSplineCoord, I erosionSplineCoord, I ridgesSplineCoord, I foldedRidgesSplineCoord) {
 
-        CubicSpline<C, I> oceanErosionFactorSpline = RefactoredTerrainProvider.getErosionFactor(erosionSplineCoord, ridgesSplineCoord, foldedRidgesSplineCoord, 6.15F, false, NO_TRANSFORM);
-        CubicSpline<C, I> beachErosionFactorSpline = RefactoredTerrainProvider.getErosionFactor(erosionSplineCoord, ridgesSplineCoord, foldedRidgesSplineCoord, 4.75F, false, NO_TRANSFORM);
-        CubicSpline<C, I> landErosionFactorSpline = RefactoredTerrainProvider.getErosionFactor(erosionSplineCoord, ridgesSplineCoord, foldedRidgesSplineCoord, 4.6F, false, NO_TRANSFORM);
+        CubicSpline<C, I> oceanErosionFactorSpline = RefactoredTerrainProvider.getErosionFactor(erosionSplineCoord, ridgesSplineCoord, foldedRidgesSplineCoord, 6.15F, 6.3F, 5.5F, 4.8F,false, NO_TRANSFORM);
+        CubicSpline<C, I> beachErosionFactorSpline = RefactoredTerrainProvider.getErosionFactor(erosionSplineCoord, ridgesSplineCoord, foldedRidgesSplineCoord, 4.75F,5.2F, 4.75F, 4.6F, false, NO_TRANSFORM);
+        CubicSpline<C, I> landErosionFactorSpline = RefactoredTerrainProvider.getErosionFactor(erosionSplineCoord, ridgesSplineCoord, foldedRidgesSplineCoord, 4.6F, 5.1F, 4.45F, 4.4F, false, NO_TRANSFORM);
         CubicSpline<C, I> erosionFactorSpline = RefactoredTerrainProvider.getPlateauErosionFactor(erosionSplineCoord, ridgesSplineCoord, 3.09F,  NO_TRANSFORM);
         CubicSpline<C, I> plateauErosionFactorSpline = RefactoredTerrainProvider.getPlateauErosionFactor(erosionSplineCoord, ridgesSplineCoord, 2.09F,  NO_TRANSFORM);
-        CubicSpline<C, I> amplifiedErosionFactorSpline = RefactoredTerrainProvider.getErosionFactor(erosionSplineCoord, ridgesSplineCoord, foldedRidgesSplineCoord, 5.48F, true, AMPLIFIED_FACTOR);
+        CubicSpline<C, I> amplifiedErosionFactorSpline = RefactoredTerrainProvider.getErosionFactor(erosionSplineCoord, ridgesSplineCoord, foldedRidgesSplineCoord, 5.48F, 5.1F, 4.45F, 2.0F, true, AMPLIFIED_FACTOR);
 
         return CubicSpline.builder(continentSplineCoord, NO_TRANSFORM)
                 .addPoint(-0.6F, 6.25F)
                 .addPoint(-0.51F, oceanErosionFactorSpline)
 
-                .addPoint(-0.27F, 4.85F)
+                .addPoint(-0.27F, 5.2F)
                 .addPoint(-0.13F, 4.75F)
                 .addPoint(-0.1F, beachErosionFactorSpline)
                 .addPoint(-0.07F, 4.65F)
