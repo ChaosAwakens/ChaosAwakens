@@ -23,9 +23,9 @@ public class CAMultiNoiseBiomeSourceParameterLists {
     public static final Supplier<ResourceKey<MultiNoiseBiomeSourceParameterList>> MINING_PARADISE_BIOME_LIST = registerMultiNoiseBiomeSourceParameterList("mining_paradise", MiningParadiseDimensionConfig::createMiningParadiseNoiseBiomes);
 
     private static Supplier<ResourceKey<MultiNoiseBiomeSourceParameterList>> registerMultiNoiseBiomeSourceParameterList(ResourceLocation id, Function<BootstapContext<MultiNoiseBiomeSourceParameterList>, Supplier<MultiNoiseBiomeSourceParameterList>> actualMultiNoiseBiomeSourceParameterListConfigFunc) {
-        Supplier<ResourceKey<MultiNoiseBiomeSourceParameterList>> ngsSup = CAServices.REGISTRAR.registerDatapackObject(id, actualMultiNoiseBiomeSourceParameterListConfigFunc, Registries.MULTI_NOISE_BIOME_SOURCE_PARAMETER_LIST);
-        MULTI_NOISE_BIOME_SOURCE_PARAMETER_LISTS.add(ngsSup);
-        return ngsSup;
+        Supplier<ResourceKey<MultiNoiseBiomeSourceParameterList>> mnbsplKeySup = CAServices.REGISTRAR.registerDatapackObject(id, actualMultiNoiseBiomeSourceParameterListConfigFunc, Registries.MULTI_NOISE_BIOME_SOURCE_PARAMETER_LIST);
+        MULTI_NOISE_BIOME_SOURCE_PARAMETER_LISTS.add(mnbsplKeySup);
+        return mnbsplKeySup;
     }
 
     private static Supplier<ResourceKey<MultiNoiseBiomeSourceParameterList>> registerMultiNoiseBiomeSourceParameterList(String id, Function<BootstapContext<MultiNoiseBiomeSourceParameterList>, Supplier<MultiNoiseBiomeSourceParameterList>> actualMultiNoiseBiomeSourceParameterListConfigFunc) {

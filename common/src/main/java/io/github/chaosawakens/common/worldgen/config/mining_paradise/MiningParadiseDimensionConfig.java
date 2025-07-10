@@ -5,6 +5,7 @@ import com.mojang.datafixers.util.Pair;
 import io.github.chaosawakens.common.registry.*;
 import io.github.chaosawakens.common.worldgen.config.base.DimensionLevelStemConfig;
 import io.github.chaosawakens.common.worldgen.config.mining_paradise.biome.MiningParadiseBiomeBuilder;
+import io.github.chaosawakens.util.NoiseRouterUtil;
 import io.github.chaosawakens.util.WorldGenUtil;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.core.Holder;
@@ -70,7 +71,7 @@ public class MiningParadiseDimensionConfig implements DimensionLevelStemConfig {
         return new Climate.ParameterList<>(mappedClimateParameterPointList.build());
     }
 
-    protected static SurfaceRules.RuleSource createMiningParadiseSurfaceRules() {
+    public static SurfaceRules.RuleSource createMiningParadiseSurfaceRules() {
         SurfaceRules.RuleSource defaultSurfaceRuleSource = SurfaceRules.sequence(
                 SurfaceRules.ifTrue(
                         SurfaceRules.abovePreliminarySurface(),
@@ -134,7 +135,9 @@ public class MiningParadiseDimensionConfig implements DimensionLevelStemConfig {
         DensityFunction terrainFactor = CADensityFunctions.getWrappedDensityFunctionHolder(regCtx, CADensityFunctions.MINING_PARADISE_FACTOR);
         DensityFunction terrainDepth = CADensityFunctions.getWrappedDensityFunctionHolder(regCtx, CADensityFunctions.MINING_PARADISE_DEPTH);
         DensityFunction continentRidges = CADensityFunctions.getWrappedDensityFunctionHolder(regCtx, CADensityFunctions.MINING_PARADISE_RIDGES);
-        DensityFunction initialLandDensity = NoiseRouterData.slide(DensityFunctions.add(WorldGenUtil.noiseGradientDensity(DensityFunctions.cache2d(terrainFactor), terrainDepth, 5.0F), DensityFunctions.constant(9.5D)).clamp(-66.0D, 64.0D), -256, 736, 480, 0, -0.75, 22, 44, 0.75);
+        DensityFunction initialLandDensity = NoiseRouterUtil.createTerrainSlide(
+                DensityFunctions.add(WorldGenUtil.noiseGradientDensity(DensityFunctions.cache2d(terrainFactor), terrainDepth, 5.0F), DensityFunctions.constant(9.5D)).clamp(-66.0D, 64.0D),
+                -256, 736, 20, 20, -1.0F, 4, 44, 1.5F);
         DensityFunction finalLandDensity = DensityFunctions.mul(DensityFunctions.interpolated(DensityFunctions.blendDensity(initialLandDensity)), DensityFunctions.constant(1.0D)).squeeze();
 
         return new NoiseRouter(

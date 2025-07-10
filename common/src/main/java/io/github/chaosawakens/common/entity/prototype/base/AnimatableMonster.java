@@ -118,13 +118,14 @@ public abstract class AnimatableMonster extends Monster implements WrappedAnimat
         } else {
             if (requiresServerAnimationTicking()) {
                 if (cachedAnimationStates.stream().noneMatch(ExtendedAnimationState::isServerTickable)) this.requiresServerAnimTicking = false;
-
-                cachedAnimationStates.stream()
-                        .filter(curAnimState -> curAnimState.isServerTickable() && curAnimState.isStarted())
-                        .peek(curAnimState -> {
-                            if (curAnimState.getAccumulatedTicks() >= curAnimState.getAnimationTickDuration()) stopAnimation(curAnimState);
-                        })
-                        .forEach(curAnimState -> curAnimState.updateTime(tickCount, (float) curAnimState.getAnimationSpeedMultiplier()));
+                else {
+                    cachedAnimationStates.stream()
+                            .filter(curAnimState -> curAnimState.isServerTickable() && curAnimState.isStarted())
+                            .peek(curAnimState -> {
+                                if (curAnimState.getAccumulatedTicks() >= curAnimState.getAnimationTickDuration()) stopAnimation(curAnimState);
+                            })
+                            .forEach(curAnimState -> curAnimState.updateTime(tickCount, (float) curAnimState.getAnimationSpeedMultiplier()));
+                }
             }
 
             tickServerAnimations();

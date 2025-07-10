@@ -1,4 +1,4 @@
-// 1.20.1	2025-07-10T12:04:18.2257988	Chaos Awakens Datapack Registries
+// 1.20.1	2025-07-10T19:10:16.42484	Chaos Awakens Datapack Registries
 2340a4b1d099214775cb456687b1aa902d5c058a data/chaosawakens/damage_type/big_carnivorous_plant.json
 639d3e54d3df69c99f7b7d1571b1fffe8ec5e442 data/chaosawakens/damage_type/thorny_sun.json
 8e7156fa517088a7200f946dfe69c9af7553f5eb data/chaosawakens/dimension/mining_paradise.json
@@ -27,7 +27,7 @@ ec06f09d5e282096fedf379920250e53ccda248b data/chaosawakens/worldgen/density_func
 112369c1280f0792cde071d07b6206e161dfd68c data/chaosawakens/worldgen/multi_noise_biome_source_parameter_list/mining_paradise.json
 70cd30bbca86df97620e3dc54477c8128e97cdde data/chaosawakens/worldgen/noise/mining_paradise/continentalness.json
 988261d07c8d9582771c49e4211e73250aec82cf data/chaosawakens/worldgen/noise/mining_paradise/erosion.json
-052b3acae6936fe4996ab4b01823ac739c44f517 data/chaosawakens/worldgen/noise_settings/mining_paradise.json
+1c12fdd53ff97467eae8b7a7ca17feea0bdb618a data/chaosawakens/worldgen/noise_settings/mining_paradise.json
 9de12ae6e66d312497b62fb7de261e0ef2b4a309 data/chaosawakens/worldgen/placed_feature/crystal_grass_bonemeal.json
 c49856fda347bf25274f29529010f48a15abf981 data/chaosawakens/worldgen/placed_feature/dense_grass_bonemeal.json
 f72f6c473e707e24afa3176f623f972192a6fe6b data/chaosawakens/worldgen/placed_feature/dense_grass_patch.json
