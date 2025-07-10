@@ -23,7 +23,7 @@ public class RefactoredTerrainProvider {
     private static final ToFloatFunction<Float> AMPLIFIED_JAGGEDNESS = ToFloatFunction.createUnlimited((value) -> value * 2.0F); // Doubles jaggedness
 
     /**
-increased     * Builds a jaggedness spline based on erosion, weirdness, and peaks/valleys.
+     * Builds a jaggedness spline based on erosion, weirdness, and peaks/valleys.
      *
      * @param erosionInput            Function providing erosion noise.
      * @param weirdnessInput          Function providing weirdness noise.
@@ -33,6 +33,7 @@ increased     * Builds a jaggedness spline based on erosion, weirdness, and peak
      * @param lowErosionFactor        (Unused in original, kept for signature match if called elsewhere)
      * @param highErosionFactor       (Unused in original, kept for signature match if called elsewhere)
      * @param transformFunction       Output transformation function.
+     *
      * @return A CubicSpline for jaggedness based on erosion.
      */
     public static <C, I extends ToFloatFunction<C>> CubicSpline<C, I> buildErosionJaggednessSpline(
@@ -50,7 +51,7 @@ increased     * Builds a jaggedness spline based on erosion, weirdness, and peak
                 peakWeirdnessMultiplier, highErosionFactor, transformFunction); // highErosionFactor used as peakWeirdnessMultiplierForRidge
 
         // Combines jaggedness based on erosion level.
-        return CubicSpline.builder(erosionInput, transformFunction)
+        return net.minecraft.util.CubicSpline.builder(erosionInput, transformFunction)
                 .addPoint(-1.0F, lowErosionJaggedness) // Very low erosion
                 .addPoint(-0.78F, highErosionJaggedness) // Transition to higher erosion
                 .addPoint(erosionMidPoint, highErosionJaggedness) // Higher erosion
@@ -79,7 +80,7 @@ increased     * Builds a jaggedness spline based on erosion, weirdness, and peak
         float peakNoiseThreshold = NoiseRouterData.peaksAndValleys(0.56666666F); // A value representing typical peaks
         float midNoiseThreshold = (valleyNoiseThreshold + peakNoiseThreshold) / 2.0F;
 
-        CubicSpline.Builder<C, I> splineBuilder = CubicSpline.builder(peaksAndValleysInput, transformFunction);
+        CubicSpline.Builder<C, I> splineBuilder = net.minecraft.util.CubicSpline.builder(peaksAndValleysInput, transformFunction);
         splineBuilder.addPoint(valleyNoiseThreshold, 0.0F); // Valleys are smoother
 
         // Add jaggedness based on weirdness if multipliers are positive
@@ -128,6 +129,7 @@ increased     * Builds a jaggedness spline based on erosion, weirdness, and peak
      * @param targetFactor           The base scaling factor to aim for.
      * @param applyPeaksAndValleys   If true, peaks/valleys noise will influence the factor.
      * @param transformFunction      Output transformation function.
+     *
      * @return A CubicSpline for a terrain scaling factor.
      */
     public static <C, I extends ToFloatFunction<C>> CubicSpline<C, I> getErosionFactor(
@@ -184,6 +186,16 @@ increased     * Builds a jaggedness spline based on erosion, weirdness, and peak
         return erosionSplineBuilder.build();
     }
 
+    /**
+     * Creates a scaling factor spline based on erosion and weirdness.
+     *
+     * @param erosionInput     Function providing erosion noise.
+     * @param weirdnessInput   Function providing weirdness noise.
+     * @param targetFactor     The base scaling factor to aim for.
+     * @param transformFunction Output transformation function.
+     *
+     * @return A CubicSpline for a terrain scaling factor.
+     */
     public static <C, I extends ToFloatFunction<C>> CubicSpline<C, I> getPlateauErosionFactor(
             I erosionInput, I weirdnessInput,
             float targetFactor, ToFloatFunction<Float> transformFunction) {

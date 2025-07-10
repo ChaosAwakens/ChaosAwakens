@@ -9,7 +9,8 @@
     "common.block.BushBlockMixin",
     "common.block.CropBlockMixin",
     "common.block.StemBlockMixin",
-    "common.entity.LivingEntityMixin"
+    "common.entity.LivingEntityMixin",
+    "server.MinecraftServerMixin"
   ],
   "client": [
     "client.renderer.DebugRendererMixin",

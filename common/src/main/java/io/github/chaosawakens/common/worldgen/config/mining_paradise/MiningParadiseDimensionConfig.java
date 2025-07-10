@@ -52,7 +52,7 @@ public class MiningParadiseDimensionConfig implements DimensionLevelStemConfig {
     }
 
     public static DimensionType createDimensionType() {
-        return new DimensionType(OptionalLong.empty(), true, false, false, false, 1.0D, true, false, -256, 736, 480, BlockTags.INFINIBURN_OVERWORLD, BuiltinDimensionTypes.OVERWORLD_EFFECTS, 0.0F, new DimensionType.MonsterSettings(false, false, ConstantInt.of(4), 0));
+        return new DimensionType(OptionalLong.empty(), true, false, false, true, 1.0D, true, false, -256, 736, 480, BlockTags.INFINIBURN_OVERWORLD, BuiltinDimensionTypes.OVERWORLD_EFFECTS, 0.0F, new DimensionType.MonsterSettings(false, false, ConstantInt.of(4), 0));
     }
 
     public static Supplier<NoiseGeneratorSettings> createMiningParadiseNoiseGenSettings(BootstapContext<NoiseGeneratorSettings> regCtx) {

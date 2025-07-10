@@ -12,7 +12,7 @@
   "min_y": -256,
   "monster_spawn_block_light_limit": 0,
   "monster_spawn_light_level": 4,
-  "natural": false,
+  "natural": true,
   "piglin_safe": false,
   "respawn_anchor_works": false,
   "ultrawarm": false
