@@ -234,7 +234,7 @@ public class RefactoredTerrainProvider {
 
         // Base spline influenced by weirdness
         CubicSpline<C, I> baseWeirdnessSpline = CubicSpline.builder(weirdnessInput, transformFunction)
-                .addPoint(-0.2F, 6.3F) // High factor at low weirdness
+                .addPoint(-0.4F, 6.3F) // High factor at low weirdness
                 .addPoint(0.2F, targetFactor) // Target factor at higher weirdness
                 .build();
 
@@ -246,7 +246,7 @@ public class RefactoredTerrainProvider {
                 .addPoint(-0.35F, baseWeirdnessSpline)
                 .addPoint(-0.25F, baseWeirdnessSpline)
                 .addPoint(-0.1F, CubicSpline.builder(weirdnessInput, transformFunction) // Another nested spline
-                        .addPoint(-0.05F, 2.67F)
+                        .addPoint(-0.05F, 5.1F)
                         .addPoint(0.05F, 6.3F).build())
                 .addPoint(0.03F, baseWeirdnessSpline);
 

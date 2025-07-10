@@ -26,14 +26,14 @@
       "type": "minecraft:squeeze",
       "argument": {
         "type": "minecraft:mul",
-        "argument1": 0.16,
+        "argument1": 1.0,
         "argument2": {
           "type": "minecraft:interpolated",
           "argument": {
             "type": "minecraft:blend_density",
             "argument": {
               "type": "minecraft:add",
-              "argument1": 0.578125,
+              "argument1": 0.75,
               "argument2": {
                 "type": "minecraft:mul",
                 "argument1": {
@@ -45,10 +45,10 @@
                 },
                 "argument2": {
                   "type": "minecraft:add",
-                  "argument1": -0.578125,
+                  "argument1": -0.75,
                   "argument2": {
                     "type": "minecraft:add",
-                    "argument1": -0.538425,
+                    "argument1": -0.75,
                     "argument2": {
                       "type": "minecraft:mul",
                       "argument1": {
@@ -60,15 +60,15 @@
                       },
                       "argument2": {
                         "type": "minecraft:add",
-                        "argument1": 0.538425,
+                        "argument1": 0.75,
                         "argument2": {
                           "type": "minecraft:clamp",
                           "input": {
                             "type": "minecraft:add",
-                            "argument1": 10.703125,
+                            "argument1": 9.5,
                             "argument2": {
                               "type": "minecraft:mul",
-                              "argument1": 6.0,
+                              "argument1": 5.0,
                               "argument2": {
                                 "type": "minecraft:quarter_negative",
                                 "argument": {
@@ -99,7 +99,7 @@
     "fluid_level_spread": 0.0,
     "initial_density_without_jaggedness": {
       "type": "minecraft:add",
-      "argument1": 0.578125,
+      "argument1": 0.75,
       "argument2": {
         "type": "minecraft:mul",
         "argument1": {
@@ -111,10 +111,10 @@
         },
         "argument2": {
           "type": "minecraft:add",
-          "argument1": -0.578125,
+          "argument1": -0.75,
           "argument2": {
             "type": "minecraft:add",
-            "argument1": -0.538425,
+            "argument1": -0.75,
             "argument2": {
               "type": "minecraft:mul",
               "argument1": {
@@ -126,15 +126,15 @@
               },
               "argument2": {
                 "type": "minecraft:add",
-                "argument1": 0.538425,
+                "argument1": 0.75,
                 "argument2": {
                   "type": "minecraft:clamp",
                   "input": {
                     "type": "minecraft:add",
-                    "argument1": 10.703125,
+                    "argument1": 9.5,
                     "argument2": {
                       "type": "minecraft:mul",
-                      "argument1": 6.0,
+                      "argument1": 5.0,
                       "argument2": {
                         "type": "minecraft:quarter_negative",
                         "argument": {

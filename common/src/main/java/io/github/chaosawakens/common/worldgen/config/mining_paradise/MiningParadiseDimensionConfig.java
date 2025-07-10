@@ -134,8 +134,8 @@ public class MiningParadiseDimensionConfig implements DimensionLevelStemConfig {
         DensityFunction terrainFactor = CADensityFunctions.getWrappedDensityFunctionHolder(regCtx, CADensityFunctions.MINING_PARADISE_FACTOR);
         DensityFunction terrainDepth = CADensityFunctions.getWrappedDensityFunctionHolder(regCtx, CADensityFunctions.MINING_PARADISE_DEPTH);
         DensityFunction continentRidges = CADensityFunctions.getWrappedDensityFunctionHolder(regCtx, CADensityFunctions.MINING_PARADISE_RIDGES);
-        DensityFunction initialLandDensity = NoiseRouterData.slide(DensityFunctions.add(WorldGenUtil.noiseGradientDensity(DensityFunctions.cache2d(terrainFactor), terrainDepth, 6.0F), DensityFunctions.constant(10.703125D)).clamp(-66.0D, 64.0D), -256, 736, 480, 0, -0.538425D, 22, 44, 0.578125D);
-        DensityFunction finalLandDensity = DensityFunctions.mul(DensityFunctions.interpolated(DensityFunctions.blendDensity(initialLandDensity)), DensityFunctions.constant(0.16D)).squeeze();
+        DensityFunction initialLandDensity = NoiseRouterData.slide(DensityFunctions.add(WorldGenUtil.noiseGradientDensity(DensityFunctions.cache2d(terrainFactor), terrainDepth, 5.0F), DensityFunctions.constant(9.5D)).clamp(-66.0D, 64.0D), -256, 736, 480, 0, -0.75, 22, 44, 0.75);
+        DensityFunction finalLandDensity = DensityFunctions.mul(DensityFunctions.interpolated(DensityFunctions.blendDensity(initialLandDensity)), DensityFunctions.constant(1.0D)).squeeze();
 
         return new NoiseRouter(
                 zero,
