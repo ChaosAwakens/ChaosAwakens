@@ -10,6 +10,7 @@ import net.minecraft.server.level.progress.ChunkProgressListener;
 import net.minecraft.world.RandomSequences;
 import net.minecraft.world.level.CustomSpawner;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.dimension.DimensionType;
 import net.minecraft.world.level.dimension.LevelStem;
 import net.minecraft.world.level.storage.LevelStorageSource;
 import net.minecraft.world.level.storage.ServerLevelData;
@@ -20,6 +21,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.Executor;
 
 @Mixin(MinecraftServer.class)
@@ -34,8 +36,10 @@ public abstract class MinecraftServerMixin {
 
     @WrapOperation(method = "createLevels", at = @At(value = "NEW", target = "(Lnet/minecraft/server/MinecraftServer;Ljava/util/concurrent/Executor;Lnet/minecraft/world/level/storage/LevelStorageSource$LevelStorageAccess;Lnet/minecraft/world/level/storage/ServerLevelData;Lnet/minecraft/resources/ResourceKey;Lnet/minecraft/world/level/dimension/LevelStem;Lnet/minecraft/server/level/progress/ChunkProgressListener;ZJLjava/util/List;ZLnet/minecraft/world/RandomSequences;)Lnet/minecraft/server/level/ServerLevel;", ordinal = 1))
     private ServerLevel chaosawakens$createLevels(MinecraftServer curServer, Executor mainThreadExecutor, LevelStorageSource.LevelStorageAccess serverStorageAccess, ServerLevelData dummyData, ResourceKey<Level> curLevelKey, LevelStem curLevelStem, ChunkProgressListener chunkProgressListener, boolean isDebugWorld, long obfuscatedWorldSeed, List<CustomSpawner> customSpawners, boolean shouldTickTime, RandomSequences randomSequences, Operation<ServerLevel> original) {
-        ServerLevelData targetData = curLevelKey.location().getNamespace().equals(CAConstants.MODID)
-                ? worldData.overworldData()
+        Optional<DimensionType> potentialCADim = curLevelStem.type().unwrap().right();
+        boolean isNaturalDimension = potentialCADim.isEmpty() || potentialCADim.get().natural();
+        ServerLevelData targetData = curLevelKey.location().getNamespace().equals(CAConstants.MODID) && isNaturalDimension
+                ? worldData.overworldData() // Use overworld data globally for natural CA dimensions since the game was designed that way anyway
                 : dummyData;
 
         return original.call(curServer, mainThreadExecutor, serverStorageAccess, targetData, curLevelKey, curLevelStem, chunkProgressListener, isDebugWorld, obfuscatedWorldSeed, customSpawners, shouldTickTime, randomSequences);

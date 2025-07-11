@@ -116,11 +116,34 @@ public class MiningParadiseDimensionConfig implements DimensionLevelStemConfig {
                         )
                 )
         );
+        SurfaceRules.RuleSource mesozoicJungleSurfaceRuleSource = SurfaceRules.sequence(
+                SurfaceRules.ifTrue(
+                        SurfaceRules.abovePreliminarySurface(),
+                        SurfaceRules.ifTrue(
+                                SurfaceRules.ON_FLOOR,
+                                SurfaceRules.sequence(
+                                        SurfaceRules.ifTrue(
+                                                CASurfaceRules.CAConditionSources.AT_ABOVE_WATER_LEVEL,
+                                                CASurfaceRules.CAStateRules.TAR
+                                        ),
+                                        CASurfaceRules.CAStateRules.DENSE_DIRT
+                                )
+                        )
+                ),
+                SurfaceRules.ifTrue(
+                        SurfaceRules.UNDER_FLOOR,
+                        SurfaceRules.ifTrue(
+                                SurfaceRules.not(SurfaceRules.hole()),
+                                CASurfaceRules.CAStateRules.DENSE_DIRT
+                        )
+                )
+        );
         SurfaceRules.RuleSource densePlainsRuleSource = SurfaceRules.ifTrue(SurfaceRules.isBiome(CABiomes.DENSE_PLAINS.get()), defaultSurfaceRuleSource);
         SurfaceRules.RuleSource denseMountainsRuleSource = SurfaceRules.ifTrue(SurfaceRules.isBiome(CABiomes.DENSE_MOUNTAINS.get()), denseMountainsSurfaceRuleSource);
+        SurfaceRules.RuleSource mesozoicJungleRuleSource = SurfaceRules.ifTrue(SurfaceRules.isBiome(CABiomes.MESOZOIC_JUNGLE.get()), mesozoicJungleSurfaceRuleSource);
         SurfaceRules.RuleSource bedrockFloorRuleSource = SurfaceRules.ifTrue(SurfaceRules.verticalGradient("bedrock_floor", VerticalAnchor.bottom(), VerticalAnchor.aboveBottom(5)), CASurfaceRules.CAStateRules.BEDROCK);
 
-        return SurfaceRules.sequence(densePlainsRuleSource, denseMountainsRuleSource, bedrockFloorRuleSource);
+        return SurfaceRules.sequence(densePlainsRuleSource, denseMountainsRuleSource, mesozoicJungleRuleSource, bedrockFloorRuleSource);
     }
 
     protected static NoiseRouter createMiningParadiseNoiseRouter(BootstapContext<NoiseGeneratorSettings> regCtx) {

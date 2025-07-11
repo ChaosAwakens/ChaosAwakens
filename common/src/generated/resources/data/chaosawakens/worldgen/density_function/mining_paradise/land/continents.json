@@ -6,7 +6,7 @@
     "shift_x": "chaosawakens:vanilla/shift_x",
     "shift_y": 0.0,
     "shift_z": "chaosawakens:vanilla/shift_z",
-    "xz_scale": 0.5,
+    "xz_scale": 0.125,
     "y_scale": 0.0
   }
 }

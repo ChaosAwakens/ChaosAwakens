@@ -17,5 +17,7 @@ public class CASurfaceRules {
         // Mining Paradise
         public static final SurfaceRules.RuleSource DENSE_GRASS_BLOCK = SurfaceRules.state(CABlocks.DENSE_GRASS_BLOCK.get().defaultBlockState());
         public static final SurfaceRules.RuleSource DENSE_DIRT = SurfaceRules.state(CABlocks.DENSE_DIRT.get().defaultBlockState());
+
+        public static final SurfaceRules.RuleSource TAR = SurfaceRules.state(CABlocks.TAR.get().defaultBlockState());
     }
 }

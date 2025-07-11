@@ -10,6 +10,10 @@ import net.minecraft.world.level.biome.Climate;
 import java.util.function.Consumer;
 
 public class MiningParadiseBiomeBuilder implements BiomeBuilder {
+    public static final Climate.Parameter FULL_RANGE = Climate.Parameter.span(-1.1F, 1.55F);
+    public static final Climate.Parameter LAYER_1 = Climate.Parameter.span(-0.2F, 0.25F);
+    public static final Climate.Parameter LAYER_2 = Climate.Parameter.span(0.26F, 0.61F); // .48
+    public static final Climate.Parameter LAYER_4 = Climate.Parameter.span(0.61F, 1.55F);
 
     public MiningParadiseBiomeBuilder() { // Same per-object pattern Vanilla uses, JIC
 
@@ -17,9 +21,13 @@ public class MiningParadiseBiomeBuilder implements BiomeBuilder {
 
     @Override
     public void mapBiomes(Consumer<Pair<Climate.ParameterPoint, ResourceKey<Biome>>> biomeClimateParameterPointMapper) {
-        addSurfaceBiome(biomeClimateParameterPointMapper, Climate.Parameter.span(0.55F, 1.1F), Climate.Parameter.span(-0.6F, 0.6F), Climate.Parameter.span(0.6F, 1.85F), Climate.Parameter.span(-0.9F, -0.1F), Climate.Parameter.point(0.0F), 0, CABiomes.DENSE_MOUNTAINS.get());
+        // Layer 4
+        addSurfaceBiome(biomeClimateParameterPointMapper, Climate.Parameter.span(-1.0F, 0.11F), Climate.Parameter.span(0.2F, 0.5F), LAYER_4, FULL_RANGE, Climate.Parameter.point(1.0F), 0, CABiomes.DENSE_MOUNTAINS.get());
 
-        addSurfaceBiome(biomeClimateParameterPointMapper, Climate.Parameter.span(-0.2F, 1.2F), Climate.Parameter.span(0.2F, 0.5F), Climate.Parameter.span(0.2F, 0.85F), Climate.Parameter.span(0.1F, 0.9F), Climate.Parameter.point(0.0F), 0, CABiomes.DENSE_PLAINS.get());
+        // Layer 2
+        addSurfaceBiome(biomeClimateParameterPointMapper, Climate.Parameter.span(-0.2F, 1.2F), Climate.Parameter.span(0.2F, 0.5F), LAYER_2, FULL_RANGE, Climate.Parameter.point(0.0F), 0, CABiomes.DENSE_PLAINS.get());
 
+        // Layer 1
+        addSurfaceBiome(biomeClimateParameterPointMapper, Climate.Parameter.span(0.2F, 0.7F), Climate.Parameter.span(0.2F, 0.8F), LAYER_1, FULL_RANGE, Climate.Parameter.point(0.0F), 0, CABiomes.MESOZOIC_JUNGLE.get());
     }
 }

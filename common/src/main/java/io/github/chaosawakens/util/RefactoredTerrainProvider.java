@@ -51,7 +51,7 @@ public class RefactoredTerrainProvider {
                 peakWeirdnessMultiplier, highErosionFactor, transformFunction); // highErosionFactor used as peakWeirdnessMultiplierForRidge
 
         // Combines jaggedness based on erosion level.
-        return net.minecraft.util.CubicSpline.builder(erosionInput, transformFunction)
+        return CubicSpline.builder(erosionInput, transformFunction)
                 .addPoint(-1.0F, lowErosionJaggedness) // Very low erosion
                 .addPoint(-0.78F, highErosionJaggedness) // Transition to higher erosion
                 .addPoint(erosionMidPoint, highErosionJaggedness) // Higher erosion
@@ -80,7 +80,7 @@ public class RefactoredTerrainProvider {
         float peakNoiseThreshold = NoiseRouterData.peaksAndValleys(0.56666666F); // A value representing typical peaks
         float midNoiseThreshold = (valleyNoiseThreshold + peakNoiseThreshold) / 2.0F;
 
-        CubicSpline.Builder<C, I> splineBuilder = net.minecraft.util.CubicSpline.builder(peaksAndValleysInput, transformFunction);
+        CubicSpline.Builder<C, I> splineBuilder = CubicSpline.builder(peaksAndValleysInput, transformFunction);
         splineBuilder.addPoint(valleyNoiseThreshold, 0.0F); // Valleys are smoother
 
         // Add jaggedness based on weirdness if multipliers are positive

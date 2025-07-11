@@ -2,7 +2,7 @@
   "type": "minecraft:flat_cache",
   "argument": {
     "type": "minecraft:shifted_noise",
-    "noise": "minecraft:ridge",
+    "noise": "chaosawakens:mining_paradise/ridges",
     "shift_x": "chaosawakens:vanilla/shift_x",
     "shift_y": 0.0,
     "shift_z": "chaosawakens:vanilla/shift_z",
