@@ -12,8 +12,8 @@ import java.util.function.Consumer;
 public class MiningParadiseBiomeBuilder implements BiomeBuilder {
     public static final Climate.Parameter FULL_RANGE = Climate.Parameter.span(-1.1F, 1.55F);
     public static final Climate.Parameter LAYER_1 = Climate.Parameter.span(-0.2F, 0.25F);
-    public static final Climate.Parameter LAYER_2 = Climate.Parameter.span(0.26F, 0.61F); // .48
-    public static final Climate.Parameter LAYER_4 = Climate.Parameter.span(0.61F, 1.55F);
+    public static final Climate.Parameter LAYER_2 = Climate.Parameter.span(0.24F, 0.59F); // .48
+    public static final Climate.Parameter LAYER_4 = Climate.Parameter.span(0.59F, 1.55F);
 
     public MiningParadiseBiomeBuilder() { // Same per-object pattern Vanilla uses, JIC
 
@@ -22,12 +22,12 @@ public class MiningParadiseBiomeBuilder implements BiomeBuilder {
     @Override
     public void mapBiomes(Consumer<Pair<Climate.ParameterPoint, ResourceKey<Biome>>> biomeClimateParameterPointMapper) {
         // Layer 4
-        addSurfaceBiome(biomeClimateParameterPointMapper, Climate.Parameter.span(-1.0F, 0.11F), Climate.Parameter.span(0.2F, 0.5F), LAYER_4, FULL_RANGE, Climate.Parameter.point(1.0F), 0, CABiomes.DENSE_MOUNTAINS.get());
+        addSurfaceBiome(biomeClimateParameterPointMapper, Climate.Parameter.span(-0.57F, 0.57F), Climate.Parameter.span(-0.41F, 0.41F), LAYER_4, FULL_RANGE, Climate.Parameter.point(0.0F), 0, CABiomes.DENSE_MOUNTAINS.get());
 
         // Layer 2
-        addSurfaceBiome(biomeClimateParameterPointMapper, Climate.Parameter.span(-0.2F, 1.2F), Climate.Parameter.span(0.2F, 0.5F), LAYER_2, FULL_RANGE, Climate.Parameter.point(0.0F), 0, CABiomes.DENSE_PLAINS.get());
+        addSurfaceBiome(biomeClimateParameterPointMapper, FULL_RANGE, FULL_RANGE, LAYER_2, FULL_RANGE, Climate.Parameter.point(0.0F), 0, CABiomes.DENSE_PLAINS.get());
 
         // Layer 1
-        addSurfaceBiome(biomeClimateParameterPointMapper, Climate.Parameter.span(0.2F, 0.7F), Climate.Parameter.span(0.2F, 0.8F), LAYER_1, FULL_RANGE, Climate.Parameter.point(0.0F), 0, CABiomes.MESOZOIC_JUNGLE.get());
+        addSurfaceBiome(biomeClimateParameterPointMapper, FULL_RANGE, FULL_RANGE, LAYER_1, FULL_RANGE, Climate.Parameter.point(0.0F), 0, CABiomes.MESOZOIC_JUNGLE.get());
     }
 }

@@ -48,11 +48,12 @@ public final class WorldGenUtil {
     public static <C, I extends ToFloatFunction<C>> CubicSpline<C, I> miningParadiseFactor(I continentSplineCoord, I erosionSplineCoord, I ridgesSplineCoord, I foldedRidgesSplineCoord) {
         CubicSpline<C, I> deepOceanErosionFactorSpline = RefactoredTerrainProvider.getErosionFactor(erosionSplineCoord, ridgesSplineCoord, foldedRidgesSplineCoord, 7.15F, 6.8F, 5.5F, 4.4F,false, NO_TRANSFORM);
         CubicSpline<C, I> oceanErosionFactorSpline = RefactoredTerrainProvider.getErosionFactor(erosionSplineCoord, ridgesSplineCoord, foldedRidgesSplineCoord, 6.15F, 6.3F, 5.5F, 4.8F,false, NO_TRANSFORM);
-        CubicSpline<C, I> beachErosionFactorSpline = RefactoredTerrainProvider.getErosionFactor(erosionSplineCoord, ridgesSplineCoord, foldedRidgesSplineCoord, 5.25F,5.2F, 4.75F, 4.6F, false, NO_TRANSFORM);
-        CubicSpline<C, I> landErosionFactorSpline = RefactoredTerrainProvider.getErosionFactor(erosionSplineCoord, ridgesSplineCoord, foldedRidgesSplineCoord, 4.88F, 5.1F, 4.45F, 4.4F, false, NO_TRANSFORM);
+        CubicSpline<C, I> beachErosionFactorSpline = RefactoredTerrainProvider.getErosionFactor(erosionSplineCoord, ridgesSplineCoord, foldedRidgesSplineCoord, 4.75F,5.2F, 4.75F, 4.6F, false, NO_TRANSFORM);
+        CubicSpline<C, I> landErosionFactorSpline = RefactoredTerrainProvider.getErosionFactor(erosionSplineCoord, ridgesSplineCoord, foldedRidgesSplineCoord, 4.5F, 5.1F, 4.45F, 4.4F, false, NO_TRANSFORM);
         CubicSpline<C, I> erosionFactorSpline = RefactoredTerrainProvider.getPlateauErosionFactor(erosionSplineCoord, ridgesSplineCoord, 3.59F,  NO_TRANSFORM);
         CubicSpline<C, I> plateauErosionFactorSpline = RefactoredTerrainProvider.getPlateauErosionFactor(erosionSplineCoord, ridgesSplineCoord, 2.99F,  NO_TRANSFORM);
-        CubicSpline<C, I> amplifiedErosionFactorSpline = RefactoredTerrainProvider.getErosionFactor(erosionSplineCoord, ridgesSplineCoord, foldedRidgesSplineCoord, 4.48F, 5.1F, 4.45F, 2.0F, true, AMPLIFIED_FACTOR);
+        CubicSpline<C, I> amplifiedErosionFactorSpline = RefactoredTerrainProvider.getErosionFactor(erosionSplineCoord, ridgesSplineCoord, foldedRidgesSplineCoord, 2.28F, 4.1F, 2.45F, 2.0F, true, NO_TRANSFORM);
+        CubicSpline<C, I> highAmplifiedErosionFactorSpline = RefactoredTerrainProvider.getErosionFactor(erosionSplineCoord, ridgesSplineCoord, foldedRidgesSplineCoord, 1.58F, 3.5F, 2.45F, 2.0F, true, NO_TRANSFORM);
 
         return CubicSpline.builder(continentSplineCoord, NO_TRANSFORM)
                 .addPoint(-1.1F, deepOceanErosionFactorSpline)
@@ -60,16 +61,16 @@ public final class WorldGenUtil {
                 .addPoint(-0.6F, oceanErosionFactorSpline)
                 .addPoint(-0.51F, oceanErosionFactorSpline)
 
-                .addPoint(-0.27F, 5.7F)
-                .addPoint(-0.13F, 5.25F)
+                .addPoint(-0.27F, 5.2F)
+                .addPoint(-0.13F, 4.75F)
                 .addPoint(-0.1F, beachErosionFactorSpline)
-                .addPoint(-0.07F, 5.05F)
-                .addPoint(0.07F, 5.0F)
+                .addPoint(-0.07F, 4.65F)
+                .addPoint(0.07F, 4.5F)
 
-                .addPoint(0.13F, 4.94F)
-                .addPoint(0.22F, 4.88F)
+                .addPoint(0.13F, 4.45F)
+                .addPoint(0.22F, 4.4F)
                 .addPoint(0.25F, landErosionFactorSpline)
-                .addPoint(0.28F, 4.78F)
+                .addPoint(0.28F, 4.4F)
 
                 .addPoint(0.3F, 4.08F)
                 .addPoint(0.41F, 3.69F)
@@ -79,11 +80,11 @@ public final class WorldGenUtil {
                 .addPoint(0.49F, 3.26F)
                 .addPoint(0.53F, 3.12F)
                 .addPoint(0.56F, plateauErosionFactorSpline)
-                .addPoint(0.59F, 2.79F)
+                .addPoint(0.59F, 2.99F)
 
-                .addPoint(0.61F, 2.26F)
+                .addPoint(0.61F, 2.58F)
                 .addPoint(0.7F, amplifiedErosionFactorSpline)
-                .addPoint(0.8F, amplifiedErosionFactorSpline)
+                .addPoint(0.8F, highAmplifiedErosionFactorSpline)
                 .build();
     }
 
