@@ -1,16 +1,21 @@
 package io.github.chaosawakens.common.registry;
 
 import com.google.common.collect.ImmutableList;
+import com.mojang.datafixers.util.Either;
 import io.github.chaosawakens.CAConstants;
 import io.github.chaosawakens.api.asm.annotations.RegistrarEntry;
 import io.github.chaosawakens.api.platform.CAServices;
+import io.github.chaosawakens.common.worldgen.feature.NBTTreeFeature;
+import io.github.chaosawakens.common.worldgen.feature.configurations.NBTTreeConfiguration;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.RandomPatchConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.SimpleBlockConfiguration;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
@@ -20,6 +25,19 @@ import java.util.List;
 import java.util.function.Supplier;
 
 public class CAFeatures {
+
+    @RegistrarEntry
+    public static class Features {
+        private static final ObjectArrayList<Supplier<Feature<?>>> FEATURES = new ObjectArrayList<>();
+
+        public static final Supplier<Feature<NBTTreeConfiguration>> NBT_TREE_FEATURE = registerFeature("nbt_tree", () -> new NBTTreeFeature(NBTTreeConfiguration.CODEC));
+
+        private static <FC extends FeatureConfiguration, F extends Feature<FC>> Supplier<F> registerFeature(String id, Supplier<Feature<?>> featureSup) {
+            Supplier<Feature<?extends FeatureConfiguration>> placedFeatureSup = CAServices.REGISTRAR.registerObject(CAConstants.prefix(id), featureSup, BuiltInRegistries.FEATURE);
+            FEATURES.add(featureSup);
+            return (Supplier<F>) placedFeatureSup;
+        }
+    }
 
     @RegistrarEntry
     public static class CAConfiguredFeatures {
