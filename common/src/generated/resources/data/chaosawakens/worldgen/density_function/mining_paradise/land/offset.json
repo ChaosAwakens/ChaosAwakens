@@ -7,8 +7,28 @@
       "argument1": {
         "type": "minecraft:mul",
         "argument1": {
+          "type": "minecraft:blend_offset"
+        },
+        "argument2": {
           "type": "minecraft:add",
           "argument1": 1.0,
+          "argument2": {
+            "type": "minecraft:mul",
+            "argument1": -1.0,
+            "argument2": {
+              "type": "minecraft:cache_once",
+              "argument": {
+                "type": "minecraft:blend_alpha"
+              }
+            }
+          }
+        }
+      },
+      "argument2": {
+        "type": "minecraft:mul",
+        "argument1": {
+          "type": "minecraft:add",
+          "argument1": -0.5,
           "argument2": {
             "type": "minecraft:spline",
             "spline": {
@@ -126,7 +146,7 @@
                             {
                               "derivative": 0.5,
                               "location": -1.0,
-                              "value": -0.75
+                              "value": -0.37
                             },
                             {
                               "derivative": 0.0,
@@ -160,7 +180,7 @@
                             {
                               "derivative": 0.5,
                               "location": -1.0,
-                              "value": -0.6
+                              "value": -0.22
                             },
                             {
                               "derivative": 0.1125,
@@ -194,7 +214,7 @@
                             {
                               "derivative": 0.5,
                               "location": -1.0,
-                              "value": -0.6
+                              "value": -0.22
                             },
                             {
                               "derivative": 0.0,
@@ -228,7 +248,7 @@
                             {
                               "derivative": 0.5,
                               "location": -1.0,
-                              "value": -0.6
+                              "value": -0.22
                             },
                             {
                               "derivative": 0.0,
@@ -262,7 +282,7 @@
                             {
                               "derivative": 0.0,
                               "location": -1.0,
-                              "value": -0.6
+                              "value": -0.22
                             },
                             {
                               "derivative": 0.0,
@@ -273,7 +293,7 @@
                                   {
                                     "derivative": 0.5,
                                     "location": -1.0,
-                                    "value": -0.6
+                                    "value": -0.22
                                   },
                                   {
                                     "derivative": 0.0,
@@ -315,7 +335,7 @@
                             {
                               "derivative": 0.0,
                               "location": -1.0,
-                              "value": -0.6
+                              "value": -0.22
                             },
                             {
                               "derivative": 0.0,
@@ -326,7 +346,7 @@
                                   {
                                     "derivative": 0.5,
                                     "location": -1.0,
-                                    "value": -0.6
+                                    "value": -0.22
                                   },
                                   {
                                     "derivative": 0.0,
@@ -368,7 +388,7 @@
                             {
                               "derivative": 0.5,
                               "location": -1.0,
-                              "value": -0.6
+                              "value": -0.22
                             },
                             {
                               "derivative": 0.0,
@@ -542,7 +562,7 @@
                             {
                               "derivative": 0.5,
                               "location": -1.0,
-                              "value": -0.75
+                              "value": -0.37
                             },
                             {
                               "derivative": 0.0,
@@ -576,7 +596,7 @@
                             {
                               "derivative": 0.5,
                               "location": -1.0,
-                              "value": -0.6
+                              "value": -0.22
                             },
                             {
                               "derivative": 0.1125,
@@ -610,7 +630,7 @@
                             {
                               "derivative": 0.5,
                               "location": -1.0,
-                              "value": -0.6
+                              "value": -0.22
                             },
                             {
                               "derivative": 0.0,
@@ -644,7 +664,7 @@
                             {
                               "derivative": 0.5,
                               "location": -1.0,
-                              "value": -0.6
+                              "value": -0.22
                             },
                             {
                               "derivative": 0.0,
@@ -678,7 +698,7 @@
                             {
                               "derivative": 0.0,
                               "location": -1.0,
-                              "value": -0.6
+                              "value": -0.22
                             },
                             {
                               "derivative": 0.0,
@@ -689,7 +709,7 @@
                                   {
                                     "derivative": 0.5,
                                     "location": -1.0,
-                                    "value": -0.6
+                                    "value": -0.22
                                   },
                                   {
                                     "derivative": 0.0,
@@ -731,7 +751,7 @@
                             {
                               "derivative": 0.0,
                               "location": -1.0,
-                              "value": -0.6
+                              "value": -0.22
                             },
                             {
                               "derivative": 0.0,
@@ -742,7 +762,7 @@
                                   {
                                     "derivative": 0.5,
                                     "location": -1.0,
-                                    "value": -0.6
+                                    "value": -0.22
                                   },
                                   {
                                     "derivative": 0.0,
@@ -784,7 +804,7 @@
                             {
                               "derivative": 0.5,
                               "location": -1.0,
-                              "value": -0.6
+                              "value": -0.22
                             },
                             {
                               "derivative": 0.0,
@@ -848,7 +868,7 @@
                 },
                 {
                   "derivative": 0.0,
-                  "location": -0.51,
+                  "location": -0.65,
                   "value": {
                     "coordinate": "chaosawakens:mining_paradise/land/erosion",
                     "points": [
@@ -958,7 +978,7 @@
                             {
                               "derivative": 0.5,
                               "location": -1.0,
-                              "value": -0.75
+                              "value": -0.37
                             },
                             {
                               "derivative": 0.0,
@@ -992,7 +1012,7 @@
                             {
                               "derivative": 0.5,
                               "location": -1.0,
-                              "value": -0.6
+                              "value": -0.22
                             },
                             {
                               "derivative": 0.1125,
@@ -1026,7 +1046,7 @@
                             {
                               "derivative": 0.5,
                               "location": -1.0,
-                              "value": -0.6
+                              "value": -0.22
                             },
                             {
                               "derivative": 0.0,
@@ -1060,7 +1080,7 @@
                             {
                               "derivative": 0.5,
                               "location": -1.0,
-                              "value": -0.6
+                              "value": -0.22
                             },
                             {
                               "derivative": 0.0,
@@ -1094,7 +1114,7 @@
                             {
                               "derivative": 0.0,
                               "location": -1.0,
-                              "value": -0.6
+                              "value": -0.22
                             },
                             {
                               "derivative": 0.0,
@@ -1105,7 +1125,7 @@
                                   {
                                     "derivative": 0.5,
                                     "location": -1.0,
-                                    "value": -0.6
+                                    "value": -0.22
                                   },
                                   {
                                     "derivative": 0.0,
@@ -1147,7 +1167,7 @@
                             {
                               "derivative": 0.0,
                               "location": -1.0,
-                              "value": -0.6
+                              "value": -0.22
                             },
                             {
                               "derivative": 0.0,
@@ -1158,7 +1178,7 @@
                                   {
                                     "derivative": 0.5,
                                     "location": -1.0,
-                                    "value": -0.6
+                                    "value": -0.22
                                   },
                                   {
                                     "derivative": 0.0,
@@ -1200,7 +1220,7 @@
                             {
                               "derivative": 0.5,
                               "location": -1.0,
-                              "value": -0.6
+                              "value": -0.22
                             },
                             {
                               "derivative": 0.0,
@@ -1374,7 +1394,7 @@
                             {
                               "derivative": 0.5,
                               "location": -1.0,
-                              "value": -0.75
+                              "value": -0.37
                             },
                             {
                               "derivative": 0.0,
@@ -1408,7 +1428,7 @@
                             {
                               "derivative": 0.5,
                               "location": -1.0,
-                              "value": -0.6
+                              "value": -0.22
                             },
                             {
                               "derivative": 0.1125,
@@ -1442,7 +1462,7 @@
                             {
                               "derivative": 0.5,
                               "location": -1.0,
-                              "value": -0.6
+                              "value": -0.22
                             },
                             {
                               "derivative": 0.0,
@@ -1476,7 +1496,7 @@
                             {
                               "derivative": 0.5,
                               "location": -1.0,
-                              "value": -0.6
+                              "value": -0.22
                             },
                             {
                               "derivative": 0.0,
@@ -1510,7 +1530,7 @@
                             {
                               "derivative": 0.0,
                               "location": -1.0,
-                              "value": -0.6
+                              "value": -0.22
                             },
                             {
                               "derivative": 0.0,
@@ -1521,7 +1541,7 @@
                                   {
                                     "derivative": 0.5,
                                     "location": -1.0,
-                                    "value": -0.6
+                                    "value": -0.22
                                   },
                                   {
                                     "derivative": 0.0,
@@ -1563,7 +1583,7 @@
                             {
                               "derivative": 0.0,
                               "location": -1.0,
-                              "value": -0.6
+                              "value": -0.22
                             },
                             {
                               "derivative": 0.0,
@@ -1574,7 +1594,7 @@
                                   {
                                     "derivative": 0.5,
                                     "location": -1.0,
-                                    "value": -0.6
+                                    "value": -0.22
                                   },
                                   {
                                     "derivative": 0.0,
@@ -1616,7 +1636,7 @@
                             {
                               "derivative": 0.5,
                               "location": -1.0,
-                              "value": -0.6
+                              "value": -0.22
                             },
                             {
                               "derivative": 0.0,
@@ -1680,7 +1700,7 @@
                 },
                 {
                   "derivative": 0.0,
-                  "location": -0.36,
+                  "location": -0.26,
                   "value": {
                     "coordinate": "chaosawakens:mining_paradise/land/erosion",
                     "points": [
@@ -1770,7 +1790,7 @@
                             {
                               "derivative": 0.5,
                               "location": -1.0,
-                              "value": -0.35000002
+                              "value": -0.24000001
                             },
                             {
                               "derivative": 0.0,
@@ -1804,7 +1824,7 @@
                             {
                               "derivative": 0.5,
                               "location": -1.0,
-                              "value": -0.2
+                              "value": -0.09
                             },
                             {
                               "derivative": 0.01,
@@ -1838,7 +1858,7 @@
                             {
                               "derivative": 0.5,
                               "location": -1.0,
-                              "value": -0.2
+                              "value": -0.09
                             },
                             {
                               "derivative": 0.0,
@@ -1902,7 +1922,7 @@
                 },
                 {
                   "derivative": 0.0,
-                  "location": -0.15,
+                  "location": -0.05,
                   "value": {
                     "coordinate": "chaosawakens:mining_paradise/land/erosion",
                     "points": [
@@ -1992,7 +2012,7 @@
                             {
                               "derivative": 0.5,
                               "location": -1.0,
-                              "value": -0.35000002
+                              "value": -0.24000001
                             },
                             {
                               "derivative": 0.0,
@@ -2026,7 +2046,7 @@
                             {
                               "derivative": 0.5,
                               "location": -1.0,
-                              "value": -0.2
+                              "value": -0.09
                             },
                             {
                               "derivative": 0.01,
@@ -2060,7 +2080,7 @@
                             {
                               "derivative": 0.5,
                               "location": -1.0,
-                              "value": -0.2
+                              "value": -0.09
                             },
                             {
                               "derivative": 0.0,
@@ -2214,7 +2234,7 @@
                             {
                               "derivative": 0.5,
                               "location": -1.0,
-                              "value": -0.28
+                              "value": -0.21000001
                             },
                             {
                               "derivative": 0.0,
@@ -2248,7 +2268,7 @@
                             {
                               "derivative": 0.5,
                               "location": -1.0,
-                              "value": -0.13
+                              "value": -0.06
                             },
                             {
                               "derivative": 0.01,
@@ -2282,7 +2302,7 @@
                             {
                               "derivative": 0.5,
                               "location": -1.0,
-                              "value": -0.13
+                              "value": -0.06
                             },
                             {
                               "derivative": 0.0,
@@ -2346,7 +2366,7 @@
                 },
                 {
                   "derivative": 0.0,
-                  "location": 0.36,
+                  "location": 0.15,
                   "value": {
                     "coordinate": "chaosawakens:mining_paradise/land/erosion",
                     "points": [
@@ -2436,7 +2456,7 @@
                             {
                               "derivative": 0.5,
                               "location": -1.0,
-                              "value": -0.28
+                              "value": -0.21000001
                             },
                             {
                               "derivative": 0.0,
@@ -2470,7 +2490,7 @@
                             {
                               "derivative": 0.5,
                               "location": -1.0,
-                              "value": -0.13
+                              "value": -0.06
                             },
                             {
                               "derivative": 0.01,
@@ -2504,7 +2524,7 @@
                             {
                               "derivative": 0.5,
                               "location": -1.0,
-                              "value": -0.13
+                              "value": -0.06
                             },
                             {
                               "derivative": 0.0,
@@ -2568,7 +2588,451 @@
                 },
                 {
                   "derivative": 0.0,
-                  "location": 0.6,
+                  "location": 0.25,
+                  "value": {
+                    "coordinate": "chaosawakens:mining_paradise/land/erosion",
+                    "points": [
+                      {
+                        "derivative": 0.0,
+                        "location": -0.85,
+                        "value": {
+                          "coordinate": "chaosawakens:mining_paradise/land/ridges_folded",
+                          "points": [
+                            {
+                              "derivative": 0.38940096,
+                              "location": -1.0,
+                              "value": -0.08880186
+                            },
+                            {
+                              "derivative": 0.38940096,
+                              "location": 1.0,
+                              "value": 0.69000006
+                            }
+                          ]
+                        }
+                      },
+                      {
+                        "derivative": 0.0,
+                        "location": -0.7,
+                        "value": {
+                          "coordinate": "chaosawakens:mining_paradise/land/ridges_folded",
+                          "points": [
+                            {
+                              "derivative": 0.37788022,
+                              "location": -1.0,
+                              "value": -0.115760356
+                            },
+                            {
+                              "derivative": 0.37788022,
+                              "location": 1.0,
+                              "value": 0.6400001
+                            }
+                          ]
+                        }
+                      },
+                      {
+                        "derivative": 0.0,
+                        "location": -0.4,
+                        "value": {
+                          "coordinate": "chaosawakens:mining_paradise/land/ridges_folded",
+                          "points": [
+                            {
+                              "derivative": 0.0,
+                              "location": -1.0,
+                              "value": -0.2222
+                            },
+                            {
+                              "derivative": 0.0,
+                              "location": -0.75,
+                              "value": -0.2222
+                            },
+                            {
+                              "derivative": 0.0,
+                              "location": -0.65,
+                              "value": 0.0
+                            },
+                            {
+                              "derivative": 0.0,
+                              "location": 0.5954547,
+                              "value": 2.9802322E-8
+                            },
+                            {
+                              "derivative": 0.2534563,
+                              "location": 0.6054547,
+                              "value": 2.9802322E-8
+                            },
+                            {
+                              "derivative": 0.2534563,
+                              "location": 1.0,
+                              "value": 0.100000024
+                            }
+                          ]
+                        }
+                      },
+                      {
+                        "derivative": 0.0,
+                        "location": -0.35,
+                        "value": {
+                          "coordinate": "chaosawakens:mining_paradise/land/ridges_folded",
+                          "points": [
+                            {
+                              "derivative": 0.5,
+                              "location": -1.0,
+                              "value": -0.19
+                            },
+                            {
+                              "derivative": 0.0,
+                              "location": -0.4,
+                              "value": 0.05
+                            },
+                            {
+                              "derivative": 0.0,
+                              "location": 0.0,
+                              "value": 0.05
+                            },
+                            {
+                              "derivative": 0.0,
+                              "location": 0.4,
+                              "value": 0.05
+                            },
+                            {
+                              "derivative": 0.007000001,
+                              "location": 1.0,
+                              "value": 0.060000002
+                            }
+                          ]
+                        }
+                      },
+                      {
+                        "derivative": 0.0,
+                        "location": -0.1,
+                        "value": {
+                          "coordinate": "chaosawakens:mining_paradise/land/ridges_folded",
+                          "points": [
+                            {
+                              "derivative": 0.5,
+                              "location": -1.0,
+                              "value": -0.04
+                            },
+                            {
+                              "derivative": 0.01,
+                              "location": -0.4,
+                              "value": 0.001
+                            },
+                            {
+                              "derivative": 0.01,
+                              "location": 0.0,
+                              "value": 0.003
+                            },
+                            {
+                              "derivative": 0.094000004,
+                              "location": 0.4,
+                              "value": 0.05
+                            },
+                            {
+                              "derivative": 0.007000001,
+                              "location": 1.0,
+                              "value": 0.060000002
+                            }
+                          ]
+                        }
+                      },
+                      {
+                        "derivative": 0.0,
+                        "location": 0.2,
+                        "value": {
+                          "coordinate": "chaosawakens:mining_paradise/land/ridges_folded",
+                          "points": [
+                            {
+                              "derivative": 0.5,
+                              "location": -1.0,
+                              "value": -0.04
+                            },
+                            {
+                              "derivative": 0.0,
+                              "location": -0.4,
+                              "value": 0.01
+                            },
+                            {
+                              "derivative": 0.0,
+                              "location": 0.0,
+                              "value": 0.01
+                            },
+                            {
+                              "derivative": 0.04,
+                              "location": 0.4,
+                              "value": 0.03
+                            },
+                            {
+                              "derivative": 0.049,
+                              "location": 1.0,
+                              "value": 0.1
+                            }
+                          ]
+                        }
+                      },
+                      {
+                        "derivative": 0.0,
+                        "location": 0.7,
+                        "value": {
+                          "coordinate": "chaosawakens:mining_paradise/land/ridges_folded",
+                          "points": [
+                            {
+                              "derivative": 0.0,
+                              "location": -1.0,
+                              "value": -0.02
+                            },
+                            {
+                              "derivative": 0.0,
+                              "location": -0.4,
+                              "value": -0.03
+                            },
+                            {
+                              "derivative": 0.0,
+                              "location": 0.0,
+                              "value": -0.03
+                            },
+                            {
+                              "derivative": 0.12,
+                              "location": 0.4,
+                              "value": 0.03
+                            },
+                            {
+                              "derivative": 0.049,
+                              "location": 1.0,
+                              "value": 0.1
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "derivative": 0.0,
+                  "location": 0.5,
+                  "value": {
+                    "coordinate": "chaosawakens:mining_paradise/land/erosion",
+                    "points": [
+                      {
+                        "derivative": 0.0,
+                        "location": -0.85,
+                        "value": {
+                          "coordinate": "chaosawakens:mining_paradise/land/ridges_folded",
+                          "points": [
+                            {
+                              "derivative": 0.38940096,
+                              "location": -1.0,
+                              "value": -0.08880186
+                            },
+                            {
+                              "derivative": 0.38940096,
+                              "location": 1.0,
+                              "value": 0.69000006
+                            }
+                          ]
+                        }
+                      },
+                      {
+                        "derivative": 0.0,
+                        "location": -0.7,
+                        "value": {
+                          "coordinate": "chaosawakens:mining_paradise/land/ridges_folded",
+                          "points": [
+                            {
+                              "derivative": 0.37788022,
+                              "location": -1.0,
+                              "value": -0.115760356
+                            },
+                            {
+                              "derivative": 0.37788022,
+                              "location": 1.0,
+                              "value": 0.6400001
+                            }
+                          ]
+                        }
+                      },
+                      {
+                        "derivative": 0.0,
+                        "location": -0.4,
+                        "value": {
+                          "coordinate": "chaosawakens:mining_paradise/land/ridges_folded",
+                          "points": [
+                            {
+                              "derivative": 0.0,
+                              "location": -1.0,
+                              "value": -0.2222
+                            },
+                            {
+                              "derivative": 0.0,
+                              "location": -0.75,
+                              "value": -0.2222
+                            },
+                            {
+                              "derivative": 0.0,
+                              "location": -0.65,
+                              "value": 0.0
+                            },
+                            {
+                              "derivative": 0.0,
+                              "location": 0.5954547,
+                              "value": 2.9802322E-8
+                            },
+                            {
+                              "derivative": 0.2534563,
+                              "location": 0.6054547,
+                              "value": 2.9802322E-8
+                            },
+                            {
+                              "derivative": 0.2534563,
+                              "location": 1.0,
+                              "value": 0.100000024
+                            }
+                          ]
+                        }
+                      },
+                      {
+                        "derivative": 0.0,
+                        "location": -0.35,
+                        "value": {
+                          "coordinate": "chaosawakens:mining_paradise/land/ridges_folded",
+                          "points": [
+                            {
+                              "derivative": 0.5,
+                              "location": -1.0,
+                              "value": -0.19
+                            },
+                            {
+                              "derivative": 0.0,
+                              "location": -0.4,
+                              "value": 0.05
+                            },
+                            {
+                              "derivative": 0.0,
+                              "location": 0.0,
+                              "value": 0.05
+                            },
+                            {
+                              "derivative": 0.0,
+                              "location": 0.4,
+                              "value": 0.05
+                            },
+                            {
+                              "derivative": 0.007000001,
+                              "location": 1.0,
+                              "value": 0.060000002
+                            }
+                          ]
+                        }
+                      },
+                      {
+                        "derivative": 0.0,
+                        "location": -0.1,
+                        "value": {
+                          "coordinate": "chaosawakens:mining_paradise/land/ridges_folded",
+                          "points": [
+                            {
+                              "derivative": 0.5,
+                              "location": -1.0,
+                              "value": -0.04
+                            },
+                            {
+                              "derivative": 0.01,
+                              "location": -0.4,
+                              "value": 0.001
+                            },
+                            {
+                              "derivative": 0.01,
+                              "location": 0.0,
+                              "value": 0.003
+                            },
+                            {
+                              "derivative": 0.094000004,
+                              "location": 0.4,
+                              "value": 0.05
+                            },
+                            {
+                              "derivative": 0.007000001,
+                              "location": 1.0,
+                              "value": 0.060000002
+                            }
+                          ]
+                        }
+                      },
+                      {
+                        "derivative": 0.0,
+                        "location": 0.2,
+                        "value": {
+                          "coordinate": "chaosawakens:mining_paradise/land/ridges_folded",
+                          "points": [
+                            {
+                              "derivative": 0.5,
+                              "location": -1.0,
+                              "value": -0.04
+                            },
+                            {
+                              "derivative": 0.0,
+                              "location": -0.4,
+                              "value": 0.01
+                            },
+                            {
+                              "derivative": 0.0,
+                              "location": 0.0,
+                              "value": 0.01
+                            },
+                            {
+                              "derivative": 0.04,
+                              "location": 0.4,
+                              "value": 0.03
+                            },
+                            {
+                              "derivative": 0.049,
+                              "location": 1.0,
+                              "value": 0.1
+                            }
+                          ]
+                        }
+                      },
+                      {
+                        "derivative": 0.0,
+                        "location": 0.7,
+                        "value": {
+                          "coordinate": "chaosawakens:mining_paradise/land/ridges_folded",
+                          "points": [
+                            {
+                              "derivative": 0.0,
+                              "location": -1.0,
+                              "value": -0.02
+                            },
+                            {
+                              "derivative": 0.0,
+                              "location": -0.4,
+                              "value": -0.03
+                            },
+                            {
+                              "derivative": 0.0,
+                              "location": 0.0,
+                              "value": -0.03
+                            },
+                            {
+                              "derivative": 0.12,
+                              "location": 0.4,
+                              "value": 0.03
+                            },
+                            {
+                              "derivative": 0.049,
+                              "location": 1.0,
+                              "value": 0.1
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "derivative": 0.0,
+                  "location": 0.65,
                   "value": {
                     "coordinate": "chaosawakens:mining_paradise/land/erosion",
                     "points": [
@@ -2653,7 +3117,7 @@
                             {
                               "derivative": 0.5,
                               "location": -1.0,
-                              "value": -0.2
+                              "value": -0.17
                             },
                             {
                               "derivative": 0.0,
@@ -2687,7 +3151,7 @@
                             {
                               "derivative": 0.5,
                               "location": -1.0,
-                              "value": -0.05
+                              "value": -0.02
                             },
                             {
                               "derivative": 0.07,
@@ -2721,7 +3185,7 @@
                             {
                               "derivative": 0.5,
                               "location": -1.0,
-                              "value": -0.05
+                              "value": -0.02
                             },
                             {
                               "derivative": 0.0,
@@ -2755,7 +3219,7 @@
                             {
                               "derivative": 0.5,
                               "location": -1.0,
-                              "value": -0.05
+                              "value": -0.02
                             },
                             {
                               "derivative": 0.0,
@@ -2789,7 +3253,7 @@
                             {
                               "derivative": 0.0,
                               "location": -1.0,
-                              "value": -0.05
+                              "value": -0.02
                             },
                             {
                               "derivative": 0.0,
@@ -2800,7 +3264,7 @@
                                   {
                                     "derivative": 0.5,
                                     "location": -1.0,
-                                    "value": -0.05
+                                    "value": -0.02
                                   },
                                   {
                                     "derivative": 0.0,
@@ -2842,7 +3306,7 @@
                             {
                               "derivative": 0.0,
                               "location": -1.0,
-                              "value": -0.05
+                              "value": -0.02
                             },
                             {
                               "derivative": 0.0,
@@ -2853,7 +3317,7 @@
                                   {
                                     "derivative": 0.5,
                                     "location": -1.0,
-                                    "value": -0.05
+                                    "value": -0.02
                                   },
                                   {
                                     "derivative": 0.0,
@@ -2895,7 +3359,7 @@
                             {
                               "derivative": 0.5,
                               "location": -1.0,
-                              "value": -0.05
+                              "value": -0.02
                             },
                             {
                               "derivative": 0.0,
@@ -2959,7 +3423,7 @@
                 },
                 {
                   "derivative": 0.0,
-                  "location": 0.75,
+                  "location": 0.7,
                   "value": {
                     "coordinate": "chaosawakens:mining_paradise/land/erosion",
                     "points": [
@@ -3044,7 +3508,7 @@
                             {
                               "derivative": 0.5,
                               "location": -1.0,
-                              "value": -0.2
+                              "value": -0.17
                             },
                             {
                               "derivative": 0.0,
@@ -3078,7 +3542,7 @@
                             {
                               "derivative": 0.5,
                               "location": -1.0,
-                              "value": -0.05
+                              "value": -0.02
                             },
                             {
                               "derivative": 0.07,
@@ -3112,7 +3576,7 @@
                             {
                               "derivative": 0.5,
                               "location": -1.0,
-                              "value": -0.05
+                              "value": -0.02
                             },
                             {
                               "derivative": 0.0,
@@ -3146,7 +3610,7 @@
                             {
                               "derivative": 0.5,
                               "location": -1.0,
-                              "value": -0.05
+                              "value": -0.02
                             },
                             {
                               "derivative": 0.0,
@@ -3180,7 +3644,7 @@
                             {
                               "derivative": 0.0,
                               "location": -1.0,
-                              "value": -0.05
+                              "value": -0.02
                             },
                             {
                               "derivative": 0.0,
@@ -3191,7 +3655,7 @@
                                   {
                                     "derivative": 0.5,
                                     "location": -1.0,
-                                    "value": -0.05
+                                    "value": -0.02
                                   },
                                   {
                                     "derivative": 0.0,
@@ -3233,7 +3697,7 @@
                             {
                               "derivative": 0.0,
                               "location": -1.0,
-                              "value": -0.05
+                              "value": -0.02
                             },
                             {
                               "derivative": 0.0,
@@ -3244,7 +3708,7 @@
                                   {
                                     "derivative": 0.5,
                                     "location": -1.0,
-                                    "value": -0.05
+                                    "value": -0.02
                                   },
                                   {
                                     "derivative": 0.0,
@@ -3286,7 +3750,7 @@
                             {
                               "derivative": 0.5,
                               "location": -1.0,
-                              "value": -0.05
+                              "value": -0.02
                             },
                             {
                               "derivative": 0.0,
@@ -3350,7 +3814,7 @@
                 },
                 {
                   "derivative": 0.0,
-                  "location": 0.9,
+                  "location": 0.8,
                   "value": {
                     "coordinate": "chaosawakens:mining_paradise/land/erosion",
                     "points": [
@@ -3435,7 +3899,7 @@
                             {
                               "derivative": 0.5,
                               "location": -1.0,
-                              "value": -0.2
+                              "value": -0.16000001
                             },
                             {
                               "derivative": 0.0,
@@ -3469,7 +3933,7 @@
                             {
                               "derivative": 0.5,
                               "location": -1.0,
-                              "value": -0.05
+                              "value": -0.01
                             },
                             {
                               "derivative": 0.099999994,
@@ -3503,181 +3967,7 @@
                             {
                               "derivative": 0.5,
                               "location": -1.0,
-                              "value": -0.05
-                            },
-                            {
-                              "derivative": 0.0,
-                              "location": -0.4,
-                              "value": 0.02
-                            },
-                            {
-                              "derivative": 0.0,
-                              "location": 0.0,
-                              "value": 0.02
-                            },
-                            {
-                              "derivative": 0.04,
-                              "location": 0.4,
-                              "value": 0.06
-                            },
-                            {
-                              "derivative": 0.049,
-                              "location": 1.0,
-                              "value": 0.2
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        "derivative": 0.0,
-                        "location": 0.4,
-                        "value": {
-                          "coordinate": "chaosawakens:mining_paradise/land/ridges_folded",
-                          "points": [
-                            {
-                              "derivative": 0.5,
-                              "location": -1.0,
-                              "value": -0.05
-                            },
-                            {
-                              "derivative": 0.0,
-                              "location": -0.4,
-                              "value": 0.02
-                            },
-                            {
-                              "derivative": 0.0,
-                              "location": 0.0,
-                              "value": 0.02
-                            },
-                            {
-                              "derivative": 0.04,
-                              "location": 0.4,
-                              "value": 0.06
-                            },
-                            {
-                              "derivative": 0.049,
-                              "location": 1.0,
-                              "value": 0.2
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        "derivative": 0.0,
-                        "location": 0.45,
-                        "value": {
-                          "coordinate": "chaosawakens:mining_paradise/land/ridges_folded",
-                          "points": [
-                            {
-                              "derivative": 0.0,
-                              "location": -1.0,
-                              "value": -0.05
-                            },
-                            {
-                              "derivative": 0.0,
-                              "location": -0.4,
-                              "value": {
-                                "coordinate": "chaosawakens:mining_paradise/land/ridges_folded",
-                                "points": [
-                                  {
-                                    "derivative": 0.5,
-                                    "location": -1.0,
-                                    "value": -0.05
-                                  },
-                                  {
-                                    "derivative": 0.0,
-                                    "location": -0.4,
-                                    "value": 0.02
-                                  },
-                                  {
-                                    "derivative": 0.0,
-                                    "location": 0.0,
-                                    "value": 0.02
-                                  },
-                                  {
-                                    "derivative": 0.04,
-                                    "location": 0.4,
-                                    "value": 0.06
-                                  },
-                                  {
-                                    "derivative": 0.049,
-                                    "location": 1.0,
-                                    "value": 0.2
-                                  }
-                                ]
-                              }
-                            },
-                            {
-                              "derivative": 0.0,
-                              "location": 0.0,
-                              "value": 0.34
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        "derivative": 0.0,
-                        "location": 0.55,
-                        "value": {
-                          "coordinate": "chaosawakens:mining_paradise/land/ridges_folded",
-                          "points": [
-                            {
-                              "derivative": 0.0,
-                              "location": -1.0,
-                              "value": -0.05
-                            },
-                            {
-                              "derivative": 0.0,
-                              "location": -0.4,
-                              "value": {
-                                "coordinate": "chaosawakens:mining_paradise/land/ridges_folded",
-                                "points": [
-                                  {
-                                    "derivative": 0.5,
-                                    "location": -1.0,
-                                    "value": -0.05
-                                  },
-                                  {
-                                    "derivative": 0.0,
-                                    "location": -0.4,
-                                    "value": 0.02
-                                  },
-                                  {
-                                    "derivative": 0.0,
-                                    "location": 0.0,
-                                    "value": 0.02
-                                  },
-                                  {
-                                    "derivative": 0.04,
-                                    "location": 0.4,
-                                    "value": 0.06
-                                  },
-                                  {
-                                    "derivative": 0.049,
-                                    "location": 1.0,
-                                    "value": 0.2
-                                  }
-                                ]
-                              }
-                            },
-                            {
-                              "derivative": 0.0,
-                              "location": 0.0,
-                              "value": 0.34
-                            }
-                          ]
-                        }
-                      },
-                      {
-                        "derivative": 0.0,
-                        "location": 0.58,
-                        "value": {
-                          "coordinate": "chaosawakens:mining_paradise/land/ridges_folded",
-                          "points": [
-                            {
-                              "derivative": 0.5,
-                              "location": -1.0,
-                              "value": -0.05
+                              "value": -0.01
                             },
                             {
                               "derivative": 0.0,
@@ -3742,26 +4032,6 @@
               ]
             }
           }
-        },
-        "argument2": {
-          "type": "minecraft:add",
-          "argument1": 1.0,
-          "argument2": {
-            "type": "minecraft:mul",
-            "argument1": -1.0,
-            "argument2": {
-              "type": "minecraft:cache_once",
-              "argument": {
-                "type": "minecraft:blend_alpha"
-              }
-            }
-          }
-        }
-      },
-      "argument2": {
-        "type": "minecraft:mul",
-        "argument1": {
-          "type": "minecraft:blend_offset"
         },
         "argument2": {
           "type": "minecraft:cache_once",
