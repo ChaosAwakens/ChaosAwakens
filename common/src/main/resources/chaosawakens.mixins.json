@@ -10,6 +10,7 @@
     "common.block.CropBlockMixin",
     "common.block.StemBlockMixin",
     "common.entity.LivingEntityMixin",
+    "common.level.BiomeManagerMixin",
     "server.MinecraftServerMixin"
   ],
   "client": [

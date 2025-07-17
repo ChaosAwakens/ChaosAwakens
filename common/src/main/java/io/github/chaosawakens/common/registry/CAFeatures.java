@@ -1,7 +1,6 @@
 package io.github.chaosawakens.common.registry;
 
 import com.google.common.collect.ImmutableList;
-import com.mojang.datafixers.util.Either;
 import io.github.chaosawakens.CAConstants;
 import io.github.chaosawakens.api.asm.annotations.RegistrarEntry;
 import io.github.chaosawakens.api.platform.CAServices;
@@ -30,12 +29,16 @@ public class CAFeatures {
     public static class Features {
         private static final ObjectArrayList<Supplier<Feature<?>>> FEATURES = new ObjectArrayList<>();
 
-        public static final Supplier<Feature<NBTTreeConfiguration>> NBT_TREE_FEATURE = registerFeature("nbt_tree", () -> new NBTTreeFeature(NBTTreeConfiguration.CODEC));
+        public static final Supplier<Feature<NBTTreeConfiguration>> NBT_TREE = registerFeature("nbt_tree", () -> new NBTTreeFeature(NBTTreeConfiguration.CODEC));
 
         private static <FC extends FeatureConfiguration, F extends Feature<FC>> Supplier<F> registerFeature(String id, Supplier<Feature<?>> featureSup) {
             Supplier<Feature<?extends FeatureConfiguration>> placedFeatureSup = CAServices.REGISTRAR.registerObject(CAConstants.prefix(id), featureSup, BuiltInRegistries.FEATURE);
             FEATURES.add(featureSup);
             return (Supplier<F>) placedFeatureSup;
+        }
+
+        public static ImmutableList<Supplier<Feature<?>>> getFeatures() {
+            return ImmutableList.copyOf(FEATURES);
         }
     }
 
