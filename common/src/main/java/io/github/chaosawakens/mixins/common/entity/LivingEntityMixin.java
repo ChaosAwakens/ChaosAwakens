@@ -16,7 +16,7 @@ public class LivingEntityMixin {
     }
 
     @Inject(method = "hurt", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;actuallyHurt(Lnet/minecraft/world/damagesource/DamageSource;F)V"))
-    public void chaosawakens$hurt(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
+    private void chaosawakens$hurt(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
         HoplologyEnchantment.updateProtection(LivingEntity.class.cast(this));
     }
 }

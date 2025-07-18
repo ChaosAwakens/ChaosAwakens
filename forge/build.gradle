@@ -99,6 +99,8 @@ minecraft {
 
 sourceSets.main.resources.srcDir(project(':common').file('src/generated/resources'))
 
+jarJar.enable()
+
 dependencies {
     // Base
     minecraft("net.minecraftforge:forge:${minecraft_version}-${forge_version}")
@@ -145,6 +147,10 @@ processResources {
     from project(':common').file('src/generated/resources/')
 }
 
+tasks.named('compileTestJava') { // Somehow breaks because JarJar doesn't work with MixinExtras here(?)
+    enabled = false
+}
+
 jar.finalizedBy('reobfJar')
 
 publishing {
@@ -153,9 +159,8 @@ publishing {
             artifactId = base.archivesName.get()
             version = mod_version
 
-            artifact jar
-            artifact sourcesJar
-            artifact javadocJar
+            from components.java
+            jarJar.component(it)
         }
     }
 }

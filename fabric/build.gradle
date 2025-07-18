@@ -21,6 +21,8 @@ dependencies {
 
     implementation project(":common")
 
+    include(implementation(annotationProcessor("io.github.llamalad7:mixinextras-fabric:0.5.0-rc.2")))
+
     // Dependencies (Mandatory)
     modImplementation("net.fabricmc.fabric-api:fabric-api:${fabric_api_version}")
 
