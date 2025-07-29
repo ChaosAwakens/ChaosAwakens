@@ -3,6 +3,7 @@ package io.github.chaosawakens.common.worldgen.config.mining_paradise;
 import com.google.common.collect.ImmutableList;
 import com.mojang.datafixers.util.Pair;
 import io.github.chaosawakens.common.registry.*;
+import io.github.chaosawakens.common.worldgen.chunk_gen.OptimizedChunkGenerator;
 import io.github.chaosawakens.common.worldgen.config.base.DimensionLevelStemConfig;
 import io.github.chaosawakens.common.worldgen.config.mining_paradise.biome.MiningParadiseBiomeBuilder;
 import io.github.chaosawakens.util.NoiseRouterUtil;
@@ -48,7 +49,7 @@ public class MiningParadiseDimensionConfig implements DimensionLevelStemConfig {
         BiomeSource src = MultiNoiseBiomeSource.createFromPreset(biomeSrcParamListLookup.getOrThrow(CAMultiNoiseBiomeSourceParameterLists.MINING_PARADISE_BIOME_LIST.get()));
         Holder.Reference<NoiseGeneratorSettings> settings = noiseGenSettingsLookup.getOrThrow(CANoiseGeneratorSettings.MINING_PARADISE.get());
 
-        return new NoiseBasedChunkGenerator(src, settings);
+        return new OptimizedChunkGenerator(src, settings);
     }
 
     public static DimensionType createDimensionType() {

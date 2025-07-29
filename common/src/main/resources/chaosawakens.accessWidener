@@ -110,3 +110,31 @@ extendable method net/minecraft/world/level/levelgen/NoiseBasedChunkGenerator do
 # BiomeManager
 accessible field net/minecraft/world/level/biome/BiomeManager noiseBiomeSource Lnet/minecraft/world/level/biome/BiomeManager$NoiseBiomeSource;
 accessible field net/minecraft/world/level/biome/BiomeManager biomeZoomSeed J
+
+# RandomState
+extendable class net/minecraft/world/level/levelgen/RandomState
+accessible method net/minecraft/world/level/levelgen/RandomState <init> (Lnet/minecraft/world/level/levelgen/NoiseGeneratorSettings;Lnet/minecraft/core/HolderGetter;J)V
+
+# Climate
+accessible field net/minecraft/world/level/biome/Climate QUANTIZATION_FACTOR F
+
+# Climate$ParameterPoint
+accessible method net/minecraft/world/level/biome/Climate$ParameterPoint fitness (Lnet/minecraft/world/level/biome/Climate$TargetPoint;)J
+
+# Climate$RTree
+accessible class net/minecraft/world/level/biome/Climate$RTree
+extendable class net/minecraft/world/level/biome/Climate$RTree
+accessible method net/minecraft/world/level/biome/Climate$RTree <init> (Lnet/minecraft/world/level/biome/Climate$RTree$Node;)V
+accessible field net/minecraft/world/level/biome/Climate$RTree CHILDREN_PER_NODE I
+
+# Climate$RTree$SubTree
+accessible class net/minecraft/world/level/biome/Climate$RTree$SubTree
+extendable class net/minecraft/world/level/biome/Climate$RTree$SubTree
+accessible field net/minecraft/world/level/biome/Climate$RTree$SubTree children [Lnet/minecraft/world/level/biome/Climate$RTree$Node;
+
+# Climate$RTree$Node
+accessible class net/minecraft/world/level/biome/Climate$RTree$Node
+
+# SurfaceSystem
+accessible field net/minecraft/world/level/levelgen/SurfaceSystem defaultBlock Lnet/minecraft/world/level/block/state/BlockState;
+accessible method net/minecraft/world/level/levelgen/SurfaceSystem isStone (Lnet/minecraft/world/level/block/state/BlockState;)Z

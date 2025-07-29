@@ -5,9 +5,9 @@
   "refmap": "${mod_id}.refmap.json",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "block.BlockMixin",
+    "common.block.BlockMixin",
     "datagen.TagsProviderMixin",
-    "item.HoeItemMixin",
+    "common.item.HoeItemMixin",
     "temp.BlockInfoLayerMixin",
     "temp.MapStateMixin"
   ],

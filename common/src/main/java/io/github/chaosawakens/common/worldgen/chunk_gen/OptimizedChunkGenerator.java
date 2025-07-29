@@ -1,14 +1,18 @@
 package io.github.chaosawakens.common.worldgen.chunk_gen;
 
 import net.minecraft.core.Holder;
+import net.minecraft.core.Registry;
 import net.minecraft.world.level.LevelHeightAccessor;
 import net.minecraft.world.level.NoiseColumn;
 import net.minecraft.world.level.StructureManager;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.biome.BiomeManager;
 import net.minecraft.world.level.biome.BiomeSource;
 import net.minecraft.world.level.chunk.ChunkAccess;
 import net.minecraft.world.level.levelgen.NoiseBasedChunkGenerator;
 import net.minecraft.world.level.levelgen.NoiseGeneratorSettings;
 import net.minecraft.world.level.levelgen.RandomState;
+import net.minecraft.world.level.levelgen.WorldGenerationContext;
 import net.minecraft.world.level.levelgen.blending.Blender;
 import org.jetbrains.annotations.NotNull;
 
@@ -21,7 +25,6 @@ public class OptimizedChunkGenerator extends NoiseBasedChunkGenerator {
     public OptimizedChunkGenerator(BiomeSource biomeSrc, Holder<NoiseGeneratorSettings> noiseGenSettingsRegHolder) {
         super(biomeSrc, noiseGenSettingsRegHolder);
     }
-
 
     @Override
     public @NotNull CompletableFuture<ChunkAccess> fillFromNoise(Executor mainThread, Blender chunkBlender, RandomState randState, StructureManager structureManager, ChunkAccess targetChunkAccess) {
@@ -38,8 +41,12 @@ public class OptimizedChunkGenerator extends NoiseBasedChunkGenerator {
         return super.getBaseColumn(targetX, targetZ, heightInfo, rand);
     }
 
-    protected OptionalInt iterateOptimizedNoiseColumn() {
+    @Override
+    public void buildSurface(ChunkAccess targetChunkAccess, WorldGenerationContext worldGenCtx, RandomState randState, StructureManager levelStructureManager, BiomeManager levelBiomeManager, Registry<Biome> biomeRegistry, Blender chunkBlender) {
+        super.buildSurface(targetChunkAccess, worldGenCtx, randState, levelStructureManager, levelBiomeManager, biomeRegistry, chunkBlender);
+    }
 
+    protected OptionalInt iterateOptimizedNoiseColumn() {
         return OptionalInt.empty();
     }
 }

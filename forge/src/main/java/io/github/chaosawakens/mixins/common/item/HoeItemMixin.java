@@ -1,4 +1,4 @@
-package io.github.chaosawakens.mixins.item;
+package io.github.chaosawakens.mixins.common.item;
 
 import com.llamalad7.mixinextras.expression.Definition;
 import com.llamalad7.mixinextras.expression.Expression;
