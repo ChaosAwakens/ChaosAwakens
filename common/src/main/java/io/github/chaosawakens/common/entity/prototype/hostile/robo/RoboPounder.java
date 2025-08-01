@@ -43,7 +43,6 @@ public class RoboPounder extends AnimatableMonster {
     public static final byte GROUND_SLAM_ATTACK_ID = 5;
     public static final byte RAGE_RUN_ATTACK_ID = 6;
     public static final String IDLE_ANIM = "Idle";
-    public static final String WALK_ANIM = "Walk";
     public static final String DEATH_ANIM = "Death";
     public static final String LEFT_PISTON_PUNCH_ATTACK_ANIM = "Piston Punch Attack (Left)";
     public static final String RIGHT_PISTON_PUNCH_ATTACK_ANIM = "Piston Punch Attack (Right)";
@@ -160,7 +159,7 @@ public class RoboPounder extends AnimatableMonster {
         targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, AbstractVillager.class, false));
 
         // Melee Attacks
-        goalSelector.addGoal(0, new AnimatableAttackGoal<RoboPounder>(this, ObjectArrayList.of(() -> leftPistonPunchAttackAnim, () -> rightPistonPunchAttackAnim), 34, true, PISTON_PUNCH_ATTACK_ID)
+        goalSelector.addGoal(0, new AnimatableAttackGoal<>(this, ObjectArrayList.of(() -> leftPistonPunchAttackAnim, () -> rightPistonPunchAttackAnim), 34, true, PISTON_PUNCH_ATTACK_ID)
                 .attackArc(95.0D)
                 .potentialTargetRadius(5.0D)
                 .attackFrame(12.0D, 18.0D)
@@ -172,7 +171,7 @@ public class RoboPounder extends AnimatableMonster {
                 })
                 .actionOnAttack((animatable, target, potentialTargets, curTick) -> new ScreenShakeEffect(animatable.blockPosition(), 15.5D, 0.0028F, 12.5F, 1.0F).enqueue(animatable.level()))
                 .actionOnEnd((animatable, target, potentialTargets, curTick) -> animatable.playAnimation(idleAnimState, true)));
-        goalSelector.addGoal(0, new AnimatableAttackGoal<RoboPounder>(this, ObjectArrayList.of(() -> leftSideSweepAttackAnim, () -> rightSideSweepAttackAnim), 39, true, SIDE_SWEEP_ATTACK_ID)
+        goalSelector.addGoal(0, new AnimatableAttackGoal<>(this, ObjectArrayList.of(() -> leftSideSweepAttackAnim, () -> rightSideSweepAttackAnim), 39, true, SIDE_SWEEP_ATTACK_ID)
                 .attackArc(245.0D)
                 .potentialTargetRadius(4.0D)
                 .attackTickCooldown(30.0D)
@@ -183,7 +182,7 @@ public class RoboPounder extends AnimatableMonster {
                 .actionOnEnd((animatable, target, potentialTargets, curTick) -> animatable.playAnimation(idleAnimState, true)));
 
         // AOE Attacks
-        goalSelector.addGoal(0, new AnimatableAttackGoal<RoboPounder>(this, ObjectArrayList.of(() -> leftDomeStompAttackAnim, () -> rightDomeStompAttackAnim), 34, true, DOME_STOMP_ATTACK_ID)
+        goalSelector.addGoal(0, new AnimatableAttackGoal<>(this, ObjectArrayList.of(() -> leftDomeStompAttackAnim, () -> rightDomeStompAttackAnim), 34, true, DOME_STOMP_ATTACK_ID)
                 .performDefaultAttack(false)
                 .forcePose(true)
                 .potentialTargetRadius(7.0D)

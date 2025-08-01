@@ -6,11 +6,13 @@ import io.github.chaosawakens.api.asm.annotations.RegistrarEntry;
 import io.github.chaosawakens.api.entity.ClientDataEntry;
 import io.github.chaosawakens.api.entity.EntityTypePropertyWrapper;
 import io.github.chaosawakens.api.platform.CAServices;
+import io.github.chaosawakens.common.entity.prototype.hostile.Ent;
 import io.github.chaosawakens.common.entity.prototype.hostile.robo.RoboPounder;
 import io.github.chaosawakens.common.entity.prototype.passive.animal.land.AppleCow;
 import io.github.chaosawakens.common.entity.prototype.passive.animal.land.CarrotPig;
 import io.github.chaosawakens.common.entity.prototype.passive.animal.land.LettuceChicken;
 import io.github.chaosawakens.common.entity.prototype.passive.animal.land.StinkBug;
+import io.github.chaosawakens.util.LootUtil;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
@@ -125,7 +127,7 @@ public class CAEntityTypes {
     public static final Supplier<EntityType<RoboPounder>> ROBO_POUNDER = EntityTypePropertyWrapper.create(
             registerEntityType("robo_pounder", () -> EntityType.Builder.of(RoboPounder::new, MobCategory.MONSTER)
                     .sized(4.1F, 6.0F)
-                    .clientTrackingRange(15)
+                    .clientTrackingRange(50)
                     .build(CAConstants.prefix("robo_pounder").toString())))
             .builder()
             .withAttributes(RoboPounder::createAttributes)
@@ -133,6 +135,153 @@ public class CAEntityTypes {
             .withClientDataEntry(getSideSafeClientDataEntry("robo_pounder"))
             .build()
             .getParentEntityType();
+
+    // Ent
+    public static final Supplier<EntityType<Ent>> ACACIA_ENT = EntityTypePropertyWrapper.create(
+                    registerEntityType("acacia_ent", () -> EntityType.Builder.of(Ent::new, MobCategory.MONSTER)
+                            .sized(3.35F, 4.225F)
+                            .clientTrackingRange(30)
+                            .build(CAConstants.prefix("acacia_ent").toString())))
+            .builder()
+            .withAttributes(Ent::createAttributes)
+            .withLootTable(LootUtil::createAcaciaEntLootTable)
+            .withClientDataEntry(getSideSafeClientDataEntry("ent"))
+            .build()
+            .getParentEntityType();
+    public static final Supplier<EntityType<Ent>> BIRCH_ENT = EntityTypePropertyWrapper.create(
+                    registerEntityType("birch_ent", () -> EntityType.Builder.of(Ent::new, MobCategory.MONSTER)
+                            .sized(3.35F, 4.225F)
+                            .clientTrackingRange(30)
+                            .build(CAConstants.prefix("birch_ent").toString())))
+            .builder()
+            .withAttributes(Ent::createAttributes)
+            .withLootTable(LootUtil::createBirchEntLootTable)
+            .withClientDataEntry(getSideSafeClientDataEntry("ent"))
+            .build()
+            .getParentEntityType();
+    public static final Supplier<EntityType<Ent>> CHERRY_ENT = EntityTypePropertyWrapper.create(
+                    registerEntityType("cherry_ent", () -> EntityType.Builder.of(Ent::new, MobCategory.MONSTER)
+                            .sized(3.35F, 4.225F)
+                            .clientTrackingRange(30)
+                            .build(CAConstants.prefix("cherry_ent").toString())))
+            .builder()
+            .withAttributes(Ent::createAttributes)
+            .withLootTable(LootUtil::createCherryEntLootTable)
+            .withClientDataEntry(getSideSafeClientDataEntry("ent"))
+            .build()
+            .getParentEntityType();
+    public static final Supplier<EntityType<Ent>> CRIMSON_ENT = EntityTypePropertyWrapper.create(
+                    registerEntityType("crimson_ent", () -> EntityType.Builder.of(Ent::new, MobCategory.MONSTER)
+                            .sized(3.35F, 4.225F)
+                            .clientTrackingRange(30)
+                            .build(CAConstants.prefix("crimson_ent").toString())))
+            .builder()
+            .withAttributes(Ent::createAttributes)
+            .withLootTable(LootUtil::createCrimsonEntLootTable)
+            .withClientDataEntry(getSideSafeClientDataEntry("ent"))
+            .build()
+            .getParentEntityType();
+    public static final Supplier<EntityType<Ent>> DARK_OAK_ENT = EntityTypePropertyWrapper.create(
+                    registerEntityType("dark_oak_ent", () -> EntityType.Builder.of(Ent::new, MobCategory.MONSTER)
+                            .sized(3.35F, 4.225F)
+                            .clientTrackingRange(30)
+                            .build(CAConstants.prefix("dark_oak_ent").toString())))
+            .builder()
+            .withAttributes(Ent::createAttributes)
+            .withLootTable(LootUtil::createDarkOakEntLootTable)
+            .withClientDataEntry(getSideSafeClientDataEntry("ent"))
+            .build()
+            .getParentEntityType();
+    public static final Supplier<EntityType<Ent>> JUNGLE_ENT = EntityTypePropertyWrapper.create(
+                    registerEntityType("jungle_ent", () -> EntityType.Builder.of(Ent::new, MobCategory.MONSTER)
+                            .sized(3.35F, 4.225F)
+                            .clientTrackingRange(30)
+                            .build(CAConstants.prefix("jungle_ent").toString())))
+            .builder()
+            .withAttributes(Ent::createAttributes)
+            .withLootTable(LootUtil::createJungleEntLootTable)
+            .withClientDataEntry(getSideSafeClientDataEntry("ent"))
+            .build()
+            .getParentEntityType();
+    public static final Supplier<EntityType<Ent>> OAK_ENT = EntityTypePropertyWrapper.create(
+                    registerEntityType("oak_ent", () -> EntityType.Builder.of(Ent::new, MobCategory.MONSTER)
+                            .sized(3.35F, 4.225F)
+                            .clientTrackingRange(30)
+                            .build(CAConstants.prefix("oak_ent").toString())))
+            .builder()
+            .withAttributes(Ent::createAttributes)
+            .withLootTable(LootUtil::createOakEntLootTable)
+            .withClientDataEntry(getSideSafeClientDataEntry("ent"))
+            .build()
+            .getParentEntityType();
+    public static final Supplier<EntityType<Ent>> SPRUCE_ENT = EntityTypePropertyWrapper.create(
+                    registerEntityType("spruce_ent", () -> EntityType.Builder.of(Ent::new, MobCategory.MONSTER)
+                            .sized(3.35F, 4.225F)
+                            .clientTrackingRange(30)
+                            .build(CAConstants.prefix("spruce_ent").toString())))
+            .builder()
+            .withAttributes(Ent::createAttributes)
+            .withLootTable(LootUtil::createSpruceEntLootTable)
+            .withClientDataEntry(getSideSafeClientDataEntry("ent"))
+            .build()
+            .getParentEntityType();
+    public static final Supplier<EntityType<Ent>> WARPED_ENT = EntityTypePropertyWrapper.create(
+                    registerEntityType("warped_ent", () -> EntityType.Builder.of(Ent::new, MobCategory.MONSTER)
+                            .sized(3.35F, 4.225F)
+                            .clientTrackingRange(30)
+                            .build(CAConstants.prefix("warped_ent").toString())))
+            .builder()
+            .withAttributes(Ent::createAttributes)
+            .withLootTable(LootUtil::createWarpedEntLootTable)
+            .withClientDataEntry(getSideSafeClientDataEntry("ent"))
+            .build()
+            .getParentEntityType();
+
+    public static final Supplier<EntityType<Ent>> APPLE_ENT = EntityTypePropertyWrapper.create(
+                    registerEntityType("apple_ent", () -> EntityType.Builder.of(Ent::new, MobCategory.MONSTER)
+                            .sized(3.35F, 4.225F)
+                            .clientTrackingRange(30)
+                            .build(CAConstants.prefix("apple_ent").toString())))
+            .builder()
+            .withAttributes(Ent::createAttributes)
+            .withLootTable(LootUtil::createAppleEntLootTable)
+            .withClientDataEntry(getSideSafeClientDataEntry("ent"))
+            .build()
+            .getParentEntityType();
+    public static final Supplier<EntityType<Ent>> GINKGO_ENT = EntityTypePropertyWrapper.create(
+                    registerEntityType("ginkgo_ent", () -> EntityType.Builder.of(Ent::new, MobCategory.MONSTER)
+                            .sized(3.35F, 4.225F)
+                            .clientTrackingRange(30)
+                            .build(CAConstants.prefix("ginkgo_ent").toString())))
+            .builder()
+            .withAttributes(Ent::createAttributes)
+            .withLootTable(LootUtil::createGinkgoEntLootTable)
+            .withClientDataEntry(getSideSafeClientDataEntry("ent"))
+            .build()
+            .getParentEntityType();
+    public static final Supplier<EntityType<Ent>> PEACH_ENT = EntityTypePropertyWrapper.create(
+                    registerEntityType("peach_ent", () -> EntityType.Builder.of(Ent::new, MobCategory.MONSTER)
+                            .sized(3.35F, 4.225F)
+                            .clientTrackingRange(30)
+                            .build(CAConstants.prefix("peach_ent").toString())))
+            .builder()
+            .withAttributes(Ent::createAttributes)
+            .withLootTable(LootUtil::createPeachEntLootTable)
+            .withClientDataEntry(getSideSafeClientDataEntry("ent"))
+            .build()
+            .getParentEntityType();
+    public static final Supplier<EntityType<Ent>> SKYWOOD_ENT = EntityTypePropertyWrapper.create(
+                    registerEntityType("skywood_ent", () -> EntityType.Builder.of(Ent::new, MobCategory.MONSTER)
+                            .sized(3.35F, 4.225F)
+                            .clientTrackingRange(30)
+                            .build(CAConstants.prefix("skywood_ent").toString())))
+            .builder()
+            .withAttributes(Ent::createAttributes)
+            .withLootTable(LootUtil::createSkywoodEntLootTable)
+            .withClientDataEntry(getSideSafeClientDataEntry("ent"))
+            .build()
+            .getParentEntityType();
+
 
     private static <E extends Entity> Supplier<EntityType<E>> registerEntityType(ResourceLocation id, Supplier<EntityType<E>> entityTypeSup) {
         Supplier<EntityType<E>> registeredEntityTypeSup = CAServices.REGISTRAR.registerObject(id, entityTypeSup, BuiltInRegistries.ENTITY_TYPE); // Otherwise reference to the entity type sup is null cuz it needs to be registered b4hand

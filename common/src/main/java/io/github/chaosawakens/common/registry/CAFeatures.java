@@ -33,9 +33,9 @@ public class CAFeatures {
         public static final Supplier<Feature<NBTTreeConfiguration>> NBT_TREE = registerFeature("nbt_tree", () -> new NBTTreeFeature(NBTTreeConfiguration.CODEC));
 
         private static <FC extends FeatureConfiguration, F extends Feature<FC>> Supplier<F> registerFeature(String id, Supplier<Feature<?>> featureSup) {
-            Supplier<Feature<?extends FeatureConfiguration>> placedFeatureSup = CAServices.REGISTRAR.registerObject(CAConstants.prefix(id), featureSup, BuiltInRegistries.FEATURE);
+            Supplier<F> placedFeatureSup = (Supplier<F>) CAServices.REGISTRAR.registerObject(CAConstants.prefix(id), featureSup, BuiltInRegistries.FEATURE);
             FEATURES.add(featureSup);
-            return (Supplier<F>) placedFeatureSup;
+            return placedFeatureSup;
         }
 
         public static ImmutableList<Supplier<Feature<?>>> getFeatures() {

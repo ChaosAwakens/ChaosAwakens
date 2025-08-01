@@ -18,7 +18,11 @@
     [],
     [],
     [
-      "chaosawakens:dense_grass_patch"
+      "chaosawakens:dense_grass_patch",
+      "chaosawakens:tall_dense_grass_patch",
+      "chaosawakens:alstroemeriat_patch",
+      "chaosawakens:dense_bush_patch",
+      "chaosawakens:tall_dense_bush_patch"
     ]
   ],
   "has_precipitation": true,

@@ -7,7 +7,22 @@
     "water_color": 4159204,
     "water_fog_color": 429011
   },
-  "features": [],
+  "features": [
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [
+      "chaosawakens:dense_grass_patch",
+      "chaosawakens:thorny_sun_patch",
+      "chaosawakens:alstroemeriat_patch"
+    ]
+  ],
   "has_precipitation": true,
   "spawn_costs": {},
   "spawners": {
