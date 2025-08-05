@@ -93,104 +93,23 @@ subprojects {
     }
 
     processResources {
-        def expandProps = [
-                // Base (Common)
-                "mod_name"                              : mod_name,
-                "mod_authors"                           : mod_authors,
-                "mod_credits"                           : mod_credits,
-                "mod_id"                                : mod_id,
-                "mod_license"                           : mod_license,
-                "mod_description"                       : mod_description,
-                "mod_version"                           : mod_version,
-                "mod_group"                             : mod_group,
+        def props = new Properties()
 
-                "minecraft_version"                     : minecraft_version,
+        rootProject.file('gradle.properties').withInputStream { props.load(it) }
 
-                "publisher_plugin_version"              : publisher_plugin_version,
+        // Filter out any non-String values and system properties
+        def replaceProperties = [:]
 
-                // Base (Forge)
-                "issue_tracker_url"                     : issue_tracker_url,
-                "display_url"                           : display_url,
-                "auto_update_url"                       : auto_update_url,
-
-                "mod_logo_path"                         : mod_logo_path,
-
-                "forge_version"                         : forge_version,
-                "mixin_version"                         : mixin_version,
-
-                "forge_client_taskname"                 : forge_client_taskname,
-                "forge_server_taskname"                 : forge_server_taskname,
-                "forge_data_taskname"                   : forge_data_taskname,
-
-                "forge_mappings_channel"                : forge_mappings_channel,
-                "forge_mappings_channel_version"        : forge_mappings_channel_version,
-                "forge_mappings_channel_plugin_version" : forge_mappings_channel_plugin_version,
-
-                "forge_loader_version_range"            : forge_loader_version_range,
-                "forge_version_range"                   : forge_version_range,
-                "minecraft_version_range"               : minecraft_version_range,
-
-                // Base (Fabric)
-                "homepage_url"                          : homepage_url,
-                "source_code_url"                       : source_code_url,
-
-                "mod_icon_path"                         : mod_icon_path,
-
-                "fabric_common_entrypoint"              : fabric_common_entrypoint,
-                "fabric_client_entrypoint"              : fabric_client_entrypoint,
-                "fabric_datagen_entrypoint"             : fabric_datagen_entrypoint,
-
-                "fabric_loader_version"                 : fabric_loader_version,
-
-                "fabric_mappings_channel"               : fabric_mappings_channel,
-                "fabric_mappings_channel_version"       : fabric_mappings_channel_version,
-
-                "fabric_client_taskname"                : fabric_client_taskname,
-                "fabric_server_taskname"                : fabric_server_taskname,
-                "fabric_data_taskname"                  : fabric_data_taskname,
-
-                "fabric_loader_version_range"           : fabric_loader_version_range,
-                "fabric_minecraft_version_range"        : fabric_minecraft_version_range,
-
-                // Mandatory (Fabric)
-                "fabric_api_version_range"              : fabric_api_version_range,
-
-                // Optional (Forge)
-                "forge_jei_version"                     : forge_jei_version,
-                "forge_jeed_version"                    : forge_jeed_version,
-
-                "forge_jei_version_range"               : forge_jei_version_range,
-                "forge_jeed_version_range"              : forge_jeed_version_range,
-
-                "forge_configured_version"              : forge_configured_version,
-                "forge_catalogue_version"               : forge_catalogue_version,
-                "forge_gmmo_version"                    : forge_gmmo_version,
-
-                "forge_configured_version_range"        : forge_configured_version_range,
-                "forge_catalogue_version_range"         : forge_catalogue_version_range,
-                "forge_gmmo_version_range"              : forge_gmmo_version_range,
-
-                "forge_jade_version"                    : forge_jade_version,
-                "forge_appleskin_version"               : forge_appleskin_version,
-
-                "forge_jade_version_range"              : forge_jade_version_range,
-                "forge_appleskin_version_range"         : forge_appleskin_version_range,
-
-                // Optional (Fabric)
-                "fabric_jei_version"                    : fabric_jei_version,
-                "fabric_appleskin_version"              : fabric_appleskin_version,
-                "fabric_modmenu_version"                : fabric_modmenu_version,
-
-                "fabric_jei_version_range"              : fabric_jei_version_range,
-                "fabric_appleskin_version_range"        : fabric_appleskin_version_range,
-                "fabric_modmenu_version_range"          : fabric_modmenu_version_range
-        ]
-
-        filesMatching(['pack.mcmeta', 'fabric.mod.json', 'META-INF/mods.toml', '*.mixins.json']) {
-            expand expandProps
+        props.each { key, value ->
+            if (value instanceof String) {
+                replaceProperties.put(key, value)
+            }
         }
 
-        inputs.properties(expandProps)
+        inputs.properties(replaceProperties)
+        filesMatching(['META-INF/mods.toml', 'fabric.mods.json', 'pack.mcmeta', '*.mixins.json']) {
+            expand replaceProperties + [project: project]
+        }
     }
 
     tasks.withType(GenerateModuleMetadata).configureEach {

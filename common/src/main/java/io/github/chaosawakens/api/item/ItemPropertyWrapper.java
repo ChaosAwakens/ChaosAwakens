@@ -533,7 +533,7 @@ public class ItemPropertyWrapper {
         }
 
         /**
-         * Tags this IPWBuilder's parent {@link Item} with the provided {@linkplain TagKey<Item> Tags}. Appends to the existing list.
+         * Tags this IPWBuilder's parent {@link Item} with the provided {@linkplain TagKey<Item> Tags}. Appends to the existing processors.
          *
          * @param parentItemTags The {@linkplain TagKey<Item> TagKeys} with which this IPW's parent {@link Item} will be tagged. May only be of type {@link Item}.
          *
@@ -547,7 +547,7 @@ public class ItemPropertyWrapper {
         }
 
         /**
-         * Tags this IPWBuilder's parent item with the provided {@linkplain TagKey<Item> Tags}. Overwrites the existing list.
+         * Tags this IPWBuilder's parent item with the provided {@linkplain TagKey<Item> Tags}. Overwrites the existing processors.
          *
          * @param parentItemTags The {@linkplain TagKey<Item> TagKeys} with which this IPW's parent {@link Item} will be tagged. May only be of type {@link Item}.
          *
@@ -577,7 +577,7 @@ public class ItemPropertyWrapper {
         }
 
         /**
-         * Appends a custom list of {@linkplain ItemModelDefinition ItemModelDefinitions} to this builder.
+         * Appends a custom processors of {@linkplain ItemModelDefinition ItemModelDefinitions} to this builder.
          *
          * @param itemModelDefinitions The {@link ItemModelDefinition} used to build this IPWBuilder's parent item's model in datagen.
          *
@@ -605,7 +605,7 @@ public class ItemPropertyWrapper {
         }
 
         /**
-         * Sets a new custom list of {@linkplain ItemModelDefinition ItemModelDefinitions} to this builder.
+         * Sets a new custom processors of {@linkplain ItemModelDefinition ItemModelDefinitions} to this builder.
          *
          * @param itemModelDefinitions The {@link ItemModelDefinition} used to build this IPWBuilder's parent item's model in datagen.
          *

@@ -23,7 +23,7 @@ public interface BiomeBuilder {
      * Core method used by {@linkplain MultiNoiseBiomeSourceParameterList.Preset Biome Source Parameter List Presets} to
      * actually consume and map biomes to their respective noises/climate parameter points.
      *
-     * @param biomeClimateParameterPointMapper The mapping {@linkplain Consumer} accepting different noise list-biome
+     * @param biomeClimateParameterPointMapper The mapping {@linkplain Consumer} accepting different noise processors-biome
      *                                         pairs for mapping and passing onto a {@linkplain MultiNoiseBiomeSourceParameterList}.
      */
     void mapBiomes(Consumer<Pair<Climate.ParameterPoint, ResourceKey<Biome>>> biomeClimateParameterPointMapper);

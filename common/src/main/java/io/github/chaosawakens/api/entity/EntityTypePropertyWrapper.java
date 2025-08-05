@@ -465,7 +465,7 @@ public class EntityTypePropertyWrapper<E extends Entity> {
         }
 
         /**
-         * Tags this ETPWBuilder's parent {@link EntityType<E>} with the provided {@linkplain TagKey<EntityType<E>> Tags}. Appends to the existing list.
+         * Tags this ETPWBuilder's parent {@link EntityType<E>} with the provided {@linkplain TagKey<EntityType<E>> Tags}. Appends to the existing processors.
          *
          * @param parentEntityTypeTags The {@linkplain TagKey<EntityType<E>> TagKeys} with which this ETPW's parent {@link EntityType<E>} will be tagged. May only be of type {@link EntityType<E>}.
          *
@@ -479,7 +479,7 @@ public class EntityTypePropertyWrapper<E extends Entity> {
         }
 
         /**
-         * Tags this ETPWBuilder's parent block with the provided {@linkplain TagKey<EntityType<E>> Tags}. Overwrites the existing list.
+         * Tags this ETPWBuilder's parent block with the provided {@linkplain TagKey<EntityType<E>> Tags}. Overwrites the existing processors.
          *
          * @param parentEntityTypeTags The {@linkplain TagKey<EntityType<E>> TagKeys} with which this ETPW's parent {@link EntityType<E>} will be tagged. May only be of type {@link EntityType<E>}.
          *

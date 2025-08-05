@@ -690,7 +690,7 @@ public class BlockPropertyWrapper { //TODO Maybe type param this for blocks
         }
 
         /**
-         * Tags this BPWBuilder's parent {@link Block} with the provided {@linkplain TagKey<?> Tags}. Appends to the existing list.
+         * Tags this BPWBuilder's parent {@link Block} with the provided {@linkplain TagKey<?> Tags}. Appends to the existing processors.
          *
          * @param parentBlockTags The {@linkplain TagKey<?> TagKeys} with which this BPW's parent {@link Block} will be tagged. May generally be of types {@link Item} or {@link Block}.
          *
@@ -704,7 +704,7 @@ public class BlockPropertyWrapper { //TODO Maybe type param this for blocks
         }
 
         /**
-         * Tags this BPWBuilder's parent {@link Block} with the provided {@linkplain TagKey<?> Tags}. Overwrites the existing list.
+         * Tags this BPWBuilder's parent {@link Block} with the provided {@linkplain TagKey<?> Tags}. Overwrites the existing processors.
          *
          * @param parentBlockTags The {@linkplain TagKey<?> TagKeys} with which this BPW's parent {@link Block} will be tagged. May generally be of types {@link Item} or {@link Block}.
          *
@@ -731,7 +731,7 @@ public class BlockPropertyWrapper { //TODO Maybe type param this for blocks
         }
 
         /**
-         * Tags this BPWBuilder's parent {@link Block} with the provided {@linkplain TagKey<Block> Tags}. Appends to the existing list. Useful for bypassing Java's generic type inference.
+         * Tags this BPWBuilder's parent {@link Block} with the provided {@linkplain TagKey<Block> Tags}. Appends to the existing processors. Useful for bypassing Java's generic type inference.
          *
          * @param parentBlockTags The {@linkplain TagKey<Block> TagKeys} with which this BPW's parent {@link Block} will be tagged.
          *
@@ -745,7 +745,7 @@ public class BlockPropertyWrapper { //TODO Maybe type param this for blocks
         }
 
         /**
-         * Tags this BPWBuilder's parent {@link Block} with the provided {@linkplain TagKey<Block> Tags}. Overwrites the existing list. Useful for bypassing Java's generic type inference.
+         * Tags this BPWBuilder's parent {@link Block} with the provided {@linkplain TagKey<Block> Tags}. Overwrites the existing processors. Useful for bypassing Java's generic type inference.
          *
          * @param parentBlockTags The {@linkplain TagKey<Block> TagKeys} with which this BPW's parent {@link Block} will be tagged.
          *
@@ -772,7 +772,7 @@ public class BlockPropertyWrapper { //TODO Maybe type param this for blocks
         }
 
         /**
-         * Tags this BPWBuilder's parent {@link Block} with the provided {@linkplain TagKey<Item> Tags}. Appends to the existing list. Useful for bypassing Java's generic type inference.
+         * Tags this BPWBuilder's parent {@link Block} with the provided {@linkplain TagKey<Item> Tags}. Appends to the existing processors. Useful for bypassing Java's generic type inference.
          *
          * @param parentItemTags The {@linkplain TagKey<Item> TagKeys} with which this BPW's parent {@link Block} will be tagged.
          *
@@ -786,7 +786,7 @@ public class BlockPropertyWrapper { //TODO Maybe type param this for blocks
         }
 
         /**
-         * Tags this BPWBuilder's parent {@link Block} with the provided {@linkplain TagKey<Item> Tags}. Overwrites the existing list. Useful for bypassing Java's generic type inference.
+         * Tags this BPWBuilder's parent {@link Block} with the provided {@linkplain TagKey<Item> Tags}. Overwrites the existing processors. Useful for bypassing Java's generic type inference.
          *
          * @param parentItemTags The {@linkplain TagKey<Item> TagKeys} with which this BPW's parent {@link Block} will be tagged.
          *
@@ -817,7 +817,7 @@ public class BlockPropertyWrapper { //TODO Maybe type param this for blocks
         }
 
         /**
-         * Appends a custom list of {@linkplain BlockModelDefinition BlockModelDefinitions} to this builder. By default, model datagen is handled based on a series of
+         * Appends a custom processors of {@linkplain BlockModelDefinition BlockModelDefinitions} to this builder. By default, model datagen is handled based on a series of
          * type checks (E.G. Doors, walls, fences, rotatable blocks, etc.). You can use this method if your custom block requires a
          * different model definition that isn't natively handled.
          *
@@ -847,7 +847,7 @@ public class BlockPropertyWrapper { //TODO Maybe type param this for blocks
         }
 
         /**
-         * Sets a new custom list of {@linkplain BlockModelDefinition BlockModelDefinitions} to this builder. By default, model datagen is handled based on a series of
+         * Sets a new custom processors of {@linkplain BlockModelDefinition BlockModelDefinitions} to this builder. By default, model datagen is handled based on a series of
          * type checks (E.G. Doors, walls, fences, rotatable blocks, etc.). You can use this method if your custom block requires a
          * different model definition that isn't natively handled.
          *

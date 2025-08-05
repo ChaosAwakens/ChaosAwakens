@@ -1,6 +1,7 @@
 package io.github.chaosawakens.common.registry;
 
 import com.google.common.collect.ImmutableList;
+import com.mojang.datafixers.util.Either;
 import io.github.chaosawakens.CAConstants;
 import io.github.chaosawakens.api.asm.annotations.RegistrarEntry;
 import io.github.chaosawakens.api.platform.CAServices;
@@ -10,6 +11,7 @@ import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
+import net.minecraft.data.worldgen.placement.VegetationPlacements;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
@@ -20,8 +22,10 @@ import net.minecraft.world.level.levelgen.feature.configurations.RandomPatchConf
 import net.minecraft.world.level.levelgen.feature.configurations.SimpleBlockConfiguration;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import net.minecraft.world.level.levelgen.placement.*;
+import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorList;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Supplier;
 
 public class CAFeatures {
@@ -71,6 +75,8 @@ public class CAFeatures {
 
         public static final Supplier<ResourceKey<ConfiguredFeature<?, ?>>> DREDGESTONE_ROCK = registerConfiguredFeature("dredgestone_rock", () -> new ConfiguredFeature<>(Feature.FOREST_ROCK, new BlockStateConfiguration(CABlocks.DREDGESTONE.get().defaultBlockState())));
 
+        public static final Supplier<ResourceKey<ConfiguredFeature<?, ?>>> MESOZOIC_TREE_VARIANT_1 = registerConfiguredFeature("mesozoic_tree_variant_1", () -> new ConfiguredFeature<>(Features.NBT_TREE.get(), new NBTTreeConfiguration(Either.left(CAConstants.prefix("feature_presets/nbt_tree/mesozoic_tree/mesozoic_tree_1")), BlockStateProvider.simple(CABlocks.DENSE_GRASS_BLOCK.get()), 0, Optional.of(new StructureProcessorList(ObjectArrayList.of())))));
+
         private static Supplier<ResourceKey<ConfiguredFeature<?, ?>>> registerConfiguredFeature(ResourceLocation id, Supplier<ConfiguredFeature<?, ?>> actualPlacedFeatureSup) {
             Supplier<ResourceKey<ConfiguredFeature<?, ?>>> placedFeatureSup = CAServices.REGISTRAR.registerDatapackObject(id, b -> actualPlacedFeatureSup, Registries.CONFIGURED_FEATURE);
             CONFIGURED_FEATURES.add(placedFeatureSup);
@@ -113,6 +119,8 @@ public class CAFeatures {
         public static final Supplier<ResourceKey<PlacedFeature>> LARGE_MESOZOIC_BUSH_PATCH = registerPlacedFeature("large_mesozoic_bush_patch", CAConfiguredFeatures.LARGE_MESOZOIC_BUSH_PATCH, ObjectArrayList.of(RarityFilter.onAverageOnceEvery(32), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
 
         public static final Supplier<ResourceKey<PlacedFeature>> DREDGESTONE_ROCK = registerPlacedFeature("dredgestone_rock", CAConfiguredFeatures.DREDGESTONE_ROCK, ObjectArrayList.of(PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
+
+        public static final Supplier<ResourceKey<PlacedFeature>> MESOZOIC_TREE_VARIANT_1 = registerPlacedFeature("mesozoic_tree_variant_1", CAConfiguredFeatures.MESOZOIC_TREE_VARIANT_1, VegetationPlacements.treePlacement(PlacementUtils.countExtra(4, 0.1F, 1)));
 
         private static Supplier<ResourceKey<PlacedFeature>> registerPlacedFeature(ResourceLocation id, Supplier<ResourceKey<ConfiguredFeature<?, ?>>> configuredFeatureHolder, List<PlacementModifier> placementModifiers) {
             Supplier<ResourceKey<PlacedFeature>> placedFeatureSup = CAServices.REGISTRAR.registerDatapackObject(id, b -> () -> new PlacedFeature(b.lookup(Registries.CONFIGURED_FEATURE).getOrThrow(configuredFeatureHolder.get()), List.copyOf(placementModifiers)), Registries.PLACED_FEATURE);
