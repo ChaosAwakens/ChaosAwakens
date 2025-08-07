@@ -6,6 +6,7 @@ import io.github.chaosawakens.api.asm.annotations.RegistrarEntry;
 import io.github.chaosawakens.api.item.ItemPropertyWrapper;
 import io.github.chaosawakens.api.platform.CAServices;
 import io.github.chaosawakens.common.block.misc.EnchantedItem;
+import io.github.chaosawakens.common.item.misc.CreeperLauncherItem;
 import io.github.chaosawakens.common.item.misc.CritterCageItem;
 import io.github.chaosawakens.common.item.misc.MinersDreamItem;
 import io.github.chaosawakens.common.item.mob.WrappedFoodOnAStickItem;
@@ -136,6 +137,8 @@ public final class CAItems {
     public static final Supplier<Item> BIG_BERTHA_BLADE = ItemPropertyWrapper.of(CAItemPropertyWrappers.BASIC_GENERATED, registerItem("big_bertha_blade", () -> new Item(new Item.Properties().rarity(Rarity.EPIC)))).getParentItem();
     public static final Supplier<Item> BIG_BERTHA_GUARD = ItemPropertyWrapper.of(CAItemPropertyWrappers.BASIC_GENERATED, registerItem("big_bertha_guard", () -> new Item(new Item.Properties().rarity(Rarity.EPIC)))).getParentItem();
     public static final Supplier<Item> BIG_BERTHA_HANDLE = ItemPropertyWrapper.of(CAItemPropertyWrappers.BASIC_GENERATED, registerItem("big_bertha_handle", () -> new Item(new Item.Properties().rarity(Rarity.EPIC)))).getParentItem();
+
+    public static final Supplier<Item> CREEPER_LAUNCHER = ItemPropertyWrapper.of(CAItemPropertyWrappers.BASIC_GENERATED, registerItem("creeper_launcher", () -> new CreeperLauncherItem(new Item.Properties().rarity(Rarity.EPIC)))).getParentItem();
 
     // Misc
     public static final Supplier<Item> MINERS_DREAM = ItemPropertyWrapper.of(CAItemPropertyWrappers.BASIC_GENERATED, registerItem("miners_dream", () -> new MinersDreamItem(new Item.Properties().stacksTo(16))))

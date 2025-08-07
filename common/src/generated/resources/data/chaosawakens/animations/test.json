@@ -1,0 +1,60 @@
+{
+  "animations": {
+    "test animation": {
+      "animation_length": 1.0,
+      "bones": {
+        "bone": {
+          "position": {
+            "1.0": {
+              "easing": "easeinquad",
+              "vector": [
+                1.0,
+                0.0,
+                1.0
+              ]
+            }
+          }
+        }
+      },
+      "loop": false
+    },
+    "test animation 2": {
+      "bones": {
+        "bone": {
+          "position": {}
+        }
+      },
+      "loop": true
+    },
+    "test animation 3": {
+      "animation_length": 12.0,
+      "bones": {
+        "bone": {
+          "position": {
+            "1.0": {
+              "easing": "easeinquad",
+              "vector": [
+                1.0,
+                0.0,
+                1.0
+              ]
+            },
+            "4.0": {
+              "easing": "linear",
+              "easingArgs": [
+                1.0,
+                2.0,
+                3.0
+              ],
+              "vector": [
+                1.0,
+                0.0,
+                1.0
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -87,6 +87,14 @@ public final class MathUtil {
         return BlockHitResult.Type.MISS.equals(potentialHitResult.getType()) ? basePos : potentialHitResult.getLocation();
     }
 
+    public static double applyInterpolation(double startValue, double endValue, double alphaT) {
+        return startValue + (endValue - startValue) * alphaT;
+    }
+
+    public static double quadraticEasing(double originalProgressValue) {
+        return originalProgressValue * originalProgressValue;
+    }
+
     public static OscillationResult oscillate(OscillationResult result, float startValue, float endValue, float delta) {
         if (result.increasing) {
             result.value += delta;
