@@ -5,13 +5,13 @@ import com.mojang.datafixers.util.Either;
 import io.github.chaosawakens.CAConstants;
 import io.github.chaosawakens.api.asm.annotations.RegistrarEntry;
 import io.github.chaosawakens.api.platform.CAServices;
+import io.github.chaosawakens.common.worldgen.InSquareBBPlacement;
 import io.github.chaosawakens.common.worldgen.feature.NBTTreeFeature;
 import io.github.chaosawakens.common.worldgen.feature.configurations.NBTTreeConfiguration;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
-import net.minecraft.data.worldgen.placement.VegetationPlacements;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
@@ -22,7 +22,7 @@ import net.minecraft.world.level.levelgen.feature.configurations.RandomPatchConf
 import net.minecraft.world.level.levelgen.feature.configurations.SimpleBlockConfiguration;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import net.minecraft.world.level.levelgen.placement.*;
-import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorList;
+import net.minecraft.world.level.levelgen.structure.BoundingBox;
 
 import java.util.List;
 import java.util.Optional;
@@ -93,7 +93,7 @@ public class CAFeatures {
 
         public static final Supplier<ResourceKey<ConfiguredFeature<?, ?>>> DREDGESTONE_ROCK = registerConfiguredFeature("dredgestone_rock", () -> new ConfiguredFeature<>(Feature.FOREST_ROCK, new BlockStateConfiguration(CABlocks.DREDGESTONE.get().defaultBlockState())));
 
-        public static final Supplier<ResourceKey<ConfiguredFeature<?, ?>>> MESOZOIC_TREE_VARIANT_1 = registerConfiguredFeature("mesozoic_tree_variant_1", () -> new ConfiguredFeature<>(Features.NBT_TREE.get(), new NBTTreeConfiguration(Either.left(CAConstants.prefix("feature_presets/nbt_tree/mesozoic_tree/mesozoic_tree_1")), BlockStateProvider.simple(CABlocks.DENSE_GRASS_BLOCK.get()), 0, Optional.of(new StructureProcessorList(ObjectArrayList.of())))));
+        public static final Supplier<ResourceKey<ConfiguredFeature<?, ?>>> MESOZOIC_TREE_VARIANT_1 = registerConfiguredFeature("mesozoic_tree_variant_1", () -> new ConfiguredFeature<>(Features.NBT_TREE.get(), new NBTTreeConfiguration(Either.left(CAConstants.prefix("feature_presets/nbt_tree/mesozoic_tree/mesozoic_tree_1")), BlockStateProvider.simple(CABlocks.DENSE_GRASS_BLOCK.get()), 0, new BoundingBox(10, 0, 8, 17, 10, 15), Optional.empty())));
 
         private static Supplier<ResourceKey<ConfiguredFeature<?, ?>>> registerConfiguredFeature(ResourceLocation id, Supplier<ConfiguredFeature<?, ?>> actualPlacedFeatureSup) {
             Supplier<ResourceKey<ConfiguredFeature<?, ?>>> placedFeatureSup = CAServices.REGISTRAR.registerDatapackObject(id, b -> actualPlacedFeatureSup, Registries.CONFIGURED_FEATURE);
@@ -156,7 +156,7 @@ public class CAFeatures {
 
         public static final Supplier<ResourceKey<PlacedFeature>> DREDGESTONE_ROCK = registerPlacedFeature("dredgestone_rock", CAConfiguredFeatures.DREDGESTONE_ROCK, ObjectArrayList.of(PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
 
-        public static final Supplier<ResourceKey<PlacedFeature>> MESOZOIC_TREE_VARIANT_1 = registerPlacedFeature("mesozoic_tree_variant_1", CAConfiguredFeatures.MESOZOIC_TREE_VARIANT_1, VegetationPlacements.treePlacement(PlacementUtils.countExtra(4, 0.1F, 1)));
+        public static final Supplier<ResourceKey<PlacedFeature>> MESOZOIC_TREE_VARIANT_1 = registerPlacedFeature("mesozoic_tree_variant_1", CAConfiguredFeatures.MESOZOIC_TREE_VARIANT_1, nbtTreePlacement(PlacementUtils.countExtra(4, 0.1F, 1), 27, 25));
 
         private static Supplier<ResourceKey<PlacedFeature>> registerPlacedFeature(ResourceLocation id, Supplier<ResourceKey<ConfiguredFeature<?, ?>>> configuredFeatureHolder, List<PlacementModifier> placementModifiers) {
             Supplier<ResourceKey<PlacedFeature>> placedFeatureSup = CAServices.REGISTRAR.registerDatapackObject(id, b -> () -> new PlacedFeature(b.lookup(Registries.CONFIGURED_FEATURE).getOrThrow(configuredFeatureHolder.get()), List.copyOf(placementModifiers)), Registries.PLACED_FEATURE);
@@ -170,6 +170,32 @@ public class CAFeatures {
 
         public static ImmutableList<Supplier<ResourceKey<PlacedFeature>>> getPlacedFeatures() {
             return ImmutableList.copyOf(PLACED_FEATURES);
+        }
+
+        private static ObjectArrayList<PlacementModifier> nbtTreePlacement(PlacementModifier modifier, int x, int z) {
+            return ObjectArrayList.of(
+                    modifier,
+                    new InSquareBBPlacement(x, z),
+                    SurfaceWaterDepthFilter.forMaxDepth(0),
+                    PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
+                    BiomeFilter.biome());
+        }
+    }
+
+    @RegistrarEntry
+    public static class PlacementModifiers {
+        private static final ObjectArrayList<Supplier<PlacementModifierType<?>>> PLACEMENT_MODIFIERS = new ObjectArrayList<>();
+
+        public static final Supplier<PlacementModifierType<InSquareBBPlacement>> IN_BB_SQUARE = registerModifier("in_bb_square", () -> () -> InSquareBBPlacement.CODEC);
+
+        private static <P extends PlacementModifier> Supplier<PlacementModifierType<P>> registerModifier(String id, Supplier<PlacementModifierType<P>> codecSup) {
+            Supplier<PlacementModifierType<P>> typeSupplier = CAServices.REGISTRAR.registerObject(CAConstants.prefix(id), codecSup, BuiltInRegistries.PLACEMENT_MODIFIER_TYPE);
+            PLACEMENT_MODIFIERS.add((Supplier) typeSupplier);
+            return typeSupplier;
+        }
+
+        public static ImmutableList<Supplier<PlacementModifierType<?>>> getFeatures() {
+            return ImmutableList.copyOf(PLACEMENT_MODIFIERS);
         }
     }
 }

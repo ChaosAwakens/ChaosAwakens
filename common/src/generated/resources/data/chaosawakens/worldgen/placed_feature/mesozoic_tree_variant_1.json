@@ -18,7 +18,9 @@
       }
     },
     {
-      "type": "minecraft:in_square"
+      "type": "chaosawakens:in_bb_square",
+      "x": 27,
+      "z": 25
     },
     {
       "type": "minecraft:surface_water_depth_filter",

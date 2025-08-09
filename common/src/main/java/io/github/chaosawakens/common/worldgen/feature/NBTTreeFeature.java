@@ -3,9 +3,11 @@ package io.github.chaosawakens.common.worldgen.feature;
 import com.mojang.serialization.Codec;
 import io.github.chaosawakens.common.worldgen.feature.configurations.NBTTreeConfiguration;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Vec3i;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.Rotation;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
@@ -29,27 +31,51 @@ public class NBTTreeFeature extends Feature<NBTTreeConfiguration> {
 
         NBTTreeConfiguration config = featurePlaceContext.config();
         Optional<StructureTemplate> treeTemplate = curLevel.getServer().getStructureManager().get(config.template().left().get());
-        BlockPos offsetPos = curLevel.getHeightmapPos(Heightmap.Types.WORLD_SURFACE_WG, featurePlaceContext.origin()).offset(0, -featurePlaceContext.config().groundLevel(), 0);
 
-        if (treeTemplate.isPresent()) { // TODO Actually place this properly (Weeyurd)
-            RandomSource rand = featurePlaceContext.random();
+        if (treeTemplate.isEmpty()) return false;
 
-            StructureTemplate rawTemp = treeTemplate.get();
-            StructurePlaceSettings settings = new StructurePlaceSettings();
+        Vec3i size = treeTemplate.get().getSize();
+        BoundingBox trunkBB = config.trunkBB();
 
-            settings.setRotation(randomRotation(rand));
+        BlockPos firstCorner = curLevel.getHeightmapPos(Heightmap.Types.WORLD_SURFACE_WG, featurePlaceContext.origin()).offset(trunkBB.minX(), 0, trunkBB.minZ());
+        BlockPos secondCorner = curLevel.getHeightmapPos(Heightmap.Types.WORLD_SURFACE_WG, featurePlaceContext.origin()).offset(trunkBB.maxX(), 0, trunkBB.minZ());
+        BlockPos thirdCorner = curLevel.getHeightmapPos(Heightmap.Types.WORLD_SURFACE_WG, featurePlaceContext.origin()).offset(trunkBB.minX(), 0, trunkBB.maxZ());
+        BlockPos fourthCorner = curLevel.getHeightmapPos(Heightmap.Types.WORLD_SURFACE_WG, featurePlaceContext.origin()).offset(trunkBB.maxX(), 0, trunkBB.maxZ());
 
-            BoundingBox treeBB = rawTemp.getBoundingBox(settings, offsetPos);
-            int treeHeightAtPosition = offsetPos.getY() + treeBB.getYSpan();
+        RandomSource rand = featurePlaceContext.random();
+        BlockState validSurface = config.validSurface().getState(rand, BlockPos.ZERO);
 
-            if (treeHeightAtPosition > curLevel.getMaxBuildHeight()) return false;
+        if (validSurface != curLevel.getBlockState(firstCorner.below())) return false;
+        if (validSurface != curLevel.getBlockState(secondCorner.below())) return false;
+        if (validSurface != curLevel.getBlockState(thirdCorner.below())) return false;
+        if (validSurface != curLevel.getBlockState(fourthCorner.below())) return false;
 
-            treeTemplate.get().placeInWorld(curLevel, offsetPos, offsetPos, settings, rand, 0);
-
-            return true;
+        // Check for lowest corner and set offset Y level to it
+        BlockPos offsetPos;
+        if (firstCorner.getY() <= secondCorner.getY() && firstCorner.getY() <= thirdCorner.getY() && firstCorner.getY() <= fourthCorner.getY()) {
+            offsetPos = featurePlaceContext.origin().atY(firstCorner.getY() - config.groundLevel());
+        } else if (secondCorner.getY() <= firstCorner.getY() && secondCorner.getY() <= thirdCorner.getY() && secondCorner.getY() <= fourthCorner.getY()) {
+            offsetPos = featurePlaceContext.origin().atY(secondCorner.getY() - config.groundLevel());
+        } else if (thirdCorner.getY() <= firstCorner.getY() && thirdCorner.getY() <= secondCorner.getY() && thirdCorner.getY() <= fourthCorner.getY()) {
+            offsetPos = featurePlaceContext.origin().atY(thirdCorner.getY() - config.groundLevel());
+        } else {
+            offsetPos = featurePlaceContext.origin().atY(fourthCorner.getY() - config.groundLevel());
         }
 
-        return false;
+        StructureTemplate rawTemp = treeTemplate.get();
+        StructurePlaceSettings settings = new StructurePlaceSettings();
+
+        settings.setRotationPivot(new BlockPos(size.getX() / 2, 0, size.getZ() / 2));
+        settings.setRotation(randomRotation(rand));
+
+        BoundingBox treeBB = rawTemp.getBoundingBox(settings, offsetPos);
+        int treeHeightAtPosition = offsetPos.getY() + treeBB.getYSpan();
+
+        if (treeHeightAtPosition > curLevel.getMaxBuildHeight()) return false;
+
+        treeTemplate.get().placeInWorld(curLevel, offsetPos, offsetPos, settings, rand, 0);
+
+        return true;
     }
 
     private Rotation randomRotation(RandomSource random) {
