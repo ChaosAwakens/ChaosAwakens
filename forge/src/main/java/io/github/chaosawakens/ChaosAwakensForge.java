@@ -73,6 +73,7 @@ public class ChaosAwakensForge {
 
         datagen.addProvider(event.includeServer(), new CADatapackRegistryProvider(datagenPackOutput, lookupProvider));
 
-        datagen.addProvider(event.includeServer(), new CAAnimationTestProviders(datagenPackOutput));
+        datagen.addProvider(event.includeServer(), new CAAnimationTestProvider(datagenPackOutput));
+        datagen.addProvider(event.includeServer(), new CAModelTestProvider(datagenPackOutput));
     }
 }

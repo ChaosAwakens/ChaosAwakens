@@ -13,7 +13,7 @@ import java.util.Optional;
  * functional equivalent of Geckolib's {@code EasingType} {@code interface}, except it's revised to have full integration
  * with CA's in-house ARS system.
  * <br></br>
- * The mathematical functions used here are mostly provided generously by <a href="https://easings.net">easings.net</a>.
+ * The mathematical functions used here are mostly provided by <a href="https://easings.net">easings.net</a>.
  */
 @FunctionalInterface
 public interface MathematicalEasing {

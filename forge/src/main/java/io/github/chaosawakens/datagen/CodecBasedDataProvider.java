@@ -59,7 +59,7 @@ public abstract class CodecBasedDataProvider<T> implements DataProvider {
 
     @Override
     public @NotNull String getName() {
-        return String.format("Codec-Based Data Provider [%s]", modId);
+        return String.format("Codec-Based Data Provider [%s]", outputPath.json(CAConstants.prefix("")));
     }
 
     protected abstract void addDataEntries();
