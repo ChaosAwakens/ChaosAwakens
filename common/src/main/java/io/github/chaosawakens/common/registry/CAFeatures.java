@@ -14,13 +14,14 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.valueproviders.UniformInt;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
-import net.minecraft.world.level.levelgen.feature.configurations.BlockStateConfiguration;
-import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
-import net.minecraft.world.level.levelgen.feature.configurations.RandomPatchConfiguration;
-import net.minecraft.world.level.levelgen.feature.configurations.SimpleBlockConfiguration;
+import net.minecraft.world.level.levelgen.feature.configurations.*;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
+import net.minecraft.world.level.levelgen.feature.stateproviders.RuleBasedBlockStateProvider;
 import net.minecraft.world.level.levelgen.placement.*;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 
@@ -92,6 +93,8 @@ public class CAFeatures {
         public static final Supplier<ResourceKey<ConfiguredFeature<?, ?>>> LARGE_MESOZOIC_BUSH_PATCH = registerConfiguredFeature("large_mesozoic_bush_patch", () -> new ConfiguredFeature<>(Feature.RANDOM_PATCH, new RandomPatchConfiguration(96, 12, 3, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(CABlocks.LARGE_MESOZOIC_BUSH.get()))))));
 
         public static final Supplier<ResourceKey<ConfiguredFeature<?, ?>>> DREDGESTONE_ROCK = registerConfiguredFeature("dredgestone_rock", () -> new ConfiguredFeature<>(Feature.FOREST_ROCK, new BlockStateConfiguration(CABlocks.DREDGESTONE.get().defaultBlockState())));
+        public static final Supplier<ResourceKey<ConfiguredFeature<?, ?>>> TAR_PUDDLE = registerConfiguredFeature("tar_puddle", () -> new ConfiguredFeature<>(Feature.RANDOM_PATCH, new RandomPatchConfiguration(128, 3, 1, PlacementUtils.filtered(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(CABlocks.TAR.get())), BlockPredicate.matchesBlocks(List.of(CABlocks.DENSE_DIRT.get(), CABlocks.DENSE_GRASS_BLOCK.get()))))));
+        public static final Supplier<ResourceKey<ConfiguredFeature<?, ?>>> LATOSOL_PUDDLE = registerConfiguredFeature("latosol_puddle", () -> new ConfiguredFeature<>(Feature.RANDOM_PATCH, new RandomPatchConfiguration(128, 3, 1, PlacementUtils.filtered(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(CABlocks.LATOSOL.get())), BlockPredicate.matchesBlocks(List.of(CABlocks.DENSE_DIRT.get(), CABlocks.DENSE_GRASS_BLOCK.get()))))));
 
         public static final Supplier<ResourceKey<ConfiguredFeature<?, ?>>> MESOZOIC_TREE_VARIANT_1 = registerConfiguredFeature("mesozoic_tree_variant_1", () -> new ConfiguredFeature<>(Features.NBT_TREE.get(), new NBTTreeConfiguration(Either.left(CAConstants.prefix("feature_presets/nbt_tree/mesozoic_tree/mesozoic_tree_1")), BlockStateProvider.simple(CABlocks.DENSE_GRASS_BLOCK.get()), 0, new BoundingBox(10, 0, 8, 17, 10, 15), Optional.empty())));
 
@@ -143,18 +146,20 @@ public class CAFeatures {
         public static final Supplier<ResourceKey<PlacedFeature>> THORNY_SUN_PATCH = registerPlacedFeature("thorny_sun_patch", CAConfiguredFeatures.THORNY_SUN_PATCH, ObjectArrayList.of(RarityFilter.onAverageOnceEvery(32), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
         public static final Supplier<ResourceKey<PlacedFeature>> ALSTROEMERIAT_PATCH = registerPlacedFeature("alstroemeriat_patch", CAConfiguredFeatures.ALSTROEMERIAT_PATCH, ObjectArrayList.of(RarityFilter.onAverageOnceEvery(32), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
 
-        public static final Supplier<ResourceKey<PlacedFeature>> DENSE_BUSH_PATCH = registerPlacedFeature("dense_bush_patch", CAConfiguredFeatures.DENSE_BUSH_PATCH, ObjectArrayList.of(RarityFilter.onAverageOnceEvery(32), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
-        public static final Supplier<ResourceKey<PlacedFeature>> TALL_DENSE_BUSH_PATCH = registerPlacedFeature("tall_dense_bush_patch", CAConfiguredFeatures.TALL_DENSE_BUSH_PATCH, ObjectArrayList.of(RarityFilter.onAverageOnceEvery(32), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
+        public static final Supplier<ResourceKey<PlacedFeature>> DENSE_BUSH_PATCH = registerPlacedFeature("dense_bush_patch", CAConfiguredFeatures.DENSE_BUSH_PATCH, ObjectArrayList.of(RarityFilter.onAverageOnceEvery(24), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
+        public static final Supplier<ResourceKey<PlacedFeature>> TALL_DENSE_BUSH_PATCH = registerPlacedFeature("tall_dense_bush_patch", CAConfiguredFeatures.TALL_DENSE_BUSH_PATCH, ObjectArrayList.of(RarityFilter.onAverageOnceEvery(24), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
 
-        public static final Supplier<ResourceKey<PlacedFeature>> SMALL_CARNIVOROUS_PLANT_PATCH = registerPlacedFeature("small_carnivorous_plant_patch", CAConfiguredFeatures.SMALL_CARNIVOROUS_PLANT_PATCH, ObjectArrayList.of(RarityFilter.onAverageOnceEvery(32), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
-        public static final Supplier<ResourceKey<PlacedFeature>> BIG_CARNIVOROUS_PLANT_PATCH = registerPlacedFeature("big_carnivorous_plant_patch", CAConfiguredFeatures.BIG_CARNIVOROUS_PLANT_PATCH, ObjectArrayList.of(RarityFilter.onAverageOnceEvery(32), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
+        public static final Supplier<ResourceKey<PlacedFeature>> SMALL_CARNIVOROUS_PLANT_PATCH = registerPlacedFeature("small_carnivorous_plant_patch", CAConfiguredFeatures.SMALL_CARNIVOROUS_PLANT_PATCH, ObjectArrayList.of(RarityFilter.onAverageOnceEvery(10), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
+        public static final Supplier<ResourceKey<PlacedFeature>> BIG_CARNIVOROUS_PLANT_PATCH = registerPlacedFeature("big_carnivorous_plant_patch", CAConfiguredFeatures.BIG_CARNIVOROUS_PLANT_PATCH, ObjectArrayList.of(RarityFilter.onAverageOnceEvery(10), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
 
-        public static final Supplier<ResourceKey<PlacedFeature>> BUSH_PATCH = registerPlacedFeature("bush_patch", CAConfiguredFeatures.BUSH_PATCH, ObjectArrayList.of(RarityFilter.onAverageOnceEvery(32), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
-        public static final Supplier<ResourceKey<PlacedFeature>> TALL_BUSH_PATCH = registerPlacedFeature("tall_bush_patch", CAConfiguredFeatures.TALL_BUSH_PATCH, ObjectArrayList.of(RarityFilter.onAverageOnceEvery(32), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
+        public static final Supplier<ResourceKey<PlacedFeature>> BUSH_PATCH = registerPlacedFeature("bush_patch", CAConfiguredFeatures.BUSH_PATCH, ObjectArrayList.of(RarityFilter.onAverageOnceEvery(24), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
+        public static final Supplier<ResourceKey<PlacedFeature>> TALL_BUSH_PATCH = registerPlacedFeature("tall_bush_patch", CAConfiguredFeatures.TALL_BUSH_PATCH, ObjectArrayList.of(RarityFilter.onAverageOnceEvery(24), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
 
         public static final Supplier<ResourceKey<PlacedFeature>> LARGE_MESOZOIC_BUSH_PATCH = registerPlacedFeature("large_mesozoic_bush_patch", CAConfiguredFeatures.LARGE_MESOZOIC_BUSH_PATCH, ObjectArrayList.of(RarityFilter.onAverageOnceEvery(32), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
 
         public static final Supplier<ResourceKey<PlacedFeature>> DREDGESTONE_ROCK = registerPlacedFeature("dredgestone_rock", CAConfiguredFeatures.DREDGESTONE_ROCK, ObjectArrayList.of(PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
+        public static final Supplier<ResourceKey<PlacedFeature>> TAR_PUDDLE = registerPlacedFeature("tar_puddle", CAConfiguredFeatures.TAR_PUDDLE, ObjectArrayList.of(RarityFilter.onAverageOnceEvery(48), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
+        public static final Supplier<ResourceKey<PlacedFeature>> LATOSOL_PUDDLE = registerPlacedFeature("latosol_puddle", CAConfiguredFeatures.LATOSOL_PUDDLE, ObjectArrayList.of(RarityFilter.onAverageOnceEvery(48), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
 
         public static final Supplier<ResourceKey<PlacedFeature>> MESOZOIC_TREE_VARIANT_1 = registerPlacedFeature("mesozoic_tree_variant_1", CAConfiguredFeatures.MESOZOIC_TREE_VARIANT_1, nbtTreePlacement(PlacementUtils.countExtra(4, 0.1F, 1), 27, 25));
 
@@ -177,6 +182,7 @@ public class CAFeatures {
                     modifier,
                     new InSquareBBPlacement(x, z),
                     SurfaceWaterDepthFilter.forMaxDepth(0),
+                    InSquarePlacement.spread(),
                     PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
                     BiomeFilter.biome());
         }

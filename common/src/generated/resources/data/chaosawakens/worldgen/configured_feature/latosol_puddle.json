@@ -1,0 +1,33 @@
+{
+  "type": "minecraft:random_patch",
+  "config": {
+    "feature": {
+      "feature": {
+        "type": "minecraft:simple_block",
+        "config": {
+          "to_place": {
+            "type": "minecraft:simple_state_provider",
+            "state": {
+              "Name": "chaosawakens:latosol"
+            }
+          }
+        }
+      },
+      "placement": [
+        {
+          "type": "minecraft:block_predicate_filter",
+          "predicate": {
+            "type": "minecraft:matching_blocks",
+            "blocks": [
+              "chaosawakens:dense_dirt",
+              "chaosawakens:dense_grass_block"
+            ]
+          }
+        }
+      ]
+    },
+    "tries": 128,
+    "xz_spread": 3,
+    "y_spread": 1
+  }
+}

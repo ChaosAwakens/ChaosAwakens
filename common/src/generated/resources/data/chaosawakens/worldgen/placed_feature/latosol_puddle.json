@@ -1,9 +1,9 @@
 {
-  "feature": "chaosawakens:tall_dense_bush_patch",
+  "feature": "chaosawakens:latosol_puddle",
   "placement": [
     {
       "type": "minecraft:rarity_filter",
-      "chance": 24
+      "chance": 48
     },
     {
       "type": "minecraft:in_square"

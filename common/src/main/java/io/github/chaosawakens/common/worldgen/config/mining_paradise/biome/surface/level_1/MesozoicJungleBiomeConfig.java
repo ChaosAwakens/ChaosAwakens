@@ -67,6 +67,9 @@ public class MesozoicJungleBiomeConfig implements BiomeConfig {
 
         biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, placedFeatureGetter.getOrThrow(CAFeatures.CAPlacedFeatures.MESOZOIC_TREE_VARIANT_1.get()));
 
+        biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, placedFeatureGetter.getOrThrow(CAFeatures.CAPlacedFeatures.TAR_PUDDLE.get()));
+        biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, placedFeatureGetter.getOrThrow(CAFeatures.CAPlacedFeatures.LATOSOL_PUDDLE.get()));
+
         return biomeBuilder.build();
     }
 
