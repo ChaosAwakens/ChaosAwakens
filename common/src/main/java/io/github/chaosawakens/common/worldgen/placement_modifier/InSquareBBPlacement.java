@@ -1,4 +1,4 @@
-package io.github.chaosawakens.common.worldgen;
+package io.github.chaosawakens.common.worldgen.placement_modifier;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;

@@ -5,25 +5,24 @@ import com.mojang.datafixers.util.Either;
 import io.github.chaosawakens.CAConstants;
 import io.github.chaosawakens.api.asm.annotations.RegistrarEntry;
 import io.github.chaosawakens.api.platform.CAServices;
-import io.github.chaosawakens.common.worldgen.InSquareBBPlacement;
 import io.github.chaosawakens.common.worldgen.feature.NBTTreeFeature;
 import io.github.chaosawakens.common.worldgen.feature.configurations.NBTTreeConfiguration;
+import io.github.chaosawakens.common.worldgen.placement_modifier.InSquareBBPlacement;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.valueproviders.UniformInt;
-import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.configurations.*;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
-import net.minecraft.world.level.levelgen.feature.stateproviders.RuleBasedBlockStateProvider;
 import net.minecraft.world.level.levelgen.placement.*;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
+import net.minecraft.world.level.levelgen.structure.templatesystem.BlockMatchTest;
 
 import java.util.List;
 import java.util.Optional;
@@ -98,6 +97,8 @@ public class CAFeatures {
 
         public static final Supplier<ResourceKey<ConfiguredFeature<?, ?>>> MESOZOIC_TREE_VARIANT_1 = registerConfiguredFeature("mesozoic_tree_variant_1", () -> new ConfiguredFeature<>(Features.NBT_TREE.get(), new NBTTreeConfiguration(Either.left(CAConstants.prefix("feature_presets/nbt_tree/mesozoic_tree/mesozoic_tree_1")), BlockStateProvider.simple(CABlocks.DENSE_GRASS_BLOCK.get()), 0, new BoundingBox(10, 0, 8, 17, 10, 15), Optional.empty())));
 
+        public static final Supplier<ResourceKey<ConfiguredFeature<?, ?>>> URANIUM_BLOCK = registerConfiguredFeature("uranium_block", () -> new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(new BlockMatchTest(CABlocks.DREDGESTONE.get()), CABlocks.URANIUM_BLOCK.get().defaultBlockState(), 64)));
+
         private static Supplier<ResourceKey<ConfiguredFeature<?, ?>>> registerConfiguredFeature(ResourceLocation id, Supplier<ConfiguredFeature<?, ?>> actualPlacedFeatureSup) {
             Supplier<ResourceKey<ConfiguredFeature<?, ?>>> placedFeatureSup = CAServices.REGISTRAR.registerDatapackObject(id, b -> actualPlacedFeatureSup, Registries.CONFIGURED_FEATURE);
             CONFIGURED_FEATURES.add(placedFeatureSup);
@@ -163,6 +164,8 @@ public class CAFeatures {
 
         public static final Supplier<ResourceKey<PlacedFeature>> MESOZOIC_TREE_VARIANT_1 = registerPlacedFeature("mesozoic_tree_variant_1", CAConfiguredFeatures.MESOZOIC_TREE_VARIANT_1, nbtTreePlacement(PlacementUtils.countExtra(4, 0.1F, 1), 27, 25));
 
+        public static final Supplier<ResourceKey<PlacedFeature>> URANIUM_BLOCK = registerPlacedFeature("uranium_block", CAConfiguredFeatures.URANIUM_BLOCK, commonOrePlacement(30, HeightRangePlacement.triangle(VerticalAnchor.absolute(0), VerticalAnchor.absolute(192))));
+
         private static Supplier<ResourceKey<PlacedFeature>> registerPlacedFeature(ResourceLocation id, Supplier<ResourceKey<ConfiguredFeature<?, ?>>> configuredFeatureHolder, List<PlacementModifier> placementModifiers) {
             Supplier<ResourceKey<PlacedFeature>> placedFeatureSup = CAServices.REGISTRAR.registerDatapackObject(id, b -> () -> new PlacedFeature(b.lookup(Registries.CONFIGURED_FEATURE).getOrThrow(configuredFeatureHolder.get()), List.copyOf(placementModifiers)), Registries.PLACED_FEATURE);
             PLACED_FEATURES.add(placedFeatureSup);
@@ -185,6 +188,18 @@ public class CAFeatures {
                     InSquarePlacement.spread(),
                     PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
                     BiomeFilter.biome());
+        }
+
+        private static List<PlacementModifier> orePlacement(PlacementModifier pCountPlacement, PlacementModifier pHeightRange) {
+            return List.of(pCountPlacement, InSquarePlacement.spread(), pHeightRange, BiomeFilter.biome());
+        }
+
+        private static List<PlacementModifier> commonOrePlacement(int pCount, PlacementModifier pHeightRange) {
+            return orePlacement(CountPlacement.of(pCount), pHeightRange);
+        }
+
+        private static List<PlacementModifier> rareOrePlacement(int pChance, PlacementModifier pHeightRange) {
+            return orePlacement(RarityFilter.onAverageOnceEvery(pChance), pHeightRange);
         }
     }
 

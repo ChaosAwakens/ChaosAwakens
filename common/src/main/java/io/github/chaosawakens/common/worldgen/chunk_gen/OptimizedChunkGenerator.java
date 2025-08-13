@@ -1,6 +1,5 @@
 package io.github.chaosawakens.common.worldgen.chunk_gen;
 
-import io.github.chaosawakens.common.worldgen.chunk_gen.chunk.OptimizedNoiseChunk;
 import net.minecraft.SharedConstants;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
@@ -36,7 +35,7 @@ public class OptimizedChunkGenerator extends NoiseBasedChunkGenerator {
 
     @Override
     public @NotNull ChunkAccess doFill(Blender chunkBlender, StructureManager structureManager, RandomState randState, ChunkAccess targetChunkAccess, int minCellY, int cellYCount) {
-        OptimizedNoiseChunk noisechunk = targetChunkAccess.getOrCreateNoiseChunk((p_224255_) -> {
+        NoiseChunk noisechunk = targetChunkAccess.getOrCreateNoiseChunk((p_224255_) -> {
             return this.createNoiseChunk(p_224255_, structureManager, chunkBlender, randState);
         });
         Heightmap heightmap = targetChunkAccess.getOrCreateHeightmapUnprimed(Heightmap.Types.OCEAN_FLOOR_WG);

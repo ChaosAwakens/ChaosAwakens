@@ -21,7 +21,9 @@ public class CATags {
     @RegistrarEntry
     public static class CABlockTags {
         public static final Supplier<TagKey<Block>> BASE_STONE_CRYSTAL = createWrappedBlockTag("base_stone_crystal").getParentTag();
-        public static final Supplier<TagKey<Block>> BASE_STONE_MINING = createWrappedBlockTag("base_stone_mining").getParentTag();
+        public static final Supplier<TagKey<Block>> BASE_STONE_MINING = createWrappedBlockTag("base_stone_mining")
+                .withEntries(ObjectArrayList.of(CABlocks.DREDGESTONE))
+                .getParentTag();
         public static final Supplier<TagKey<Block>> BASE_STONE_VILLAGE = createWrappedBlockTag("base_stone_village").getParentTag();
 
         public static final Supplier<TagKey<Block>> MINERS_DREAM_MINEABLE = createWrappedBlockTag("miners_dream_mineable")

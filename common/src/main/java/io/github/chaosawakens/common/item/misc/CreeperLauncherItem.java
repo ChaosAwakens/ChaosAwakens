@@ -31,7 +31,7 @@ public class CreeperLauncherItem extends Item {
             ownerPlayer.level().playSound(ownerPlayer, targetCreeper, SoundEvents.GENERIC_EXPLODE, SoundSource.PLAYERS, 100.0F, ownerPlayer.getRandom().nextFloat() + 0.1F);
 
             if (ownerPlayer.getRandom().nextFloat() < 0.4F) {
-                new ScreenShakeEffect(ownerPlayer.blockPosition(), 150.5D, 0.2F, 45.5F, 1.2F).enqueue(ownerPlayer.level());
+                new ScreenShakeEffect(ownerPlayer.blockPosition(), 150.5D, 2000.2F, 450.5F, 1.2F).enqueue(ownerPlayer.level());
                 ownerPlayer.level().explode(targetCreeper, targetCreeper.getX(), targetCreeper.getY(), targetCreeper.getZ(), 15.0F, true, Level.ExplosionInteraction.MOB);
             } else new ScreenShakeEffect(ownerPlayer.blockPosition(), 150.5D, 0.006F, 45.5F, 1.2F).enqueue(ownerPlayer.level());
 
