@@ -223,6 +223,10 @@ public final class CABlocks {
 
     // Deepslate Ores
 
+    // MiningParadise Ores
+    //public static final Supplier<Block> URANIUM_ORE = BlockPropertyWrapper.of(CABlockPropertyWrappers.BASIC_BLOCK_PICKAXE, registerBlock("uranium_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DIAMOND_ORE)))).getParentBlock();
+
+
     // Mining Paradise Stones
     public static final Supplier<Block> DREDGESTONE = BlockPropertyWrapper.of(CABlockPropertyWrappers.BASIC_BLOCK_PICKAXE, registerBlock("dredgestone", () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE)))).getParentBlock();
     public static final Supplier<Block> DREDGESTONE_BRICKS = BlockPropertyWrapper.of(CABlockPropertyWrappers.SOLID_BRICKS, registerBlock("dredgestone_bricks", () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE_BRICKS)))).getParentBlock();

@@ -11,9 +11,9 @@ import java.util.function.Consumer;
 
 public class MiningParadiseBiomeBuilder implements BiomeBuilder {
     public static final Climate.Parameter FULL_RANGE = Climate.Parameter.span(-1.1F, 1.55F);
-    public static final Climate.Parameter LAYER_1 = Climate.Parameter.span(-0.2F, 0.25F);
-    public static final Climate.Parameter LAYER_2 = Climate.Parameter.span(0.26F, 0.59F); // .48
-    public static final Climate.Parameter LAYER_4 = Climate.Parameter.span(0.59F, 1.55F);
+    public static final Climate.Parameter LAYER_1 = Climate.Parameter.span(-0.1F, 0.25F);
+    public static final Climate.Parameter LAYER_2 = Climate.Parameter.span(0.25F, 0.57F); // .48
+    public static final Climate.Parameter LAYER_4 = Climate.Parameter.span(0.57F, 1.55F);
 
     public MiningParadiseBiomeBuilder() { // Same per-object pattern Vanilla uses, JIC
 
