@@ -23,11 +23,15 @@ import net.minecraft.world.level.dimension.BuiltinDimensionTypes;
 import net.minecraft.world.level.dimension.DimensionType;
 import net.minecraft.world.level.dimension.LevelStem;
 import net.minecraft.world.level.levelgen.*;
+import net.minecraft.world.level.levelgen.synth.NormalNoise;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.OptionalLong;
 import java.util.function.Function;
 import java.util.function.Supplier;
+import java.util.stream.Stream;
+
+import static net.minecraft.world.level.levelgen.NoiseRouterData.yLimitedInterpolatable;
 
 public class MiningParadiseDimensionConfig implements DimensionLevelStemConfig {
     public static final NoiseSettings BASE_NOISE_SETTINGS = NoiseSettings.create(-256, 736, 1, 4);
@@ -148,11 +152,17 @@ public class MiningParadiseDimensionConfig implements DimensionLevelStemConfig {
     }
 
     protected static NoiseRouter createMiningParadiseNoiseRouter(BootstapContext<NoiseGeneratorSettings> regCtx) {
-        DensityFunction zero = DensityFunctions.zero();
+        DensityFunction aquiferBarrier = DensityFunctions.noise(regCtx.lookup(Registries.NOISE).getOrThrow(CANoiseParameters.AQUIFER_BARRIER.get()), (double)0.5F);
+        DensityFunction fluidFloodedness = DensityFunctions.noise(regCtx.lookup(Registries.NOISE).getOrThrow(CANoiseParameters.AQUIFER_FLUID_LEVEL_FLOODEDNESS.get()), 0.67);
+        DensityFunction fluidSpread = DensityFunctions.noise(regCtx.lookup(Registries.NOISE).getOrThrow(CANoiseParameters.AQUIFER_FLUID_LEVEL_SPREAD.get()), 0.715);
+        DensityFunction aquiferLava = DensityFunctions.noise(regCtx.lookup(Registries.NOISE).getOrThrow(CANoiseParameters.AQUIFER_LAVA.get()), 0.5);
         DensityFunction shiftX = CADensityFunctions.getWrappedDensityFunctionHolder(regCtx, CADensityFunctions.SHIFT_X);
         DensityFunction shiftZ = CADensityFunctions.getWrappedDensityFunctionHolder(regCtx, CADensityFunctions.SHIFT_Z);
         DensityFunction shiftedTemperature = DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.5D, regCtx.lookup(Registries.NOISE).getOrThrow(Noises.TEMPERATURE));
         DensityFunction shiftedVegetation = DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.5D, regCtx.lookup(Registries.NOISE).getOrThrow(Noises.VEGETATION));
+        DensityFunction y = CADensityFunctions.getWrappedDensityFunctionHolder(regCtx, CADensityFunctions.Y);
+        DensityFunction[] oreFunctions = createOreDensityFunctions(y, regCtx.lookup(Registries.NOISE));
+        DensityFunction zero = DensityFunctions.zero();
         DensityFunction landContinents = CADensityFunctions.getWrappedDensityFunctionHolder(regCtx, CADensityFunctions.MINING_PARADISE_CONTINENTS);
         DensityFunction landErosion = CADensityFunctions.getWrappedDensityFunctionHolder(regCtx, CADensityFunctions.MINING_PARADISE_EROSION);
         DensityFunction terrainJaggedness = CADensityFunctions.getWrappedDensityFunctionHolder(regCtx, CADensityFunctions.MINING_PARADISE_JAGGEDNESS);
@@ -165,10 +175,10 @@ public class MiningParadiseDimensionConfig implements DimensionLevelStemConfig {
         DensityFunction finalLandDensity = DensityFunctions.mul(DensityFunctions.interpolated(DensityFunctions.blendDensity(initialLandDensity)), DensityFunctions.constant(1.0D)).squeeze();
 
         return new NoiseRouter(
-                zero,
-                zero,
-                zero,
-                zero,
+                aquiferBarrier,
+                fluidFloodedness,
+                fluidSpread,
+                aquiferLava,
                 shiftedTemperature,
                 shiftedVegetation,
                 landContinents,
@@ -177,12 +187,33 @@ public class MiningParadiseDimensionConfig implements DimensionLevelStemConfig {
                 continentRidges,
                 initialLandDensity,
                 finalLandDensity,
-                zero,
-                zero,
-                zero);
+                oreFunctions[0], // veininess
+                oreFunctions[1], // vein a/b
+                oreFunctions[2]  // ore gap
+        );
     }
 
     protected static ObjectArrayList<Climate.ParameterPoint> createMiningParadiseClimateSpawnConfiguration(BootstapContext<NoiseGeneratorSettings> regCtx) {
         return ObjectArrayList.of();
+    }
+    private static DensityFunction[] createOreDensityFunctions(DensityFunction y, HolderGetter<NormalNoise.NoiseParameters> noiseParams) {
+
+        int minY = Stream.of(OreVeinifier.VeinType.values())
+                .mapToInt(v -> v.minY)
+                .min().orElse(-DimensionType.MIN_Y * 2);
+
+        int maxY = Stream.of(OreVeinifier.VeinType.values())
+                .mapToInt(v -> v.maxY)
+                .max().orElse(-DimensionType.MIN_Y * 2);
+
+        DensityFunction veininess = yLimitedInterpolatable(y, DensityFunctions.noise(noiseParams.getOrThrow(Noises.ORE_VEININESS), 1.5D, 1.5D), minY, maxY, 0);
+
+        DensityFunction veinA = yLimitedInterpolatable(y, DensityFunctions.noise(noiseParams.getOrThrow(Noises.ORE_VEIN_A), 4.0D, 4.0D), minY, maxY, 0).abs();
+        DensityFunction veinB = yLimitedInterpolatable(y, DensityFunctions.noise(noiseParams.getOrThrow(Noises.ORE_VEIN_B), 4.0D, 4.0D), minY, maxY, 0).abs();
+        DensityFunction veinAB = DensityFunctions.add(DensityFunctions.constant(-0.08), DensityFunctions.max(veinA, veinB));
+
+        DensityFunction oreGap = DensityFunctions.noise(noiseParams.getOrThrow(Noises.ORE_GAP));
+
+        return new DensityFunction[]{veininess, veinAB, oreGap};
     }
 }

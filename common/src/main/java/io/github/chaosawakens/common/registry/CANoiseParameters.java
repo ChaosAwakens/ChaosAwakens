@@ -8,6 +8,7 @@ import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.levelgen.DensityFunctions;
 import net.minecraft.world.level.levelgen.synth.NormalNoise;
 
 import java.util.function.Supplier;
@@ -20,6 +21,12 @@ public class CANoiseParameters {
     public static final Supplier<ResourceKey<NormalNoise.NoiseParameters>> MINING_PARADISE_CONTINENTALNESS = registerNoiseParameter("mining_paradise/continentalness", () -> new NormalNoise.NoiseParameters(-10, 0.5D, 2.0D, 1.0D, 1.0D, 2.0D, 1.0D, 1.0D, 1.0D, 1.0D, 1.0D));
     public static final Supplier<ResourceKey<NormalNoise.NoiseParameters>> MINING_PARADISE_EROSION = registerNoiseParameter("mining_paradise/erosion", () -> new NormalNoise.NoiseParameters(-10, 1.0D, 1.0D, 0.0D, 1.0D, 1.0D));
     public static final Supplier<ResourceKey<NormalNoise.NoiseParameters>> MINING_PARADISE_RIDGES = registerNoiseParameter("mining_paradise/ridges", () -> new NormalNoise.NoiseParameters(-11, 2.0D, 2.0D, 1.0D, 0.0D, 0.0D, 0.0D, 0.0D));
+
+
+    public static final Supplier<ResourceKey<NormalNoise.NoiseParameters>> AQUIFER_BARRIER = registerNoiseParameter("mining_paradise/aquifer_barrier", () -> new NormalNoise.NoiseParameters(-3, 1.0D));
+    public static final Supplier<ResourceKey<NormalNoise.NoiseParameters>> AQUIFER_FLUID_LEVEL_FLOODEDNESS = registerNoiseParameter("mining_paradise/aquifer_fluid_level_floodedness", () -> new NormalNoise.NoiseParameters(-7, 1.0D));
+    public static final Supplier<ResourceKey<NormalNoise.NoiseParameters>> AQUIFER_LAVA = registerNoiseParameter("mining_paradise/aquifer_lava", () -> new NormalNoise.NoiseParameters(-1, 1.0D));
+    public static final Supplier<ResourceKey<NormalNoise.NoiseParameters>> AQUIFER_FLUID_LEVEL_SPREAD = registerNoiseParameter("mining_paradise/aquifer_fluid_level_spread", () -> new NormalNoise.NoiseParameters(-5, 1.0D));
 
     private static Supplier<ResourceKey<NormalNoise.NoiseParameters>> registerNoiseParameter(ResourceLocation id, Supplier<NormalNoise.NoiseParameters> actualNoiseParamSup) {
         Supplier<ResourceKey<NormalNoise.NoiseParameters>> noiseParamSup = CAServices.REGISTRAR.registerDatapackObject(id, b -> actualNoiseParamSup, Registries.NOISE);

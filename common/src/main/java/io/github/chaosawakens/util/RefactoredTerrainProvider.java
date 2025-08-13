@@ -384,6 +384,42 @@ public class RefactoredTerrainProvider {
         return builder.build();
     }
 
+    public static <C, I extends ToFloatFunction<C>> CubicSpline<C, I> buildErosionOffsetRidgeSpline(
+            I erosionFunc, I ridgesFunc,
+            float baseOffset, float ridgeParam1, float ridgeParam2, float mountainLerpFactor,
+            float ridgeParam3, float ridgeParam4,
+            boolean applyAdvancedRidgeLogic, boolean useMaxInMountainRidge,
+            ToFloatFunction<Float> valueTransformer) {
+
+        // Splines for various ridge shapes based on different parameters
+        CubicSpline<C, I> ridgeShape1 = ridgeSpline(ridgesFunc, baseOffset - 0.15F, 0.5F * mountainLerpFactor, Mth.lerp(0.5F, 0.5F, 0.5F) * mountainLerpFactor, 0.5F * mountainLerpFactor, 0.6F * mountainLerpFactor, 0.5F, valueTransformer);
+        CubicSpline<C, I> ridgeShape2 = ridgeSpline(ridgesFunc, baseOffset, ridgeParam3 * mountainLerpFactor, ridgeParam1 * mountainLerpFactor, 0.5F * mountainLerpFactor, 0.6F * mountainLerpFactor, 0.5F, valueTransformer);
+        CubicSpline<C, I> ridgeShape3 = ridgeSpline(ridgesFunc, baseOffset, ridgeParam3, ridgeParam3, ridgeParam1, ridgeParam2, 0.5F, valueTransformer); // Used twice
+
+        CubicSpline<C, I> flatRidgeArea = CubicSpline.builder(ridgesFunc, valueTransformer)
+                .addPoint(-1.0F, baseOffset)
+                .addPoint(-0.4F, ridgeShape3) // Re-using ridgeShape3, was $$19
+                .addPoint(0.0F, ridgeParam2 + 0.07F)
+                .build();
+
+        CubicSpline<C, I> valleyOrLowRidge = ridgeSpline(ridgesFunc, -0.02F, ridgeParam4, ridgeParam4, ridgeParam1, ridgeParam2, 0.0F, valueTransformer);
+
+        CubicSpline.Builder<C, I> builder = CubicSpline.builder(erosionFunc, valueTransformer)
+                .addPoint(-0.35F, ridgeShape1)
+                .addPoint(-0.1F, ridgeShape2)
+                .addPoint(0.2F, ridgeShape3); // Was $$19
+
+        if (applyAdvancedRidgeLogic) {
+            builder.addPoint(0.4F, ridgeShape3) // Was $$20 (same as $$19)
+                    .addPoint(0.45F, flatRidgeArea)
+                    .addPoint(0.55F, flatRidgeArea)
+                    .addPoint(0.58F, ridgeShape3); // Was $$20
+        }
+
+        builder.addPoint(0.7F, valleyOrLowRidge);
+        return builder.build();
+    }
+
     /**
      * Generic helper to build a 5-point spline, often used for defining ridge shapes.
      * Points are at x = -1.0, -0.4, 0.0, 0.4, 1.0.

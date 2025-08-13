@@ -16,6 +16,7 @@ import net.minecraft.world.level.levelgen.DensityFunction;
 import net.minecraft.world.level.levelgen.DensityFunctions;
 import net.minecraft.world.level.levelgen.NoiseRouterData;
 import net.minecraft.world.level.levelgen.Noises;
+import net.minecraft.world.level.levelgen.synth.NormalNoise;
 
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -64,6 +65,18 @@ public class CADensityFunctions { // Needed so that Vanilla datapacks don't dire
 
     public static Holder<DensityFunction> getWrappedDensityFunction(BootstapContext<?> regCtx, Supplier<ResourceKey<DensityFunction>> targetDensityFunction) {
         return getWrappedDensityFunctionHolder(regCtx, targetDensityFunction).function();
+    }
+
+    public static DensityFunction noise(Holder<NormalNoise.NoiseParameters> noiseData) {
+        return noise(noiseData, (double)1.0F, (double)1.0F);
+    }
+
+    public static DensityFunction noise(Holder<NormalNoise.NoiseParameters> noiseData, double xzScale, double yScale) {
+        return new DensityFunctions.Noise(new DensityFunction.NoiseHolder(noiseData), xzScale, yScale);
+    }
+
+    public static DensityFunction noise(Holder<NormalNoise.NoiseParameters> noiseData, double yScale) {
+        return noise(noiseData, (double)1.0F, yScale);
     }
 
     public static ImmutableList<Supplier<ResourceKey<DensityFunction>>> getDensityFunctions() {

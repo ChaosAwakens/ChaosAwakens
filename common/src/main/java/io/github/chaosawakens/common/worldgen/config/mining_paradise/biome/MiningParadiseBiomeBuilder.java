@@ -22,7 +22,7 @@ public class MiningParadiseBiomeBuilder implements BiomeBuilder {
     @Override
     public void mapBiomes(Consumer<Pair<Climate.ParameterPoint, ResourceKey<Biome>>> biomeClimateParameterPointMapper) {
         // Layer 4
-        addSurfaceBiome(biomeClimateParameterPointMapper, Climate.Parameter.span(-0.57F, 0.57F), Climate.Parameter.span(-0.41F, 0.41F), LAYER_4, FULL_RANGE, Climate.Parameter.point(0.0F), 0, CABiomes.DENSE_MOUNTAINS.get());
+        addSurfaceBiome(biomeClimateParameterPointMapper, Climate.Parameter.span(-0.87F, 0.87F), Climate.Parameter.span(-0.41F, 0.41F), LAYER_4, FULL_RANGE, Climate.Parameter.point(0.0F), 0, CABiomes.DENSE_MOUNTAINS.get());
 
         // Layer 2
         addSurfaceBiome(biomeClimateParameterPointMapper, FULL_RANGE, FULL_RANGE, LAYER_2, FULL_RANGE, Climate.Parameter.point(0.0F), 0, CABiomes.DENSE_PLAINS.get());

@@ -1,13 +1,46 @@
 package io.github.chaosawakens.util;
 
-import net.minecraft.world.level.levelgen.DensityFunction;
-import net.minecraft.world.level.levelgen.DensityFunctions;
-import net.minecraft.world.level.levelgen.NoiseRouterData;
+import net.minecraft.core.HolderGetter;
+import net.minecraft.world.level.dimension.DimensionType;
+import net.minecraft.world.level.levelgen.*;
+import net.minecraft.world.level.levelgen.synth.NormalNoise;
+
+import java.util.stream.Stream;
 
 public final class NoiseRouterUtil {
 
     private NoiseRouterUtil() {
         throw new IllegalAccessError("Attempted to construct Utility Class!");
+    }
+
+    /**
+     * Creates a density function that interpolates between two functions within a specified Y range,
+     * and returns a constant value outside that range.
+     *
+     * @param inputDensity The primary density function to interpolate
+     * @param interpolationRange The density function used for interpolation
+     * @param minY The minimum Y level where interpolation starts
+     * @param maxY The maximum Y level where interpolation ends
+     * @param defaultValue The constant value to use outside the Y range
+     * @return A new density function with the specified interpolation behavior
+     */
+    public static DensityFunction createYLimitedInterpolation(
+            DensityFunction inputDensity,
+            DensityFunction interpolationRange,
+            int minY,
+            int maxY,
+            int defaultValue) {
+        // Create a range choice that selects between the interpolated function and a constant
+        // The interpolation happens between minY and maxY (inclusive)
+        return DensityFunctions.interpolated(
+                DensityFunctions.rangeChoice(
+                        inputDensity,
+                        (double) minY,
+                        (double) (maxY + 1),  // Add 1 to make maxY inclusive
+                        interpolationRange,
+                        DensityFunctions.constant((double) defaultValue)
+                )
+        );
     }
 
     /**
