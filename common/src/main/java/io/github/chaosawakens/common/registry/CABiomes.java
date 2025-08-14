@@ -5,6 +5,7 @@ import io.github.chaosawakens.CAConstants;
 import io.github.chaosawakens.api.asm.annotations.RegistrarEntry;
 import io.github.chaosawakens.api.platform.CAServices;
 import io.github.chaosawakens.common.worldgen.config.base.BiomeConfig;
+import io.github.chaosawakens.common.worldgen.config.mining_paradise.biome.surface.level_0.StalagmiteValleyBiomeConfig;
 import io.github.chaosawakens.common.worldgen.config.mining_paradise.biome.surface.level_1.MesozoicJungleBiomeConfig;
 import io.github.chaosawakens.common.worldgen.config.mining_paradise.biome.surface.level_2.DensePlainsBiomeConfig;
 import io.github.chaosawakens.common.worldgen.config.mining_paradise.biome.surface.level_4.DenseMountainsBiomeConfig;
@@ -26,6 +27,8 @@ public class CABiomes {
     public static final Supplier<ResourceKey<Biome>> DENSE_PLAINS = registerBiome("dense_plains", DensePlainsBiomeConfig::new);
 
     public static final Supplier<ResourceKey<Biome>> MESOZOIC_JUNGLE = registerBiome("mesozoic_jungle", MesozoicJungleBiomeConfig::new);
+
+    public static final Supplier<ResourceKey<Biome>> STALAGMITE_VALLEY = registerBiome("stalagmite_valley", StalagmiteValleyBiomeConfig::new);
 
     private static Supplier<ResourceKey<Biome>> registerBiome(ResourceLocation id, Supplier<BiomeConfig> biomeConfigSup) {
         Supplier<ResourceKey<Biome>> biomeSup = CAServices.REGISTRAR.registerDatapackObject(id, b -> () -> biomeConfigSup.get().createBiome(b), Registries.BIOME);

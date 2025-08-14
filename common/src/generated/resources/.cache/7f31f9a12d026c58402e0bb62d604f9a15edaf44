@@ -1,4 +1,4 @@
-// 1.20.1	2025-08-13T16:18:46.9054854	Chaos Awakens Datapack Registries
+// 1.20.1	2025-08-14T08:32:10.9461364	Chaos Awakens Datapack Registries
 2340a4b1d099214775cb456687b1aa902d5c058a data/chaosawakens/damage_type/big_carnivorous_plant.json
 639d3e54d3df69c99f7b7d1571b1fffe8ec5e442 data/chaosawakens/damage_type/thorny_sun.json
 8e7156fa517088a7200f946dfe69c9af7553f5eb data/chaosawakens/dimension/mining_paradise.json
@@ -6,6 +6,7 @@ d0c4b98e327df320dd5a0735da98505728c96f3b data/chaosawakens/dimension_type/mining
 055c028496b9206e3ba4c20b62a54e9f3e49d192 data/chaosawakens/worldgen/biome/dense_mountains.json
 988d4e71adb1200f20cc4ca259422a71a4eb6cba data/chaosawakens/worldgen/biome/dense_plains.json
 36744efc376d5eead2d63e220e5fe99100a73c19 data/chaosawakens/worldgen/biome/mesozoic_jungle.json
+58f58535b329ed83bf41d0c7f5bffd9a6b3156cc data/chaosawakens/worldgen/biome/stalagmite_valley.json
 f6025da654eeb648d1c08e9fda5476e636c1e19a data/chaosawakens/worldgen/configured_feature/alstroemeriat_patch.json
 4ff7508992767c46933b9227826113970abc357d data/chaosawakens/worldgen/configured_feature/big_carnivorous_patch.json
 683f350e7ec5a0b55ade4b5958471ea035e9e685 data/chaosawakens/worldgen/configured_feature/black_crystal_growth_patch.json
@@ -41,7 +42,7 @@ b16bb83124655b5f895312633827d36a00acb340 data/chaosawakens/worldgen/configured_f
 7b467eeee4eebe2442fc17bf083c50e8b6d9fb74 data/chaosawakens/worldgen/density_function/mining_paradise/land/continents.json
 eed3ae1a2c14486ef74225808001894e19e48403 data/chaosawakens/worldgen/density_function/mining_paradise/land/depth.json
 412c7c07a2870a55526c0e7358979a7de532c3fd data/chaosawakens/worldgen/density_function/mining_paradise/land/erosion.json
-e9511c2bd059d2a39d97c1434a52f975a466f5d9 data/chaosawakens/worldgen/density_function/mining_paradise/land/factor.json
+7df48d7ba0d6a34476fbfe75249422af1aebae96 data/chaosawakens/worldgen/density_function/mining_paradise/land/factor.json
 b53ad807939b8317845ddd270e334dbd7416cf7e data/chaosawakens/worldgen/density_function/mining_paradise/land/jaggedness.json
 b9c1dd23f029d81ae17c038c9b9314c2df85ccee data/chaosawakens/worldgen/density_function/mining_paradise/land/offset.json
 8d97cd37d750d919837ce78ed00f0168de004ea4 data/chaosawakens/worldgen/density_function/mining_paradise/land/ridges.json
