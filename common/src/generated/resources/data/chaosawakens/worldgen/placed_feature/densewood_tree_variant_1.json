@@ -1,10 +1,14 @@
 {
-  "feature": "chaosawakens:mesozoic_tree_variant_1",
+  "feature": "chaosawakens:densewood_tree_variant_1",
   "placement": [
     {
+      "type": "minecraft:rarity_filter",
+      "chance": 16
+    },
+    {
       "type": "chaosawakens:in_bb_square",
-      "x": 27,
-      "z": 25
+      "x": 11,
+      "z": 13
     },
     {
       "type": "minecraft:surface_water_depth_filter",
@@ -13,6 +17,9 @@
     {
       "type": "minecraft:heightmap",
       "heightmap": "OCEAN_FLOOR"
+    },
+    {
+      "type": "minecraft:biome"
     }
   ]
 }

@@ -1,10 +1,10 @@
 {
-  "feature": "chaosawakens:mesozoic_tree_variant_1",
+  "feature": "chaosawakens:mesozoic_tree_variant_3",
   "placement": [
     {
       "type": "chaosawakens:in_bb_square",
-      "x": 27,
-      "z": 25
+      "x": 19,
+      "z": 17
     },
     {
       "type": "minecraft:surface_water_depth_filter",

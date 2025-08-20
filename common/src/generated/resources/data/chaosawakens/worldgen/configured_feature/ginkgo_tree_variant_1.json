@@ -2,14 +2,14 @@
   "type": "chaosawakens:nbt_tree",
   "config": {
     "ground_level": 0,
-    "location": "chaosawakens:feature_presets/nbt_tree/mesozoic_tree/mesozoic_tree_1",
+    "location": "chaosawakens:feature_presets/nbt_tree/ginkgo_tree/ginkgo_tree_1",
     "trunk_bb": [
-      11,
-      0,
-      9,
-      16,
       10,
-      14
+      0,
+      8,
+      17,
+      10,
+      15
     ],
     "valid_surface": {
       "type": "minecraft:simple_state_provider",

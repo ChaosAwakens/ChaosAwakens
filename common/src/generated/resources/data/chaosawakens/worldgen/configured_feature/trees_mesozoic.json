@@ -1,0 +1,16 @@
+{
+  "type": "chaosawakens:random_key_selector",
+  "config": {
+    "default": "chaosawakens:mesozoic_tree_variant_3",
+    "features": [
+      {
+        "chance": 0.2,
+        "feature": "chaosawakens:mesozoic_tree_variant_1"
+      },
+      {
+        "chance": 0.4,
+        "feature": "chaosawakens:mesozoic_tree_variant_2"
+      }
+    ]
+  }
+}

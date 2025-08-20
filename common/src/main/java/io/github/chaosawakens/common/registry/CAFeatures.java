@@ -6,7 +6,10 @@ import io.github.chaosawakens.CAConstants;
 import io.github.chaosawakens.api.asm.annotations.RegistrarEntry;
 import io.github.chaosawakens.api.platform.CAServices;
 import io.github.chaosawakens.common.worldgen.feature.NBTTreeFeature;
+import io.github.chaosawakens.common.worldgen.feature.RandomKeySelectorFeature;
+import io.github.chaosawakens.common.worldgen.feature.WeightedPlacedFeatureKey;
 import io.github.chaosawakens.common.worldgen.feature.configurations.NBTTreeConfiguration;
+import io.github.chaosawakens.common.worldgen.feature.configurations.RandomFeatureKeyConfiguration;
 import io.github.chaosawakens.common.worldgen.placement_modifier.InSquareBBPlacement;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -35,6 +38,7 @@ public class CAFeatures {
         private static final ObjectArrayList<Supplier<Feature<?>>> FEATURES = new ObjectArrayList<>();
 
         public static final Supplier<Feature<NBTTreeConfiguration>> NBT_TREE = registerFeature("nbt_tree", () -> new NBTTreeFeature(NBTTreeConfiguration.CODEC));
+        public static final Supplier<Feature<RandomFeatureKeyConfiguration>> RANDOM_KEY_SELECTOR = registerFeature("random_key_selector", () -> new RandomKeySelectorFeature(RandomFeatureKeyConfiguration.CODEC));
 
         private static <FC extends FeatureConfiguration, F extends Feature<FC>> Supplier<F> registerFeature(String id, Supplier<Feature<?>> featureSup) {
             Supplier<F> placedFeatureSup = (Supplier<F>) CAServices.REGISTRAR.registerObject(CAConstants.prefix(id), featureSup, BuiltInRegistries.FEATURE);
@@ -95,7 +99,17 @@ public class CAFeatures {
         public static final Supplier<ResourceKey<ConfiguredFeature<?, ?>>> TAR_PUDDLE = registerConfiguredFeature("tar_puddle", () -> new ConfiguredFeature<>(Feature.RANDOM_PATCH, new RandomPatchConfiguration(128, 3, 1, PlacementUtils.filtered(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(CABlocks.TAR.get())), BlockPredicate.matchesBlocks(List.of(CABlocks.DENSE_DIRT.get(), CABlocks.DENSE_GRASS_BLOCK.get()))))));
         public static final Supplier<ResourceKey<ConfiguredFeature<?, ?>>> LATOSOL_PUDDLE = registerConfiguredFeature("latosol_puddle", () -> new ConfiguredFeature<>(Feature.RANDOM_PATCH, new RandomPatchConfiguration(128, 3, 1, PlacementUtils.filtered(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(CABlocks.LATOSOL.get())), BlockPredicate.matchesBlocks(List.of(CABlocks.DENSE_DIRT.get(), CABlocks.DENSE_GRASS_BLOCK.get()))))));
 
-        public static final Supplier<ResourceKey<ConfiguredFeature<?, ?>>> MESOZOIC_TREE_VARIANT_1 = registerConfiguredFeature("mesozoic_tree_variant_1", () -> new ConfiguredFeature<>(Features.NBT_TREE.get(), new NBTTreeConfiguration(Either.left(CAConstants.prefix("feature_presets/nbt_tree/mesozoic_tree/mesozoic_tree_1")), BlockStateProvider.simple(CABlocks.DENSE_GRASS_BLOCK.get()), 0, new BoundingBox(10, 0, 8, 17, 10, 15), Optional.empty())));
+        public static final Supplier<ResourceKey<ConfiguredFeature<?, ?>>> MESOZOIC_TREE_VARIANT_1 = registerConfiguredFeature("mesozoic_tree_variant_1", () -> new ConfiguredFeature<>(Features.NBT_TREE.get(), new NBTTreeConfiguration(Either.left(CAConstants.prefix("feature_presets/nbt_tree/mesozoic_tree/mesozoic_tree_1")), BlockStateProvider.simple(CABlocks.DENSE_GRASS_BLOCK.get()), 0, new BoundingBox(11, 0, 9, 16, 10, 14), Optional.empty())));
+        public static final Supplier<ResourceKey<ConfiguredFeature<?, ?>>> MESOZOIC_TREE_VARIANT_2 = registerConfiguredFeature("mesozoic_tree_variant_2", () -> new ConfiguredFeature<>(Features.NBT_TREE.get(), new NBTTreeConfiguration(Either.left(CAConstants.prefix("feature_presets/nbt_tree/mesozoic_tree/mesozoic_tree_2")), BlockStateProvider.simple(CABlocks.DENSE_GRASS_BLOCK.get()), 0, new BoundingBox(6, 0, 7, 11, 10, 12), Optional.empty())));
+        public static final Supplier<ResourceKey<ConfiguredFeature<?, ?>>> MESOZOIC_TREE_VARIANT_3 = registerConfiguredFeature("mesozoic_tree_variant_3", () -> new ConfiguredFeature<>(Features.NBT_TREE.get(), new NBTTreeConfiguration(Either.left(CAConstants.prefix("feature_presets/nbt_tree/mesozoic_tree/mesozoic_tree_3")), BlockStateProvider.simple(CABlocks.DENSE_GRASS_BLOCK.get()), 0, new BoundingBox(6, 0, 6, 11, 10, 11), Optional.empty())));
+
+        public static final Supplier<ResourceKey<ConfiguredFeature<?, ?>>> GINKGO_TREE_VARIANT_1 = registerConfiguredFeature("ginkgo_tree_variant_1", () -> new ConfiguredFeature<>(Features.NBT_TREE.get(), new NBTTreeConfiguration(Either.left(CAConstants.prefix("feature_presets/nbt_tree/ginkgo_tree/ginkgo_tree_1")), BlockStateProvider.simple(CABlocks.DENSE_GRASS_BLOCK.get()), 0, new BoundingBox(10, 0, 8, 17, 10, 15), Optional.empty())));
+        public static final Supplier<ResourceKey<ConfiguredFeature<?, ?>>> GINKGO_TREE_VARIANT_2 = registerConfiguredFeature("ginkgo_tree_variant_2", () -> new ConfiguredFeature<>(Features.NBT_TREE.get(), new NBTTreeConfiguration(Either.left(CAConstants.prefix("feature_presets/nbt_tree/ginkgo_tree/ginkgo_tree_2")), BlockStateProvider.simple(CABlocks.DENSE_GRASS_BLOCK.get()), 0, new BoundingBox(5, 0, 6, 11, 10, 12), Optional.empty())));
+        public static final Supplier<ResourceKey<ConfiguredFeature<?, ?>>> GINKGO_TREE_VARIANT_3 = registerConfiguredFeature("ginkgo_tree_variant_3", () -> new ConfiguredFeature<>(Features.NBT_TREE.get(), new NBTTreeConfiguration(Either.left(CAConstants.prefix("feature_presets/nbt_tree/ginkgo_tree/ginkgo_tree_3")), BlockStateProvider.simple(CABlocks.DENSE_GRASS_BLOCK.get()), 0, new BoundingBox(5, 0, 5, 11, 10, 11), Optional.empty())));
+
+        public static final Supplier<ResourceKey<ConfiguredFeature<?, ?>>> DENSEWOOD_TREE_VARIANT_1 = registerConfiguredFeature("densewood_tree_variant_1", () -> new ConfiguredFeature<>(Features.NBT_TREE.get(), new NBTTreeConfiguration(Either.left(CAConstants.prefix("feature_presets/nbt_tree/densewood_tree_1")), BlockStateProvider.simple(CABlocks.DENSE_GRASS_BLOCK.get()), 0, new BoundingBox(4, 0, 5, 6, 10, 7), Optional.empty())));
+
+        public static final Supplier<ResourceKey<ConfiguredFeature<?, ?>>> TREES_MESOZOIC = registerConfiguredFeature("trees_mesozoic", () -> new ConfiguredFeature<>(Features.RANDOM_KEY_SELECTOR.get(), new RandomFeatureKeyConfiguration( ObjectArrayList.of(new WeightedPlacedFeatureKey(CAPlacedFeatures.MESOZOIC_TREE_VARIANT_1, 0.2f), new WeightedPlacedFeatureKey(CAPlacedFeatures.MESOZOIC_TREE_VARIANT_2, 0.4f)), CAPlacedFeatures.MESOZOIC_TREE_VARIANT_3)));
 
         public static final Supplier<ResourceKey<ConfiguredFeature<?, ?>>> URANIUM_BLOCK = registerConfiguredFeature("uranium_block", () -> new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(new BlockMatchTest(CABlocks.DREDGESTONE.get()), CABlocks.URANIUM_BLOCK.get().defaultBlockState(), 64)));
 
@@ -162,7 +176,17 @@ public class CAFeatures {
         public static final Supplier<ResourceKey<PlacedFeature>> TAR_PUDDLE = registerPlacedFeature("tar_puddle", CAConfiguredFeatures.TAR_PUDDLE, ObjectArrayList.of(RarityFilter.onAverageOnceEvery(48), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
         public static final Supplier<ResourceKey<PlacedFeature>> LATOSOL_PUDDLE = registerPlacedFeature("latosol_puddle", CAConfiguredFeatures.LATOSOL_PUDDLE, ObjectArrayList.of(RarityFilter.onAverageOnceEvery(48), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
 
-        public static final Supplier<ResourceKey<PlacedFeature>> MESOZOIC_TREE_VARIANT_1 = registerPlacedFeature("mesozoic_tree_variant_1", CAConfiguredFeatures.MESOZOIC_TREE_VARIANT_1, nbtTreePlacement(PlacementUtils.countExtra(4, 0.1F, 1), 27, 25));
+        public static final Supplier<ResourceKey<PlacedFeature>> MESOZOIC_TREE_VARIANT_1 = registerPlacedFeature("mesozoic_tree_variant_1", CAConfiguredFeatures.MESOZOIC_TREE_VARIANT_1, nbtTreePlacement(27, 25));
+        public static final Supplier<ResourceKey<PlacedFeature>> MESOZOIC_TREE_VARIANT_2 = registerPlacedFeature("mesozoic_tree_variant_2", CAConfiguredFeatures.MESOZOIC_TREE_VARIANT_2, nbtTreePlacement(25, 25));
+        public static final Supplier<ResourceKey<PlacedFeature>> MESOZOIC_TREE_VARIANT_3 = registerPlacedFeature("mesozoic_tree_variant_3", CAConfiguredFeatures.MESOZOIC_TREE_VARIANT_3, nbtTreePlacement(19, 17));
+
+        public static final Supplier<ResourceKey<PlacedFeature>> GINKGO_TREE_VARIANT_1 = registerPlacedFeature("ginkgo_tree_variant_1", CAConfiguredFeatures.GINKGO_TREE_VARIANT_1, nbtTreePlacement(27, 25));
+        public static final Supplier<ResourceKey<PlacedFeature>> GINKGO_TREE_VARIANT_2 = registerPlacedFeature("ginkgo_tree_variant_2", CAConfiguredFeatures.GINKGO_TREE_VARIANT_2, nbtTreePlacement(25, 25));
+        public static final Supplier<ResourceKey<PlacedFeature>> GINKGO_TREE_VARIANT_3 = registerPlacedFeature("ginkgo_tree_variant_3", CAConfiguredFeatures.GINKGO_TREE_VARIANT_3, nbtTreePlacement(19, 17));
+
+        public static final Supplier<ResourceKey<PlacedFeature>> DENSEWOOD_TREE_VARIANT_1 = registerPlacedFeature("densewood_tree_variant_1", CAConfiguredFeatures.DENSEWOOD_TREE_VARIANT_1, nbtTreePlacementExtra(RarityFilter.onAverageOnceEvery(16), 11, 13));
+
+        public static final Supplier<ResourceKey<PlacedFeature>> TREES_MESOZOIC = registerPlacedFeature("trees_mesozoic", CAConfiguredFeatures.TREES_MESOZOIC, ObjectArrayList.of(PlacementUtils.countExtra(4, 0.1F, 1)));
 
         public static final Supplier<ResourceKey<PlacedFeature>> URANIUM_BLOCK = registerPlacedFeature("uranium_block", CAConfiguredFeatures.URANIUM_BLOCK, commonOrePlacement(30, HeightRangePlacement.triangle(VerticalAnchor.absolute(0), VerticalAnchor.absolute(192))));
 
@@ -180,12 +204,19 @@ public class CAFeatures {
             return ImmutableList.copyOf(PLACED_FEATURES);
         }
 
-        private static ObjectArrayList<PlacementModifier> nbtTreePlacement(PlacementModifier modifier, int x, int z) {
+        private static ObjectArrayList<PlacementModifier> nbtTreePlacement(int x, int z) {
+            return ObjectArrayList.of(
+                    new InSquareBBPlacement(x, z),
+                    SurfaceWaterDepthFilter.forMaxDepth(0),
+                    PlacementUtils.HEIGHTMAP_OCEAN_FLOOR
+            );
+        }
+
+        private static ObjectArrayList<PlacementModifier> nbtTreePlacementExtra(PlacementModifier modifier, int x, int z) {
             return ObjectArrayList.of(
                     modifier,
                     new InSquareBBPlacement(x, z),
                     SurfaceWaterDepthFilter.forMaxDepth(0),
-                    InSquarePlacement.spread(),
                     PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
                     BiomeFilter.biome());
         }

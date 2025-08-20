@@ -1,9 +1,9 @@
 {
-  "feature": "chaosawakens:mesozoic_tree_variant_1",
+  "feature": "chaosawakens:ginkgo_tree_variant_2",
   "placement": [
     {
       "type": "chaosawakens:in_bb_square",
-      "x": 27,
+      "x": 25,
       "z": 25
     },
     {
