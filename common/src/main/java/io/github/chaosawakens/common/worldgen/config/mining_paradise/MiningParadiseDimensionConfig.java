@@ -196,8 +196,7 @@ public class MiningParadiseDimensionConfig implements DimensionLevelStemConfig {
     protected static ObjectArrayList<Climate.ParameterPoint> createMiningParadiseClimateSpawnConfiguration(BootstapContext<NoiseGeneratorSettings> regCtx) {
         return ObjectArrayList.of();
     }
-    private static DensityFunction[] createOreDensityFunctions(DensityFunction y, HolderGetter<NormalNoise.NoiseParameters> noiseParams) {
-
+    private static DensityFunction[] createOreDensityFunctions(DensityFunction yFunc, HolderGetter<NormalNoise.NoiseParameters> noiseParams) {
         int minY = Stream.of(OreVeinifier.VeinType.values())
                 .mapToInt(v -> v.minY)
                 .min().orElse(-DimensionType.MIN_Y * 2);
@@ -206,10 +205,10 @@ public class MiningParadiseDimensionConfig implements DimensionLevelStemConfig {
                 .mapToInt(v -> v.maxY)
                 .max().orElse(-DimensionType.MIN_Y * 2);
 
-        DensityFunction veininess = yLimitedInterpolatable(y, DensityFunctions.noise(noiseParams.getOrThrow(Noises.ORE_VEININESS), 1.5D, 1.5D), minY, maxY, 0);
+        DensityFunction veininess = yLimitedInterpolatable(yFunc, DensityFunctions.noise(noiseParams.getOrThrow(Noises.ORE_VEININESS), 1.5D, 1.5D), minY, maxY, 0);
 
-        DensityFunction veinA = yLimitedInterpolatable(y, DensityFunctions.noise(noiseParams.getOrThrow(Noises.ORE_VEIN_A), 4.0D, 4.0D), minY, maxY, 0).abs();
-        DensityFunction veinB = yLimitedInterpolatable(y, DensityFunctions.noise(noiseParams.getOrThrow(Noises.ORE_VEIN_B), 4.0D, 4.0D), minY, maxY, 0).abs();
+        DensityFunction veinA = yLimitedInterpolatable(yFunc, DensityFunctions.noise(noiseParams.getOrThrow(Noises.ORE_VEIN_A), 4.0D, 4.0D), minY, maxY, 0).abs();
+        DensityFunction veinB = yLimitedInterpolatable(yFunc, DensityFunctions.noise(noiseParams.getOrThrow(Noises.ORE_VEIN_B), 4.0D, 4.0D), minY, maxY, 0).abs();
         DensityFunction veinAB = DensityFunctions.add(DensityFunctions.constant(-0.08), DensityFunctions.max(veinA, veinB));
 
         DensityFunction oreGap = DensityFunctions.noise(noiseParams.getOrThrow(Noises.ORE_GAP));

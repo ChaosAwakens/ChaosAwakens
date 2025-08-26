@@ -1,15 +1,14 @@
 package io.github.chaosawakens.api.animation.geckolib.molang;
 
-import org.joml.Vector3d;
+import java.util.function.DoubleSupplier;
 
 public class MolangExpression {
 
-    public MolangExpression() {
-
+    public MolangExpression(String expression) {
     }
 
-    public Vector3d computeResult() {
-        return new Vector3d();
+    public DoubleSupplier computeResult() {
+        return () -> 0.0D;
     }
 
     public static void parse(String expression) {
