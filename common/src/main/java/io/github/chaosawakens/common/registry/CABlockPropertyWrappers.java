@@ -414,6 +414,11 @@ public final class CABlockPropertyWrappers {
             .withItemTag(CATags.CAItemTags.DENSE_FLOWER_BLOCKS)
             .build();
 
+    public static final BlockPropertyWrapper SAPLING = BlockPropertyWrapper.ofTemplate(NO_TINT_PLANT)
+            .cachedBuilder()
+            .withLootTable(LootUtil::dropSelf)
+            .build();
+
     // Solid
     public static final BlockPropertyWrapper SOLID_BRICKS = BlockPropertyWrapper.ofTemplate(BASIC_BLOCK_PICKAXE)
             .cachedBuilder()

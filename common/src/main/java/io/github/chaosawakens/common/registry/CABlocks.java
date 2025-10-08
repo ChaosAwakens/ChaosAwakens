@@ -8,13 +8,14 @@ import io.github.chaosawakens.api.platform.CAServices;
 import io.github.chaosawakens.common.block.base.general.*;
 import io.github.chaosawakens.common.block.base.general.config.VegetationConfig;
 import io.github.chaosawakens.common.block.dungeon.general.DungeonGateBlock;
-import io.github.chaosawakens.common.block.vegetation.dense.BigCarnivorousPlantBlock;
-import io.github.chaosawakens.common.block.vegetation.dense.TerraPretaFarmBlock;
-import io.github.chaosawakens.common.block.vegetation.dense.ThornySunBlock;
+import io.github.chaosawakens.common.block.vegetation.dense.*;
 import io.github.chaosawakens.common.block.vegetation.general.FruitableLeavesBlock;
 import io.github.chaosawakens.common.block.vegetation.general.LeafCarpetBlock;
+import io.github.chaosawakens.common.worldgen.level.MegaNBTTreeGrower;
+import io.github.chaosawakens.common.worldgen.level.NBTTreeGrower;
 import io.github.chaosawakens.util.PredicateUtil;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.effect.MobEffects;
@@ -177,6 +178,15 @@ public final class CABlocks {
     public static final Supplier<Block> OAK_LEAF_CARPET = BlockPropertyWrapper.of(CABlockPropertyWrappers.LEAF_CARPET, registerBlock("oak_leaf_carpet", () -> new LeafCarpetBlock(BlockBehaviour.Properties.copy(Blocks.OAK_LEAVES).strength(0.1F)))).getParentBlock();
     public static final Supplier<Block> SPRUCE_LEAF_CARPET = BlockPropertyWrapper.of(CABlockPropertyWrappers.LEAF_CARPET, registerBlock("spruce_leaf_carpet", () -> new LeafCarpetBlock(BlockBehaviour.Properties.copy(Blocks.SPRUCE_LEAVES).strength(0.1F)))).getParentBlock();
 
+    // Sapling
+//    public static final Supplier<Block> APPLE_SAPLING = BlockPropertyWrapper.of(CABlockPropertyWrappers.SAPLING, registerBlock("apple_sapling", () -> new SaplingBlock(new NBTTreeGrower(ObjectArrayList.of(CAFeatures.CAConfiguredFeatures.DENSEWOOD_TREE_VARIANT_1)), BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)))).getParentBlock();
+    public static final Supplier<Block> DENSEWOOD_SAPLING = BlockPropertyWrapper.of(CABlockPropertyWrappers.SAPLING, registerBlock("densewood_sapling", () -> new SaplingBlock(new NBTTreeGrower(ObjectArrayList.of(CAFeatures.CAConfiguredFeatures.DENSEWOOD_TREE_VARIANT_1)), BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)))).getParentBlock();
+//    public static final Supplier<Block> DUPLICATOR_SAPLING = BlockPropertyWrapper.of(CABlockPropertyWrappers.SAPLING, registerBlock("duplicator_sapling", () -> new SaplingBlock(new NBTTreeGrower(CAFeatures.CAConfiguredFeatures.DENSEWOOD_TREE_VARIANT_1), BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)))).getParentBlock();
+    public static final Supplier<Block> GINKGO_SAPLING = BlockPropertyWrapper.of(CABlockPropertyWrappers.SAPLING, registerBlock("ginkgo_sapling", () -> new SaplingBlock(new NBTTreeGrower(ObjectArrayList.of(CAFeatures.CAConfiguredFeatures.GINKGO_TREE_VARIANT_1, CAFeatures.CAConfiguredFeatures.GINKGO_TREE_VARIANT_2, CAFeatures.CAConfiguredFeatures.GINKGO_TREE_VARIANT_3)), BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)))).getParentBlock();
+    public static final Supplier<Block> MESOZOIC_SAPLING = BlockPropertyWrapper.of(CABlockPropertyWrappers.SAPLING, registerBlock("mesozoic_sapling", () -> new SaplingBlock(new MegaNBTTreeGrower(ObjectArrayList.of(CAFeatures.CAConfiguredFeatures.MESOZOIC_TREE_VARIANT_1, CAFeatures.CAConfiguredFeatures.MESOZOIC_TREE_VARIANT_2, CAFeatures.CAConfiguredFeatures.MESOZOIC_TREE_VARIANT_3), ObjectArrayList.of()), BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)))).getParentBlock();
+//    public static final Supplier<Block> PEACH_SAPLING = BlockPropertyWrapper.of(CABlockPropertyWrappers.SAPLING, registerBlock("peach_sapling", () -> new SaplingBlock(new NBTTreeGrower(ObjectArrayList.of(CAFeatures.CAConfiguredFeatures.DENSEWOOD_TREE_VARIANT_1)), BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)))).getParentBlock();
+//    public static final Supplier<Block> SKYWOOD_SAPLING = BlockPropertyWrapper.of(CABlockPropertyWrappers.SAPLING, registerBlock("skywood_sapling", () -> new SaplingBlock(new NBTTreeGrower(CAFeatures.CAConfiguredFeatures.DENSEWOOD_TREE_VARIANT_1), BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)))).getParentBlock();
+
     // Dungeon Blocks
     public static final Supplier<Block> APPLE_GATE_BLOCK = BlockPropertyWrapper.of(CABlockPropertyWrappers.GATE_BLOCK, registerBlock("apple_gate_block", () -> new DungeonGateBlock(BlockBehaviour.Properties.copy(APPLE_PLANKS.get())))).getParentBlock();
     public static final Supplier<Block> CRYSTALWOOD_GATE_BLOCK = BlockPropertyWrapper.of(CABlockPropertyWrappers.GATE_BLOCK, registerBlock("crystalwood_gate_block", () -> new DungeonGateBlock(BlockBehaviour.Properties.copy(CRYSTALWOOD_PLANKS.get())))).getParentBlock();
@@ -316,6 +326,9 @@ public final class CABlocks {
     public static final Supplier<Block> LARGE_DENSEWOOD_BUSH = BlockPropertyWrapper.of(CABlockPropertyWrappers.NO_TINT_MULTI_LAYER_PLANT, registerBlock("large_densewood_bush", () -> new CustomizableMultiLayerPlantBlock(BlockBehaviour.Properties.copy(Blocks.LILAC), VegetationConfig.DENSE.getPlantConfig()))).getParentBlock();
     public static final Supplier<Block> LARGE_GINKGO_BUSH = BlockPropertyWrapper.of(CABlockPropertyWrappers.NO_TINT_MULTI_LAYER_PLANT, registerBlock("large_ginkgo_bush", () -> new CustomizableMultiLayerPlantBlock(BlockBehaviour.Properties.copy(Blocks.LILAC), VegetationConfig.DENSE.getPlantConfig()))).getParentBlock();
     public static final Supplier<Block> LARGE_MESOZOIC_BUSH = BlockPropertyWrapper.of(CABlockPropertyWrappers.NO_TINT_MULTI_LAYER_PLANT, registerBlock("large_mesozoic_bush", () -> new CustomizableMultiLayerPlantBlock(BlockBehaviour.Properties.copy(Blocks.LILAC), VegetationConfig.DENSE.getPlantConfig()))).getParentBlock();
+
+    public static final Supplier<Block> MESOZOIC_VINES = BlockPropertyWrapper.of(CABlockPropertyWrappers.NO_TINT_PLANT, registerBlock("mesozoic_vines", () -> new MesozoicVinesBlock(BlockBehaviour.Properties.copy(Blocks.VINE)))).getParentBlock();
+    public static final Supplier<Block> MESOZOIC_VINES_PLANT = BlockPropertyWrapper.of(CABlockPropertyWrappers.NO_TINT_PLANT, registerBlock("mesozoic_vines_plant", () -> new MesozoicVinesPlantBlock(BlockBehaviour.Properties.copy(Blocks.VINE)))).getParentBlock();
 
     // CrystalWorld Vegetation
     public static final Supplier<Block> CRYSTAL_GRASS_BLOCK = BlockPropertyWrapper.of(CABlockPropertyWrappers.CRYSTAL_GRASS_BLOCK, registerBlock("crystal_grass_block", () -> new CustomizableGrassBlock(BlockBehaviour.Properties.copy(Blocks.STONE).sound(SoundType.AMETHYST).strength(1.5F), () -> VegetationConfig.CRYSTAL))).getParentBlock();

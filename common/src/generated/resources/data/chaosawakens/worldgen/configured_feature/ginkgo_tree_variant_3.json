@@ -3,22 +3,11 @@
   "config": {
     "ground_level": 0,
     "location": "chaosawakens:feature_presets/nbt_tree/ginkgo_tree/ginkgo_tree_3",
-    "trunk_bb": [
-      5,
-      0,
-      5,
-      11,
-      10,
-      11
-    ],
-    "valid_surface": {
-      "type": "minecraft:simple_state_provider",
-      "state": {
-        "Name": "chaosawakens:dense_grass_block",
-        "Properties": {
-          "snowy": "false"
-        }
+    "processors": [
+      {
+        "chance": 0.2,
+        "processor_type": "chaosawakens:bee_hive"
       }
-    }
+    ]
   }
 }

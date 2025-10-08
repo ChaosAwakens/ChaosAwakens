@@ -3,22 +3,15 @@
   "config": {
     "ground_level": 0,
     "location": "chaosawakens:feature_presets/nbt_tree/mesozoic_tree/mesozoic_tree_1",
-    "trunk_bb": [
-      11,
-      0,
-      9,
-      16,
-      10,
-      14
-    ],
-    "valid_surface": {
-      "type": "minecraft:simple_state_provider",
-      "state": {
-        "Name": "chaosawakens:dense_grass_block",
-        "Properties": {
-          "snowy": "false"
-        }
+    "processors": [
+      {
+        "chance": 0.1,
+        "processor_type": "chaosawakens:bee_hive"
+      },
+      {
+        "chance": 0.8,
+        "processor_type": "chaosawakens:mesozoic_vine"
       }
-    }
+    ]
   }
 }

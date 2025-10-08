@@ -13,6 +13,37 @@
     {
       "type": "minecraft:heightmap",
       "heightmap": "OCEAN_FLOOR"
+    },
+    {
+      "type": "chaosawakens:surface_area_check",
+      "box": [
+        6,
+        0,
+        7,
+        11,
+        10,
+        12
+      ],
+      "state": {
+        "type": "chaosawakens:simple_supplier_provider",
+        "state": {
+          "Name": "chaosawakens:dense_grass_block",
+          "Properties": {
+            "snowy": "false"
+          }
+        }
+      }
+    },
+    {
+      "type": "chaosawakens:pick_lowest_height",
+      "box": [
+        6,
+        0,
+        7,
+        11,
+        10,
+        12
+      ]
     }
   ]
 }

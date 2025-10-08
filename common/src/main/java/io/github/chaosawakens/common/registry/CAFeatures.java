@@ -2,15 +2,22 @@ package io.github.chaosawakens.common.registry;
 
 import com.google.common.collect.ImmutableList;
 import com.mojang.datafixers.util.Either;
+import com.mojang.serialization.Codec;
 import io.github.chaosawakens.CAConstants;
 import io.github.chaosawakens.api.asm.annotations.RegistrarEntry;
 import io.github.chaosawakens.api.platform.CAServices;
 import io.github.chaosawakens.common.worldgen.feature.NBTTreeFeature;
 import io.github.chaosawakens.common.worldgen.feature.RandomKeySelectorFeature;
+import io.github.chaosawakens.common.worldgen.feature.SimpleSupplierStateProvider;
 import io.github.chaosawakens.common.worldgen.feature.WeightedPlacedFeatureKey;
 import io.github.chaosawakens.common.worldgen.feature.configurations.NBTTreeConfiguration;
 import io.github.chaosawakens.common.worldgen.feature.configurations.RandomFeatureKeyConfiguration;
 import io.github.chaosawakens.common.worldgen.placement_modifier.InSquareBBPlacement;
+import io.github.chaosawakens.common.worldgen.placement_modifier.PickLowestHeightPlacement;
+import io.github.chaosawakens.common.worldgen.placement_modifier.SurfaceAreaCheckPlacement;
+import io.github.chaosawakens.common.worldgen.placement_modifier.SurfaceCheckPlacement;
+import io.github.chaosawakens.common.worldgen.structure.BeeHiveProcessor;
+import io.github.chaosawakens.common.worldgen.structure.MesozoicVineProcessor;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -23,9 +30,13 @@ import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.configurations.*;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
+import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProviderType;
 import net.minecraft.world.level.levelgen.placement.*;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.level.levelgen.structure.templatesystem.BlockMatchTest;
+import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessor;
+import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorList;
+import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorType;
 
 import java.util.List;
 import java.util.Optional;
@@ -99,15 +110,15 @@ public class CAFeatures {
         public static final Supplier<ResourceKey<ConfiguredFeature<?, ?>>> TAR_PUDDLE = registerConfiguredFeature("tar_puddle", () -> new ConfiguredFeature<>(Feature.RANDOM_PATCH, new RandomPatchConfiguration(128, 3, 1, PlacementUtils.filtered(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(CABlocks.TAR.get())), BlockPredicate.matchesBlocks(List.of(CABlocks.DENSE_DIRT.get(), CABlocks.DENSE_GRASS_BLOCK.get()))))));
         public static final Supplier<ResourceKey<ConfiguredFeature<?, ?>>> LATOSOL_PUDDLE = registerConfiguredFeature("latosol_puddle", () -> new ConfiguredFeature<>(Feature.RANDOM_PATCH, new RandomPatchConfiguration(128, 3, 1, PlacementUtils.filtered(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(CABlocks.LATOSOL.get())), BlockPredicate.matchesBlocks(List.of(CABlocks.DENSE_DIRT.get(), CABlocks.DENSE_GRASS_BLOCK.get()))))));
 
-        public static final Supplier<ResourceKey<ConfiguredFeature<?, ?>>> MESOZOIC_TREE_VARIANT_1 = registerConfiguredFeature("mesozoic_tree_variant_1", () -> new ConfiguredFeature<>(Features.NBT_TREE.get(), new NBTTreeConfiguration(Either.left(CAConstants.prefix("feature_presets/nbt_tree/mesozoic_tree/mesozoic_tree_1")), BlockStateProvider.simple(CABlocks.DENSE_GRASS_BLOCK.get()), 0, new BoundingBox(11, 0, 9, 16, 10, 14), Optional.empty())));
-        public static final Supplier<ResourceKey<ConfiguredFeature<?, ?>>> MESOZOIC_TREE_VARIANT_2 = registerConfiguredFeature("mesozoic_tree_variant_2", () -> new ConfiguredFeature<>(Features.NBT_TREE.get(), new NBTTreeConfiguration(Either.left(CAConstants.prefix("feature_presets/nbt_tree/mesozoic_tree/mesozoic_tree_2")), BlockStateProvider.simple(CABlocks.DENSE_GRASS_BLOCK.get()), 0, new BoundingBox(6, 0, 7, 11, 10, 12), Optional.empty())));
-        public static final Supplier<ResourceKey<ConfiguredFeature<?, ?>>> MESOZOIC_TREE_VARIANT_3 = registerConfiguredFeature("mesozoic_tree_variant_3", () -> new ConfiguredFeature<>(Features.NBT_TREE.get(), new NBTTreeConfiguration(Either.left(CAConstants.prefix("feature_presets/nbt_tree/mesozoic_tree/mesozoic_tree_3")), BlockStateProvider.simple(CABlocks.DENSE_GRASS_BLOCK.get()), 0, new BoundingBox(6, 0, 6, 11, 10, 11), Optional.empty())));
+        public static final Supplier<ResourceKey<ConfiguredFeature<?, ?>>> MESOZOIC_TREE_VARIANT_1 = registerConfiguredFeature("mesozoic_tree_variant_1", () -> new ConfiguredFeature<>(Features.NBT_TREE.get(), new NBTTreeConfiguration(Either.left(CAConstants.prefix("feature_presets/nbt_tree/mesozoic_tree/mesozoic_tree_1")), 0, Optional.of(new StructureProcessorList(ObjectArrayList.of(new BeeHiveProcessor(0.1f), new MesozoicVineProcessor(0.8f)))) )));
+        public static final Supplier<ResourceKey<ConfiguredFeature<?, ?>>> MESOZOIC_TREE_VARIANT_2 = registerConfiguredFeature("mesozoic_tree_variant_2", () -> new ConfiguredFeature<>(Features.NBT_TREE.get(), new NBTTreeConfiguration(Either.left(CAConstants.prefix("feature_presets/nbt_tree/mesozoic_tree/mesozoic_tree_2")), 0, Optional.of(new StructureProcessorList(ObjectArrayList.of(new BeeHiveProcessor(0.1f), new MesozoicVineProcessor(0.8f)))) )));
+        public static final Supplier<ResourceKey<ConfiguredFeature<?, ?>>> MESOZOIC_TREE_VARIANT_3 = registerConfiguredFeature("mesozoic_tree_variant_3", () -> new ConfiguredFeature<>(Features.NBT_TREE.get(), new NBTTreeConfiguration(Either.left(CAConstants.prefix("feature_presets/nbt_tree/mesozoic_tree/mesozoic_tree_3")), 0, Optional.of(new StructureProcessorList(ObjectArrayList.of(new BeeHiveProcessor(0.1f), new MesozoicVineProcessor(0.8f)))) )));
 
-        public static final Supplier<ResourceKey<ConfiguredFeature<?, ?>>> GINKGO_TREE_VARIANT_1 = registerConfiguredFeature("ginkgo_tree_variant_1", () -> new ConfiguredFeature<>(Features.NBT_TREE.get(), new NBTTreeConfiguration(Either.left(CAConstants.prefix("feature_presets/nbt_tree/ginkgo_tree/ginkgo_tree_1")), BlockStateProvider.simple(CABlocks.DENSE_GRASS_BLOCK.get()), 0, new BoundingBox(10, 0, 8, 17, 10, 15), Optional.empty())));
-        public static final Supplier<ResourceKey<ConfiguredFeature<?, ?>>> GINKGO_TREE_VARIANT_2 = registerConfiguredFeature("ginkgo_tree_variant_2", () -> new ConfiguredFeature<>(Features.NBT_TREE.get(), new NBTTreeConfiguration(Either.left(CAConstants.prefix("feature_presets/nbt_tree/ginkgo_tree/ginkgo_tree_2")), BlockStateProvider.simple(CABlocks.DENSE_GRASS_BLOCK.get()), 0, new BoundingBox(5, 0, 6, 11, 10, 12), Optional.empty())));
-        public static final Supplier<ResourceKey<ConfiguredFeature<?, ?>>> GINKGO_TREE_VARIANT_3 = registerConfiguredFeature("ginkgo_tree_variant_3", () -> new ConfiguredFeature<>(Features.NBT_TREE.get(), new NBTTreeConfiguration(Either.left(CAConstants.prefix("feature_presets/nbt_tree/ginkgo_tree/ginkgo_tree_3")), BlockStateProvider.simple(CABlocks.DENSE_GRASS_BLOCK.get()), 0, new BoundingBox(5, 0, 5, 11, 10, 11), Optional.empty())));
+        public static final Supplier<ResourceKey<ConfiguredFeature<?, ?>>> GINKGO_TREE_VARIANT_1 = registerConfiguredFeature("ginkgo_tree_variant_1", () -> new ConfiguredFeature<>(Features.NBT_TREE.get(), new NBTTreeConfiguration(Either.left(CAConstants.prefix("feature_presets/nbt_tree/ginkgo_tree/ginkgo_tree_1")), 0, Optional.of(new StructureProcessorList(ObjectArrayList.of(new BeeHiveProcessor(0.2f)))) )));
+        public static final Supplier<ResourceKey<ConfiguredFeature<?, ?>>> GINKGO_TREE_VARIANT_2 = registerConfiguredFeature("ginkgo_tree_variant_2", () -> new ConfiguredFeature<>(Features.NBT_TREE.get(), new NBTTreeConfiguration(Either.left(CAConstants.prefix("feature_presets/nbt_tree/ginkgo_tree/ginkgo_tree_2")), 0, Optional.of(new StructureProcessorList(ObjectArrayList.of(new BeeHiveProcessor(0.2f)))) )));
+        public static final Supplier<ResourceKey<ConfiguredFeature<?, ?>>> GINKGO_TREE_VARIANT_3 = registerConfiguredFeature("ginkgo_tree_variant_3", () -> new ConfiguredFeature<>(Features.NBT_TREE.get(), new NBTTreeConfiguration(Either.left(CAConstants.prefix("feature_presets/nbt_tree/ginkgo_tree/ginkgo_tree_3")), 0, Optional.of(new StructureProcessorList(ObjectArrayList.of(new BeeHiveProcessor(0.2f)))) )));
 
-        public static final Supplier<ResourceKey<ConfiguredFeature<?, ?>>> DENSEWOOD_TREE_VARIANT_1 = registerConfiguredFeature("densewood_tree_variant_1", () -> new ConfiguredFeature<>(Features.NBT_TREE.get(), new NBTTreeConfiguration(Either.left(CAConstants.prefix("feature_presets/nbt_tree/densewood_tree_1")), BlockStateProvider.simple(CABlocks.DENSE_GRASS_BLOCK.get()), 0, new BoundingBox(4, 0, 5, 6, 10, 7), Optional.empty())));
+        public static final Supplier<ResourceKey<ConfiguredFeature<?, ?>>> DENSEWOOD_TREE_VARIANT_1 = registerConfiguredFeature("densewood_tree_variant_1", () -> new ConfiguredFeature<>(Features.NBT_TREE.get(), new NBTTreeConfiguration(Either.left(CAConstants.prefix("feature_presets/nbt_tree/densewood_tree_1")), 0, Optional.of(new StructureProcessorList(ObjectArrayList.of(new BeeHiveProcessor(0.2f)))) )));
 
         public static final Supplier<ResourceKey<ConfiguredFeature<?, ?>>> TREES_MESOZOIC = registerConfiguredFeature("trees_mesozoic", () -> new ConfiguredFeature<>(Features.RANDOM_KEY_SELECTOR.get(), new RandomFeatureKeyConfiguration( ObjectArrayList.of(new WeightedPlacedFeatureKey(CAPlacedFeatures.MESOZOIC_TREE_VARIANT_1, 0.2f), new WeightedPlacedFeatureKey(CAPlacedFeatures.MESOZOIC_TREE_VARIANT_2, 0.4f)), CAPlacedFeatures.MESOZOIC_TREE_VARIANT_3)));
 
@@ -176,15 +187,15 @@ public class CAFeatures {
         public static final Supplier<ResourceKey<PlacedFeature>> TAR_PUDDLE = registerPlacedFeature("tar_puddle", CAConfiguredFeatures.TAR_PUDDLE, ObjectArrayList.of(RarityFilter.onAverageOnceEvery(48), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
         public static final Supplier<ResourceKey<PlacedFeature>> LATOSOL_PUDDLE = registerPlacedFeature("latosol_puddle", CAConfiguredFeatures.LATOSOL_PUDDLE, ObjectArrayList.of(RarityFilter.onAverageOnceEvery(48), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
 
-        public static final Supplier<ResourceKey<PlacedFeature>> MESOZOIC_TREE_VARIANT_1 = registerPlacedFeature("mesozoic_tree_variant_1", CAConfiguredFeatures.MESOZOIC_TREE_VARIANT_1, nbtTreePlacement(27, 25));
-        public static final Supplier<ResourceKey<PlacedFeature>> MESOZOIC_TREE_VARIANT_2 = registerPlacedFeature("mesozoic_tree_variant_2", CAConfiguredFeatures.MESOZOIC_TREE_VARIANT_2, nbtTreePlacement(25, 25));
-        public static final Supplier<ResourceKey<PlacedFeature>> MESOZOIC_TREE_VARIANT_3 = registerPlacedFeature("mesozoic_tree_variant_3", CAConfiguredFeatures.MESOZOIC_TREE_VARIANT_3, nbtTreePlacement(19, 17));
+        public static final Supplier<ResourceKey<PlacedFeature>> MESOZOIC_TREE_VARIANT_1 = registerPlacedFeature("mesozoic_tree_variant_1", CAConfiguredFeatures.MESOZOIC_TREE_VARIANT_1, nbtTreePlacement(new BoundingBox(11, 0, 9, 16, 10, 14), 27, 25));
+        public static final Supplier<ResourceKey<PlacedFeature>> MESOZOIC_TREE_VARIANT_2 = registerPlacedFeature("mesozoic_tree_variant_2", CAConfiguredFeatures.MESOZOIC_TREE_VARIANT_2, nbtTreePlacement(new BoundingBox(6, 0, 7, 11, 10, 12), 25, 25));
+        public static final Supplier<ResourceKey<PlacedFeature>> MESOZOIC_TREE_VARIANT_3 = registerPlacedFeature("mesozoic_tree_variant_3", CAConfiguredFeatures.MESOZOIC_TREE_VARIANT_3, nbtTreePlacement(new BoundingBox(6, 0, 6, 11, 10, 11), 19, 17));
 
-        public static final Supplier<ResourceKey<PlacedFeature>> GINKGO_TREE_VARIANT_1 = registerPlacedFeature("ginkgo_tree_variant_1", CAConfiguredFeatures.GINKGO_TREE_VARIANT_1, nbtTreePlacement(27, 25));
-        public static final Supplier<ResourceKey<PlacedFeature>> GINKGO_TREE_VARIANT_2 = registerPlacedFeature("ginkgo_tree_variant_2", CAConfiguredFeatures.GINKGO_TREE_VARIANT_2, nbtTreePlacement(25, 25));
-        public static final Supplier<ResourceKey<PlacedFeature>> GINKGO_TREE_VARIANT_3 = registerPlacedFeature("ginkgo_tree_variant_3", CAConfiguredFeatures.GINKGO_TREE_VARIANT_3, nbtTreePlacement(19, 17));
+        public static final Supplier<ResourceKey<PlacedFeature>> GINKGO_TREE_VARIANT_1 = registerPlacedFeature("ginkgo_tree_variant_1", CAConfiguredFeatures.GINKGO_TREE_VARIANT_1, nbtTreePlacement(new BoundingBox(10, 0, 8, 17, 10, 15), 27, 25));
+        public static final Supplier<ResourceKey<PlacedFeature>> GINKGO_TREE_VARIANT_2 = registerPlacedFeature("ginkgo_tree_variant_2", CAConfiguredFeatures.GINKGO_TREE_VARIANT_2, nbtTreePlacement(new BoundingBox(5, 0, 6, 11, 10, 12), 25, 25));
+        public static final Supplier<ResourceKey<PlacedFeature>> GINKGO_TREE_VARIANT_3 = registerPlacedFeature("ginkgo_tree_variant_3", CAConfiguredFeatures.GINKGO_TREE_VARIANT_3, nbtTreePlacement(new BoundingBox(5, 0, 5, 11, 10, 11), 19, 17));
 
-        public static final Supplier<ResourceKey<PlacedFeature>> DENSEWOOD_TREE_VARIANT_1 = registerPlacedFeature("densewood_tree_variant_1", CAConfiguredFeatures.DENSEWOOD_TREE_VARIANT_1, nbtTreePlacementExtra(RarityFilter.onAverageOnceEvery(16), 11, 13));
+        public static final Supplier<ResourceKey<PlacedFeature>> DENSEWOOD_TREE_VARIANT_1 = registerPlacedFeature("densewood_tree_variant_1", CAConfiguredFeatures.DENSEWOOD_TREE_VARIANT_1, nbtTreePlacementExtra(RarityFilter.onAverageOnceEvery(8), new BoundingBox(4, 0, 5, 6, 10, 7), 11, 13));
 
         public static final Supplier<ResourceKey<PlacedFeature>> TREES_MESOZOIC = registerPlacedFeature("trees_mesozoic", CAConfiguredFeatures.TREES_MESOZOIC, ObjectArrayList.of(PlacementUtils.countExtra(4, 0.1F, 1)));
 
@@ -204,21 +215,25 @@ public class CAFeatures {
             return ImmutableList.copyOf(PLACED_FEATURES);
         }
 
-        private static ObjectArrayList<PlacementModifier> nbtTreePlacement(int x, int z) {
+        private static ObjectArrayList<PlacementModifier> nbtTreePlacement(BoundingBox trunkBB, int x, int z) {
             return ObjectArrayList.of(
                     new InSquareBBPlacement(x, z),
                     SurfaceWaterDepthFilter.forMaxDepth(0),
-                    PlacementUtils.HEIGHTMAP_OCEAN_FLOOR
+                    PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
+                    new SurfaceAreaCheckPlacement(new SimpleSupplierStateProvider(() -> CABlocks.DENSE_GRASS_BLOCK.get().defaultBlockState()), trunkBB),
+                    new PickLowestHeightPlacement(trunkBB)
             );
         }
 
-        private static ObjectArrayList<PlacementModifier> nbtTreePlacementExtra(PlacementModifier modifier, int x, int z) {
+        private static ObjectArrayList<PlacementModifier> nbtTreePlacementExtra(PlacementModifier modifier, BoundingBox trunkBB, int x, int z) {
             return ObjectArrayList.of(
                     modifier,
                     new InSquareBBPlacement(x, z),
                     SurfaceWaterDepthFilter.forMaxDepth(0),
                     PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
-                    BiomeFilter.biome());
+                    BiomeFilter.biome(),
+                    new SurfaceAreaCheckPlacement(new SimpleSupplierStateProvider(() -> CABlocks.DENSE_GRASS_BLOCK.get().defaultBlockState()), trunkBB),
+                    new PickLowestHeightPlacement(trunkBB));
         }
 
         private static List<PlacementModifier> orePlacement(PlacementModifier pCountPlacement, PlacementModifier pHeightRange) {
@@ -239,6 +254,9 @@ public class CAFeatures {
         private static final ObjectArrayList<Supplier<PlacementModifierType<?>>> PLACEMENT_MODIFIERS = new ObjectArrayList<>();
 
         public static final Supplier<PlacementModifierType<InSquareBBPlacement>> IN_BB_SQUARE = registerModifier("in_bb_square", () -> () -> InSquareBBPlacement.CODEC);
+        public static final Supplier<PlacementModifierType<SurfaceCheckPlacement>> SURFACE_CHECK = registerModifier("surface_check", () -> () -> SurfaceCheckPlacement.CODEC);
+        public static final Supplier<PlacementModifierType<SurfaceAreaCheckPlacement>> SURFACE_AREA_CHECK = registerModifier("surface_area_check", () -> () -> SurfaceAreaCheckPlacement.CODEC);
+        public static final Supplier<PlacementModifierType<PickLowestHeightPlacement>> PICK_LOWEST_HEIGHT = registerModifier("pick_lowest_height", () -> () -> PickLowestHeightPlacement.CODEC);
 
         private static <P extends PlacementModifier> Supplier<PlacementModifierType<P>> registerModifier(String id, Supplier<PlacementModifierType<P>> codecSup) {
             Supplier<PlacementModifierType<P>> typeSupplier = CAServices.REGISTRAR.registerObject(CAConstants.prefix(id), codecSup, BuiltInRegistries.PLACEMENT_MODIFIER_TYPE);
@@ -246,8 +264,43 @@ public class CAFeatures {
             return typeSupplier;
         }
 
-        public static ImmutableList<Supplier<PlacementModifierType<?>>> getFeatures() {
+        public static ImmutableList<Supplier<PlacementModifierType<?>>> getModifiers() {
             return ImmutableList.copyOf(PLACEMENT_MODIFIERS);
+        }
+    }
+
+    @RegistrarEntry
+    public static class StructureProcessors {
+        private static final ObjectArrayList<Supplier<StructureProcessorType<?>>> STRUCTURE_PROCESSORS = new ObjectArrayList<>();
+
+        public static final Supplier<StructureProcessorType<BeeHiveProcessor>> BEE_HIVE = registerProcessor("bee_hive", () -> () -> BeeHiveProcessor.CODEC);
+        public static final Supplier<StructureProcessorType<MesozoicVineProcessor>> MESOZOIC_VINE = registerProcessor("mesozoic_vine", () -> () -> MesozoicVineProcessor.CODEC);
+
+        private static <P extends StructureProcessor> Supplier<StructureProcessorType<P>> registerProcessor(String id, Supplier<StructureProcessorType<P>> codecSup) {
+            Supplier<StructureProcessorType<P>> typeSupplier = CAServices.REGISTRAR.registerObject(CAConstants.prefix(id), codecSup, BuiltInRegistries.STRUCTURE_PROCESSOR);
+            STRUCTURE_PROCESSORS.add((Supplier) typeSupplier);
+            return typeSupplier;
+        }
+
+        public static ImmutableList<Supplier<StructureProcessorType<?>>> getProcessors() {
+            return ImmutableList.copyOf(STRUCTURE_PROCESSORS);
+        }
+    }
+
+    @RegistrarEntry
+    public static class StateProviders {
+        private static final ObjectArrayList<Supplier<BlockStateProviderType<?>>> STATE_PROVIDERS = new ObjectArrayList<>();
+
+        public static final Supplier<BlockStateProviderType<SimpleSupplierStateProvider>> SIMPLE_SUPPLIER_PROVIDER = registerProvider("simple_supplier_provider", SimpleSupplierStateProvider.CODEC);
+
+        private static <P extends BlockStateProvider> Supplier<BlockStateProviderType<P>> registerProvider(String id, Codec<P> codec) {
+            Supplier<BlockStateProviderType<P>> typeSupplier = CAServices.REGISTRAR.registerObject(CAConstants.prefix(id), () -> new BlockStateProviderType(codec), BuiltInRegistries.BLOCKSTATE_PROVIDER_TYPE);
+            STATE_PROVIDERS.add((Supplier) typeSupplier);
+            return typeSupplier;
+        }
+
+        public static ImmutableList<Supplier<BlockStateProviderType<?>>> getProviders() {
+            return ImmutableList.copyOf(STATE_PROVIDERS);
         }
     }
 }

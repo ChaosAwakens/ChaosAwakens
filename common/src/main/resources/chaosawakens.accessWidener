@@ -35,6 +35,9 @@ accessible field net/minecraft/client/renderer/RenderStateShard name Ljava/lang/
 # DoorBlock (Why is the constructor not public by default? WHY ARE THERE SO MANY DAMN ACCESS-PROTECTED BLOCK CONSTRUCTORS!?!?!?)
 accessible method net/minecraft/world/level/block/DoorBlock <init> (Lnet/minecraft/world/level/block/state/BlockBehaviour$Properties;Lnet/minecraft/world/level/block/state/properties/BlockSetType;)V
 
+# SaplingBlock
+accessible method net/minecraft/world/level/block/SaplingBlock <init> (Lnet/minecraft/world/level/block/grower/AbstractTreeGrower;Lnet/minecraft/world/level/block/state/BlockBehaviour$Properties;)V
+
 # TrapDoorBlock
 accessible method net/minecraft/world/level/block/TrapDoorBlock <init> (Lnet/minecraft/world/level/block/state/BlockBehaviour$Properties;Lnet/minecraft/world/level/block/state/properties/BlockSetType;)V
 
@@ -180,3 +183,11 @@ accessible method net/minecraft/world/level/levelgen/SurfaceSystem isStone (Lnet
 # DensityFunctions
 accessible method net/minecraft/world/level/levelgen/DensityFunctions$Noise <init> (Lnet/minecraft/world/level/levelgen/DensityFunction$NoiseHolder;DD)V
 accessible class net/minecraft/world/level/levelgen/DensityFunctions$BeardifierMarker
+
+# StructureTemplate
+#accessible field net/minecraft/world/level/levelgen/structure/templatesystem/StructureTemplate palettes Ljava/util/List;
+#accessible field net/minecraft/world/level/levelgen/structure/templatesystem/StructureTemplate entityInfoList Ljava/util/List;
+#accessible method net/minecraft/world/level/levelgen/structure/templatesystem/StructureTemplate placeEntities (Lnet/minecraft/world/level/ServerLevelAccessor;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/Mirror;Lnet/minecraft/world/level/block/Rotation;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/levelgen/structure/BoundingBox;Z)V
+
+# BlockStateProviderType
+accessible method net/minecraft/world/level/levelgen/feature/stateproviders/BlockStateProviderType <init> (Lcom/mojang/serialization/Codec;)V

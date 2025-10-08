@@ -15,13 +15,11 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemp
 
 import java.util.Optional;
 
-public record NBTTreeConfiguration(Either<ResourceLocation, StructureTemplate> template, BlockStateProvider validSurface, int groundLevel, BoundingBox trunkBB, Optional<StructureProcessorList> processors) implements FeatureConfiguration {
+public record NBTTreeConfiguration(Either<ResourceLocation, StructureTemplate> template, int groundLevel, Optional<StructureProcessorList> processors) implements FeatureConfiguration {
     public static final Codec<Either<ResourceLocation, StructureTemplate>> TEMPLATE_CODEC = Codec.of(NBTTreeConfiguration::encodeTemplate, ResourceLocation.CODEC.map(Either::left));
     public static final Codec<NBTTreeConfiguration> CODEC = RecordCodecBuilder.create(instance -> instance.group(
             TEMPLATE_CODEC.fieldOf("location").forGetter(conf -> conf.template),
-            BlockStateProvider.CODEC.fieldOf("valid_surface").forGetter(conf -> conf.validSurface),
             Codec.intRange(0, 32).fieldOf("ground_level").forGetter(conf -> conf.groundLevel),
-            BoundingBox.CODEC.fieldOf("trunk_bb").forGetter(conf -> conf.trunkBB),
             StructureProcessorType.LIST_OBJECT_CODEC.optionalFieldOf("processors").forGetter(conf -> conf.processors)
     ).apply(instance, NBTTreeConfiguration::new));
 

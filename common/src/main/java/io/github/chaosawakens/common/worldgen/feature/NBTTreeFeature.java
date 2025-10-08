@@ -7,11 +7,8 @@ import net.minecraft.core.Vec3i;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.Rotation;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
-import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
 
@@ -34,46 +31,22 @@ public class NBTTreeFeature extends Feature<NBTTreeConfiguration> {
 
         if (treeTemplate.isEmpty()) return false;
 
+        BlockPos origin = featurePlaceContext.origin();
         Vec3i size = treeTemplate.get().getSize();
-        BoundingBox trunkBB = config.trunkBB();
 
-        BlockPos firstCorner = curLevel.getHeightmapPos(Heightmap.Types.WORLD_SURFACE_WG, featurePlaceContext.origin()).offset(trunkBB.minX(), 0, trunkBB.minZ());
-        BlockPos secondCorner = curLevel.getHeightmapPos(Heightmap.Types.WORLD_SURFACE_WG, featurePlaceContext.origin()).offset(trunkBB.maxX(), 0, trunkBB.minZ());
-        BlockPos thirdCorner = curLevel.getHeightmapPos(Heightmap.Types.WORLD_SURFACE_WG, featurePlaceContext.origin()).offset(trunkBB.minX(), 0, trunkBB.maxZ());
-        BlockPos fourthCorner = curLevel.getHeightmapPos(Heightmap.Types.WORLD_SURFACE_WG, featurePlaceContext.origin()).offset(trunkBB.maxX(), 0, trunkBB.maxZ());
+        if (origin.getY() + size.getY() > curLevel.getMaxBuildHeight()) return false;
 
         RandomSource rand = featurePlaceContext.random();
-        BlockState validSurface = config.validSurface().getState(rand, BlockPos.ZERO);
-
-        if (validSurface != curLevel.getBlockState(firstCorner.below())) return false;
-        if (validSurface != curLevel.getBlockState(secondCorner.below())) return false;
-        if (validSurface != curLevel.getBlockState(thirdCorner.below())) return false;
-        if (validSurface != curLevel.getBlockState(fourthCorner.below())) return false;
-
-        // Check for lowest corner and set offset Y level to it
-        BlockPos offsetPos;
-        if (firstCorner.getY() <= secondCorner.getY() && firstCorner.getY() <= thirdCorner.getY() && firstCorner.getY() <= fourthCorner.getY()) {
-            offsetPos = featurePlaceContext.origin().atY(firstCorner.getY() - config.groundLevel());
-        } else if (secondCorner.getY() <= firstCorner.getY() && secondCorner.getY() <= thirdCorner.getY() && secondCorner.getY() <= fourthCorner.getY()) {
-            offsetPos = featurePlaceContext.origin().atY(secondCorner.getY() - config.groundLevel());
-        } else if (thirdCorner.getY() <= firstCorner.getY() && thirdCorner.getY() <= secondCorner.getY() && thirdCorner.getY() <= fourthCorner.getY()) {
-            offsetPos = featurePlaceContext.origin().atY(thirdCorner.getY() - config.groundLevel());
-        } else {
-            offsetPos = featurePlaceContext.origin().atY(fourthCorner.getY() - config.groundLevel());
-        }
-
-        StructureTemplate rawTemp = treeTemplate.get();
         StructurePlaceSettings settings = new StructurePlaceSettings();
 
         settings.setRotationPivot(new BlockPos(size.getX() / 2, 0, size.getZ() / 2));
         settings.setRotation(randomRotation(rand));
 
-        BoundingBox treeBB = rawTemp.getBoundingBox(settings, offsetPos);
-        int treeHeightAtPosition = offsetPos.getY() + treeBB.getYSpan();
+        if (config.processors().isPresent()) {
+            config.processors().get().list().forEach(structureProcessor -> settings.addProcessor(structureProcessor));
+        }
 
-        if (treeHeightAtPosition > curLevel.getMaxBuildHeight()) return false;
-
-        treeTemplate.get().placeInWorld(curLevel, offsetPos, offsetPos, settings, rand, 0);
+        treeTemplate.get().placeInWorld(curLevel, origin, origin, settings, rand, 2);
 
         return true;
     }
