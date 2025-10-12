@@ -105,7 +105,7 @@ public class CALanguageProvider extends LanguageProvider {
 
         String baseResult = String.valueOf(charSet);
 
-        for (String lcw : DEFAULT_SEPARATORS) if (baseResult.contains(lcw)) baseResult = baseResult.replaceAll(lcw, lcw.toLowerCase());
+        for (String lcw : separators) if (baseResult.contains(lcw)) baseResult = baseResult.replaceAll(lcw, lcw.toLowerCase());
 
         return baseResult;
     }

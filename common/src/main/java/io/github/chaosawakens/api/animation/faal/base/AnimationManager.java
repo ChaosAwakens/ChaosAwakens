@@ -22,4 +22,5 @@ package io.github.chaosawakens.api.animation.faal.base;
  * Now, to actually define the usage of this class, a comprehensive code block (as seen below) describes the process behind animation registration and management:
  */
 public final class AnimationManager {
+
 }

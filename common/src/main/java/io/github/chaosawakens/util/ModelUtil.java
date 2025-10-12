@@ -527,8 +527,10 @@ public final class ModelUtil {
                         .with(PropertyDispatch.property(BlockStateProperties.SLAB_TYPE)
                                 .select(SlabType.BOTTOM, Variant.variant()
                                         .with(VariantProperties.MODEL, bottomModel))
-                                .select(SlabType.TOP, Variant.variant().with(VariantProperties.MODEL, topModel))
-                                .select(SlabType.DOUBLE, Variant.variant().with(VariantProperties.MODEL, doubleSlabModel))));
+                                .select(SlabType.TOP, Variant.variant()
+                                        .with(VariantProperties.MODEL, topModel))
+                                .select(SlabType.DOUBLE, Variant.variant()
+                                        .with(VariantProperties.MODEL, doubleSlabModel))));
     }
 
     /**
