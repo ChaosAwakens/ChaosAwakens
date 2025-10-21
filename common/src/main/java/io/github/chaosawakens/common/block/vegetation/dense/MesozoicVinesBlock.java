@@ -14,7 +14,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class MesozoicVinesBlock extends GrowingPlantHeadBlock {
-    protected static final VoxelShape SHAPE = Block.box(4.0, 9.0, 4.0, 12.0, 16.0, 12.0);
+    protected static final VoxelShape SHAPE = Block.box(0.0, 6.0, 0.0, 16.0, 16.0, 16.0);
 
     public MesozoicVinesBlock(BlockBehaviour.Properties properties) {
         super(properties, Direction.DOWN, SHAPE, false, 0.1f);
@@ -34,7 +34,8 @@ public class MesozoicVinesBlock extends GrowingPlantHeadBlock {
     public boolean canSurvive(BlockState $$0, LevelReader $$1, BlockPos $$2) {
         BlockPos $$3 = $$2.relative(this.growthDirection.getOpposite());
         BlockState $$4 = $$1.getBlockState($$3);
-        return !this.canAttachTo($$4) ? false : $$4.is(this.getHeadBlock()) || $$4.is(this.getBodyBlock()) || $$4.is(CABlocks.MESOZOIC_LEAVES.get());
+        return !this.canAttachTo($$4) ? false : $$4.is(this.getHeadBlock()) || $$4.is(this.getBodyBlock())
+                || $$4.is(CABlocks.MESOZOIC_LEAVES.get());
     }
 
     @Override

@@ -3,8 +3,8 @@
   "placement": [
     {
       "type": "chaosawakens:in_bb_square",
-      "x": 19,
-      "z": 17
+      "x": 6,
+      "z": 8
     },
     {
       "type": "minecraft:surface_water_depth_filter",

@@ -3,8 +3,8 @@
   "placement": [
     {
       "type": "chaosawakens:in_bb_square",
-      "x": 19,
-      "z": 17
+      "x": 21,
+      "z": 19
     },
     {
       "type": "minecraft:surface_water_depth_filter",
@@ -17,10 +17,10 @@
     {
       "type": "chaosawakens:surface_area_check",
       "box": [
-        6,
+        8,
         0,
-        6,
-        11,
+        7,
+        12,
         10,
         11
       ],
@@ -37,10 +37,10 @@
     {
       "type": "chaosawakens:pick_lowest_height",
       "box": [
-        6,
+        8,
         0,
-        6,
-        11,
+        7,
+        12,
         10,
         11
       ]

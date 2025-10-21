@@ -187,13 +187,13 @@ public class CAFeatures {
         public static final Supplier<ResourceKey<PlacedFeature>> TAR_PUDDLE = registerPlacedFeature("tar_puddle", CAConfiguredFeatures.TAR_PUDDLE, ObjectArrayList.of(RarityFilter.onAverageOnceEvery(48), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
         public static final Supplier<ResourceKey<PlacedFeature>> LATOSOL_PUDDLE = registerPlacedFeature("latosol_puddle", CAConfiguredFeatures.LATOSOL_PUDDLE, ObjectArrayList.of(RarityFilter.onAverageOnceEvery(48), InSquarePlacement.spread(), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome()));
 
-        public static final Supplier<ResourceKey<PlacedFeature>> MESOZOIC_TREE_VARIANT_1 = registerPlacedFeature("mesozoic_tree_variant_1", CAConfiguredFeatures.MESOZOIC_TREE_VARIANT_1, nbtTreePlacement(new BoundingBox(11, 0, 9, 16, 10, 14), 27, 25));
-        public static final Supplier<ResourceKey<PlacedFeature>> MESOZOIC_TREE_VARIANT_2 = registerPlacedFeature("mesozoic_tree_variant_2", CAConfiguredFeatures.MESOZOIC_TREE_VARIANT_2, nbtTreePlacement(new BoundingBox(6, 0, 7, 11, 10, 12), 25, 25));
-        public static final Supplier<ResourceKey<PlacedFeature>> MESOZOIC_TREE_VARIANT_3 = registerPlacedFeature("mesozoic_tree_variant_3", CAConfiguredFeatures.MESOZOIC_TREE_VARIANT_3, nbtTreePlacement(new BoundingBox(6, 0, 6, 11, 10, 11), 19, 17));
+        public static final Supplier<ResourceKey<PlacedFeature>> MESOZOIC_TREE_VARIANT_1 = registerPlacedFeature("mesozoic_tree_variant_1", CAConfiguredFeatures.MESOZOIC_TREE_VARIANT_1, nbtTreePlacement(new BoundingBox(11, 0, 10, 15, 10, 14), 27, 25));
+        public static final Supplier<ResourceKey<PlacedFeature>> MESOZOIC_TREE_VARIANT_2 = registerPlacedFeature("mesozoic_tree_variant_2", CAConfiguredFeatures.MESOZOIC_TREE_VARIANT_2, nbtTreePlacement(new BoundingBox(13, 0, 10, 17, 10, 14), 31, 29));
+        public static final Supplier<ResourceKey<PlacedFeature>> MESOZOIC_TREE_VARIANT_3 = registerPlacedFeature("mesozoic_tree_variant_3", CAConfiguredFeatures.MESOZOIC_TREE_VARIANT_3, nbtTreePlacement(new BoundingBox(8, 0, 7, 12, 10, 11), 21, 19));
 
-        public static final Supplier<ResourceKey<PlacedFeature>> GINKGO_TREE_VARIANT_1 = registerPlacedFeature("ginkgo_tree_variant_1", CAConfiguredFeatures.GINKGO_TREE_VARIANT_1, nbtTreePlacement(new BoundingBox(10, 0, 8, 17, 10, 15), 27, 25));
-        public static final Supplier<ResourceKey<PlacedFeature>> GINKGO_TREE_VARIANT_2 = registerPlacedFeature("ginkgo_tree_variant_2", CAConfiguredFeatures.GINKGO_TREE_VARIANT_2, nbtTreePlacement(new BoundingBox(5, 0, 6, 11, 10, 12), 25, 25));
-        public static final Supplier<ResourceKey<PlacedFeature>> GINKGO_TREE_VARIANT_3 = registerPlacedFeature("ginkgo_tree_variant_3", CAConfiguredFeatures.GINKGO_TREE_VARIANT_3, nbtTreePlacement(new BoundingBox(5, 0, 5, 11, 10, 11), 19, 17));
+        public static final Supplier<ResourceKey<PlacedFeature>> GINKGO_TREE_VARIANT_1 = registerPlacedFeature("ginkgo_tree_variant_1", CAConfiguredFeatures.GINKGO_TREE_VARIANT_1, nbtTreePlacement(new BoundingBox(10, 0, 8, 17, 10, 15), 10, 8));
+        public static final Supplier<ResourceKey<PlacedFeature>> GINKGO_TREE_VARIANT_2 = registerPlacedFeature("ginkgo_tree_variant_2", CAConfiguredFeatures.GINKGO_TREE_VARIANT_2, nbtTreePlacement(new BoundingBox(5, 0, 6, 11, 10, 12), 8, 8));
+        public static final Supplier<ResourceKey<PlacedFeature>> GINKGO_TREE_VARIANT_3 = registerPlacedFeature("ginkgo_tree_variant_3", CAConfiguredFeatures.GINKGO_TREE_VARIANT_3, nbtTreePlacement(new BoundingBox(5, 0, 5, 11, 10, 11), 6, 8));
 
         public static final Supplier<ResourceKey<PlacedFeature>> DENSEWOOD_TREE_VARIANT_1 = registerPlacedFeature("densewood_tree_variant_1", CAConfiguredFeatures.DENSEWOOD_TREE_VARIANT_1, nbtTreePlacementExtra(RarityFilter.onAverageOnceEvery(8), new BoundingBox(4, 0, 5, 6, 10, 7), 11, 13));
 
