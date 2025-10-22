@@ -3,11 +3,6 @@
   "config": {
     "ground_level": 0,
     "location": "chaosawakens:feature_presets/nbt_tree/ginkgo_tree/ginkgo_tree_1",
-    "processors": [
-      {
-        "chance": 0.2,
-        "processor_type": "chaosawakens:bee_hive"
-      }
-    ]
+    "processors": []
   }
 }

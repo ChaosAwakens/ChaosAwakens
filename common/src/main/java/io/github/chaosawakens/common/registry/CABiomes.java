@@ -6,8 +6,10 @@ import io.github.chaosawakens.api.asm.annotations.RegistrarEntry;
 import io.github.chaosawakens.api.platform.CAServices;
 import io.github.chaosawakens.common.worldgen.config.base.BiomeConfig;
 import io.github.chaosawakens.common.worldgen.config.mining_paradise.biome.surface.level_0.StalagmiteValleyBiomeConfig;
+import io.github.chaosawakens.common.worldgen.config.mining_paradise.biome.surface.level_1.GinkgoForestBiomeConfig;
 import io.github.chaosawakens.common.worldgen.config.mining_paradise.biome.surface.level_1.MesozoicJungleBiomeConfig;
 import io.github.chaosawakens.common.worldgen.config.mining_paradise.biome.surface.level_2.DensePlainsBiomeConfig;
+import io.github.chaosawakens.common.worldgen.config.mining_paradise.biome.surface.level_2.DensewoodForestBiomeConfig;
 import io.github.chaosawakens.common.worldgen.config.mining_paradise.biome.surface.level_4.DenseMountainsBiomeConfig;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.core.registries.Registries;
@@ -29,6 +31,10 @@ public class CABiomes {
     public static final Supplier<ResourceKey<Biome>> MESOZOIC_JUNGLE = registerBiome("mesozoic_jungle", MesozoicJungleBiomeConfig::new);
 
     public static final Supplier<ResourceKey<Biome>> STALAGMITE_VALLEY = registerBiome("stalagmite_valley", StalagmiteValleyBiomeConfig::new);
+
+    public static final Supplier<ResourceKey<Biome>> DENSEWOOD_FOREST = registerBiome("densewood_forest", DensewoodForestBiomeConfig::new);
+
+    public static final Supplier<ResourceKey<Biome>> GINKGO_FOREST = registerBiome("ginkgo_forest", GinkgoForestBiomeConfig::new);
 
     private static Supplier<ResourceKey<Biome>> registerBiome(ResourceLocation id, Supplier<BiomeConfig> biomeConfigSup) {
         Supplier<ResourceKey<Biome>> biomeSup = CAServices.REGISTRAR.registerDatapackObject(id, b -> () -> biomeConfigSup.get().createBiome(b), Registries.BIOME);

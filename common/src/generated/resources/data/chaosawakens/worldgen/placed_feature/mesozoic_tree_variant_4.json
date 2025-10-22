@@ -1,0 +1,49 @@
+{
+  "feature": "chaosawakens:mesozoic_tree_variant_4",
+  "placement": [
+    {
+      "type": "chaosawakens:in_bb_square",
+      "x": 18,
+      "z": 14
+    },
+    {
+      "type": "minecraft:surface_water_depth_filter",
+      "max_water_depth": 0
+    },
+    {
+      "type": "minecraft:heightmap",
+      "heightmap": "OCEAN_FLOOR"
+    },
+    {
+      "type": "chaosawakens:surface_area_check",
+      "box": [
+        8,
+        0,
+        4,
+        12,
+        16,
+        8
+      ],
+      "state": {
+        "type": "chaosawakens:simple_supplier_provider",
+        "state": {
+          "Name": "chaosawakens:dense_grass_block",
+          "Properties": {
+            "snowy": "false"
+          }
+        }
+      }
+    },
+    {
+      "type": "chaosawakens:pick_lowest_height",
+      "box": [
+        8,
+        0,
+        4,
+        12,
+        16,
+        8
+      ]
+    }
+  ]
+}

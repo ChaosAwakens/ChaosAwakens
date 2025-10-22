@@ -3,7 +3,7 @@
   "placement": [
     {
       "type": "chaosawakens:in_bb_square",
-      "x": 19,
+      "x": 18,
       "z": 17
     },
     {
@@ -17,12 +17,12 @@
     {
       "type": "chaosawakens:surface_area_check",
       "box": [
-        6,
+        8,
         0,
-        6,
+        7,
         11,
-        10,
-        11
+        16,
+        10
       ],
       "state": {
         "type": "chaosawakens:simple_supplier_provider",
@@ -37,12 +37,12 @@
     {
       "type": "chaosawakens:pick_lowest_height",
       "box": [
-        6,
+        8,
         0,
-        6,
+        7,
         11,
-        10,
-        11
+        16,
+        10
       ]
     }
   ]

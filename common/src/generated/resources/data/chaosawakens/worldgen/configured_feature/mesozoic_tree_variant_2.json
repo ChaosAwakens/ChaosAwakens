@@ -5,10 +5,6 @@
     "location": "chaosawakens:feature_presets/nbt_tree/mesozoic_tree/mesozoic_tree_2",
     "processors": [
       {
-        "chance": 0.1,
-        "processor_type": "chaosawakens:bee_hive"
-      },
-      {
         "chance": 0.8,
         "processor_type": "chaosawakens:mesozoic_vine"
       }

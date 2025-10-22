@@ -1,0 +1,49 @@
+{
+  "feature": "chaosawakens:densewood_tree_variant_2",
+  "placement": [
+    {
+      "type": "chaosawakens:in_bb_square",
+      "x": 9,
+      "z": 7
+    },
+    {
+      "type": "minecraft:surface_water_depth_filter",
+      "max_water_depth": 0
+    },
+    {
+      "type": "minecraft:heightmap",
+      "heightmap": "OCEAN_FLOOR"
+    },
+    {
+      "type": "chaosawakens:surface_area_check",
+      "box": [
+        4,
+        0,
+        3,
+        6,
+        10,
+        5
+      ],
+      "state": {
+        "type": "chaosawakens:simple_supplier_provider",
+        "state": {
+          "Name": "chaosawakens:dense_grass_block",
+          "Properties": {
+            "snowy": "false"
+          }
+        }
+      }
+    },
+    {
+      "type": "chaosawakens:pick_lowest_height",
+      "box": [
+        4,
+        0,
+        3,
+        6,
+        10,
+        5
+      ]
+    }
+  ]
+}

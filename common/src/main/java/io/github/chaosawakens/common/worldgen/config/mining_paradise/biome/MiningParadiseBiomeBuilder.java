@@ -36,12 +36,18 @@ public class MiningParadiseBiomeBuilder implements BiomeBuilder {
         addSurfaceBiome(biomeClimateParameterPointMapper, Climate.Parameter.span(-0.87F, 0.87F), Climate.Parameter.span(-0.41F, 0.41F), LAYER_4_CONT, FULL_RANGE, Climate.Parameter.point(0.0F), 0, CABiomes.DENSE_MOUNTAINS.get());
 
         // Layer 2
-        addSurfaceBiome(biomeClimateParameterPointMapper, FULL_RANGE, FULL_RANGE, LAYER_2, FULL_RANGE, Climate.Parameter.point(0.0F), 0, CABiomes.DENSE_PLAINS.get());
-        addSurfaceBiome(biomeClimateParameterPointMapper, FULL_RANGE, FULL_RANGE, LAYER_23, FULL_RANGE, Climate.Parameter.point(0.0F), 0, CABiomes.DENSE_PLAINS.get());
+        addSurfaceBiome(biomeClimateParameterPointMapper, Climate.Parameter.span(-1.1F, 0.0F), FULL_RANGE, LAYER_2, FULL_RANGE, Climate.Parameter.point(0.0F), 0, CABiomes.DENSE_PLAINS.get());
+        addSurfaceBiome(biomeClimateParameterPointMapper, Climate.Parameter.span(-1.1F, 0.0F), FULL_RANGE, LAYER_23, FULL_RANGE, Climate.Parameter.point(0.0F), 0, CABiomes.DENSE_PLAINS.get());
+
+        addSurfaceBiome(biomeClimateParameterPointMapper, Climate.Parameter.span(0.0F, 1.55F), FULL_RANGE, LAYER_2, FULL_RANGE, Climate.Parameter.point(0.0F), 0, CABiomes.DENSEWOOD_FOREST.get());
+        addSurfaceBiome(biomeClimateParameterPointMapper, Climate.Parameter.span(0.0F, 1.55F), FULL_RANGE, LAYER_23, FULL_RANGE, Climate.Parameter.point(0.0F), 0, CABiomes.DENSEWOOD_FOREST.get());
 
         // Layer 1
-        addSurfaceBiome(biomeClimateParameterPointMapper, FULL_RANGE, FULL_RANGE, LAYER_1, FULL_RANGE, Climate.Parameter.point(0.0F), 0, CABiomes.MESOZOIC_JUNGLE.get());
-        addSurfaceBiome(biomeClimateParameterPointMapper, FULL_RANGE, FULL_RANGE, LAYER_12, FULL_RANGE, Climate.Parameter.point(0.0F), 0, CABiomes.MESOZOIC_JUNGLE.get());
+        addSurfaceBiome(biomeClimateParameterPointMapper, Climate.Parameter.span(-1.1F, 0.0F), FULL_RANGE, LAYER_1, FULL_RANGE, Climate.Parameter.point(0.0F), 0, CABiomes.MESOZOIC_JUNGLE.get());
+        addSurfaceBiome(biomeClimateParameterPointMapper, Climate.Parameter.span(-1.1F, 0.0F), FULL_RANGE, LAYER_12, FULL_RANGE, Climate.Parameter.point(0.0F), 0, CABiomes.MESOZOIC_JUNGLE.get());
+
+        addSurfaceBiome(biomeClimateParameterPointMapper, Climate.Parameter.span(0.0F, 1.55F), FULL_RANGE, LAYER_1, FULL_RANGE, Climate.Parameter.point(0.0F), 0, CABiomes.GINKGO_FOREST.get());
+        addSurfaceBiome(biomeClimateParameterPointMapper, Climate.Parameter.span(0.0F, 1.55F), FULL_RANGE, LAYER_12, FULL_RANGE, Climate.Parameter.point(0.0F), 0, CABiomes.GINKGO_FOREST.get());
 
         // Layer 0
         addSurfaceBiome(biomeClimateParameterPointMapper, FULL_RANGE, FULL_RANGE, LAYER_01, FULL_RANGE, Climate.Parameter.point(0.0F), 0, CABiomes.STALAGMITE_VALLEY.get());

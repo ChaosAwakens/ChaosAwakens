@@ -143,12 +143,14 @@ public class MiningParadiseDimensionConfig implements DimensionLevelStemConfig {
                         )
                 )
         );
-        SurfaceRules.RuleSource densePlainsRuleSource = SurfaceRules.ifTrue(SurfaceRules.isBiome(CABiomes.DENSE_PLAINS.get()), defaultSurfaceRuleSource);
         SurfaceRules.RuleSource denseMountainsRuleSource = SurfaceRules.ifTrue(SurfaceRules.isBiome(CABiomes.DENSE_MOUNTAINS.get()), denseMountainsSurfaceRuleSource);
+        SurfaceRules.RuleSource densePlainsRuleSource = SurfaceRules.ifTrue(SurfaceRules.isBiome(CABiomes.DENSE_PLAINS.get()), defaultSurfaceRuleSource);
+        SurfaceRules.RuleSource densewoodForestRuleSource = SurfaceRules.ifTrue(SurfaceRules.isBiome(CABiomes.DENSEWOOD_FOREST.get()), defaultSurfaceRuleSource);
         SurfaceRules.RuleSource mesozoicJungleRuleSource = SurfaceRules.ifTrue(SurfaceRules.isBiome(CABiomes.MESOZOIC_JUNGLE.get()), mesozoicJungleSurfaceRuleSource);
+        SurfaceRules.RuleSource ginkgoForestRuleSource = SurfaceRules.ifTrue(SurfaceRules.isBiome(CABiomes.GINKGO_FOREST.get()), defaultSurfaceRuleSource);
         SurfaceRules.RuleSource bedrockFloorRuleSource = SurfaceRules.ifTrue(SurfaceRules.verticalGradient("bedrock_floor", VerticalAnchor.bottom(), VerticalAnchor.aboveBottom(5)), CASurfaceRules.CAStateRules.BEDROCK);
 
-        return SurfaceRules.sequence(densePlainsRuleSource, denseMountainsRuleSource, mesozoicJungleRuleSource, bedrockFloorRuleSource);
+        return SurfaceRules.sequence(densewoodForestRuleSource, densePlainsRuleSource, mesozoicJungleRuleSource, ginkgoForestRuleSource, denseMountainsRuleSource, bedrockFloorRuleSource);
     }
 
     protected static NoiseRouter createMiningParadiseNoiseRouter(BootstapContext<NoiseGeneratorSettings> regCtx) {

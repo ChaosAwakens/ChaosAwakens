@@ -62,7 +62,6 @@ public class DensePlainsBiomeConfig implements BiomeConfig {
         biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, placedFeatureGetter.getOrThrow(CAFeatures.CAPlacedFeatures.ALSTROEMERIAT_PATCH.get()));
         biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, placedFeatureGetter.getOrThrow(CAFeatures.CAPlacedFeatures.DENSE_BUSH_PATCH.get()));
         biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, placedFeatureGetter.getOrThrow(CAFeatures.CAPlacedFeatures.TALL_DENSE_BUSH_PATCH.get()));
-        biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, placedFeatureGetter.getOrThrow(CAFeatures.CAPlacedFeatures.DENSEWOOD_TREE_VARIANT_1.get()));
 
         // Ores
         biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, placedFeatureGetter.getOrThrow(CAFeatures.CAPlacedFeatures.URANIUM_BLOCK.get()));
