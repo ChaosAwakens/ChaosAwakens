@@ -48,10 +48,10 @@ public class MesozoicVineProcessor extends StructureProcessor {
                 }
                 RandomSource random = settings.getRandom(info.pos());
                 if (random.nextFloat() < this.chance) {
-                    int num = random.nextInt(3) + random.nextInt(3);
+                    int num = random.nextInt(2) + random.nextInt(3);
                     for (int i = 0; i < num; i++) {
                         if (infoMap.get(info.pos().below(i + 1)) != null || !accessor.getBlockState(info.pos().below(i + 1)).canBeReplaced()) {
-                            infoMap.put(info.pos().below(i), new StructureTemplate.StructureBlockInfo(info.pos().below(i), CABlocks.MESOZOIC_VINES_PLANT.get().defaultBlockState(), new CompoundTag()));
+                            infoMap.put(info.pos().below(i), new StructureTemplate.StructureBlockInfo(info.pos().below(i), CABlocks.MESOZOIC_VINES.get().defaultBlockState(), new CompoundTag()));
                             return;
                         }
                         infoMap.put(info.pos().below(i), new StructureTemplate.StructureBlockInfo(info.pos().below(i), CABlocks.MESOZOIC_VINES_PLANT.get().defaultBlockState(), new CompoundTag()));
