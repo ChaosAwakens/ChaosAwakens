@@ -69,5 +69,5 @@ public interface IRegistrar {
      * @see Registries
      * @see ServerLevel#registryAccess()
      */
-    <T> Supplier<ResourceKey<T>> registerDatapackObject(final ResourceLocation objId, Function<BootstapContext<T>, Supplier<T>> objSupMappingFunc, final ResourceKey<Registry<T>> targetDatapackRegistry);
+    <V, T extends V> Supplier<ResourceKey<T>> registerDatapackObject(final ResourceLocation objId, Function<BootstapContext<T>, Supplier<T>> objSupMappingFunc, final ResourceKey<Registry<V>> targetDatapackRegistry);
 }

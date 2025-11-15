@@ -34,7 +34,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:air"
+          "name": "chaosawakens:mesozoic_vines_plant"
         }
       ],
       "rolls": 1.0
