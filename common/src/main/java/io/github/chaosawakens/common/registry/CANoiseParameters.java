@@ -28,6 +28,10 @@ public class CANoiseParameters {
     public static final Supplier<ResourceKey<NormalNoise.NoiseParameters>> AQUIFER_LAVA = registerNoiseParameter("mining_paradise/aquifer_lava", () -> new NormalNoise.NoiseParameters(-1, 1.0D));
     public static final Supplier<ResourceKey<NormalNoise.NoiseParameters>> AQUIFER_FLUID_LEVEL_SPREAD = registerNoiseParameter("mining_paradise/aquifer_fluid_level_spread", () -> new NormalNoise.NoiseParameters(-5, 1.0D));
 
+    public static final Supplier<ResourceKey<NormalNoise.NoiseParameters>> CAVE = registerNoiseParameter("mining_paradise/cave", () -> new NormalNoise.NoiseParameters(-8, 1.0, 1.0, 1.0, 1.0));
+    public static final Supplier<ResourceKey<NormalNoise.NoiseParameters>> CAVE_LAYER = registerNoiseParameter("mining_paradise/cave_layer", () -> new NormalNoise.NoiseParameters(-8, 1.0D));
+    public static final Supplier<ResourceKey<NormalNoise.NoiseParameters>> CAVE_CHEESE = registerNoiseParameter("mining_paradise/cave_cheese", () -> new NormalNoise.NoiseParameters(-8, 1.0, 1.0, 2.0, 1.0, 2.0, 1.0, 0.0, 2.0, 1.0));
+
     private static Supplier<ResourceKey<NormalNoise.NoiseParameters>> registerNoiseParameter(ResourceLocation id, Supplier<NormalNoise.NoiseParameters> actualNoiseParamSup) {
         Supplier<ResourceKey<NormalNoise.NoiseParameters>> noiseParamSup = CAServices.REGISTRAR.registerDatapackObject(id, b -> actualNoiseParamSup, Registries.NOISE);
         NOISE_PARAMETERS.add(noiseParamSup);

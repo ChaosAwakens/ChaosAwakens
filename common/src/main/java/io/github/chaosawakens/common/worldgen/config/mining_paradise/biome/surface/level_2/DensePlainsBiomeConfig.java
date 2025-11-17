@@ -1,5 +1,6 @@
 package io.github.chaosawakens.common.worldgen.config.mining_paradise.biome.surface.level_2;
 
+import io.github.chaosawakens.common.registry.CAConfiguredCarvers;
 import io.github.chaosawakens.common.registry.CAFeatures;
 import io.github.chaosawakens.common.worldgen.config.base.BiomeConfig;
 import net.minecraft.core.HolderGetter;
@@ -65,6 +66,9 @@ public class DensePlainsBiomeConfig implements BiomeConfig {
 
         // Ores
         biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, placedFeatureGetter.getOrThrow(CAFeatures.CAPlacedFeatures.URANIUM_BLOCK.get()));
+
+        // Terrain
+        biomeBuilder.addCarver(GenerationStep.Carving.AIR, configuredWorldCarverGetter.getOrThrow(CAConfiguredCarvers.CONFIGURED_MINING_PARADISE_CAVE.get()));
 
         return biomeBuilder.build();
     }

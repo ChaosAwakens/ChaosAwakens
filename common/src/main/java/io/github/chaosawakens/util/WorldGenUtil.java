@@ -122,10 +122,10 @@ public final class WorldGenUtil {
                 .addPoint(0.81F, 1.62F)
 
                 .addPoint(0.83F, 1.55F)
-                .addPoint(0.845F, 3.0F, 7.5F)
+                .addPoint(0.857F, 3.0F, 7.5F)
                 .addPoint(0.87F, 3.6F)
                 .addPoint(0.89F, 3.6F)
-                .addPoint(0.915F, 3.0F, -7.5F)
+                .addPoint(0.913F, 3.0F, -7.5F)
                 .addPoint(0.93F, 1.55F)
 
                 .addPoint(0.95F, 1.5F)

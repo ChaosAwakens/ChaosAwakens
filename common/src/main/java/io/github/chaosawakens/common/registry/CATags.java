@@ -20,10 +20,28 @@ public class CATags {
 
     @RegistrarEntry
     public static class CABlockTags {
-        public static final Supplier<TagKey<Block>> BASE_STONE_CRYSTAL = createWrappedBlockTag("base_stone_crystal").getParentTag();
-        public static final Supplier<TagKey<Block>> BASE_STONE_MINING = createWrappedBlockTag("base_stone_mining")
-                .withEntries(ObjectArrayList.of(CABlocks.DREDGESTONE))
+        public static final Supplier<TagKey<Block>> DREDGESTONE = createWrappedBlockTag("dredgestone")
+                .withEntry(() -> CABlocks.DREDGESTONE.get())
                 .getParentTag();
+
+        public static final Supplier<TagKey<Block>> BASE_STONE_MINING = createWrappedBlockTag("base_stone_mining")
+                .withTagEntry(DREDGESTONE)
+                .getParentTag();
+
+        public static final Supplier<TagKey<Block>> DENSE_DIRT = createWrappedBlockTag("dense_dirt")
+                .withEntries(ObjectArrayList.of(() -> CABlocks.DENSE_DIRT.get(), () -> CABlocks.DENSE_GRASS_BLOCK.get()))
+                .getParentTag();
+
+        public static final Supplier<TagKey<Block>> MINING_DIRT = createWrappedBlockTag("mining_dirt")
+                .withTagEntry(DENSE_DIRT)
+                .getParentTag();
+
+        public static final Supplier<TagKey<Block>> MINING_CARVER_REPLACEABLES = createWrappedBlockTag("mining_carver_replaceables")
+                .withTagEntries(ObjectArrayList.of(MINING_DIRT, BASE_STONE_MINING))
+                .getParentTag();
+
+        public static final Supplier<TagKey<Block>> BASE_STONE_CRYSTAL = createWrappedBlockTag("base_stone_crystal").getParentTag();
+
         public static final Supplier<TagKey<Block>> BASE_STONE_VILLAGE = createWrappedBlockTag("base_stone_village").getParentTag();
 
         public static final Supplier<TagKey<Block>> MINERS_DREAM_MINEABLE = createWrappedBlockTag("miners_dream_mineable")
@@ -39,7 +57,6 @@ public class CATags {
 
         public static final Supplier<TagKey<Block>> FARMABLE = createBlockTag("farmable");
 
-        public static final Supplier<TagKey<Block>> DENSE_DIRT = createBlockTag("dense_dirt");
         public static final Supplier<TagKey<Block>> TERRA_PRETA = createBlockTag("terra_preta");
 
         public static final Supplier<TagKey<Block>> APPLE_LOGS = createWrappedBlockTag("wood/logs/apple_logs")

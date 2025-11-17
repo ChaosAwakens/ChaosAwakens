@@ -23,6 +23,7 @@ import net.minecraft.world.level.dimension.BuiltinDimensionTypes;
 import net.minecraft.world.level.dimension.DimensionType;
 import net.minecraft.world.level.dimension.LevelStem;
 import net.minecraft.world.level.levelgen.*;
+import net.minecraft.world.level.levelgen.carver.*;
 import net.minecraft.world.level.levelgen.synth.NormalNoise;
 import org.jetbrains.annotations.NotNull;
 
@@ -34,7 +35,7 @@ import java.util.stream.Stream;
 import static net.minecraft.world.level.levelgen.NoiseRouterData.yLimitedInterpolatable;
 
 public class MiningParadiseDimensionConfig implements DimensionLevelStemConfig {
-    public static final NoiseSettings BASE_NOISE_SETTINGS = NoiseSettings.create(-256, 736, 1, 4);
+    public static final NoiseSettings BASE_NOISE_SETTINGS = NoiseSettings.create(-128, 512, 1, 4);
 
     public MiningParadiseDimensionConfig() {
     }
@@ -46,6 +47,7 @@ public class MiningParadiseDimensionConfig implements DimensionLevelStemConfig {
 
     @Override
     public @NotNull ChunkGenerator createLevelChunkGen(BootstapContext<LevelStem> regCtx) {
+
         HolderGetter<Biome> biomeLookup = regCtx.lookup(Registries.BIOME);
         HolderGetter<NoiseGeneratorSettings> noiseGenSettingsLookup = regCtx.lookup(Registries.NOISE_SETTINGS);
         HolderGetter<MultiNoiseBiomeSourceParameterList> biomeSrcParamListLookup = regCtx.lookup(Registries.MULTI_NOISE_BIOME_SOURCE_PARAMETER_LIST);
@@ -57,11 +59,23 @@ public class MiningParadiseDimensionConfig implements DimensionLevelStemConfig {
     }
 
     public static DimensionType createDimensionType() {
-        return new DimensionType(OptionalLong.empty(), true, false, false, true, 1.0D, true, false, -256, 736, 480, BlockTags.INFINIBURN_OVERWORLD, BuiltinDimensionTypes.OVERWORLD_EFFECTS, 0.0F, new DimensionType.MonsterSettings(false, false, ConstantInt.of(4), 0));
+        return new DimensionType(OptionalLong.empty(), true, false, false, true, 1.0D, true, false, -128, 640, 512, BlockTags.INFINIBURN_OVERWORLD, BuiltinDimensionTypes.OVERWORLD_EFFECTS, 0.0F, new DimensionType.MonsterSettings(false, false, ConstantInt.of(4), 0));
     }
 
     public static Supplier<NoiseGeneratorSettings> createMiningParadiseNoiseGenSettings(BootstapContext<NoiseGeneratorSettings> regCtx) {
-        return () -> new NoiseGeneratorSettings(BASE_NOISE_SETTINGS, CABlocks.DREDGESTONE.get().defaultBlockState(), Blocks.WATER.defaultBlockState(), createMiningParadiseNoiseRouter(regCtx), createMiningParadiseSurfaceRules(), createMiningParadiseClimateSpawnConfiguration(regCtx), 121, false, true, true, false);
+        return () -> new NoiseGeneratorSettings(
+                BASE_NOISE_SETTINGS,
+                CABlocks.DREDGESTONE.get().defaultBlockState(),
+                Blocks.WATER.defaultBlockState(),
+                createMiningParadiseNoiseRouter(regCtx),
+                createMiningParadiseSurfaceRules(),
+                createMiningParadiseClimateSpawnConfiguration(regCtx),
+                121,  // sea level
+                false,  // disableMobGeneration
+                true,   // aquifersEnabled
+                true,   // oreVeinsEnabled
+                false   // useLegacyRandomSource
+        );
     }
 
     public static Supplier<MultiNoiseBiomeSourceParameterList> createMiningParadiseNoiseBiomes(BootstapContext<MultiNoiseBiomeSourceParameterList> regCtx) {
@@ -154,10 +168,10 @@ public class MiningParadiseDimensionConfig implements DimensionLevelStemConfig {
     }
 
     protected static NoiseRouter createMiningParadiseNoiseRouter(BootstapContext<NoiseGeneratorSettings> regCtx) {
-        DensityFunction aquiferBarrier = DensityFunctions.noise(regCtx.lookup(Registries.NOISE).getOrThrow(CANoiseParameters.AQUIFER_BARRIER.get()), (double)0.5F);
-        DensityFunction fluidFloodedness = DensityFunctions.noise(regCtx.lookup(Registries.NOISE).getOrThrow(CANoiseParameters.AQUIFER_FLUID_LEVEL_FLOODEDNESS.get()), 0.67);
-        DensityFunction fluidSpread = DensityFunctions.noise(regCtx.lookup(Registries.NOISE).getOrThrow(CANoiseParameters.AQUIFER_FLUID_LEVEL_SPREAD.get()), 0.715);
-        DensityFunction aquiferLava = DensityFunctions.noise(regCtx.lookup(Registries.NOISE).getOrThrow(CANoiseParameters.AQUIFER_LAVA.get()), 0.5);
+        DensityFunction aquiferBarrier = DensityFunctions.noise(regCtx.lookup(Registries.NOISE).getOrThrow(CANoiseParameters.AQUIFER_BARRIER.get()), (double) 0.5F);
+        DensityFunction fluidFloodedness = DensityFunctions.noise(regCtx.lookup(Registries.NOISE).getOrThrow(CANoiseParameters.AQUIFER_FLUID_LEVEL_FLOODEDNESS.get()), 0.47);
+        DensityFunction fluidSpread = DensityFunctions.noise(regCtx.lookup(Registries.NOISE).getOrThrow(CANoiseParameters.AQUIFER_FLUID_LEVEL_SPREAD.get()), 0.415);
+        DensityFunction aquiferLava = DensityFunctions.noise(regCtx.lookup(Registries.NOISE).getOrThrow(CANoiseParameters.AQUIFER_LAVA.get()), 0.39);
         DensityFunction shiftX = CADensityFunctions.getWrappedDensityFunctionHolder(regCtx, CADensityFunctions.SHIFT_X);
         DensityFunction shiftZ = CADensityFunctions.getWrappedDensityFunctionHolder(regCtx, CADensityFunctions.SHIFT_Z);
         DensityFunction shiftedTemperature = DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.5D, regCtx.lookup(Registries.NOISE).getOrThrow(Noises.TEMPERATURE));
@@ -173,7 +187,7 @@ public class MiningParadiseDimensionConfig implements DimensionLevelStemConfig {
         DensityFunction continentRidges = CADensityFunctions.getWrappedDensityFunctionHolder(regCtx, CADensityFunctions.MINING_PARADISE_RIDGES);
         DensityFunction initialLandDensity = NoiseRouterUtil.createTerrainSlide(
                 DensityFunctions.add(WorldGenUtil.noiseGradientDensity(DensityFunctions.cache2d(terrainFactor), terrainDepth, 5.0F), DensityFunctions.constant(9.5D)).clamp(-66.0D, 64.0D),
-                -256, 736, 20, 20, -1.0F, 4, 44, 1.5F);
+                -128, 512, 20, 20, -1.0F, 4, 44, 1.5F);
         DensityFunction finalLandDensity = DensityFunctions.mul(DensityFunctions.interpolated(DensityFunctions.blendDensity(initialLandDensity)), DensityFunctions.constant(1.0D)).squeeze();
 
         return new NoiseRouter(
@@ -198,6 +212,7 @@ public class MiningParadiseDimensionConfig implements DimensionLevelStemConfig {
     protected static ObjectArrayList<Climate.ParameterPoint> createMiningParadiseClimateSpawnConfiguration(BootstapContext<NoiseGeneratorSettings> regCtx) {
         return ObjectArrayList.of();
     }
+
     private static DensityFunction[] createOreDensityFunctions(DensityFunction yFunc, HolderGetter<NormalNoise.NoiseParameters> noiseParams) {
         int minY = Stream.of(OreVeinifier.VeinType.values())
                 .mapToInt(v -> v.minY)

@@ -12,8 +12,8 @@
   "disable_mob_generation": false,
   "legacy_random_source": false,
   "noise": {
-    "height": 736,
-    "min_y": -256,
+    "height": 512,
+    "min_y": -128,
     "size_horizontal": 1,
     "size_vertical": 4
   },
@@ -44,9 +44,9 @@
                 "argument1": {
                   "type": "minecraft:y_clamped_gradient",
                   "from_value": 0.0,
-                  "from_y": -252,
+                  "from_y": -124,
                   "to_value": 1.0,
-                  "to_y": -208
+                  "to_y": -80
                 },
                 "argument2": {
                   "type": "minecraft:add",
@@ -59,9 +59,9 @@
                       "argument1": {
                         "type": "minecraft:y_clamped_gradient",
                         "from_value": 1.0,
-                        "from_y": 440,
+                        "from_y": 344,
                         "to_value": 0.0,
-                        "to_y": 460
+                        "to_y": 364
                       },
                       "argument2": {
                         "type": "minecraft:add",
@@ -104,13 +104,13 @@
       "type": "minecraft:noise",
       "noise": "chaosawakens:mining_paradise/aquifer_fluid_level_floodedness",
       "xz_scale": 1.0,
-      "y_scale": 0.67
+      "y_scale": 0.47
     },
     "fluid_level_spread": {
       "type": "minecraft:noise",
       "noise": "chaosawakens:mining_paradise/aquifer_fluid_level_spread",
       "xz_scale": 1.0,
-      "y_scale": 0.715
+      "y_scale": 0.415
     },
     "initial_density_without_jaggedness": {
       "type": "minecraft:add",
@@ -120,9 +120,9 @@
         "argument1": {
           "type": "minecraft:y_clamped_gradient",
           "from_value": 0.0,
-          "from_y": -252,
+          "from_y": -124,
           "to_value": 1.0,
-          "to_y": -208
+          "to_y": -80
         },
         "argument2": {
           "type": "minecraft:add",
@@ -135,9 +135,9 @@
               "argument1": {
                 "type": "minecraft:y_clamped_gradient",
                 "from_value": 1.0,
-                "from_y": 440,
+                "from_y": 344,
                 "to_value": 0.0,
-                "to_y": 460
+                "to_y": 364
               },
               "argument2": {
                 "type": "minecraft:add",
@@ -176,7 +176,7 @@
       "type": "minecraft:noise",
       "noise": "chaosawakens:mining_paradise/aquifer_lava",
       "xz_scale": 1.0,
-      "y_scale": 0.5
+      "y_scale": 0.39
     },
     "ridges": "chaosawakens:mining_paradise/land/ridges",
     "temperature": {
@@ -267,7 +267,638 @@
   },
   "ore_veins_enabled": true,
   "sea_level": 121,
-  "spawn_target": [],
+  "spawn_target": [
+    {
+      "continentalness": [
+        0.58,
+        0.65
+      ],
+      "depth": 0.0,
+      "erosion": [
+        -1.1,
+        1.55
+      ],
+      "humidity": [
+        -0.41,
+        0.41
+      ],
+      "offset": 0.0,
+      "temperature": [
+        -0.87,
+        0.87
+      ],
+      "weirdness": 0.0
+    },
+    {
+      "continentalness": [
+        0.58,
+        0.65
+      ],
+      "depth": 1.0,
+      "erosion": [
+        -1.1,
+        1.55
+      ],
+      "humidity": [
+        -0.41,
+        0.41
+      ],
+      "offset": 0.0,
+      "temperature": [
+        -0.87,
+        0.87
+      ],
+      "weirdness": 0.0
+    },
+    {
+      "continentalness": [
+        0.74,
+        0.83
+      ],
+      "depth": 0.0,
+      "erosion": [
+        -1.1,
+        1.55
+      ],
+      "humidity": [
+        -0.41,
+        0.41
+      ],
+      "offset": 0.0,
+      "temperature": [
+        -0.87,
+        0.87
+      ],
+      "weirdness": 0.0
+    },
+    {
+      "continentalness": [
+        0.74,
+        0.83
+      ],
+      "depth": 1.0,
+      "erosion": [
+        -1.1,
+        1.55
+      ],
+      "humidity": [
+        -0.41,
+        0.41
+      ],
+      "offset": 0.0,
+      "temperature": [
+        -0.87,
+        0.87
+      ],
+      "weirdness": 0.0
+    },
+    {
+      "continentalness": [
+        0.94,
+        1.55
+      ],
+      "depth": 0.0,
+      "erosion": [
+        -1.1,
+        1.55
+      ],
+      "humidity": [
+        -0.41,
+        0.41
+      ],
+      "offset": 0.0,
+      "temperature": [
+        -0.87,
+        0.87
+      ],
+      "weirdness": 0.0
+    },
+    {
+      "continentalness": [
+        0.94,
+        1.55
+      ],
+      "depth": 1.0,
+      "erosion": [
+        -1.1,
+        1.55
+      ],
+      "humidity": [
+        -0.41,
+        0.41
+      ],
+      "offset": 0.0,
+      "temperature": [
+        -0.87,
+        0.87
+      ],
+      "weirdness": 0.0
+    },
+    {
+      "continentalness": [
+        0.26,
+        0.35
+      ],
+      "depth": 0.0,
+      "erosion": [
+        -1.1,
+        1.55
+      ],
+      "humidity": [
+        -1.1,
+        1.55
+      ],
+      "offset": 0.0,
+      "temperature": [
+        -1.1,
+        -0.1
+      ],
+      "weirdness": 0.0
+    },
+    {
+      "continentalness": [
+        0.26,
+        0.35
+      ],
+      "depth": 1.0,
+      "erosion": [
+        -1.1,
+        1.55
+      ],
+      "humidity": [
+        -1.1,
+        1.55
+      ],
+      "offset": 0.0,
+      "temperature": [
+        -1.1,
+        -0.1
+      ],
+      "weirdness": 0.0
+    },
+    {
+      "continentalness": [
+        0.41,
+        0.57
+      ],
+      "depth": 0.0,
+      "erosion": [
+        -1.1,
+        1.55
+      ],
+      "humidity": [
+        -1.1,
+        1.55
+      ],
+      "offset": 0.0,
+      "temperature": [
+        -1.1,
+        -0.1
+      ],
+      "weirdness": 0.0
+    },
+    {
+      "continentalness": [
+        0.41,
+        0.57
+      ],
+      "depth": 1.0,
+      "erosion": [
+        -1.1,
+        1.55
+      ],
+      "humidity": [
+        -1.1,
+        1.55
+      ],
+      "offset": 0.0,
+      "temperature": [
+        -1.1,
+        -0.1
+      ],
+      "weirdness": 0.0
+    },
+    {
+      "continentalness": [
+        0.26,
+        0.35
+      ],
+      "depth": 0.0,
+      "erosion": [
+        -1.1,
+        1.55
+      ],
+      "humidity": [
+        -1.1,
+        1.55
+      ],
+      "offset": 0.0,
+      "temperature": [
+        0.1,
+        1.55
+      ],
+      "weirdness": 0.0
+    },
+    {
+      "continentalness": [
+        0.26,
+        0.35
+      ],
+      "depth": 1.0,
+      "erosion": [
+        -1.1,
+        1.55
+      ],
+      "humidity": [
+        -1.1,
+        1.55
+      ],
+      "offset": 0.0,
+      "temperature": [
+        0.1,
+        1.55
+      ],
+      "weirdness": 0.0
+    },
+    {
+      "continentalness": [
+        0.41,
+        0.57
+      ],
+      "depth": 0.0,
+      "erosion": [
+        -1.1,
+        1.55
+      ],
+      "humidity": [
+        -1.1,
+        1.55
+      ],
+      "offset": 0.0,
+      "temperature": [
+        0.1,
+        1.55
+      ],
+      "weirdness": 0.0
+    },
+    {
+      "continentalness": [
+        0.41,
+        0.57
+      ],
+      "depth": 1.0,
+      "erosion": [
+        -1.1,
+        1.55
+      ],
+      "humidity": [
+        -1.1,
+        1.55
+      ],
+      "offset": 0.0,
+      "temperature": [
+        0.1,
+        1.55
+      ],
+      "weirdness": 0.0
+    },
+    {
+      "continentalness": [
+        -0.2,
+        0.15
+      ],
+      "depth": 0.0,
+      "erosion": [
+        -1.1,
+        1.55
+      ],
+      "humidity": [
+        -1.1,
+        1.55
+      ],
+      "offset": 0.0,
+      "temperature": [
+        -1.1,
+        -0.1
+      ],
+      "weirdness": 0.0
+    },
+    {
+      "continentalness": [
+        -0.2,
+        0.15
+      ],
+      "depth": 1.0,
+      "erosion": [
+        -1.1,
+        1.55
+      ],
+      "humidity": [
+        -1.1,
+        1.55
+      ],
+      "offset": 0.0,
+      "temperature": [
+        -1.1,
+        -0.1
+      ],
+      "weirdness": 0.0
+    },
+    {
+      "continentalness": [
+        0.19,
+        0.25
+      ],
+      "depth": 0.0,
+      "erosion": [
+        -1.1,
+        1.55
+      ],
+      "humidity": [
+        -1.1,
+        1.55
+      ],
+      "offset": 0.0,
+      "temperature": [
+        -1.1,
+        -0.1
+      ],
+      "weirdness": 0.0
+    },
+    {
+      "continentalness": [
+        0.19,
+        0.25
+      ],
+      "depth": 1.0,
+      "erosion": [
+        -1.1,
+        1.55
+      ],
+      "humidity": [
+        -1.1,
+        1.55
+      ],
+      "offset": 0.0,
+      "temperature": [
+        -1.1,
+        -0.1
+      ],
+      "weirdness": 0.0
+    },
+    {
+      "continentalness": [
+        -0.2,
+        0.15
+      ],
+      "depth": 0.0,
+      "erosion": [
+        -1.1,
+        1.55
+      ],
+      "humidity": [
+        -1.1,
+        1.55
+      ],
+      "offset": 0.0,
+      "temperature": [
+        0.1,
+        1.55
+      ],
+      "weirdness": 0.0
+    },
+    {
+      "continentalness": [
+        -0.2,
+        0.15
+      ],
+      "depth": 1.0,
+      "erosion": [
+        -1.1,
+        1.55
+      ],
+      "humidity": [
+        -1.1,
+        1.55
+      ],
+      "offset": 0.0,
+      "temperature": [
+        0.1,
+        1.55
+      ],
+      "weirdness": 0.0
+    },
+    {
+      "continentalness": [
+        0.19,
+        0.25
+      ],
+      "depth": 0.0,
+      "erosion": [
+        -1.1,
+        1.55
+      ],
+      "humidity": [
+        -1.1,
+        1.55
+      ],
+      "offset": 0.0,
+      "temperature": [
+        0.1,
+        1.55
+      ],
+      "weirdness": 0.0
+    },
+    {
+      "continentalness": [
+        0.19,
+        0.25
+      ],
+      "depth": 1.0,
+      "erosion": [
+        -1.1,
+        1.55
+      ],
+      "humidity": [
+        -1.1,
+        1.55
+      ],
+      "offset": 0.0,
+      "temperature": [
+        0.1,
+        1.55
+      ],
+      "weirdness": 0.0
+    },
+    {
+      "continentalness": [
+        0.16,
+        0.18
+      ],
+      "depth": 0.0,
+      "erosion": [
+        -1.1,
+        1.55
+      ],
+      "humidity": [
+        -1.1,
+        1.55
+      ],
+      "offset": 0.0,
+      "temperature": [
+        -1.1,
+        1.55
+      ],
+      "weirdness": 0.0
+    },
+    {
+      "continentalness": [
+        0.16,
+        0.18
+      ],
+      "depth": 1.0,
+      "erosion": [
+        -1.1,
+        1.55
+      ],
+      "humidity": [
+        -1.1,
+        1.55
+      ],
+      "offset": 0.0,
+      "temperature": [
+        -1.1,
+        1.55
+      ],
+      "weirdness": 0.0
+    },
+    {
+      "continentalness": [
+        0.36,
+        0.4
+      ],
+      "depth": 0.0,
+      "erosion": [
+        -1.1,
+        1.55
+      ],
+      "humidity": [
+        -1.1,
+        1.55
+      ],
+      "offset": 0.0,
+      "temperature": [
+        -1.1,
+        1.55
+      ],
+      "weirdness": 0.0
+    },
+    {
+      "continentalness": [
+        0.36,
+        0.4
+      ],
+      "depth": 1.0,
+      "erosion": [
+        -1.1,
+        1.55
+      ],
+      "humidity": [
+        -1.1,
+        1.55
+      ],
+      "offset": 0.0,
+      "temperature": [
+        -1.1,
+        1.55
+      ],
+      "weirdness": 0.0
+    },
+    {
+      "continentalness": [
+        0.66,
+        0.73
+      ],
+      "depth": 0.0,
+      "erosion": [
+        -1.1,
+        1.55
+      ],
+      "humidity": [
+        -1.1,
+        1.55
+      ],
+      "offset": 0.0,
+      "temperature": [
+        -1.1,
+        1.55
+      ],
+      "weirdness": 0.0
+    },
+    {
+      "continentalness": [
+        0.66,
+        0.73
+      ],
+      "depth": 1.0,
+      "erosion": [
+        -1.1,
+        1.55
+      ],
+      "humidity": [
+        -1.1,
+        1.55
+      ],
+      "offset": 0.0,
+      "temperature": [
+        -1.1,
+        1.55
+      ],
+      "weirdness": 0.0
+    },
+    {
+      "continentalness": [
+        0.84,
+        0.93
+      ],
+      "depth": 0.0,
+      "erosion": [
+        -1.1,
+        1.55
+      ],
+      "humidity": [
+        -1.1,
+        1.55
+      ],
+      "offset": 0.0,
+      "temperature": [
+        -1.1,
+        1.55
+      ],
+      "weirdness": 0.0
+    },
+    {
+      "continentalness": [
+        0.84,
+        0.93
+      ],
+      "depth": 1.0,
+      "erosion": [
+        -1.1,
+        1.55
+      ],
+      "humidity": [
+        -1.1,
+        1.55
+      ],
+      "offset": 0.0,
+      "temperature": [
+        -1.1,
+        1.55
+      ],
+      "weirdness": 0.0
+    }
+  ],
   "surface_rule": {
     "type": "minecraft:sequence",
     "sequence": [

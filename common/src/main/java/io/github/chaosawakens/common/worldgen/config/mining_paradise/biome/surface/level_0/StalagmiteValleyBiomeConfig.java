@@ -1,5 +1,6 @@
 package io.github.chaosawakens.common.worldgen.config.mining_paradise.biome.surface.level_0;
 
+import io.github.chaosawakens.common.registry.CAConfiguredCarvers;
 import io.github.chaosawakens.common.registry.CAFeatures;
 import io.github.chaosawakens.common.worldgen.config.base.BiomeConfig;
 import net.minecraft.core.HolderGetter;
@@ -63,6 +64,9 @@ public class StalagmiteValleyBiomeConfig implements BiomeConfig {
         biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, placedFeatureGetter.getOrThrow(CAFeatures.CAPlacedFeatures.BIG_CARNIVOROUS_PLANT_PATCH.get()));
         biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, placedFeatureGetter.getOrThrow(CAFeatures.CAPlacedFeatures.BUSH_PATCH.get()));
         biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, placedFeatureGetter.getOrThrow(CAFeatures.CAPlacedFeatures.TALL_BUSH_PATCH.get()));
+
+        // Terrain
+        biomeBuilder.addCarver(GenerationStep.Carving.AIR, configuredWorldCarverGetter.getOrThrow(CAConfiguredCarvers.CONFIGURED_MINING_PARADISE_CAVE.get()));
 
         return biomeBuilder.build();
     }

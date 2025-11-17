@@ -1,5 +1,6 @@
 package io.github.chaosawakens.common.worldgen.config.mining_paradise.biome.surface.level_4;
 
+import io.github.chaosawakens.common.registry.CAConfiguredCarvers;
 import io.github.chaosawakens.common.registry.CAFeatures;
 import io.github.chaosawakens.common.worldgen.config.base.BiomeConfig;
 import net.minecraft.core.HolderGetter;
@@ -62,6 +63,7 @@ public class DenseMountainsBiomeConfig implements BiomeConfig {
         biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, placedFeatureGetter.getOrThrow(CAFeatures.CAPlacedFeatures.ALSTROEMERIAT_PATCH.get()));
 
         // Terrain
+        biomeBuilder.addCarver(GenerationStep.Carving.AIR, configuredWorldCarverGetter.getOrThrow(CAConfiguredCarvers.CONFIGURED_MINING_PARADISE_CAVE.get()));
 
         return biomeBuilder.build();
     }

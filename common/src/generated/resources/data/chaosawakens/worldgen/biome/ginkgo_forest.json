@@ -1,5 +1,7 @@
 {
-  "carvers": {},
+  "carvers": {
+    "air": "chaosawakens:mining_paradise_cave"
+  },
   "downfall": 0.4,
   "effects": {
     "fog_color": 2302743,
