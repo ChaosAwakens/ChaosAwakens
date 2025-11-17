@@ -65,6 +65,8 @@ public class GinkgoForestBiomeConfig implements BiomeConfig {
 
         // Terrain
         biomeBuilder.addCarver(GenerationStep.Carving.AIR, configuredWorldCarverGetter.getOrThrow(CAConfiguredCarvers.CONFIGURED_MINING_PARADISE_CAVE.get()));
+        biomeBuilder.addCarver(GenerationStep.Carving.AIR, configuredWorldCarverGetter.getOrThrow(CAConfiguredCarvers.CONFIGURED_MINING_PARADISE_CANYON.get()));
+        biomeBuilder.addCarver(GenerationStep.Carving.AIR, configuredWorldCarverGetter.getOrThrow(CAConfiguredCarvers.CONFIGURED_MINING_PARADISE_EXTRA_CAVE.get()));
 
         return biomeBuilder.build();
     }

@@ -1,6 +1,10 @@
 {
   "carvers": {
-    "air": "chaosawakens:mining_paradise_cave"
+    "air": [
+      "chaosawakens:mining_paradise_cave",
+      "chaosawakens:mining_paradise_canyon",
+      "chaosawakens:mining_paradise_extra_cave"
+    ]
   },
   "downfall": 0.0,
   "effects": {

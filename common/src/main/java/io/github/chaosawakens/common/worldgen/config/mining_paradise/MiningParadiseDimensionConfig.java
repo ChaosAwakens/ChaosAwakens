@@ -70,7 +70,7 @@ public class MiningParadiseDimensionConfig implements DimensionLevelStemConfig {
                 createMiningParadiseNoiseRouter(regCtx),
                 createMiningParadiseSurfaceRules(),
                 createMiningParadiseClimateSpawnConfiguration(regCtx),
-                121,  // sea level
+                92,  // sea level
                 false,  // disableMobGeneration
                 true,   // aquifersEnabled
                 true,   // oreVeinsEnabled
