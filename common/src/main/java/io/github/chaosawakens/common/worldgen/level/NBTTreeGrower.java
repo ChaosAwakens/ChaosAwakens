@@ -51,13 +51,12 @@ public class NBTTreeGrower extends AbstractTreeGrower {
 
                 StructureTemplate template = level.getStructureManager().get(feature.config().template().left().get()).get();
 
-                if (!feature.place(level, generator, random, pos.offset(template.getSize().getX() / -2, 0, template.getSize().getZ() / -2))) {
+                if (feature.place(level, generator, random, pos.offset(template.getSize().getX() / -2, 0, template.getSize().getZ() / -2))) {
+                    return true;
+                } else {
                     if (level.getBlockState(pos) == blockState) {
                         level.sendBlockUpdated(pos, state, blockState, 2);
                     }
-                    return true;
-                } else {
-                    level.setBlock(pos, state, 4);
                     return false;
                 }
             }

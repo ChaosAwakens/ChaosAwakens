@@ -17,12 +17,12 @@
     {
       "type": "chaosawakens:surface_area_check",
       "box": [
-        8,
+        6,
         0,
-        8,
-        11,
+        7,
+        12,
         16,
-        11
+        12
       ],
       "state": {
         "type": "chaosawakens:simple_supplier_provider",
@@ -37,12 +37,12 @@
     {
       "type": "chaosawakens:pick_lowest_height",
       "box": [
-        8,
+        6,
         0,
-        8,
-        11,
+        7,
+        12,
         16,
-        11
+        12
       ]
     }
   ]

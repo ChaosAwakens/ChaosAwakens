@@ -4,19 +4,19 @@
     "default": "chaosawakens:ginkgo_tree_variant_5",
     "features": [
       {
-        "chance": 0.25,
+        "chance": 0.2,
         "feature": "chaosawakens:ginkgo_tree_variant_1"
       },
       {
-        "chance": 0.25,
+        "chance": 0.2,
         "feature": "chaosawakens:ginkgo_tree_variant_2"
       },
       {
-        "chance": 0.25,
+        "chance": 0.2,
         "feature": "chaosawakens:ginkgo_tree_variant_3"
       },
       {
-        "chance": 0.25,
+        "chance": 0.2,
         "feature": "chaosawakens:ginkgo_tree_variant_4"
       }
     ]

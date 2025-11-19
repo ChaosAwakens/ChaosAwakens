@@ -1,33 +1,21 @@
 {
-  "type": "minecraft:random_patch",
+  "type": "minecraft:netherrack_replace_blobs",
   "config": {
-    "feature": {
-      "feature": {
-        "type": "minecraft:simple_block",
-        "config": {
-          "to_place": {
-            "type": "minecraft:simple_state_provider",
-            "state": {
-              "Name": "chaosawakens:latosol"
-            }
-          }
-        }
-      },
-      "placement": [
-        {
-          "type": "minecraft:block_predicate_filter",
-          "predicate": {
-            "type": "minecraft:matching_blocks",
-            "blocks": [
-              "chaosawakens:dense_dirt",
-              "chaosawakens:dense_grass_block"
-            ]
-          }
-        }
-      ]
+    "radius": {
+      "type": "minecraft:uniform",
+      "value": {
+        "max_inclusive": 7,
+        "min_inclusive": 3
+      }
     },
-    "tries": 128,
-    "xz_spread": 3,
-    "y_spread": 1
+    "state": {
+      "Name": "chaosawakens:latosol"
+    },
+    "target": {
+      "Name": "chaosawakens:dense_grass_block",
+      "Properties": {
+        "snowy": "false"
+      }
+    }
   }
 }

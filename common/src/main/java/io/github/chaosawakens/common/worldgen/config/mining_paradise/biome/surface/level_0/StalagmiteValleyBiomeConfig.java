@@ -70,6 +70,8 @@ public class StalagmiteValleyBiomeConfig implements BiomeConfig {
         biomeBuilder.addCarver(GenerationStep.Carving.AIR, configuredWorldCarverGetter.getOrThrow(CAConfiguredCarvers.CONFIGURED_MINING_PARADISE_CANYON.get()));
         biomeBuilder.addCarver(GenerationStep.Carving.AIR, configuredWorldCarverGetter.getOrThrow(CAConfiguredCarvers.CONFIGURED_MINING_PARADISE_EXTRA_CAVE.get()));
 
+        biomeBuilder.addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, placedFeatureGetter.getOrThrow(CAFeatures.CAPlacedFeatures.STALAGMITE_PLACED.get()));
+
         return biomeBuilder.build();
     }
 

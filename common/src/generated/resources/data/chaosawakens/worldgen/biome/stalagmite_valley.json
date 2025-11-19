@@ -16,7 +16,9 @@
   "features": [
     [],
     [],
-    [],
+    [
+      "chaosawakens:stalagmite"
+    ],
     [],
     [],
     [],

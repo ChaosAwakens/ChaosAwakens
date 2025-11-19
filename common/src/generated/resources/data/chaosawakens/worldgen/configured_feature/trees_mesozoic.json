@@ -4,23 +4,23 @@
     "default": "chaosawakens:mesozoic_tree_variant_6",
     "features": [
       {
-        "chance": 0.2,
+        "chance": 0.16,
         "feature": "chaosawakens:mesozoic_tree_variant_1"
       },
       {
-        "chance": 0.2,
+        "chance": 0.16,
         "feature": "chaosawakens:mesozoic_tree_variant_2"
       },
       {
-        "chance": 0.2,
+        "chance": 0.16,
         "feature": "chaosawakens:mesozoic_tree_variant_3"
       },
       {
-        "chance": 0.2,
+        "chance": 0.16,
         "feature": "chaosawakens:mesozoic_tree_variant_4"
       },
       {
-        "chance": 0.2,
+        "chance": 0.16,
         "feature": "chaosawakens:mesozoic_tree_variant_5"
       }
     ]
