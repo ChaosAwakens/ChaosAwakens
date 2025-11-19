@@ -351,6 +351,34 @@
                   }
                 }
               }
+            },
+            {
+              "type": "minecraft:condition",
+              "if_true": {
+                "type": "minecraft:vertical_gradient",
+                "false_at_and_above": {
+                  "absolute": 8
+                },
+                "random_name": "minecraft:gloomstone_layer",
+                "true_at_and_below": {
+                  "absolute": 0
+                }
+              },
+              "then_run": {
+                "type": "minecraft:condition",
+                "if_true": {
+                  "type": "minecraft:not",
+                  "invert": {
+                    "type": "minecraft:hole"
+                  }
+                },
+                "then_run": {
+                  "type": "minecraft:block",
+                  "result_state": {
+                    "Name": "chaosawakens:gloomstone"
+                  }
+                }
+              }
             }
           ]
         }
@@ -432,6 +460,34 @@
                   "type": "minecraft:block",
                   "result_state": {
                     "Name": "chaosawakens:dense_dirt"
+                  }
+                }
+              }
+            },
+            {
+              "type": "minecraft:condition",
+              "if_true": {
+                "type": "minecraft:vertical_gradient",
+                "false_at_and_above": {
+                  "absolute": 8
+                },
+                "random_name": "minecraft:gloomstone_layer",
+                "true_at_and_below": {
+                  "absolute": 0
+                }
+              },
+              "then_run": {
+                "type": "minecraft:condition",
+                "if_true": {
+                  "type": "minecraft:not",
+                  "invert": {
+                    "type": "minecraft:hole"
+                  }
+                },
+                "then_run": {
+                  "type": "minecraft:block",
+                  "result_state": {
+                    "Name": "chaosawakens:gloomstone"
                   }
                 }
               }
@@ -519,6 +575,34 @@
                   }
                 }
               }
+            },
+            {
+              "type": "minecraft:condition",
+              "if_true": {
+                "type": "minecraft:vertical_gradient",
+                "false_at_and_above": {
+                  "absolute": 8
+                },
+                "random_name": "minecraft:gloomstone_layer",
+                "true_at_and_below": {
+                  "absolute": 0
+                }
+              },
+              "then_run": {
+                "type": "minecraft:condition",
+                "if_true": {
+                  "type": "minecraft:not",
+                  "invert": {
+                    "type": "minecraft:hole"
+                  }
+                },
+                "then_run": {
+                  "type": "minecraft:block",
+                  "result_state": {
+                    "Name": "chaosawakens:gloomstone"
+                  }
+                }
+              }
             }
           ]
         }
@@ -603,6 +687,34 @@
                   }
                 }
               }
+            },
+            {
+              "type": "minecraft:condition",
+              "if_true": {
+                "type": "minecraft:vertical_gradient",
+                "false_at_and_above": {
+                  "absolute": 8
+                },
+                "random_name": "minecraft:gloomstone_layer",
+                "true_at_and_below": {
+                  "absolute": 0
+                }
+              },
+              "then_run": {
+                "type": "minecraft:condition",
+                "if_true": {
+                  "type": "minecraft:not",
+                  "invert": {
+                    "type": "minecraft:hole"
+                  }
+                },
+                "then_run": {
+                  "type": "minecraft:block",
+                  "result_state": {
+                    "Name": "chaosawakens:gloomstone"
+                  }
+                }
+              }
             }
           ]
         }
@@ -646,17 +758,17 @@
                       "then_run": {
                         "type": "minecraft:block",
                         "result_state": {
-                          "Name": "chaosawakens:dense_dirt"
+                          "Name": "chaosawakens:dense_grass_block",
+                          "Properties": {
+                            "snowy": "false"
+                          }
                         }
                       }
                     },
                     {
                       "type": "minecraft:block",
                       "result_state": {
-                        "Name": "chaosawakens:dense_grass_block",
-                        "Properties": {
-                          "snowy": "false"
-                        }
+                        "Name": "chaosawakens:dense_dirt"
                       }
                     }
                   ]
@@ -687,8 +799,73 @@
                   }
                 }
               }
+            },
+            {
+              "type": "minecraft:condition",
+              "if_true": {
+                "type": "minecraft:vertical_gradient",
+                "false_at_and_above": {
+                  "absolute": 8
+                },
+                "random_name": "minecraft:gloomstone_layer",
+                "true_at_and_below": {
+                  "absolute": 0
+                }
+              },
+              "then_run": {
+                "type": "minecraft:condition",
+                "if_true": {
+                  "type": "minecraft:not",
+                  "invert": {
+                    "type": "minecraft:hole"
+                  }
+                },
+                "then_run": {
+                  "type": "minecraft:block",
+                  "result_state": {
+                    "Name": "chaosawakens:gloomstone"
+                  }
+                }
+              }
             }
           ]
+        }
+      },
+      {
+        "type": "minecraft:condition",
+        "if_true": {
+          "type": "minecraft:biome",
+          "biome_is": [
+            "chaosawakens:dense_mountains"
+          ]
+        },
+        "then_run": {
+          "type": "minecraft:condition",
+          "if_true": {
+            "type": "minecraft:vertical_gradient",
+            "false_at_and_above": {
+              "absolute": 8
+            },
+            "random_name": "minecraft:gloomstone_layer",
+            "true_at_and_below": {
+              "absolute": 0
+            }
+          },
+          "then_run": {
+            "type": "minecraft:condition",
+            "if_true": {
+              "type": "minecraft:not",
+              "invert": {
+                "type": "minecraft:hole"
+              }
+            },
+            "then_run": {
+              "type": "minecraft:block",
+              "result_state": {
+                "Name": "chaosawakens:gloomstone"
+              }
+            }
+          }
         }
       },
       {

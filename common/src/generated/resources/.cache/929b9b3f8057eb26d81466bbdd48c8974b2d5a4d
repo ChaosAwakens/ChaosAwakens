@@ -1,6 +1,6 @@
-// 1.20.1	2025-11-17T09:02:41.5514489	Chaos Awakens: Block Tags
+// 1.20.1	2025-11-18T16:00:07.4610077	Chaos Awakens: Block Tags
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/chaosawakens/tags/blocks/base_stone_crystal.json
-38f4dbacd533dc5cc3c378b74a85e7a08a4063e2 data/chaosawakens/tags/blocks/base_stone_mining.json
+b731e39685a159a3c923468f86763651a5775971 data/chaosawakens/tags/blocks/base_stone_mining.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/chaosawakens/tags/blocks/base_stone_village.json
 cf70b7571fc2de53e997b849f3a095a5f9600bf0 data/chaosawakens/tags/blocks/dense_dirt.json
 15fd874b2908431c3d61833648f73cfc12e729d8 data/chaosawakens/tags/blocks/dredgestone.json
@@ -39,6 +39,7 @@ dd43157ac0c3e9516448859d4d7acebd3ac3cd81 data/chaosawakens/tags/blocks/fossils/s
 b41349a4b011bedbfcf9cc91ce48ebbfda560d20 data/chaosawakens/tags/blocks/fossils/stone.json
 5b99c02e83247352aac342fa9b5f9d07676cb63a data/chaosawakens/tags/blocks/fossils/stone/chaosawakens.json
 733e8ef495b80ad2000c4f3a068a62e27d65ab73 data/chaosawakens/tags/blocks/fossils/stone/vanilla.json
+ca2eca4549b6955c09808e30d541ea0f9c3172b2 data/chaosawakens/tags/blocks/gloomstone.json
 12bdb94a915d478964967ba4c9f9d33adbd7d11a data/chaosawakens/tags/blocks/miners_dream_mineable.json
 c31ea0f5db9f1d0ff9edec310558214679f9fb42 data/chaosawakens/tags/blocks/mining_carver_replaceables.json
 3c5988ffb993bce9642e86866b9f47d4f798b72a data/chaosawakens/tags/blocks/mining_dirt.json

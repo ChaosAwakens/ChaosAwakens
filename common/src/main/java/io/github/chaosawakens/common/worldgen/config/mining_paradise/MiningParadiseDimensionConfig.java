@@ -91,80 +91,18 @@ public class MiningParadiseDimensionConfig implements DimensionLevelStemConfig {
     }
 
     public static SurfaceRules.RuleSource createMiningParadiseSurfaceRules() {
-        SurfaceRules.RuleSource defaultSurfaceRuleSource = SurfaceRules.sequence(
-                SurfaceRules.ifTrue(
-                        SurfaceRules.abovePreliminarySurface(),
-                        SurfaceRules.ifTrue(
-                                SurfaceRules.ON_FLOOR,
-                                SurfaceRules.sequence(
-                                        SurfaceRules.ifTrue(
-                                                CASurfaceRules.CAConditionSources.AT_ABOVE_WATER_LEVEL,
-                                                CASurfaceRules.CAStateRules.DENSE_GRASS_BLOCK
-                                        ),
-                                        CASurfaceRules.CAStateRules.DENSE_DIRT
-                                )
-                        )
-                ),
-                SurfaceRules.ifTrue(
-                        SurfaceRules.UNDER_FLOOR,
-                        SurfaceRules.ifTrue(
-                                SurfaceRules.not(SurfaceRules.hole()),
-                                CASurfaceRules.CAStateRules.DENSE_DIRT
-                        )
-                )
-        );
-        SurfaceRules.RuleSource denseMountainsSurfaceRuleSource = SurfaceRules.sequence(
-                SurfaceRules.ifTrue(
-                        SurfaceRules.abovePreliminarySurface(),
-                        SurfaceRules.ifTrue(
-                                SurfaceRules.ON_FLOOR,
-                                SurfaceRules.sequence(
-                                        SurfaceRules.ifTrue(
-                                                CASurfaceRules.CAConditionSources.AT_ABOVE_WATER_LEVEL,
-                                                CASurfaceRules.CAStateRules.DENSE_DIRT
-                                        ),
-                                        CASurfaceRules.CAStateRules.DENSE_GRASS_BLOCK
-                                )
-                        )
-                ),
-                SurfaceRules.ifTrue(
-                        SurfaceRules.UNDER_FLOOR,
-                        SurfaceRules.ifTrue(
-                                SurfaceRules.not(SurfaceRules.hole()),
-                                CASurfaceRules.CAStateRules.DENSE_DIRT
-                        )
-                )
-        );
-        SurfaceRules.RuleSource mesozoicJungleSurfaceRuleSource = SurfaceRules.sequence(
-                SurfaceRules.ifTrue(
-                        SurfaceRules.abovePreliminarySurface(),
-                        SurfaceRules.ifTrue(
-                                SurfaceRules.ON_FLOOR,
-                                SurfaceRules.sequence(
-                                        SurfaceRules.ifTrue(
-                                                CASurfaceRules.CAConditionSources.AT_ABOVE_WATER_LEVEL,
-                                                CASurfaceRules.CAStateRules.DENSE_GRASS_BLOCK
-                                        ),
-                                        CASurfaceRules.CAStateRules.DENSE_DIRT
-                                )
-                        )
-                ),
-                SurfaceRules.ifTrue(
-                        SurfaceRules.UNDER_FLOOR,
-                        SurfaceRules.ifTrue(
-                                SurfaceRules.not(SurfaceRules.hole()),
-                                CASurfaceRules.CAStateRules.DENSE_DIRT
-                        )
-                )
-        );
-        SurfaceRules.RuleSource denseMountainsRuleSource = SurfaceRules.ifTrue(SurfaceRules.isBiome(CABiomes.DENSE_MOUNTAINS.get()), denseMountainsSurfaceRuleSource);
+        SurfaceRules.RuleSource defaultSurfaceRuleSource = SurfaceRules.sequence(CASurfaceRules.ADD_GRASS_BLOCK_TOP, CASurfaceRules.ADD_DIRT_LAYER, CASurfaceRules.ADD_GLOOMSTONE_LAYER);
+        SurfaceRules.RuleSource stalagmiteValleySurfaceRuleSource = CASurfaceRules.ADD_GLOOMSTONE_LAYER;
+
+        SurfaceRules.RuleSource stalagmiteValleyRuleSource = SurfaceRules.ifTrue(SurfaceRules.isBiome(CABiomes.DENSE_MOUNTAINS.get()), stalagmiteValleySurfaceRuleSource);
+        SurfaceRules.RuleSource denseMountainsRuleSource = SurfaceRules.ifTrue(SurfaceRules.isBiome(CABiomes.DENSE_MOUNTAINS.get()), defaultSurfaceRuleSource);
         SurfaceRules.RuleSource densePlainsRuleSource = SurfaceRules.ifTrue(SurfaceRules.isBiome(CABiomes.DENSE_PLAINS.get()), defaultSurfaceRuleSource);
         SurfaceRules.RuleSource densewoodForestRuleSource = SurfaceRules.ifTrue(SurfaceRules.isBiome(CABiomes.DENSEWOOD_FOREST.get()), defaultSurfaceRuleSource);
-        SurfaceRules.RuleSource mesozoicJungleRuleSource = SurfaceRules.ifTrue(SurfaceRules.isBiome(CABiomes.MESOZOIC_JUNGLE.get()), mesozoicJungleSurfaceRuleSource);
+        SurfaceRules.RuleSource mesozoicJungleRuleSource = SurfaceRules.ifTrue(SurfaceRules.isBiome(CABiomes.MESOZOIC_JUNGLE.get()), defaultSurfaceRuleSource);
         SurfaceRules.RuleSource ginkgoForestRuleSource = SurfaceRules.ifTrue(SurfaceRules.isBiome(CABiomes.GINKGO_FOREST.get()), defaultSurfaceRuleSource);
         SurfaceRules.RuleSource bedrockFloorRuleSource = SurfaceRules.ifTrue(SurfaceRules.verticalGradient("bedrock_floor", VerticalAnchor.bottom(), VerticalAnchor.aboveBottom(5)), CASurfaceRules.CAStateRules.BEDROCK);
 
-        return SurfaceRules.sequence(densewoodForestRuleSource, densePlainsRuleSource, mesozoicJungleRuleSource, ginkgoForestRuleSource, denseMountainsRuleSource, bedrockFloorRuleSource);
+        return SurfaceRules.sequence(densewoodForestRuleSource, densePlainsRuleSource, mesozoicJungleRuleSource, ginkgoForestRuleSource, denseMountainsRuleSource, stalagmiteValleyRuleSource, bedrockFloorRuleSource);
     }
 
     protected static NoiseRouter createMiningParadiseNoiseRouter(BootstapContext<NoiseGeneratorSettings> regCtx) {

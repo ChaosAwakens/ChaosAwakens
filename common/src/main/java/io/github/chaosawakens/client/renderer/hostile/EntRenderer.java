@@ -1,5 +1,6 @@
 package io.github.chaosawakens.client.renderer.hostile;
 
+import com.mojang.blaze3d.vertex.PoseStack;
 import io.github.chaosawakens.CAConstants;
 import io.github.chaosawakens.client.model.hostile.EntModel;
 import io.github.chaosawakens.common.entity.prototype.hostile.Ent;
@@ -19,6 +20,12 @@ public class EntRenderer<E extends Ent> extends MobRenderer<E, EntModel<E>> {
 
     public EntRenderer(EntityRendererProvider.Context ctx) {
         super(ctx, new EntModel<>(ctx.bakeLayer(EntModel.BASE_LAYER)), 1.4F);
+    }
+
+    @Override
+    protected void scale(@NotNull E pLivingEntity, PoseStack pPoseStack, float pPartialTickTime) {
+        pPoseStack.scale(2.0F, 2.0F, 2.0F);
+        super.scale(pLivingEntity, pPoseStack, pPartialTickTime);
     }
 
     @Override

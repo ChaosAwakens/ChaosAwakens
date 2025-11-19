@@ -24,8 +24,12 @@ public class CATags {
                 .withEntry(() -> CABlocks.DREDGESTONE.get())
                 .getParentTag();
 
+        public static final Supplier<TagKey<Block>> GLOOMSTONE = createWrappedBlockTag("gloomstone")
+                .withEntry(() -> CABlocks.GLOOMSTONE.get())
+                .getParentTag();
+
         public static final Supplier<TagKey<Block>> BASE_STONE_MINING = createWrappedBlockTag("base_stone_mining")
-                .withTagEntry(DREDGESTONE)
+                .withTagEntries(ObjectArrayList.of(DREDGESTONE, GLOOMSTONE))
                 .getParentTag();
 
         public static final Supplier<TagKey<Block>> DENSE_DIRT = createWrappedBlockTag("dense_dirt")
