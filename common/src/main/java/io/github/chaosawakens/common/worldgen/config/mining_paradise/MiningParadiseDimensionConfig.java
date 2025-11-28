@@ -3,7 +3,7 @@ package io.github.chaosawakens.common.worldgen.config.mining_paradise;
 import com.google.common.collect.ImmutableList;
 import com.mojang.datafixers.util.Pair;
 import io.github.chaosawakens.common.registry.*;
-import io.github.chaosawakens.common.worldgen.chunk_gen.OptimizedChunkGenerator;
+import io.github.chaosawakens.common.worldgen.chunk_gen.chunk.OptimizedNoiseBasedChunkGenerator;
 import io.github.chaosawakens.common.worldgen.config.base.DimensionLevelStemConfig;
 import io.github.chaosawakens.common.worldgen.config.mining_paradise.biome.MiningParadiseBiomeBuilder;
 import io.github.chaosawakens.util.NoiseRouterUtil;
@@ -23,7 +23,6 @@ import net.minecraft.world.level.dimension.BuiltinDimensionTypes;
 import net.minecraft.world.level.dimension.DimensionType;
 import net.minecraft.world.level.dimension.LevelStem;
 import net.minecraft.world.level.levelgen.*;
-import net.minecraft.world.level.levelgen.carver.*;
 import net.minecraft.world.level.levelgen.synth.NormalNoise;
 import org.jetbrains.annotations.NotNull;
 
@@ -48,14 +47,13 @@ public class MiningParadiseDimensionConfig implements DimensionLevelStemConfig {
     @Override
     public @NotNull ChunkGenerator createLevelChunkGen(BootstapContext<LevelStem> regCtx) {
 
-        HolderGetter<Biome> biomeLookup = regCtx.lookup(Registries.BIOME);
         HolderGetter<NoiseGeneratorSettings> noiseGenSettingsLookup = regCtx.lookup(Registries.NOISE_SETTINGS);
         HolderGetter<MultiNoiseBiomeSourceParameterList> biomeSrcParamListLookup = regCtx.lookup(Registries.MULTI_NOISE_BIOME_SOURCE_PARAMETER_LIST);
 
         BiomeSource src = MultiNoiseBiomeSource.createFromPreset(biomeSrcParamListLookup.getOrThrow(CAMultiNoiseBiomeSourceParameterLists.MINING_PARADISE_BIOME_LIST.get()));
         Holder.Reference<NoiseGeneratorSettings> settings = noiseGenSettingsLookup.getOrThrow(CANoiseGeneratorSettings.MINING_PARADISE.get());
 
-        return new OptimizedChunkGenerator(src, settings);
+        return new OptimizedNoiseBasedChunkGenerator(src, settings);
     }
 
     public static DimensionType createDimensionType() {
@@ -119,14 +117,31 @@ public class MiningParadiseDimensionConfig implements DimensionLevelStemConfig {
         DensityFunction zero = DensityFunctions.zero();
         DensityFunction landContinents = CADensityFunctions.getWrappedDensityFunctionHolder(regCtx, CADensityFunctions.MINING_PARADISE_CONTINENTS);
         DensityFunction landErosion = CADensityFunctions.getWrappedDensityFunctionHolder(regCtx, CADensityFunctions.MINING_PARADISE_EROSION);
-        DensityFunction terrainJaggedness = CADensityFunctions.getWrappedDensityFunctionHolder(regCtx, CADensityFunctions.MINING_PARADISE_JAGGEDNESS);
+        DensityFunction terrainWeirdness = CADensityFunctions.getWrappedDensityFunctionHolder(regCtx, CADensityFunctions.MINING_PARADISE_RIDGES_FOLDED);
         DensityFunction terrainFactor = CADensityFunctions.getWrappedDensityFunctionHolder(regCtx, CADensityFunctions.MINING_PARADISE_FACTOR);
         DensityFunction terrainDepth = CADensityFunctions.getWrappedDensityFunctionHolder(regCtx, CADensityFunctions.MINING_PARADISE_DEPTH);
         DensityFunction continentRidges = CADensityFunctions.getWrappedDensityFunctionHolder(regCtx, CADensityFunctions.MINING_PARADISE_RIDGES);
-        DensityFunction initialLandDensity = NoiseRouterUtil.createTerrainSlide(
-                DensityFunctions.add(WorldGenUtil.noiseGradientDensity(DensityFunctions.cache2d(terrainFactor), terrainDepth, 5.0F), DensityFunctions.constant(9.5D)).clamp(-66.0D, 64.0D),
-                -128, 512, 20, 20, -1.0F, 4, 44, 1.5F);
-        DensityFunction finalLandDensity = DensityFunctions.mul(DensityFunctions.interpolated(DensityFunctions.blendDensity(initialLandDensity)), DensityFunctions.constant(1.0D)).squeeze();
+        DensityFunction initialLandDensity =
+                DensityFunctions.add(DensityFunctions.constant(0.1171875F),
+                        DensityFunctions.mul( DensityFunctions.yClampedGradient(-128, -118, 0D, 1D),
+                                DensityFunctions.add(DensityFunctions.constant(-0.1171875F),
+                                        DensityFunctions.add(DensityFunctions.constant(-0.078125F),
+                                                DensityFunctions.mul(DensityFunctions.yClampedGradient(338, 364, 1D, 0D),
+                                                        DensityFunctions.add(DensityFunctions.constant(0.078125F),
+                                                                DensityFunctions.add(DensityFunctions.constant(-0.703125F),
+                                                                     DensityFunctions.mul(DensityFunctions.constant(4F),
+                                                                            DensityFunctions.mul(terrainDepth,
+                                                                                    DensityFunctions.cache2d(terrainFactor)
+                                                                                    ).quarterNegative()
+                                                                                )
+                                                                            ).clamp(-128, 96)
+                                                                    )
+                                                            )
+                                                    )
+                                            )
+                                     )
+                            );
+        DensityFunction finalLandDensity = DensityFunctions.mul(DensityFunctions.interpolated(DensityFunctions.blendDensity(initialLandDensity)), DensityFunctions.constant(2.0D)).squeeze();
 
         return new NoiseRouter(
                 aquiferBarrier,
@@ -138,7 +153,7 @@ public class MiningParadiseDimensionConfig implements DimensionLevelStemConfig {
                 landContinents,
                 landErosion,
                 terrainDepth,
-                continentRidges,
+                terrainWeirdness,
                 initialLandDensity,
                 finalLandDensity,
                 oreFunctions[0], // veininess

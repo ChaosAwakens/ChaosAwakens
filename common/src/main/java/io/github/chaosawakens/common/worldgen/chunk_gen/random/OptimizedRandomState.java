@@ -1,4 +1,4 @@
-package io.github.chaosawakens.common.worldgen.chunk_gen;
+package io.github.chaosawakens.common.worldgen.chunk_gen.random;
 
 import net.minecraft.core.HolderGetter;
 import net.minecraft.world.level.levelgen.NoiseGeneratorSettings;

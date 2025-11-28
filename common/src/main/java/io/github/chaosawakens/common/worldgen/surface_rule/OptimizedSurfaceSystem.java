@@ -1,4 +1,4 @@
-package io.github.chaosawakens.common.worldgen.chunk_gen;
+package io.github.chaosawakens.common.worldgen.surface_rule;
 
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.PositionalRandomFactory;

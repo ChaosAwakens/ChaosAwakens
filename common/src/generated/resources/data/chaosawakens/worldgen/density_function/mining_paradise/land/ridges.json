@@ -1,12 +1,16 @@
 {
-  "type": "minecraft:flat_cache",
-  "argument": {
-    "type": "minecraft:shifted_noise",
-    "noise": "chaosawakens:mining_paradise/ridges",
-    "shift_x": "chaosawakens:vanilla/shift_x",
-    "shift_y": 0.0,
-    "shift_z": "chaosawakens:vanilla/shift_z",
-    "xz_scale": 0.25,
-    "y_scale": 0.0
+  "type": "minecraft:mul",
+  "argument1": 0.75,
+  "argument2": {
+    "type": "minecraft:flat_cache",
+    "argument": {
+      "type": "minecraft:shifted_noise",
+      "noise": "chaosawakens:mining_paradise/ridges",
+      "shift_x": "chaosawakens:vanilla/shift_x",
+      "shift_y": 0.0,
+      "shift_z": "chaosawakens:vanilla/shift_z",
+      "xz_scale": 0.5,
+      "y_scale": 0.0
+    }
   }
 }

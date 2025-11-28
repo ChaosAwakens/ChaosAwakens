@@ -37,16 +37,60 @@ public class CADensityFunctions { // Needed so that Vanilla datapacks don't dire
     public static final Supplier<ResourceKey<DensityFunction>> RIDGES_FOLDED = registerDensityFunction("vanilla/land/ridges_folded", b -> () -> DensityFunctions.mul(DensityFunctions.add(DensityFunctions.add(getWrappedDensityFunctionHolder(b, RIDGES).abs(), DensityFunctions.constant(-2.0D / 3.0D)).abs(), DensityFunctions.constant(-1.0D / 3.0D)), DensityFunctions.constant(-3.0D)));
 
     // Mining Paradise
-    public static final Supplier<ResourceKey<DensityFunction>> MINING_PARADISE_CONTINENTS = registerDensityFunction("mining_paradise/land/continents", b -> () -> DensityFunctions.flatCache(DensityFunctions.shiftedNoise2d(getWrappedDensityFunctionHolder(b, SHIFT_X), getWrappedDensityFunctionHolder(b, SHIFT_Z), 0.125D, b.lookup(Registries.NOISE).getOrThrow(CANoiseParameters.MINING_PARADISE_CONTINENTALNESS.get()))));
-    public static final Supplier<ResourceKey<DensityFunction>> MINING_PARADISE_EROSION = registerDensityFunction("mining_paradise/land/erosion", b -> () -> DensityFunctions.flatCache(DensityFunctions.shiftedNoise2d(getWrappedDensityFunctionHolder(b, SHIFT_X), getWrappedDensityFunctionHolder(b, SHIFT_Z), 0.5D, b.lookup(Registries.NOISE).getOrThrow(CANoiseParameters.MINING_PARADISE_EROSION.get()))));
+    public static final Supplier<ResourceKey<DensityFunction>> MINING_PARADISE_CONTINENTS = registerDensityFunction("mining_paradise/land/continents", b -> () ->
+            DensityFunctions.min(DensityFunctions.constant(1.0D),
+                    DensityFunctions.max(DensityFunctions.constant(-1.0D),
+                        DensityFunctions.mul(DensityFunctions.constant(1.1D),
+                                DensityFunctions.add(DensityFunctions.constant(0.1D),
+                                        DensityFunctions.flatCache(DensityFunctions.shiftedNoise2d(getWrappedDensityFunctionHolder(b, SHIFT_X),
+                                                getWrappedDensityFunctionHolder(b, SHIFT_Z), 0.3D, b.lookup(Registries.NOISE).getOrThrow(CANoiseParameters.MINING_PARADISE_CONTINENTALNESS.get()))))))));
 
-    public static final Supplier<ResourceKey<DensityFunction>> MINING_PARADISE_RIDGES = registerDensityFunction("mining_paradise/land/ridges", b -> () -> DensityFunctions.flatCache(DensityFunctions.shiftedNoise2d(getWrappedDensityFunctionHolder(b, SHIFT_X), getWrappedDensityFunctionHolder(b, SHIFT_Z), 0.25D, b.lookup(Registries.NOISE).getOrThrow(CANoiseParameters.MINING_PARADISE_RIDGES.get()))));
-    public static final Supplier<ResourceKey<DensityFunction>> MINING_PARADISE_RIDGES_FOLDED = registerDensityFunction("mining_paradise/land/ridges_folded", b -> () -> DensityFunctions.mul(DensityFunctions.add(DensityFunctions.add(getWrappedDensityFunctionHolder(b, MINING_PARADISE_RIDGES).abs(), DensityFunctions.constant(-1.5D / 3.0D)).abs(), DensityFunctions.constant(-1.25D / 3.0D)), DensityFunctions.constant(-2.75D)));
+    public static final Supplier<ResourceKey<DensityFunction>> MINING_PARADISE_EROSION = registerDensityFunction("mining_paradise/land/erosion", b -> () ->
+            DensityFunctions.min(DensityFunctions.constant(0.25D),
+                    DensityFunctions.flatCache(DensityFunctions.mul(DensityFunctions.constant(0.125D),
+                            DensityFunctions.add(DensityFunctions.constant(1.0),
+                                    DensityFunctions.shiftedNoise2d(getWrappedDensityFunctionHolder(b, SHIFT_X),
+                                            getWrappedDensityFunctionHolder(b, SHIFT_Z), 0.65D, b.lookup(Registries.NOISE).getOrThrow(CANoiseParameters.MINING_PARADISE_EROSION.get())))))));
 
-    public static final Supplier<ResourceKey<DensityFunction>> MINING_PARADISE_OFFSET = registerDensityFunction("mining_paradise/land/offset", b -> () -> DensityFunctions.flatCache(DensityFunctions.cache2d(DensityFunctions.lerp(DensityFunctions.blendAlpha(), DensityFunctions.blendOffset(), DensityFunctions.add(DensityFunctions.constant(-0.5D), DensityFunctions.spline(WorldGenUtil.miningParadiseOffset(new DensityFunctions.Spline.Coordinate(getWrappedDensityFunction(b, MINING_PARADISE_CONTINENTS)), new DensityFunctions.Spline.Coordinate(getWrappedDensityFunction(b, MINING_PARADISE_EROSION)), new DensityFunctions.Spline.Coordinate(getWrappedDensityFunction(b, MINING_PARADISE_RIDGES_FOLDED)))))))));
-    public static final Supplier<ResourceKey<DensityFunction>> MINING_PARADISE_JAGGEDNESS = registerDensityFunction("mining_paradise/land/jaggedness", b -> () -> NoiseRouterData.splineWithBlending(DensityFunctions.spline(WorldGenUtil.miningParadiseJaggedness(new DensityFunctions.Spline.Coordinate(getWrappedDensityFunction(b, MINING_PARADISE_CONTINENTS)), new DensityFunctions.Spline.Coordinate(getWrappedDensityFunction(b, MINING_PARADISE_EROSION)), new DensityFunctions.Spline.Coordinate(getWrappedDensityFunction(b, MINING_PARADISE_RIDGES)), new DensityFunctions.Spline.Coordinate(getWrappedDensityFunction(b, MINING_PARADISE_RIDGES_FOLDED)))), DensityFunctions.zero()));
-    public static final Supplier<ResourceKey<DensityFunction>> MINING_PARADISE_FACTOR = registerDensityFunction("mining_paradise/land/factor", b -> () -> NoiseRouterData.splineWithBlending(DensityFunctions.spline(WorldGenUtil.miningParadiseFactor(new DensityFunctions.Spline.Coordinate(getWrappedDensityFunction(b, MINING_PARADISE_CONTINENTS)), new DensityFunctions.Spline.Coordinate(getWrappedDensityFunction(b, MINING_PARADISE_EROSION)), new DensityFunctions.Spline.Coordinate(getWrappedDensityFunction(b, MINING_PARADISE_RIDGES)), new DensityFunctions.Spline.Coordinate(getWrappedDensityFunction(b, MINING_PARADISE_RIDGES_FOLDED)))), DensityFunctions.constant(8.0D)));
-    public static final Supplier<ResourceKey<DensityFunction>> MINING_PARADISE_DEPTH = registerDensityFunction("mining_paradise/land/depth", b -> () -> DensityFunctions.add(DensityFunctions.yClampedGradient(-256, 480, 2.0D, -5.0D), getWrappedDensityFunctionHolder(b, MINING_PARADISE_OFFSET)));
+    public static final Supplier<ResourceKey<DensityFunction>> MINING_PARADISE_RIDGES = registerDensityFunction("mining_paradise/land/ridges", b -> () ->
+            DensityFunctions.mul(DensityFunctions.constant(0.75D),
+                DensityFunctions.flatCache(DensityFunctions.shiftedNoise2d(getWrappedDensityFunctionHolder(b, SHIFT_X),
+                    getWrappedDensityFunctionHolder(b, SHIFT_Z), 0.5D, b.lookup(Registries.NOISE).getOrThrow(CANoiseParameters.MINING_PARADISE_RIDGES.get())))));
+
+    public static final Supplier<ResourceKey<DensityFunction>> MINING_PARADISE_RIDGES_FOLDED = registerDensityFunction("mining_paradise/land/ridges_folded", b -> () ->
+            DensityFunctions.max(DensityFunctions.constant(1.5D),
+                    DensityFunctions.min(DensityFunctions.constant(3.0D),
+                            DensityFunctions.mul(DensityFunctions.mul(
+                                    DensityFunctions.constant(3.0D),
+                                            DensityFunctions.add(DensityFunctions.constant(1.0D),
+                                                    getWrappedDensityFunctionHolder(b, MINING_PARADISE_CONTINENTS))),
+                                    DensityFunctions.mul(DensityFunctions.constant(2),
+                                            DensityFunctions.min(DensityFunctions.constant(0.5D),
+                                                    DensityFunctions.max(DensityFunctions.constant(0.0D),
+                                                            DensityFunctions.add(DensityFunctions.constant(1D),
+                                                                    DensityFunctions.add(DensityFunctions.mul(DensityFunctions.constant(-1.0D),
+                                                                                    getWrappedDensityFunctionHolder(b, MINING_PARADISE_CONTINENTS)),
+                                                                            DensityFunctions.add(DensityFunctions.constant(-3.0D),
+                                                                                    DensityFunctions.mul(DensityFunctions.constant(40.0D),
+                                                                                            DensityFunctions.shiftedNoise2d(getWrappedDensityFunctionHolder(b, SHIFT_X),
+                                                                                                    getWrappedDensityFunctionHolder(b, SHIFT_Z), 0.2D, b.lookup(Registries.NOISE).getOrThrow(CANoiseParameters.MINING_PARADISE_RIDGES.get()))).abs()))))))))));
+
+    public static final Supplier<ResourceKey<DensityFunction>> MINING_PARADISE_OFFSET = registerDensityFunction("mining_paradise/land/offset", b -> () -> DensityFunctions.flatCache(
+            DensityFunctions.cache2d(DensityFunctions.lerp(DensityFunctions.blendAlpha(),
+                    DensityFunctions.blendOffset(),
+                    DensityFunctions.mul(DensityFunctions.constant(16.0D),
+                            DensityFunctions.add(DensityFunctions.constant(-0.0025D),
+                                    DensityFunctions.spline(WorldGenUtil.miningParadiseOffset(new DensityFunctions.Spline.Coordinate(getWrappedDensityFunction(b, MINING_PARADISE_CONTINENTS)), new DensityFunctions.Spline.Coordinate(getWrappedDensityFunction(b, MINING_PARADISE_EROSION)),
+                                            new DensityFunctions.Spline.Coordinate(getWrappedDensityFunction(b, MINING_PARADISE_RIDGES_FOLDED))))))))));
+
+    public static final Supplier<ResourceKey<DensityFunction>> MINING_PARADISE_JAGGEDNESS = registerDensityFunction("mining_paradise/land/jaggedness", b -> () -> NoiseRouterData.splineWithBlending(
+            DensityFunctions.spline(WorldGenUtil.miningParadiseJaggedness(new DensityFunctions.Spline.Coordinate(getWrappedDensityFunction(b, MINING_PARADISE_CONTINENTS)), new DensityFunctions.Spline.Coordinate(getWrappedDensityFunction(b, MINING_PARADISE_EROSION)), new DensityFunctions.Spline.Coordinate(getWrappedDensityFunction(b, MINING_PARADISE_RIDGES)), new DensityFunctions.Spline.Coordinate(getWrappedDensityFunction(b, MINING_PARADISE_RIDGES_FOLDED)))), DensityFunctions.zero()));
+    public static final Supplier<ResourceKey<DensityFunction>> MINING_PARADISE_FACTOR = registerDensityFunction("mining_paradise/land/factor", b -> () -> NoiseRouterData.splineWithBlending(
+            DensityFunctions.spline(WorldGenUtil.miningParadiseFactor(new DensityFunctions.Spline.Coordinate(getWrappedDensityFunction(b, MINING_PARADISE_CONTINENTS)), new DensityFunctions.Spline.Coordinate(getWrappedDensityFunction(b, MINING_PARADISE_EROSION)), new DensityFunctions.Spline.Coordinate(getWrappedDensityFunction(b, MINING_PARADISE_RIDGES)),  new DensityFunctions.Spline.Coordinate(getWrappedDensityFunction(b, MINING_PARADISE_RIDGES_FOLDED)))),
+            DensityFunctions.constant(1.0D)));
+    public static final Supplier<ResourceKey<DensityFunction>> MINING_PARADISE_DEPTH = registerDensityFunction("mining_paradise/land/depth", b -> () -> DensityFunctions.add(
+            DensityFunctions.yClampedGradient(-128, 384, 1.1D, -1.1D),
+            getWrappedDensityFunctionHolder(b, MINING_PARADISE_OFFSET)));
 
 
     private static Supplier<ResourceKey<DensityFunction>> registerDensityFunction(ResourceLocation id, Function<BootstapContext<DensityFunction>, Supplier<DensityFunction>> dfFunc) {

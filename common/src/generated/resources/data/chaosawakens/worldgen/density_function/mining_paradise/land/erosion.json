@@ -1,12 +1,24 @@
 {
-  "type": "minecraft:flat_cache",
-  "argument": {
-    "type": "minecraft:shifted_noise",
-    "noise": "chaosawakens:mining_paradise/erosion",
-    "shift_x": "chaosawakens:vanilla/shift_x",
-    "shift_y": 0.0,
-    "shift_z": "chaosawakens:vanilla/shift_z",
-    "xz_scale": 0.5,
-    "y_scale": 0.0
+  "type": "minecraft:min",
+  "argument1": 0.25,
+  "argument2": {
+    "type": "minecraft:flat_cache",
+    "argument": {
+      "type": "minecraft:mul",
+      "argument1": 0.125,
+      "argument2": {
+        "type": "minecraft:add",
+        "argument1": 1.0,
+        "argument2": {
+          "type": "minecraft:shifted_noise",
+          "noise": "chaosawakens:mining_paradise/erosion",
+          "shift_x": "chaosawakens:vanilla/shift_x",
+          "shift_y": 0.0,
+          "shift_z": "chaosawakens:vanilla/shift_z",
+          "xz_scale": 0.65,
+          "y_scale": 0.0
+        }
+      }
+    }
   }
 }

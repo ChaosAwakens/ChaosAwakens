@@ -18,10 +18,9 @@ public class CANoiseParameters {
     private static final ObjectArrayList<Supplier<ResourceKey<NormalNoise.NoiseParameters>>> NOISE_PARAMETERS = new ObjectArrayList<>();
 
     // Mining Paradise
-    public static final Supplier<ResourceKey<NormalNoise.NoiseParameters>> MINING_PARADISE_CONTINENTALNESS = registerNoiseParameter("mining_paradise/continentalness", () -> new NormalNoise.NoiseParameters(-10, 0.5D, 2.0D, 1.0D, 1.0D, 2.0D, 1.0D, 1.0D, 1.0D, 1.0D, 1.0D));
-    public static final Supplier<ResourceKey<NormalNoise.NoiseParameters>> MINING_PARADISE_EROSION = registerNoiseParameter("mining_paradise/erosion", () -> new NormalNoise.NoiseParameters(-10, 1.0D, 1.0D, 0.0D, 1.0D, 1.0D));
-    public static final Supplier<ResourceKey<NormalNoise.NoiseParameters>> MINING_PARADISE_RIDGES = registerNoiseParameter("mining_paradise/ridges", () -> new NormalNoise.NoiseParameters(-11, 2.0D, 2.0D, 1.0D, 0.0D, 0.0D, 0.0D, 0.0D));
-
+    public static final Supplier<ResourceKey<NormalNoise.NoiseParameters>> MINING_PARADISE_CONTINENTALNESS = registerNoiseParameter("mining_paradise/continentalness", () -> new NormalNoise.NoiseParameters(-10, 1.0D, 1.0D, 2.0D, 2.0D, 2.0D, 1.0D, 1.0D, 1.0D, 1.0D, 1.0D));
+    public static final Supplier<ResourceKey<NormalNoise.NoiseParameters>> MINING_PARADISE_EROSION = registerNoiseParameter("mining_paradise/erosion", () -> new NormalNoise.NoiseParameters(-8, 1.0D, 0.0D, 1.0D, 1.0D));
+    public static final Supplier<ResourceKey<NormalNoise.NoiseParameters>> MINING_PARADISE_RIDGES = registerNoiseParameter("mining_paradise/ridges", () -> new NormalNoise.NoiseParameters(-8, 1.5D, 1.0D, 0.5D, 0.5D, 0.5D, 0.5D, 0.5D));
 
     public static final Supplier<ResourceKey<NormalNoise.NoiseParameters>> AQUIFER_BARRIER = registerNoiseParameter("mining_paradise/aquifer_barrier", () -> new NormalNoise.NoiseParameters(-3, 1.0D));
     public static final Supplier<ResourceKey<NormalNoise.NoiseParameters>> AQUIFER_FLUID_LEVEL_FLOODEDNESS = registerNoiseParameter("mining_paradise/aquifer_fluid_level_floodedness", () -> new NormalNoise.NoiseParameters(-7, 1.0D));

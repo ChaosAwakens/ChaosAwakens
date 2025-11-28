@@ -1,4 +1,4 @@
-package io.github.chaosawakens.common.worldgen.chunk_gen;
+package io.github.chaosawakens.common.worldgen.chunk_gen.chunk;
 
 import net.minecraft.SharedConstants;
 import net.minecraft.core.BlockPos;
@@ -22,9 +22,9 @@ import java.util.OptionalInt;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
 
-public class OptimizedChunkGenerator extends NoiseBasedChunkGenerator {
+public class OptimizedNoiseBasedChunkGenerator extends NoiseBasedChunkGenerator {
 
-    public OptimizedChunkGenerator(BiomeSource biomeSrc, Holder<NoiseGeneratorSettings> noiseGenSettingsRegHolder) {
+    public OptimizedNoiseBasedChunkGenerator(BiomeSource biomeSrc, Holder<NoiseGeneratorSettings> noiseGenSettingsRegHolder) {
         super(biomeSrc, noiseGenSettingsRegHolder);
     }
 
