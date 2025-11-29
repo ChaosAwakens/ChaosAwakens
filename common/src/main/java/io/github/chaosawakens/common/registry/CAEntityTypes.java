@@ -8,6 +8,7 @@ import io.github.chaosawakens.api.entity.EntityTypePropertyWrapper;
 import io.github.chaosawakens.api.platform.CAServices;
 import io.github.chaosawakens.common.entity.prototype.hostile.Ent;
 import io.github.chaosawakens.common.entity.prototype.hostile.robo.RoboPounder;
+import io.github.chaosawakens.common.entity.prototype.neutral.RubberDucky;
 import io.github.chaosawakens.common.entity.prototype.passive.animal.land.AppleCow;
 import io.github.chaosawakens.common.entity.prototype.passive.animal.land.CarrotPig;
 import io.github.chaosawakens.common.entity.prototype.passive.animal.land.LettuceChicken;
@@ -282,6 +283,18 @@ public class CAEntityTypes {
             .build()
             .getParentEntityType();
 
+    // Neutral
+    public static final Supplier<EntityType<RubberDucky>> RUBBER_DUCKY = EntityTypePropertyWrapper.create(
+                    registerEntityType("rubber_ducky", () -> EntityType.Builder.of(RubberDucky::new, MobCategory.CREATURE)
+                            .sized(0.65F, 0.65F)
+                            .clientTrackingRange(20)
+                            .build(CAConstants.prefix("rubber_ducky").toString())))
+            .builder()
+            .withAttributes(RubberDucky::createAttributes)
+            .withLootTable(RubberDucky::createLootTable)
+            .withClientDataEntry(getSideSafeClientDataEntry("rubber_ducky"))
+            .build()
+            .getParentEntityType();
 
     private static <E extends Entity> Supplier<EntityType<E>> registerEntityType(ResourceLocation id, Supplier<EntityType<E>> entityTypeSup) {
         Supplier<EntityType<E>> registeredEntityTypeSup = CAServices.REGISTRAR.registerObject(id, entityTypeSup, BuiltInRegistries.ENTITY_TYPE); // Otherwise reference to the entity type sup is null cuz it needs to be registered b4hand

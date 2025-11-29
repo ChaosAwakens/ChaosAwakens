@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 200,
+  "experience": 0.35,
+  "group": "chaosawakens",
+  "ingredient": {
+    "item": "chaosawakens:gloomstone_uranium_ore"
+  },
+  "result": "chaosawakens:uranium_ingot"
+}

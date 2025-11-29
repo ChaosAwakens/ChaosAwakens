@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "chaosawakens:block/ore/gloomstone/gloomstone_lapis_ore"
+  }
+}

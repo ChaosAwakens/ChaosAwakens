@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_gloomstone_uranium_ore": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "chaosawakens:gloomstone_uranium_ore"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "chaosawakens:uranium_ingot_from_blasting_gloomstone_uranium_ore"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_gloomstone_uranium_ore",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "chaosawakens:uranium_ingot_from_blasting_gloomstone_uranium_ore"
+    ]
+  },
+  "sends_telemetry_event": false
+}

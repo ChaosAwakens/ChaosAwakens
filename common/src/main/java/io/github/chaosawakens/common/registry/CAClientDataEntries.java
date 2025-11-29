@@ -6,12 +6,14 @@ import io.github.chaosawakens.CAConstants;
 import io.github.chaosawakens.api.entity.ClientDataEntry;
 import io.github.chaosawakens.client.model.hostile.EntModel;
 import io.github.chaosawakens.client.model.hostile.robo.RoboPounderModel;
+import io.github.chaosawakens.client.model.neutral.RubberDuckyModel;
 import io.github.chaosawakens.client.model.passive.animal.land.AppleCowModel;
 import io.github.chaosawakens.client.model.passive.animal.land.CarrotPigModel;
 import io.github.chaosawakens.client.model.passive.animal.land.LettuceChickenModel;
 import io.github.chaosawakens.client.model.passive.animal.land.StinkBugModel;
 import io.github.chaosawakens.client.renderer.hostile.EntRenderer;
 import io.github.chaosawakens.client.renderer.hostile.robo.RoboPounderRenderer;
+import io.github.chaosawakens.client.renderer.neutral.RubberDuckyRenderer;
 import io.github.chaosawakens.client.renderer.passive.animal.land.AppleCowRenderer;
 import io.github.chaosawakens.client.renderer.passive.animal.land.CarrotPigRenderer;
 import io.github.chaosawakens.client.renderer.passive.animal.land.LettuceChickenRenderer;
@@ -38,6 +40,9 @@ public class CAClientDataEntries {
 
     // Nature (Hostile)
     public static final Supplier<ClientDataEntry> ENT = registerClientDataEntry(Suppliers.ofInstance(new ClientDataEntry(CAConstants.prefix("ent"), (ctx) -> () -> new EntRenderer<>(ctx.get()), ObjectObjectImmutablePair.of(() -> EntModel.BASE_LAYER, EntModel::createBodyLayer))));
+
+    // Neutral
+    public static final Supplier<ClientDataEntry> RUBBER_DUCKY = registerClientDataEntry(Suppliers.ofInstance(new ClientDataEntry(CAConstants.prefix("rubber_ducky"), (ctx) -> () -> new RubberDuckyRenderer<>(ctx.get()), ObjectObjectImmutablePair.of(() -> RubberDuckyModel.BASE_LAYER, RubberDuckyModel::createBodyLayer))));
 
     private static Supplier<ClientDataEntry> registerClientDataEntry(Supplier<ClientDataEntry> clientDataEntrySup) {
         if (!CLIENT_DATA_ENTRIES.contains(clientDataEntrySup)) CLIENT_DATA_ENTRIES.add(clientDataEntrySup);

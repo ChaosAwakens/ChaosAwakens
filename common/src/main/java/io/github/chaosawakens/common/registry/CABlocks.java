@@ -11,7 +11,6 @@ import io.github.chaosawakens.common.block.dungeon.general.DungeonGateBlock;
 import io.github.chaosawakens.common.block.vegetation.dense.*;
 import io.github.chaosawakens.common.block.vegetation.general.FruitableLeavesBlock;
 import io.github.chaosawakens.common.block.vegetation.general.LeafCarpetBlock;
-import io.github.chaosawakens.common.worldgen.level.MegaNBTTreeGrower;
 import io.github.chaosawakens.common.worldgen.level.NBTTreeGrower;
 import io.github.chaosawakens.util.PredicateUtil;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
@@ -232,18 +231,47 @@ public final class CABlocks {
 
     // Deepslate Ores
 
-    // MiningParadise Ores
-    //public static final Supplier<Block> URANIUM_ORE = BlockPropertyWrapper.of(CABlockPropertyWrappers.BASIC_BLOCK_PICKAXE, registerBlock("uranium_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DIAMOND_ORE)))).getParentBlock();
-
-
     // Mining Paradise Stones
     public static final Supplier<Block> DREDGESTONE = BlockPropertyWrapper.of(CABlockPropertyWrappers.BASIC_BLOCK_PICKAXE, registerBlock("dredgestone", () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE)))).getParentBlock();
     public static final Supplier<Block> DREDGESTONE_BRICKS = BlockPropertyWrapper.of(CABlockPropertyWrappers.SOLID_BRICKS, registerBlock("dredgestone_bricks", () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE_BRICKS)))).getParentBlock();
  //   public static final Supplier<Block> CHISELED_DREDGESTONE = BlockPropertyWrapper.of(CABlockPropertyWrappers.SOLID_CHISELED_BLOCK, registerBlock("chiseled_dredgestone", () -> new Block(BlockBehaviour.Properties.copy(Blocks.CHISELED_STONE_BRICKS)))).getParentBlock();
 
+    // Dredgestone Ores
+    public static final Supplier<Block> DREDGESTONE_ALUMINUM_ORE = BlockPropertyWrapper.of(CABlockPropertyWrappers.BASIC_BLOCK_PICKAXE, registerBlock("dredgestone_aluminum_ore", () -> new DropExperienceBlock(BlockBehaviour.Properties.copy(DREDGESTONE.get())))).getParentBlock();
+    public static final Supplier<Block> DREDGESTONE_COAL_ORE = BlockPropertyWrapper.of(CABlockPropertyWrappers.BASIC_BLOCK_PICKAXE, registerBlock("dredgestone_coal_ore", () -> new DropExperienceBlock(BlockBehaviour.Properties.copy(DREDGESTONE.get())))).getParentBlock();
+    public static final Supplier<Block> DREDGESTONE_COPPER_ORE = BlockPropertyWrapper.of(CABlockPropertyWrappers.BASIC_BLOCK_PICKAXE, registerBlock("dredgestone_copper_ore", () -> new DropExperienceBlock(BlockBehaviour.Properties.copy(DREDGESTONE.get())))).getParentBlock();
+    public static final Supplier<Block> DREDGESTONE_DIAMOND_ORE = BlockPropertyWrapper.of(CABlockPropertyWrappers.BASIC_BLOCK_PICKAXE, registerBlock("dredgestone_diamond_ore", () -> new DropExperienceBlock(BlockBehaviour.Properties.copy(DREDGESTONE.get())))).getParentBlock();
+    public static final Supplier<Block> DREDGESTONE_GOLD_ORE = BlockPropertyWrapper.of(CABlockPropertyWrappers.BASIC_BLOCK_PICKAXE, registerBlock("dredgestone_gold_ore", () -> new DropExperienceBlock(BlockBehaviour.Properties.copy(DREDGESTONE.get())))).getParentBlock();
+    public static final Supplier<Block> DREDGESTONE_IRON_ORE = BlockPropertyWrapper.of(CABlockPropertyWrappers.BASIC_BLOCK_PICKAXE, registerBlock("dredgestone_iron_ore", () -> new DropExperienceBlock(BlockBehaviour.Properties.copy(DREDGESTONE.get())))).getParentBlock();
+    public static final Supplier<Block> DREDGESTONE_KUNZITE_ORE = BlockPropertyWrapper.of(CABlockPropertyWrappers.BASIC_BLOCK_PICKAXE, registerBlock("dredgestone_kunzite_ore", () -> new DropExperienceBlock(BlockBehaviour.Properties.copy(DREDGESTONE.get())))).getParentBlock();
+    public static final Supplier<Block> DREDGESTONE_LAPIS_ORE = BlockPropertyWrapper.of(CABlockPropertyWrappers.BASIC_BLOCK_PICKAXE, registerBlock("dredgestone_lapis_ore", () -> new DropExperienceBlock(BlockBehaviour.Properties.copy(DREDGESTONE.get())))).getParentBlock();
+    public static final Supplier<Block> DREDGESTONE_PLATINUM_ORE = BlockPropertyWrapper.of(CABlockPropertyWrappers.BASIC_BLOCK_PICKAXE, registerBlock("dredgestone_platinum_ore", () -> new DropExperienceBlock(BlockBehaviour.Properties.copy(DREDGESTONE.get())))).getParentBlock();
+    public static final Supplier<Block> DREDGESTONE_REDSTONE_ORE = BlockPropertyWrapper.of(CABlockPropertyWrappers.BASIC_BLOCK_PICKAXE, registerBlock("dredgestone_redstone_ore", () -> new DropExperienceBlock(BlockBehaviour.Properties.copy(DREDGESTONE.get())))).getParentBlock();
+    public static final Supplier<Block> DREDGESTONE_RUBY_ORE = BlockPropertyWrapper.of(CABlockPropertyWrappers.BASIC_BLOCK_PICKAXE, registerBlock("dredgestone_ruby_ore", () -> new DropExperienceBlock(BlockBehaviour.Properties.copy(DREDGESTONE.get())))).getParentBlock();
+    public static final Supplier<Block> DREDGESTONE_SUNSTONE_ORE = BlockPropertyWrapper.of(CABlockPropertyWrappers.BASIC_BLOCK_PICKAXE, registerBlock("dredgestone_sunstone_ore", () -> new DropExperienceBlock(BlockBehaviour.Properties.copy(DREDGESTONE.get())))).getParentBlock();
+    public static final Supplier<Block> DREDGESTONE_TITANIUM_ORE = BlockPropertyWrapper.of(CABlockPropertyWrappers.BASIC_BLOCK_PICKAXE, registerBlock("dredgestone_titanium_ore", () -> new DropExperienceBlock(BlockBehaviour.Properties.copy(DREDGESTONE.get())))).getParentBlock();
+    public static final Supplier<Block> DREDGESTONE_URANIUM_ORE = BlockPropertyWrapper.of(CABlockPropertyWrappers.BASIC_BLOCK_PICKAXE, registerBlock("dredgestone_uranium_ore", () -> new DropExperienceBlock(BlockBehaviour.Properties.copy(DREDGESTONE.get())))).getParentBlock();
+
+    // Gloomstone
     public static final Supplier<Block> GLOOMSTONE = BlockPropertyWrapper.of(CABlockPropertyWrappers.BASIC_BLOCK_PICKAXE_STONE, registerBlock("gloomstone", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE)))).getParentBlock();
     public static final Supplier<Block> GLOOMSTONE_BRICKS = BlockPropertyWrapper.of(CABlockPropertyWrappers.SOLID_BRICKS_STONE, registerBlock("gloomstone_bricks", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_BRICKS)))).getParentBlock();
   //  public static final Supplier<Block> CHISELED_GLOOMSTONE = BlockPropertyWrapper.of(CABlockPropertyWrappers.SOLID_CHISELED_BLOCK_STONE, registerBlock("chiseled_gloomstone", () -> new Block(BlockBehaviour.Properties.copy(Blocks.CHISELED_DEEPSLATE)))).getParentBlock();
+
+    // Gloomstone Ores
+    public static final Supplier<Block> GLOOMSTONE_ALUMINUM_ORE = BlockPropertyWrapper.of(CABlockPropertyWrappers.BASIC_BLOCK_PICKAXE, registerBlock("gloomstone_aluminum_ore", () -> new DropExperienceBlock(BlockBehaviour.Properties.copy(GLOOMSTONE.get())))).getParentBlock();
+    public static final Supplier<Block> GLOOMSTONE_COAL_ORE = BlockPropertyWrapper.of(CABlockPropertyWrappers.BASIC_BLOCK_PICKAXE, registerBlock("gloomstone_coal_ore", () -> new DropExperienceBlock(BlockBehaviour.Properties.copy(GLOOMSTONE.get())))).getParentBlock();
+    public static final Supplier<Block> GLOOMSTONE_COPPER_ORE = BlockPropertyWrapper.of(CABlockPropertyWrappers.BASIC_BLOCK_PICKAXE, registerBlock("gloomstone_copper_ore", () -> new DropExperienceBlock(BlockBehaviour.Properties.copy(GLOOMSTONE.get())))).getParentBlock();
+    public static final Supplier<Block> GLOOMSTONE_DIAMOND_ORE = BlockPropertyWrapper.of(CABlockPropertyWrappers.BASIC_BLOCK_PICKAXE, registerBlock("gloomstone_diamond_ore", () -> new DropExperienceBlock(BlockBehaviour.Properties.copy(GLOOMSTONE.get())))).getParentBlock();
+    public static final Supplier<Block> GLOOMSTONE_GOLD_ORE = BlockPropertyWrapper.of(CABlockPropertyWrappers.BASIC_BLOCK_PICKAXE, registerBlock("gloomstone_gold_ore", () -> new DropExperienceBlock(BlockBehaviour.Properties.copy(GLOOMSTONE.get())))).getParentBlock();
+    public static final Supplier<Block> GLOOMSTONE_IRON_ORE = BlockPropertyWrapper.of(CABlockPropertyWrappers.BASIC_BLOCK_PICKAXE, registerBlock("gloomstone_iron_ore", () -> new DropExperienceBlock(BlockBehaviour.Properties.copy(GLOOMSTONE.get())))).getParentBlock();
+    public static final Supplier<Block> GLOOMSTONE_KUNZITE_ORE = BlockPropertyWrapper.of(CABlockPropertyWrappers.BASIC_BLOCK_PICKAXE, registerBlock("gloomstone_kunzite_ore", () -> new DropExperienceBlock(BlockBehaviour.Properties.copy(GLOOMSTONE.get())))).getParentBlock();
+    public static final Supplier<Block> GLOOMSTONE_LAPIS_ORE = BlockPropertyWrapper.of(CABlockPropertyWrappers.BASIC_BLOCK_PICKAXE, registerBlock("gloomstone_lapis_ore", () -> new DropExperienceBlock(BlockBehaviour.Properties.copy(GLOOMSTONE.get())))).getParentBlock();
+    public static final Supplier<Block> GLOOMSTONE_PLATINUM_ORE = BlockPropertyWrapper.of(CABlockPropertyWrappers.BASIC_BLOCK_PICKAXE, registerBlock("gloomstone_platinum_ore", () -> new DropExperienceBlock(BlockBehaviour.Properties.copy(GLOOMSTONE.get())))).getParentBlock();
+    public static final Supplier<Block> GLOOMSTONE_REDSTONE_ORE = BlockPropertyWrapper.of(CABlockPropertyWrappers.BASIC_BLOCK_PICKAXE, registerBlock("gloomstone_redstone_ore", () -> new DropExperienceBlock(BlockBehaviour.Properties.copy(GLOOMSTONE.get())))).getParentBlock();
+    public static final Supplier<Block> GLOOMSTONE_RUBY_ORE = BlockPropertyWrapper.of(CABlockPropertyWrappers.BASIC_BLOCK_PICKAXE, registerBlock("gloomstone_ruby_ore", () -> new DropExperienceBlock(BlockBehaviour.Properties.copy(GLOOMSTONE.get())))).getParentBlock();
+    public static final Supplier<Block> GLOOMSTONE_SUNSTONE_ORE = BlockPropertyWrapper.of(CABlockPropertyWrappers.BASIC_BLOCK_PICKAXE, registerBlock("gloomstone_sunstone_ore", () -> new DropExperienceBlock(BlockBehaviour.Properties.copy(GLOOMSTONE.get())))).getParentBlock();
+    public static final Supplier<Block> GLOOMSTONE_TITANIUM_ORE = BlockPropertyWrapper.of(CABlockPropertyWrappers.BASIC_BLOCK_PICKAXE, registerBlock("gloomstone_titanium_ore", () -> new DropExperienceBlock(BlockBehaviour.Properties.copy(GLOOMSTONE.get())))).getParentBlock();
+    public static final Supplier<Block> GLOOMSTONE_URANIUM_ORE = BlockPropertyWrapper.of(CABlockPropertyWrappers.BASIC_BLOCK_PICKAXE, registerBlock("gloomstone_uranium_ore", () -> new DropExperienceBlock(BlockBehaviour.Properties.copy(GLOOMSTONE.get())))).getParentBlock();
 
     // Lamp & Mining Blocks
     public static final Supplier<Block> MINING_LAMP = BlockPropertyWrapper.of(CABlockPropertyWrappers.BASIC_BLOCK, registerBlock("mining_lamp", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.SAND).instrument(NoteBlockInstrument.PLING).strength(0.3F).sound(SoundType.GLASS).lightLevel((curState) -> 15)))).getParentBlock();
