@@ -1,4 +1,4 @@
-// 1.20.1	2025-11-27T17:55:38.3102421	Chaos Awakens: Block States
+// 1.20.1	2025-11-29T09:03:48.7515847	Chaos Awakens: Block States
 5c81494d06a5589da8afe9c24272dddb04a88d14 assets/chaosawakens/blockstates/acacia_gate_block.json
 807de6368ec3d2d151f9683203f9b05493f6600e assets/chaosawakens/blockstates/acacia_leaf_carpet.json
 d87edfaebd05837212a46d7c4ff3d3f16312c8cf assets/chaosawakens/blockstates/alstroemeriat.json
@@ -53,6 +53,7 @@ af8fe270bdc63aa30c31520cab730f535383fbba assets/chaosawakens/blockstates/cyan_ro
 c4535bac34ed8b3bd7c9904984516e4bcfb292ec assets/chaosawakens/blockstates/dark_oak_leaf_carpet.json
 cfd6b0f1a27477ede50fafc6f0dc4103f7533ddd assets/chaosawakens/blockstates/dead_duplicator_log.json
 3b4a906df6414fb43f59746e61f3426fc61638fb assets/chaosawakens/blockstates/dead_duplicator_wood.json
+6c1e5f7286bfbdabae1ca91710a4b3bc57592d44 assets/chaosawakens/blockstates/deepslate_kunzite_ore.json
 0726ab0d02ca0917f3831bb0287a8ae53135c11a assets/chaosawakens/blockstates/densewood.json
 2d88612df23fee90d64bea3fa8b00ec7f1311704 assets/chaosawakens/blockstates/densewood_button.json
 486c8d043b8a9f310518e203754244f2a69d4f73 assets/chaosawakens/blockstates/densewood_door.json
@@ -251,6 +252,7 @@ d40a69543616b10dc2413f86f30f646291345b1e assets/chaosawakens/blockstates/gloomst
 18eb30af29f765f5e459c507a42753abdad54cb1 assets/chaosawakens/blockstates/horsetail_restio.json
 1f83bc35623117ec7ddd27db0fb986488e9e4224 assets/chaosawakens/blockstates/king_protea.json
 4545e1a67cc5393bd46fec24b4788188e373f777 assets/chaosawakens/blockstates/kunzite_block.json
+ea081fb53d0d2c4e06cd870d1cb2cb0479af9b10 assets/chaosawakens/blockstates/kunzite_ore.json
 c62de09dc5b02f771b17e7b207b33d47a2780124 assets/chaosawakens/blockstates/large_densewood_bush.json
 57349e026851a0eb23c050344285ea276fd2f460 assets/chaosawakens/blockstates/large_ginkgo_bush.json
 b97e8ea9442e34aa3e7e05699d994e6ca95d14d2 assets/chaosawakens/blockstates/large_mesozoic_bush.json

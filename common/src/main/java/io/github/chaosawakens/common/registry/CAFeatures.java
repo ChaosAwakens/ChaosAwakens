@@ -24,7 +24,6 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
-import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.configurations.*;
@@ -135,7 +134,47 @@ public class CAFeatures {
         public static final Supplier<ResourceKey<ConfiguredFeature<?, ?>>> TREES_DENSEWOOD = registerConfiguredFeature("trees_densewood", () -> new ConfiguredFeature<>(Features.RANDOM_KEY_SELECTOR.get(), new RandomFeatureKeyConfiguration(ObjectArrayList.of(new WeightedPlacedFeatureKey(CAPlacedFeatures.DENSEWOOD_TREE_VARIANT_1, 0.2f), new WeightedPlacedFeatureKey(CAPlacedFeatures.DENSEWOOD_TREE_VARIANT_2, 0.2f), new WeightedPlacedFeatureKey(CAPlacedFeatures.DENSEWOOD_TREE_VARIANT_3, 0.2f), new WeightedPlacedFeatureKey(CAPlacedFeatures.DENSEWOOD_TREE_VARIANT_4, 0.2f)), CAPlacedFeatures.DENSEWOOD_TREE_VARIANT_5)));
         public static final Supplier<ResourceKey<ConfiguredFeature<?, ?>>> TREES_GINKGO = registerConfiguredFeature("trees_ginkgo", () -> new ConfiguredFeature<>(Features.RANDOM_KEY_SELECTOR.get(), new RandomFeatureKeyConfiguration(ObjectArrayList.of(new WeightedPlacedFeatureKey(CAPlacedFeatures.GINKGO_TREE_VARIANT_1, 0.2f), new WeightedPlacedFeatureKey(CAPlacedFeatures.GINKGO_TREE_VARIANT_2, 0.2f), new WeightedPlacedFeatureKey(CAPlacedFeatures.GINKGO_TREE_VARIANT_3, 0.2f), new WeightedPlacedFeatureKey(CAPlacedFeatures.GINKGO_TREE_VARIANT_4, 0.2f)), CAPlacedFeatures.GINKGO_TREE_VARIANT_5)));
 
-        public static final Supplier<ResourceKey<ConfiguredFeature<?, ?>>> URANIUM_BLOCK = registerConfiguredFeature("uranium_block", () -> new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(new BlockMatchTest(CABlocks.DREDGESTONE.get()), CABlocks.URANIUM_BLOCK.get().defaultBlockState(), 64)));
+        public static final Supplier<ResourceKey<ConfiguredFeature<?, ?>>> DREDGESTONE_URANIUM_ORE = registerConfiguredFeature("dredgestone_uranium_ore", () -> new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(new BlockMatchTest(CABlocks.DREDGESTONE.get()), CABlocks.DREDGESTONE_URANIUM_ORE.get().defaultBlockState(), 3)));
+        public static final Supplier<ResourceKey<ConfiguredFeature<?, ?>>> GLOOMSTONE_URANIUM_ORE = registerConfiguredFeature("gloomstone_uranium_ore", () -> new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(new BlockMatchTest(CABlocks.GLOOMSTONE.get()), CABlocks.GLOOMSTONE_URANIUM_ORE.get().defaultBlockState(), 4)));
+
+        public static final Supplier<ResourceKey<ConfiguredFeature<?, ?>>> DREDGESTONE_TITANIUM_ORE = registerConfiguredFeature("dredgestone_titanium_ore", () -> new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(new BlockMatchTest(CABlocks.DREDGESTONE.get()), CABlocks.DREDGESTONE_TITANIUM_ORE.get().defaultBlockState(), 3)));
+        public static final Supplier<ResourceKey<ConfiguredFeature<?, ?>>> GLOOMSTONE_TITANIUM_ORE = registerConfiguredFeature("gloomstone_titanium_ore", () -> new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(new BlockMatchTest(CABlocks.GLOOMSTONE.get()), CABlocks.GLOOMSTONE_TITANIUM_ORE.get().defaultBlockState(), 4)));
+
+        public static final Supplier<ResourceKey<ConfiguredFeature<?, ?>>> DREDGESTONE_SUNSTONE_ORE = registerConfiguredFeature("dredgestone_sunstone_ore", () -> new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(new BlockMatchTest(CABlocks.DREDGESTONE.get()), CABlocks.DREDGESTONE_SUNSTONE_ORE.get().defaultBlockState(), 22)));
+        public static final Supplier<ResourceKey<ConfiguredFeature<?, ?>>> GLOOMSTONE_SUNSTONE_ORE = registerConfiguredFeature("gloomstone_sunstone_ore", () -> new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(new BlockMatchTest(CABlocks.GLOOMSTONE.get()), CABlocks.GLOOMSTONE_SUNSTONE_ORE.get().defaultBlockState(), 15)));
+
+        public static final Supplier<ResourceKey<ConfiguredFeature<?, ?>>> DREDGESTONE_RUBY_ORE = registerConfiguredFeature("dredgestone_ruby_ore", () -> new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(new BlockMatchTest(CABlocks.DREDGESTONE.get()), CABlocks.DREDGESTONE_RUBY_ORE.get().defaultBlockState(), 2)));
+        public static final Supplier<ResourceKey<ConfiguredFeature<?, ?>>> GLOOMSTONE_RUBY_ORE = registerConfiguredFeature("gloomstone_ruby_ore", () -> new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(new BlockMatchTest(CABlocks.GLOOMSTONE.get()), CABlocks.GLOOMSTONE_RUBY_ORE.get().defaultBlockState(), 3)));
+
+        public static final Supplier<ResourceKey<ConfiguredFeature<?, ?>>> DREDGESTONE_REDSTONE_ORE = registerConfiguredFeature("dredgestone_redstone_ore", () -> new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(new BlockMatchTest(CABlocks.DREDGESTONE.get()), CABlocks.DREDGESTONE_REDSTONE_ORE.get().defaultBlockState(), 5)));
+        public static final Supplier<ResourceKey<ConfiguredFeature<?, ?>>> GLOOMSTONE_REDSTONE_ORE = registerConfiguredFeature("gloomstone_redstone_ore", () -> new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(new BlockMatchTest(CABlocks.GLOOMSTONE.get()), CABlocks.GLOOMSTONE_REDSTONE_ORE.get().defaultBlockState(), 6)));
+
+        public static final Supplier<ResourceKey<ConfiguredFeature<?, ?>>> DREDGESTONE_PLATINUM_ORE = registerConfiguredFeature("dredgestone_platinum_ore", () -> new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(new BlockMatchTest(CABlocks.DREDGESTONE.get()), CABlocks.DREDGESTONE_PLATINUM_ORE.get().defaultBlockState(), 4)));
+        public static final Supplier<ResourceKey<ConfiguredFeature<?, ?>>> GLOOMSTONE_PLATINUM_ORE = registerConfiguredFeature("gloomstone_platinum_ore", () -> new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(new BlockMatchTest(CABlocks.GLOOMSTONE.get()), CABlocks.GLOOMSTONE_PLATINUM_ORE.get().defaultBlockState(), 5)));
+
+        public static final Supplier<ResourceKey<ConfiguredFeature<?, ?>>> DREDGESTONE_LAPIS_ORE = registerConfiguredFeature("dredgestone_lapis_ore", () -> new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(new BlockMatchTest(CABlocks.DREDGESTONE.get()), CABlocks.DREDGESTONE_LAPIS_ORE.get().defaultBlockState(), 7)));
+        public static final Supplier<ResourceKey<ConfiguredFeature<?, ?>>> GLOOMSTONE_LAPIS_ORE = registerConfiguredFeature("gloomstone_lapis_ore", () -> new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(new BlockMatchTest(CABlocks.GLOOMSTONE.get()), CABlocks.GLOOMSTONE_LAPIS_ORE.get().defaultBlockState(), 7)));
+
+        public static final Supplier<ResourceKey<ConfiguredFeature<?, ?>>> DREDGESTONE_KUNZITE_ORE = registerConfiguredFeature("dredgestone_kunzite_ore", () -> new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(new BlockMatchTest(CABlocks.DREDGESTONE.get()), CABlocks.DREDGESTONE_KUNZITE_ORE.get().defaultBlockState(), 4)));
+        public static final Supplier<ResourceKey<ConfiguredFeature<?, ?>>> GLOOMSTONE_KUNZITE_ORE = registerConfiguredFeature("gloomstone_kunzite_ore", () -> new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(new BlockMatchTest(CABlocks.GLOOMSTONE.get()), CABlocks.GLOOMSTONE_KUNZITE_ORE.get().defaultBlockState(), 5)));
+
+        public static final Supplier<ResourceKey<ConfiguredFeature<?, ?>>> DREDGESTONE_IRON_ORE = registerConfiguredFeature("dredgestone_iron_ore", () -> new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(new BlockMatchTest(CABlocks.DREDGESTONE.get()), CABlocks.DREDGESTONE_IRON_ORE.get().defaultBlockState(), 9)));
+        public static final Supplier<ResourceKey<ConfiguredFeature<?, ?>>> GLOOMSTONE_IRON_ORE = registerConfiguredFeature("gloomstone_iron_ore", () -> new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(new BlockMatchTest(CABlocks.GLOOMSTONE.get()), CABlocks.GLOOMSTONE_IRON_ORE.get().defaultBlockState(), 9)));
+
+        public static final Supplier<ResourceKey<ConfiguredFeature<?, ?>>> DREDGESTONE_GOLD_ORE = registerConfiguredFeature("dredgestone_gold_ore", () -> new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(new BlockMatchTest(CABlocks.DREDGESTONE.get()), CABlocks.DREDGESTONE_GOLD_ORE.get().defaultBlockState(), 9)));
+        public static final Supplier<ResourceKey<ConfiguredFeature<?, ?>>> GLOOMSTONE_GOLD_ORE = registerConfiguredFeature("gloomstone_gold_ore", () -> new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(new BlockMatchTest(CABlocks.GLOOMSTONE.get()), CABlocks.GLOOMSTONE_GOLD_ORE.get().defaultBlockState(), 9)));
+
+        public static final Supplier<ResourceKey<ConfiguredFeature<?, ?>>> DREDGESTONE_DIAMOND_ORE = registerConfiguredFeature("dredgestone_diamond_ore", () -> new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(new BlockMatchTest(CABlocks.DREDGESTONE.get()), CABlocks.DREDGESTONE_DIAMOND_ORE.get().defaultBlockState(), 4)));
+        public static final Supplier<ResourceKey<ConfiguredFeature<?, ?>>> GLOOMSTONE_DIAMOND_ORE = registerConfiguredFeature("gloomstone_diamond_ore", () -> new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(new BlockMatchTest(CABlocks.GLOOMSTONE.get()), CABlocks.GLOOMSTONE_DIAMOND_ORE.get().defaultBlockState(), 12)));
+
+        public static final Supplier<ResourceKey<ConfiguredFeature<?, ?>>> DREDGESTONE_COPPER_ORE = registerConfiguredFeature("dredgestone_copper_ore", () -> new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(new BlockMatchTest(CABlocks.DREDGESTONE.get()), CABlocks.DREDGESTONE_COPPER_ORE.get().defaultBlockState(), 20)));
+        public static final Supplier<ResourceKey<ConfiguredFeature<?, ?>>> GLOOMSTONE_COPPER_ORE = registerConfiguredFeature("gloomstone_copper_ore", () -> new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(new BlockMatchTest(CABlocks.GLOOMSTONE.get()), CABlocks.GLOOMSTONE_COPPER_ORE.get().defaultBlockState(), 15)));
+
+        public static final Supplier<ResourceKey<ConfiguredFeature<?, ?>>> DREDGESTONE_COAL_ORE = registerConfiguredFeature("dredgestone_coal_ore", () -> new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(new BlockMatchTest(CABlocks.DREDGESTONE.get()), CABlocks.DREDGESTONE_COAL_ORE.get().defaultBlockState(), 24)));
+        public static final Supplier<ResourceKey<ConfiguredFeature<?, ?>>> GLOOMSTONE_COAL_ORE = registerConfiguredFeature("gloomstone_coal_ore", () -> new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(new BlockMatchTest(CABlocks.GLOOMSTONE.get()), CABlocks.GLOOMSTONE_COAL_ORE.get().defaultBlockState(), 17)));
+
+        public static final Supplier<ResourceKey<ConfiguredFeature<?, ?>>> DREDGESTONE_ALUMINUM_ORE = registerConfiguredFeature("dredgestone_aluminum_ore", () -> new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(new BlockMatchTest(CABlocks.DREDGESTONE.get()), CABlocks.DREDGESTONE_ALUMINUM_ORE.get().defaultBlockState(), 15)));
+        public static final Supplier<ResourceKey<ConfiguredFeature<?, ?>>> GLOOMSTONE_ALUMINUM_ORE = registerConfiguredFeature("gloomstone_aluminum_ore", () -> new ConfiguredFeature<>(Feature.ORE, new OreConfiguration(new BlockMatchTest(CABlocks.GLOOMSTONE.get()), CABlocks.GLOOMSTONE_ALUMINUM_ORE.get().defaultBlockState(), 20)));
 
         private static Supplier<ResourceKey<ConfiguredFeature<?, ?>>> registerConfiguredFeature(ResourceLocation id, Supplier<ConfiguredFeature<?, ?>> actualPlacedFeatureSup) {
             Supplier<ResourceKey<ConfiguredFeature<?, ?>>> placedFeatureSup = CAServices.REGISTRAR.registerDatapackObject(id, b -> actualPlacedFeatureSup, Registries.CONFIGURED_FEATURE);
@@ -225,7 +264,48 @@ public class CAFeatures {
         public static final Supplier<ResourceKey<PlacedFeature>> TREES_DENSEWOOD = registerPlacedFeature("trees_densewood", CAConfiguredFeatures.TREES_DENSEWOOD, ObjectArrayList.of(PlacementUtils.countExtra(3, 0.1F, 1)));
         public static final Supplier<ResourceKey<PlacedFeature>> TREES_GINKGO = registerPlacedFeature("trees_ginkgo", CAConfiguredFeatures.TREES_GINKGO, ObjectArrayList.of(PlacementUtils.countExtra(3, 0.1F, 1)));
 
-        public static final Supplier<ResourceKey<PlacedFeature>> URANIUM_BLOCK = registerPlacedFeature("uranium_block", CAConfiguredFeatures.URANIUM_BLOCK, commonOrePlacement(30, HeightRangePlacement.triangle(VerticalAnchor.absolute(0), VerticalAnchor.absolute(192))));
+        public static final Supplier<ResourceKey<PlacedFeature>> DREDGESTONE_URANIUM_ORE = registerPlacedFeature("dredgestone_uranium_ore", CAConfiguredFeatures.DREDGESTONE_URANIUM_ORE, commonOrePlacement(6, HeightRangePlacement.triangle(VerticalAnchor.absolute(0), VerticalAnchor.absolute(48))));
+        public static final Supplier<ResourceKey<PlacedFeature>> GLOOMSTONE_URANIUM_ORE = registerPlacedFeature("gloomstone_uranium_ore", CAConfiguredFeatures.GLOOMSTONE_URANIUM_ORE, commonOrePlacement(7, HeightRangePlacement.triangle(VerticalAnchor.absolute(-128), VerticalAnchor.absolute(-5))));
+
+        public static final Supplier<ResourceKey<PlacedFeature>> DREDGESTONE_TITANIUM_ORE = registerPlacedFeature("dredgestone_titanium_ore", CAConfiguredFeatures.DREDGESTONE_TITANIUM_ORE, commonOrePlacement(6, HeightRangePlacement.triangle(VerticalAnchor.absolute(0), VerticalAnchor.absolute(48))));
+        public static final Supplier<ResourceKey<PlacedFeature>> GLOOMSTONE_TITANIUM_ORE = registerPlacedFeature("gloomstone_titanium_ore", CAConfiguredFeatures.GLOOMSTONE_TITANIUM_ORE, commonOrePlacement(7, HeightRangePlacement.triangle(VerticalAnchor.absolute(-128), VerticalAnchor.absolute(-5))));
+
+        public static final Supplier<ResourceKey<PlacedFeature>> DREDGESTONE_SUNSTONE_ORE = registerPlacedFeature("dredgestone_sunstone_ore", CAConfiguredFeatures.DREDGESTONE_SUNSTONE_ORE, commonOrePlacement(20, HeightRangePlacement.triangle(VerticalAnchor.absolute(0), VerticalAnchor.absolute(48))));
+        public static final Supplier<ResourceKey<PlacedFeature>> GLOOMSTONE_SUNSTONE_ORE = registerPlacedFeature("gloomstone_sunstone_ore", CAConfiguredFeatures.GLOOMSTONE_SUNSTONE_ORE, commonOrePlacement(13, HeightRangePlacement.triangle(VerticalAnchor.absolute(-128), VerticalAnchor.absolute(-5))));
+
+        public static final Supplier<ResourceKey<PlacedFeature>> DREDGESTONE_RUBY_ORE = registerPlacedFeature("dredgestone_ruby_ore", CAConfiguredFeatures.DREDGESTONE_RUBY_ORE, commonOrePlacement(3, HeightRangePlacement.triangle(VerticalAnchor.absolute(0), VerticalAnchor.absolute(48))));
+        public static final Supplier<ResourceKey<PlacedFeature>> GLOOMSTONE_RUBY_ORE = registerPlacedFeature("gloomstone_ruby_ore", CAConfiguredFeatures.GLOOMSTONE_RUBY_ORE, commonOrePlacement(4, HeightRangePlacement.triangle(VerticalAnchor.absolute(-128), VerticalAnchor.absolute(-5))));
+
+        public static final Supplier<ResourceKey<PlacedFeature>> DREDGESTONE_REDSTONE_ORE = registerPlacedFeature("dredgestone_redstone_ore", CAConfiguredFeatures.DREDGESTONE_REDSTONE_ORE, commonOrePlacement(6, HeightRangePlacement.triangle(VerticalAnchor.absolute(0), VerticalAnchor.absolute(48))));
+        public static final Supplier<ResourceKey<PlacedFeature>> GLOOMSTONE_REDSTONE_ORE = registerPlacedFeature("gloomstone_redstone_ore", CAConfiguredFeatures.GLOOMSTONE_REDSTONE_ORE, commonOrePlacement(12, HeightRangePlacement.triangle(VerticalAnchor.absolute(-128), VerticalAnchor.absolute(-5))));
+
+        public static final Supplier<ResourceKey<PlacedFeature>> DREDGESTONE_PLATINUM_ORE = registerPlacedFeature("dredgestone_platinum_ore", CAConfiguredFeatures.DREDGESTONE_PLATINUM_ORE, commonOrePlacement(4, HeightRangePlacement.triangle(VerticalAnchor.absolute(0), VerticalAnchor.absolute(48))));
+        public static final Supplier<ResourceKey<PlacedFeature>> GLOOMSTONE_PLATINUM_ORE = registerPlacedFeature("gloomstone_platinum_ore", CAConfiguredFeatures.GLOOMSTONE_PLATINUM_ORE, commonOrePlacement(5, HeightRangePlacement.triangle(VerticalAnchor.absolute(-128), VerticalAnchor.absolute(-5))));
+
+        public static final Supplier<ResourceKey<PlacedFeature>> DREDGESTONE_LAPIS_ORE = registerPlacedFeature("dredgestone_lapis_ore", CAConfiguredFeatures.DREDGESTONE_LAPIS_ORE, commonOrePlacement(3, HeightRangePlacement.triangle(VerticalAnchor.absolute(1), VerticalAnchor.absolute(96))));
+        public static final Supplier<ResourceKey<PlacedFeature>> GLOOMSTONE_LAPIS_ORE = registerPlacedFeature("gloomstone_lapis_ore", CAConfiguredFeatures.GLOOMSTONE_LAPIS_ORE, commonOrePlacement(6, HeightRangePlacement.triangle(VerticalAnchor.absolute(-128), VerticalAnchor.absolute(-1))));
+
+        public static final Supplier<ResourceKey<PlacedFeature>> DREDGESTONE_KUNZITE_ORE = registerPlacedFeature("dredgestone_kunzite_ore", CAConfiguredFeatures.DREDGESTONE_KUNZITE_ORE, commonOrePlacement(4, HeightRangePlacement.triangle(VerticalAnchor.absolute(0), VerticalAnchor.absolute(48))));
+        public static final Supplier<ResourceKey<PlacedFeature>> GLOOMSTONE_KUNZITE_ORE = registerPlacedFeature("gloomstone_kunzite_ore", CAConfiguredFeatures.GLOOMSTONE_KUNZITE_ORE, commonOrePlacement(5, HeightRangePlacement.triangle(VerticalAnchor.absolute(-128), VerticalAnchor.absolute(-5))));
+
+        public static final Supplier<ResourceKey<PlacedFeature>> DREDGESTONE_IRON_ORE = registerPlacedFeature("dredgestone_iron_ore", CAConfiguredFeatures.DREDGESTONE_IRON_ORE, commonOrePlacement(15, HeightRangePlacement.triangle(VerticalAnchor.absolute(0), VerticalAnchor.absolute(40))));
+        public static final Supplier<ResourceKey<PlacedFeature>> GLOOMSTONE_IRON_ORE = registerPlacedFeature("gloomstone_iron_ore", CAConfiguredFeatures.GLOOMSTONE_IRON_ORE, commonOrePlacement(15, HeightRangePlacement.triangle(VerticalAnchor.absolute(-128), VerticalAnchor.absolute(-5))));
+
+        public static final Supplier<ResourceKey<PlacedFeature>> DREDGESTONE_GOLD_ORE = registerPlacedFeature("dredgestone_gold_ore", CAConfiguredFeatures.DREDGESTONE_GOLD_ORE, commonOrePlacement(6, HeightRangePlacement.triangle(VerticalAnchor.absolute(1), VerticalAnchor.absolute(64))));
+        public static final Supplier<ResourceKey<PlacedFeature>> GLOOMSTONE_GOLD_ORE = registerPlacedFeature("gloomstone_gold_ore", CAConfiguredFeatures.GLOOMSTONE_GOLD_ORE, commonOrePlacement(6, HeightRangePlacement.triangle(VerticalAnchor.absolute(-128), VerticalAnchor.absolute(-1))));
+
+        public static final Supplier<ResourceKey<PlacedFeature>> DREDGESTONE_DIAMOND_ORE = registerPlacedFeature("dredgestone_diamond_ore", CAConfiguredFeatures.DREDGESTONE_DIAMOND_ORE, commonOrePlacement(9, HeightRangePlacement.triangle(VerticalAnchor.absolute(0), VerticalAnchor.absolute(48))));
+        public static final Supplier<ResourceKey<PlacedFeature>> GLOOMSTONE_DIAMOND_ORE = registerPlacedFeature("gloomstone_diamond_ore", CAConfiguredFeatures.GLOOMSTONE_DIAMOND_ORE, commonOrePlacement(10, HeightRangePlacement.triangle(VerticalAnchor.absolute(-128), VerticalAnchor.absolute(-5))));
+
+        public static final Supplier<ResourceKey<PlacedFeature>> DREDGESTONE_COPPER_ORE = registerPlacedFeature("dredgestone_copper_ore", CAConfiguredFeatures.DREDGESTONE_COPPER_ORE, commonOrePlacement(24, HeightRangePlacement.triangle(VerticalAnchor.absolute(1), VerticalAnchor.absolute(144))));
+        public static final Supplier<ResourceKey<PlacedFeature>> GLOOMSTONE_COPPER_ORE = registerPlacedFeature("gloomstone_copper_ore", CAConfiguredFeatures.GLOOMSTONE_COPPER_ORE, commonOrePlacement(10, HeightRangePlacement.triangle(VerticalAnchor.absolute(-48), VerticalAnchor.absolute(-1))));
+
+        public static final Supplier<ResourceKey<PlacedFeature>> DREDGESTONE_COAL_ORE = registerPlacedFeature("dredgestone_coal_ore", CAConfiguredFeatures.DREDGESTONE_COAL_ORE, commonOrePlacement(40, HeightRangePlacement.triangle(VerticalAnchor.absolute(1), VerticalAnchor.absolute(352))));
+        public static final Supplier<ResourceKey<PlacedFeature>> GLOOMSTONE_COAL_ORE = registerPlacedFeature("gloomstone_coal_ore", CAConfiguredFeatures.GLOOMSTONE_COAL_ORE, commonOrePlacement(26, HeightRangePlacement.triangle(VerticalAnchor.absolute(-20), VerticalAnchor.absolute(-1))));
+
+        public static final Supplier<ResourceKey<PlacedFeature>> DREDGESTONE_ALUMINUM_ORE = registerPlacedFeature("dredgestone_aluminum_ore", CAConfiguredFeatures.DREDGESTONE_ALUMINUM_ORE, commonOrePlacement(30, HeightRangePlacement.triangle(VerticalAnchor.absolute(1), VerticalAnchor.absolute(144))));
+        public static final Supplier<ResourceKey<PlacedFeature>> GLOOMSTONE_ALUMINUM_ORE = registerPlacedFeature("gloomstone_aluminum_ore", CAConfiguredFeatures.GLOOMSTONE_ALUMINUM_ORE, commonOrePlacement(20, HeightRangePlacement.triangle(VerticalAnchor.absolute(-48), VerticalAnchor.absolute(-1))));
+
 
         private static Supplier<ResourceKey<PlacedFeature>> registerPlacedFeature(ResourceLocation id, Supplier<ResourceKey<ConfiguredFeature<?, ?>>> configuredFeatureHolder, List<PlacementModifier> placementModifiers) {
             Supplier<ResourceKey<PlacedFeature>> placedFeatureSup = CAServices.REGISTRAR.registerDatapackObject(id, b -> () -> new PlacedFeature(b.lookup(Registries.CONFIGURED_FEATURE).getOrThrow(configuredFeatureHolder.get()), List.copyOf(placementModifiers)), Registries.PLACED_FEATURE);

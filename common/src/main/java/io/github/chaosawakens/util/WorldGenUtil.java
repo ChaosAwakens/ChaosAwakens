@@ -22,7 +22,7 @@ public final class WorldGenUtil {
 
     public static <C, I extends ToFloatFunction<C>> CubicSpline<C, I> miningParadiseOffset(I continentSplineCoord, I erosionSplineCoord, I foldedRidgesSplineCoord) {
 
-        CubicSpline<C, I> erosionOffsetSplineFromDeepOcean = RefactoredTerrainProvider.buildErosionOffsetRidgeSpline(erosionSplineCoord, foldedRidgesSplineCoord,  0.01F, 0.005F, 0.015F, 0.0F, 0.011F, -0.03F, false, false, NO_TRANSFORM);
+        CubicSpline<C, I> erosionOffsetSplineFromDeepOcean = RefactoredTerrainProvider.buildErosionOffsetRidgeSpline(erosionSplineCoord, foldedRidgesSplineCoord,  0.01F, 0.008F, 0.015F, 0.0F, 0.011F, -0.03F, false, false, NO_TRANSFORM);
 
         CubicSpline<C, I> erosionOffsetSplineFromLake = RefactoredTerrainProvider.buildErosionOffsetSpline(erosionSplineCoord, foldedRidgesSplineCoord,  0.012F, 0.008F, 0.017F, 0.04F, 0.013F, -0.03F, false, false, NO_TRANSFORM);
 

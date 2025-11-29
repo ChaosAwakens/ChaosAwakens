@@ -1,4 +1,4 @@
-// 1.20.1	2025-11-27T17:55:38.3261391	Chaos Awakens: Block & Block Item Models
+// 1.20.1	2025-11-29T09:03:48.7685984	Chaos Awakens: Block & Block Item Models
 545cc7a8d51438ddca6429e9262d81c625d1162d assets/chaosawakens/models/block/acacia_gate_block.json
 8d130b2889cdfedadd99deba33ebbc7ef31085f7 assets/chaosawakens/models/block/acacia_leaf_carpet.json
 f700a074b4699cc3621d597ffe655047e0bf4a44 assets/chaosawakens/models/block/acacia_leaf_carpet_inventory.json
@@ -103,6 +103,7 @@ ccf092d2abf9a22b685c912bd7a30cf5508d6446 assets/chaosawakens/models/block/cyan_r
 2f99c2dc1176adf564839ad36462f65f43c5908d assets/chaosawakens/models/block/dead_duplicator_log.json
 69a5053526a0fd2061e5fddc05479adf8928230a assets/chaosawakens/models/block/dead_duplicator_log_horizontal.json
 723c032178999f7da3f77999ea3941fad58bddbb assets/chaosawakens/models/block/dead_duplicator_wood.json
+2a95c563c9b890ccb5820545d8a070b76cc82d3d assets/chaosawakens/models/block/deepslate_kunzite_ore.json
 19e93c71294a68d64d55cf4f015d7ad50564f3cc assets/chaosawakens/models/block/densewood.json
 c2b9462cb058a0c06fb8a5607612034f59551b0b assets/chaosawakens/models/block/densewood_button.json
 4c35197554f5bd980a97ac5f64d03af260776b3e assets/chaosawakens/models/block/densewood_button_inventory.json
@@ -371,6 +372,7 @@ c8738d94abcdfef3bc232e444e991d4d00bc0d2a assets/chaosawakens/models/block/green_
 9315045edc30fa11a192abfe0eb6150680daf852 assets/chaosawakens/models/block/king_protea_bottom.json
 326b35d4f9a9ce1c41e0e584706eeaca0cfdf2b7 assets/chaosawakens/models/block/king_protea_top.json
 a34b04a05db26bb1f30e122a29d4ed555e4a70ba assets/chaosawakens/models/block/kunzite_block.json
+e921dbc49a76a7555b5ddcc95d5905f3e16bcf91 assets/chaosawakens/models/block/kunzite_ore.json
 43e65bfde333ac0c842e2b73847cdd69fd335b2a assets/chaosawakens/models/block/large_densewood_bush_bottom.json
 c7df53dda24afa06d9de47e17aa6d01ae1af3f5a assets/chaosawakens/models/block/large_densewood_bush_middle.json
 8e5ac55301643a72d74e992a257069adf54c5b43 assets/chaosawakens/models/block/large_densewood_bush_top.json
@@ -632,6 +634,7 @@ fe0d8c76fc838e9ec2b6fdf1448b5f28f207221d assets/chaosawakens/models/item/dark_oa
 d8a05b7505d1ed4b0a091a5d9c5fa4e5488b9079 assets/chaosawakens/models/item/dark_oak_leaf_carpet.json
 6d8c4079edf652280d56589ace44e0d5c764350c assets/chaosawakens/models/item/dead_duplicator_log.json
 eb060db5f631406b49e2b1cb80ecb1291ca388e0 assets/chaosawakens/models/item/dead_duplicator_wood.json
+babde3540a0cac55cc414443d555026c101c4f48 assets/chaosawakens/models/item/deepslate_kunzite_ore.json
 f5ffa85dfc013c4acd3ad106f133a96815d26776 assets/chaosawakens/models/item/densewood.json
 2f92d292f5eab47d0bb1b327d26252e08a2a94df assets/chaosawakens/models/item/densewood_button.json
 b109d3f0f24037cd383637ede8173252b3da99f6 assets/chaosawakens/models/item/densewood_door.json
@@ -830,6 +833,7 @@ e9c335f2eb434cab80b10ca2667c4b0cfa48b606 assets/chaosawakens/models/item/gloomst
 18c03b8d4e7b5adc2366301420d53dc693d2deca assets/chaosawakens/models/item/horsetail_restio.json
 d98c2b6f1b9823cb3376389bcd7e84a42968b203 assets/chaosawakens/models/item/king_protea.json
 44e984125e9493d8517024af9fb3c58ae339f401 assets/chaosawakens/models/item/kunzite_block.json
+030158c4b13b0887f00dec44c15cdb41db30f7cd assets/chaosawakens/models/item/kunzite_ore.json
 5d5f9b6f56656f4207e19dd2f51d57eee9aa831c assets/chaosawakens/models/item/large_densewood_bush.json
 813850c651d9b6e6da2c573ee52abc4b94e2e460 assets/chaosawakens/models/item/large_ginkgo_bush.json
 2a8c34fc649abf27241b1f0fb10cf3bf01181839 assets/chaosawakens/models/item/large_mesozoic_bush.json

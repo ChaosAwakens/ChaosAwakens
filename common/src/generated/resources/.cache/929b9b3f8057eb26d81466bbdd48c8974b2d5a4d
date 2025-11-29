@@ -1,8 +1,12 @@
-// 1.20.1	2025-11-27T17:55:38.3155487	Chaos Awakens: Block Tags
+// 1.20.1	2025-11-29T09:03:48.7592789	Chaos Awakens: Block Tags
+33a31f8df0821010ddb96828663b4216c3e6b572 data/chaosawakens/tags/blocks/aluminum_ores.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/chaosawakens/tags/blocks/base_stone_crystal.json
 b731e39685a159a3c923468f86763651a5775971 data/chaosawakens/tags/blocks/base_stone_mining.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/chaosawakens/tags/blocks/base_stone_village.json
+b174917d2c30be87ddda5bb8d96526a093ecd001 data/chaosawakens/tags/blocks/coal_ores.json
+f5298434148c95e48b056fe853960530b09c3d13 data/chaosawakens/tags/blocks/copper_ores.json
 cf70b7571fc2de53e997b849f3a095a5f9600bf0 data/chaosawakens/tags/blocks/dense_dirt.json
+d703133eb2215e41b8f6fcca4060c358cd5a2005 data/chaosawakens/tags/blocks/diamond_ores.json
 15fd874b2908431c3d61833648f73cfc12e729d8 data/chaosawakens/tags/blocks/dredgestone.json
 19a49a226148afa94a3b6f7e8f51f2be4a476264 data/chaosawakens/tags/blocks/farmland_blocks.json
 8673c6f1ebefbd4055258086e7c64e1dd29cc9e3 data/chaosawakens/tags/blocks/fossils.json
@@ -40,15 +44,25 @@ b41349a4b011bedbfcf9cc91ce48ebbfda560d20 data/chaosawakens/tags/blocks/fossils/s
 5b99c02e83247352aac342fa9b5f9d07676cb63a data/chaosawakens/tags/blocks/fossils/stone/chaosawakens.json
 733e8ef495b80ad2000c4f3a068a62e27d65ab73 data/chaosawakens/tags/blocks/fossils/stone/vanilla.json
 ca2eca4549b6955c09808e30d541ea0f9c3172b2 data/chaosawakens/tags/blocks/gloomstone.json
+c6f45eeb23d9aa9ec048e4a7bec91a7c5c97b647 data/chaosawakens/tags/blocks/gold_ores.json
+cc02a955139a5aec755493193218d9fd14f0957a data/chaosawakens/tags/blocks/iron_ores.json
+f9de01b48326a1467490f066d10a4edb6873203a data/chaosawakens/tags/blocks/kunzite_ores.json
+345a567e8f24f44f8e457c19f4bf732b0bdc8a7e data/chaosawakens/tags/blocks/lapis_ores.json
 12bdb94a915d478964967ba4c9f9d33adbd7d11a data/chaosawakens/tags/blocks/miners_dream_mineable.json
 c31ea0f5db9f1d0ff9edec310558214679f9fb42 data/chaosawakens/tags/blocks/mining_carver_replaceables.json
 3c5988ffb993bce9642e86866b9f47d4f798b72a data/chaosawakens/tags/blocks/mining_dirt.json
+0918fbabb7d4084b7227c6da292506e2eb8bedfe data/chaosawakens/tags/blocks/platinum_ores.json
+bd8488a964f697c7c226c2c34fa1d56bc9c2bdf7 data/chaosawakens/tags/blocks/redstone_ores.json
 49e02bc82aa3025d443a2c662ae386a2fef88711 data/chaosawakens/tags/blocks/robo_immune.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/chaosawakens/tags/blocks/robo_immune/jeffery.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/chaosawakens/tags/blocks/robo_immune/pounder.json
+94d0b8a58da0d4c0b854fe74af0d32e6c32bb3f5 data/chaosawakens/tags/blocks/ruby_ores.json
 7b73d6e38919b26eba0831d9b725aa36f1678b71 data/chaosawakens/tags/blocks/stalagmite_ore.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/chaosawakens/tags/blocks/stalagmite_ore/common.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/chaosawakens/tags/blocks/stalagmite_ore/rare.json
+7ad5c3229946d5090d7e3cf50c1cff1c8297007b data/chaosawakens/tags/blocks/sunstone_ores.json
+cd23ff27941303fd812abde4e7d520bd3ab9fe6f data/chaosawakens/tags/blocks/titanium_ores.json
+e33ba1fd200719c179c2bee222a63ae00a050e53 data/chaosawakens/tags/blocks/uranium_ores.json
 6eebd908f78abdfe8a651343a33053650ce673ac data/chaosawakens/tags/blocks/vegetation/crystal_flower_blocks.json
 8098c0494d0751f5a577979c3a35dc6eb145729b data/chaosawakens/tags/blocks/vegetation/crystal_vegetation.json
 5351b8f722aa238a221ee73387000dc4a792b907 data/chaosawakens/tags/blocks/vegetation/dense_flower_blocks.json
@@ -74,7 +88,7 @@ e270a0dc2572cac0a853e3e27da1a1afa0b3919d data/minecraft/tags/blocks/flowers.json
 2c3a4af37be58291aadbee3781c0fd38c6aa1ded data/minecraft/tags/blocks/logs_that_burn.json
 b95e07ccdca2e6b613945397dda9e04c79800366 data/minecraft/tags/blocks/mineable/axe.json
 d89fc4326b85b6d39178241f56e9b9c6ea779b1f data/minecraft/tags/blocks/mineable/hoe.json
-68a3926592b2b46d0c25d8539dc5ef4a23abbf13 data/minecraft/tags/blocks/mineable/pickaxe.json
+fbbdcc1c8dc79b443e98b4af176d3caf3ad16153 data/minecraft/tags/blocks/mineable/pickaxe.json
 8e6857fca40e1dd7b123e76ee8bc8977496b72b5 data/minecraft/tags/blocks/mineable/shovel.json
 77231706f171152530a4de03b16c0b791383dc79 data/minecraft/tags/blocks/needs_diamond_tool.json
 a7a7dc7f4f5ba9eda4b4cc81482933b822d0ca21 data/minecraft/tags/blocks/needs_iron_tool.json

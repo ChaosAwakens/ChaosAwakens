@@ -60,10 +60,38 @@ public class DensewoodForestBiomeConfig implements BiomeConfig {
         // Vegetation
         biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, placedFeatureGetter.getOrThrow(CAFeatures.CAPlacedFeatures.DENSE_GRASS_PATCH.get()));
         biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, placedFeatureGetter.getOrThrow(CAFeatures.CAPlacedFeatures.TALL_DENSE_GRASS_PATCH.get()));
-
         biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, placedFeatureGetter.getOrThrow(CAFeatures.CAPlacedFeatures.TREES_DENSEWOOD.get()));
 
-        biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, placedFeatureGetter.getOrThrow(CAFeatures.CAPlacedFeatures.URANIUM_BLOCK.get()));
+        // Ores
+        biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, placedFeatureGetter.getOrThrow(CAFeatures.CAPlacedFeatures.DREDGESTONE_URANIUM_ORE.get()));
+        biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, placedFeatureGetter.getOrThrow(CAFeatures.CAPlacedFeatures.DREDGESTONE_TITANIUM_ORE.get()));
+        biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, placedFeatureGetter.getOrThrow(CAFeatures.CAPlacedFeatures.DREDGESTONE_SUNSTONE_ORE.get()));
+        biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, placedFeatureGetter.getOrThrow(CAFeatures.CAPlacedFeatures.DREDGESTONE_RUBY_ORE.get()));
+        biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, placedFeatureGetter.getOrThrow(CAFeatures.CAPlacedFeatures.DREDGESTONE_REDSTONE_ORE.get()));
+        biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, placedFeatureGetter.getOrThrow(CAFeatures.CAPlacedFeatures.DREDGESTONE_PLATINUM_ORE.get()));
+        biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, placedFeatureGetter.getOrThrow(CAFeatures.CAPlacedFeatures.DREDGESTONE_LAPIS_ORE.get()));
+        biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, placedFeatureGetter.getOrThrow(CAFeatures.CAPlacedFeatures.DREDGESTONE_KUNZITE_ORE.get()));
+        biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, placedFeatureGetter.getOrThrow(CAFeatures.CAPlacedFeatures.DREDGESTONE_IRON_ORE.get()));
+        biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, placedFeatureGetter.getOrThrow(CAFeatures.CAPlacedFeatures.DREDGESTONE_GOLD_ORE.get()));
+        biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, placedFeatureGetter.getOrThrow(CAFeatures.CAPlacedFeatures.DREDGESTONE_DIAMOND_ORE.get()));
+        biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, placedFeatureGetter.getOrThrow(CAFeatures.CAPlacedFeatures.DREDGESTONE_COPPER_ORE.get()));
+        biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, placedFeatureGetter.getOrThrow(CAFeatures.CAPlacedFeatures.DREDGESTONE_COAL_ORE.get()));
+        biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, placedFeatureGetter.getOrThrow(CAFeatures.CAPlacedFeatures.DREDGESTONE_ALUMINUM_ORE.get()));
+
+        biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, placedFeatureGetter.getOrThrow(CAFeatures.CAPlacedFeatures.GLOOMSTONE_URANIUM_ORE.get()));
+        biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, placedFeatureGetter.getOrThrow(CAFeatures.CAPlacedFeatures.GLOOMSTONE_TITANIUM_ORE.get()));
+        biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, placedFeatureGetter.getOrThrow(CAFeatures.CAPlacedFeatures.GLOOMSTONE_SUNSTONE_ORE.get()));
+        biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, placedFeatureGetter.getOrThrow(CAFeatures.CAPlacedFeatures.GLOOMSTONE_RUBY_ORE.get()));
+        biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, placedFeatureGetter.getOrThrow(CAFeatures.CAPlacedFeatures.GLOOMSTONE_REDSTONE_ORE.get()));
+        biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, placedFeatureGetter.getOrThrow(CAFeatures.CAPlacedFeatures.GLOOMSTONE_PLATINUM_ORE.get()));
+        biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, placedFeatureGetter.getOrThrow(CAFeatures.CAPlacedFeatures.GLOOMSTONE_LAPIS_ORE.get()));
+        biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, placedFeatureGetter.getOrThrow(CAFeatures.CAPlacedFeatures.GLOOMSTONE_KUNZITE_ORE.get()));
+        biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, placedFeatureGetter.getOrThrow(CAFeatures.CAPlacedFeatures.GLOOMSTONE_IRON_ORE.get()));
+        biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, placedFeatureGetter.getOrThrow(CAFeatures.CAPlacedFeatures.GLOOMSTONE_GOLD_ORE.get()));
+        biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, placedFeatureGetter.getOrThrow(CAFeatures.CAPlacedFeatures.GLOOMSTONE_DIAMOND_ORE.get()));
+        biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, placedFeatureGetter.getOrThrow(CAFeatures.CAPlacedFeatures.GLOOMSTONE_COPPER_ORE.get()));
+        biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, placedFeatureGetter.getOrThrow(CAFeatures.CAPlacedFeatures.GLOOMSTONE_COAL_ORE.get()));
+        biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, placedFeatureGetter.getOrThrow(CAFeatures.CAPlacedFeatures.GLOOMSTONE_ALUMINUM_ORE.get()));
 
         // Terrain
         biomeBuilder.addCarver(GenerationStep.Carving.AIR, configuredWorldCarverGetter.getOrThrow(CAConfiguredCarvers.CONFIGURED_MINING_PARADISE_CAVE.get()));

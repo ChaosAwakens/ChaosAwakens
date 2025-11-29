@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 200,
+  "experience": 0.35,
+  "group": "chaosawakens",
+  "ingredient": {
+    "item": "chaosawakens:kunzite_ore"
+  },
+  "result": "chaosawakens:kunzite"
+}

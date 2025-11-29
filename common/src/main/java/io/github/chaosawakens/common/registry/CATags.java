@@ -20,6 +20,8 @@ public class CATags {
 
     @RegistrarEntry
     public static class CABlockTags {
+
+        // Mining Paradise
         public static final Supplier<TagKey<Block>> DREDGESTONE = createWrappedBlockTag("dredgestone")
                 .withEntry(() -> CABlocks.DREDGESTONE.get())
                 .getParentTag();
@@ -42,6 +44,70 @@ public class CATags {
 
         public static final Supplier<TagKey<Block>> MINING_CARVER_REPLACEABLES = createWrappedBlockTag("mining_carver_replaceables")
                 .withTagEntries(ObjectArrayList.of(MINING_DIRT, BASE_STONE_MINING))
+                .getParentTag();
+
+        public static final Supplier<TagKey<Block>> STALAGMITE_ORE_COMMON = createBlockTag("stalagmite_ore/common");
+        public static final Supplier<TagKey<Block>> STALAGMITE_ORE_RARE = createBlockTag("stalagmite_ore/rare");
+        public static final Supplier<TagKey<Block>> STALAGMITE_ORE = createWrappedBlockTag("stalagmite_ore")
+                .withTagEntries(ObjectArrayList.of(STALAGMITE_ORE_COMMON, STALAGMITE_ORE_RARE))
+                .getParentTag();
+
+        public static final Supplier<TagKey<Block>> URANIUM_ORES = createWrappedBlockTag("uranium_ores")
+                .withEntries(ObjectArrayList.of(() -> CABlocks.DREDGESTONE_URANIUM_ORE.get(), () -> CABlocks.GLOOMSTONE_URANIUM_ORE.get()))
+                .getParentTag();
+
+        public static final Supplier<TagKey<Block>> RUBY_ORES = createWrappedBlockTag("ruby_ores")
+                .withEntries(ObjectArrayList.of(() -> CABlocks.DREDGESTONE_RUBY_ORE.get(), () -> CABlocks.GLOOMSTONE_RUBY_ORE.get()))
+                .getParentTag();
+
+
+        public static final Supplier<TagKey<Block>> KUNZITE_ORES = createWrappedBlockTag("kunzite_ores")
+                .withEntries(ObjectArrayList.of(() -> CABlocks.DREDGESTONE_KUNZITE_ORE.get(), () -> CABlocks.GLOOMSTONE_KUNZITE_ORE.get(), () -> CABlocks.KUNZITE_ORE.get(), () -> CABlocks.DEEPSLATE_KUNZITE_ORE.get()
+                        ))
+                .getParentTag();
+
+        public static final Supplier<TagKey<Block>> TITANIUM_ORES = createWrappedBlockTag("titanium_ores")
+                .withEntries(ObjectArrayList.of(() -> CABlocks.DREDGESTONE_TITANIUM_ORE.get(), () -> CABlocks.GLOOMSTONE_TITANIUM_ORE.get()))
+                .getParentTag();
+
+        public static final Supplier<TagKey<Block>> SUNSTONE_ORES = createWrappedBlockTag("sunstone_ores")
+                .withEntries(ObjectArrayList.of(() -> CABlocks.DREDGESTONE_SUNSTONE_ORE.get(), () -> CABlocks.GLOOMSTONE_SUNSTONE_ORE.get()))
+                .getParentTag();
+
+        public static final Supplier<TagKey<Block>> REDSTONE_ORES = createWrappedBlockTag("redstone_ores")
+                .withEntries(ObjectArrayList.of(() -> CABlocks.DREDGESTONE_REDSTONE_ORE.get(), () -> CABlocks.GLOOMSTONE_REDSTONE_ORE.get()))
+                .getParentTag();
+
+        public static final Supplier<TagKey<Block>> PLATINUM_ORES = createWrappedBlockTag("platinum_ores")
+                .withEntries(ObjectArrayList.of(() -> CABlocks.DREDGESTONE_PLATINUM_ORE.get(), () -> CABlocks.GLOOMSTONE_PLATINUM_ORE.get()))
+                .getParentTag();
+
+        public static final Supplier<TagKey<Block>> LAPIS_ORES = createWrappedBlockTag("lapis_ores")
+                .withEntries(ObjectArrayList.of(() -> CABlocks.DREDGESTONE_LAPIS_ORE.get(), () -> CABlocks.GLOOMSTONE_LAPIS_ORE.get()))
+                .getParentTag();
+
+        public static final Supplier<TagKey<Block>> IRON_ORES = createWrappedBlockTag("iron_ores")
+                .withEntries(ObjectArrayList.of(() -> CABlocks.DREDGESTONE_IRON_ORE.get(), () -> CABlocks.GLOOMSTONE_IRON_ORE.get()))
+                .getParentTag();
+
+        public static final Supplier<TagKey<Block>> GOLD_ORES = createWrappedBlockTag("gold_ores")
+                .withEntries(ObjectArrayList.of(() -> CABlocks.DREDGESTONE_GOLD_ORE.get(), () -> CABlocks.GLOOMSTONE_GOLD_ORE.get()))
+                .getParentTag();
+
+        public static final Supplier<TagKey<Block>> DIAMOND_ORES = createWrappedBlockTag("diamond_ores")
+                .withEntries(ObjectArrayList.of(() -> CABlocks.DREDGESTONE_DIAMOND_ORE.get(), () -> CABlocks.GLOOMSTONE_DIAMOND_ORE.get()))
+                .getParentTag();
+
+        public static final Supplier<TagKey<Block>> COPPER_ORES = createWrappedBlockTag("copper_ores")
+                .withEntries(ObjectArrayList.of(() -> CABlocks.DREDGESTONE_COPPER_ORE.get(), () -> CABlocks.GLOOMSTONE_COPPER_ORE.get()))
+                .getParentTag();
+
+        public static final Supplier<TagKey<Block>> COAL_ORES = createWrappedBlockTag("coal_ores")
+                .withEntries(ObjectArrayList.of(() -> CABlocks.DREDGESTONE_COAL_ORE.get(), () -> CABlocks.GLOOMSTONE_COAL_ORE.get()))
+                .getParentTag();
+
+        public static final Supplier<TagKey<Block>> ALUMINUM_ORES = createWrappedBlockTag("aluminum_ores")
+                .withEntries(ObjectArrayList.of(() -> CABlocks.DREDGESTONE_ALUMINUM_ORE.get(), () -> CABlocks.GLOOMSTONE_ALUMINUM_ORE.get()))
                 .getParentTag();
 
         public static final Supplier<TagKey<Block>> BASE_STONE_CRYSTAL = createWrappedBlockTag("base_stone_crystal").getParentTag();
@@ -103,13 +169,6 @@ public class CATags {
         public static final Supplier<TagKey<Block>> CRYSTALWOOD_LEAVES = createBlockTag("wood/leaves/crystalwood_leaves");
         public static final Supplier<TagKey<Block>> CRYSTALWOOD_SAPLINGS = createBlockTag("wood/saplings/crystalwood_saplings");
 
-        public static final Supplier<TagKey<Block>> RUBY_ORES = createBlockTag("ruby_ores");
-
-        public static final Supplier<TagKey<Block>> STALAGMITE_ORE_COMMON = createBlockTag("stalagmite_ore/common");
-        public static final Supplier<TagKey<Block>> STALAGMITE_ORE_RARE = createBlockTag("stalagmite_ore/rare");
-        public static final Supplier<TagKey<Block>> STALAGMITE_ORE = createWrappedBlockTag("stalagmite_ore")
-                .withTagEntries(ObjectArrayList.of(STALAGMITE_ORE_COMMON, STALAGMITE_ORE_RARE))
-                .getParentTag();
 
         public static final Supplier<TagKey<Block>> POUNDER_IMMUNE = createBlockTag("robo_immune/pounder");
         public static final Supplier<TagKey<Block>> JEFFERY_IMMUNE = createBlockTag("robo_immune/jeffery");

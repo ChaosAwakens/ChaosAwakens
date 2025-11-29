@@ -16,6 +16,7 @@ import io.github.chaosawakens.util.PredicateUtil;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -228,8 +229,10 @@ public final class CABlocks {
     public static final Supplier<Block> SALT_BLOCK = BlockPropertyWrapper.of(CABlockPropertyWrappers.COMPONENT_BLOCK_CONSTRUCTED, registerBlock("salt_block", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_WHITE).sound(SoundType.SAND).strength(0.5F)))).getParentBlock();
 
     // Standard Ores
+    public static final Supplier<Block> KUNZITE_ORE = BlockPropertyWrapper.of(CABlockPropertyWrappers.BASIC_BLOCK_PICKAXE, registerBlock("kunzite_ore", () -> new DropExperienceBlock(BlockBehaviour.Properties.copy(Blocks.STONE)))).getParentBlock();
 
     // Deepslate Ores
+    public static final Supplier<Block> DEEPSLATE_KUNZITE_ORE = BlockPropertyWrapper.of(CABlockPropertyWrappers.BASIC_BLOCK_PICKAXE, registerBlock("deepslate_kunzite_ore", () -> new DropExperienceBlock(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE)))).getParentBlock();
 
     // Mining Paradise Stones
     public static final Supplier<Block> DREDGESTONE = BlockPropertyWrapper.of(CABlockPropertyWrappers.BASIC_BLOCK_PICKAXE, registerBlock("dredgestone", () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE)))).getParentBlock();

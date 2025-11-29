@@ -22,10 +22,10 @@ public class CANoiseParameters {
     public static final Supplier<ResourceKey<NormalNoise.NoiseParameters>> MINING_PARADISE_EROSION = registerNoiseParameter("mining_paradise/erosion", () -> new NormalNoise.NoiseParameters(-8, 1.0D, 0.0D, 1.0D, 1.0D));
     public static final Supplier<ResourceKey<NormalNoise.NoiseParameters>> MINING_PARADISE_RIDGES = registerNoiseParameter("mining_paradise/ridges", () -> new NormalNoise.NoiseParameters(-8, 1.5D, 1.0D, 0.5D, 0.5D, 0.5D, 0.5D, 0.5D));
 
-    public static final Supplier<ResourceKey<NormalNoise.NoiseParameters>> AQUIFER_BARRIER = registerNoiseParameter("mining_paradise/aquifer_barrier", () -> new NormalNoise.NoiseParameters(-3, 1.0D));
+    public static final Supplier<ResourceKey<NormalNoise.NoiseParameters>> AQUIFER_BARRIER = registerNoiseParameter("mining_paradise/aquifer_barrier", () -> new NormalNoise.NoiseParameters(-4, 1.0D));
     public static final Supplier<ResourceKey<NormalNoise.NoiseParameters>> AQUIFER_FLUID_LEVEL_FLOODEDNESS = registerNoiseParameter("mining_paradise/aquifer_fluid_level_floodedness", () -> new NormalNoise.NoiseParameters(-7, 1.0D));
     public static final Supplier<ResourceKey<NormalNoise.NoiseParameters>> AQUIFER_LAVA = registerNoiseParameter("mining_paradise/aquifer_lava", () -> new NormalNoise.NoiseParameters(-1, 1.0D));
-    public static final Supplier<ResourceKey<NormalNoise.NoiseParameters>> AQUIFER_FLUID_LEVEL_SPREAD = registerNoiseParameter("mining_paradise/aquifer_fluid_level_spread", () -> new NormalNoise.NoiseParameters(-5, 1.0D));
+    public static final Supplier<ResourceKey<NormalNoise.NoiseParameters>> AQUIFER_FLUID_LEVEL_SPREAD = registerNoiseParameter("mining_paradise/aquifer_fluid_level_spread", () -> new NormalNoise.NoiseParameters(-6, 1.0D));
 
     public static final Supplier<ResourceKey<NormalNoise.NoiseParameters>> CAVE = registerNoiseParameter("mining_paradise/cave", () -> new NormalNoise.NoiseParameters(-8, 1.0, 1.0, 1.0, 1.0));
     public static final Supplier<ResourceKey<NormalNoise.NoiseParameters>> CAVE_LAYER = registerNoiseParameter("mining_paradise/cave_layer", () -> new NormalNoise.NoiseParameters(-8, 1.0D));
