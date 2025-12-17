@@ -12,7 +12,8 @@ public class CALootTableProvider extends LootTableProvider {
     public CALootTableProvider(PackOutput pOutput) {
         super(pOutput, Set.of(), ObjectArrayList.of(
                 new SubProviderEntry(CABlockLootTableProvider::new, LootContextParamSets.BLOCK),
-                new SubProviderEntry(CAEntityLootTableProvider::new, LootContextParamSets.ENTITY)
+                new SubProviderEntry(CAEntityLootTableProvider::new, LootContextParamSets.ENTITY),
+                new SubProviderEntry(CAChestLootTableProvider::new, LootContextParamSets.CHEST)
         ));
     }
 }

@@ -1,0 +1,46 @@
+{
+  "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 14357630,
+    "separation": 8,
+    "spacing": 32
+  },
+  "structures": [
+    {
+      "structure": "chaosawakens:acacia_ent_tree",
+      "weight": 1
+    },
+    {
+      "structure": "chaosawakens:birch_ent_tree",
+      "weight": 1
+    },
+    {
+      "structure": "chaosawakens:crimson_ent_tree",
+      "weight": 1
+    },
+    {
+      "structure": "chaosawakens:dark_oak_ent_tree",
+      "weight": 1
+    },
+    {
+      "structure": "chaosawakens:ginkgo_ent_tree",
+      "weight": 1
+    },
+    {
+      "structure": "chaosawakens:jungle_ent_tree",
+      "weight": 1
+    },
+    {
+      "structure": "chaosawakens:oak_ent_tree",
+      "weight": 1
+    },
+    {
+      "structure": "chaosawakens:spruce_ent_tree",
+      "weight": 1
+    },
+    {
+      "structure": "chaosawakens:warped_ent_tree",
+      "weight": 1
+    }
+  ]
+}

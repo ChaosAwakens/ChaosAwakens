@@ -3,6 +3,7 @@ package io.github.chaosawakens.common.registry;
 import com.google.common.base.Suppliers;
 import io.github.chaosawakens.CAConstants;
 import io.github.chaosawakens.api.asm.annotations.RegistrarEntry;
+import io.github.chaosawakens.api.tag.DataPackTagWrapper;
 import io.github.chaosawakens.api.tag.TagWrapper;
 import io.github.chaosawakens.util.RegistryUtil;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
@@ -11,9 +12,12 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 
+import java.util.List;
 import java.util.function.Supplier;
 
 public class CATags {
@@ -444,6 +448,42 @@ public class CATags {
 
         private static Supplier<TagKey<Item>> createItemTag(String name) {
             return Suppliers.ofInstance(TagKey.create(Registries.ITEM, CAConstants.prefix(name)));
+        }
+    }
+
+    @RegistrarEntry
+    public static class BiomeTags {
+
+        // ENT TREES
+        public static final Supplier<TagKey<Biome>> HAS_ACACIA_ENT_TREE = createWrappedBiomeTag("has_structure/acacia_ent_tree")
+                .withEntry(() -> Biomes.SAVANNA).getParentTag();
+        public static final Supplier<TagKey<Biome>> HAS_BIRCH_ENT_TREE = createWrappedBiomeTag("has_structure/birch_ent_tree")
+                .withEntries(List.of(() -> Biomes.MEADOW, () -> Biomes.FOREST, () -> Biomes.FLOWER_FOREST, () -> Biomes.BIRCH_FOREST,
+                        () -> Biomes.OLD_GROWTH_BIRCH_FOREST)).getParentTag();
+        public static final Supplier<TagKey<Biome>> HAS_CRIMSON_ENT_TREE = createWrappedBiomeTag("has_structure/crimson_ent_tree")
+                .withEntry(() -> Biomes.CRIMSON_FOREST).getParentTag();
+        public static final Supplier<TagKey<Biome>> HAS_DARK_OAK_ENT_TREE = createWrappedBiomeTag("has_structure/dark_oak_ent_tree")
+                .withEntry(() -> Biomes.DARK_FOREST).getParentTag();
+        public static final Supplier<TagKey<Biome>> HAS_GINKGO_ENT_TREE = createWrappedBiomeTag("has_structure/ginkgo_ent_tree")
+                .withEntry(CABiomes.GINKGO_FOREST).getParentTag();
+        public static final Supplier<TagKey<Biome>> HAS_JUNGLE_ENT_TREE = createWrappedBiomeTag("has_structure/jungle_ent_tree")
+                .withEntries(List.of(() -> Biomes.JUNGLE, () -> Biomes.SPARSE_JUNGLE)).getParentTag();
+        public static final Supplier<TagKey<Biome>> HAS_OAK_ENT_TREE = createWrappedBiomeTag("has_structure/oak_ent_tree")
+                .withEntries(List.of(() -> Biomes.MEADOW, () -> Biomes.WINDSWEPT_HILLS, () -> Biomes.WINDSWEPT_FOREST, () -> Biomes.FOREST,
+                        () -> Biomes.FLOWER_FOREST)).getParentTag();
+        public static final Supplier<TagKey<Biome>> HAS_SPRUCE_ENT_TREE = createWrappedBiomeTag("has_structure/spruce_ent_tree")
+                .withEntries(List.of(() -> Biomes.WINDSWEPT_HILLS, () -> Biomes.WINDSWEPT_FOREST, () -> Biomes.TAIGA, () -> Biomes.OLD_GROWTH_PINE_TAIGA,
+                        () -> Biomes.OLD_GROWTH_SPRUCE_TAIGA, () -> Biomes.SNOWY_TAIGA)).getParentTag();
+        public static final Supplier<TagKey<Biome>> HAS_WARPED_ENT_TREE = createWrappedBiomeTag("has_structure/warped_ent_tree")
+                .withEntry(() -> Biomes.WARPED_FOREST).getParentTag();
+
+
+        private static DataPackTagWrapper<Biome, TagKey<Biome>> createWrappedBiomeTag(String name) {
+            return DataPackTagWrapper.create(createBiomeTag(name));
+        }
+
+        private static Supplier<TagKey<Biome>> createBiomeTag(String name) {
+            return Suppliers.ofInstance(TagKey.create(Registries.BIOME, CAConstants.prefix(name)));
         }
     }
 }

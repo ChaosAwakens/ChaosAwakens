@@ -5,6 +5,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import io.github.chaosawakens.CAConstants;
 import io.github.chaosawakens.common.registry.CABlocks;
 import io.github.chaosawakens.common.registry.CAFeatures;
+import io.github.chaosawakens.common.registry.CAStructures;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.RandomSource;
@@ -67,6 +68,6 @@ public class MesozoicVineProcessor extends StructureProcessor {
 
     @Override
     protected StructureProcessorType<?> getType() {
-        return CAFeatures.StructureProcessors.MESOZOIC_VINE.get();
+        return CAStructures.StructureProcessors.MESOZOIC_VINE.get();
     }
 }

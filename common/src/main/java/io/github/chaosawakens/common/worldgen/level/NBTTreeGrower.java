@@ -49,7 +49,8 @@ public class NBTTreeGrower extends AbstractTreeGrower {
                 BlockState blockState = level.getFluidState(pos).createLegacyBlock();
                 level.setBlock(pos, blockState, 4);
 
-                StructureTemplate template = level.getStructureManager().get(feature.config().template().left().get()).get();
+                StructureTemplate template = level.getStructureManager().get(feature.config().template.left().get()).get();
+                feature.config().placedFromSapling = true;
 
                 if (feature.place(level, generator, random, pos.offset(template.getSize().getX() / -2, 0, template.getSize().getZ() / -2))) {
                     return true;

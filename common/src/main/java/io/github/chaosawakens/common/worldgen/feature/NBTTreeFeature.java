@@ -6,6 +6,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Vec3i;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
@@ -27,7 +28,7 @@ public class NBTTreeFeature extends Feature<NBTTreeConfiguration> {
         if (curLevel.isClientSide()) return false;
 
         NBTTreeConfiguration config = featurePlaceContext.config();
-        Optional<StructureTemplate> treeTemplate = curLevel.getServer().getStructureManager().get(config.template().left().get());
+        Optional<StructureTemplate> treeTemplate = curLevel.getServer().getStructureManager().get(config.template.left().get());
 
         if (treeTemplate.isEmpty()) return false;
 
@@ -42,11 +43,14 @@ public class NBTTreeFeature extends Feature<NBTTreeConfiguration> {
         settings.setRotationPivot(new BlockPos(size.getX() / 2, 0, size.getZ() / 2));
         settings.setRotation(randomRotation(rand));
 
-        if (config.processors().isPresent()) {
-            config.processors().get().list().forEach(structureProcessor -> settings.addProcessor(structureProcessor));
+        if (config.processors.isPresent()) {
+            config.processors.get().list().forEach(structureProcessor -> settings.addProcessor(structureProcessor));
         }
 
-        treeTemplate.get().placeInWorld(curLevel, origin, origin, settings, rand, 2);
+        if (config.placedFromSapling)
+            treeTemplate.get().placeInWorld(curLevel, origin, origin, settings, rand, Block.UPDATE_CLIENTS);
+        else
+            treeTemplate.get().placeInWorld(curLevel, origin, origin, settings, rand, Block.UPDATE_NEIGHBORS);
 
         return true;
     }

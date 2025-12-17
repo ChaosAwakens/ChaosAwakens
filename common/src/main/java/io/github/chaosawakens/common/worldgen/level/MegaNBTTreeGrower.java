@@ -56,7 +56,7 @@ public class MegaNBTTreeGrower extends AbstractMegaTreeGrower {
                 level.setBlock(pos.offset(pBranchX, 0, pBranchY + 1), blockState, 4);
                 level.setBlock(pos.offset(pBranchX + 1, 0, pBranchY + 1), blockState, 4);
 
-                StructureTemplate template = level.getStructureManager().get(feature.config().template().left().get()).get();
+                StructureTemplate template = level.getStructureManager().get(feature.config().template.left().get()).get();
 
                 if (feature.place(level, generator, random, pos.offset(template.getSize().getX() / -2, 0, template.getSize().getZ() / -2))) {
                     return true;

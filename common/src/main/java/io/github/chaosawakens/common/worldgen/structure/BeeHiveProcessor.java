@@ -4,6 +4,7 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import io.github.chaosawakens.CAConstants;
 import io.github.chaosawakens.common.registry.CAFeatures;
+import io.github.chaosawakens.common.registry.CAStructures;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -70,6 +71,6 @@ public class BeeHiveProcessor extends StructureProcessor {
 
     @Override
     protected StructureProcessorType<?> getType() {
-        return CAFeatures.StructureProcessors.BEE_HIVE.get();
+        return CAStructures.StructureProcessors.BEE_HIVE.get();
     }
 }
