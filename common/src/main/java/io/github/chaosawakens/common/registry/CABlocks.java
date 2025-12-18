@@ -16,7 +16,6 @@ import io.github.chaosawakens.util.PredicateUtil;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -357,8 +356,8 @@ public final class CABlocks {
     public static final Supplier<Block> LARGE_GINKGO_BUSH = BlockPropertyWrapper.of(CABlockPropertyWrappers.NO_TINT_MULTI_LAYER_PLANT, registerBlock("large_ginkgo_bush", () -> new CustomizableMultiLayerPlantBlock(BlockBehaviour.Properties.copy(Blocks.LILAC), VegetationConfig.DENSE.getPlantConfig()))).getParentBlock();
     public static final Supplier<Block> LARGE_MESOZOIC_BUSH = BlockPropertyWrapper.of(CABlockPropertyWrappers.NO_TINT_MULTI_LAYER_PLANT, registerBlock("large_mesozoic_bush", () -> new CustomizableMultiLayerPlantBlock(BlockBehaviour.Properties.copy(Blocks.LILAC), VegetationConfig.DENSE.getPlantConfig()))).getParentBlock();
 
-    public static final Supplier<Block> MESOZOIC_VINES = BlockPropertyWrapper.of(CABlockPropertyWrappers.NO_TINT_PLANT, registerBlock("mesozoic_vines", () -> new MesozoicVinesBlock(BlockBehaviour.Properties.copy(Blocks.VINE)))).getParentBlock();
-    public static final Supplier<Block> MESOZOIC_VINES_PLANT = BlockPropertyWrapper.of(CABlockPropertyWrappers.NO_TINT_PLANT, registerItemlessBlock("mesozoic_vines_plant", () -> new MesozoicVinesPlantBlock(BlockBehaviour.Properties.copy(Blocks.VINE)))).getParentBlock();
+    public static final Supplier<Block> MESOZOIC_VINES = BlockPropertyWrapper.of(CABlockPropertyWrappers.NO_TINT_PLANT, registerBlock("mesozoic_vines", () -> new MesozoicVinesHeadBlock(BlockBehaviour.Properties.copy(Blocks.VINE)))).getParentBlock();
+    public static final Supplier<Block> MESOZOIC_VINES_PLANT = BlockPropertyWrapper.of(CABlockPropertyWrappers.NO_TINT_PLANT, registerItemlessBlock("mesozoic_vines_plant", () -> new MesozoicVinesBodyBlock(BlockBehaviour.Properties.copy(Blocks.VINE)))).getParentBlock();
 
     // CrystalWorld Vegetation
     public static final Supplier<Block> CRYSTAL_GRASS_BLOCK = BlockPropertyWrapper.of(CABlockPropertyWrappers.CRYSTAL_GRASS_BLOCK, registerBlock("crystal_grass_block", () -> new CustomizableGrassBlock(BlockBehaviour.Properties.copy(Blocks.STONE).sound(SoundType.AMETHYST).strength(1.5F), () -> VegetationConfig.CRYSTAL))).getParentBlock();

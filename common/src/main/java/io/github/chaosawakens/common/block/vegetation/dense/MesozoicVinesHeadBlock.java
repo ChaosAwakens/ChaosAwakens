@@ -4,18 +4,18 @@ import io.github.chaosawakens.common.registry.CABlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.GrowingPlantHeadBlock;
+import net.minecraft.world.level.block.NetherVines;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import org.jetbrains.annotations.Nullable;
 
-public class MesozoicVinesBlock extends GrowingPlantHeadBlock {
+public class MesozoicVinesHeadBlock extends GrowingPlantHeadBlock {
     protected static final VoxelShape SHAPE = Block.box(0.0, 6.0, 0.0, 16.0, 16.0, 16.0);
 
-    public MesozoicVinesBlock(BlockBehaviour.Properties properties) {
+    public MesozoicVinesHeadBlock(BlockBehaviour.Properties properties) {
         super(properties, Direction.DOWN, SHAPE, false, 0.1f);
     }
 

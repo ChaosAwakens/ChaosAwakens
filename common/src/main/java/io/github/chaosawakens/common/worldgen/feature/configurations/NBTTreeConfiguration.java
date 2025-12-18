@@ -13,24 +13,13 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemp
 
 import java.util.Optional;
 
-public class NBTTreeConfiguration implements FeatureConfiguration {
+public record NBTTreeConfiguration(Either<ResourceLocation, StructureTemplate> template, int groundLevel, Optional<StructureProcessorList> processors) implements FeatureConfiguration {
     public static final Codec<Either<ResourceLocation, StructureTemplate>> TEMPLATE_CODEC = Codec.of(NBTTreeConfiguration::encodeTemplate, ResourceLocation.CODEC.map(Either::left));
     public static final Codec<NBTTreeConfiguration> CODEC = RecordCodecBuilder.create(instance -> instance.group(
             TEMPLATE_CODEC.fieldOf("location").forGetter(conf -> conf.template),
             Codec.intRange(0, 32).fieldOf("ground_level").forGetter(conf -> conf.groundLevel),
             StructureProcessorType.LIST_OBJECT_CODEC.optionalFieldOf("processors").forGetter(conf -> conf.processors)
     ).apply(instance, NBTTreeConfiguration::new));
-
-    public final Either<ResourceLocation, StructureTemplate> template;
-    public final int groundLevel;
-    public final Optional<StructureProcessorList> processors;
-    public boolean placedFromSapling;
-
-    public NBTTreeConfiguration(Either<ResourceLocation, StructureTemplate> template, int groundLevel, Optional<StructureProcessorList> processors) {
-        this.template = template;
-        this.groundLevel = groundLevel;
-        this.processors = processors;
-    }
 
     private static <T> DataResult<T> encodeTemplate(Either<ResourceLocation, StructureTemplate> either, DynamicOps<T> ops, T templateObj) {
         Optional<ResourceLocation> templateLoc = either.left();

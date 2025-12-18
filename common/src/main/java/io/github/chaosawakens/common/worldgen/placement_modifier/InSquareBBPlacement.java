@@ -27,8 +27,8 @@ public class InSquareBBPlacement extends PlacementModifier {
 
     @Override
     public Stream<BlockPos> getPositions(PlacementContext context, RandomSource randomSource, BlockPos pos) {
-        int posX = 32 - x > 0 ? randomSource.nextInt(32 - x) + pos.getX() : pos.getX();
-        int posZ = 32 - z > 0 ? randomSource.nextInt(32 - z) + pos.getZ() : pos.getZ();
+        int posX = 30 - x > 0 ? randomSource.nextInt(30 - x) + pos.getX() : pos.getX();
+        int posZ = 30 - z > 0 ? randomSource.nextInt(30 - z) + pos.getZ() : pos.getZ();
         return Stream.of(new BlockPos(posX, pos.getY(), posZ));
     }
 

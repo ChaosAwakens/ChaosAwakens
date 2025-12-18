@@ -1,10 +1,8 @@
-package io.github.chaosawakens.common.worldgen.structure;
+package io.github.chaosawakens.common.worldgen.structure.templatesystem;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import io.github.chaosawakens.CAConstants;
 import io.github.chaosawakens.common.registry.CABlocks;
-import io.github.chaosawakens.common.registry.CAFeatures;
 import io.github.chaosawakens.common.registry.CAStructures;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -22,29 +20,30 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class MesozoicVineProcessor extends StructureProcessor {
-    public static final Codec<MesozoicVineProcessor> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+public class MesozoicVinesProcessor extends StructureProcessor {
+    public static final Codec<MesozoicVinesProcessor> CODEC = RecordCodecBuilder.create(instance -> instance.group(
                 Codec.floatRange(0, 1).fieldOf("chance").forGetter(processor -> processor.chance)
             )
-            .apply(instance, MesozoicVineProcessor::new));
+            .apply(instance, MesozoicVinesProcessor::new));
 
     public final float chance;
 
-    public MesozoicVineProcessor(float chance) {
+    public MesozoicVinesProcessor(float chance) {
         this.chance = chance;
     }
 
     @Override
-    public @Nullable StructureTemplate.StructureBlockInfo processBlock(LevelReader reader, BlockPos pos, BlockPos pos2, StructureTemplate.StructureBlockInfo info, StructureTemplate.StructureBlockInfo info2, StructurePlaceSettings settings) {
+    public @Nullable StructureTemplate.StructureBlockInfo processBlock(LevelReader reader, BlockPos origin, BlockPos origin2, StructureTemplate.StructureBlockInfo info, StructureTemplate.StructureBlockInfo info2, StructurePlaceSettings settings) {
         return info2;
     }
 
-    public List<StructureTemplate.StructureBlockInfo> finalizeProcessing(ServerLevelAccessor accessor, BlockPos pos, BlockPos pos2, List<StructureTemplate.StructureBlockInfo> infos, List<StructureTemplate.StructureBlockInfo> infos2, StructurePlaceSettings settings) {
-        Map<BlockPos, StructureTemplate.StructureBlockInfo> infoMap = infos2.stream().collect(Collectors.toMap(StructureTemplate.StructureBlockInfo::pos, item -> item));
-        infos2.forEach(info -> {
+    @Override
+    public List<StructureTemplate.StructureBlockInfo> finalizeProcessing(ServerLevelAccessor accessor, BlockPos origin, BlockPos originWithOffset, List<StructureTemplate.StructureBlockInfo> infos, List<StructureTemplate.StructureBlockInfo> infosWithOffset, StructurePlaceSettings settings) {
+        Map<BlockPos, StructureTemplate.StructureBlockInfo> infoMap = infosWithOffset.stream().collect(Collectors.toMap(StructureTemplate.StructureBlockInfo::pos, item -> item));
+        infosWithOffset.forEach(info -> {
             if (info.state().equals(Blocks.EMERALD_BLOCK.defaultBlockState())) {
                 if (!accessor.getBlockState(info.pos()).canBeReplaced()) {
-                    infoMap.put(info.pos(), new StructureTemplate.StructureBlockInfo(info.pos(), Blocks.STRUCTURE_VOID.defaultBlockState(), new CompoundTag()));
+                    infoMap.remove(info.pos());
                     return;
                 }
                 RandomSource random = settings.getRandom(info.pos());
@@ -59,7 +58,7 @@ public class MesozoicVineProcessor extends StructureProcessor {
                     }
                     infoMap.put(info.pos().below(num), new StructureTemplate.StructureBlockInfo(info.pos().below(num), CABlocks.MESOZOIC_VINES.get().defaultBlockState(), new CompoundTag()));
                 } else {
-                    infoMap.put(info.pos(), new StructureTemplate.StructureBlockInfo(info.pos(), Blocks.AIR.defaultBlockState(), new CompoundTag()));
+                    infoMap.remove(info.pos());
                 }
             }
         });
@@ -68,6 +67,6 @@ public class MesozoicVineProcessor extends StructureProcessor {
 
     @Override
     protected StructureProcessorType<?> getType() {
-        return CAStructures.StructureProcessors.MESOZOIC_VINE.get();
+        return CAStructures.StructureProcessors.MESOZOIC_VINES.get();
     }
 }

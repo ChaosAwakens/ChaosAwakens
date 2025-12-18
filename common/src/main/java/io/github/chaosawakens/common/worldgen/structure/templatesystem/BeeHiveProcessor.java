@@ -1,9 +1,7 @@
-package io.github.chaosawakens.common.worldgen.structure;
+package io.github.chaosawakens.common.worldgen.structure.templatesystem;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import io.github.chaosawakens.CAConstants;
-import io.github.chaosawakens.common.registry.CAFeatures;
 import io.github.chaosawakens.common.registry.CAStructures;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -12,20 +10,14 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.animal.Bee;
 import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.BeehiveBlock;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.entity.BeehiveBlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessor;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorType;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.List;
 
 public class BeeHiveProcessor extends StructureProcessor {
     public static final Codec<BeeHiveProcessor> CODEC = RecordCodecBuilder.create(instance -> instance.group(

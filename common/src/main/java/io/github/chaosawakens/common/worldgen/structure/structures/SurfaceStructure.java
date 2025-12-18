@@ -76,7 +76,6 @@ public class SurfaceStructure extends Structure {
             return Optional.empty();
         }
 
-        CAConstants.LOGGER.debug("First available y level: {}");
         BlockPos targetPos = new BlockPos(pos.getMinBlockX(), y, pos.getMinBlockZ());
         return JigsawPlacement.addPieces(
                 context, this.startPool, this.startJigsawName, this.maxDepth, targetPos, this.useExpansionHack, this.projectStartToHeightmap, this.maxDistanceFromCenter

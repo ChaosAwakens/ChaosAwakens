@@ -5,8 +5,8 @@ import com.mojang.datafixers.util.Pair;
 import io.github.chaosawakens.CAConstants;
 import io.github.chaosawakens.api.asm.annotations.RegistrarEntry;
 import io.github.chaosawakens.api.platform.CAServices;
-import io.github.chaosawakens.common.worldgen.structure.BeeHiveProcessor;
-import io.github.chaosawakens.common.worldgen.structure.MesozoicVineProcessor;
+import io.github.chaosawakens.common.worldgen.structure.templatesystem.BeeHiveProcessor;
+import io.github.chaosawakens.common.worldgen.structure.templatesystem.MesozoicVinesProcessor;
 import io.github.chaosawakens.common.worldgen.structure.structures.SurfaceStructure;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.core.HolderGetter;
@@ -16,7 +16,6 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.data.worldgen.Pools;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.tags.BiomeTags;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.levelgen.GenerationStep;
@@ -100,7 +99,7 @@ public class CAStructures {
         private static final ObjectArrayList<Supplier<StructureProcessorType<?>>> STRUCTURE_PROCESSORS = new ObjectArrayList<>();
 
         public static final Supplier<StructureProcessorType<BeeHiveProcessor>> BEE_HIVE = registerProcessor("bee_hive", () -> () -> BeeHiveProcessor.CODEC);
-        public static final Supplier<StructureProcessorType<MesozoicVineProcessor>> MESOZOIC_VINE = registerProcessor("mesozoic_vine", () -> () -> MesozoicVineProcessor.CODEC);
+        public static final Supplier<StructureProcessorType<MesozoicVinesProcessor>> MESOZOIC_VINES = registerProcessor("mesozoic_vine", () -> () -> MesozoicVinesProcessor.CODEC);
 
         private static <P extends StructureProcessor> Supplier<StructureProcessorType<P>> registerProcessor(String id, Supplier<StructureProcessorType<P>> codecSup) {
             Supplier<StructureProcessorType<P>> typeSupplier = CAServices.REGISTRAR.registerObject(CAConstants.prefix(id), codecSup, BuiltInRegistries.STRUCTURE_PROCESSOR);

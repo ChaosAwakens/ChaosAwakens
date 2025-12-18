@@ -7,15 +7,14 @@ import io.github.chaosawakens.CAConstants;
 import io.github.chaosawakens.api.asm.annotations.RegistrarEntry;
 import io.github.chaosawakens.api.platform.CAServices;
 import io.github.chaosawakens.common.worldgen.feature.*;
-import io.github.chaosawakens.common.worldgen.feature.configurations.StalagmiteConfiguration;
 import io.github.chaosawakens.common.worldgen.feature.configurations.NBTTreeConfiguration;
 import io.github.chaosawakens.common.worldgen.feature.configurations.RandomFeatureKeyConfiguration;
+import io.github.chaosawakens.common.worldgen.feature.configurations.StalagmiteConfiguration;
 import io.github.chaosawakens.common.worldgen.placement_modifier.InSquareBBPlacement;
 import io.github.chaosawakens.common.worldgen.placement_modifier.PickLowestHeightPlacement;
 import io.github.chaosawakens.common.worldgen.placement_modifier.SurfaceAreaCheckPlacement;
 import io.github.chaosawakens.common.worldgen.placement_modifier.SurfaceCheckPlacement;
-import io.github.chaosawakens.common.worldgen.structure.BeeHiveProcessor;
-import io.github.chaosawakens.common.worldgen.structure.MesozoicVineProcessor;
+import io.github.chaosawakens.common.worldgen.structure.templatesystem.MesozoicVinesProcessor;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -32,9 +31,7 @@ import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvi
 import net.minecraft.world.level.levelgen.placement.*;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.level.levelgen.structure.templatesystem.BlockMatchTest;
-import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessor;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorList;
-import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorType;
 
 import java.util.List;
 import java.util.Optional;
@@ -111,12 +108,12 @@ public class CAFeatures {
         public static final Supplier<ResourceKey<ConfiguredFeature<?, ?>>> TAR_PUDDLE = registerConfiguredFeature("tar_puddle", () -> new ConfiguredFeature<>(Feature.REPLACE_BLOBS, new ReplaceSphereConfiguration(CABlocks.DENSE_GRASS_BLOCK.get().defaultBlockState(), CABlocks.TAR.get().defaultBlockState(), UniformInt.of(3, 7))));
         public static final Supplier<ResourceKey<ConfiguredFeature<?, ?>>> LATOSOL_PUDDLE = registerConfiguredFeature("latosol_puddle", () -> new ConfiguredFeature<>(Feature.REPLACE_BLOBS, new ReplaceSphereConfiguration(CABlocks.DENSE_GRASS_BLOCK.get().defaultBlockState(), CABlocks.LATOSOL.get().defaultBlockState(), UniformInt.of(3, 7))));
 
-        public static final Supplier<ResourceKey<ConfiguredFeature<?, ?>>> MESOZOIC_TREE_VARIANT_1 = registerConfiguredFeature("mesozoic_tree_variant_1", () -> new ConfiguredFeature<>(Features.NBT_TREE.get(), new NBTTreeConfiguration(Either.left(CAConstants.prefix("feature_presets/nbt_tree/mesozoic_tree/mesozoic_tree_1")), 0, Optional.of(new StructureProcessorList(ObjectArrayList.of(new MesozoicVineProcessor(0.8f)))) )));
-        public static final Supplier<ResourceKey<ConfiguredFeature<?, ?>>> MESOZOIC_TREE_VARIANT_2 = registerConfiguredFeature("mesozoic_tree_variant_2", () -> new ConfiguredFeature<>(Features.NBT_TREE.get(), new NBTTreeConfiguration(Either.left(CAConstants.prefix("feature_presets/nbt_tree/mesozoic_tree/mesozoic_tree_2")), 0, Optional.of(new StructureProcessorList(ObjectArrayList.of(new MesozoicVineProcessor(0.8f)))) )));
-        public static final Supplier<ResourceKey<ConfiguredFeature<?, ?>>> MESOZOIC_TREE_VARIANT_3 = registerConfiguredFeature("mesozoic_tree_variant_3", () -> new ConfiguredFeature<>(Features.NBT_TREE.get(), new NBTTreeConfiguration(Either.left(CAConstants.prefix("feature_presets/nbt_tree/mesozoic_tree/mesozoic_tree_3")), 0, Optional.of(new StructureProcessorList(ObjectArrayList.of(new MesozoicVineProcessor(0.8f)))) )));
-        public static final Supplier<ResourceKey<ConfiguredFeature<?, ?>>> MESOZOIC_TREE_VARIANT_4 = registerConfiguredFeature("mesozoic_tree_variant_4", () -> new ConfiguredFeature<>(Features.NBT_TREE.get(), new NBTTreeConfiguration(Either.left(CAConstants.prefix("feature_presets/nbt_tree/mesozoic_tree/mesozoic_tree_4")), 0, Optional.of(new StructureProcessorList(ObjectArrayList.of(new MesozoicVineProcessor(0.8f)))) )));
-        public static final Supplier<ResourceKey<ConfiguredFeature<?, ?>>> MESOZOIC_TREE_VARIANT_5 = registerConfiguredFeature("mesozoic_tree_variant_5", () -> new ConfiguredFeature<>(Features.NBT_TREE.get(), new NBTTreeConfiguration(Either.left(CAConstants.prefix("feature_presets/nbt_tree/mesozoic_tree/mesozoic_tree_5")), 0, Optional.of(new StructureProcessorList(ObjectArrayList.of(new MesozoicVineProcessor(0.8f)))) )));
-        public static final Supplier<ResourceKey<ConfiguredFeature<?, ?>>> MESOZOIC_TREE_VARIANT_6 = registerConfiguredFeature("mesozoic_tree_variant_6", () -> new ConfiguredFeature<>(Features.NBT_TREE.get(), new NBTTreeConfiguration(Either.left(CAConstants.prefix("feature_presets/nbt_tree/mesozoic_tree/mesozoic_tree_6")), 0, Optional.of(new StructureProcessorList(ObjectArrayList.of(new MesozoicVineProcessor(0.8f)))) )));
+        public static final Supplier<ResourceKey<ConfiguredFeature<?, ?>>> MESOZOIC_TREE_VARIANT_1 = registerConfiguredFeature("mesozoic_tree_variant_1", () -> new ConfiguredFeature<>(Features.NBT_TREE.get(), new NBTTreeConfiguration(Either.left(CAConstants.prefix("feature_presets/nbt_tree/mesozoic_tree/mesozoic_tree_1")), 0, Optional.of(new StructureProcessorList(ObjectArrayList.of(new MesozoicVinesProcessor(0.8f)))) )));
+        public static final Supplier<ResourceKey<ConfiguredFeature<?, ?>>> MESOZOIC_TREE_VARIANT_2 = registerConfiguredFeature("mesozoic_tree_variant_2", () -> new ConfiguredFeature<>(Features.NBT_TREE.get(), new NBTTreeConfiguration(Either.left(CAConstants.prefix("feature_presets/nbt_tree/mesozoic_tree/mesozoic_tree_2")), 0, Optional.of(new StructureProcessorList(ObjectArrayList.of(new MesozoicVinesProcessor(0.8f)))) )));
+        public static final Supplier<ResourceKey<ConfiguredFeature<?, ?>>> MESOZOIC_TREE_VARIANT_3 = registerConfiguredFeature("mesozoic_tree_variant_3", () -> new ConfiguredFeature<>(Features.NBT_TREE.get(), new NBTTreeConfiguration(Either.left(CAConstants.prefix("feature_presets/nbt_tree/mesozoic_tree/mesozoic_tree_3")), 0, Optional.of(new StructureProcessorList(ObjectArrayList.of(new MesozoicVinesProcessor(0.8f)))) )));
+        public static final Supplier<ResourceKey<ConfiguredFeature<?, ?>>> MESOZOIC_TREE_VARIANT_4 = registerConfiguredFeature("mesozoic_tree_variant_4", () -> new ConfiguredFeature<>(Features.NBT_TREE.get(), new NBTTreeConfiguration(Either.left(CAConstants.prefix("feature_presets/nbt_tree/mesozoic_tree/mesozoic_tree_4")), 0, Optional.of(new StructureProcessorList(ObjectArrayList.of(new MesozoicVinesProcessor(0.8f)))) )));
+        public static final Supplier<ResourceKey<ConfiguredFeature<?, ?>>> MESOZOIC_TREE_VARIANT_5 = registerConfiguredFeature("mesozoic_tree_variant_5", () -> new ConfiguredFeature<>(Features.NBT_TREE.get(), new NBTTreeConfiguration(Either.left(CAConstants.prefix("feature_presets/nbt_tree/mesozoic_tree/mesozoic_tree_5")), 0, Optional.of(new StructureProcessorList(ObjectArrayList.of(new MesozoicVinesProcessor(0.8f)))) )));
+        public static final Supplier<ResourceKey<ConfiguredFeature<?, ?>>> MESOZOIC_TREE_VARIANT_6 = registerConfiguredFeature("mesozoic_tree_variant_6", () -> new ConfiguredFeature<>(Features.NBT_TREE.get(), new NBTTreeConfiguration(Either.left(CAConstants.prefix("feature_presets/nbt_tree/mesozoic_tree/mesozoic_tree_6")), 0, Optional.of(new StructureProcessorList(ObjectArrayList.of(new MesozoicVinesProcessor(0.8f)))) )));
 
         public static final Supplier<ResourceKey<ConfiguredFeature<?, ?>>> GINKGO_TREE_VARIANT_1 = registerConfiguredFeature("ginkgo_tree_variant_1", () -> new ConfiguredFeature<>(Features.NBT_TREE.get(), new NBTTreeConfiguration(Either.left(CAConstants.prefix("feature_presets/nbt_tree/ginkgo_tree/ginkgo_tree_1")), 0, Optional.empty() )));
         public static final Supplier<ResourceKey<ConfiguredFeature<?, ?>>> GINKGO_TREE_VARIANT_2 = registerConfiguredFeature("ginkgo_tree_variant_2", () -> new ConfiguredFeature<>(Features.NBT_TREE.get(), new NBTTreeConfiguration(Either.left(CAConstants.prefix("feature_presets/nbt_tree/ginkgo_tree/ginkgo_tree_2")), 0, Optional.empty() )));
@@ -321,13 +318,13 @@ public class CAFeatures {
             return ImmutableList.copyOf(PLACED_FEATURES);
         }
 
-        private static ObjectArrayList<PlacementModifier> nbtTreePlacement(BoundingBox trunkBB, int x, int z) {
+        private static ObjectArrayList<PlacementModifier> nbtTreePlacement(BoundingBox trunkBB, int treeSizeX, int treeSizeZ) {
             return ObjectArrayList.of(
-                    new InSquareBBPlacement(x, z),
+                    new InSquareBBPlacement(treeSizeX, treeSizeZ),
                     SurfaceWaterDepthFilter.forMaxDepth(0),
                     PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
                     new SurfaceAreaCheckPlacement(new SimpleSupplierStateProvider(() -> CABlocks.DENSE_GRASS_BLOCK.get().defaultBlockState()), trunkBB),
-                    new PickLowestHeightPlacement(trunkBB)
+                    new PickLowestHeightPlacement(trunkBB, 5)
             );
         }
 
@@ -339,7 +336,7 @@ public class CAFeatures {
                     PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
                     BiomeFilter.biome(),
                     new SurfaceAreaCheckPlacement(new SimpleSupplierStateProvider(() -> CABlocks.DENSE_GRASS_BLOCK.get().defaultBlockState()), trunkBB),
-                    new PickLowestHeightPlacement(trunkBB));
+                    new PickLowestHeightPlacement(trunkBB, 5));
         }
 
         private static List<PlacementModifier> orePlacement(PlacementModifier pCountPlacement, PlacementModifier pHeightRange) {
