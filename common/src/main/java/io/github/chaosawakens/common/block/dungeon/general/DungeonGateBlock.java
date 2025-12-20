@@ -92,7 +92,7 @@ public class DungeonGateBlock extends Block {
             curLevel.setBlockAndUpdate(targetPos, setActive(targetState));
             curLevel.scheduleTick(targetPos, targetDungeonGateBlock, targetDungeonGateBlock.isConstantlyUpdated() ? targetDungeonGateBlock.getBaseUpdateTickTime() : targetDungeonGateBlock.getBaseUpdateTickTime() + RandomSource.create().nextInt(5));
 
-            return InteractionResult.SUCCESS;
+            return InteractionResult.PASS;
         }
 
         return InteractionResult.PASS;

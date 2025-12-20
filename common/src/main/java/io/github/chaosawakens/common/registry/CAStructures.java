@@ -6,9 +6,11 @@ import io.github.chaosawakens.CAConstants;
 import io.github.chaosawakens.api.asm.annotations.RegistrarEntry;
 import io.github.chaosawakens.api.platform.CAServices;
 import io.github.chaosawakens.common.worldgen.structure.templatesystem.BeeHiveProcessor;
+import io.github.chaosawakens.common.worldgen.structure.templatesystem.FillBelowBoundingBoxProcessor;
 import io.github.chaosawakens.common.worldgen.structure.templatesystem.MesozoicVinesProcessor;
-import io.github.chaosawakens.common.worldgen.structure.structures.SurfaceStructure;
+import io.github.chaosawakens.common.worldgen.structure.structures.NetherSurfaceStructure;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+import net.minecraft.core.Holder;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -21,6 +23,7 @@ import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
+import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import net.minecraft.world.level.levelgen.heightproviders.ConstantHeight;
 import net.minecraft.world.level.levelgen.structure.*;
 import net.minecraft.world.level.levelgen.structure.placement.RandomSpreadStructurePlacement;
@@ -30,9 +33,11 @@ import net.minecraft.world.level.levelgen.structure.pools.StructurePoolElement;
 import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
 import net.minecraft.world.level.levelgen.structure.structures.JigsawStructure;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessor;
+import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorList;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorType;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -44,7 +49,7 @@ public class CAStructures {
     public static class StructureTypes {
         private static final ObjectArrayList<Supplier<StructureType<?>>> STRUCTURE_TYPES = new ObjectArrayList<>();
 
-        public static final Supplier<StructureType<SurfaceStructure>> SURFACE_STRUCTURE = registerStructureType("surface_structure", () -> () -> SurfaceStructure.CODEC);
+        public static final Supplier<StructureType<NetherSurfaceStructure>> NETHER_SURFACE_STRUCTURE = registerStructureType("nether_surface_structure", () -> () -> NetherSurfaceStructure.CODEC);
 
         private static <S extends Structure> Supplier<StructureType<S>> registerStructureType(String id, Supplier<StructureType<S>> structureSup) {
             Supplier<StructureType<S>> typeSupplier = CAServices.REGISTRAR.registerObject(CAConstants.prefix(id), structureSup, BuiltInRegistries.STRUCTURE_TYPE);
@@ -61,15 +66,15 @@ public class CAStructures {
     public static class Structures {
         private static final ObjectArrayList<Supplier<ResourceKey<Structure>>> STRUCTURES = new ObjectArrayList<>();
 
-        public static final Supplier<ResourceKey<Structure>> ACACIA_ENT_TREE = registerStructure("acacia_ent_tree", (b) -> () -> new JigsawStructure(settings(b.lookup(Registries.BIOME).getOrThrow(CATags.BiomeTags.HAS_ACACIA_ENT_TREE.get()), TerrainAdjustment.NONE), b.lookup(Registries.TEMPLATE_POOL).getOrThrow(StructureTemplatePools.ACACIA_ENT_TREE_START.get()), 6, ConstantHeight.of(VerticalAnchor.absolute(0)), false, Heightmap.Types.WORLD_SURFACE_WG));
-        public static final Supplier<ResourceKey<Structure>> BIRCH_ENT_TREE = registerStructure("birch_ent_tree", (b) -> () -> new JigsawStructure(settings(b.lookup(Registries.BIOME).getOrThrow(CATags.BiomeTags.HAS_BIRCH_ENT_TREE.get()), TerrainAdjustment.NONE), b.lookup(Registries.TEMPLATE_POOL).getOrThrow(StructureTemplatePools.BIRCH_ENT_TREE_START.get()), 6, ConstantHeight.of(VerticalAnchor.absolute(0)), false, Heightmap.Types.WORLD_SURFACE_WG));
-        public static final Supplier<ResourceKey<Structure>> CRIMSON_ENT_TREE = registerStructure("crimson_ent_tree", (b) -> () -> new SurfaceStructure(settings(b.lookup(Registries.BIOME).getOrThrow(CATags.BiomeTags.HAS_CRIMSON_ENT_TREE.get()), TerrainAdjustment.NONE), b.lookup(Registries.TEMPLATE_POOL).getOrThrow(StructureTemplatePools.CRIMSON_ENT_TREE_START.get()), 6, ConstantHeight.of(VerticalAnchor.absolute(0)), false, Heightmap.Types.WORLD_SURFACE_WG));
+        public static final Supplier<ResourceKey<Structure>> ACACIA_ENT_TREE = registerStructure("acacia_ent_tree", (b) -> () -> new JigsawStructure(settings(b.lookup(Registries.BIOME).getOrThrow(CATags.BiomeTags.HAS_ACACIA_ENT_TREE.get()), TerrainAdjustment.BEARD_THIN), b.lookup(Registries.TEMPLATE_POOL).getOrThrow(StructureTemplatePools.ACACIA_ENT_TREE_START.get()), 6, ConstantHeight.of(VerticalAnchor.absolute(0)), false, Heightmap.Types.WORLD_SURFACE_WG));
+        public static final Supplier<ResourceKey<Structure>> BIRCH_ENT_TREE = registerStructure("birch_ent_tree", (b) -> () -> new JigsawStructure(settings(b.lookup(Registries.BIOME).getOrThrow(CATags.BiomeTags.HAS_BIRCH_ENT_TREE.get()), TerrainAdjustment.BEARD_THIN), b.lookup(Registries.TEMPLATE_POOL).getOrThrow(StructureTemplatePools.BIRCH_ENT_TREE_START.get()), 6, ConstantHeight.of(VerticalAnchor.absolute(0)), false, Heightmap.Types.WORLD_SURFACE_WG));
+        public static final Supplier<ResourceKey<Structure>> CRIMSON_ENT_TREE = registerStructure("crimson_ent_tree", (b) -> () -> new NetherSurfaceStructure(settings(b.lookup(Registries.BIOME).getOrThrow(CATags.BiomeTags.HAS_CRIMSON_ENT_TREE.get()), TerrainAdjustment.BEARD_THIN), b.lookup(Registries.TEMPLATE_POOL).getOrThrow(StructureTemplatePools.CRIMSON_ENT_TREE_START.get()), 6, ConstantHeight.of(VerticalAnchor.absolute(50))));
         public static final Supplier<ResourceKey<Structure>> DARK_OAK_ENT_TREE = registerStructure("dark_oak_ent_tree", (b) -> () -> new JigsawStructure(settings(b.lookup(Registries.BIOME).getOrThrow(CATags.BiomeTags.HAS_DARK_OAK_ENT_TREE.get()), TerrainAdjustment.NONE), b.lookup(Registries.TEMPLATE_POOL).getOrThrow(StructureTemplatePools.DARK_OAK_ENT_TREE_START.get()), 6, ConstantHeight.of(VerticalAnchor.absolute(-6)), false, Heightmap.Types.WORLD_SURFACE_WG));
-        public static final Supplier<ResourceKey<Structure>> GINKGO_ENT_TREE = registerStructure("ginkgo_ent_tree", (b) -> () -> new JigsawStructure(settings(b.lookup(Registries.BIOME).getOrThrow(CATags.BiomeTags.HAS_GINKGO_ENT_TREE.get()), TerrainAdjustment.NONE), b.lookup(Registries.TEMPLATE_POOL).getOrThrow(StructureTemplatePools.GINKGO_ENT_TREE_START.get()), 6, ConstantHeight.of(VerticalAnchor.absolute(0)), false, Heightmap.Types.WORLD_SURFACE_WG));
-        public static final Supplier<ResourceKey<Structure>> JUNGLE_ENT_TREE = registerStructure("jungle_ent_tree", (b) -> () -> new JigsawStructure(settings(b.lookup(Registries.BIOME).getOrThrow(CATags.BiomeTags.HAS_JUNGLE_ENT_TREE.get()), TerrainAdjustment.NONE), b.lookup(Registries.TEMPLATE_POOL).getOrThrow(StructureTemplatePools.JUNGLE_ENT_TREE_START.get()), 6, ConstantHeight.of(VerticalAnchor.absolute(0)), false, Heightmap.Types.WORLD_SURFACE_WG));
-        public static final Supplier<ResourceKey<Structure>> OAK_ENT_TREE = registerStructure("oak_ent_tree", (b) -> () -> new JigsawStructure(settings(b.lookup(Registries.BIOME).getOrThrow(CATags.BiomeTags.HAS_OAK_ENT_TREE.get()), TerrainAdjustment.NONE), b.lookup(Registries.TEMPLATE_POOL).getOrThrow(StructureTemplatePools.OAK_ENT_TREE_START.get()), 6, ConstantHeight.of(VerticalAnchor.absolute(0)), false, Heightmap.Types.WORLD_SURFACE_WG));
-        public static final Supplier<ResourceKey<Structure>> SPRUCE_ENT_TREE = registerStructure("spruce_ent_tree", (b) -> () -> new JigsawStructure(settings(b.lookup(Registries.BIOME).getOrThrow(CATags.BiomeTags.HAS_SPRUCE_ENT_TREE.get()), TerrainAdjustment.NONE), b.lookup(Registries.TEMPLATE_POOL).getOrThrow(StructureTemplatePools.SPRUCE_ENT_TREE_START.get()), 6, ConstantHeight.of(VerticalAnchor.absolute(0)), false, Heightmap.Types.WORLD_SURFACE_WG));
-        public static final Supplier<ResourceKey<Structure>> WARPED_ENT_TREE = registerStructure("warped_ent_tree", (b) -> () -> new SurfaceStructure(settings(b.lookup(Registries.BIOME).getOrThrow(CATags.BiomeTags.HAS_WARPED_ENT_TREE.get()), TerrainAdjustment.NONE), b.lookup(Registries.TEMPLATE_POOL).getOrThrow(StructureTemplatePools.WARPED_ENT_TREE_START.get()), 6, ConstantHeight.of(VerticalAnchor.absolute(0)), false, Heightmap.Types.WORLD_SURFACE_WG));
+        public static final Supplier<ResourceKey<Structure>> GINKGO_ENT_TREE = registerStructure("ginkgo_ent_tree", (b) -> () -> new JigsawStructure(settings(b.lookup(Registries.BIOME).getOrThrow(CATags.BiomeTags.HAS_GINKGO_ENT_TREE.get()), TerrainAdjustment.BEARD_THIN), b.lookup(Registries.TEMPLATE_POOL).getOrThrow(StructureTemplatePools.GINKGO_ENT_TREE_START.get()), 6, ConstantHeight.of(VerticalAnchor.absolute(0)), false, Heightmap.Types.WORLD_SURFACE_WG));
+        public static final Supplier<ResourceKey<Structure>> JUNGLE_ENT_TREE = registerStructure("jungle_ent_tree", (b) -> () -> new JigsawStructure(settings(b.lookup(Registries.BIOME).getOrThrow(CATags.BiomeTags.HAS_JUNGLE_ENT_TREE.get()), TerrainAdjustment.BEARD_THIN), b.lookup(Registries.TEMPLATE_POOL).getOrThrow(StructureTemplatePools.JUNGLE_ENT_TREE_START.get()), 6, ConstantHeight.of(VerticalAnchor.absolute(0)), false, Heightmap.Types.WORLD_SURFACE_WG));
+        public static final Supplier<ResourceKey<Structure>> OAK_ENT_TREE = registerStructure("oak_ent_tree", (b) -> () -> new JigsawStructure(settings(b.lookup(Registries.BIOME).getOrThrow(CATags.BiomeTags.HAS_OAK_ENT_TREE.get()), TerrainAdjustment.BEARD_THIN), b.lookup(Registries.TEMPLATE_POOL).getOrThrow(StructureTemplatePools.OAK_ENT_TREE_START.get()), 6, ConstantHeight.of(VerticalAnchor.absolute(0)), false, Heightmap.Types.WORLD_SURFACE_WG));
+        public static final Supplier<ResourceKey<Structure>> SPRUCE_ENT_TREE = registerStructure("spruce_ent_tree", (b) -> () -> new JigsawStructure(settings(b.lookup(Registries.BIOME).getOrThrow(CATags.BiomeTags.HAS_SPRUCE_ENT_TREE.get()), TerrainAdjustment.BEARD_THIN), b.lookup(Registries.TEMPLATE_POOL).getOrThrow(StructureTemplatePools.SPRUCE_ENT_TREE_START.get()), 6, ConstantHeight.of(VerticalAnchor.absolute(0)), false, Heightmap.Types.WORLD_SURFACE_WG));
+        public static final Supplier<ResourceKey<Structure>> WARPED_ENT_TREE = registerStructure("warped_ent_tree", (b) -> () -> new NetherSurfaceStructure(settings(b.lookup(Registries.BIOME).getOrThrow(CATags.BiomeTags.HAS_WARPED_ENT_TREE.get()), TerrainAdjustment.BEARD_THIN), b.lookup(Registries.TEMPLATE_POOL).getOrThrow(StructureTemplatePools.WARPED_ENT_TREE_START.get()), 6, ConstantHeight.of(VerticalAnchor.absolute(50))));
 
         private static <S extends Structure> Supplier<ResourceKey<S>> registerStructure(String id,  Function<BootstapContext<S>, Supplier<S>> structureFunction) {
             Supplier<ResourceKey<S>> typeSupplier = CAServices.REGISTRAR.registerDatapackObject(CAConstants.prefix(id), structureFunction, Registries.STRUCTURE);
@@ -100,6 +105,7 @@ public class CAStructures {
 
         public static final Supplier<StructureProcessorType<BeeHiveProcessor>> BEE_HIVE = registerProcessor("bee_hive", () -> () -> BeeHiveProcessor.CODEC);
         public static final Supplier<StructureProcessorType<MesozoicVinesProcessor>> MESOZOIC_VINES = registerProcessor("mesozoic_vine", () -> () -> MesozoicVinesProcessor.CODEC);
+        public static final Supplier<StructureProcessorType<FillBelowBoundingBoxProcessor>> FILL_BELOW = registerProcessor("fill_below", () -> () -> FillBelowBoundingBoxProcessor.CODEC);
 
         private static <P extends StructureProcessor> Supplier<StructureProcessorType<P>> registerProcessor(String id, Supplier<StructureProcessorType<P>> codecSup) {
             Supplier<StructureProcessorType<P>> typeSupplier = CAServices.REGISTRAR.registerObject(CAConstants.prefix(id), codecSup, BuiltInRegistries.STRUCTURE_PROCESSOR);
@@ -110,6 +116,12 @@ public class CAStructures {
         public static ImmutableList<Supplier<StructureProcessorType<?>>> getProcessors() {
             return ImmutableList.copyOf(STRUCTURE_PROCESSORS);
         }
+    }
+
+    public static class StructureProcessorLists {
+        private static final ObjectArrayList<Supplier<StructureProcessorList>> PROCESSOR_LISTS = new ObjectArrayList<>();
+
+        public static final Holder<StructureProcessorList> ACACIA_ENT_TREE_PROCESSOR_LIST = Holder.direct(new StructureProcessorList(List.of(new FillBelowBoundingBoxProcessor(new BoundingBox(5, 0, 7, 22, 0, 21), BlockStateProvider.simple(CABlocks.DENSE_DIRT.get())))));
     }
 
     @RegistrarEntry

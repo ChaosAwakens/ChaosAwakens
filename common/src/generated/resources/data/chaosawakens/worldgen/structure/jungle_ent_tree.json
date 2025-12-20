@@ -10,5 +10,6 @@
   },
   "start_pool": "chaosawakens:ent_tree/jungle",
   "step": "surface_structures",
+  "terrain_adaptation": "beard_thin",
   "use_expansion_hack": false
 }

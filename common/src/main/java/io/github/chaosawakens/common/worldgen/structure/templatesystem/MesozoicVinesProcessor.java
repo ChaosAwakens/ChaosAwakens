@@ -16,6 +16,7 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProc
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -51,18 +52,19 @@ public class MesozoicVinesProcessor extends StructureProcessor {
                     int num = random.nextInt(2) + random.nextInt(3);
                     for (int i = 0; i < num; i++) {
                         if (infoMap.get(info.pos().below(i + 1)) != null || !accessor.getBlockState(info.pos().below(i + 1)).canBeReplaced()) {
-                            infoMap.put(info.pos().below(i), new StructureTemplate.StructureBlockInfo(info.pos().below(i), CABlocks.MESOZOIC_VINES.get().defaultBlockState(), new CompoundTag()));
+                            infoMap.put(info.pos().below(i), new StructureTemplate.StructureBlockInfo(info.pos().below(i), CABlocks.MESOZOIC_VINES_HEAD.get().defaultBlockState(), new CompoundTag()));
                             return;
                         }
-                        infoMap.put(info.pos().below(i), new StructureTemplate.StructureBlockInfo(info.pos().below(i), CABlocks.MESOZOIC_VINES_PLANT.get().defaultBlockState(), new CompoundTag()));
+                        infoMap.put(info.pos().below(i), new StructureTemplate.StructureBlockInfo(info.pos().below(i), CABlocks.MESOZOIC_VINES_BODY.get().defaultBlockState(), new CompoundTag()));
                     }
-                    infoMap.put(info.pos().below(num), new StructureTemplate.StructureBlockInfo(info.pos().below(num), CABlocks.MESOZOIC_VINES.get().defaultBlockState(), new CompoundTag()));
+                    infoMap.put(info.pos().below(num), new StructureTemplate.StructureBlockInfo(info.pos().below(num), CABlocks.MESOZOIC_VINES_HEAD.get().defaultBlockState(), new CompoundTag()));
                 } else {
                     infoMap.remove(info.pos());
                 }
             }
         });
-        return infoMap.values().stream().toList();
+        List<StructureTemplate.StructureBlockInfo> infosResult = infoMap.values().stream().sorted(Comparator.comparingInt(info -> -info.pos().getY())).toList();
+        return infosResult;
     }
 
     @Override

@@ -38,7 +38,6 @@ public class CABiomeTagsProvider extends BiomeTagsProvider {
 
         if (!DataPackTagWrapper.getCachedTWEntries().isEmpty()) {
             DataPackTagWrapper.getCachedTWEntries().forEach(twEntry -> {
-                CAConstants.LOGGER.debug("[Tagging Biome]: Tag Entry -> {}", twEntry);
                 TagKey<?> parentTagKey = twEntry.getParentTag().get();
 
                 if (parentTagKey.isFor(Registries.BIOME)) {

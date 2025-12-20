@@ -38,6 +38,6 @@ public class MesozoicVinesHeadBlock extends GrowingPlantHeadBlock {
 
     @Override
     protected Block getBodyBlock() {
-        return CABlocks.MESOZOIC_VINES_PLANT.get();
+        return CABlocks.MESOZOIC_VINES_BODY.get();
     }
 }
