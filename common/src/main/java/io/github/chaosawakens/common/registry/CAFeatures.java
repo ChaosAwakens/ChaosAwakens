@@ -7,6 +7,7 @@ import io.github.chaosawakens.CAConstants;
 import io.github.chaosawakens.api.asm.annotations.RegistrarEntry;
 import io.github.chaosawakens.api.platform.CAServices;
 import io.github.chaosawakens.common.worldgen.feature.*;
+import io.github.chaosawakens.common.worldgen.feature.configurations.MultiLayerPlantBlockConfiguration;
 import io.github.chaosawakens.common.worldgen.feature.configurations.NBTTreeConfiguration;
 import io.github.chaosawakens.common.worldgen.feature.configurations.RandomFeatureKeyConfiguration;
 import io.github.chaosawakens.common.worldgen.feature.configurations.StalagmiteConfiguration;
@@ -46,6 +47,7 @@ public class CAFeatures {
         public static final Supplier<Feature<NBTTreeConfiguration>> NBT_TREE = registerFeature("nbt_tree", () -> new NBTTreeFeature(NBTTreeConfiguration.CODEC));
         public static final Supplier<Feature<StalagmiteConfiguration>> STALAGMITE = registerFeature("stalagmite", () -> new StalagmiteFeature(StalagmiteConfiguration.CODEC));
         public static final Supplier<Feature<RandomFeatureKeyConfiguration>> RANDOM_KEY_SELECTOR = registerFeature("random_key_selector", () -> new RandomKeySelectorFeature(RandomFeatureKeyConfiguration.CODEC));
+        public static final Supplier<Feature<MultiLayerPlantBlockConfiguration>> MULTI_LAYER_PLANT_BLOCK = registerFeature("multi_layer_plant_block", () -> new MultiLayerPlantBlockFeature(MultiLayerPlantBlockConfiguration.CODEC));
 
         private static <FC extends FeatureConfiguration, F extends Feature<FC>> Supplier<F> registerFeature(String id, Supplier<Feature<?>> featureSup) {
             Supplier<F> placedFeatureSup = (Supplier<F>) CAServices.REGISTRAR.registerObject(CAConstants.prefix(id), featureSup, BuiltInRegistries.FEATURE);
@@ -102,7 +104,7 @@ public class CAFeatures {
         public static final Supplier<ResourceKey<ConfiguredFeature<?, ?>>> BUSH_PATCH = registerConfiguredFeature("bush_patch", () -> new ConfiguredFeature<>(Feature.RANDOM_PATCH, new RandomPatchConfiguration(96, 12, 3, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(CABlocks.BUSH.get()))))));
         public static final Supplier<ResourceKey<ConfiguredFeature<?, ?>>> TALL_BUSH_PATCH = registerConfiguredFeature("tall_bush_patch", () -> new ConfiguredFeature<>(Feature.RANDOM_PATCH, new RandomPatchConfiguration(96, 12, 3, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(CABlocks.TALL_BUSH.get()))))));
 
-        public static final Supplier<ResourceKey<ConfiguredFeature<?, ?>>> LARGE_MESOZOIC_BUSH_PATCH = registerConfiguredFeature("large_mesozoic_bush_patch", () -> new ConfiguredFeature<>(Feature.RANDOM_PATCH, new RandomPatchConfiguration(96, 12, 3, PlacementUtils.onlyWhenEmpty(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(BlockStateProvider.simple(CABlocks.LARGE_MESOZOIC_BUSH.get()))))));
+        public static final Supplier<ResourceKey<ConfiguredFeature<?, ?>>> LARGE_MESOZOIC_BUSH_PATCH = registerConfiguredFeature("large_mesozoic_bush_patch", () -> new ConfiguredFeature<>(Feature.RANDOM_PATCH, new RandomPatchConfiguration(96, 12, 3, PlacementUtils.onlyWhenEmpty(Features.MULTI_LAYER_PLANT_BLOCK.get(), new MultiLayerPlantBlockConfiguration(BlockStateProvider.simple(CABlocks.LARGE_MESOZOIC_BUSH.get()), 3)))));
 
         public static final Supplier<ResourceKey<ConfiguredFeature<?, ?>>> DREDGESTONE_ROCK = registerConfiguredFeature("dredgestone_rock", () -> new ConfiguredFeature<>(Feature.FOREST_ROCK, new BlockStateConfiguration(CABlocks.DREDGESTONE.get().defaultBlockState())));
         public static final Supplier<ResourceKey<ConfiguredFeature<?, ?>>> TAR_PUDDLE = registerConfiguredFeature("tar_puddle", () -> new ConfiguredFeature<>(Feature.REPLACE_BLOBS, new ReplaceSphereConfiguration(CABlocks.DENSE_GRASS_BLOCK.get().defaultBlockState(), CABlocks.TAR.get().defaultBlockState(), UniformInt.of(3, 7))));

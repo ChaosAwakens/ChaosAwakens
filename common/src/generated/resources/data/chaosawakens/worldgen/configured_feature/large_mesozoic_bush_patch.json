@@ -3,9 +3,10 @@
   "config": {
     "feature": {
       "feature": {
-        "type": "minecraft:simple_block",
+        "type": "chaosawakens:multi_layer_plant_block",
         "config": {
-          "to_place": {
+          "max_level": 3,
+          "state": {
             "type": "minecraft:simple_state_provider",
             "state": {
               "Name": "chaosawakens:large_mesozoic_bush",
