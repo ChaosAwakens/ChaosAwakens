@@ -1,5 +1,6 @@
 package io.github.chaosawakens.api.services;
 
+import com.google.common.collect.ImmutableMap;
 import io.github.chaosawakens.CAConstants;
 import io.github.chaosawakens.FabricServerHooks;
 import io.github.chaosawakens.api.asm.annotations.NetworkRegistrarEntry;
@@ -7,7 +8,6 @@ import io.github.chaosawakens.api.network.BasePacket;
 import io.github.chaosawakens.api.network.NetworkSide;
 import io.github.chaosawakens.api.platform.CAServices;
 import io.github.chaosawakens.api.platform.services.INetworkManager;
-import io.github.chaosawakens.util.ClientUtil;
 import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
@@ -48,13 +48,8 @@ public class FabricNetworkManager implements INetworkManager {
 
                 packet.packetHandler().apply(packet.packetDecoder().apply(buf)).handlePacket(playerReceiver, targetServer.getLevel(playerReceiver.level().dimension()), NetworkSide.C2S);
             }));
-        } else if (targetSide.equals(NetworkSide.S2C)) {
-            ClientPlayNetworking.registerGlobalReceiver(packet.packetId(), ((targetClient, clientPacketListener, buf, fabricPacketSender) -> {
-                buf.readByte(); // Forge discriminator handling (monke see monke do)
-
-                packet.packetHandler().apply(packet.packetDecoder().apply(buf)).handlePacket(ClientUtil.getClientPlayer(), ClientUtil.getClientLevel(), NetworkSide.S2C);
-            }));
         }
+
         return packet;
     }
 
@@ -134,5 +129,9 @@ public class FabricNetworkManager implements INetworkManager {
                 ServerPlayNetworking.send(targetPlayer, mappedPacketToSend.packetId(), encodedBuf);
             }
         } else CAConstants.LOGGER.warn("Attempted to send unknown packet ({}) to client! Ensure that the packet is registered!", s2cPacket.getClass().getTypeName());
+    }
+
+    public static ImmutableMap<Class<?>, BasePacket<?>> getMappedPackets() {
+        return ImmutableMap.copyOf(MAPPED_PACKETS);
     }
 }

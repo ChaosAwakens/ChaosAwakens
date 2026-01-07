@@ -60,6 +60,8 @@ public class ChaosAwakensForge {
         datagen.addProvider(event.includeClient(), new CABlockModelProvider(datagenPackOutput, curFileHelper));
         datagen.addProvider(event.includeClient(), new CABlockStateProvider(datagenPackOutput, curFileHelper));
 
+        datagen.addProvider(event.includeClient(), new CASoundDefinitionsProvider(datagenPackOutput, curFileHelper));
+
         // Data
         CABlockTagsProvider cachedBlockTagsProvider = new CABlockTagsProvider(datagenPackOutput, lookupProvider, curFileHelper);
 

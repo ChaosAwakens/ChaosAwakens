@@ -5,12 +5,10 @@ import com.mojang.datafixers.util.Pair;
 import io.github.chaosawakens.CAConstants;
 import io.github.chaosawakens.api.asm.annotations.RegistrarEntry;
 import io.github.chaosawakens.api.platform.CAServices;
-import io.github.chaosawakens.common.worldgen.structure.templatesystem.BeeHiveProcessor;
-import io.github.chaosawakens.common.worldgen.structure.templatesystem.FillBelowBoundingBoxProcessor;
-import io.github.chaosawakens.common.worldgen.structure.templatesystem.MesozoicVinesProcessor;
 import io.github.chaosawakens.common.worldgen.structure.structures.NetherSurfaceStructure;
+import io.github.chaosawakens.common.worldgen.structure.templatesystem.BeeHiveProcessor;
+import io.github.chaosawakens.common.worldgen.structure.templatesystem.MesozoicVinesProcessor;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
-import net.minecraft.core.Holder;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -23,7 +21,6 @@ import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
-import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import net.minecraft.world.level.levelgen.heightproviders.ConstantHeight;
 import net.minecraft.world.level.levelgen.structure.*;
 import net.minecraft.world.level.levelgen.structure.placement.RandomSpreadStructurePlacement;
@@ -37,7 +34,6 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProc
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorType;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -105,7 +101,6 @@ public class CAStructures {
 
         public static final Supplier<StructureProcessorType<BeeHiveProcessor>> BEE_HIVE = registerProcessor("bee_hive", () -> () -> BeeHiveProcessor.CODEC);
         public static final Supplier<StructureProcessorType<MesozoicVinesProcessor>> MESOZOIC_VINES = registerProcessor("mesozoic_vine", () -> () -> MesozoicVinesProcessor.CODEC);
-        public static final Supplier<StructureProcessorType<FillBelowBoundingBoxProcessor>> FILL_BELOW = registerProcessor("fill_below", () -> () -> FillBelowBoundingBoxProcessor.CODEC);
 
         private static <P extends StructureProcessor> Supplier<StructureProcessorType<P>> registerProcessor(String id, Supplier<StructureProcessorType<P>> codecSup) {
             Supplier<StructureProcessorType<P>> typeSupplier = CAServices.REGISTRAR.registerObject(CAConstants.prefix(id), codecSup, BuiltInRegistries.STRUCTURE_PROCESSOR);
@@ -121,7 +116,6 @@ public class CAStructures {
     public static class StructureProcessorLists {
         private static final ObjectArrayList<Supplier<StructureProcessorList>> PROCESSOR_LISTS = new ObjectArrayList<>();
 
-        public static final Holder<StructureProcessorList> ACACIA_ENT_TREE_PROCESSOR_LIST = Holder.direct(new StructureProcessorList(List.of(new FillBelowBoundingBoxProcessor(new BoundingBox(5, 0, 7, 22, 0, 21), BlockStateProvider.simple(CABlocks.DENSE_DIRT.get())))));
     }
 
     @RegistrarEntry

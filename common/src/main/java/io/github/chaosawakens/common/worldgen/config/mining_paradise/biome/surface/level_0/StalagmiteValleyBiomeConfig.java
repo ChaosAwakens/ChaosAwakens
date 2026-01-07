@@ -2,6 +2,7 @@ package io.github.chaosawakens.common.worldgen.config.mining_paradise.biome.surf
 
 import io.github.chaosawakens.common.registry.CAConfiguredCarvers;
 import io.github.chaosawakens.common.registry.CAFeatures;
+import io.github.chaosawakens.common.registry.CASoundEvents;
 import io.github.chaosawakens.common.worldgen.config.base.BiomeConfig;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
@@ -21,6 +22,7 @@ public class StalagmiteValleyBiomeConfig implements BiomeConfig {
             .waterColor(4159204)
             .waterFogColor(429011)
             .skyColor(84742)
+            .backgroundMusic(CASoundEvents.createBiomeMusic(CASoundEvents.CRAGS))
             .build();
 
     public StalagmiteValleyBiomeConfig() {}

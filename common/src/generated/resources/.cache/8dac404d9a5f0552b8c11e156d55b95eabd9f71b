@@ -1,4 +1,4 @@
-// 1.20.1	2025-11-29T09:03:48.7515847	Chaos Awakens: Block States
+// 1.20.1	2026-01-07T17:23:13.5525752	Chaos Awakens: Block States
 5c81494d06a5589da8afe9c24272dddb04a88d14 assets/chaosawakens/blockstates/acacia_gate_block.json
 807de6368ec3d2d151f9683203f9b05493f6600e assets/chaosawakens/blockstates/acacia_leaf_carpet.json
 d87edfaebd05837212a46d7c4ff3d3f16312c8cf assets/chaosawakens/blockstates/alstroemeriat.json
@@ -250,6 +250,7 @@ d40a69543616b10dc2413f86f30f646291345b1e assets/chaosawakens/blockstates/gloomst
 80e2b8cce1e37605b1203be0718be4cfbe499c0b assets/chaosawakens/blockstates/green_crystal_flower.json
 5cb9a80770343f94b184e27fd6cfb4999c1f67e1 assets/chaosawakens/blockstates/green_crystal_growth.json
 18eb30af29f765f5e459c507a42753abdad54cb1 assets/chaosawakens/blockstates/horsetail_restio.json
+5b31b32d6c854e094e7a5373bf84fc43829170b9 assets/chaosawakens/blockstates/jungle_gate_block.json
 1f83bc35623117ec7ddd27db0fb986488e9e4224 assets/chaosawakens/blockstates/king_protea.json
 4545e1a67cc5393bd46fec24b4788188e373f777 assets/chaosawakens/blockstates/kunzite_block.json
 ea081fb53d0d2c4e06cd870d1cb2cb0479af9b10 assets/chaosawakens/blockstates/kunzite_ore.json

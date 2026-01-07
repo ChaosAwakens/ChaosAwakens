@@ -1,4 +1,4 @@
-// 1.20.1	2025-08-07T01:52:31.6725202	Chaos Awakens: Item Models
+// 1.20.1	2026-01-07T17:28:27.9722899	Chaos Awakens: Item Models
 471c14e99f78d17c912d1c6180f55cc35b706e7f assets/chaosawakens/models/item/apple_cow.json
 7739a52b8dd3174f4785a96a252de9259a260a4a assets/chaosawakens/models/item/baked_golden_potato.json
 09e2e3cba220805db46a5a502d1bbff2c28752ae assets/chaosawakens/models/item/basilisk_scale.json
@@ -26,7 +26,6 @@ d105ed269b6b62ddcb7d12cb53a112c81e3ae773 assets/chaosawakens/models/item/cooked_
 ef0912ee2202c1ec79e4d7b98b31b3d85d8aa8e2 assets/chaosawakens/models/item/corn.json
 8fa39bfac8aa1157e1affbc596e8042e579b6d83 assets/chaosawakens/models/item/cow.json
 5c0f45a2dc1e96200b6013d548bbae6bc5a9ebc2 assets/chaosawakens/models/item/creeper.json
-716b5b57aef0b2bb0690c30ca5499f33b8da1a68 assets/chaosawakens/models/item/creeper_launcher.json
 ba85d4515da8b20cacfccd6cc1960b137318e93e assets/chaosawakens/models/item/critter_cage.json
 5413633031eee5f3c378f9d33c83a70f1939e284 assets/chaosawakens/models/item/crystal_apple.json
 f234f551c9847977fafd0fcbc03dc45478b18aac assets/chaosawakens/models/item/crystal_beetroot.json

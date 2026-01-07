@@ -5,11 +5,15 @@ import io.github.chaosawakens.api.client.WrappedClampedItemPropertyFunction;
 import io.github.chaosawakens.api.datagen.block.BlockModelDefinition;
 import io.github.chaosawakens.api.entity.EntityTypePropertyWrapper;
 import io.github.chaosawakens.api.item.ItemPropertyWrapper;
+import io.github.chaosawakens.api.network.BasePacket;
+import io.github.chaosawakens.api.network.NetworkSide;
+import io.github.chaosawakens.api.services.FabricNetworkManager;
 import io.github.chaosawakens.common.registry.CAClientDataEntries;
 import io.github.chaosawakens.util.ClientUtil;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
@@ -33,6 +37,8 @@ public class ChaosAwakensClientFabric implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
+        registerClientPacketHandlers();
+
         handleClientEntityData();
         handleBlockRenderLayers();
 
@@ -40,6 +46,19 @@ public class ChaosAwakensClientFabric implements ClientModInitializer {
         registerItemColorProviders();
 
         registerItemModelPredicates();
+    }
+
+    private static <T> void registerClientPacketHandlers() {
+        FabricNetworkManager.getMappedPackets().values().stream()
+                .filter(basePacket -> basePacket != null && basePacket.targetSide().equals(NetworkSide.S2C))
+                .map(packet -> (BasePacket<T>) packet)
+                .forEach(packet -> {
+                    ClientPlayNetworking.registerGlobalReceiver(packet.packetId(), ((targetClient, clientPacketListener, buf, fabricPacketSender) -> {
+                        buf.readByte(); // Forge discriminator handling (monke see monke do)
+
+                        packet.packetHandler().apply(packet.packetDecoder().apply(buf)).handlePacket(ClientUtil.getClientPlayer(), ClientUtil.getClientLevel(), NetworkSide.S2C);
+                    }));
+                });
     }
 
     private static void handleClientEntityData() {

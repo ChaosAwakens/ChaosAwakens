@@ -9,6 +9,12 @@
   "downfall": 0.0,
   "effects": {
     "fog_color": 339026,
+    "music": {
+      "max_delay": 4000,
+      "min_delay": 600,
+      "replace_current_music": false,
+      "sound": "chaosawakens:crags"
+    },
     "sky_color": 84742,
     "water_color": 4159204,
     "water_fog_color": 429011

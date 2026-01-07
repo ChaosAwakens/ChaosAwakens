@@ -1,0 +1,12 @@
+{
+  "soundtracks.mining_paradise.crags": {
+    "replace": true,
+    "sounds": [
+      {
+        "name": "chaosawakens:soundtracks/mining_paradise/crags",
+        "preload": true
+      }
+    ],
+    "subtitle": "soundtracks.mining_paradise.crags"
+  }
+}
