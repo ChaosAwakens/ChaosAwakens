@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "#": {
+      "item": "chaosawakens:chiseled_gloomstone"
+    }
+  },
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "result": {
+    "count": 4,
+    "item": "chaosawakens:chiseled_gloomstone_stairs"
+  },
+  "show_notification": true
+}

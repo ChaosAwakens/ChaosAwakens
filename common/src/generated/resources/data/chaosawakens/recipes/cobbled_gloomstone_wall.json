@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "#": {
+      "item": "chaosawakens:cobbled_gloomstone"
+    }
+  },
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "result": {
+    "count": 6,
+    "item": "chaosawakens:cobbled_gloomstone_wall"
+  },
+  "show_notification": true
+}

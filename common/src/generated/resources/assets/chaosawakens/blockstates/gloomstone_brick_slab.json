@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "chaosawakens:block/gloomstone_brick_slab"
+    },
+    "type=double": {
+      "model": "chaosawakens:block/gloomstone_bricks"
+    },
+    "type=top": {
+      "model": "chaosawakens:block/gloomstone_brick_slab_top"
+    }
+  }
+}

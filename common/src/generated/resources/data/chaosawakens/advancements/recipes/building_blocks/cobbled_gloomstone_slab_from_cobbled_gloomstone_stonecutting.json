@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_cobbled_gloomstone": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "chaosawakens:cobbled_gloomstone"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "chaosawakens:cobbled_gloomstone_slab_from_cobbled_gloomstone_stonecutting"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_cobbled_gloomstone",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "chaosawakens:cobbled_gloomstone_slab_from_cobbled_gloomstone_stonecutting"
+    ]
+  },
+  "sends_telemetry_event": false
+}

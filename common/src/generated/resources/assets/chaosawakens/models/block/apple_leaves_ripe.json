@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "render_type": "minecraft:cutout_mipped",
+  "textures": {
+    "all": "chaosawakens:block/leaves/apple/apple_leaves_ripe"
+  }
+}

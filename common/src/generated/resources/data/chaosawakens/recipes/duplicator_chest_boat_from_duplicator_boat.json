@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "chest_boat",
+  "ingredients": [
+    {
+      "item": "chaosawakens:duplicator_boat"
+    },
+    {
+      "item": "minecraft:chest"
+    }
+  ],
+  "result": {
+    "item": "chaosawakens:duplicator_chest_boat"
+  }
+}

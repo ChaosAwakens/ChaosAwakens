@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "chaosawakens:block/apple_slab"
+    },
+    "type=double": {
+      "model": "chaosawakens:block/apple_planks"
+    },
+    "type=top": {
+      "model": "chaosawakens:block/apple_slab_top"
+    }
+  }
+}

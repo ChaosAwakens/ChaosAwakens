@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "chaosawakens:block/fossil/gloomstone/fossilized_lettuce_chicken_gloomstone"
+  }
+}

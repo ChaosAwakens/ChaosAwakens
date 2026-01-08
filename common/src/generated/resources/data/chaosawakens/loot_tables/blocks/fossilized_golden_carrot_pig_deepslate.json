@@ -1,0 +1,19 @@
+{
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "chaosawakens:fossilized_golden_carrot_pig_deepslate"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ]
+}

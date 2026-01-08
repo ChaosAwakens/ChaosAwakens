@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "#": {
+      "item": "chaosawakens:chiseled_dredgestone"
+    }
+  },
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "result": {
+    "count": 4,
+    "item": "chaosawakens:chiseled_dredgestone_stairs"
+  },
+  "show_notification": true
+}

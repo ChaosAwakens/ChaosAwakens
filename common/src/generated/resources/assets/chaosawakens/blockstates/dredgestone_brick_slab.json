@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "chaosawakens:block/dredgestone_brick_slab"
+    },
+    "type=double": {
+      "model": "chaosawakens:block/dredgestone_bricks"
+    },
+    "type=top": {
+      "model": "chaosawakens:block/dredgestone_brick_slab_top"
+    }
+  }
+}

@@ -1,0 +1,138 @@
+plugins {
+    id("multiloader-loader")
+    id("net.neoforged.moddev.legacyforge")
+    id("me.modmuss50.mod-publish-plugin")
+}
+
+base {
+    archivesName = "${mod_id}-forge-${minecraft_version}"
+}
+
+mixin {
+    add(sourceSets.main, "${mod_id}.refmap.json")
+
+    config("${mod_id}.mixins.json")
+    config("${mod_id}.forge.mixins.json")
+}
+
+legacyForge {
+    version = "${minecraft_version}-${forge_version}"
+
+    def at = project(':common').file('src/main/resources/META-INF/accesstransformer.cfg')
+
+    if (at.exists()) {
+        accessTransformers = [at]
+        validateAccessTransformers = true
+    }
+
+    parchment {
+        minecraftVersion = minecraft_version
+        mappingsVersion = mappings_channel_version
+    }
+
+    runs {
+        configureEach {
+            ideName = "${mod_name} Forge ${it.name.capitalize()}"
+            gameDirectory = project.file("run/${it.name}")
+            jvmArguments = ["-Xms12G", "-Xmx16G", "-XX:+UseG1GC", "-XX:+UnlockExperimentalVMOptions",
+                            "-XX:MaxGCPauseMillis=100", "-XX:+DisableExplicitGC", "-XX:TargetSurvivorRatio=90",
+                            "-XX:G1NewSizePercent=35", "-XX:G1MaxNewSizePercent=60",
+                            "-XX:G1MixedGCLiveThresholdPercent=50", "-XX:+AlwaysPreTouch", "-Dterminal.ansi=true",
+                            "-Dmixin.debug.export=true", "-XX:+AllowEnhancedClassRedefinition",
+                            "-Dforge.logging.console.level=debug", "-Dforge.logging.markers=REGISTRIES"]
+
+            logLevel = org.slf4j.event.Level.DEBUG
+        }
+
+        client {
+            client()
+        }
+
+        data {
+            data()
+
+            programArguments.addAll('--mod', mod_id, '--all')
+            programArguments.addAll('--output', rootProject.project(':common').file('src/generated/resources/').getAbsolutePath())
+            programArguments.addAll('--existing', rootProject.project(':common').file('src/main/resources/').getAbsolutePath())
+        }
+
+        server {
+            server()
+        }
+    }
+
+    mods {
+        mod_id {
+            sourceSet sourceSets.main
+        }
+    }
+}
+
+dependencies {
+    // Base
+    annotationProcessor("org.spongepowered:mixin:${mixin_version}:processor")
+
+    compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:${mixinextras_version}"))
+    implementation(jarJar("io.github.llamalad7:mixinextras-forge:${mixinextras_version}"))
+
+    // Dependencies (Mandatory)
+    modImplementation("com.mememan:nexus-forge-${minecraft_version}:${nexus_version}")
+
+    jarJar(implementation("team.unnamed:mocha")) {
+        version {
+            prefer(mocha_version)
+        }
+    }
+    additionalRuntimeClasspath("team.unnamed:mocha:${mocha_version}")
+
+    // Dependencies (Optional)
+    modCompileOnly("mezz.jei:jei-${minecraft_version}-common-api:${forge_jei_version}")
+    modCompileOnly("mezz.jei:jei-${minecraft_version}-forge-api:${forge_jei_version}")
+
+    modRuntimeOnly("mezz.jei:jei-${minecraft_version}-forge:${forge_jei_version}")
+
+    modImplementation("curse.maven:just-enough-effect-descriptions-jeed-532286:${forge_jeed_version}")
+
+    modImplementation("curse.maven:configured-457570:${forge_configured_version}")
+    modImplementation("curse.maven:catalogue-459701:${forge_catalogue_version}")
+    modImplementation("curse.maven:gamemenumodoption-353051:${forge_gmmo_version}")
+
+    modImplementation("curse.maven:jade-324717:${forge_jade_version}")
+
+    modCompileOnly("squeek.appleskin:appleskin-forge:${forge_appleskin_version}:api")
+    modRuntimeOnly("squeek.appleskin:appleskin-forge:${forge_appleskin_version}")
+}
+
+jar {
+    manifest.attributes([
+            "MixinConfigs": "${mod_id}.mixins.json,${mod_id}.forge.mixins.json"
+    ])
+}
+
+publishMods {
+    file = jar.archiveFile
+    changelog = file("CHANGELOG.md").getText()
+    version = "${minecraft_version} ${mod_version}"
+    displayName = "${mod_name} v${minecraft_version}-${mod_version}"
+    type = STABLE
+
+    modLoaders.add("forge")
+    modLoaders.add("neoforge")
+
+    curseforge {
+        projectId = "475414"
+        projectSlug = "chaos-awakens"
+        accessToken = providers.environmentVariable("CURSEFORGE_API_KEY")
+        announcementTitle = "New ${mod_name} [Neo/Forge] CurseForge Release - v${mod_version} for MC ${minecraft_version}"
+
+        getMinecraftVersions().add(minecraft_version)
+    }
+
+    modrinth {
+        projectId = "frSNDQkA"
+        accessToken = providers.environmentVariable("MODRINTH_API_KEY")
+        announcementTitle = "New ${mod_name} [Neo/Forge] Modrinth Release - v${mod_version} for MC ${minecraft_version}"
+
+        getMinecraftVersions().add(minecraft_version)
+    }
+}

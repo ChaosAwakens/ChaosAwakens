@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_gloomstone_bricks": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "chaosawakens:gloomstone_bricks"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "chaosawakens:gloomstone_brick_wall"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_gloomstone_bricks",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "chaosawakens:gloomstone_brick_wall"
+    ]
+  },
+  "sends_telemetry_event": false
+}

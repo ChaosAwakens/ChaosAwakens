@@ -1,0 +1,33 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_any_wood/peach_logs": {
+      "conditions": {
+        "items": [
+          {
+            "tag": "chaosawakens:wood/peach_logs"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "chaosawakens:peach_planks"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_any_wood/peach_logs",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "chaosawakens:peach_planks"
+    ]
+  },
+  "sends_telemetry_event": false
+}

@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "group": "wooden_button",
+  "ingredients": [
+    {
+      "item": "chaosawakens:mesozoic_planks"
+    }
+  ],
+  "result": {
+    "item": "chaosawakens:mesozoic_button"
+  }
+}

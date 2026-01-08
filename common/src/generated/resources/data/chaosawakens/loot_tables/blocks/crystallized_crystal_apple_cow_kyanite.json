@@ -1,0 +1,19 @@
+{
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "chaosawakens:crystallized_crystal_apple_cow_kyanite"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ]
+}

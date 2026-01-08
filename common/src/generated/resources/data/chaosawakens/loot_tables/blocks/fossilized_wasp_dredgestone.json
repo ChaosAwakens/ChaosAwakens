@@ -1,0 +1,19 @@
+{
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "chaosawakens:fossilized_wasp_dredgestone"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ]
+}

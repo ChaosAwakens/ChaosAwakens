@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "chaosawakens:block/fossil/soul_soil/fossilized_skeleton_soul_soil"
+  }
+}

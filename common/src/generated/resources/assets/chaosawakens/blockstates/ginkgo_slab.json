@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "chaosawakens:block/ginkgo_slab"
+    },
+    "type=double": {
+      "model": "chaosawakens:block/ginkgo_planks"
+    },
+    "type=top": {
+      "model": "chaosawakens:block/ginkgo_slab_top"
+    }
+  }
+}

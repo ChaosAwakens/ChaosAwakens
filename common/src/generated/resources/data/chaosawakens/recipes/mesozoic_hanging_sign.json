@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "hanging_sign",
+  "key": {
+    "#": {
+      "item": "chaosawakens:mesozoic_planks"
+    },
+    "C": {
+      "item": "minecraft:chain"
+    }
+  },
+  "pattern": [
+    "C C",
+    "###",
+    "###"
+  ],
+  "result": {
+    "count": 6,
+    "item": "chaosawakens:mesozoic_hanging_sign"
+  },
+  "show_notification": true
+}

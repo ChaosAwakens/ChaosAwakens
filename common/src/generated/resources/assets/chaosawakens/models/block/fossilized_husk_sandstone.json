@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "bottom": "chaosawakens:block/fossil/sandstone/fossilized_husk_sandstone_bottom",
+    "side": "chaosawakens:block/fossil/sandstone/fossilized_husk_sandstone_side",
+    "top": "chaosawakens:block/fossil/sandstone/fossilized_husk_sandstone_top"
+  }
+}

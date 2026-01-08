@@ -1,0 +1,134 @@
+plugins {
+    id("multiloader-loader")
+    id("fabric-loom")
+    id("me.modmuss50.mod-publish-plugin")
+}
+
+base {
+    archivesName = "${mod_id}-fabric-${minecraft_version}"
+
+    sourceCompatibility = targetCompatibility = JavaVersion.VERSION_17
+}
+
+java {
+    toolchain.languageVersion = JavaLanguageVersion.of(17)
+
+    withSourcesJar()
+    withJavadocJar()
+}
+
+dependencies {
+    // Base
+    minecraft("com.mojang:minecraft:${minecraft_version}")
+    mappings(loom.layered() {
+        officialMojangMappings()
+        parchment("org.parchmentmc.data:${fabric_mappings_channel}-${fabric_mappings_channel_version}@zip")
+    })
+
+    modImplementation("net.fabricmc:fabric-loader:${fabric_loader_version}")
+
+    // Dependencies (Mandatory)
+    modImplementation("net.fabricmc.fabric-api:fabric-api:${fabric_api_version}")
+    modImplementation("com.mememan:nexus-fabric-${minecraft_version}:${nexus_version}")
+
+    include(implementation("team.unnamed:mocha:${mocha_version}"))
+
+    // Dependencies (Optional)
+    modCompileOnlyApi("mezz.jei:jei-${minecraft_version}-common-api:${fabric_jei_version}")
+    modCompileOnlyApi("mezz.jei:jei-${minecraft_version}-fabric-api:${fabric_jei_version}")
+
+    modRuntimeOnly("mezz.jei:jei-${minecraft_version}-fabric:${fabric_jei_version}")
+
+    modCompileOnly("squeek.appleskin:appleskin-fabric:${fabric_appleskin_version}:api") { transitive = false }
+
+    modImplementation("com.terraformersmc:modmenu:${fabric_modmenu_version}")
+}
+
+loom {
+    mods {
+        mod_id {
+            sourceSet sourceSets.main
+        }
+    }
+
+    if (project(":common").file("src/main/resources/${mod_id}.accessWidener").exists()) {
+        accessWidenerPath.set(project(":common").file("src/main/resources/${mod_id}.accessWidener"))
+    }
+
+    mixin {
+        defaultRefmapName.set("${mod_id}.refmap.json")
+    }
+
+    runs {
+        client {
+            client()
+            setConfigName("${fabric_client_taskname}")
+            ideConfigGenerated(true)
+            runDir("run/client")
+
+            vmArg("-Dfabric.log.level=debug")
+
+            vmArgs("-Xms12G", "-Xmx16G", "-XX:+UseG1GC", "-XX:+UnlockExperimentalVMOptions", "-XX:MaxGCPauseMillis=100",
+                    "-XX:+DisableExplicitGC", "-XX:TargetSurvivorRatio=90", "-XX:G1NewSizePercent=35",
+                    "-XX:G1MaxNewSizePercent=60", "-XX:G1MixedGCLiveThresholdPercent=50", "-XX:+AlwaysPreTouch",
+                    "-Dmixin.debug.export=true", "-XX:+AllowEnhancedClassRedefinition")
+        }
+        server {
+            server()
+            serverWithGui()
+            setConfigName("${fabric_server_taskname}")
+            ideConfigGenerated(true)
+            runDir("run/server")
+
+            vmArg("-Dfabric.log.level=debug")
+
+            vmArgs("-Xms12G", "-Xmx16G", "-XX:+UseG1GC", "-XX:+UnlockExperimentalVMOptions", "-XX:MaxGCPauseMillis=100",
+                    "-XX:+DisableExplicitGC", "-XX:TargetSurvivorRatio=90", "-XX:G1NewSizePercent=35",
+                    "-XX:G1MaxNewSizePercent=60", "-XX:G1MixedGCLiveThresholdPercent=50", "-XX:+AlwaysPreTouch",
+                    "-Dmixin.debug.export=true", "-XX:+AllowEnhancedClassRedefinition")
+        }
+        datagen {
+            inherit server
+            setConfigName("${fabric_data_taskname}")
+
+            vmArg("-Dfabric-api.datagen")
+            vmArg("-Dfabric-api.datagen.output-dir=${project(':common').file('src/generated/resources')}")
+            vmArg("-Dfabric-api.datagen.modid=${mod_id}")
+            vmArg("-Dfabric.log.level=debug")
+
+            runDir("build/datagen")
+
+            vmArgs("-Xms12G", "-Xmx16G", "-XX:+UseG1GC", "-XX:+UnlockExperimentalVMOptions", "-XX:MaxGCPauseMillis=100",
+                    "-XX:+DisableExplicitGC", "-XX:TargetSurvivorRatio=90", "-XX:G1NewSizePercent=35",
+                    "-XX:G1MaxNewSizePercent=60", "-XX:G1MixedGCLiveThresholdPercent=50", "-XX:+AlwaysPreTouch",
+                    "-Dmixin.debug.export=true", "-XX:+AllowEnhancedClassRedefinition")
+        }
+    }
+}
+
+publishMods {
+    file = jar.archiveFile
+    changelog = file("CHANGELOG.md").getText()
+    version = "${minecraft_version}-${mod_version}"
+    displayName = "${mod_name} v${minecraft_version}-${mod_version} Fabric"
+    type = STABLE
+
+    modLoaders.add("fabric")
+
+    curseforge {
+        projectId = "475414"
+        projectSlug = "chaos-awakens"
+        accessToken = providers.environmentVariable("CURSEFORGE_API_KEY")
+        announcementTitle = "New ${mod_name} CurseForge Release (Fabric) - v${mod_version} for MC ${minecraft_version}"
+
+        getMinecraftVersions().add(minecraft_version)
+    }
+
+    modrinth {
+        projectId = "frSNDQkA"
+        accessToken = providers.environmentVariable("MODRINTH_API_KEY")
+        announcementTitle = "New ${mod_name} Modrinth Release (Fabric) - v${mod_version} for MC ${minecraft_version}"
+
+        getMinecraftVersions().add(minecraft_version)
+    }
+}

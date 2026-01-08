@@ -1,0 +1,5 @@
+plugins {
+    id("fabric-loom") version("${fabric_loom_version}") apply(false)
+    id("net.neoforged.moddev.legacyforge") version("${legacyforge_version}") apply(false)
+    id("me.modmuss50.mod-publish-plugin") version("${publisher_plugin_version}") apply(false)
+}

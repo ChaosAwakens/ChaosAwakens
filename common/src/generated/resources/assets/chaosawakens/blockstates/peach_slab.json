@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "chaosawakens:block/peach_slab"
+    },
+    "type=double": {
+      "model": "chaosawakens:block/peach_planks"
+    },
+    "type=top": {
+      "model": "chaosawakens:block/peach_slab_top"
+    }
+  }
+}

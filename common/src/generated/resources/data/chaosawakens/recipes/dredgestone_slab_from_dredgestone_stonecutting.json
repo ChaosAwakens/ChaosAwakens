@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 2,
+  "ingredient": {
+    "item": "chaosawakens:dredgestone"
+  },
+  "result": "chaosawakens:dredgestone_slab"
+}

@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "planks",
+  "ingredients": [
+    {
+      "tag": "chaosawakens:wood/densewood_logs"
+    }
+  ],
+  "result": {
+    "count": 4,
+    "item": "chaosawakens:densewood_planks"
+  }
+}

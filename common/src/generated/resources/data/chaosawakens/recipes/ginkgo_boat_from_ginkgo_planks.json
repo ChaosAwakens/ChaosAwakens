@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "boat",
+  "key": {
+    "#": {
+      "item": "chaosawakens:ginkgo_planks"
+    }
+  },
+  "pattern": [
+    "# #",
+    "###"
+  ],
+  "result": {
+    "item": "chaosawakens:ginkgo_boat"
+  },
+  "show_notification": true
+}

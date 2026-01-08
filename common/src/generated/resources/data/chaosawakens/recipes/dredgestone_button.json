@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "ingredients": [
+    {
+      "item": "chaosawakens:dredgestone"
+    }
+  ],
+  "result": {
+    "item": "chaosawakens:dredgestone_button"
+  }
+}

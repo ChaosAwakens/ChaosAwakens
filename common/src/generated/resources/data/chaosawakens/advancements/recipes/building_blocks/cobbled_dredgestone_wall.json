@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_cobbled_dredgestone": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "chaosawakens:cobbled_dredgestone"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "chaosawakens:cobbled_dredgestone_wall"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_cobbled_dredgestone",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "chaosawakens:cobbled_dredgestone_wall"
+    ]
+  },
+  "sends_telemetry_event": false
+}

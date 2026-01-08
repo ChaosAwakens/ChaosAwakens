@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_duplicator_planks": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "chaosawakens:duplicator_planks"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "chaosawakens:duplicator_pressure_plate"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_duplicator_planks",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "chaosawakens:duplicator_pressure_plate"
+    ]
+  },
+  "sends_telemetry_event": false
+}

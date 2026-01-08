@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "wooden_sign",
+  "key": {
+    "#": {
+      "item": "chaosawakens:densewood_planks"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "###",
+    "###",
+    " S "
+  ],
+  "result": {
+    "count": 3,
+    "item": "chaosawakens:densewood_sign"
+  },
+  "show_notification": true
+}

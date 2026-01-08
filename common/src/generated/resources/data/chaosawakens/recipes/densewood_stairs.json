@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "wooden_stairs",
+  "key": {
+    "#": {
+      "item": "chaosawakens:densewood_planks"
+    }
+  },
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "result": {
+    "count": 6,
+    "item": "chaosawakens:densewood_stairs"
+  },
+  "show_notification": true
+}

@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "wooden_fence",
+  "key": {
+    "#": {
+      "item": "chaosawakens:densewood_planks"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "#S#",
+    "#S#"
+  ],
+  "result": {
+    "count": 3,
+    "item": "chaosawakens:densewood_fence"
+  },
+  "show_notification": true
+}

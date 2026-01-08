@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "boat",
+  "key": {
+    "#": {
+      "item": "chaosawakens:apple_planks"
+    }
+  },
+  "pattern": [
+    "# #",
+    "###"
+  ],
+  "result": {
+    "item": "chaosawakens:apple_boat"
+  },
+  "show_notification": true
+}

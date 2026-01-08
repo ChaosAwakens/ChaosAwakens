@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "chaosawakens:block/wood/peach/stripped_peach_log_top",
+    "side": "chaosawakens:block/wood/peach/stripped_peach_log"
+  }
+}

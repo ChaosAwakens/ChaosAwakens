@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "chaosawakens:block/fossil/deepslate/fossilized_husk_deepslate_top",
+    "side": "chaosawakens:block/fossil/deepslate/fossilized_husk_deepslate"
+  }
+}

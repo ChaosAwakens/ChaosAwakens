@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "chaosawakens:item/entity_items/chest_boat/crystalwood_chest_boat"
+  }
+}

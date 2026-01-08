@@ -1,0 +1,38 @@
+{
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:alternatives",
+          "children": [
+            {
+              "type": "minecraft:item",
+              "conditions": [
+                {
+                  "condition": "minecraft:match_tool",
+                  "predicate": {
+                    "enchantments": [
+                      {
+                        "enchantment": "minecraft:silk_touch",
+                        "levels": {
+                          "min": 1
+                        }
+                      }
+                    ]
+                  }
+                }
+              ],
+              "name": "chaosawakens:dredgestone"
+            },
+            {
+              "type": "minecraft:item",
+              "name": "chaosawakens:cobbled_dredgestone"
+            }
+          ]
+        }
+      ],
+      "rolls": 1.0
+    }
+  ]
+}

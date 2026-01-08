@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "chaosawakens:block/skywood_slab"
+    },
+    "type=double": {
+      "model": "chaosawakens:block/skywood_planks"
+    },
+    "type=top": {
+      "model": "chaosawakens:block/skywood_slab_top"
+    }
+  }
+}

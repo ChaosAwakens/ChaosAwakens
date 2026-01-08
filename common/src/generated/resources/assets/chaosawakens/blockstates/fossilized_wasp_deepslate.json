@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "chaosawakens:block/fossilized_wasp_deepslate_horizontal",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "chaosawakens:block/fossilized_wasp_deepslate"
+    },
+    "axis=z": {
+      "model": "chaosawakens:block/fossilized_wasp_deepslate_horizontal",
+      "x": 90
+    }
+  }
+}

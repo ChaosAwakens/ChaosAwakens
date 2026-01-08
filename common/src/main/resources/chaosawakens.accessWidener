@@ -1,0 +1,194 @@
+accessWidener v2 named
+
+## SHARED
+# ModelTemplate
+accessible field net/minecraft/data/models/model/ModelTemplate model Ljava/util/Optional;
+accessible field net/minecraft/data/models/model/ModelTemplate requiredSlots Ljava/util/Set;
+
+# PropertyDispatch
+accessible method net/minecraft/data/models/blockstates/PropertyDispatch getEntries ()Ljava/util/Map;
+accessible method net/minecraft/data/models/blockstates/PropertyDispatch getDefinedProperties ()Ljava/util/List;
+accessible field net/minecraft/data/models/model/ModelTemplate suffix Ljava/util/Optional;
+
+# MultiPartGenerator
+accessible field net/minecraft/data/models/blockstates/MultiPartGenerator parts Ljava/util/List;
+accessible field net/minecraft/data/models/blockstates/MultiPartGenerator$Entry variants Ljava/util/List;
+accessible field net/minecraft/data/models/blockstates/MultiPartGenerator$ConditionalEntry condition Lnet/minecraft/data/models/blockstates/Condition;
+
+# MultiVariantGenerator
+accessible class net/minecraft/data/models/blockstates/MultiPartGenerator$Entry
+accessible class net/minecraft/data/models/blockstates/MultiPartGenerator$ConditionalEntry
+accessible field net/minecraft/data/models/blockstates/MultiVariantGenerator baseVariants Ljava/util/List;
+accessible field net/minecraft/data/models/blockstates/MultiVariantGenerator declaredPropertySets Ljava/util/List;
+
+# Variant
+accessible field net/minecraft/data/models/blockstates/Variant values Ljava/util/Map;
+
+# VariantProperty
+accessible field net/minecraft/data/models/blockstates/VariantProperty$Value value Ljava/lang/Object;
+
+# VariantProperties
+accessible field net/minecraft/data/models/blockstates/VariantProperties$Rotation value I
+
+# RenderStateShard
+accessible field net/minecraft/client/renderer/RenderStateShard name Ljava/lang/String;
+
+# DoorBlock
+accessible method net/minecraft/world/level/block/DoorBlock <init> (Lnet/minecraft/world/level/block/state/BlockBehaviour$Properties;Lnet/minecraft/world/level/block/state/properties/BlockSetType;)V
+
+# SaplingBlock
+accessible method net/minecraft/world/level/block/SaplingBlock <init> (Lnet/minecraft/world/level/block/grower/AbstractTreeGrower;Lnet/minecraft/world/level/block/state/BlockBehaviour$Properties;)V
+
+# TrapDoorBlock
+accessible method net/minecraft/world/level/block/TrapDoorBlock <init> (Lnet/minecraft/world/level/block/state/BlockBehaviour$Properties;Lnet/minecraft/world/level/block/state/properties/BlockSetType;)V
+
+# StairBlock
+accessible method net/minecraft/world/level/block/StairBlock <init> (Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/level/block/state/BlockBehaviour$Properties;)V
+
+# ButtonBlock
+accessible method net/minecraft/world/level/block/ButtonBlock <init> (Lnet/minecraft/world/level/block/state/BlockBehaviour$Properties;Lnet/minecraft/world/level/block/state/properties/BlockSetType;IZ)V
+
+# PressurePlateBlock
+accessible method net/minecraft/world/level/block/PressurePlateBlock <init> (Lnet/minecraft/world/level/block/PressurePlateBlock$Sensitivity;Lnet/minecraft/world/level/block/state/BlockBehaviour$Properties;Lnet/minecraft/world/level/block/state/properties/BlockSetType;)V
+
+# BlockSetType
+accessible method net/minecraft/world/level/block/state/properties/BlockSetType register (Lnet/minecraft/world/level/block/state/properties/BlockSetType;)Lnet/minecraft/world/level/block/state/properties/BlockSetType;
+
+# WoodType
+accessible method net/minecraft/world/level/block/state/properties/WoodType register (Lnet/minecraft/world/level/block/state/properties/WoodType;)Lnet/minecraft/world/level/block/state/properties/WoodType;
+
+# Item.Properties
+accessible field net/minecraft/world/item/Item$Properties requiredFeatures Lnet/minecraft/world/flag/FeatureFlagSet;
+
+# BlockFamilies
+accessible method net/minecraft/data/BlockFamilies familyBuilder (Lnet/minecraft/world/level/block/Block;)Lnet/minecraft/data/BlockFamily$Builder;
+
+# Camera
+accessible method net/minecraft/client/Camera setRotation (FF)V
+
+# TextureSlot
+accessible method net/minecraft/data/models/model/TextureSlot create (Ljava/lang/String;Lnet/minecraft/data/models/model/TextureSlot;)Lnet/minecraft/data/models/model/TextureSlot;
+accessible method net/minecraft/data/models/model/TextureSlot create (Ljava/lang/String;)Lnet/minecraft/data/models/model/TextureSlot;
+
+# OreVeinifier$VeinType
+accessible class net/minecraft/world/level/levelgen/OreVeinifier$VeinType
+accessible field net/minecraft/world/level/levelgen/OreVeinifier$VeinType minY I
+accessible field net/minecraft/world/level/levelgen/OreVeinifier$VeinType maxY I
+accessible method net/minecraft/world/level/levelgen/OreVeinifier create (Lnet/minecraft/world/level/levelgen/DensityFunction;Lnet/minecraft/world/level/levelgen/DensityFunction;Lnet/minecraft/world/level/levelgen/DensityFunction;Lnet/minecraft/world/level/levelgen/PositionalRandomFactory;)Lnet/minecraft/world/level/levelgen/NoiseChunk$BlockStateFiller;
+
+# NoiseRouterData
+accessible method net/minecraft/world/level/levelgen/NoiseRouterData overworld (Lnet/minecraft/core/HolderGetter;Lnet/minecraft/core/HolderGetter;ZZ)Lnet/minecraft/world/level/levelgen/NoiseRouter;
+accessible method net/minecraft/world/level/levelgen/NoiseRouterData slide (Lnet/minecraft/world/level/levelgen/DensityFunction;IIIIDIID)Lnet/minecraft/world/level/levelgen/DensityFunction;
+accessible method net/minecraft/world/level/levelgen/NoiseRouterData noiseGradientDensity (Lnet/minecraft/world/level/levelgen/DensityFunction;Lnet/minecraft/world/level/levelgen/DensityFunction;)Lnet/minecraft/world/level/levelgen/DensityFunction;
+accessible method net/minecraft/world/level/levelgen/NoiseRouterData splineWithBlending (Lnet/minecraft/world/level/levelgen/DensityFunction;Lnet/minecraft/world/level/levelgen/DensityFunction;)Lnet/minecraft/world/level/levelgen/DensityFunction;
+accessible method net/minecraft/world/level/levelgen/NoiseRouterData yLimitedInterpolatable (Lnet/minecraft/world/level/levelgen/DensityFunction;Lnet/minecraft/world/level/levelgen/DensityFunction;III)Lnet/minecraft/world/level/levelgen/DensityFunction;
+
+# TerrainProvider
+accessible method net/minecraft/data/worldgen/TerrainProvider getErosionFactor (Lnet/minecraft/util/ToFloatFunction;Lnet/minecraft/util/ToFloatFunction;Lnet/minecraft/util/ToFloatFunction;FZLnet/minecraft/util/ToFloatFunction;)Lnet/minecraft/util/CubicSpline;
+accessible method net/minecraft/data/worldgen/TerrainProvider calculateSlope (FFFF)F
+accessible method net/minecraft/data/worldgen/TerrainProvider ridgeSpline (Lnet/minecraft/util/ToFloatFunction;FFFFFFLnet/minecraft/util/ToFloatFunction;)Lnet/minecraft/util/CubicSpline;
+accessible method net/minecraft/data/worldgen/TerrainProvider buildWeirdnessJaggednessSpline (Lnet/minecraft/util/ToFloatFunction;FLnet/minecraft/util/ToFloatFunction;)Lnet/minecraft/util/CubicSpline;
+accessible method net/minecraft/data/worldgen/TerrainProvider buildRidgeJaggednessSpline (Lnet/minecraft/util/ToFloatFunction;Lnet/minecraft/util/ToFloatFunction;FFLnet/minecraft/util/ToFloatFunction;)Lnet/minecraft/util/CubicSpline;
+accessible method net/minecraft/data/worldgen/TerrainProvider buildErosionJaggednessSpline (Lnet/minecraft/util/ToFloatFunction;Lnet/minecraft/util/ToFloatFunction;Lnet/minecraft/util/ToFloatFunction;FFFFLnet/minecraft/util/ToFloatFunction;)Lnet/minecraft/util/CubicSpline;
+accessible method net/minecraft/data/worldgen/TerrainProvider buildMountainRidgeSplineWithPoints (Lnet/minecraft/util/ToFloatFunction;FZLnet/minecraft/util/ToFloatFunction;)Lnet/minecraft/util/CubicSpline;
+accessible method net/minecraft/data/worldgen/TerrainProvider mountainContinentalness (FFF)F
+accessible method net/minecraft/data/worldgen/TerrainProvider calculateMountainRidgeZeroContinentalnessPoint (F)F
+
+# HierarchicalModel
+accessible field net/minecraft/client/model/HierarchicalModel ANIMATION_VECTOR_CACHE Lorg/joml/Vector3f;
+
+# MultiNoiseBiomeSourceParameterList$Preset
+accessible field net/minecraft/world/level/biome/MultiNoiseBiomeSourceParameterList$Preset BY_NAME Ljava/util/Map;
+mutable field net/minecraft/world/level/biome/MultiNoiseBiomeSourceParameterList$Preset BY_NAME Ljava/util/Map;
+
+# MultiNoiseBiomeSourceParameterList$Preset$SourceProvider
+accessible class net/minecraft/world/level/biome/MultiNoiseBiomeSourceParameterList$Preset$SourceProvider
+
+# NoiseBasedChunkGenerator
+extendable class net/minecraft/world/level/levelgen/NoiseBasedChunkGenerator
+accessible field net/minecraft/world/level/levelgen/NoiseBasedChunkGenerator AIR Lnet/minecraft/world/level/block/state/BlockState;
+accessible field net/minecraft/world/level/levelgen/NoiseBasedChunkGenerator settings Lnet/minecraft/core/Holder;
+accessible field net/minecraft/world/level/levelgen/NoiseBasedChunkGenerator globalFluidPicker Ljava/util/function/Supplier;
+accessible method net/minecraft/world/level/levelgen/NoiseBasedChunkGenerator doFill (Lnet/minecraft/world/level/levelgen/blending/Blender;Lnet/minecraft/world/level/StructureManager;Lnet/minecraft/world/level/levelgen/RandomState;Lnet/minecraft/world/level/chunk/ChunkAccess;II)Lnet/minecraft/world/level/chunk/ChunkAccess;
+extendable method net/minecraft/world/level/levelgen/NoiseBasedChunkGenerator doFill (Lnet/minecraft/world/level/levelgen/blending/Blender;Lnet/minecraft/world/level/StructureManager;Lnet/minecraft/world/level/levelgen/RandomState;Lnet/minecraft/world/level/chunk/ChunkAccess;II)Lnet/minecraft/world/level/chunk/ChunkAccess;
+accessible method net/minecraft/world/level/levelgen/NoiseBasedChunkGenerator debugPreliminarySurfaceLevel (Lnet/minecraft/world/level/levelgen/NoiseChunk;IIILnet/minecraft/world/level/block/state/BlockState;)Lnet/minecraft/world/level/block/state/BlockState;
+accessible method net/minecraft/world/level/levelgen/NoiseBasedChunkGenerator createNoiseChunk (Lnet/minecraft/world/level/chunk/ChunkAccess;Lnet/minecraft/world/level/StructureManager;Lnet/minecraft/world/level/levelgen/blending/Blender;Lnet/minecraft/world/level/levelgen/RandomState;)Lnet/minecraft/world/level/levelgen/NoiseChunk;
+
+# NoiseChunk
+accessible method net/minecraft/world/level/levelgen/NoiseChunk cellWidth ()I
+accessible method net/minecraft/world/level/levelgen/NoiseChunk cellHeight ()I
+accessible method net/minecraft/world/level/levelgen/NoiseChunk getInterpolatedState ()Lnet/minecraft/world/level/block/state/BlockState;
+accessible class net/minecraft/world/level/levelgen/NoiseChunk$CacheAllInCell
+accessible field net/minecraft/world/level/levelgen/NoiseChunk$CacheAllInCell noiseFiller Lnet/minecraft/world/level/levelgen/DensityFunction;
+accessible field net/minecraft/world/level/levelgen/NoiseChunk$CacheAllInCell values [D
+accessible class net/minecraft/world/level/levelgen/NoiseChunk$NoiseInterpolator
+accessible method net/minecraft/world/level/levelgen/NoiseChunk$NoiseInterpolator <init> (Lnet/minecraft/world/level/levelgen/NoiseChunk;Lnet/minecraft/world/level/levelgen/DensityFunction;)V
+accessible field net/minecraft/world/level/levelgen/NoiseChunk$NoiseInterpolator noiseFiller Lnet/minecraft/world/level/levelgen/DensityFunction;
+accessible method net/minecraft/world/level/levelgen/NoiseChunk$NoiseInterpolator selectCellYZ (II)V
+accessible method net/minecraft/world/level/levelgen/NoiseChunk$NoiseInterpolator updateForY (D)V
+accessible method net/minecraft/world/level/levelgen/NoiseChunk$NoiseInterpolator updateForX (D)V
+accessible method net/minecraft/world/level/levelgen/NoiseChunk$NoiseInterpolator updateForZ (D)V
+accessible field net/minecraft/world/level/levelgen/NoiseChunk$NoiseInterpolator value D
+accessible field net/minecraft/world/level/levelgen/NoiseChunk interpolationCounter J
+accessible field net/minecraft/world/level/levelgen/NoiseChunk cellCountXZ I
+accessible field net/minecraft/world/level/levelgen/NoiseChunk cellCountY I
+accessible field net/minecraft/world/level/levelgen/NoiseChunk cellWidth I
+accessible field net/minecraft/world/level/levelgen/NoiseChunk cellHeight I
+accessible field net/minecraft/world/level/levelgen/NoiseChunk interpolators Ljava/util/List;
+accessible field net/minecraft/world/level/levelgen/NoiseChunk cellCaches Ljava/util/List;
+accessible field net/minecraft/world/level/levelgen/NoiseChunk fillingCell Z
+accessible field net/minecraft/world/level/levelgen/NoiseChunk cellStartBlockX I
+accessible field net/minecraft/world/level/levelgen/NoiseChunk cellStartBlockY I
+accessible field net/minecraft/world/level/levelgen/NoiseChunk cellStartBlockZ I
+accessible field net/minecraft/world/level/levelgen/NoiseChunk cellNoiseMinY I
+accessible field net/minecraft/world/level/levelgen/NoiseChunk firstCellZ I
+accessible field net/minecraft/world/level/levelgen/NoiseChunk arrayInterpolationCounter J
+accessible field net/minecraft/world/level/levelgen/NoiseChunk inCellY I
+accessible field net/minecraft/world/level/levelgen/NoiseChunk inCellX I
+accessible field net/minecraft/world/level/levelgen/NoiseChunk inCellZ I
+
+
+
+# BiomeManager
+accessible field net/minecraft/world/level/biome/BiomeManager noiseBiomeSource Lnet/minecraft/world/level/biome/BiomeManager$NoiseBiomeSource;
+accessible field net/minecraft/world/level/biome/BiomeManager biomeZoomSeed J
+
+# RandomState
+extendable class net/minecraft/world/level/levelgen/RandomState
+accessible method net/minecraft/world/level/levelgen/RandomState <init> (Lnet/minecraft/world/level/levelgen/NoiseGeneratorSettings;Lnet/minecraft/core/HolderGetter;J)V
+
+# Climate
+accessible field net/minecraft/world/level/biome/Climate QUANTIZATION_FACTOR F
+
+# Climate$ParameterPoint
+accessible method net/minecraft/world/level/biome/Climate$ParameterPoint fitness (Lnet/minecraft/world/level/biome/Climate$TargetPoint;)J
+
+# Climate$RTree
+accessible class net/minecraft/world/level/biome/Climate$RTree
+extendable class net/minecraft/world/level/biome/Climate$RTree
+accessible method net/minecraft/world/level/biome/Climate$RTree <init> (Lnet/minecraft/world/level/biome/Climate$RTree$Node;)V
+accessible field net/minecraft/world/level/biome/Climate$RTree CHILDREN_PER_NODE I
+
+# Climate$RTree$SubTree
+accessible class net/minecraft/world/level/biome/Climate$RTree$SubTree
+extendable class net/minecraft/world/level/biome/Climate$RTree$SubTree
+accessible field net/minecraft/world/level/biome/Climate$RTree$SubTree children [Lnet/minecraft/world/level/biome/Climate$RTree$Node;
+
+# Climate$RTree$Node
+accessible class net/minecraft/world/level/biome/Climate$RTree$Node
+
+# SurfaceSystem
+accessible field net/minecraft/world/level/levelgen/SurfaceSystem defaultBlock Lnet/minecraft/world/level/block/state/BlockState;
+accessible method net/minecraft/world/level/levelgen/SurfaceSystem isStone (Lnet/minecraft/world/level/block/state/BlockState;)Z
+
+# DensityFunctions
+accessible method net/minecraft/world/level/levelgen/DensityFunctions$Noise <init> (Lnet/minecraft/world/level/levelgen/DensityFunction$NoiseHolder;DD)V
+accessible class net/minecraft/world/level/levelgen/DensityFunctions$BeardifierMarker
+
+# StructureTemplate
+#accessible field net/minecraft/world/level/levelgen/structure/templatesystem/StructureTemplate palettes Ljava/util/List;
+#accessible field net/minecraft/world/level/levelgen/structure/templatesystem/StructureTemplate entityInfoList Ljava/util/List;
+#accessible method net/minecraft/world/level/levelgen/structure/templatesystem/StructureTemplate placeEntities (Lnet/minecraft/world/level/ServerLevelAccessor;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/Mirror;Lnet/minecraft/world/level/block/Rotation;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/levelgen/structure/BoundingBox;Z)V
+
+# BlockStateProviderType
+accessible method net/minecraft/world/level/levelgen/feature/stateproviders/BlockStateProviderType <init> (Lcom/mojang/serialization/Codec;)V

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "chest_boat",
+  "ingredients": [
+    {
+      "item": "chaosawakens:ginkgo_boat"
+    },
+    {
+      "item": "minecraft:chest"
+    }
+  ],
+  "result": {
+    "item": "chaosawakens:ginkgo_chest_boat"
+  }
+}
