@@ -10,7 +10,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:air"
+          "name": "chaosawakens:apple_hanging_sign"
         }
       ],
       "rolls": 1.0

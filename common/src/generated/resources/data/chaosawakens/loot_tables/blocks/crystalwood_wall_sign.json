@@ -10,7 +10,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:air"
+          "name": "chaosawakens:crystalwood_sign"
         }
       ],
       "rolls": 1.0
