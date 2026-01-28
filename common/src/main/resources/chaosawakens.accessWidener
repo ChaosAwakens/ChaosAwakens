@@ -114,6 +114,8 @@ extendable method net/minecraft/world/level/levelgen/NoiseBasedChunkGenerator do
 accessible method net/minecraft/world/level/levelgen/NoiseBasedChunkGenerator debugPreliminarySurfaceLevel (Lnet/minecraft/world/level/levelgen/NoiseChunk;IIILnet/minecraft/world/level/block/state/BlockState;)Lnet/minecraft/world/level/block/state/BlockState;
 accessible method net/minecraft/world/level/levelgen/NoiseBasedChunkGenerator createNoiseChunk (Lnet/minecraft/world/level/chunk/ChunkAccess;Lnet/minecraft/world/level/StructureManager;Lnet/minecraft/world/level/levelgen/blending/Blender;Lnet/minecraft/world/level/levelgen/RandomState;)Lnet/minecraft/world/level/levelgen/NoiseChunk;
 
+
+
 # NoiseChunk
 accessible method net/minecraft/world/level/levelgen/NoiseChunk cellWidth ()I
 accessible method net/minecraft/world/level/levelgen/NoiseChunk cellHeight ()I

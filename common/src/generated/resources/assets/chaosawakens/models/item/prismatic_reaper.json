@@ -1,0 +1,6 @@
+{
+  "parent": "chaosawakens:item/handheld_long",
+  "textures": {
+    "layer0": "chaosawakens:item/equipment/special/mid/prismatic_reaper"
+  }
+}

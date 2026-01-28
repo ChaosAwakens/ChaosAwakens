@@ -60,17 +60,16 @@ public final class CACreativeModeTabs {
                             .build(), CREATIVE_MODE_TABS)
             .withCustomName("Chaos Awakens: Items")
             .buildAndGet();
-    public static final Supplier<CreativeModeTab> GEAR = CreativeModeTabPropertyWrapperTemplates.registerAndReflectAndChain(CAConstants.prefix("gear"),
+    public static final Supplier<CreativeModeTab> EQUIPMENT = CreativeModeTabPropertyWrapperTemplates.registerAndReflectAndChain(CAConstants.prefix("equipment"),
                     () -> CreativeModeTab.builder(CreativeModeTab.Row.TOP, 0)
-                            .title(Component.translatable("creative_mode_tab.chaosawakens.gear"))
-                            .icon(() -> CAItems.ITEMS.stream().filter(curItem -> curItem.get() instanceof TieredItem).findFirst().orElse(CAItems.KUNZITE).get().getDefaultInstance()) // TODO Sub
-                            .displayItems((param, output) -> output.acceptAll(CAItems.ITEMS.stream()
-                                    .filter(curItem -> curItem.get() instanceof TieredItem)
+                            .title(Component.translatable("creative_mode_tab.chaosawakens.equipment"))
+                            .icon(() -> CAItems.EQUIPMENT.stream().filter(curItem -> curItem.get() instanceof TieredItem).findFirst().orElse(CAItems.ULTIMATE_SWORD).get().getDefaultInstance()) // TODO Sub
+                            .displayItems((param, output) -> output.acceptAll(CAItems.EQUIPMENT.stream()
                                     .map(Supplier::get)
                                     .map(Item::getDefaultInstance)
                                     .collect(Collectors.toCollection(ObjectArrayList::new))))
                             .build(), CREATIVE_MODE_TABS)
-            .withCustomName("Chaos Awakens: Gear")
+            .withCustomName("Chaos Awakens: Equipment")
             .buildAndGet();
    public static final Supplier<CreativeModeTab> FOOD = CreativeModeTabPropertyWrapperTemplates.registerAndReflectAndChain(CAConstants.prefix("food"),
                     () -> CreativeModeTab.builder(CreativeModeTab.Row.TOP, 0)
