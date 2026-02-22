@@ -1,0 +1,16 @@
+{
+  "type": "chaosawakens:iron_defossilizing",
+  "bucket_ingredient": {
+    "item": "minecraft:water_bucket"
+  },
+  "category": "iron",
+  "defossilizing_time": 200,
+  "experience": 1.0,
+  "fossilized_ingredient": {
+    "item": "chaosawakens:fossilized_cave_spider_stone"
+  },
+  "power_chip_ingredient": {
+    "item": "chaosawakens:aluminum_power_chip"
+  },
+  "result": "minecraft:cave_spider_spawn_egg"
+}

@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "item": "chaosawakens:robo_wall_l"
+  },
+  "result": "chaosawakens:robo_wall_l"
+}

@@ -1,0 +1,22 @@
+{
+  "criteria": {
+    "has_fossilized_dolphin_sand": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "chaosawakens:fossilized_dolphin_sand"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_fossilized_dolphin_sand"
+    ]
+  ],
+  "sends_telemetry_event": false
+}

@@ -1,0 +1,22 @@
+{
+  "criteria": {
+    "has_fossilized_skeleton_dredgestone": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "chaosawakens:fossilized_skeleton_dredgestone"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_fossilized_skeleton_dredgestone"
+    ]
+  ],
+  "sends_telemetry_event": false
+}

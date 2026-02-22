@@ -43,7 +43,7 @@ public abstract class EntityRenderDispatcherMixin {
                     float scale = 1.0f / 16.0f;
 
                     boneData.getCubes().forEach(cube -> {
-                        Vector3d origin = cube.getOrigin();
+                        Vector3d origin = cube.getOrigin(); // Local -> Bone -> Level
                         Vector3d size = cube.getSize();
 
                         // Start with identity matrix

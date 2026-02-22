@@ -1,0 +1,22 @@
+{
+  "criteria": {
+    "has_fossilized_bee_gloomstone": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "chaosawakens:fossilized_bee_gloomstone"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_fossilized_bee_gloomstone"
+    ]
+  ],
+  "sends_telemetry_event": false
+}

@@ -9,14 +9,13 @@ import com.mememan.nexus.util.RegistryUtil;
 import io.github.chaosawakens.CAConstants;
 import io.github.chaosawakens.content.block.vegetation.FruitableLeavesBlock;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+import net.minecraft.core.Direction;
 import net.minecraft.data.models.blockstates.*;
-import net.minecraft.data.models.model.ModelLocationUtils;
-import net.minecraft.data.models.model.ModelTemplate;
-import net.minecraft.data.models.model.TextureMapping;
-import net.minecraft.data.models.model.TextureSlot;
+import net.minecraft.data.models.model.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.PipeBlock;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 
 import java.util.Optional;
 import java.util.function.Supplier;
@@ -69,7 +68,9 @@ public final class CAModelTemplates {
         return leafCarpet(targetBlock, RegistryUtil.getTextureLocationOrDefault(
                 targetBlock,
                 RegistryUtil.getTextureLocationOrDefault(DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(targetBlock.get())
-                        .withPath(curPath -> curPath.replace("_leaf_carpet", "_leaves")))));
+                        .withPath(curPath -> curPath.replace("_leaf_carpet", "_leaves")),
+                        RegistryUtil.getTextureLocationOrDefault(DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(targetBlock.get())
+                                .withPath(curPath -> curPath.replace("_carpet", ""))))));
     }
 
     public static BlockStateDefinition leafCarpetBlockState(Supplier<Block> targetBlock) {
@@ -194,5 +195,69 @@ public final class CAModelTemplates {
 
     public static BlockStateDefinition fruitableLeavesBlockState(Supplier<Block> targetBlock) {
         return fruitableLeavesBlockState(targetBlock, ModelLocationUtils.getModelLocation(targetBlock.get()), ModelLocationUtils.getModelLocation(targetBlock.get()).withSuffix("_ripe"));
+    }
+
+    public static BlockModelDefinition roboSlab(Supplier<Block> targetBlock) {
+        ResourceLocation defaultedTexLoc = RegistryUtil.getTextureLocationOrDefault(RegistryUtil.pickBlockId(targetBlock), RegistryUtil.getTextureLocationOrDefault(DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(targetBlock.get()).withPath(curPath -> curPath.replace("_slab", "_block"))));
+
+        return ModelUtil.slab(targetBlock, defaultedTexLoc, defaultedTexLoc, defaultedTexLoc);
+    }
+
+    public static BlockStateDefinition roboSlabBlockState(Supplier<Block> targetBlock) {
+        ResourceLocation defaultedTexLoc = RegistryUtil.getTextureLocationOrDefault(RegistryUtil.pickBlockId(targetBlock), RegistryUtil.getTextureLocationOrDefault(DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(targetBlock.get()).withPath(curPath -> curPath.replace("_slab", "_block"))));
+
+        if (defaultedTexLoc.getPath().contains("/")) defaultedTexLoc = defaultedTexLoc.withPath(curPath -> curPath.substring(curPath.lastIndexOf('/') + 1)).withPrefix("block/");
+
+        return ModelUtil.slabBlockState(targetBlock, defaultedTexLoc);
+    }
+
+    public static BlockModelDefinition topSideRoboSlab(Supplier<Block> targetBlock) {
+        ResourceLocation defaultedSideTexLoc = RegistryUtil.getTextureLocationOrDefault(RegistryUtil.pickBlockId(targetBlock), RegistryUtil.getTextureLocationOrDefault(DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(targetBlock.get()).withPath(curPath -> curPath.replace("_slab", "_block"))));
+        ResourceLocation defaultedTopBottomTexLoc = RegistryUtil.getTextureLocationOrDefault(RegistryUtil.pickBlockId(targetBlock), RegistryUtil.getTextureLocationOrDefault(DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(targetBlock.get()).withPath(curPath -> curPath.replace("_slab", "_block")).withSuffix("_top")));
+
+        return ModelUtil.slab(targetBlock, defaultedTopBottomTexLoc, defaultedTopBottomTexLoc, defaultedSideTexLoc);
+    }
+
+    public static BlockModelDefinition roboStairs(Supplier<Block> targetBlock) {
+        ResourceLocation defaultedTexLoc = RegistryUtil.getTextureLocationOrDefault(RegistryUtil.pickBlockId(targetBlock), RegistryUtil.getTextureLocationOrDefault(DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(targetBlock.get()).withPath(curPath -> curPath.replace("_stairs", "_block"))));
+
+        return ModelUtil.stairs(targetBlock, defaultedTexLoc, defaultedTexLoc, defaultedTexLoc);
+    }
+
+    public static BlockModelDefinition roboWall(Supplier<Block> targetBlock) {
+        ResourceLocation defaultedTexLoc = RegistryUtil.getTextureLocationOrDefault(RegistryUtil.pickBlockId(targetBlock), RegistryUtil.getTextureLocationOrDefault(DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(targetBlock.get()).withPath(curPath -> curPath.replace("_wall", "_block"))));
+
+        return ModelUtil.wall(targetBlock, defaultedTexLoc);
+    }
+
+    public static BlockModelDefinition orientableCube(ResourceLocation frontTexture, ResourceLocation sideTexture, ResourceLocation topTexture) {
+        return new BlockModelDefinition(ModelTemplates.CUBE_ORIENTABLE)
+                .withTextureMapping(new TextureMapping()
+                        .put(TextureSlot.FRONT, frontTexture)
+                        .put(TextureSlot.SIDE, sideTexture)
+                        .put(TextureSlot.TOP, topTexture));
+    }
+
+    public static BlockModelDefinition orientableCube(Supplier<Block> targetBlock) {
+        return orientableCube(RegistryUtil.getTextureLocationOrDefault(targetBlock), RegistryUtil.getTextureLocationWithSuffixOrDefault(targetBlock, "_side"), RegistryUtil.getTextureLocationWithSuffixOrDefault(targetBlock, "_top"))
+                .withOrdinalModelDefinition(new ItemModelDefinition(ModelUtil.fromLocation(ModelLocationUtils.getModelLocation(targetBlock.get()))));
+    }
+
+    public static BlockStateDefinition orientableCubeBlockState(Supplier<Block> targetBlock) {
+        return new BlockStateDefinition(targetBlock)
+                .withBlockStateSupplier(MultiVariantGenerator.multiVariant(targetBlock.get())
+                        .with(PropertyDispatch.property(BlockStateProperties.LIT)
+                                .select(true, Variant.variant()
+                                        .with(VariantProperties.MODEL, ModelLocationUtils.getModelLocation(targetBlock.get(), "_lit")))
+                                .select(false, Variant.variant()
+                                        .with(VariantProperties.MODEL, ModelLocationUtils.getModelLocation(targetBlock.get()))))
+                        .with(PropertyDispatch.property(BlockStateProperties.HORIZONTAL_FACING)
+                                .select(Direction.EAST, Variant.variant()
+                                        .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90))
+                                .select(Direction.SOUTH, Variant.variant()
+                                        .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180))
+                                .select(Direction.WEST, Variant.variant()
+                                        .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270))
+                                .select(Direction.NORTH, Variant.variant())));
     }
 }

@@ -32,12 +32,20 @@ public final class CABPWTemplates {
             .withRecipe(CARecipeTemplates::patternBlockRecipeFrom)
             .build();
 
+    public static final BlockPropertyWrapper<Block> ORIENTABLE_BLOCK_STONE = new BlockPropertyWrapper<>()
+            .builder()
+            .copyFrom(BlockPropertyWrapperTemplates.BASIC_PICKAXE_STONE)
+            .withModelDefinition(CAModelTemplates::orientableCube)
+            .withBlockStateDefinition(CAModelTemplates::orientableCubeBlockState)
+            .build();
+
     public static final BlockPropertyWrapper<Block> FOSSIL = new BlockPropertyWrapper<>()
             .builder()
             .copyFrom(BlockPropertyWrapperTemplates.BASIC)
             .withParentTab(CACreativeModeTabs.FOSSILS)
             .literalTranslation()
             .withLocalization(StringUtil::formatFossilName)
+            .withRecipe(CARecipeTemplates::spawnEggFromFossilWater)
             .build();
     public static final BlockPropertyWrapper<Block> FOSSIL_PICKAXE = new BlockPropertyWrapper<>()
             .builder()
@@ -65,6 +73,7 @@ public final class CABPWTemplates {
             .copyFrom(FOSSIL_PICKAXE)
             .withTag(CATags.CABlockTags.BLACKSTONE_FOSSILS::get)
             .withAdditionalTag(CATags.CAItemTags.BLACKSTONE_FOSSILS::get)
+            .withRecipe(CARecipeTemplates::spawnEggFromFossilLava)
             .build();
     public static final BlockPropertyWrapper<Block> FOSSIL_DEEPSLATE = new BlockPropertyWrapper<>()
             .builder()
@@ -113,12 +122,14 @@ public final class CABPWTemplates {
             .copyFrom(FOSSIL_PICKAXE)
             .withTag(CATags.CABlockTags.KYANITE_FOSSILS::get)
             .withAdditionalTag(CATags.CAItemTags.KYANITE_FOSSILS::get)
+            .withRecipe(null)
             .build();
     public static final BlockPropertyWrapper<Block> FOSSIL_NETHERRACK = new BlockPropertyWrapper<>()
             .builder()
             .copyFrom(FOSSIL_PICKAXE)
             .withTag(CATags.CABlockTags.NETHERRACK_FOSSILS::get)
             .withAdditionalTag(CATags.CAItemTags.NETHERRACK_FOSSILS::get)
+            .withRecipe(CARecipeTemplates::spawnEggFromFossilLava)
             .build();
     public static final BlockPropertyWrapper<Block> FOSSIL_SAND = new BlockPropertyWrapper<>()
             .builder()
@@ -138,6 +149,7 @@ public final class CABPWTemplates {
             .copyFrom(FOSSIL_SHOVEL)
             .withTag(CATags.CABlockTags.SOUL_SOIL_FOSSILS::get)
             .withAdditionalTag(CATags.CAItemTags.SOUL_SOIL_FOSSILS::get)
+            .withRecipe(CARecipeTemplates::spawnEggFromFossilLava)
             .build();
     public static final BlockPropertyWrapper<Block> FOSSIL_STONE = new BlockPropertyWrapper<>()
             .builder()
@@ -162,12 +174,47 @@ public final class CABPWTemplates {
             .withLootTable(LootUtil::dropMultiFace)
             .build();
 
+    public static final BlockPropertyWrapper<Block> PETAL_BLOCK = new BlockPropertyWrapper<>()
+            .builder()
+            .copyFrom(BlockPropertyWrapperTemplates.BASIC_AXE)
+            .withTag(CATags.CABlockTags.FLOWER_BLOCKS::get)
+            .withAdditionalTag(CATags.CAItemTags.FLOWER_BLOCKS::get)
+            .build();
+    public static final BlockPropertyWrapper<Block> STEM_BLOCK = new BlockPropertyWrapper<>()
+            .builder()
+            .copyFrom(BlockPropertyWrapperTemplates.ROTATED_PILLAR_AXE)
+            .withTag(CATags.CABlockTags.FLOWER_BLOCKS::get)
+            .withAdditionalTag(CATags.CAItemTags.FLOWER_BLOCKS::get)
+            .build();
+
     public static final BlockPropertyWrapper<Block> FRUITABLE_LEAVES = new BlockPropertyWrapper<>()
             .builder()
             .copyFrom(BlockPropertyWrapperTemplates.LEAVES)
             .withModelDefinition(CAModelTemplates::fruitableLeaves)
             .withBlockStateDefinition(CAModelTemplates::fruitableLeavesBlockState)
             .withLootTable(CALootTableTemplates::dropLeavesRipe)
+            .build();
+
+    public static final BlockPropertyWrapper<Block> DENSE_PLANT = new BlockPropertyWrapper<>()
+            .builder()
+            .copyFrom(BlockPropertyWrapperTemplates.NO_TINT_PLANT)
+            .withTag(CATags.CABlockTags.DENSE_VEGETATION::get)
+            .build();
+    public static final BlockPropertyWrapper<Block> TALL_DENSE_PLANT = new BlockPropertyWrapper<>()
+            .builder()
+            .copyFrom(BlockPropertyWrapperTemplates.NO_TINT_TALL_PLANT)
+            .withTag(CATags.CABlockTags.DENSE_VEGETATION::get)
+            .build();
+
+    public static final BlockPropertyWrapper<Block> DENSE_FLOWER = new BlockPropertyWrapper<>()
+            .builder()
+            .copyFrom(BlockPropertyWrapperTemplates.SMALL_FLOWER)
+            .withTag(CATags.CABlockTags.DENSE_FLOWERS::get)
+            .build();
+    public static final BlockPropertyWrapper<Block> TALL_DENSE_FLOWER = new BlockPropertyWrapper<>()
+            .builder()
+            .copyFrom(BlockPropertyWrapperTemplates.TALL_FLOWER)
+            .withTag(CATags.CABlockTags.DENSE_FLOWERS::get)
             .build();
 
     public static final BlockPropertyWrapper<Block> MATERIAL_BLOCK_PICKAXE_IRON = new BlockPropertyWrapper<>()
@@ -192,6 +239,51 @@ public final class CABPWTemplates {
             .builder()
             .copyFrom(BlockPropertyWrapperTemplates.COMPONENT_BLOCK_PICKAXE)
             .withTag(() -> BlockTags.NEEDS_STONE_TOOL)
+            .build();
+
+    public static final BlockPropertyWrapper<Block> ROBO_BLOCK = new BlockPropertyWrapper<>()
+            .builder()
+            .copyFrom(BlockPropertyWrapperTemplates.BASIC_PICKAXE_DIAMOND)
+            .withTag(CATags.CABlockTags.ROBO_BLOCKS::get)
+            .withAdditionalTag(CATags.CAItemTags.ROBO_BLOCKS::get)
+            .withLocalization(StringUtil::formatRoboBlockName)
+            .build();
+    public static final BlockPropertyWrapper<Block> ROTATED_ROBO_BLOCK = new BlockPropertyWrapper<>()
+            .builder()
+            .copyFrom(ROBO_BLOCK)
+            .withModelDefinition(ModelUtil::rotatedPillar)
+            .withBlockStateDefinition(ModelUtil::rotatedPillarBlockState)
+            .build();
+
+    public static final BlockPropertyWrapper<Block> ROBO_SLAB = new BlockPropertyWrapper<>()
+            .builder()
+            .copyFrom(BlockPropertyWrapperTemplates.SLAB)
+            .withModelDefinition(CAModelTemplates::roboSlab)
+            .withBlockStateDefinition(CAModelTemplates::roboSlabBlockState)
+            .withTags(() -> BlockTags.NEEDS_DIAMOND_TOOL, CATags.CABlockTags.ROBO_BLOCKS::get)
+            .withAdditionalTag(CATags.CAItemTags.ROBO_BLOCKS::get)
+            .withLocalization(StringUtil::formatRoboBlockName)
+            .build();
+    public static final BlockPropertyWrapper<Block> ROBO_SLAB_TOP_SIDE = new BlockPropertyWrapper<>()
+            .builder()
+            .copyFrom(ROBO_SLAB)
+            .withModelDefinition(CAModelTemplates::topSideRoboSlab)
+            .build();
+    public static final BlockPropertyWrapper<Block> ROBO_STAIRS = new BlockPropertyWrapper<>()
+            .builder()
+            .copyFrom(BlockPropertyWrapperTemplates.STAIRS)
+            .withModelDefinition(CAModelTemplates::roboStairs)
+            .withTags(() -> BlockTags.NEEDS_DIAMOND_TOOL, CATags.CABlockTags.ROBO_BLOCKS::get)
+            .withAdditionalTag(CATags.CAItemTags.ROBO_BLOCKS::get)
+            .withLocalization(StringUtil::formatRoboBlockName)
+            .build();
+    public static final BlockPropertyWrapper<Block> ROBO_WALL = new BlockPropertyWrapper<>()
+            .builder()
+            .copyFrom(BlockPropertyWrapperTemplates.WALL)
+            .withModelDefinition(CAModelTemplates::roboWall)
+            .withTags(() -> BlockTags.NEEDS_DIAMOND_TOOL, CATags.CABlockTags.ROBO_BLOCKS::get)
+            .withAdditionalTag(CATags.CAItemTags.ROBO_BLOCKS::get)
+            .withLocalization(StringUtil::formatRoboBlockName)
             .build();
 
     public static <B extends Block> BlockPropertyWrapperBuilder<B> registerWithItemAndChain(ResourceLocation blockId, Supplier<B> blockSup, Item.Properties itemProps, BlockPropertyWrapper<Block> templateBPW, @Nullable Collection<Supplier<Block>> blockSupCol, @Nullable Collection<Supplier<Item>> blockItemSupCol) {

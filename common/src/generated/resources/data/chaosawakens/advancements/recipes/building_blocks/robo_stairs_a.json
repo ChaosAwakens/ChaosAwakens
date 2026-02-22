@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_robo_stairs_a": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "chaosawakens:robo_stairs_a"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "chaosawakens:robo_stairs_a"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_robo_stairs_a",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "chaosawakens:robo_stairs_a"
+    ]
+  },
+  "sends_telemetry_event": false
+}

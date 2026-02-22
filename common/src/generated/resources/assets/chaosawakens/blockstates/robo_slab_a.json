@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "chaosawakens:block/robo_slab_a"
+    },
+    "type=double": {
+      "model": "chaosawakens:block/robo_block_a"
+    },
+    "type=top": {
+      "model": "chaosawakens:block/robo_slab_a_top"
+    }
+  }
+}

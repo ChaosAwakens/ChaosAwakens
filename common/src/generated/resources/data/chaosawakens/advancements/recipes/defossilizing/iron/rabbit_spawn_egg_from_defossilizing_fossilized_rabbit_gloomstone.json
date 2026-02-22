@@ -1,0 +1,22 @@
+{
+  "criteria": {
+    "has_fossilized_rabbit_gloomstone": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "chaosawakens:fossilized_rabbit_gloomstone"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_fossilized_rabbit_gloomstone"
+    ]
+  ],
+  "sends_telemetry_event": false
+}

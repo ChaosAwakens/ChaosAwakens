@@ -1,0 +1,22 @@
+{
+  "criteria": {
+    "has_fossilized_salmon_gravel": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "chaosawakens:fossilized_salmon_gravel"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_fossilized_salmon_gravel"
+    ]
+  ],
+  "sends_telemetry_event": false
+}

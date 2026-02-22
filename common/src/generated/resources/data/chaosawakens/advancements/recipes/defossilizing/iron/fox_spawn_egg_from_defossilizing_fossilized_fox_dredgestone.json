@@ -1,0 +1,22 @@
+{
+  "criteria": {
+    "has_fossilized_fox_dredgestone": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "chaosawakens:fossilized_fox_dredgestone"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_fossilized_fox_dredgestone"
+    ]
+  ],
+  "sends_telemetry_event": false
+}

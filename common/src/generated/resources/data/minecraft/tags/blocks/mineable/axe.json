@@ -13,6 +13,8 @@
     "chaosawakens:apple_stairs",
     "chaosawakens:apple_trapdoor",
     "chaosawakens:apple_wood",
+    "chaosawakens:blood_red_petal_block",
+    "chaosawakens:bright_pink_petal_block",
     "chaosawakens:crystalwood_button",
     "chaosawakens:crystalwood_door",
     "chaosawakens:crystalwood_fence",
@@ -52,6 +54,7 @@
     "chaosawakens:duplicator_stairs",
     "chaosawakens:duplicator_trapdoor",
     "chaosawakens:duplicator_wood",
+    "chaosawakens:flower_stem",
     "chaosawakens:ginkgo_button",
     "chaosawakens:ginkgo_door",
     "chaosawakens:ginkgo_fence",
@@ -78,6 +81,7 @@
     "chaosawakens:mesozoic_stairs",
     "chaosawakens:mesozoic_trapdoor",
     "chaosawakens:mesozoic_wood",
+    "chaosawakens:navy_blue_petal_block",
     "chaosawakens:peach_button",
     "chaosawakens:peach_door",
     "chaosawakens:peach_fence",
@@ -111,6 +115,8 @@
     "chaosawakens:stripped_ginkgo_log",
     "chaosawakens:stripped_mesozoic_log",
     "chaosawakens:stripped_peach_log",
-    "chaosawakens:stripped_skywood_log"
+    "chaosawakens:stripped_skywood_log",
+    "chaosawakens:wasp_nest",
+    "chaosawakens:wasp_nest_pattern"
   ]
 }

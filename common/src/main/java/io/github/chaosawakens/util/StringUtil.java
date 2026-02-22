@@ -27,4 +27,8 @@ public final class StringUtil {
 
         return wrapSuffixInParentheses(localisedFossilName);
     }
+
+    public static String formatRoboBlockName(String localisedRoboBlockName) {
+        return com.mememan.nexus.util.StringUtil.lastToken(localisedRoboBlockName.replaceAll("\\s+", "_")).length() != 1 ? localisedRoboBlockName : wrapSuffixInParentheses(localisedRoboBlockName);
+    }
 }

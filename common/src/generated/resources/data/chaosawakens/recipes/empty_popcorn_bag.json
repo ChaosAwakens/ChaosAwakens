@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "P": {
+      "item": "minecraft:paper"
+    },
+    "R": {
+      "item": "minecraft:red_dye"
+    }
+  },
+  "pattern": [
+    "PPP",
+    "PRR",
+    "RRR"
+  ],
+  "result": {
+    "count": 3,
+    "item": "chaosawakens:empty_popcorn_bag"
+  },
+  "show_notification": true
+}

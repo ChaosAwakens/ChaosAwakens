@@ -7,8 +7,6 @@ public interface Bone {
 
     Optional<Bone> getParentBoneBB();
 
-    ModelCoordinateData getCoordinateData();
-
     List<Cube> getCubeBBs();
 
     default boolean isHomogeneous() {

@@ -1,0 +1,22 @@
+{
+  "criteria": {
+    "has_fossilized_parrot_gloomstone": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "chaosawakens:fossilized_parrot_gloomstone"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_fossilized_parrot_gloomstone"
+    ]
+  ],
+  "sends_telemetry_event": false
+}

@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab",
+  "textures": {
+    "bottom": "chaosawakens:block/robo/robo_block_a",
+    "side": "chaosawakens:block/robo/robo_block_a",
+    "top": "chaosawakens:block/robo/robo_block_a"
+  }
+}

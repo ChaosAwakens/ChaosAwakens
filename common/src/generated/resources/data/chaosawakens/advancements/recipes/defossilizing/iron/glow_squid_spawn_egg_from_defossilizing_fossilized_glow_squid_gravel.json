@@ -1,0 +1,22 @@
+{
+  "criteria": {
+    "has_fossilized_glow_squid_gravel": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "chaosawakens:fossilized_glow_squid_gravel"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_fossilized_glow_squid_gravel"
+    ]
+  ],
+  "sends_telemetry_event": false
+}

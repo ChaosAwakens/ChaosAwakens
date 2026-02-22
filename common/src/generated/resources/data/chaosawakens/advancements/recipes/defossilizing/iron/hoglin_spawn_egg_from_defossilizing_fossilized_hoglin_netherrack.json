@@ -1,0 +1,22 @@
+{
+  "criteria": {
+    "has_fossilized_hoglin_netherrack": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "chaosawakens:fossilized_hoglin_netherrack"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_fossilized_hoglin_netherrack"
+    ]
+  ],
+  "sends_telemetry_event": false
+}

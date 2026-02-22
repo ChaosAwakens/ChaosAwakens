@@ -37,7 +37,7 @@ public final class CACreativeModeTabs {
     public static final Supplier<CreativeModeTab> FOSSILS = CreativeModeTabPropertyWrapperTemplates.registerAndReflectAndChain(CAConstants.prefix("fossils"),
                     () -> CreativeModeTab.builder(CreativeModeTab.Row.TOP, 0)
                             .title(Component.translatable("creative_mode_tab.chaosawakens.fossils"))
-                            .icon(() -> CABlocks.BLOCKS.stream().filter(curBlockSup -> curBlockSup.get() instanceof FossilBlock).findFirst().orElse(CABlocks.FROZEN_ARCTIC_FOX_PACKED_ICE).get().asItem().getDefaultInstance())
+                            .icon(() -> CABlocks.BLOCKS.stream().filter(curBlockSup -> curBlockSup.get() instanceof FossilBlock).findFirst().map(Supplier::get).orElse(CABlocks.FROZEN_ARCTIC_FOX_PACKED_ICE.get()).asItem().getDefaultInstance())
                             .displayItems((param, output) -> output.acceptAll(CABlocks.BLOCK_ITEMS.stream()
                                     .map(Supplier::get)
                                     .filter(BlockItem.class::isInstance) // JIC
@@ -63,7 +63,7 @@ public final class CACreativeModeTabs {
     public static final Supplier<CreativeModeTab> EQUIPMENT = CreativeModeTabPropertyWrapperTemplates.registerAndReflectAndChain(CAConstants.prefix("equipment"),
                     () -> CreativeModeTab.builder(CreativeModeTab.Row.TOP, 0)
                             .title(Component.translatable("creative_mode_tab.chaosawakens.equipment"))
-                            .icon(() -> CAItems.EQUIPMENT.stream().filter(curItem -> curItem.get() instanceof TieredItem).findFirst().orElse(CAItems.ULTIMATE_SWORD).get().getDefaultInstance()) // TODO Sub
+                            .icon(() -> CAItems.EQUIPMENT.stream().filter(curItem -> curItem.get() instanceof TieredItem).findFirst().orElse(CAItems.ULTIMATE_SWORD::get).get().getDefaultInstance()) // TODO Sub
                             .displayItems((param, output) -> output.acceptAll(CAItems.EQUIPMENT.stream()
                                     .map(Supplier::get)
                                     .map(Item::getDefaultInstance)

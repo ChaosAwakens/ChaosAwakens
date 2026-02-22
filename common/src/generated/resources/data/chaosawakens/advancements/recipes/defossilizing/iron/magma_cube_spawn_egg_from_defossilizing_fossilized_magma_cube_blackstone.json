@@ -1,0 +1,22 @@
+{
+  "criteria": {
+    "has_fossilized_magma_cube_blackstone": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "chaosawakens:fossilized_magma_cube_blackstone"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_fossilized_magma_cube_blackstone"
+    ]
+  ],
+  "sends_telemetry_event": false
+}

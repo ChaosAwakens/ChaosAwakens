@@ -1,0 +1,22 @@
+{
+  "criteria": {
+    "has_fossilized_ocelot_dredgestone": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "chaosawakens:fossilized_ocelot_dredgestone"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_fossilized_ocelot_dredgestone"
+    ]
+  ],
+  "sends_telemetry_event": false
+}

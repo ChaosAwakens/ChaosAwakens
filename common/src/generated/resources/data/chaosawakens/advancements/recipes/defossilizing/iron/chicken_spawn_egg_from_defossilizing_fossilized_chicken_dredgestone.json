@@ -1,0 +1,22 @@
+{
+  "criteria": {
+    "has_fossilized_chicken_dredgestone": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "chaosawakens:fossilized_chicken_dredgestone"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_fossilized_chicken_dredgestone"
+    ]
+  ],
+  "sends_telemetry_event": false
+}

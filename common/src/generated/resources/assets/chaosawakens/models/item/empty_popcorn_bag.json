@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "chaosawakens:item/food/manufactured/snack/popcorn/empty_popcorn_bag"
+  }
+}

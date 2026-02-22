@@ -1,6 +1,7 @@
 package io.github.chaosawakens.api.animation_resolver_system.pipeline.processing.base.model;
 
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+import org.joml.Matrix4d;
 import org.joml.Quaterniond;
 import org.joml.Vector3d;
 
@@ -8,6 +9,7 @@ import java.util.List;
 
 public class ModelCoordinateData {
     public static final float EPSILON = 1.0E-6F;
+    public static final double TRANSFORMATION_SCALE = 1.0D / 16.0D;
     protected double minX, minY, minZ; // Local Bounds/Transformations
     protected double maxX, maxY, maxZ;
     protected double originX, originY, originZ;
@@ -100,15 +102,15 @@ public class ModelCoordinateData {
     }
 
     public double getRotationX() {
-        return Math.toRadians(rotationX);
+        return rotationX;
     }
 
     public double getRotationY() {
-        return Math.toRadians(rotationY);
+        return rotationY;
     }
 
     public double getRotationZ() {
-        return Math.toRadians(rotationZ);
+        return rotationZ;
     }
 
     public double getScaleX() {
@@ -172,14 +174,29 @@ public class ModelCoordinateData {
     }
 
     public Vector3d getObbCenter() {
+        if (needsUpdate) {
+            this.needsUpdate = false;
+
+            updateOBBData();
+        }
         return obbCenter;
     }
 
     public Vector3d getObbHalfExtents() {
+        if (needsUpdate) {
+            this.needsUpdate = false;
+
+            updateOBBData();
+        }
         return obbHalfExtents;
     }
 
     public Quaterniond getObbOrientation() {
+        if (needsUpdate) {
+            this.needsUpdate = false;
+
+            updateOBBData();
+        }
         return obbOrientation;
     }
 
@@ -220,6 +237,16 @@ public class ModelCoordinateData {
     }
 
     protected void rebuildTransformationMatrix() {
+        Matrix4d transformationMatrix = new Matrix4d().identity();
+
+        double rootXTranslation = (getOriginX() - getPivotX()) * getScaleX();
+        double rootYTranslation = (getOriginY() - getPivotY()) * getScaleY();
+        double rootZTranslation = (getOriginZ() - getPivotZ()) * getScaleZ();
+
+        transformationMatrix.translate(originX, originY, originZ);
+    }
+
+    protected void updateOBBData() {
         
     }
 

@@ -1,5 +1,7 @@
 {
   "values": [
+    "chaosawakens:dense_dirt",
+    "chaosawakens:dense_grass_block",
     "chaosawakens:fossilized_cod_gravel",
     "chaosawakens:fossilized_cod_sand",
     "chaosawakens:fossilized_dolphin_gravel",
@@ -30,6 +32,7 @@
     "chaosawakens:fossilized_wither_skeleton_soul_soil",
     "chaosawakens:fossilized_wood_fish_gravel",
     "chaosawakens:fossilized_wood_fish_sand",
+    "chaosawakens:latosol",
     "chaosawakens:salt_block"
   ]
 }

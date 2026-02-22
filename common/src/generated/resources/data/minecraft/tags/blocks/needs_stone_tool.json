@@ -1,5 +1,6 @@
 {
   "values": [
+    "chaosawakens:crystal_defossilizer",
     "chaosawakens:fossilized_apple_cow_dredgestone",
     "chaosawakens:fossilized_apple_cow_gloomstone",
     "chaosawakens:fossilized_attack_squid_dredgestone",
@@ -104,6 +105,7 @@
     "chaosawakens:fossilized_zombie_horse_dredgestone",
     "chaosawakens:fossilized_zombie_horse_gloomstone",
     "chaosawakens:fossilized_zombie_villager_dredgestone",
-    "chaosawakens:fossilized_zombie_villager_gloomstone"
+    "chaosawakens:fossilized_zombie_villager_gloomstone",
+    "chaosawakens:iron_defossilizer"
   ]
 }

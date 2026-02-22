@@ -1,0 +1,22 @@
+{
+  "criteria": {
+    "has_fossilized_drowned_sand": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "chaosawakens:fossilized_drowned_sand"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_fossilized_drowned_sand"
+    ]
+  ],
+  "sends_telemetry_event": false
+}

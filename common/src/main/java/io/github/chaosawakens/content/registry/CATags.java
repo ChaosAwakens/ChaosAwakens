@@ -75,14 +75,35 @@ public final class CATags {
                 .withChildTags(VANILLA_FOSSILS, CHAOSAWAKENS_FOSSILS)
                 .buildAndGet();
 
-        // Vegetation
+        // Vegetation (Generic)
         public static final Supplier<TagKey<Block>> LEAF_CARPETS = TagPropertyWrapperTemplates.registerTagKey(Registries.BLOCK, CAConstants.prefix("vegetation/leaf_carpet"));
+
+        public static final Supplier<TagKey<Block>> FLOWER_BLOCKS = TagPropertyWrapperTemplates.registerTagKey(Registries.BLOCK, CAConstants.prefix("vegetation/flower_blocks"));
+
+        // Vegetation (Mining Paradise)
+        public static final Supplier<TagKey<Block>> DENSE_SOIL = TagPropertyWrapperTemplates.registerTagKey(Registries.BLOCK, CAConstants.prefix("vegetation/mining_paradise/dense_soil"));
+
+        public static final Supplier<TagKey<Block>> DENSE_FLOWERS = TagPropertyWrapperTemplates.registerTagKey(Registries.BLOCK, CAConstants.prefix("vegetation/mining_paradise/dense_flowers"));
+        public static final Supplier<TagKey<Block>> DENSE_VEGETATION = TagPropertyWrapperTemplates.registerAndChain(Registries.BLOCK, CAConstants.prefix("vegetation/mining_paradise/dense_vegetation"))
+                .withChildTag(DENSE_FLOWERS)
+                .buildAndGet();
+
+        // Vegetation (CrystalWorld)
+        public static final Supplier<TagKey<Block>> CRYSTAL_SOIL = TagPropertyWrapperTemplates.registerTagKey(Registries.BLOCK, CAConstants.prefix("vegetation/crystalworld/crystal_soil"));
+
+        public static final Supplier<TagKey<Block>> CRYSTAL_FLOWERS = TagPropertyWrapperTemplates.registerTagKey(Registries.BLOCK, CAConstants.prefix("vegetation/crystalworld/crystal_flowers"));
+        public static final Supplier<TagKey<Block>> CRYSTAL_VEGETATION = TagPropertyWrapperTemplates.registerAndChain(Registries.BLOCK, CAConstants.prefix("vegetation/crystalworld/crystal_vegetation"))
+                .withChildTag(CRYSTAL_FLOWERS)
+                .buildAndGet();
 
         // Base Stone
         public static final Supplier<TagKey<Block>> BASE_STONE_MINING_PARADISE = TagPropertyWrapperTemplates.registerAndChain(Registries.BLOCK, CAConstants.prefix("stone/base_stone_mining_paradise"))
               //  .withTaggedObjects(CABlocks.DREDGESTONE.stoneBlockFamily().stream().filter(curBlockEntry -> DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(curBlockEntry.get()).getPath().equals("dredgestone")).map(curBlockSup -> (Supplier<Block>) curBlockSup).collect(Collectors.toCollection(ObjectArrayList::new)))
               //  .withTaggedObjects(CABlocks.GLOOMSTONE.stoneBlockFamily().stream().filter(curBlockEntry -> DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(curBlockEntry.get()).getPath().equals("gloomstone")).map(curBlockSup -> (Supplier<Block>) curBlockSup).collect(Collectors.toCollection(ObjectArrayList::new)))
                 .buildAndGet();
+
+        // Misc.
+        public static final Supplier<TagKey<Block>> ROBO_BLOCKS = TagPropertyWrapperTemplates.registerTagKey(Registries.BLOCK, CAConstants.prefix("misc/robo_blocks"));
     }
 
     @RegistrarEntry
@@ -99,6 +120,8 @@ public final class CATags {
 
         // Vegetation
         public static final Supplier<TagKey<Item>> LEAF_CARPETS = TagPropertyWrapperTemplates.registerTagKey(Registries.ITEM, CAConstants.prefix("vegetation/leaf_carpet"));
+
+        public static final Supplier<TagKey<Item>> FLOWER_BLOCKS = TagPropertyWrapperTemplates.registerTagKey(Registries.ITEM, CAConstants.prefix("vegetation/flower_blocks"));
 
         // Fossils
         public static final Supplier<TagKey<Item>> DEEPSLATE_FOSSILS = TagPropertyWrapperTemplates.registerTagKey(Registries.ITEM, CAConstants.prefix("fossil/overworld/deepslate_fossils"));
@@ -150,5 +173,13 @@ public final class CATags {
         public static final Supplier<TagKey<Item>> FOSSILS = TagPropertyWrapperTemplates.registerAndChain(Registries.ITEM, CAConstants.prefix("fossil/fossils"))
                 .withChildTags(VANILLA_FOSSILS, CHAOSAWAKENS_FOSSILS)
                 .buildAndGet();
+
+        // Defossilizer
+        public static final Supplier<TagKey<Item>> IRON_DEFOSSILIZER_BUCKETS = TagPropertyWrapperTemplates.registerTagKey(Registries.ITEM, CAConstants.prefix("defossilizer/iron_defossilizer_buckets"));
+
+        public static final Supplier<TagKey<Item>> CRYSTAL_DEFOSSILIZER_BUCKETS = TagPropertyWrapperTemplates.registerTagKey(Registries.ITEM, CAConstants.prefix("defossilizer/crystal_defossilizer_buckets"));
+
+        // Misc.
+        public static final Supplier<TagKey<Item>> ROBO_BLOCKS = TagPropertyWrapperTemplates.registerTagKey(Registries.ITEM, CAConstants.prefix("misc/robo_blocks"));
     }
 }
