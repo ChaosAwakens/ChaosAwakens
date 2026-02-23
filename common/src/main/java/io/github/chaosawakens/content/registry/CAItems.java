@@ -11,7 +11,6 @@ import io.github.chaosawakens.core.template.CAArmorMaterialTemplates;
 import io.github.chaosawakens.core.template.CAIPWTemplates;
 import io.github.chaosawakens.core.template.CAItemTierTemplates;
 import io.github.chaosawakens.core.template.CARecipeTemplates;
-import io.github.chaosawakens.template.CAItemPWTemplates;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
@@ -209,7 +208,7 @@ public final class CAItems {
     public static final Supplier<SwordItem> POISON_SWORD = ItemPropertyWrapperTemplates.registerItemFromTemplate(CAConstants.prefix("poison_sword"), () -> new SwordItem(CAItemTierTemplates.SPECIAL_LOW, 10, -2.4F, new Item.Properties().durability(1300).rarity(Rarity.RARE)), ItemPropertyWrapperTemplates.BASIC_HANDHELD, EQUIPMENT);
     public static final Supplier<SwordItem> RAT_SWORD = ItemPropertyWrapperTemplates.registerItemFromTemplate(CAConstants.prefix("rat_sword"), () -> new SwordItem(CAItemTierTemplates.SPECIAL_LOW, 9, -2.4F, new Item.Properties().durability(1024).rarity(Rarity.RARE)), ItemPropertyWrapperTemplates.BASIC_HANDHELD, EQUIPMENT);
 
-    public static final Supplier<SwordItem> PRISMATIC_REAPER = ItemPropertyWrapperTemplates.registerItemFromTemplate(CAConstants.prefix("prismatic_reaper"), () -> new SwordItem(CAItemTierTemplates.SPECIAL_MID, 28, -2.4F, new Item.Properties().durability(6000).rarity(Rarity.EPIC)), CAItemPWTemplates.HANDHELD_LONG, EQUIPMENT);
+    public static final Supplier<SwordItem> PRISMATIC_REAPER = ItemPropertyWrapperTemplates.registerItemFromTemplate(CAConstants.prefix("prismatic_reaper"), () -> new SwordItem(CAItemTierTemplates.SPECIAL_MID, 28, -2.4F, new Item.Properties().durability(6000).rarity(Rarity.EPIC)), CAIPWTemplates.HANDHELD_LONG, EQUIPMENT);
 
     // Armor
     public static final Supplier<ArmorItem> ULTIMATE_HELMET = ItemPropertyWrapperTemplates.registerItemFromTemplate(CAConstants.prefix("ultimate_helmet"), () -> new ArmorItem(CAArmorMaterialTemplates.ULTIMATE, ArmorItem.Type.HELMET, new Item.Properties().fireResistant()), ItemPropertyWrapperTemplates.BASIC_GENERATED, EQUIPMENT);

@@ -23,6 +23,7 @@ import java.util.function.Supplier;
 public final class CAModelTemplates {
     public static final ModelTemplate LEAF_CARPET = new ModelTemplate(Optional.of(CAConstants.prefix("block/leaf_carpet")), Optional.empty(), TextureSlot.TEXTURE);
     public static final ModelTemplate LEAF_CARPET_INVENTORY = new ModelTemplate(Optional.of(CAConstants.prefix("block/leaf_carpet_inventory")), Optional.of("_inventory"), TextureSlot.TEXTURE);
+    public static final ModelTemplate HANDHELD_LONG = new ModelTemplate(Optional.of(CAConstants.prefix("item/handheld_long")), Optional.empty(), TextureSlot.LAYER0);
 
     private CAModelTemplates() {
         throw new IllegalAccessError("Attempted to construct instance of template class! (CAModelTemplates)");
