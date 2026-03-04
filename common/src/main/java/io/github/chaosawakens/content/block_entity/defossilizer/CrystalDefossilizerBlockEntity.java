@@ -1,6 +1,9 @@
 package io.github.chaosawakens.content.block_entity.defossilizer;
 
+import io.github.chaosawakens.content.client.menu.defossilizer.CrystalDefossilizerMenu;
+import io.github.chaosawakens.content.data.recipe.defossilizing.AbstractDefossilizingRecipe;
 import io.github.chaosawakens.content.registry.CABlockEntityTypes;
+import io.github.chaosawakens.content.registry.CAMenuTypes;
 import io.github.chaosawakens.content.registry.CARecipeData;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -21,7 +24,12 @@ public class CrystalDefossilizerBlockEntity extends AbstractDefossilizerBlockEnt
     }
 
     @Override
-    protected @NotNull AbstractContainerMenu createMenu(int i, Inventory inventory) {
-        return null;
+    protected @NotNull AbstractContainerMenu createMenu(int containerId, Inventory inventory) {
+        return new CrystalDefossilizerMenu(CAMenuTypes.CRYSTAL_DEFOSSILIZER.get(), containerId, inventory, this, dataAccess);
+    }
+
+    @Override
+    public @NotNull AbstractDefossilizingRecipe.DefossilizationCategory getDefossilizationCategory() {
+        return AbstractDefossilizingRecipe.DefossilizationCategory.CRYSTAL;
     }
 }

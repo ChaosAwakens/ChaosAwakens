@@ -1,4 +1,4 @@
-// 1.20.1	2026-02-22T23:27:47.0934296	chaosawakens/Tags [chaosawakens]
+// 1.20.1	2026-03-04T16:49:59.9735463	chaosawakens/Tags [chaosawakens]
 84f042d9244490839bc3c6b43b69e7851b093b62 data\chaosawakens\tags\blocks\fossil\mining_paradise_fossils.json
 5ad12d3f2485f27af44afcdfb78457a5e3b6969a data\chaosawakens\tags\items\wood\apple_logs.json
 ce5f64bdfa1cc7e68eb9aa7994130f054cd10ceb data\minecraft\tags\items\wooden_trapdoors.json
@@ -74,14 +74,14 @@ f15ff21a8eb277c8ce6b8fce2782d5bfe3d4f33c data\minecraft\tags\blocks\wooden_butto
 2f232254f327a1560134e28bc927d9ba4279a85c data\chaosawakens\tags\items\fossil\nether_fossils.json
 e1785f57319fc46a9e58dd1abaef6a118eecb976 data\chaosawakens\tags\blocks\fossil\mining_paradise\gloomstone_fossils.json
 bdb4c145c50672264bf12eb99fa668d5c1f9071e data\minecraft\tags\blocks\mineable\axe.json
-51dca49db3bf9defd6a1ea3b7c59d23b699237b0 data\minecraft\tags\items\walls.json
 c391d50e91f1c3fac61ba07a97fccd32048a9c5d data\chaosawakens\tags\items\fossil\crystalworld_fossils.json
+51dca49db3bf9defd6a1ea3b7c59d23b699237b0 data\minecraft\tags\items\walls.json
 449841278b3ae52f70f91b83fd68601d126c6384 data\minecraft\tags\blocks\needs_diamond_tool.json
 41717ec5564329e713bad6097bd6df8011e4396c data\minecraft\tags\blocks\mineable\shovel.json
 e2df3acf95432c0dc2b861f2621569fb481a7dfd data\minecraft\tags\blocks\logs_that_burn.json
 c19d42292a48bbd4405fe785c20b031554f42c03 data\chaosawakens\tags\items\fossil\overworld\sandstone_fossils.json
-cbd41a2a653b3094086fdcaf5ad8b3ba17284a5c data\chaosawakens\tags\blocks\fossil\vanilla_fossils.json
 853ab87c45fb868ace81df3a5274ce19d0b8bfdd data\chaosawakens\tags\items\fossil\nether\netherrack_fossils.json
+cbd41a2a653b3094086fdcaf5ad8b3ba17284a5c data\chaosawakens\tags\blocks\fossil\vanilla_fossils.json
 fdd1924b92e374c670ff4cbedb9018cc5f8627a1 data\minecraft\tags\items\wooden_fences.json
 0b61948cda3c7e78003a1c660bee985ddb22d211 data\minecraft\tags\blocks\wall_hanging_signs.json
 293db60bb7c3a28de9ef9e0f9d593b36e02bcd67 data\chaosawakens\tags\items\wood\peach_logs.json

@@ -3,13 +3,13 @@ package io.github.chaosawakens.content.client.screen.defossilizer;
 import io.github.chaosawakens.CAConstants;
 import io.github.chaosawakens.content.client.component.defossilizer.AbstractDefossilizerRecipeBookComponent;
 import io.github.chaosawakens.content.client.menu.defossilizer.AbstractDefossilizerMenu;
+import io.github.chaosawakens.util.MathUtil;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.ImageButton;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.gui.screens.recipebook.RecipeUpdateListener;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.ClickType;
 import net.minecraft.world.inventory.Slot;
@@ -59,10 +59,10 @@ public abstract class AbstractDefossilizerScreen<ADM extends AbstractDefossilize
 
         if (menu.isDefossilizing()) {
             int defossilizationProgress = menu.getDefossilizationProgress();
-            int litProgress = Mth.clamp(200 - defossilizationProgress, 0, 200);
+            int litProgress = (int) MathUtil.normalize(defossilizationProgress, 0, 24, 0, 12);
 
             guiGraphics.blit(guiTexture, leftMostPos + 79, topMostPos + 34, 176, 14, defossilizationProgress + 1, 16); // Arrow
-            guiGraphics.blit(guiTexture, leftMostPos + 56, topMostPos + 36 + 12 - litProgress, 176, 12 - litProgress, 14, litProgress + 1); // Fire
+            guiGraphics.blit(guiTexture, leftMostPos + 56, topMostPos + 37 + litProgress, 176, litProgress, 14, 12 - litProgress); // Fire
         }
     }
 

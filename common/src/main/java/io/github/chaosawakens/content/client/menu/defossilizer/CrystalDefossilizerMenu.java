@@ -15,6 +15,4 @@ public class CrystalDefossilizerMenu extends AbstractDefossilizerMenu {
     public CrystalDefossilizerMenu(int containerId, Inventory playerInventory) {
         super(CAMenuTypes.CRYSTAL_DEFOSSILIZER.get(), containerId, playerInventory);
     }
-
-
 }

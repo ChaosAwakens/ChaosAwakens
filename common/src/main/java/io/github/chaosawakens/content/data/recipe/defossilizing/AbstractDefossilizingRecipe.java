@@ -74,9 +74,7 @@ public abstract class AbstractDefossilizingRecipe implements Recipe<Container> {
 
     @Override
     public boolean matches(Container container, Level level) {
-        return getFossilizedStackPredicate().test(container.getItem(AbstractDefossilizerBlockEntity.FOSSIL_INPUT_SLOT_INDEX))
-                || getBucketStackPredicate().test(container.getItem(AbstractDefossilizerBlockEntity.BUCKET_INPUT_SLOT_INDEX))
-                || getPowerChipStackPredicate().test(container.getItem(AbstractDefossilizerBlockEntity.POWER_CHIP_INPUT_SLOT_INDEX));
+        return getFossilizedStackPredicate().test(container.getItem(AbstractDefossilizerBlockEntity.FOSSIL_INPUT_SLOT_INDEX));
     }
 
     @Override

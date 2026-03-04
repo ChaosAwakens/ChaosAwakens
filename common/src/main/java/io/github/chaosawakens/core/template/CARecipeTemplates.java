@@ -59,6 +59,52 @@ public final class CARecipeTemplates {
         return patternBlockRecipeFrom(finishedRecipe, Function.identity());
     }
 
+    public static <B extends Block> Consumer<Supplier<B>> spawnEggFromFossilCrystal(Consumer<FinishedRecipe> finishedRecipe, ItemLike bucketItemLike, ItemLike powerChipItemLike, Function<B, ItemLike> resultComponentMapper, Function<ResourceLocation, ResourceLocation> recipeIdMapper) {
+        return parentItemLikeSup -> {
+            B parentItemLike = parentItemLikeSup.get();
+            ResourceLocation parentItemLikeId = DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(parentItemLike);
+
+            ItemLike resultItemLike = resultComponentMapper.apply(parentItemLike);
+
+            if (resultItemLike != null) {
+                ResourceLocation resultItemLikeId = DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(resultItemLike);
+                ResourceLocation baseRecipeId = recipeIdMapper.apply(resultItemLikeId);
+
+                Ingredient fossilIngredient = Ingredient.of(parentItemLike);
+                Ingredient bucketIngredient = Ingredient.of(bucketItemLike);
+                Ingredient powerChipIngredient = Ingredient.of(powerChipItemLike);
+
+                DefossilizingRecipeBuilder.crystalDefossilizing(bucketIngredient, fossilIngredient, powerChipIngredient, resultItemLike.asItem(), 200, 1.0F)
+                        .unlockedBy("has_" + parentItemLikeId.getPath(), PredicateUtil.has(parentItemLike))
+                        .save(finishedRecipe, (new ResourceLocation(parentItemLikeId.getNamespace(), baseRecipeId.getPath())).withSuffix("_from_defossilizing_" + parentItemLikeId.getPath()));
+            }
+        };
+    }
+
+    public static <B extends Block> Consumer<Supplier<B>> spawnEggFromFossilWaterCrystal(Consumer<FinishedRecipe> finishedRecipe, Function<B, ItemLike> resultComponentMapper, Function<ResourceLocation, ResourceLocation> recipeIdMapper) {
+        return spawnEggFromFossilCrystal(finishedRecipe, Items.WATER_BUCKET, CAItems.ALUMINUM_POWER_CHIP.get(), resultComponentMapper, recipeIdMapper);
+    }
+
+    public static <B extends Block> Consumer<Supplier<B>> spawnEggFromFossilWaterCrystal(Consumer<FinishedRecipe> finishedRecipe, Function<ResourceLocation, ResourceLocation> recipeIdMapper) {
+        return spawnEggFromFossilWaterCrystal(finishedRecipe, findSpawnEgg(), recipeIdMapper);
+    }
+
+    public static <B extends Block> Consumer<Supplier<B>> spawnEggFromFossilWaterCrystal(Consumer<FinishedRecipe> finishedRecipe) {
+        return spawnEggFromFossilWaterCrystal(finishedRecipe, Function.identity());
+    }
+
+    public static <B extends Block> Consumer<Supplier<B>> spawnEggFromFossilLavaCrystal(Consumer<FinishedRecipe> finishedRecipe, Function<B, ItemLike> resultComponentMapper, Function<ResourceLocation, ResourceLocation> recipeIdMapper) {
+        return spawnEggFromFossilCrystal(finishedRecipe, Items.LAVA_BUCKET, CAItems.ALUMINUM_POWER_CHIP.get(), resultComponentMapper, recipeIdMapper);
+    }
+
+    public static <B extends Block> Consumer<Supplier<B>> spawnEggFromFossilLavaCrystal(Consumer<FinishedRecipe> finishedRecipe, Function<ResourceLocation, ResourceLocation> recipeIdMapper) {
+        return spawnEggFromFossilLavaCrystal(finishedRecipe, findSpawnEgg(), recipeIdMapper);
+    }
+
+    public static <B extends Block> Consumer<Supplier<B>> spawnEggFromFossilLavaCrystal(Consumer<FinishedRecipe> finishedRecipe) {
+        return spawnEggFromFossilLavaCrystal(finishedRecipe, Function.identity());
+    }
+
     public static <B extends Block> Consumer<Supplier<B>> spawnEggFromFossil(Consumer<FinishedRecipe> finishedRecipe, ItemLike bucketItemLike, ItemLike powerChipItemLike, Function<B, ItemLike> resultComponentMapper, Function<ResourceLocation, ResourceLocation> recipeIdMapper) {
         return parentItemLikeSup -> {
             B parentItemLike = parentItemLikeSup.get();

@@ -122,7 +122,7 @@ public final class CABPWTemplates {
             .copyFrom(FOSSIL_PICKAXE)
             .withTag(CATags.CABlockTags.KYANITE_FOSSILS::get)
             .withAdditionalTag(CATags.CAItemTags.KYANITE_FOSSILS::get)
-            .withRecipe(null)
+            .withRecipe(CARecipeTemplates::spawnEggFromFossilWaterCrystal)
             .build();
     public static final BlockPropertyWrapper<Block> FOSSIL_NETHERRACK = new BlockPropertyWrapper<>()
             .builder()

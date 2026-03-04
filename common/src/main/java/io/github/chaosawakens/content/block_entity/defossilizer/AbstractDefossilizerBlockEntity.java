@@ -49,6 +49,11 @@ public abstract class AbstractDefossilizerBlockEntity extends BaseContainerBlock
     public static final int[] OUTPUT_SLOTS = new int[]{BUCKET_INPUT_SLOT_INDEX, POWER_CHIP_INPUT_SLOT_INDEX, DEFOSSILIZED_OUTPUT_SLOT_INDEX}; // Down
     public static final int[] SIDE_SLOTS = new int[]{BUCKET_INPUT_SLOT_INDEX, POWER_CHIP_INPUT_SLOT_INDEX}; // North, South, East, West
     public static final int[] UPWARD_INPUT_SLOTS = new int[]{FOSSIL_INPUT_SLOT_INDEX}; // Up
+    public static final int[][] SLOT_GROUPS_BY_IDX = new int[][]{UPWARD_INPUT_SLOTS, SIDE_SLOTS};
+    public static final Direction[][] DIRECTIONS_BY_SLOT_IDX = new Direction[][]{
+            new Direction[]{Direction.UP},
+            new Direction[]{Direction.NORTH, Direction.SOUTH, Direction.EAST, Direction.WEST}
+    };
     public static final int INV_SLOT_START = 4;
     public static final int INV_SLOT_END = 31;
     public static final int USE_ROW_SLOT_START = 31;
@@ -101,6 +106,9 @@ public abstract class AbstractDefossilizerBlockEntity extends BaseContainerBlock
             }
         };
     }
+
+    @NotNull
+    public abstract AbstractDefossilizingRecipe.DefossilizationCategory getDefossilizationCategory();
 
     @Override
     public int getContainerSize() {
@@ -201,12 +209,48 @@ public abstract class AbstractDefossilizerBlockEntity extends BaseContainerBlock
 
     @Override
     public boolean canPlaceItemThroughFace(int slotIdx, ItemStack inputStack, @Nullable Direction inputDir) {
+        if (inputDir != null) {
+            for (int i = 0; i < SLOT_GROUPS_BY_IDX.length; i++) {
+                int[] slotGroup = SLOT_GROUPS_BY_IDX[i];
+                Direction[] directions = DIRECTIONS_BY_SLOT_IDX[i];
+                boolean anyMatchDir = false;
+
+                for (Direction direction : directions) {
+                    if (direction == inputDir) {
+                        anyMatchDir = true;
+                        break;
+                    }
+                }
+
+                for (int slot : slotGroup) {
+                    if (slot == slotIdx && anyMatchDir && canPlaceItem(slot, inputStack)) return true;
+                }
+            }
+        }
+
         return false;
     }
 
     @Override
     public boolean canTakeItemThroughFace(int slotIdx, ItemStack targetStack, Direction interactionDir) {
-        return false;
+        for (int i = 0; i < SLOT_GROUPS_BY_IDX.length; i++) {
+            int[] slotGroup = SLOT_GROUPS_BY_IDX[i];
+            Direction[] directions = DIRECTIONS_BY_SLOT_IDX[i];
+            boolean anyMatchDir = false;
+
+            for (Direction direction : directions) {
+                if (direction == interactionDir) {
+                    anyMatchDir = true;
+                    break;
+                }
+            }
+
+            for (int slot : slotGroup) {
+                if (slot == slotIdx && anyMatchDir) return true;
+            }
+        }
+
+        return interactionDir == Direction.DOWN;
     }
 
     @Override
@@ -270,31 +314,34 @@ public abstract class AbstractDefossilizerBlockEntity extends BaseContainerBlock
     }
 
     public static void serverTick(Level curLevel, BlockPos targetPos, BlockState targetState, AbstractDefossilizerBlockEntity targetDefossilizerBlockEntity) {
-        boolean isAlreadyDefossilizing = targetDefossilizerBlockEntity.isDefossilizing();
         boolean markChanged = false;
-        boolean prelimDefossilizing = targetDefossilizerBlockEntity.isDefossilizing();
+        boolean wasDefossilizing = targetDefossilizerBlockEntity.isDefossilizing();
 
         ItemStack fossilStack = targetDefossilizerBlockEntity.getItem(FOSSIL_INPUT_SLOT_INDEX);
         ItemStack bucketStack = targetDefossilizerBlockEntity.getItem(BUCKET_INPUT_SLOT_INDEX);
         ItemStack powerChipStack = targetDefossilizerBlockEntity.getItem(POWER_CHIP_INPUT_SLOT_INDEX);
 
-        boolean hasIngredients = !fossilStack.isEmpty() && !bucketStack.isEmpty() && !powerChipStack.isEmpty();
+        boolean hasIngredients = !fossilStack.isEmpty();
+        boolean hasBucket = !bucketStack.isEmpty();
+        boolean hasPowerChip = !powerChipStack.isEmpty();
+        boolean hasFuel = hasBucket && hasPowerChip;
+        boolean shouldProgressDefossilization = wasDefossilizing || hasFuel;
 
-        if (isAlreadyDefossilizing || hasIngredients) {
+        if (shouldProgressDefossilization || hasIngredients) {
             Recipe<?> curRecipe = null;
 
-            if (isAlreadyDefossilizing) curRecipe = targetDefossilizerBlockEntity.quickCheck.getRecipeFor(targetDefossilizerBlockEntity, curLevel).orElse(null);
+            if (hasIngredients) curRecipe = targetDefossilizerBlockEntity.quickCheck.getRecipeFor(targetDefossilizerBlockEntity, curLevel).orElse(null);
 
             int maxStackSize = targetDefossilizerBlockEntity.getMaxStackSize();
 
-            if (!isAlreadyDefossilizing && canDefossilize(curRecipe, targetDefossilizerBlockEntity, targetDefossilizerBlockEntity.getItem(DEFOSSILIZED_OUTPUT_SLOT_INDEX), maxStackSize)) {
+            if (!targetDefossilizerBlockEntity.isDefossilizing() && canDefossilize(curRecipe, targetDefossilizerBlockEntity, targetDefossilizerBlockEntity.getItem(DEFOSSILIZED_OUTPUT_SLOT_INDEX), maxStackSize)) {
                 targetDefossilizerBlockEntity.totalDefossilizationTime = getTotalDefossilizationTime(curLevel, targetDefossilizerBlockEntity);
                 targetDefossilizerBlockEntity.defossilizationProgress = 0;
 
-                if (isAlreadyDefossilizing) markChanged = true;
+                if (targetDefossilizerBlockEntity.isDefossilizing()) markChanged = true;
             }
 
-            if (isAlreadyDefossilizing && canDefossilize(curRecipe, targetDefossilizerBlockEntity, targetDefossilizerBlockEntity.getItem(DEFOSSILIZED_OUTPUT_SLOT_INDEX), maxStackSize)) {
+            if (targetDefossilizerBlockEntity.isDefossilizing() && canDefossilize(curRecipe, targetDefossilizerBlockEntity, targetDefossilizerBlockEntity.getItem(DEFOSSILIZED_OUTPUT_SLOT_INDEX), maxStackSize)) {
                 targetDefossilizerBlockEntity.defossilizationProgress++;
 
                 if (targetDefossilizerBlockEntity.defossilizationProgress >= targetDefossilizerBlockEntity.totalDefossilizationTime) {
@@ -307,12 +354,19 @@ public abstract class AbstractDefossilizerBlockEntity extends BaseContainerBlock
 
                     markChanged = true;
                 }
-            } else targetDefossilizerBlockEntity.defossilizationProgress = 0;
-        } else if (!targetDefossilizerBlockEntity.isDefossilizing() && targetDefossilizerBlockEntity.defossilizationProgress > 0) {
-            targetDefossilizerBlockEntity.defossilizationProgress = Mth.clamp(targetDefossilizerBlockEntity.defossilizationProgress - 2, 0, targetDefossilizerBlockEntity.totalDefossilizationTime);
+            } else {
+                targetDefossilizerBlockEntity.defossilizationProgress = 0;
+                targetDefossilizerBlockEntity.totalDefossilizationTime = 0;
+            }
+        } else {
+            if (!targetDefossilizerBlockEntity.isDefossilizing() && targetDefossilizerBlockEntity.defossilizationProgress > 0) {
+                targetDefossilizerBlockEntity.defossilizationProgress = Mth.clamp(targetDefossilizerBlockEntity.defossilizationProgress - 2, 0, targetDefossilizerBlockEntity.totalDefossilizationTime);
+            }
+
+            targetDefossilizerBlockEntity.totalDefossilizationTime = 0;
         }
 
-        if (prelimDefossilizing != targetDefossilizerBlockEntity.isDefossilizing()) {
+        if (wasDefossilizing != targetDefossilizerBlockEntity.isDefossilizing()) {
             markChanged = true;
             curLevel.setBlock(targetPos, targetState, Block.UPDATE_ALL);
         }
@@ -330,7 +384,7 @@ public abstract class AbstractDefossilizerBlockEntity extends BaseContainerBlock
     }
 
     public static int getTotalDefossilizationTime(Level level, AbstractDefossilizerBlockEntity blockEntity) {
-        return blockEntity.quickCheck.getRecipeFor(blockEntity, level).map(AbstractDefossilizingRecipe::getDefossilizationTime).orElse(DEFAULT_DEFOSSILIZATION_TIME);
+        return blockEntity.quickCheck.getRecipeFor(blockEntity, level).map(AbstractDefossilizingRecipe::getDefossilizationTime).orElse(0);
     }
 
     public static boolean isFossil(ItemStack targetStack) {
@@ -347,7 +401,14 @@ public abstract class AbstractDefossilizerBlockEntity extends BaseContainerBlock
 
     public static boolean canDefossilize(Recipe<?> targetRecipe, AbstractDefossilizerBlockEntity targetDefossilizerBlockEntity, ItemStack defossilizedOutputStack, int maxStackSize) {
         ItemStack outputStack = targetRecipe == null ? ItemStack.EMPTY : targetRecipe.getResultItem(targetDefossilizerBlockEntity.level.registryAccess());
-        return targetRecipe != null && (!targetDefossilizerBlockEntity.getItem(FOSSIL_INPUT_SLOT_INDEX).isEmpty()) && (defossilizedOutputStack.isEmpty() || (ItemStack.isSameItemSameTags(outputStack, defossilizedOutputStack) && outputStack.getCount() + defossilizedOutputStack.getCount() <= maxStackSize));
+        return targetRecipe instanceof AbstractDefossilizingRecipe defossilizingRecipe
+                && defossilizingRecipe.getDefossilizationCategory() == targetDefossilizerBlockEntity.getDefossilizationCategory()
+                && (!targetDefossilizerBlockEntity.getItem(FOSSIL_INPUT_SLOT_INDEX).isEmpty())
+                && (defossilizingRecipe.getBucketIngredient().test(targetDefossilizerBlockEntity.getItem(BUCKET_INPUT_SLOT_INDEX)))
+                && (defossilizingRecipe.getPowerChipIngredient().test(targetDefossilizerBlockEntity.getItem(POWER_CHIP_INPUT_SLOT_INDEX)))
+                && (defossilizedOutputStack.isEmpty() ||
+                (ItemStack.isSameItemSameTags(outputStack, defossilizedOutputStack)
+                        && outputStack.getCount() + defossilizedOutputStack.getCount() <= maxStackSize));
     }
 
     public static boolean defossilize(Recipe<?> targetRecipe, AbstractDefossilizerBlockEntity targetDefossilizerBlockEntity, ItemStack defossilizedOutputStack, int maxStackSize) {

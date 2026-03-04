@@ -1,6 +1,7 @@
 package io.github.chaosawakens.content.block_entity.defossilizer;
 
 import io.github.chaosawakens.content.client.menu.defossilizer.IronDefossilizerMenu;
+import io.github.chaosawakens.content.data.recipe.defossilizing.AbstractDefossilizingRecipe;
 import io.github.chaosawakens.content.registry.CABlockEntityTypes;
 import io.github.chaosawakens.content.registry.CAMenuTypes;
 import io.github.chaosawakens.content.registry.CARecipeData;
@@ -24,5 +25,10 @@ public class IronDefossilizerBlockEntity extends AbstractDefossilizerBlockEntity
     @Override
     protected @NotNull IronDefossilizerMenu createMenu(int containerId, Inventory inventory) {
         return new IronDefossilizerMenu(CAMenuTypes.IRON_DEFOSSILIZER.get(), containerId, inventory, this, dataAccess);
+    }
+
+    @Override
+    public @NotNull AbstractDefossilizingRecipe.DefossilizationCategory getDefossilizationCategory() {
+        return AbstractDefossilizingRecipe.DefossilizationCategory.IRON;
     }
 }

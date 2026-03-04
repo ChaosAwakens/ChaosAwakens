@@ -45,4 +45,17 @@ public final class MathUtil {
 
         return 1 - Math.pow(Math.cos(timeDelta * (Math.PI / 2.0F)), 3) * Math.cos(timeDelta * chosenFrequencyFactor * Math.PI); // Have it behave deterministically as in Geckolib (different function of t by default, oscillations die out as t -> 1)
     }
+
+    public static double normalize(double value, double min, double max, double targetMin, double targetMax) {
+        if (min == max) throw new IllegalArgumentException("Input range min cannot equal max");
+        if (targetMin == targetMax) throw new IllegalArgumentException("Target range min cannot equal max");
+
+        double normalizedValue = (value - min) / (max - min); // Normalize between 0 - 1 first
+
+        return normalizedValue * (targetMax - targetMin) + targetMin;
+    }
+
+    public static double normalize(double value, double targetMin, double targetMax) {
+        return normalize(value, Double.MIN_VALUE, Double.MAX_VALUE, targetMin, targetMax);
+    }
 }
