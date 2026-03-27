@@ -122,7 +122,6 @@ public final class CABPWTemplates {
             .copyFrom(FOSSIL_PICKAXE)
             .withTag(CATags.CABlockTags.KYANITE_FOSSILS::get)
             .withAdditionalTag(CATags.CAItemTags.KYANITE_FOSSILS::get)
-            .withRecipe(CARecipeTemplates::spawnEggFromFossilWaterCrystal)
             .build();
     public static final BlockPropertyWrapper<Block> FOSSIL_NETHERRACK = new BlockPropertyWrapper<>()
             .builder()
@@ -169,6 +168,7 @@ public final class CABPWTemplates {
             .builder()
             .withModelDefinition(CAModelTemplates::leafCarpet)
             .withBlockStateDefinition(CAModelTemplates::leafCarpetBlockState)
+            .withRecipe(CARecipeTemplates::leafCarpetRecipeFrom)
             .withTag(CATags.CABlockTags.LEAF_CARPETS::get)
             .withAdditionalTag(CATags.CAItemTags.LEAF_CARPETS::get)
             .withLootTable(LootUtil::dropMultiFace)
@@ -195,6 +195,15 @@ public final class CABPWTemplates {
             .withLootTable(CALootTableTemplates::dropLeavesRipe)
             .build();
 
+    public static final BlockPropertyWrapper<Block> CRYSTAL_GRASS_BLOCK = new BlockPropertyWrapper<>()
+            .builder()
+            .copyFrom(BlockPropertyWrapperTemplates.BASIC_PICKAXE)
+            .withModelDefinition(CAModelTemplates::crystalGrassBlock)
+            .withTag(CATags.CABlockTags.CRYSTAL_SOIL::get)
+            .withLootTable(LootUtil::dropSilkTouchOnly)
+            .literalTranslation()
+            .build();
+
     public static final BlockPropertyWrapper<Block> DENSE_PLANT = new BlockPropertyWrapper<>()
             .builder()
             .copyFrom(BlockPropertyWrapperTemplates.NO_TINT_PLANT)
@@ -203,6 +212,11 @@ public final class CABPWTemplates {
     public static final BlockPropertyWrapper<Block> TALL_DENSE_PLANT = new BlockPropertyWrapper<>()
             .builder()
             .copyFrom(BlockPropertyWrapperTemplates.NO_TINT_TALL_PLANT)
+            .withTag(CATags.CABlockTags.DENSE_VEGETATION::get)
+            .build();
+    public static final BlockPropertyWrapper<Block> MULTI_LAYER_DENSE_PLANT = new BlockPropertyWrapper<>()
+            .builder()
+            .copyFrom(BlockPropertyWrapperTemplates.NO_TINT_MULTI_LAYER_PLANT)
             .withTag(CATags.CABlockTags.DENSE_VEGETATION::get)
             .build();
 
@@ -216,6 +230,43 @@ public final class CABPWTemplates {
             .copyFrom(BlockPropertyWrapperTemplates.TALL_FLOWER)
             .withTag(CATags.CABlockTags.DENSE_FLOWERS::get)
             .build();
+    public static final BlockPropertyWrapper<Block> MULTI_LAYER_DENSE_FLOWER = new BlockPropertyWrapper<>()
+            .builder()
+            .copyFrom(BlockPropertyWrapperTemplates.MULTI_LAYER_FLOWER)
+            .withTag(CATags.CABlockTags.DENSE_FLOWERS::get)
+            .build();
+
+    public static final BlockPropertyWrapper<Block> CRYSTAL_PLANT = new BlockPropertyWrapper<>()
+            .builder()
+            .copyFrom(BlockPropertyWrapperTemplates.NO_TINT_PLANT)
+            .withTag(CATags.CABlockTags.CRYSTAL_VEGETATION::get)
+            .build();
+    public static final BlockPropertyWrapper<Block> TALL_CRYSTAL_PLANT = new BlockPropertyWrapper<>()
+            .builder()
+            .copyFrom(BlockPropertyWrapperTemplates.NO_TINT_TALL_PLANT)
+            .withTag(CATags.CABlockTags.CRYSTAL_VEGETATION::get)
+            .build();
+    public static final BlockPropertyWrapper<Block> MULTI_LAYER_CRYSTAL_PLANT = new BlockPropertyWrapper<>()
+            .builder()
+            .copyFrom(BlockPropertyWrapperTemplates.NO_TINT_MULTI_LAYER_PLANT)
+            .withTag(CATags.CABlockTags.CRYSTAL_VEGETATION::get)
+            .build();
+
+    public static final BlockPropertyWrapper<Block> CRYSTAL_FLOWER = new BlockPropertyWrapper<>()
+            .builder()
+            .copyFrom(BlockPropertyWrapperTemplates.SMALL_FLOWER)
+            .withTag(CATags.CABlockTags.CRYSTAL_FLOWERS::get)
+            .build();
+    public static final BlockPropertyWrapper<Block> TALL_CRYSTAL_FLOWER = new BlockPropertyWrapper<>()
+            .builder()
+            .copyFrom(BlockPropertyWrapperTemplates.TALL_FLOWER)
+            .withTag(CATags.CABlockTags.CRYSTAL_FLOWERS::get)
+            .build();
+    public static final BlockPropertyWrapper<Block> MULTI_LAYER_CRYSTAL_FLOWER = new BlockPropertyWrapper<>()
+            .builder()
+            .copyFrom(BlockPropertyWrapperTemplates.MULTI_LAYER_FLOWER)
+            .withTag(CATags.CABlockTags.CRYSTAL_FLOWERS::get)
+            .build();
 
     public static final BlockPropertyWrapper<Block> MATERIAL_BLOCK_PICKAXE_IRON = new BlockPropertyWrapper<>()
             .builder()
@@ -228,6 +279,12 @@ public final class CABPWTemplates {
             .copyFrom(BlockPropertyWrapperTemplates.MATERIAL_BLOCK_PICKAXE)
             .literalTranslation()
             .withTag(() -> BlockTags.NEEDS_DIAMOND_TOOL)
+            .build();
+
+    public static final BlockPropertyWrapper<Block> MATERIAL_BLOCK_CRYSTAL = new BlockPropertyWrapper<>()
+            .builder()
+            .copyFrom(MATERIAL_BLOCK_PICKAXE_IRON)
+            .withRecipe(CARecipeTemplates::crystalBlockRecipeFrom)
             .build();
 
     public static final BlockPropertyWrapper<Block> COMPONENT_BLOCK_PICKAXE_IRON = new BlockPropertyWrapper<>()
@@ -248,11 +305,52 @@ public final class CABPWTemplates {
             .withAdditionalTag(CATags.CAItemTags.ROBO_BLOCKS::get)
             .withLocalization(StringUtil::formatRoboBlockName)
             .build();
+    public static final BlockPropertyWrapper<Block> ROBO_GATE_BLOCK = new BlockPropertyWrapper<>()
+            .builder()
+            .copyFrom(GATE_BLOCK)
+            .withTag(CATags.CABlockTags.ROBO_BLOCKS::get)
+            .withAdditionalTag(CATags.CAItemTags.ROBO_BLOCKS::get)
+            .build();
+
+    public static final BlockPropertyWrapper<Block> ROBO_GLASS = new BlockPropertyWrapper<>()
+            .builder()
+            .copyFrom(BlockPropertyWrapperTemplates.GLASS)
+            .withTag(CATags.CABlockTags.ROBO_BLOCKS::get)
+            .withAdditionalTag(CATags.CAItemTags.ROBO_BLOCKS::get)
+            .build();
+    public static final BlockPropertyWrapper<Block> ROBO_GLASS_PANE = new BlockPropertyWrapper<>()
+            .builder()
+            .copyFrom(BlockPropertyWrapperTemplates.GLASS_PANE)
+            .withTag(CATags.CABlockTags.ROBO_BLOCKS::get)
+            .withAdditionalTag(CATags.CAItemTags.ROBO_BLOCKS::get)
+            .build();
+
+    public static final BlockPropertyWrapper<Block> ROBO_BARS = new BlockPropertyWrapper<>()
+            .builder()
+            .copyFrom(BlockPropertyWrapperTemplates.BARS_DIAMOND)
+            .withTag(CATags.CABlockTags.ROBO_BLOCKS::get)
+            .withAdditionalTag(CATags.CAItemTags.ROBO_BLOCKS::get)
+            .build();
+
     public static final BlockPropertyWrapper<Block> ROTATED_ROBO_BLOCK = new BlockPropertyWrapper<>()
             .builder()
             .copyFrom(ROBO_BLOCK)
             .withModelDefinition(ModelUtil::rotatedPillar)
             .withBlockStateDefinition(ModelUtil::rotatedPillarBlockState)
+            .build();
+    public static final BlockPropertyWrapper<Block> AXIS_ALIGNED_ROBO_BLOCK = new BlockPropertyWrapper<>()
+            .builder()
+            .copyFrom(ROBO_BLOCK)
+            .withModelDefinition(ModelUtil::cubeColumn)
+            .withBlockStateDefinition(ModelUtil::axisAlignedBlock)
+            .literalTranslation()
+            .build();
+
+    public static final BlockPropertyWrapper<Block> ROBO_CONTAINER = new BlockPropertyWrapper<>()
+            .builder()
+            .copyFrom(ROBO_BLOCK)
+            .withModelDefinition(CAModelTemplates::orientableCubeContainer)
+            .withBlockStateDefinition(CAModelTemplates::orientableCubeContainerBlockState)
             .build();
 
     public static final BlockPropertyWrapper<Block> ROBO_SLAB = new BlockPropertyWrapper<>()

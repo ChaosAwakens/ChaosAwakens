@@ -1,0 +1,22 @@
+{
+  "criteria": {
+    "has_fossilized_spider_deepslate": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "chaosawakens:fossilized_spider_deepslate"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_fossilized_spider_deepslate"
+    ]
+  ],
+  "sends_telemetry_event": false
+}

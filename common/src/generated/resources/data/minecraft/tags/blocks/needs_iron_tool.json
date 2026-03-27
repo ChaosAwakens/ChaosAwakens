@@ -1,5 +1,6 @@
 {
   "values": [
+    "chaosawakens:aluminum_block",
     "chaosawakens:fossilized_apple_cow_deepslate",
     "chaosawakens:fossilized_attack_squid_deepslate",
     "chaosawakens:fossilized_axolotl_deepslate",
@@ -48,6 +49,7 @@
     "chaosawakens:fossilized_wolf_deepslate",
     "chaosawakens:fossilized_zombie_deepslate",
     "chaosawakens:fossilized_zombie_horse_deepslate",
-    "chaosawakens:fossilized_zombie_villager_deepslate"
+    "chaosawakens:fossilized_zombie_villager_deepslate",
+    "chaosawakens:sunstone_block"
   ]
 }

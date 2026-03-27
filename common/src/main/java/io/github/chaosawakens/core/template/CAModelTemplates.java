@@ -70,8 +70,16 @@ public final class CAModelTemplates {
                 targetBlock,
                 RegistryUtil.getTextureLocationOrDefault(DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(targetBlock.get())
                         .withPath(curPath -> curPath.replace("_leaf_carpet", "_leaves")),
+                        "block",
                         RegistryUtil.getTextureLocationOrDefault(DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(targetBlock.get())
-                                .withPath(curPath -> curPath.replace("_carpet", ""))))));
+                                .withPath(curPath -> curPath.replace("_carpet", "")), "block", RegistryUtil.getTextureLocationOrDefault(
+                                        new ResourceLocation(DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(targetBlock.get()).getPath().replace("_leaf_carpet", "_leaves")),
+                                "block", RegistryUtil.getTextureLocationOrDefault(
+                                        new ResourceLocation(DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(targetBlock.get()).getPath().replace("_carpet", "")),
+                                        "block"
+                                )
+                        ))
+                )));
     }
 
     public static BlockStateDefinition leafCarpetBlockState(Supplier<Block> targetBlock) {
@@ -260,5 +268,70 @@ public final class CAModelTemplates {
                                 .select(Direction.WEST, Variant.variant()
                                         .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270))
                                 .select(Direction.NORTH, Variant.variant())));
+    }
+
+    public static BlockModelDefinition crystalGrassBlock(Supplier<Block> targetBlock) {
+        ResourceLocation targetBlockId = DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(targetBlock.get());
+        ResourceLocation sideTextureLoc = RegistryUtil.getTextureLocationOrDefault(targetBlockId.withSuffix("_side"), "block");
+        ResourceLocation bottomTextureLoc = RegistryUtil.getTextureLocationOrDefault(targetBlockId.withSuffix("_bottom"), "block");
+        ResourceLocation topTextureLoc = RegistryUtil.getTextureLocationOrDefault(targetBlockId.withSuffix("_top"), "block");
+
+        return ModelUtil.cubeBottomTop(targetBlock, sideTextureLoc, bottomTextureLoc, topTextureLoc);
+    }
+
+    public static BlockModelDefinition orientableCubeContainer(Supplier<Block> targetBlock, ResourceLocation sideTextureLoc, ResourceLocation bottomTextureLoc, ResourceLocation topTextureLoc, ResourceLocation openContainerTexture) {
+        return ModelUtil.cubeBottomTop(targetBlock, sideTextureLoc, bottomTextureLoc, topTextureLoc)
+                .withOrdinalModelDefinition(ModelUtil.cubeBottomTop(targetBlock, sideTextureLoc, bottomTextureLoc, topTextureLoc)
+                        .withCustomName(DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(targetBlock.get()).withSuffix("_open").getPath())
+                        .setOrdinalModelDefinitions(ObjectArrayList.of()));
+    }
+
+    public static BlockModelDefinition orientableCubeContainer(Supplier<Block> targetBlock, ResourceLocation sideTextureLoc, ResourceLocation bottomTextureLoc, ResourceLocation topTextureLoc) {
+        return orientableCubeContainer(targetBlock, sideTextureLoc, bottomTextureLoc, topTextureLoc, topTextureLoc);
+    }
+
+    public static BlockModelDefinition orientableCubeContainer(Supplier<Block> targetBlock, ResourceLocation sideTextureLoc, ResourceLocation endTextureLoc) {
+        return orientableCubeContainer(targetBlock, sideTextureLoc, endTextureLoc, endTextureLoc);
+    }
+
+    public static BlockModelDefinition orientableCubeContainer(Supplier<Block> targetBlock) {
+        return orientableCubeContainer(targetBlock, RegistryUtil.getTextureLocationOrDefault(targetBlock), RegistryUtil.getTextureLocationOrDefault(targetBlock), RegistryUtil.getTextureLocationWithSuffixOrDefault(targetBlock, "_top"), RegistryUtil.getTextureLocationOrDefault(DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(targetBlock.get()).withSuffix("_open"), "block", RegistryUtil.getTextureLocationWithSuffixOrDefault(targetBlock, "_top")));
+    }
+
+    public static BlockStateDefinition orientableFacingBlockState(Supplier<Block> targetBlock) {
+        return new BlockStateDefinition(targetBlock)
+                .withBlockStateSupplier(MultiVariantGenerator.multiVariant(targetBlock.get())
+                        .with(PropertyDispatch.property(BlockStateProperties.FACING)
+                                .select(Direction.DOWN, Variant.variant()
+                                        .with(VariantProperties.X_ROT, VariantProperties.Rotation.R180))
+                                .select(Direction.UP, Variant.variant())
+                                .select(Direction.NORTH, Variant.variant()
+                                        .with(VariantProperties.X_ROT, VariantProperties.Rotation.R90))
+                                .select(Direction.SOUTH, Variant.variant()
+                                        .with(VariantProperties.X_ROT, VariantProperties.Rotation.R90)
+                                        .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180))
+                                .select(Direction.WEST, Variant.variant()
+                                        .with(VariantProperties.X_ROT, VariantProperties.Rotation.R90)
+                                        .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270))
+                                .select(Direction.EAST, Variant.variant()
+                                        .with(VariantProperties.X_ROT, VariantProperties.Rotation.R90)
+                                        .with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90))));
+    }
+
+    public static BlockStateDefinition orientableCubeContainerBlockState(Supplier<Block> targetBlock, ResourceLocation openModelLoc, ResourceLocation closedModelLoc) {
+        BlockStateDefinition orientableCubeBase = orientableFacingBlockState(targetBlock);
+        MultiVariantGenerator multiVariantGenerator = (MultiVariantGenerator) orientableCubeBase.getBlockStateSupplier();
+
+        return new BlockStateDefinition(targetBlock)
+                .withBlockStateSupplier(multiVariantGenerator
+                        .with(PropertyDispatch.property(BlockStateProperties.OPEN)
+                                .select(false, Variant.variant()
+                                        .with(VariantProperties.MODEL, closedModelLoc))
+                                .select(true, Variant.variant()
+                                        .with(VariantProperties.MODEL, openModelLoc))));
+    }
+
+    public static BlockStateDefinition orientableCubeContainerBlockState(Supplier<Block> targetBlock) {
+        return orientableCubeContainerBlockState(targetBlock, ModelLocationUtils.getModelLocation(targetBlock.get()), ModelLocationUtils.getModelLocation(targetBlock.get(), "_open"));
     }
 }

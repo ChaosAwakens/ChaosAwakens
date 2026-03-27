@@ -23,7 +23,7 @@ public class DungeonGateBlock extends Block {
     protected final int baseUpdateTickTime;
 
     public DungeonGateBlock(boolean isConstantlyUpdated, int baseUpdateTickTime, Properties properties) {
-        super(properties);
+        super(properties.strength(10000.0F, 10000.0F));
         this.isConstantlyUpdated = isConstantlyUpdated;
         this.baseUpdateTickTime = baseUpdateTickTime;
 

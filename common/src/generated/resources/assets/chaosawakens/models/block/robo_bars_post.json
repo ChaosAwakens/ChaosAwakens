@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/iron_bars_post",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "bars": "chaosawakens:block/robo/robo_bars",
+    "particle": "chaosawakens:block/robo/robo_bars"
+  }
+}

@@ -402,7 +402,7 @@ public abstract class AbstractDefossilizerBlockEntity extends BaseContainerBlock
     public static boolean canDefossilize(Recipe<?> targetRecipe, AbstractDefossilizerBlockEntity targetDefossilizerBlockEntity, ItemStack defossilizedOutputStack, int maxStackSize) {
         ItemStack outputStack = targetRecipe == null ? ItemStack.EMPTY : targetRecipe.getResultItem(targetDefossilizerBlockEntity.level.registryAccess());
         return targetRecipe instanceof AbstractDefossilizingRecipe defossilizingRecipe
-                && defossilizingRecipe.getDefossilizationCategory() == targetDefossilizerBlockEntity.getDefossilizationCategory()
+     //           && defossilizingRecipe.getDefossilizationCategory() == targetDefossilizerBlockEntity.getDefossilizationCategory()
                 && (!targetDefossilizerBlockEntity.getItem(FOSSIL_INPUT_SLOT_INDEX).isEmpty())
                 && (defossilizingRecipe.getBucketIngredient().test(targetDefossilizerBlockEntity.getItem(BUCKET_INPUT_SLOT_INDEX)))
                 && (defossilizingRecipe.getPowerChipIngredient().test(targetDefossilizerBlockEntity.getItem(POWER_CHIP_INPUT_SLOT_INDEX)))

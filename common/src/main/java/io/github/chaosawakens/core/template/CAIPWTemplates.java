@@ -31,6 +31,12 @@ public final class CAIPWTemplates {
             .withParentTab(CACreativeModeTabs.FOOD)
             .build();
 
+    public static final ItemPropertyWrapper<Item> LUMP_MATERIAL = new ItemPropertyWrapper<>()
+            .builder()
+            .copyFrom(ItemPropertyWrapperTemplates.MATERIAL)
+            .withRecipe(CARecipeTemplates::lumpMaterialRecipe)
+            .build();
+
     public static final ItemPropertyWrapper<Item> HANDHELD_LONG = new ItemPropertyWrapper<>()
             .builder()
             .withModelDefinition(parentItem -> new ItemModelDefinition(CAModelTemplates.HANDHELD_LONG)

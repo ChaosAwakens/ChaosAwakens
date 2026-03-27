@@ -3,11 +3,15 @@ package io.github.chaosawakens.content.registry;
 import com.mememan.nexus.asm.annotations.RegistrarEntry;
 import com.mememan.nexus.template.property_wrapper.TagPropertyWrapperTemplates;
 import io.github.chaosawakens.CAConstants;
+import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 
+import java.util.Map;
 import java.util.function.Supplier;
 
 public final class CATags {
@@ -96,14 +100,29 @@ public final class CATags {
                 .withChildTag(CRYSTAL_FLOWERS)
                 .buildAndGet();
 
+        // Misc.
+        public static final Supplier<TagKey<Block>> ROBO_BLOCKS = TagPropertyWrapperTemplates.registerTagKey(Registries.BLOCK, CAConstants.prefix("misc/robo_blocks"));
+    }
+
+    @RegistrarEntry(priority = -1)
+    public static final class CABlockDependantTags {
+
         // Base Stone
+        public static final Supplier<TagKey<Block>> BASE_STONE_CRYSTALWORLD = TagPropertyWrapperTemplates.registerAndChain(Registries.BLOCK, CAConstants.prefix("stone/base_stone_crystalworld"))
+                .withTaggedObject(CABlocks.KYANITE)
+                .buildAndGet();
         public static final Supplier<TagKey<Block>> BASE_STONE_MINING_PARADISE = TagPropertyWrapperTemplates.registerAndChain(Registries.BLOCK, CAConstants.prefix("stone/base_stone_mining_paradise"))
-              //  .withTaggedObjects(CABlocks.DREDGESTONE.stoneBlockFamily().stream().filter(curBlockEntry -> DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(curBlockEntry.get()).getPath().equals("dredgestone")).map(curBlockSup -> (Supplier<Block>) curBlockSup).collect(Collectors.toCollection(ObjectArrayList::new)))
-              //  .withTaggedObjects(CABlocks.GLOOMSTONE.stoneBlockFamily().stream().filter(curBlockEntry -> DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(curBlockEntry.get()).getPath().equals("gloomstone")).map(curBlockSup -> (Supplier<Block>) curBlockSup).collect(Collectors.toCollection(ObjectArrayList::new)))
+                .withTaggedObject((Supplier<Block>) CABlocks.DREDGESTONE.stoneBlockFamily().entrySet().stream().filter(curBlockEntry -> curBlockEntry.getKey().getPath().equals("dredgestone")).map(Map.Entry::getValue).findFirst().orElseThrow())
+                .withTaggedObject((Supplier<Block>) CABlocks.GLOOMSTONE.stoneBlockFamily().entrySet().stream().filter(curBlockEntry -> curBlockEntry.getKey().getPath().equals("gloomstone")).map(Map.Entry::getValue).findFirst().orElseThrow())
+                .buildAndGet();
+        public static final Supplier<TagKey<Block>> BASE_STONE_VILLAGE_MANIA = TagPropertyWrapperTemplates.registerAndChain(Registries.BLOCK, CAConstants.prefix("stone/base_stone_village_mania"))
                 .buildAndGet();
 
         // Misc.
-        public static final Supplier<TagKey<Block>> ROBO_BLOCKS = TagPropertyWrapperTemplates.registerTagKey(Registries.BLOCK, CAConstants.prefix("misc/robo_blocks"));
+        public static final Supplier<TagKey<Block>> MINERS_DREAM_MINABLE = TagPropertyWrapperTemplates.registerAndChain(Registries.BLOCK, CAConstants.prefix("miners_dream_minable"))
+                .withChildTags(ObjectArrayList.of(BASE_STONE_CRYSTALWORLD, BASE_STONE_MINING_PARADISE, BASE_STONE_VILLAGE_MANIA, () -> BlockTags.BASE_STONE_OVERWORLD, () -> BlockTags.BASE_STONE_NETHER, () -> BlockTags.DIRT, () -> BlockTags.SAND, () -> BlockTags.ICE, () -> BlockTags.CAVE_VINES, () -> BlockTags.LEAVES, () -> BlockTags.CROPS, () -> BlockTags.FLOWERS))
+                .withTaggedObjects(ObjectArrayList.of(() -> Blocks.GRAVEL, () -> Blocks.SUSPICIOUS_GRAVEL, () -> Blocks.CLAY, () -> Blocks.SANDSTONE, () -> Blocks.SMALL_DRIPLEAF, () -> Blocks.SOUL_SAND, () -> Blocks.MAGMA_BLOCK, () -> Blocks.SOUL_SOIL, () -> Blocks.BIG_DRIPLEAF, () -> Blocks.DRIPSTONE_BLOCK, () -> Blocks.POINTED_DRIPSTONE))
+                .buildAndGet();
     }
 
     @RegistrarEntry

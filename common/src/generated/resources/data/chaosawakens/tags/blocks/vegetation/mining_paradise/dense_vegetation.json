@@ -1,6 +1,17 @@
 {
   "values": [
     "#chaosawakens:vegetation/mining_paradise/dense_flowers",
-    "chaosawakens:dense_grass"
+    "chaosawakens:bush",
+    "chaosawakens:dense_bush",
+    "chaosawakens:dense_grass",
+    "chaosawakens:dense_rose_bush",
+    "chaosawakens:horsetail_restio",
+    "chaosawakens:king_protea",
+    "chaosawakens:large_densewood_bush",
+    "chaosawakens:large_ginkgo_bush",
+    "chaosawakens:large_mesozoic_bush",
+    "chaosawakens:tall_bush",
+    "chaosawakens:tall_dense_bush",
+    "chaosawakens:tall_dense_grass"
   ]
 }

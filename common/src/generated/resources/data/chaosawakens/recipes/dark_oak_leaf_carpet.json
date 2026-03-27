@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "L": {
+      "item": "minecraft:dark_oak_leaves"
+    }
+  },
+  "pattern": [
+    "LL"
+  ],
+  "result": {
+    "item": "chaosawakens:dark_oak_leaf_carpet"
+  },
+  "show_notification": true
+}

@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:block/cube_all",
-  "textures": {
-    "all": "chaosawakens:block/dungeon/wasp_nest/wasp_nest_pattern"
-  }
-}

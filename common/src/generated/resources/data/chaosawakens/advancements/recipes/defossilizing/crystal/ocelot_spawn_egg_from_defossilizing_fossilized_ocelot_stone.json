@@ -1,0 +1,22 @@
+{
+  "criteria": {
+    "has_fossilized_ocelot_stone": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "chaosawakens:fossilized_ocelot_stone"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_fossilized_ocelot_stone"
+    ]
+  ],
+  "sends_telemetry_event": false
+}

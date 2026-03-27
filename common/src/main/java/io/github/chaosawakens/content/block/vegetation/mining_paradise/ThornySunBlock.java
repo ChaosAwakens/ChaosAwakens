@@ -5,6 +5,7 @@ import io.github.chaosawakens.content.registry.CADamageTypes;
 import io.github.chaosawakens.content.registry.CATags;
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 import net.minecraft.core.BlockPos;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
@@ -12,7 +13,7 @@ import net.minecraft.world.level.block.state.BlockState;
 public class ThornySunBlock extends DefaultableTallFlowerBlock {
 
     public ThornySunBlock(Properties properties) {
-        super(properties, ObjectOpenHashSet.of(CATags.CABlockTags.DENSE_FLOWERS));
+        super(properties, ObjectOpenHashSet.of(() -> BlockTags.DIRT, CATags.CABlockTags.DENSE_SOIL));
     }
 
     @Override

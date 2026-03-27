@@ -6,6 +6,7 @@ import com.mememan.nexus.template.property_wrapper.ItemPropertyWrapperTemplates;
 import io.github.chaosawakens.CAConstants;
 import io.github.chaosawakens.content.item.food.BaggedPopcornItem;
 import io.github.chaosawakens.content.item.misc.EnchantedItem;
+import io.github.chaosawakens.content.item.utility.MinersDreamItem;
 import io.github.chaosawakens.content.item.utility.PowerChipItem;
 import io.github.chaosawakens.core.template.CAArmorMaterialTemplates;
 import io.github.chaosawakens.core.template.CAIPWTemplates;
@@ -110,13 +111,19 @@ public final class CAItems {
     public static final Supplier<Item> KUNZITE = ItemPropertyWrapperTemplates.registerItemFromTemplate(CAConstants.prefix("kunzite"), () -> new Item(new Item.Properties()), ItemPropertyWrapperTemplates.MATERIAL, ITEMS);
     public static final Supplier<Item> RUBY = ItemPropertyWrapperTemplates.registerItemFromTemplate(CAConstants.prefix("ruby"), () -> new Item(new Item.Properties().fireResistant()), ItemPropertyWrapperTemplates.MATERIAL, ITEMS);
 
+    public static final Supplier<Item> SUNSTONE = ItemPropertyWrapperTemplates.registerItemFromTemplate(CAConstants.prefix("sunstone"), () -> new Item(new Item.Properties()), ItemPropertyWrapperTemplates.MATERIAL, ITEMS);
+
+    public static final Supplier<Item> PLATINUM_LUMP = ItemPropertyWrapperTemplates.registerItemFromTemplate(CAConstants.prefix("platinum_lump"), () -> new Item(new Item.Properties()), CAIPWTemplates.LUMP_MATERIAL, ITEMS);
+
+    public static final Supplier<Item> ALUMINUM_INGOT = ItemPropertyWrapperTemplates.registerItemFromTemplate(CAConstants.prefix("aluminum_ingot"), () -> new Item(new Item.Properties()), ItemPropertyWrapperTemplates.MATERIAL, ITEMS);
+
     public static final Supplier<Item> TITANIUM_INGOT = ItemPropertyWrapperTemplates.registerItemFromTemplate(CAConstants.prefix("titanium_ingot"), () -> new Item(new Item.Properties().fireResistant()), ItemPropertyWrapperTemplates.MATERIAL, ITEMS);
     public static final Supplier<Item> URANIUM_INGOT = ItemPropertyWrapperTemplates.registerItemFromTemplate(CAConstants.prefix("uranium_ingot"), () -> new Item(new Item.Properties().fireResistant()), ItemPropertyWrapperTemplates.MATERIAL, ITEMS);
 
+    public static final Supplier<Item> ALUMINUM_NUGGET = ItemPropertyWrapperTemplates.registerItemFromTemplate(CAConstants.prefix("aluminum_nugget"), () -> new Item(new Item.Properties()), ItemPropertyWrapperTemplates.MATERIAL_PIECE, ITEMS);
+
     public static final Supplier<Item> TITANIUM_NUGGET = ItemPropertyWrapperTemplates.registerItemFromTemplate(CAConstants.prefix("titanium_nugget"), () -> new Item(new Item.Properties().fireResistant()), ItemPropertyWrapperTemplates.MATERIAL_PIECE, ITEMS);
     public static final Supplier<Item> URANIUM_NUGGET = ItemPropertyWrapperTemplates.registerItemFromTemplate(CAConstants.prefix("uranium_nugget"), () -> new Item(new Item.Properties().fireResistant()), ItemPropertyWrapperTemplates.MATERIAL_PIECE, ITEMS);
-
-
 
     // Mob Parts
     public static final Supplier<Item> WASP_STINGER = ItemPropertyWrapperTemplates.registerItemFromTemplate(CAConstants.prefix("wasp_stinger"), () -> new Item(new Item.Properties()), ItemPropertyWrapperTemplates.BASIC_GENERATED, ITEMS);
@@ -149,6 +156,11 @@ public final class CAItems {
 
     // Machine Components
     public static final Supplier<PowerChipItem> ALUMINUM_POWER_CHIP = ItemPropertyWrapperTemplates.registerItemFromTemplate(CAConstants.prefix("aluminum_power_chip"), () -> new PowerChipItem(new Item.Properties()), ItemPropertyWrapperTemplates.BASIC_GENERATED, ITEMS);
+
+    // Utility
+    public static final Supplier<MinersDreamItem> MINERS_DREAM = ItemPropertyWrapperTemplates.registerAndChain(CAConstants.prefix("miners_dream"), () -> new MinersDreamItem(new Item.Properties().stacksTo(16)), ItemPropertyWrapperTemplates.BASIC_GENERATED, ITEMS)
+            .withRecipe(recipeConsumer -> CARecipeTemplates.threeRowRecipe(recipeConsumer, KUNZITE.get(), Items.REDSTONE_BLOCK, Items.GUNPOWDER))
+            .buildAndGet();
 
     // Material Weapons and Tools
     public static final Supplier<SwordItem> ULTIMATE_SWORD = ItemPropertyWrapperTemplates.registerItemFromTemplate(CAConstants.prefix("ultimate_sword"), () -> new SwordItem(CAItemTierTemplates.ULTIMATE, 22, -2.4F, new Item.Properties().fireResistant().rarity(Rarity.EPIC)), ItemPropertyWrapperTemplates.BASIC_HANDHELD, EQUIPMENT);

@@ -13,8 +13,8 @@ import java.util.function.Predicate;
 
 public class IronDefossilizingRecipe extends AbstractDefossilizingRecipe {
 
-    public IronDefossilizingRecipe(ResourceLocation recipeId, Ingredient bucketIngredient, Ingredient fossilizedIngredient, Ingredient powerChipIngredient, ItemStack defossilizedResult, int defossilizationTime, float experience) {
-        super(recipeId, DefossilizationCategory.IRON, bucketIngredient, fossilizedIngredient, powerChipIngredient, defossilizedResult, defossilizationTime, experience);
+    public IronDefossilizingRecipe(ResourceLocation recipeId, AbstractDefossilizingRecipe.DefossilizationCategory category, Ingredient bucketIngredient, Ingredient fossilizedIngredient, Ingredient powerChipIngredient, ItemStack defossilizedResult, int defossilizationTime, float experience) {
+        super(recipeId, category, bucketIngredient, fossilizedIngredient, powerChipIngredient, defossilizedResult, defossilizationTime, experience);
     }
 
     @Override

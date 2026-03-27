@@ -9,6 +9,7 @@ import com.mememan.nexus.util.StringUtil;
 import io.github.chaosawakens.content.data.recipe_builder.DefossilizingRecipeBuilder;
 import io.github.chaosawakens.content.registry.CAItems;
 import net.minecraft.advancements.critereon.ItemPredicate;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
@@ -59,6 +60,56 @@ public final class CARecipeTemplates {
         return patternBlockRecipeFrom(finishedRecipe, Function.identity());
     }
 
+    public static <B extends Block> Consumer<Supplier<B>> leafCarpetRecipeFrom(Consumer<FinishedRecipe> finishedRecipe, Function<B, B> leafCarpetComponentMapper, Function<ResourceLocation, ResourceLocation> recipeIdMapper) {
+        return parentItemLikeSup -> {
+            B parentItemLike = parentItemLikeSup.get();
+            ResourceLocation parentItemLikeId = DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(parentItemLike);
+
+            B componentItemLike = leafCarpetComponentMapper.apply(parentItemLike);
+
+            if (componentItemLike != null) {
+                ResourceLocation componentItemLikeId = DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(componentItemLike);
+                ResourceLocation baseRecipeId = recipeIdMapper.apply(parentItemLikeId);
+
+                ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, parentItemLike)
+                        .define('L', componentItemLike)
+                        .pattern("LL")
+                        .unlockedBy("has_" + componentItemLikeId.getPath(), PredicateUtil.has(componentItemLike))
+                        .save(finishedRecipe, baseRecipeId);
+            }
+        };
+    }
+
+    public static <B extends Block> Consumer<Supplier<B>> leafCarpetRecipeFrom(Consumer<FinishedRecipe> finishedRecipe, Function<ResourceLocation, ResourceLocation> recipeIdMapper) {
+        return leafCarpetRecipeFrom(finishedRecipe, parentLeafCarpet -> RegistryUtil.getObjectFrom(parentLeafCarpet, parentLeafCarpetId -> parentLeafCarpetId.withPath(curPath -> curPath.replace("_leaf_carpet", "_leaves")))
+                .or(() -> RegistryUtil.getObjectFrom(parentLeafCarpet, parentLeafCarpetId -> parentLeafCarpetId.withPath(curPath -> curPath.replace("_carpet", ""))))
+                .or(() -> RegistryUtil.getObjectFrom(parentLeafCarpet, parentLeafCarpetId -> new ResourceLocation(parentLeafCarpetId.getPath().replace("_leaf_carpet", "_leaves"))))
+                .or(() -> RegistryUtil.getObjectFrom(parentLeafCarpet, parentLeafCarpetId -> new ResourceLocation(parentLeafCarpetId.getPath().replace("_carpet", ""))))
+                .orElse(null), recipeIdMapper);
+    }
+
+    public static <B extends Block> Consumer<Supplier<B>> leafCarpetRecipeFrom(Consumer<FinishedRecipe> finishedRecipe) {
+        return leafCarpetRecipeFrom(finishedRecipe, Function.identity());
+    }
+
+    public static <I extends Item> Consumer<Supplier<I>> threeRowRecipe(Consumer<FinishedRecipe> recipeConsumer, I topItemReference, I middleItemReference, I bottomItemReference, int resultItemCount) {
+        return (resultItemSup) -> ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, resultItemSup.get(), resultItemCount)
+                .define('T', topItemReference)
+                .define('M', middleItemReference)
+                .define('B', bottomItemReference)
+                .pattern("TTT")
+                .pattern("MMM")
+                .pattern("BBB")
+                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(topItemReference), PredicateUtil.has(topItemReference))
+                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(middleItemReference), PredicateUtil.has(middleItemReference))
+                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(bottomItemReference), PredicateUtil.has(bottomItemReference))
+                .save(recipeConsumer);
+    }
+
+    public static <I extends Item> Consumer<Supplier<I>> threeRowRecipe(Consumer<FinishedRecipe> recipeConsumer, Item topItemReference, Item middleItemReference, Item bottomItemReference) {
+        return (resultItemSup) -> threeRowRecipe(recipeConsumer, topItemReference, middleItemReference, bottomItemReference, 1).accept((Supplier<Item>) resultItemSup);
+    }
+
     public static <B extends Block> Consumer<Supplier<B>> spawnEggFromFossilCrystal(Consumer<FinishedRecipe> finishedRecipe, ItemLike bucketItemLike, ItemLike powerChipItemLike, Function<B, ItemLike> resultComponentMapper, Function<ResourceLocation, ResourceLocation> recipeIdMapper) {
         return parentItemLikeSup -> {
             B parentItemLike = parentItemLikeSup.get();
@@ -105,7 +156,7 @@ public final class CARecipeTemplates {
         return spawnEggFromFossilLavaCrystal(finishedRecipe, Function.identity());
     }
 
-    public static <B extends Block> Consumer<Supplier<B>> spawnEggFromFossil(Consumer<FinishedRecipe> finishedRecipe, ItemLike bucketItemLike, ItemLike powerChipItemLike, Function<B, ItemLike> resultComponentMapper, Function<ResourceLocation, ResourceLocation> recipeIdMapper) {
+    public static <B extends Block> Consumer<Supplier<B>> spawnEggFromFossilIron(Consumer<FinishedRecipe> finishedRecipe, ItemLike bucketItemLike, ItemLike powerChipItemLike, Function<B, ItemLike> resultComponentMapper, Function<ResourceLocation, ResourceLocation> recipeIdMapper) {
         return parentItemLikeSup -> {
             B parentItemLike = parentItemLikeSup.get();
             ResourceLocation parentItemLikeId = DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(parentItemLike);
@@ -127,28 +178,42 @@ public final class CARecipeTemplates {
         };
     }
 
-    public static <B extends Block> Consumer<Supplier<B>> spawnEggFromFossilWater(Consumer<FinishedRecipe> finishedRecipe, Function<B, ItemLike> resultComponentMapper, Function<ResourceLocation, ResourceLocation> recipeIdMapper) {
-        return spawnEggFromFossil(finishedRecipe, Items.WATER_BUCKET, CAItems.ALUMINUM_POWER_CHIP.get(), resultComponentMapper, recipeIdMapper);
+    public static <B extends Block> Consumer<Supplier<B>> spawnEggFromFossilWaterIron(Consumer<FinishedRecipe> finishedRecipe, Function<B, ItemLike> resultComponentMapper, Function<ResourceLocation, ResourceLocation> recipeIdMapper) {
+        return spawnEggFromFossilIron(finishedRecipe, Items.WATER_BUCKET, CAItems.ALUMINUM_POWER_CHIP.get(), resultComponentMapper, recipeIdMapper);
     }
 
-    public static <B extends Block> Consumer<Supplier<B>> spawnEggFromFossilWater(Consumer<FinishedRecipe> finishedRecipe, Function<ResourceLocation, ResourceLocation> recipeIdMapper) {
-        return spawnEggFromFossilWater(finishedRecipe, findSpawnEgg(), recipeIdMapper);
+    public static <B extends Block> Consumer<Supplier<B>> spawnEggFromFossilWaterIron(Consumer<FinishedRecipe> finishedRecipe, Function<ResourceLocation, ResourceLocation> recipeIdMapper) {
+        return spawnEggFromFossilWaterIron(finishedRecipe, findSpawnEgg(), recipeIdMapper);
+    }
+
+    public static <B extends Block> Consumer<Supplier<B>> spawnEggFromFossilWaterIron(Consumer<FinishedRecipe> finishedRecipe) {
+        return spawnEggFromFossilWaterIron(finishedRecipe, Function.identity());
+    }
+
+    public static <B extends Block> Consumer<Supplier<B>> spawnEggFromFossilLavaIron(Consumer<FinishedRecipe> finishedRecipe, Function<B, ItemLike> resultComponentMapper, Function<ResourceLocation, ResourceLocation> recipeIdMapper) {
+        return spawnEggFromFossilIron(finishedRecipe, Items.LAVA_BUCKET, CAItems.ALUMINUM_POWER_CHIP.get(), resultComponentMapper, recipeIdMapper);
+    }
+
+    public static <B extends Block> Consumer<Supplier<B>> spawnEggFromFossilLavaIron(Consumer<FinishedRecipe> finishedRecipe, Function<ResourceLocation, ResourceLocation> recipeIdMapper) {
+        return spawnEggFromFossilLavaIron(finishedRecipe, findSpawnEgg(), recipeIdMapper);
+    }
+
+    public static <B extends Block> Consumer<Supplier<B>> spawnEggFromFossilLavaIron(Consumer<FinishedRecipe> finishedRecipe) {
+        return spawnEggFromFossilLavaIron(finishedRecipe, Function.identity());
     }
 
     public static <B extends Block> Consumer<Supplier<B>> spawnEggFromFossilWater(Consumer<FinishedRecipe> finishedRecipe) {
-        return spawnEggFromFossilWater(finishedRecipe, Function.identity());
-    }
-
-    public static <B extends Block> Consumer<Supplier<B>> spawnEggFromFossilLava(Consumer<FinishedRecipe> finishedRecipe, Function<B, ItemLike> resultComponentMapper, Function<ResourceLocation, ResourceLocation> recipeIdMapper) {
-        return spawnEggFromFossil(finishedRecipe, Items.LAVA_BUCKET, CAItems.ALUMINUM_POWER_CHIP.get(), resultComponentMapper, recipeIdMapper);
-    }
-
-    public static <B extends Block> Consumer<Supplier<B>> spawnEggFromFossilLava(Consumer<FinishedRecipe> finishedRecipe, Function<ResourceLocation, ResourceLocation> recipeIdMapper) {
-        return spawnEggFromFossilLava(finishedRecipe, findSpawnEgg(), recipeIdMapper);
+        return parentItemLikeSup -> {
+            spawnEggFromFossilWaterIron(finishedRecipe).accept((Supplier<Block>) parentItemLikeSup);
+            spawnEggFromFossilWaterCrystal(finishedRecipe).accept((Supplier<Block>) parentItemLikeSup);
+        };
     }
 
     public static <B extends Block> Consumer<Supplier<B>> spawnEggFromFossilLava(Consumer<FinishedRecipe> finishedRecipe) {
-        return spawnEggFromFossilLava(finishedRecipe, Function.identity());
+        return parentItemLikeSup -> {
+            spawnEggFromFossilLavaIron(finishedRecipe).accept((Supplier<Block>) parentItemLikeSup);
+            spawnEggFromFossilLavaCrystal(finishedRecipe).accept((Supplier<Block>) parentItemLikeSup);
+        };
     }
 
     public static <I extends Item> Consumer<Supplier<I>> popcornBagRecipe(Consumer<FinishedRecipe> finishedRecipe, Function<ResourceLocation, ResourceLocation> recipeIdMapper) {
@@ -250,5 +315,13 @@ public final class CARecipeTemplates {
 
             return foundSpawnEgg.get();
         };
+    }
+
+    public static <B extends Block> Consumer<Supplier<B>> crystalBlockRecipeFrom(Consumer<FinishedRecipe> finishedRecipe) {
+        return parentItemLikeSup -> RecipeUtil.materialBlockFrom(finishedRecipe, parentBlock -> RegistryUtil.getObjectFrom(parentBlock.asItem(), parentBlockId -> RegistryUtil.pickMaterialId(parentBlock::asItem, "_crystal")).orElse(null), Function.identity()).accept((Supplier<Block>) parentItemLikeSup);
+    }
+
+    public static <I extends Item> Consumer<Supplier<I>> lumpMaterialRecipe(Consumer<FinishedRecipe> finishedRecipe) {
+        return parentItemLikeSup -> RecipeUtil.materialFromBlock(finishedRecipe, parentLump -> BuiltInRegistries.BLOCK.getOptional(DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(parentLump).withPath(p -> p.replace("_lump", "_block"))).orElse(null), Function.identity()).accept((Supplier<Item>) parentItemLikeSup);
     }
 }

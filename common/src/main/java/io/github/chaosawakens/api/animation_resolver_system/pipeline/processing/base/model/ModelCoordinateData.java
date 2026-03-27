@@ -244,6 +244,8 @@ public class ModelCoordinateData {
         double rootZTranslation = (getOriginZ() - getPivotZ()) * getScaleZ();
 
         transformationMatrix.translate(originX, originY, originZ);
+
+        
     }
 
     protected void updateOBBData() {
@@ -256,6 +258,25 @@ public class ModelCoordinateData {
 
     @Override
     public boolean equals(Object obj) {
-        return super.equals(obj);
+        if (!(obj instanceof ModelCoordinateData other)) return false;
+
+        return Double.compare(other.minX, minX) == 0
+                && Double.compare(other.minY, minY) == 0
+                && Double.compare(other.minZ, minZ) == 0
+                && Double.compare(other.maxX, maxX) == 0
+                && Double.compare(other.maxY, maxY) == 0
+                && Double.compare(other.maxZ, maxZ) == 0
+                && Double.compare(other.originX, originX) == 0
+                && Double.compare(other.originY, originY) == 0
+                && Double.compare(other.originZ, originZ) == 0
+                && Double.compare(other.pivotX, pivotX) == 0
+                && Double.compare(other.pivotY, pivotY) == 0
+                && Double.compare(other.pivotZ, pivotZ) == 0
+                && Double.compare(other.rotationX, rotationX) == 0
+                && Double.compare(other.rotationY, rotationY) == 0
+                && Double.compare(other.rotationZ, rotationZ) == 0
+                && Double.compare(other.scaleX, scaleX) == 0
+                && Double.compare(other.scaleY, scaleY) == 0
+                && Double.compare(other.scaleZ, scaleZ) == 0;
     }
 }

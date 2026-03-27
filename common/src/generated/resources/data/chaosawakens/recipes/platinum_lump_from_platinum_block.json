@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "chaosawakens:platinum_block"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "item": "chaosawakens:platinum_lump"
+  }
+}

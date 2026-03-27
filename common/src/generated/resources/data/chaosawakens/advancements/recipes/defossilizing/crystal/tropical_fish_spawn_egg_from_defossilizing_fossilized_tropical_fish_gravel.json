@@ -1,0 +1,22 @@
+{
+  "criteria": {
+    "has_fossilized_tropical_fish_gravel": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "chaosawakens:fossilized_tropical_fish_gravel"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_fossilized_tropical_fish_gravel"
+    ]
+  ],
+  "sends_telemetry_event": false
+}

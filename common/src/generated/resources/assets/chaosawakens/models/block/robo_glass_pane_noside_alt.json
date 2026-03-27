@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/template_glass_pane_noside_alt",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "pane": "chaosawakens:block/robo/robo_glass"
+  }
+}

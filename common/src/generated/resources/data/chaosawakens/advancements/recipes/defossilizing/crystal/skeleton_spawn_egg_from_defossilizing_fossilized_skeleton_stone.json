@@ -1,0 +1,22 @@
+{
+  "criteria": {
+    "has_fossilized_skeleton_stone": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "chaosawakens:fossilized_skeleton_stone"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_fossilized_skeleton_stone"
+    ]
+  ],
+  "sends_telemetry_event": false
+}

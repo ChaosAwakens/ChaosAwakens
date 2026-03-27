@@ -6,6 +6,7 @@ import com.mememan.nexus.template.property_wrapper.BlockEntityTypePropertyWrappe
 import io.github.chaosawakens.CAConstants;
 import io.github.chaosawakens.content.block_entity.defossilizer.CrystalDefossilizerBlockEntity;
 import io.github.chaosawakens.content.block_entity.defossilizer.IronDefossilizerBlockEntity;
+import io.github.chaosawakens.content.block_entity.robo.RoboCrateBlockEntity;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -21,6 +22,10 @@ public final class CABlockEntityTypes {
             .build(null), BLOCK_ENTITY_TYPES);
     public static final Supplier<BlockEntityType<CrystalDefossilizerBlockEntity>> CRYSTAL_DEFOSSILIZER = BlockEntityTypePropertyWrapperTemplates.registerBlockEntityType(CAConstants.prefix("crystal_defossilizer"), () -> BlockEntityType.Builder
             .of(CrystalDefossilizerBlockEntity::new, CABlocks.CRYSTAL_DEFOSSILIZER.get())
+            .build(null), BLOCK_ENTITY_TYPES);
+
+    public static final Supplier<BlockEntityType<RoboCrateBlockEntity>> ROBO_CRATE = BlockEntityTypePropertyWrapperTemplates.registerBlockEntityType(CAConstants.prefix("robo_crate"), () -> BlockEntityType.Builder
+            .of(RoboCrateBlockEntity::new, CABlocks.ROBO_CRATE.get())
             .build(null), BLOCK_ENTITY_TYPES);
 
     public static ImmutableList<Supplier<BlockEntityType<BlockEntity>>> getBlockEntityTypes() {

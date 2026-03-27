@@ -1,0 +1,27 @@
+{
+  "values": [
+    "#chaosawakens:stone/base_stone_crystalworld",
+    "#chaosawakens:stone/base_stone_mining_paradise",
+    "#chaosawakens:stone/base_stone_village_mania",
+    "#minecraft:base_stone_nether",
+    "#minecraft:base_stone_overworld",
+    "#minecraft:cave_vines",
+    "#minecraft:crops",
+    "#minecraft:dirt",
+    "#minecraft:flowers",
+    "#minecraft:ice",
+    "#minecraft:leaves",
+    "#minecraft:sand",
+    "minecraft:big_dripleaf",
+    "minecraft:clay",
+    "minecraft:dripstone_block",
+    "minecraft:gravel",
+    "minecraft:magma_block",
+    "minecraft:pointed_dripstone",
+    "minecraft:sandstone",
+    "minecraft:small_dripleaf",
+    "minecraft:soul_sand",
+    "minecraft:soul_soil",
+    "minecraft:suspicious_gravel"
+  ]
+}

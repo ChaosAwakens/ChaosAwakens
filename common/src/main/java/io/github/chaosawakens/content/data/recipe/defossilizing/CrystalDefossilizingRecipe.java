@@ -13,8 +13,8 @@ import java.util.function.Predicate;
 
 public class CrystalDefossilizingRecipe extends AbstractDefossilizingRecipe {
 
-    public CrystalDefossilizingRecipe(ResourceLocation recipeId, Ingredient bucketIngredient, Ingredient fossilizedIngredient, Ingredient powerChipIngredient, ItemStack defossilizedResult, int defossilizationTime, float experience) {
-        super(recipeId, DefossilizationCategory.CRYSTAL, bucketIngredient, fossilizedIngredient, powerChipIngredient, defossilizedResult, defossilizationTime, experience);
+    public CrystalDefossilizingRecipe(ResourceLocation recipeId, AbstractDefossilizingRecipe.DefossilizationCategory category, Ingredient bucketIngredient, Ingredient fossilizedIngredient, Ingredient powerChipIngredient, ItemStack defossilizedResult, int defossilizationTime, float experience) {
+        super(recipeId, category, bucketIngredient, fossilizedIngredient, powerChipIngredient, defossilizedResult, defossilizationTime, experience);
     }
 
     @Override

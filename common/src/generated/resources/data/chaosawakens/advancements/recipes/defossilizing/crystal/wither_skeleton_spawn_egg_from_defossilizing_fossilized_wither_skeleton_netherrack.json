@@ -1,0 +1,22 @@
+{
+  "criteria": {
+    "has_fossilized_wither_skeleton_netherrack": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "chaosawakens:fossilized_wither_skeleton_netherrack"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_fossilized_wither_skeleton_netherrack"
+    ]
+  ],
+  "sends_telemetry_event": false
+}

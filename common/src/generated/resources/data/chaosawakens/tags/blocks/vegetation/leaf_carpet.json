@@ -1,11 +1,18 @@
 {
   "values": [
+    "chaosawakens:acacia_leaf_carpet",
     "chaosawakens:apple_leaf_carpet",
+    "chaosawakens:birch_leaf_carpet",
+    "chaosawakens:cherry_leaf_carpet",
+    "chaosawakens:dark_oak_leaf_carpet",
     "chaosawakens:densewood_leaf_carpet",
     "chaosawakens:duplicator_leaf_carpet",
     "chaosawakens:ginkgo_leaf_carpet",
+    "chaosawakens:mangrove_leaf_carpet",
     "chaosawakens:mesozoic_leaf_carpet",
+    "chaosawakens:oak_leaf_carpet",
     "chaosawakens:peach_leaf_carpet",
-    "chaosawakens:skywood_leaf_carpet"
+    "chaosawakens:skywood_leaf_carpet",
+    "chaosawakens:spruce_leaf_carpet"
   ]
 }

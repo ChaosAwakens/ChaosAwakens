@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "L": {
+      "item": "minecraft:spruce_leaves"
+    }
+  },
+  "pattern": [
+    "LL"
+  ],
+  "result": {
+    "item": "chaosawakens:spruce_leaf_carpet"
+  },
+  "show_notification": true
+}

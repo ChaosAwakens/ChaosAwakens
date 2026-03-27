@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "L": {
+      "item": "chaosawakens:duplicator_leaves"
+    }
+  },
+  "pattern": [
+    "LL"
+  ],
+  "result": {
+    "item": "chaosawakens:duplicator_leaf_carpet"
+  },
+  "show_notification": true
+}

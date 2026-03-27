@@ -1,15 +1,25 @@
 {
   "values": [
+    "chaosawakens:big_carnivorous_plant",
     "chaosawakens:blue_bulb",
+    "chaosawakens:blue_crystal_flower",
+    "chaosawakens:crystal_rose",
     "chaosawakens:cyan_rose",
     "chaosawakens:daisy",
     "chaosawakens:dense_orchid",
     "chaosawakens:dense_rose",
+    "chaosawakens:green_crystal_flower",
+    "chaosawakens:luminara_petal",
+    "chaosawakens:orange_crystal_flower",
     "chaosawakens:paeonia",
     "chaosawakens:pink_bulb",
+    "chaosawakens:pink_crystal_flower",
     "chaosawakens:primrose",
     "chaosawakens:purple_bulb",
+    "chaosawakens:red_crystal_flower",
     "chaosawakens:red_rose",
-    "chaosawakens:swamp_milkweed"
+    "chaosawakens:small_carnivorous_plant",
+    "chaosawakens:swamp_milkweed",
+    "chaosawakens:yellow_crystal_flower"
   ]
 }

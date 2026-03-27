@@ -1,0 +1,16 @@
+{
+  "type": "chaosawakens:crystal_defossilizing",
+  "bucket_ingredient": {
+    "item": "minecraft:water_bucket"
+  },
+  "category": "crystal",
+  "defossilizing_time": 200,
+  "experience": 1.0,
+  "fossilized_ingredient": {
+    "item": "chaosawakens:fossilized_rabbit_gloomstone"
+  },
+  "power_chip_ingredient": {
+    "item": "chaosawakens:aluminum_power_chip"
+  },
+  "result": "minecraft:rabbit_spawn_egg"
+}

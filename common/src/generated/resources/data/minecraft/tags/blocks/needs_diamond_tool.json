@@ -1,6 +1,8 @@
 {
   "values": [
     "chaosawakens:basilisk_scale_block",
+    "chaosawakens:compact_robo_block",
+    "chaosawakens:double_compact_robo_block",
     "chaosawakens:emperor_scorpion_scale_block",
     "chaosawakens:ender_dragon_scale_block",
     "chaosawakens:ender_eye_block",
@@ -9,7 +11,9 @@
     "chaosawakens:mobzilla_scale_block",
     "chaosawakens:moth_scale_block",
     "chaosawakens:nightmare_scale_block",
+    "chaosawakens:platinum_block",
     "chaosawakens:queen_scale_block",
+    "chaosawakens:robo_bars",
     "chaosawakens:robo_block_a",
     "chaosawakens:robo_block_l",
     "chaosawakens:robo_block_x",
@@ -17,6 +21,8 @@
     "chaosawakens:robo_brick_stairs",
     "chaosawakens:robo_brick_wall",
     "chaosawakens:robo_bricks",
+    "chaosawakens:robo_crate",
+    "chaosawakens:robo_lamp",
     "chaosawakens:robo_pillar",
     "chaosawakens:robo_slab_a",
     "chaosawakens:robo_slab_l",

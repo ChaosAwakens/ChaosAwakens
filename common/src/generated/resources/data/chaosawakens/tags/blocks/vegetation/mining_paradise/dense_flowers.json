@@ -1,9 +1,14 @@
 {
   "values": [
+    "chaosawakens:alstroemeriat",
+    "chaosawakens:big_carnivorous_plant",
     "chaosawakens:blue_bulb",
     "chaosawakens:dense_orchid",
     "chaosawakens:dense_rose",
+    "chaosawakens:luminara_petal",
     "chaosawakens:pink_bulb",
-    "chaosawakens:purple_bulb"
+    "chaosawakens:purple_bulb",
+    "chaosawakens:small_carnivorous_plant",
+    "chaosawakens:thorny_sun"
   ]
 }

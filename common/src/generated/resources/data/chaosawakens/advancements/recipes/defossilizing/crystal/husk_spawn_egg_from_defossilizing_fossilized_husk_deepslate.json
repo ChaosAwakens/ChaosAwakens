@@ -1,0 +1,22 @@
+{
+  "criteria": {
+    "has_fossilized_husk_deepslate": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "chaosawakens:fossilized_husk_deepslate"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_fossilized_husk_deepslate"
+    ]
+  ],
+  "sends_telemetry_event": false
+}

@@ -1,6 +1,7 @@
 {
   "values": [
     "chaosawakens:dense_dirt",
+    "chaosawakens:dense_farmland",
     "chaosawakens:dense_grass_block",
     "chaosawakens:fossilized_cod_gravel",
     "chaosawakens:fossilized_cod_sand",
@@ -33,6 +34,8 @@
     "chaosawakens:fossilized_wood_fish_gravel",
     "chaosawakens:fossilized_wood_fish_sand",
     "chaosawakens:latosol",
-    "chaosawakens:salt_block"
+    "chaosawakens:salt_block",
+    "chaosawakens:terra_preta",
+    "chaosawakens:terra_preta_farmland"
   ]
 }

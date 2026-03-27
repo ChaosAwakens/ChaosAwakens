@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "chaosawakens:block/robo/double_compact_robo_block_top",
+    "side": "chaosawakens:block/robo/double_compact_robo_block"
+  }
+}

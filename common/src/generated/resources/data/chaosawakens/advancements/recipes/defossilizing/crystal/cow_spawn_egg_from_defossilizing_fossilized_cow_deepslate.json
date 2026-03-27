@@ -1,0 +1,22 @@
+{
+  "criteria": {
+    "has_fossilized_cow_deepslate": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "chaosawakens:fossilized_cow_deepslate"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_fossilized_cow_deepslate"
+    ]
+  ],
+  "sends_telemetry_event": false
+}

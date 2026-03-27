@@ -1,0 +1,22 @@
+{
+  "criteria": {
+    "has_fossilized_tropical_fish_sand": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "chaosawakens:fossilized_tropical_fish_sand"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_fossilized_tropical_fish_sand"
+    ]
+  ],
+  "sends_telemetry_event": false
+}

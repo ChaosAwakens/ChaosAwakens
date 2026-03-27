@@ -1,0 +1,22 @@
+{
+  "criteria": {
+    "has_fossilized_llama_stone": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "chaosawakens:fossilized_llama_stone"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_fossilized_llama_stone"
+    ]
+  ],
+  "sends_telemetry_event": false
+}

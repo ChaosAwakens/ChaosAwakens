@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "half=lower": {
+      "model": "chaosawakens:block/dense_rose_bush_bottom"
+    },
+    "half=upper": {
+      "model": "chaosawakens:block/dense_rose_bush_top"
+    }
+  }
+}

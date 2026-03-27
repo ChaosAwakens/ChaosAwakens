@@ -1,0 +1,22 @@
+{
+  "criteria": {
+    "has_fossilized_witch_deepslate": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "chaosawakens:fossilized_witch_deepslate"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_fossilized_witch_deepslate"
+    ]
+  ],
+  "sends_telemetry_event": false
+}

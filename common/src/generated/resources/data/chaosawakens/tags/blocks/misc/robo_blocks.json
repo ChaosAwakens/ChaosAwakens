@@ -1,5 +1,8 @@
 {
   "values": [
+    "chaosawakens:compact_robo_block",
+    "chaosawakens:double_compact_robo_block",
+    "chaosawakens:robo_bars",
     "chaosawakens:robo_block_a",
     "chaosawakens:robo_block_l",
     "chaosawakens:robo_block_x",
@@ -7,6 +10,11 @@
     "chaosawakens:robo_brick_stairs",
     "chaosawakens:robo_brick_wall",
     "chaosawakens:robo_bricks",
+    "chaosawakens:robo_crate",
+    "chaosawakens:robo_gate_block",
+    "chaosawakens:robo_glass",
+    "chaosawakens:robo_glass_pane",
+    "chaosawakens:robo_lamp",
     "chaosawakens:robo_pillar",
     "chaosawakens:robo_slab_a",
     "chaosawakens:robo_slab_l",

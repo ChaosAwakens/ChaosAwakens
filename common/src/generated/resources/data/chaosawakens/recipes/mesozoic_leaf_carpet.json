@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "L": {
+      "item": "chaosawakens:mesozoic_leaves"
+    }
+  },
+  "pattern": [
+    "LL"
+  ],
+  "result": {
+    "item": "chaosawakens:mesozoic_leaf_carpet"
+  },
+  "show_notification": true
+}

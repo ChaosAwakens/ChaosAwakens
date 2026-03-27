@@ -1,0 +1,22 @@
+{
+  "criteria": {
+    "has_fossilized_piglin_netherrack": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "chaosawakens:fossilized_piglin_netherrack"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_fossilized_piglin_netherrack"
+    ]
+  ],
+  "sends_telemetry_event": false
+}

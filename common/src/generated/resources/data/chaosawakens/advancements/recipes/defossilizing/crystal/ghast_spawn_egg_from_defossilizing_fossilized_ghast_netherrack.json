@@ -1,0 +1,22 @@
+{
+  "criteria": {
+    "has_fossilized_ghast_netherrack": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "chaosawakens:fossilized_ghast_netherrack"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_fossilized_ghast_netherrack"
+    ]
+  ],
+  "sends_telemetry_event": false
+}

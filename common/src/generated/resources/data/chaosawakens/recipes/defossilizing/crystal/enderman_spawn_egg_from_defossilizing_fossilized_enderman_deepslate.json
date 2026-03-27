@@ -1,0 +1,16 @@
+{
+  "type": "chaosawakens:crystal_defossilizing",
+  "bucket_ingredient": {
+    "item": "minecraft:water_bucket"
+  },
+  "category": "crystal",
+  "defossilizing_time": 200,
+  "experience": 1.0,
+  "fossilized_ingredient": {
+    "item": "chaosawakens:fossilized_enderman_deepslate"
+  },
+  "power_chip_ingredient": {
+    "item": "chaosawakens:aluminum_power_chip"
+  },
+  "result": "minecraft:enderman_spawn_egg"
+}

@@ -11,6 +11,8 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Locale;
+
 public record DefossilizingRecipeSerializer<ADR extends AbstractDefossilizingRecipe>(FossilCache<ADR> fossilCache, int defaultDefossilizationTime) implements RecipeSerializer<ADR> {
 
     @Override
@@ -24,7 +26,9 @@ public record DefossilizingRecipeSerializer<ADR extends AbstractDefossilizingRec
         float earnedXp = GsonHelper.getAsFloat(recipeJson, "experience", 0.0F);
         int defossilizationTime = GsonHelper.getAsInt(recipeJson, "defossilizing_time", this.defaultDefossilizationTime);
 
-        return this.fossilCache.create(recipeId, bucketIngredient, fossilizedIngredient, powerChipIngredient, resultStack, defossilizationTime, earnedXp);
+        AbstractDefossilizingRecipe.DefossilizationCategory category = AbstractDefossilizingRecipe.DefossilizationCategory.valueOf(GsonHelper.getAsString(recipeJson, "category").toUpperCase(Locale.ROOT));
+
+        return this.fossilCache.create(recipeId, category, bucketIngredient, fossilizedIngredient, powerChipIngredient, resultStack, defossilizationTime, earnedXp);
     }
 
     @Override
@@ -35,8 +39,9 @@ public record DefossilizingRecipeSerializer<ADR extends AbstractDefossilizingRec
         ItemStack defossilizedResult = buf.readItem();
         int defossilizationTime = buf.readVarInt();
         float experience = buf.readFloat();
+        AbstractDefossilizingRecipe.DefossilizationCategory category = AbstractDefossilizingRecipe.DefossilizationCategory.valueOf(buf.readUtf());
 
-        return this.fossilCache.create(recipeId, bucketIngredient, fossilizedIngredient, powerChipIngredient, defossilizedResult, defossilizationTime, experience);
+        return this.fossilCache.create(recipeId, category, bucketIngredient, fossilizedIngredient, powerChipIngredient, defossilizedResult, defossilizationTime, experience);
     }
 
     @Override
@@ -48,11 +53,12 @@ public record DefossilizingRecipeSerializer<ADR extends AbstractDefossilizingRec
         buf.writeItem(recipeObject.getDefossilizedResult());
         buf.writeVarInt(recipeObject.getDefossilizationTime());
         buf.writeFloat(recipeObject.getExperience());
+        buf.writeUtf(recipeObject.getDefossilizationCategory().name());
     }
 
     @FunctionalInterface
     public interface FossilCache<ADR extends AbstractDefossilizingRecipe> {
 
-        ADR create(ResourceLocation recipeId, Ingredient bucketIngredient, Ingredient fossilizedIngredient, Ingredient powerChipIngredient, ItemStack defossilizedResult, int defossilizationTime, float experience);
+        ADR create(ResourceLocation recipeId, AbstractDefossilizingRecipe.DefossilizationCategory category, Ingredient bucketIngredient, Ingredient fossilizedIngredient, Ingredient powerChipIngredient, ItemStack defossilizedResult, int defossilizationTime, float experience);
     }
 }
