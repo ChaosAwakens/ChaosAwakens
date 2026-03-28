@@ -19,17 +19,17 @@ public final class CAStats {
 
     public static final Supplier<ResourceLocation> INTERACT_WITH_IRON_DEFOSSILIZER = new SpecializedLanguagePropertyWrapper<>(registerCustomStatType("interact_with_iron_defossilizer"), CAConstants.MOD_ID)
             .builder()
-            .withAdditionalLocalizationKey("stat.chaosawakens.interact_with_iron_defossilizer", "Iron Defossilizer Interactions")
+            .withAdditionalLocalizationKey("stat.chaosawakens.interact_with_iron_defossilizer", "Interactions with Iron Defossilizer")
             .buildAndGet(); // TODO Custom PW stuff (for both stat types and custom stats)
     public static final Supplier<ResourceLocation> INTERACT_WITH_CRYSTAL_DEFOSSILIZER = new SpecializedLanguagePropertyWrapper<>(registerCustomStatType("interact_with_crystal_defossilizer"), CAConstants.MOD_ID)
             .builder()
-            .withAdditionalLocalizationKey("stat.chaosawakens.interact_with_crystal_defossilizer", "Crystal Defossilizer Interactions")
-            .buildAndGet(); // TODO Custom PW stuff (for both stat types and custom stats)
+            .withAdditionalLocalizationKey("stat.chaosawakens.interact_with_crystal_defossilizer", "Interactions with Crystal Defossilizer")
+            .buildAndGet();
 
     public static final Supplier<ResourceLocation> OPEN_ROBO_CRATE = new SpecializedLanguagePropertyWrapper<>(registerCustomStatType("open_robo_crate"), CAConstants.MOD_ID)
             .builder()
             .withAdditionalLocalizationKey("stat.chaosawakens.open_robo_crate", "Robo Crates Opened")
-            .buildAndGet(); // TODO Custom PW stuff (for both stat types and custom stats)
+            .buildAndGet();
 
     private static Supplier<ResourceLocation> registerCustomStatType(ResourceLocation statId, Supplier<ResourceLocation> statKey, @Nullable StatFormatter statFormatter) {
         Supplier<ResourceLocation> registeredStatKey = NexusServices.REGISTRAR.registerObject(statId, statKey, BuiltInRegistries.CUSTOM_STAT);

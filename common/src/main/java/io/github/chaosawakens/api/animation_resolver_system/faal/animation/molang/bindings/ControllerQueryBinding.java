@@ -47,7 +47,7 @@ public class ControllerQueryBinding<A extends Animatable, AC extends AnimationCo
     }
 
     @Override
-    public void flag(@Nullable Object flag) {
+    public void flag(@Nullable Object flag) { // Looks to be unused for now within Mocha, anyway
         throw new UnsupportedOperationException("ControllerQueryBinding does not support flags");
     }
 
@@ -71,7 +71,7 @@ public class ControllerQueryBinding<A extends Animatable, AC extends AnimationCo
     @NotNull
     public static <A extends Animatable> MochaEngine<AnimationController<A>> bindDefault(@NotNull AnimationController<A> targetController) {
         return bindTo(targetController, (queryBinding) -> {
-            queryBinding.setFunction("anim_time", input -> targetController.getTickProgress(null));
+            queryBinding.setFunction("anim_time", input -> targetController.getTickProgress());
             queryBinding.setFunction("life_time", input -> targetController.getOwner().getAge());
         });
     }
@@ -79,10 +79,8 @@ public class ControllerQueryBinding<A extends Animatable, AC extends AnimationCo
     @NotNull
     public static <A extends Animatable> MochaEngine<AnimationController<A>> bindAuthoritative(@NotNull AnimationController<A> targetController) {
         return bindTo(targetController, (queryBinding) -> { // TODO Maybe chain?
-            queryBinding.setFunction("anim_time", input -> targetController.getTickProgress(null));
+            queryBinding.setFunction("anim_time", input -> targetController.getTickProgress());
             queryBinding.setFunction("life_time", input -> targetController.getOwner().getAge());
         });
     }
-    
-
 }

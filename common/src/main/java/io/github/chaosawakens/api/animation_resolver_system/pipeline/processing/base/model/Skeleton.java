@@ -21,4 +21,8 @@ public interface Skeleton { // Topological + Upward Traversal
     void refresh(ModelInfo updatedModelInfo);
 
     boolean isColliding(Skeleton other);
+
+    default ModelCoordinateData getCoordinateData() {
+        return null; // TODO Impl
+    }
 }

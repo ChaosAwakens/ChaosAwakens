@@ -8,4 +8,5 @@ public class ChaosAwakensForge {
     public ChaosAwakensForge() {
         ChaosAwakens.initialize();
     }
+
 }

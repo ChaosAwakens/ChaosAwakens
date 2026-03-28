@@ -1,18 +1,16 @@
 package io.github.chaosawakens.content.registry;
 
 import com.mememan.nexus.asm.annotations.RegistrarEntry;
-import com.mememan.nexus.platform.NexusServices;
+import com.mememan.nexus.loader.ModSide;
 import io.github.chaosawakens.content.client.screen.defossilizer.CrystalDefossilizerScreen;
 import io.github.chaosawakens.content.client.screen.defossilizer.IronDefossilizerScreen;
 import net.minecraft.client.gui.screens.MenuScreens;
 
-@RegistrarEntry(priority = -1)
+@RegistrarEntry(priority = -1, initSide = ModSide.CLIENT)
 public final class CAMenuScreens {
 
     static {
-        if (NexusServices.PLATFORM_MANAGER.getEnvironmentSide().isClient()) {
-            MenuScreens.register(CAMenuTypes.IRON_DEFOSSILIZER.get(), IronDefossilizerScreen::new);
-            MenuScreens.register(CAMenuTypes.CRYSTAL_DEFOSSILIZER.get(), CrystalDefossilizerScreen::new);
-        }
+        MenuScreens.register(CAMenuTypes.IRON_DEFOSSILIZER.get(), IronDefossilizerScreen::new);
+        MenuScreens.register(CAMenuTypes.CRYSTAL_DEFOSSILIZER.get(), CrystalDefossilizerScreen::new);
     }
 }

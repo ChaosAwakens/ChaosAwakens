@@ -4,6 +4,8 @@ package io.github.chaosawakens.api.animation_resolver_system.faal.controller;
  * IDLE - Inactive
  * TRANSITIONING - Transition ticks (0 - 1 across literal ticks on the server)
  * TICKING - Tick animation ticks
+ * <br></br>
+ * Animations should be responsible for managing only their own states.
  */
 @FunctionalInterface
 public interface ControllerState {

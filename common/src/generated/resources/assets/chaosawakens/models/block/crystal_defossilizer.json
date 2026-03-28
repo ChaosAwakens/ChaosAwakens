@@ -2,7 +2,7 @@
   "parent": "minecraft:block/orientable",
   "textures": {
     "front": "chaosawakens:block/machine/defossilizer/crystal/crystal_defossilizer",
-    "side": "chaosawakens:crystal_defossilizer_side",
-    "top": "chaosawakens:crystal_defossilizer_top"
+    "side": "chaosawakens:block/machine/defossilizer/crystal/crystal_defossilizer_side",
+    "top": "chaosawakens:block/machine/defossilizer/crystal/crystal_defossilizer_top"
   }
 }

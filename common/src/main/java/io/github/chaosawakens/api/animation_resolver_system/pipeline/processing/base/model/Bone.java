@@ -9,6 +9,10 @@ public interface Bone {
 
     List<Cube> getCubeBBs();
 
+    default ModelCoordinateData getCoordinateData() {
+        return null; // TODO Impl
+    }
+
     default boolean isHomogeneous() {
         return getCubeBBs().isEmpty() || getCubeBBs().stream().noneMatch(Cube::isEnabled);
     }

@@ -4,6 +4,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import team.unnamed.mocha.runtime.value.ObjectProperty;
 import team.unnamed.mocha.runtime.value.ObjectValue;
+import team.unnamed.mocha.runtime.value.Value;
 import team.unnamed.mocha.util.CaseInsensitiveStringHashMap;
 
 import java.util.Map;
@@ -23,4 +24,13 @@ public class AuthoritativeMolangQueries implements ObjectValue {
         return queries.get(name);
     }
 
+    @Override
+    public boolean set(@NotNull String name, @Nullable Value value) {
+        if (value == null) {
+            queries.remove(name);
+            return true;
+        }
+
+        return queries.put(name, ObjectProperty.property(value, false)) == null;
+    }
 }

@@ -455,6 +455,7 @@
   "block.chaosawakens.horsetail_restio": "Horsetail Restio",
   "block.chaosawakens.iron_defossilizer": "Iron Defossilizer",
   "block.chaosawakens.jungle_gate_block": "Jungle Gate Block",
+  "block.chaosawakens.jungle_leaf_carpet": "Jungle Leaf Carpet",
   "block.chaosawakens.king_protea": "King Protea",
   "block.chaosawakens.kunzite_block": "Kunzite Block",
   "block.chaosawakens.kyanite": "Kyanite",
@@ -899,7 +900,7 @@
   "painting_variant.chaosawakens.underwater": "Underwater",
   "painting_variant.chaosawakens.village": "Village",
   "painting_variant.chaosawakens.village_night": "Village Night",
-  "stat.chaosawakens.interact_with_crystal_defossilizer": "Crystal Defossilizer Interactions",
-  "stat.chaosawakens.interact_with_iron_defossilizer": "Iron Defossilizer Interactions",
+  "stat.chaosawakens.interact_with_crystal_defossilizer": "Interactions with Crystal Defossilizer",
+  "stat.chaosawakens.interact_with_iron_defossilizer": "Interactions with Iron Defossilizer",
   "stat.chaosawakens.open_robo_crate": "Robo Crates Opened"
 }

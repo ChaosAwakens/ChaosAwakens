@@ -10,6 +10,7 @@ import com.mememan.nexus.util.RegistryUtil;
 import io.github.chaosawakens.content.registry.CACreativeModeTabs;
 import io.github.chaosawakens.content.registry.CATags;
 import io.github.chaosawakens.util.StringUtil;
+import io.github.chaosawakens.util.VanillaUtil;
 import it.unimi.dsi.fastutil.Pair;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import it.unimi.dsi.fastutil.objects.ObjectObjectImmutablePair;
@@ -172,6 +173,12 @@ public final class CABPWTemplates {
             .withTag(CATags.CABlockTags.LEAF_CARPETS::get)
             .withAdditionalTag(CATags.CAItemTags.LEAF_CARPETS::get)
             .withLootTable(LootUtil::dropMultiFace)
+            .build();
+
+    public static final BlockPropertyWrapper<Block> LEAF_CARPET_VANILLA = new BlockPropertyWrapper<>()
+            .builder()
+            .copyFrom(LEAF_CARPET)
+            .withBlockColor(VanillaUtil::standardLeavesColor)
             .build();
 
     public static final BlockPropertyWrapper<Block> PETAL_BLOCK = new BlockPropertyWrapper<>()
