@@ -38,8 +38,9 @@ public class CAMultiNoiseBiomeSourceParameterLists {
 
     @RegistrarEntry
     public static class Presets {
-        public static final Supplier<MultiNoiseBiomeSourceParameterList.Preset> MINING_PARADISE_BIOME_SOURCE_PRESET = registerBiomeSourceParameterListPreset(CAConstants.prefix("mining_paradise"), () -> new MultiNoiseBiomeSourceParameterList.Preset(CAConstants.prefix("mining_paradise"), MiningParadiseDimensionConfig::generateMiningParadiseBiomes));
         private static final ObjectArrayList<Supplier<MultiNoiseBiomeSourceParameterList.Preset>> MULTI_NOISE_BIOME_SOURCE_PARAMETER_LIST_PRESETS = new ObjectArrayList<>();
+
+        public static final Supplier<MultiNoiseBiomeSourceParameterList.Preset> MINING_PARADISE_BIOME_SOURCE_PRESET = registerBiomeSourceParameterListPreset(CAConstants.prefix("mining_paradise"), () -> new MultiNoiseBiomeSourceParameterList.Preset(CAConstants.prefix("mining_paradise"), MiningParadiseDimensionConfig::generateMiningParadiseBiomes));
 
         private static Supplier<MultiNoiseBiomeSourceParameterList.Preset> registerBiomeSourceParameterListPreset(ResourceLocation presetId, Supplier<MultiNoiseBiomeSourceParameterList.Preset> presetSup) {
             MultiNoiseBiomeSourceParameterList.Preset.BY_NAME = Util.make(MultiNoiseBiomeSourceParameterList.Preset.BY_NAME, (hardcodedPresetMap) -> hardcodedPresetMap.putIfAbsent(presetId, presetSup.get()));

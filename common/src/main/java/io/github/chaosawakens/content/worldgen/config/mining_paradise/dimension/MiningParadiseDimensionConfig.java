@@ -39,6 +39,22 @@ public class MiningParadiseDimensionConfig implements DimensionLevelStemConfig {
     public MiningParadiseDimensionConfig() {
     }
 
+    @Override
+    public @NotNull Supplier<ResourceKey<DimensionType>> getParentDimensionType() {
+        return CADimensions.MINING_PARADISE_DIMENSION_TYPE;
+    }
+
+    @Override
+    public @NotNull ChunkGenerator createLevelChunkGen(BootstapContext<LevelStem> regCtx) {
+        HolderGetter<NoiseGeneratorSettings> noiseGenSettingsLookup = regCtx.lookup(Registries.NOISE_SETTINGS);
+        HolderGetter<MultiNoiseBiomeSourceParameterList> biomeSrcParamListLookup = regCtx.lookup(Registries.MULTI_NOISE_BIOME_SOURCE_PARAMETER_LIST);
+
+        BiomeSource src = MultiNoiseBiomeSource.createFromPreset(biomeSrcParamListLookup.getOrThrow(CAMultiNoiseBiomeSourceParameterLists.MINING_PARADISE_BIOME_LIST.get()));
+        Holder.Reference<NoiseGeneratorSettings> settings = noiseGenSettingsLookup.getOrThrow(CANoiseGeneratorSettings.MINING_PARADISE.get());
+
+        return new OptimizedNoiseBasedChunkGenerator(src, settings);
+    }
+
     public static DimensionType createDimensionType() {
         return new DimensionType(OptionalLong.empty(), true, false, false, true, 1.0D, true, false, -128, 640, 512, BlockTags.INFINIBURN_OVERWORLD, BuiltinDimensionTypes.OVERWORLD_EFFECTS, 0.0F, new DimensionType.MonsterSettings(false, false, ConstantInt.of(4), 0));
     }
@@ -136,7 +152,7 @@ public class MiningParadiseDimensionConfig implements DimensionLevelStemConfig {
                         DensityFunctions.interpolated(
                                 DensityFunctions.blendDensity(
                                         DensityFunctions.add(DensityFunctions.constant(0.1171875F),
-                                                DensityFunctions.mul(DensityFunctions.yClampedGradient(-128, -104, 0D, 1D),
+                                                DensityFunctions.mul( DensityFunctions.yClampedGradient(-128, -104, 0D, 1D),
                                                         DensityFunctions.add(DensityFunctions.constant(-0.1171875F),
                                                                 DensityFunctions.add(DensityFunctions.constant(-0.078125F),
                                                                         DensityFunctions.mul(DensityFunctions.yClampedGradient(338, 364, 1D, 0D),
@@ -157,7 +173,7 @@ public class MiningParadiseDimensionConfig implements DimensionLevelStemConfig {
                                                                                                                                         DensityFunctions.add(
                                                                                                                                                 DensityFunctions.constant(0.27),
                                                                                                                                                 DensityFunctions.noise(regCtx.lookup(Registries.NOISE).getOrThrow(CANoiseParameters.CAVE_CHEESE.get()), 1, 0.666)
-                                                                                                                                        ).clamp(-0.25, 0.75),
+                                                                                                                                        ).clamp(-0.25,0.75),
                                                                                                                                         DensityFunctions.add(
                                                                                                                                                         DensityFunctions.constant(1.5),
                                                                                                                                                         DensityFunctions.mul(
@@ -225,21 +241,5 @@ public class MiningParadiseDimensionConfig implements DimensionLevelStemConfig {
         DensityFunction oreGap = DensityFunctions.noise(noiseParams.getOrThrow(Noises.ORE_GAP));
 
         return new DensityFunction[]{veininess, veinAB, oreGap};
-    }
-
-    @Override
-    public @NotNull Supplier<ResourceKey<DimensionType>> getParentDimensionType() {
-        return CADimensions.MINING_PARADISE_DIMENSION_TYPE;
-    }
-
-    @Override
-    public @NotNull ChunkGenerator createLevelChunkGen(BootstapContext<LevelStem> regCtx) {
-        HolderGetter<NoiseGeneratorSettings> noiseGenSettingsLookup = regCtx.lookup(Registries.NOISE_SETTINGS);
-        HolderGetter<MultiNoiseBiomeSourceParameterList> biomeSrcParamListLookup = regCtx.lookup(Registries.MULTI_NOISE_BIOME_SOURCE_PARAMETER_LIST);
-
-        BiomeSource src = MultiNoiseBiomeSource.createFromPreset(biomeSrcParamListLookup.getOrThrow(CAMultiNoiseBiomeSourceParameterLists.MINING_PARADISE_BIOME_LIST.get()));
-        Holder.Reference<NoiseGeneratorSettings> settings = noiseGenSettingsLookup.getOrThrow(CANoiseGeneratorSettings.MINING_PARADISE.get());
-
-        return new OptimizedNoiseBasedChunkGenerator(src, settings);
     }
 }

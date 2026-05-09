@@ -53,7 +53,7 @@ public final class CARegistryEntryRemapper {
         private static final Map<Predicate<ResourceLocation>, Function<ResourceLocation, ResourceLocation>> REMAPS = new Object2ObjectOpenHashMap<>();
 
         private static final ResourceLocation FOSSIL_BASE = CAConstants.prefix("fossilised_");
-        private static final String[] FOSSIL_SUFFIXES = new String[]{
+        private static final String[] FOSSIL_SUFFIXES = new String[] {
                 "Netherrack",
                 "Blackstone",
                 "Sandstone",
@@ -71,7 +71,7 @@ public final class CARegistryEntryRemapper {
         private static final ResourceLocation CRYSTAL_WOOD_SET_BASE = CAConstants.prefix("crystal");
         private static final ResourceLocation CHERRY_WOOD_BASE = CAConstants.prefix("cherry");
 
-        private static final ResourceLocation[] CRYSTAL_WOOD_BASES = new ResourceLocation[]{
+        private static final ResourceLocation[] CRYSTAL_WOOD_BASES = new ResourceLocation[] {
                 CAConstants.prefix("crystal_button"),
                 CAConstants.prefix("crystal_crafting_table"),
                 CAConstants.prefix("crystal_fence"),

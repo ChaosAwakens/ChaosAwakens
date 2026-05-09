@@ -97,7 +97,7 @@ public class CASurfaceRules {
                 int z = context.blockZ;
 
                 int surfaceY = context.chunk.getHeight(Heightmap.Types.WORLD_SURFACE, x, z);
-                int offset = (surfaceY + 1) - y;
+                int offset = (surfaceY + 1) - y ;
 
                 // True only for blocks 1 to N under the surface
                 return offset >= 1 && offset <= layers;

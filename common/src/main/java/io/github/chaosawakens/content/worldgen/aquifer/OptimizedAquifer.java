@@ -15,13 +15,13 @@ public interface OptimizedAquifer extends Aquifer {
     /**
      * Creates a new instance of OptimizedAquifer.
      *
-     * @param chunk                   The noise chunk being generated
-     * @param chunkPos                The position of the chunk being generated
-     * @param noiseRouter             The noise router providing various noise values
+     * @param chunk The noise chunk being generated
+     * @param chunkPos The position of the chunk being generated
+     * @param noiseRouter The noise router providing various noise values
      * @param positionalRandomFactory Factory for creating position-dependent random number generators
-     * @param minY                    Minimum Y level for aquifer generation
-     * @param height                  Height range for aquifer generation
-     * @param globalFluidPicker       Determines fluid types at given positions
+     * @param minY Minimum Y level for aquifer generation
+     * @param height Height range for aquifer generation
+     * @param globalFluidPicker Determines fluid types at given positions
      * @return A new OptimizedAquifer instance
      */
     static OptimizedAquifer create(NoiseChunk chunk, ChunkPos chunkPos, NoiseRouter noiseRouter,
@@ -71,7 +71,6 @@ public interface OptimizedAquifer extends Aquifer {
             }
         };
     }
-
     /**
      * Computes the block state for a given position and density value.
      * This is the main method called during world generation.
@@ -108,7 +107,7 @@ public interface OptimizedAquifer extends Aquifer {
      * Updates the aquifer state for a chunk after generation.
      * This can be used for post-processing or cleanup.
      *
-     * @param chunk    The chunk being generated
+     * @param chunk The chunk being generated
      * @param chunkPos The position of the chunk
      */
     default void updateChunk(ChunkAccess chunk, ChunkPos chunkPos) {

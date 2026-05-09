@@ -27,22 +27,6 @@ public class LeafCarpetBlock extends MultifaceBlock implements SimpleWaterlogged
         registerDefaultState(defaultBlockState().setValue(WATERLOGGED, false));
     }
 
-    public static boolean isWaterLogged(BlockState targetState) {
-        return targetState.hasProperty(WATERLOGGED) && targetState.getValue(WATERLOGGED);
-    }
-
-    public static BlockState setWaterlogged(BlockState targetState, boolean waterlogged) {
-        return targetState.hasProperty(WATERLOGGED) ? targetState.setValue(WATERLOGGED, waterlogged) : targetState;
-    }
-
-    public static BlockState setWaterlogged(BlockState targetState) {
-        return setWaterlogged(targetState, true);
-    }
-
-    public static Map<Direction, BooleanProperty> getMappedFaces() {
-        return PROPERTY_BY_DIRECTION;
-    }
-
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         super.createBlockStateDefinition(builder);
@@ -52,8 +36,7 @@ public class LeafCarpetBlock extends MultifaceBlock implements SimpleWaterlogged
 
     @Override
     public @NotNull BlockState updateShape(BlockState targetState, Direction facingDir, BlockState neighbourState, LevelAccessor curLevel, BlockPos targetPos, BlockPos neighbourPos) {
-        if (isWaterLogged(targetState))
-            curLevel.scheduleTick(targetPos, Fluids.WATER, Fluids.WATER.getTickDelay(curLevel));
+        if (isWaterLogged(targetState)) curLevel.scheduleTick(targetPos, Fluids.WATER, Fluids.WATER.getTickDelay(curLevel));
 
         return super.updateShape(targetState, facingDir, neighbourState, curLevel, targetPos, neighbourPos);
     }
@@ -72,5 +55,21 @@ public class LeafCarpetBlock extends MultifaceBlock implements SimpleWaterlogged
     @Override
     public MultifaceSpreader getSpreader() {
         return leafCarpetSpreader;
+    }
+
+    public static boolean isWaterLogged(BlockState targetState) {
+        return targetState.hasProperty(WATERLOGGED) && targetState.getValue(WATERLOGGED);
+    }
+
+    public static BlockState setWaterlogged(BlockState targetState, boolean waterlogged) {
+        return targetState.hasProperty(WATERLOGGED) ? targetState.setValue(WATERLOGGED, waterlogged) : targetState;
+    }
+
+    public static BlockState setWaterlogged(BlockState targetState) {
+        return setWaterlogged(targetState, true);
+    }
+
+    public static Map<Direction, BooleanProperty> getMappedFaces() {
+        return PROPERTY_BY_DIRECTION;
     }
 }

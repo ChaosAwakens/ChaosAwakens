@@ -51,8 +51,7 @@ public class NBTTreeGrower extends AbstractTreeGrower {
                 if (feature.place(level, generator, random, pos.offset(template.getSize().getX() / -2, 0, template.getSize().getZ() / -2))) {
                     return true;
                 } else {
-                    if (level.getBlockState(pos) == fluidBlockState)
-                        level.sendBlockUpdated(pos, state, fluidBlockState, Block.UPDATE_CLIENTS);
+                    if (level.getBlockState(pos) == fluidBlockState) level.sendBlockUpdated(pos, state, fluidBlockState, Block.UPDATE_CLIENTS);
 
                     return false;
                 }

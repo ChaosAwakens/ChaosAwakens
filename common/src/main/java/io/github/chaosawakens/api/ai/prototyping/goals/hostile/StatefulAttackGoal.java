@@ -152,8 +152,7 @@ public class StatefulAttackGoal<AO extends StatefulMonster> extends Goal {
 
         animatableOwner.setAttackID(attackId);
 
-        if (actionOnStart != null)
-            actionOnStart.accept(animatableOwner, target, EntityUtil.getAllEntitiesAround(animatableOwner, potentialTargetRadius, potentialTargetRadius, potentialTargetRadius, potentialTargetRadius), 0.0D);
+        if (actionOnStart != null) actionOnStart.accept(animatableOwner, target, EntityUtil.getAllEntitiesAround(animatableOwner, potentialTargetRadius, potentialTargetRadius, potentialTargetRadius, potentialTargetRadius), 0.0D);
         if (staticAttack) {
             animatableOwner.setYRot(animatableOwner.yRotO);
             animatableOwner.getNavigation().stop();
@@ -163,8 +162,7 @@ public class StatefulAttackGoal<AO extends StatefulMonster> extends Goal {
 
     @Override
     public void stop() {
-        if (actionOnEnd != null)
-            actionOnEnd.accept(animatableOwner, animatableOwner.getTarget(), EntityUtil.getAllEntitiesAround(animatableOwner, potentialTargetRadius, potentialTargetRadius, potentialTargetRadius, potentialTargetRadius), attackTickDuration);
+        if (actionOnEnd != null) actionOnEnd.accept(animatableOwner, animatableOwner.getTarget(), EntityUtil.getAllEntitiesAround(animatableOwner, potentialTargetRadius, potentialTargetRadius, potentialTargetRadius, potentialTargetRadius), attackTickDuration);
 
         animatableOwner.resetAttackId();
 
@@ -196,18 +194,14 @@ public class StatefulAttackGoal<AO extends StatefulMonster> extends Goal {
 
         double currentAttackTick = usePreciseTicking ? preciseAttackTick : preciseAttackTick; // TODO
 
-        if (target != null && !staticAttack && ((!performDefaultAttack && actionOnAttack == null) || !MathUtil.isBetween(currentAttackTick, attackFrame.leftDouble(), attackFrame.rightDouble())))
-            animatableOwner.getLookControl().setLookAt(target, 30.0F, 30.0F);
-        if (actionOnTick != null)
-            actionOnTick.accept(animatableOwner, target, EntityUtil.getAllEntitiesAround(animatableOwner, potentialTargetRadius, potentialTargetRadius, potentialTargetRadius, potentialTargetRadius), currentAttackTick);
-        if (actionOnAttack != null && MathUtil.isBetween(currentAttackTick, attackFrame.leftDouble(), attackFrame.rightDouble()))
-            actionOnAttack.accept(animatableOwner, target, EntityUtil.getAllEntitiesAround(animatableOwner, potentialTargetRadius, potentialTargetRadius, potentialTargetRadius, potentialTargetRadius), currentAttackTick);
+        if (target != null && !staticAttack && ((!performDefaultAttack && actionOnAttack == null) || !MathUtil.isBetween(currentAttackTick, attackFrame.leftDouble(), attackFrame.rightDouble()))) animatableOwner.getLookControl().setLookAt(target, 30.0F, 30.0F);
+        if (actionOnTick != null) actionOnTick.accept(animatableOwner, target, EntityUtil.getAllEntitiesAround(animatableOwner, potentialTargetRadius, potentialTargetRadius, potentialTargetRadius, potentialTargetRadius), currentAttackTick);
+        if (actionOnAttack != null && MathUtil.isBetween(currentAttackTick, attackFrame.leftDouble(), attackFrame.rightDouble())) actionOnAttack.accept(animatableOwner, target, EntityUtil.getAllEntitiesAround(animatableOwner, potentialTargetRadius, potentialTargetRadius, potentialTargetRadius, potentialTargetRadius), currentAttackTick);
         if (performDefaultAttack && target != null) {
             List<LivingEntity> potentialTargets = EntityUtil.getAllEntitiesAround(animatableOwner, potentialTargetRadius, potentialTargetRadius, potentialTargetRadius, potentialTargetRadius);
 
             for (LivingEntity potentialTarget : potentialTargets) {
-                if (animatableOwner.isAlliedTo(potentialTarget) || animatableOwner.getClass() == potentialTarget.getClass())
-                    continue;
+                if (animatableOwner.isAlliedTo(potentialTarget) || animatableOwner.getClass() == potentialTarget.getClass()) continue;
 
                 double targetAngle = MathUtil.getRelativeAngleBetweenEntities(animatableOwner, potentialTarget);
                 double attackAngle = animatableOwner.yBodyRot % 360;

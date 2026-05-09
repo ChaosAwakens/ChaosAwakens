@@ -26,11 +26,11 @@ import java.util.Set;
 import java.util.function.Supplier;
 
 public class DefaultableCropBodyBlock extends GrowingPlantBodyBlock implements CropInstance {
+    @Nullable
+    private static IntegerProperty pendingHeightProperty;
     public static final IntegerProperty DEFAULT_HEIGHT_PROPERTY = IntegerProperty.create("height", 0, 2);
     public static final int DEFAULT_MAX_HEIGHT = 2;
     public static final VoxelShape DEFAULT_SHAPE = Block.box(0.0, 0.0, 0.0, 16.0, 16.0, 16.0);
-    @Nullable
-    private static IntegerProperty pendingHeightProperty;
     protected final Supplier<Item> produce;
     protected final Supplier<Item> seed;
     protected final Supplier<GrowingPlantHeadBlock> headBlock;
@@ -167,22 +167,6 @@ public class DefaultableCropBodyBlock extends GrowingPlantBodyBlock implements C
         clearHeightProperty();
     }
 
-    public static Supplier<GrowingPlantHeadBlock> findHeadFor(Supplier<Block> targetBlockSup) {
-        return () -> RegistryUtil.getObjectFrom(targetBlockSup, targetBlockId -> targetBlockId.withPath(path -> path.replace("_body_", "_head_")))
-                .filter(GrowingPlantHeadBlock.class::isInstance)
-                .map(GrowingPlantHeadBlock.class::cast)
-                .orElse(null);
-    }
-
-    private static Properties storeHeightInStaticInitializer(Properties properties, IntegerProperty heightProperty) {
-        pendingHeightProperty = heightProperty;
-        return properties;
-    }
-
-    private static void clearHeightProperty() {
-        pendingHeightProperty = null;
-    }
-
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         super.createBlockStateDefinition(builder);
@@ -202,15 +186,13 @@ public class DefaultableCropBodyBlock extends GrowingPlantBodyBlock implements C
 
     @Override
     public @NotNull BlockState updateShape(BlockState state, Direction facing, BlockState facingState, LevelAccessor level, BlockPos currentPos, BlockPos facingPos) {
-        if (facing == growthDirection.getOpposite() && !state.canSurvive(level, currentPos))
-            level.scheduleTick(currentPos, this, 1);
+        if (facing == growthDirection.getOpposite() && !state.canSurvive(level, currentPos)) level.scheduleTick(currentPos, this, 1);
 
         GrowingPlantHeadBlock headBlock = getHeadBlock();
         IntegerProperty ageProperty = headBlock instanceof DefaultableCropHeadBlock defHeadBlock ? defHeadBlock.getAgeProperty() : GrowingPlantHeadBlock.AGE;
         IntegerProperty heightProperty = headBlock instanceof DefaultableCropHeadBlock defHeadBlock ? defHeadBlock.getHeightProperty() : DEFAULT_HEIGHT_PROPERTY;
 
-        if (ageProperty != null && facing == growthDirection && !facingState.is(this) && !facingState.is(headBlock))
-            return headBlock.defaultBlockState().setValue(ageProperty, getMaxHeight()).setValue(heightProperty, getHeight(state));
+        if (ageProperty != null && facing == growthDirection && !facingState.is(this) && !facingState.is(headBlock)) return headBlock.defaultBlockState().setValue(ageProperty, getMaxHeight()).setValue(heightProperty, getHeight(state));
         if (scheduleFluidTicks) level.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
 
         return super.updateShape(state, facing, facingState, level, currentPos, facingPos);
@@ -243,7 +225,7 @@ public class DefaultableCropBodyBlock extends GrowingPlantBodyBlock implements C
 
     @Override
     public VoxelShape[] getShapeByAge() {
-        return new VoxelShape[]{DEFAULT_SHAPE};
+        return new VoxelShape[] {DEFAULT_SHAPE};
     }
 
     @Override
@@ -271,5 +253,21 @@ public class DefaultableCropBodyBlock extends GrowingPlantBodyBlock implements C
 
     public int getMaxHeight() {
         return maxHeight;
+    }
+
+    public static Supplier<GrowingPlantHeadBlock> findHeadFor(Supplier<Block> targetBlockSup) {
+        return () -> RegistryUtil.getObjectFrom(targetBlockSup, targetBlockId -> targetBlockId.withPath(path -> path.replace("_body_", "_head_")))
+                .filter(GrowingPlantHeadBlock.class::isInstance)
+                .map(GrowingPlantHeadBlock.class::cast)
+                .orElse(null);
+    }
+
+    private static Properties storeHeightInStaticInitializer(Properties properties, IntegerProperty heightProperty) {
+        pendingHeightProperty = heightProperty;
+        return properties;
+    }
+
+    private static void clearHeightProperty() {
+        pendingHeightProperty = null;
     }
 }

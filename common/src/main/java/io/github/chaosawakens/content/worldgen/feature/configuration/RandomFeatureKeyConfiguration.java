@@ -17,8 +17,7 @@ import java.util.List;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
 
-public record RandomFeatureKeyConfiguration(List<WeightedPlacedFeatureKey> features,
-                                            Supplier<ResourceKey<PlacedFeature>> defaultFeature) implements FeatureConfiguration {
+public record RandomFeatureKeyConfiguration(List<WeightedPlacedFeatureKey> features, Supplier<ResourceKey<PlacedFeature>> defaultFeature) implements FeatureConfiguration {
     public static final Codec<RandomFeatureKeyConfiguration> CODEC = RecordCodecBuilder.create(
             instance -> instance.group(
                     WeightedPlacedFeatureKey.CODEC.listOf().fieldOf("features").forGetter(conf -> conf.features),

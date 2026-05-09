@@ -19,11 +19,12 @@ import java.util.function.Supplier;
 @RegistrarEntry
 public class CADimensions {
     private static final ObjectArrayList<Supplier<ResourceKey<DimensionType>>> DIMENSION_TYPES = new ObjectArrayList<>();
+    private static final ObjectArrayList<Supplier<ResourceKey<LevelStem>>> LEVEL_STEMS = new ObjectArrayList<>();
+    private static final ObjectArrayList<Supplier<ResourceKey<Level>>> LEVEL_KEYS = new ObjectArrayList<>();
+
     // Mining Paradise
     public static final Supplier<ResourceKey<DimensionType>> MINING_PARADISE_DIMENSION_TYPE = registerDimensionType("mining_paradise", MiningParadiseDimensionConfig::createDimensionType);
-    private static final ObjectArrayList<Supplier<ResourceKey<LevelStem>>> LEVEL_STEMS = new ObjectArrayList<>();
     public static final Supplier<ResourceKey<LevelStem>> MINING_PARADISE_LEVEL_STEM = registerLevelStem("mining_paradise", MiningParadiseDimensionConfig::new);
-    private static final ObjectArrayList<Supplier<ResourceKey<Level>>> LEVEL_KEYS = new ObjectArrayList<>();
     public static final Supplier<ResourceKey<Level>> MINING_PARADISE_LEVEL_KEY = registerLevelKey("mining_paradise");
 
     private static Supplier<ResourceKey<DimensionType>> registerDimensionType(ResourceLocation id, Supplier<DimensionType> actualDimTypeSup) {

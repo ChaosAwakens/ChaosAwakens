@@ -53,48 +53,6 @@ public class OptimizedBiomeManager extends BiomeManager {
         super(noiseBiomeSource, biomeZoomSeed);
     }
 
-    private static double getFiddledDistance(long seed, int x, int y, int z, double dx, double dy, double dz) {
-        long state = seed; // Manually unrolled LCG sequence
-
-        // First 6 steps (original sequence)
-        state = (state * LCG_MULTIPLIER + LCG_INCREMENT) * state + x;
-        state = (state * LCG_MULTIPLIER + LCG_INCREMENT) * state + y;
-        state = (state * LCG_MULTIPLIER + LCG_INCREMENT) * state + z;
-        state = (state * LCG_MULTIPLIER + LCG_INCREMENT) * state + x;
-        state = (state * LCG_MULTIPLIER + LCG_INCREMENT) * state + y;
-        state = (state * LCG_MULTIPLIER + LCG_INCREMENT) * state + z;
-
-        double fiddle1 = getFiddle(state); // Get first fiddle value
-
-        // Next state and fiddle
-        state = (state * LCG_MULTIPLIER + LCG_INCREMENT) * state + seed;
-        double fiddle2 = getFiddle(state);
-
-        // Final state and fiddle
-        state = (state * LCG_MULTIPLIER + LCG_INCREMENT) * state + seed;
-        double fiddle3 = getFiddle(state);
-
-        // Optimized distance calculation using basic euclidean distance calculation and fma (see #getFiddle(long))
-        double xComp = dx + fiddle1;
-        double yComp = dy + fiddle2;
-        double zComp = dz + fiddle3;
-
-        return xComp * xComp + yComp * yComp + zComp * zComp;
-    }
-
-    private static double getFiddle(long value) { // Extract bits 24-33 (10 bits) and multiply by precomputed constant, then apply offset (fma)
-        return Math.fma((value >> 24) & 0x3FF, FIDDLE_MULTIPLIER, FIDDLE_OFFSET);
-    }
-
-    private static long next(long state, long right) { // We could've gone with a little more extreme and just converted these to ints, but that would sacrifice more precision than the improvement made by such a change would be worth tbh
-        // Horner's method my goat
-        // 6364136223846793005 = 0x5851F42D4C957F2D
-        // 1442695040888963407 = 0x14057B7EF767814F
-        long newState = state * LCG_MULTIPLIER + LCG_INCREMENT; // Calculate new state using distributive property to reduce operations
-
-        return newState + right; // Return the sum with right (JVM should optimize this to a single instruction)
-    }
-
     @Override
     public @NotNull OptimizedBiomeManager withDifferentSource(@NotNull NoiseBiomeSource noiseBiomeSource) {
         return new OptimizedBiomeManager(noiseBiomeSource, biomeZoomSeed);
@@ -195,5 +153,47 @@ public class OptimizedBiomeManager extends BiomeManager {
         final int finalZ = chunkZ + (bestIndex & Z_BIT_MASK);
 
         return noiseBiomeSource.getNoiseBiome(finalX, finalY, finalZ);
+    }
+
+    private static double getFiddledDistance(long seed, int x, int y, int z, double dx, double dy, double dz) {
+        long state = seed; // Manually unrolled LCG sequence
+
+        // First 6 steps (original sequence)
+        state = (state * LCG_MULTIPLIER + LCG_INCREMENT) * state + x;
+        state = (state * LCG_MULTIPLIER + LCG_INCREMENT) * state + y;
+        state = (state * LCG_MULTIPLIER + LCG_INCREMENT) * state + z;
+        state = (state * LCG_MULTIPLIER + LCG_INCREMENT) * state + x;
+        state = (state * LCG_MULTIPLIER + LCG_INCREMENT) * state + y;
+        state = (state * LCG_MULTIPLIER + LCG_INCREMENT) * state + z;
+
+        double fiddle1 = getFiddle(state); // Get first fiddle value
+
+        // Next state and fiddle
+        state = (state * LCG_MULTIPLIER + LCG_INCREMENT) * state + seed;
+        double fiddle2 = getFiddle(state);
+
+        // Final state and fiddle
+        state = (state * LCG_MULTIPLIER + LCG_INCREMENT) * state + seed;
+        double fiddle3 = getFiddle(state);
+
+        // Optimized distance calculation using basic euclidean distance calculation and fma (see #getFiddle(long))
+        double xComp = dx + fiddle1;
+        double yComp = dy + fiddle2;
+        double zComp = dz + fiddle3;
+
+        return xComp * xComp + yComp * yComp + zComp * zComp;
+    }
+
+    private static double getFiddle(long value) { // Extract bits 24-33 (10 bits) and multiply by precomputed constant, then apply offset (fma)
+        return Math.fma((value >> 24) & 0x3FF, FIDDLE_MULTIPLIER, FIDDLE_OFFSET);
+    }
+
+    private static long next(long state, long right) { // We could've gone with a little more extreme and just converted these to ints, but that would sacrifice more precision than the improvement made by such a change would be worth tbh
+        // Horner's method my goat
+        // 6364136223846793005 = 0x5851F42D4C957F2D
+        // 1442695040888963407 = 0x14057B7EF767814F
+        long newState = state * LCG_MULTIPLIER + LCG_INCREMENT; // Calculate new state using distributive property to reduce operations
+
+        return newState + right; // Return the sum with right (JVM should optimize this to a single instruction)
     }
 }

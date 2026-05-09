@@ -108,133 +108,6 @@ public abstract class AbstractDefossilizerBlockEntity extends BaseContainerBlock
         };
     }
 
-    public static void serverTick(Level curLevel, BlockPos targetPos, BlockState targetState, AbstractDefossilizerBlockEntity targetDefossilizerBlockEntity) {
-        boolean markChanged = false;
-        boolean wasDefossilizing = targetDefossilizerBlockEntity.isDefossilizing();
-
-        ItemStack fossilStack = targetDefossilizerBlockEntity.getItem(FOSSIL_INPUT_SLOT_INDEX);
-        ItemStack bucketStack = targetDefossilizerBlockEntity.getItem(BUCKET_INPUT_SLOT_INDEX);
-        ItemStack powerChipStack = targetDefossilizerBlockEntity.getItem(POWER_CHIP_INPUT_SLOT_INDEX);
-
-        boolean hasIngredients = !fossilStack.isEmpty();
-        boolean hasBucket = !bucketStack.isEmpty();
-        boolean hasPowerChip = !powerChipStack.isEmpty();
-        boolean hasFuel = hasBucket && hasPowerChip;
-        boolean shouldProgressDefossilization = wasDefossilizing || hasFuel;
-
-        if (shouldProgressDefossilization || hasIngredients) {
-            Recipe<?> curRecipe = null;
-
-            if (hasIngredients)
-                curRecipe = targetDefossilizerBlockEntity.quickCheck.getRecipeFor(targetDefossilizerBlockEntity, curLevel).orElse(null);
-
-            int maxStackSize = targetDefossilizerBlockEntity.getMaxStackSize();
-
-            if (!targetDefossilizerBlockEntity.isDefossilizing() && canDefossilize(curRecipe, targetDefossilizerBlockEntity, targetDefossilizerBlockEntity.getItem(DEFOSSILIZED_OUTPUT_SLOT_INDEX), maxStackSize)) {
-                targetDefossilizerBlockEntity.totalDefossilizationTime = getTotalDefossilizationTime(curLevel, targetDefossilizerBlockEntity);
-                targetDefossilizerBlockEntity.defossilizationProgress = 0;
-
-                if (targetDefossilizerBlockEntity.isDefossilizing()) markChanged = true;
-            }
-
-            if (targetDefossilizerBlockEntity.isDefossilizing() && canDefossilize(curRecipe, targetDefossilizerBlockEntity, targetDefossilizerBlockEntity.getItem(DEFOSSILIZED_OUTPUT_SLOT_INDEX), maxStackSize)) {
-                targetDefossilizerBlockEntity.defossilizationProgress++;
-
-                if (targetDefossilizerBlockEntity.defossilizationProgress >= targetDefossilizerBlockEntity.totalDefossilizationTime) {
-                    targetDefossilizerBlockEntity.defossilizationProgress = 0;
-                    targetDefossilizerBlockEntity.totalDefossilizationTime = getTotalDefossilizationTime(curLevel, targetDefossilizerBlockEntity);
-
-                    if (defossilize(curRecipe, targetDefossilizerBlockEntity, targetDefossilizerBlockEntity.getItem(DEFOSSILIZED_OUTPUT_SLOT_INDEX), maxStackSize)) {
-                        targetDefossilizerBlockEntity.setRecipeUsed(curRecipe);
-                    }
-
-                    markChanged = true;
-                }
-            } else {
-                targetDefossilizerBlockEntity.defossilizationProgress = 0;
-                targetDefossilizerBlockEntity.totalDefossilizationTime = 0;
-            }
-        } else {
-            if (!targetDefossilizerBlockEntity.isDefossilizing() && targetDefossilizerBlockEntity.defossilizationProgress > 0) {
-                targetDefossilizerBlockEntity.defossilizationProgress = Mth.clamp(targetDefossilizerBlockEntity.defossilizationProgress - 2, 0, targetDefossilizerBlockEntity.totalDefossilizationTime);
-            }
-
-            targetDefossilizerBlockEntity.totalDefossilizationTime = 0;
-        }
-
-        if (wasDefossilizing != targetDefossilizerBlockEntity.isDefossilizing()) {
-            markChanged = true;
-            targetState = targetState.setValue(AbstractDefossilizerBlock.LIT, targetDefossilizerBlockEntity.isDefossilizing());
-
-            curLevel.setBlock(targetPos, targetState, Block.UPDATE_ALL);
-        }
-
-        if (markChanged) setChanged(curLevel, targetPos, targetState);
-    }
-
-    public static void createExperience(ServerLevel level, Vec3 popVec, int recipeIdx, float xpAmount) {
-        int roundedXpAmount = Mth.floor(recipeIdx * xpAmount);
-        double incrProbability = Mth.frac(recipeIdx * xpAmount);
-
-        if (incrProbability != 0.0F && Math.random() < incrProbability) roundedXpAmount++;
-
-        ExperienceOrb.award(level, popVec, roundedXpAmount);
-    }
-
-    public static int getTotalDefossilizationTime(Level level, AbstractDefossilizerBlockEntity blockEntity) {
-        return blockEntity.quickCheck.getRecipeFor(blockEntity, level).map(AbstractDefossilizingRecipe::getDefossilizationTime).orElse(0);
-    }
-
-    public static boolean isFossil(ItemStack targetStack) {
-        return targetStack.getItem() instanceof BlockItem blockItem && blockItem.getBlock() instanceof FossilBlockInstance;
-    }
-
-    public static boolean isPowerChipComponent(ItemStack targetStack) {
-        return targetStack.getItem() instanceof PowerChipItem;
-    }
-
-    public static boolean isBucketComponent(ItemStack targetStack) {
-        return targetStack.getItem() instanceof BucketItem;
-    }
-
-    public static boolean canDefossilize(Recipe<?> targetRecipe, AbstractDefossilizerBlockEntity targetDefossilizerBlockEntity, ItemStack defossilizedOutputStack, int maxStackSize) {
-        ItemStack outputStack = targetRecipe == null ? ItemStack.EMPTY : targetRecipe.getResultItem(targetDefossilizerBlockEntity.level.registryAccess());
-        return targetRecipe instanceof AbstractDefossilizingRecipe defossilizingRecipe
-                //           && defossilizingRecipe.getDefossilizationCategory() == targetDefossilizerBlockEntity.getDefossilizationCategory()
-                && (!targetDefossilizerBlockEntity.getItem(FOSSIL_INPUT_SLOT_INDEX).isEmpty())
-                && (defossilizingRecipe.getBucketIngredient().test(targetDefossilizerBlockEntity.getItem(BUCKET_INPUT_SLOT_INDEX)))
-                && (defossilizingRecipe.getPowerChipIngredient().test(targetDefossilizerBlockEntity.getItem(POWER_CHIP_INPUT_SLOT_INDEX)))
-                && (defossilizedOutputStack.isEmpty() ||
-                (ItemStack.isSameItemSameTags(outputStack, defossilizedOutputStack)
-                        && outputStack.getCount() + defossilizedOutputStack.getCount() <= maxStackSize));
-    }
-
-    public static boolean defossilize(Recipe<?> targetRecipe, AbstractDefossilizerBlockEntity targetDefossilizerBlockEntity, ItemStack defossilizedOutputStack, int maxStackSize) {
-        if (targetRecipe != null && canDefossilize(targetRecipe, targetDefossilizerBlockEntity, defossilizedOutputStack, maxStackSize)) {
-            ItemStack outputStack = targetRecipe.getResultItem(targetDefossilizerBlockEntity.level.registryAccess());
-            ItemStack existingOutputStack = targetDefossilizerBlockEntity.getItem(AbstractDefossilizerBlockEntity.DEFOSSILIZED_OUTPUT_SLOT_INDEX);
-
-            if (existingOutputStack.isEmpty()) {
-                targetDefossilizerBlockEntity.setItem(AbstractDefossilizerBlockEntity.DEFOSSILIZED_OUTPUT_SLOT_INDEX, outputStack.copy());
-            } else if (ItemStack.isSameItemSameTags(existingOutputStack, outputStack)) {
-                existingOutputStack.grow(outputStack.getCount());
-            }
-
-            ItemStack fossilStack = targetDefossilizerBlockEntity.getItem(AbstractDefossilizerBlockEntity.FOSSIL_INPUT_SLOT_INDEX);
-            ItemStack bucketStack = targetDefossilizerBlockEntity.getItem(AbstractDefossilizerBlockEntity.BUCKET_INPUT_SLOT_INDEX);
-            ItemStack powerChipStack = targetDefossilizerBlockEntity.getItem(AbstractDefossilizerBlockEntity.POWER_CHIP_INPUT_SLOT_INDEX);
-
-            fossilStack.shrink(1);
-            powerChipStack.shrink(1);
-
-            if (bucketStack.getItem() instanceof BucketItem bucketItem && !bucketItem.content.defaultFluidState().isEmpty()) {
-                targetDefossilizerBlockEntity.setItem(AbstractDefossilizerBlockEntity.BUCKET_INPUT_SLOT_INDEX, Items.BUCKET.getDefaultInstance());
-            }
-
-            return true;
-        } else return false;
-    }
-
     @NotNull
     public abstract AbstractDefossilizingRecipe.DefossilizationCategory getDefossilizationCategory();
 
@@ -330,8 +203,7 @@ public abstract class AbstractDefossilizerBlockEntity extends BaseContainerBlock
     public boolean canPlaceItem(int slotIdx, ItemStack inputStack) {
         if (slotIdx == DEFOSSILIZED_OUTPUT_SLOT_INDEX) return false;
         else if (slotIdx == FOSSIL_INPUT_SLOT_INDEX) return isFossil(inputStack);
-        else if (slotIdx == BUCKET_INPUT_SLOT_INDEX)
-            return isBucketComponent(inputStack) && items.get(BUCKET_INPUT_SLOT_INDEX).isEmpty();
+        else if (slotIdx == BUCKET_INPUT_SLOT_INDEX) return isBucketComponent(inputStack) && items.get(BUCKET_INPUT_SLOT_INDEX).isEmpty();
         else if (slotIdx == POWER_CHIP_INPUT_SLOT_INDEX) return isPowerChipComponent(inputStack);
         else return false;
     }
@@ -383,13 +255,13 @@ public abstract class AbstractDefossilizerBlockEntity extends BaseContainerBlock
     }
 
     @Override
-    public @Nullable Recipe<?> getRecipeUsed() {
-        return null;
+    public void setRecipeUsed(@Nullable Recipe<?> recipe) {
+        if (recipe != null) usedRecipeCache.addTo(recipe.getId(), 1);
     }
 
     @Override
-    public void setRecipeUsed(@Nullable Recipe<?> recipe) {
-        if (recipe != null) usedRecipeCache.addTo(recipe.getId(), 1);
+    public @Nullable Recipe<?> getRecipeUsed() {
+        return null;
     }
 
     @Override
@@ -440,5 +312,131 @@ public abstract class AbstractDefossilizerBlockEntity extends BaseContainerBlock
         });
 
         return recipesToAward;
+    }
+
+    public static void serverTick(Level curLevel, BlockPos targetPos, BlockState targetState, AbstractDefossilizerBlockEntity targetDefossilizerBlockEntity) {
+        boolean markChanged = false;
+        boolean wasDefossilizing = targetDefossilizerBlockEntity.isDefossilizing();
+
+        ItemStack fossilStack = targetDefossilizerBlockEntity.getItem(FOSSIL_INPUT_SLOT_INDEX);
+        ItemStack bucketStack = targetDefossilizerBlockEntity.getItem(BUCKET_INPUT_SLOT_INDEX);
+        ItemStack powerChipStack = targetDefossilizerBlockEntity.getItem(POWER_CHIP_INPUT_SLOT_INDEX);
+
+        boolean hasIngredients = !fossilStack.isEmpty();
+        boolean hasBucket = !bucketStack.isEmpty();
+        boolean hasPowerChip = !powerChipStack.isEmpty();
+        boolean hasFuel = hasBucket && hasPowerChip;
+        boolean shouldProgressDefossilization = wasDefossilizing || hasFuel;
+
+        if (shouldProgressDefossilization || hasIngredients) {
+            Recipe<?> curRecipe = null;
+
+            if (hasIngredients) curRecipe = targetDefossilizerBlockEntity.quickCheck.getRecipeFor(targetDefossilizerBlockEntity, curLevel).orElse(null);
+
+            int maxStackSize = targetDefossilizerBlockEntity.getMaxStackSize();
+
+            if (!targetDefossilizerBlockEntity.isDefossilizing() && canDefossilize(curRecipe, targetDefossilizerBlockEntity, targetDefossilizerBlockEntity.getItem(DEFOSSILIZED_OUTPUT_SLOT_INDEX), maxStackSize)) {
+                targetDefossilizerBlockEntity.totalDefossilizationTime = getTotalDefossilizationTime(curLevel, targetDefossilizerBlockEntity);
+                targetDefossilizerBlockEntity.defossilizationProgress = 0;
+
+                if (targetDefossilizerBlockEntity.isDefossilizing()) markChanged = true;
+            }
+
+            if (targetDefossilizerBlockEntity.isDefossilizing() && canDefossilize(curRecipe, targetDefossilizerBlockEntity, targetDefossilizerBlockEntity.getItem(DEFOSSILIZED_OUTPUT_SLOT_INDEX), maxStackSize)) {
+                targetDefossilizerBlockEntity.defossilizationProgress++;
+
+                if (targetDefossilizerBlockEntity.defossilizationProgress >= targetDefossilizerBlockEntity.totalDefossilizationTime) {
+                    targetDefossilizerBlockEntity.defossilizationProgress = 0;
+                    targetDefossilizerBlockEntity.totalDefossilizationTime = getTotalDefossilizationTime(curLevel, targetDefossilizerBlockEntity);
+
+                    if (defossilize(curRecipe, targetDefossilizerBlockEntity, targetDefossilizerBlockEntity.getItem(DEFOSSILIZED_OUTPUT_SLOT_INDEX), maxStackSize)) {
+                        targetDefossilizerBlockEntity.setRecipeUsed(curRecipe);
+                    }
+
+                    markChanged = true;
+                }
+            } else {
+                targetDefossilizerBlockEntity.defossilizationProgress = 0;
+                targetDefossilizerBlockEntity.totalDefossilizationTime = 0;
+            }
+        } else {
+            if (!targetDefossilizerBlockEntity.isDefossilizing() && targetDefossilizerBlockEntity.defossilizationProgress > 0) {
+                targetDefossilizerBlockEntity.defossilizationProgress = Mth.clamp(targetDefossilizerBlockEntity.defossilizationProgress - 2, 0, targetDefossilizerBlockEntity.totalDefossilizationTime);
+            }
+
+            targetDefossilizerBlockEntity.totalDefossilizationTime = 0;
+        }
+
+        if (wasDefossilizing != targetDefossilizerBlockEntity.isDefossilizing()) {
+            markChanged = true;
+            targetState = targetState.setValue(AbstractDefossilizerBlock.LIT, targetDefossilizerBlockEntity.isDefossilizing());
+
+            curLevel.setBlock(targetPos, targetState, Block.UPDATE_ALL);
+        }
+
+        if (markChanged) setChanged(curLevel, targetPos, targetState);
+    }
+
+    public static void createExperience(ServerLevel level, Vec3 popVec, int recipeIdx, float xpAmount) {
+        int roundedXpAmount = Mth.floor(recipeIdx * xpAmount);
+        double incrProbability = Mth.frac(recipeIdx * xpAmount);
+
+        if (incrProbability != 0.0F && Math.random() < incrProbability) roundedXpAmount++;
+
+        ExperienceOrb.award(level, popVec, roundedXpAmount);
+    }
+
+    public static int getTotalDefossilizationTime(Level level, AbstractDefossilizerBlockEntity blockEntity) {
+        return blockEntity.quickCheck.getRecipeFor(blockEntity, level).map(AbstractDefossilizingRecipe::getDefossilizationTime).orElse(0);
+    }
+
+    public static boolean isFossil(ItemStack targetStack) {
+        return targetStack.getItem() instanceof BlockItem blockItem && blockItem.getBlock() instanceof FossilBlockInstance;
+    }
+
+    public static boolean isPowerChipComponent(ItemStack targetStack) {
+        return targetStack.getItem() instanceof PowerChipItem;
+    }
+
+    public static boolean isBucketComponent(ItemStack targetStack) {
+        return targetStack.getItem() instanceof BucketItem;
+    }
+
+    public static boolean canDefossilize(Recipe<?> targetRecipe, AbstractDefossilizerBlockEntity targetDefossilizerBlockEntity, ItemStack defossilizedOutputStack, int maxStackSize) {
+        ItemStack outputStack = targetRecipe == null ? ItemStack.EMPTY : targetRecipe.getResultItem(targetDefossilizerBlockEntity.level.registryAccess());
+        return targetRecipe instanceof AbstractDefossilizingRecipe defossilizingRecipe
+     //           && defossilizingRecipe.getDefossilizationCategory() == targetDefossilizerBlockEntity.getDefossilizationCategory()
+                && (!targetDefossilizerBlockEntity.getItem(FOSSIL_INPUT_SLOT_INDEX).isEmpty())
+                && (defossilizingRecipe.getBucketIngredient().test(targetDefossilizerBlockEntity.getItem(BUCKET_INPUT_SLOT_INDEX)))
+                && (defossilizingRecipe.getPowerChipIngredient().test(targetDefossilizerBlockEntity.getItem(POWER_CHIP_INPUT_SLOT_INDEX)))
+                && (defossilizedOutputStack.isEmpty() ||
+                (ItemStack.isSameItemSameTags(outputStack, defossilizedOutputStack)
+                        && outputStack.getCount() + defossilizedOutputStack.getCount() <= maxStackSize));
+    }
+
+    public static boolean defossilize(Recipe<?> targetRecipe, AbstractDefossilizerBlockEntity targetDefossilizerBlockEntity, ItemStack defossilizedOutputStack, int maxStackSize) {
+        if (targetRecipe != null && canDefossilize(targetRecipe, targetDefossilizerBlockEntity, defossilizedOutputStack, maxStackSize)) {
+            ItemStack outputStack = targetRecipe.getResultItem(targetDefossilizerBlockEntity.level.registryAccess());
+            ItemStack existingOutputStack = targetDefossilizerBlockEntity.getItem(AbstractDefossilizerBlockEntity.DEFOSSILIZED_OUTPUT_SLOT_INDEX);
+
+            if (existingOutputStack.isEmpty()) {
+                targetDefossilizerBlockEntity.setItem(AbstractDefossilizerBlockEntity.DEFOSSILIZED_OUTPUT_SLOT_INDEX, outputStack.copy());
+            } else if (ItemStack.isSameItemSameTags(existingOutputStack, outputStack)) {
+                existingOutputStack.grow(outputStack.getCount());
+            }
+
+            ItemStack fossilStack = targetDefossilizerBlockEntity.getItem(AbstractDefossilizerBlockEntity.FOSSIL_INPUT_SLOT_INDEX);
+            ItemStack bucketStack = targetDefossilizerBlockEntity.getItem(AbstractDefossilizerBlockEntity.BUCKET_INPUT_SLOT_INDEX);
+            ItemStack powerChipStack = targetDefossilizerBlockEntity.getItem(AbstractDefossilizerBlockEntity.POWER_CHIP_INPUT_SLOT_INDEX);
+
+            fossilStack.shrink(1);
+            powerChipStack.shrink(1);
+
+            if (bucketStack.getItem() instanceof BucketItem bucketItem && !bucketItem.content.defaultFluidState().isEmpty()) {
+                targetDefossilizerBlockEntity.setItem(AbstractDefossilizerBlockEntity.BUCKET_INPUT_SLOT_INDEX, Items.BUCKET.getDefaultInstance());
+            }
+
+            return true;
+        } else return false;
     }
 }

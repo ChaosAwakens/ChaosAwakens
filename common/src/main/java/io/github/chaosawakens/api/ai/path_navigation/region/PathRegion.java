@@ -8,7 +8,6 @@ import java.util.List;
 public interface PathRegion {
 
     ChunkAccess getCenterChunk();
-
     ChunkSource getChunkSource();
 
     List<ChunkAccess> getChunks();

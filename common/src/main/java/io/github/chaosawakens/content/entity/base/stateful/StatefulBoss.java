@@ -9,9 +9,9 @@ import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.level.Level;
 
 public abstract class StatefulBoss extends StatefulMonster {
-    public static final byte DEFAULT_PHASE_ID = 0;
     protected static final EntityDataAccessor<Boolean> IS_IMMERSIVE = SynchedEntityData.defineId(StatefulBoss.class, EntityDataSerializers.BOOLEAN);
     protected static final EntityDataAccessor<Byte> PHASE_ID = SynchedEntityData.defineId(StatefulBoss.class, EntityDataSerializers.BYTE);
+    public static final byte DEFAULT_PHASE_ID = 0;
     protected final ServerBossEvent bossEvent;
 
     protected StatefulBoss(EntityType<? extends Monster> entityType, Level level) {
@@ -52,6 +52,6 @@ public abstract class StatefulBoss extends StatefulMonster {
     protected void registerGoals() {
         super.registerGoals();
 
-
+        
     }
 }

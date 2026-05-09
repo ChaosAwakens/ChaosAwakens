@@ -23,8 +23,7 @@ public class DenseMountainsBiomeConfig implements BiomeConfig {
             .skyColor(3622254)
             .build();
 
-    public DenseMountainsBiomeConfig() {
-    }
+    public DenseMountainsBiomeConfig() {}
 
     @Override
     public boolean hasPrecipitation() {

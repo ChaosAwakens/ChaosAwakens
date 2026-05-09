@@ -29,8 +29,7 @@ public abstract class LevelMixin {
     @Expression("new BiomeManager(this, ___7)")
     @WrapOperation(method = "<init>", at = @At("MIXINEXTRAS:EXPRESSION"))
     private BiomeManager chaosawakens$initializeOptimizedBiomeManager(BiomeManager.NoiseBiomeSource noiseBiomeSource, long biomeZoomSeed, Operation<BiomeManager> original, @Local(type = ResourceKey.class, argsOnly = true) ResourceKey<DimensionType> curDim) {
-        if (chaosawakens$optimizedBiomeManager == null)
-            this.chaosawakens$optimizedBiomeManager = new OptimizedBiomeManager(noiseBiomeSource, biomeZoomSeed);
+        if (chaosawakens$optimizedBiomeManager == null) this.chaosawakens$optimizedBiomeManager = new OptimizedBiomeManager(noiseBiomeSource, biomeZoomSeed);
 
         return curDim.location().getNamespace().equals(CAConstants.MOD_ID)
                 ? chaosawakens$optimizedBiomeManager

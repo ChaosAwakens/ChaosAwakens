@@ -55,8 +55,7 @@ public class BeeHiveProcessor extends StructureProcessor {
                 tag.put("Bees", bees);
 
                 return new StructureTemplate.StructureBlockInfo(info2.pos(), Blocks.BEE_NEST.defaultBlockState().setValue(BeehiveBlock.FACING, Direction.SOUTH), tag);
-            } else
-                return new StructureTemplate.StructureBlockInfo(info2.pos(), Blocks.AIR.defaultBlockState(), info2.nbt());
+            } else return new StructureTemplate.StructureBlockInfo(info2.pos(), Blocks.AIR.defaultBlockState(), info2.nbt());
         }
 
         return info2;

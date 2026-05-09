@@ -23,8 +23,7 @@ public class GinkgoForestBiomeConfig implements BiomeConfig {
             .skyColor(8030207)
             .build();
 
-    public GinkgoForestBiomeConfig() {
-    }
+    public GinkgoForestBiomeConfig() {}
 
     @Override
     public boolean hasPrecipitation() {

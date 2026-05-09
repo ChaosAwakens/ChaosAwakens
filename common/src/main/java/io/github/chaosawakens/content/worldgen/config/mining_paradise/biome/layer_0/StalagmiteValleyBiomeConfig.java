@@ -23,8 +23,7 @@ public class StalagmiteValleyBiomeConfig implements BiomeConfig {
             .skyColor(84742)
             .build();
 
-    public StalagmiteValleyBiomeConfig() {
-    }
+    public StalagmiteValleyBiomeConfig() {}
 
     @Override
     public boolean hasPrecipitation() {

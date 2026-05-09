@@ -25,27 +25,6 @@ public class DirectGroundPathNavigation extends GroundPathNavigation {
         super(entity, world);
     }
 
-    protected static int leti(float c, int step) {
-        return Mth.floor(c - step * EPSILON);
-    }
-
-    protected static int teti(float c, int step) {
-        return Mth.floor(c + step * EPSILON);
-    }
-
-    protected static float switchAxis(Vec3 pos, int axisIndex) {
-        switch (axisIndex) {
-            default:
-                return 0.0F;
-            case 1:
-                return (float) pos.x;
-            case 2:
-                return (float) pos.y;
-            case 3:
-                return (float) pos.z;
-        }
-    }
-
     @Override
     protected @NotNull PathFinder createPathFinder(int maxNodes) {
         this.nodeEvaluator = new WalkNodeEvaluator();
@@ -80,6 +59,23 @@ public class DirectGroundPathNavigation extends GroundPathNavigation {
         doStuckDetection(pathEntityTempPos);
     }
 
+    protected static int leti(float c, int step) {
+        return Mth.floor(c - step * EPSILON);
+    }
+
+    protected static int teti(float c, int step) {
+        return Mth.floor(c + step * EPSILON);
+    }
+
+    protected static float switchAxis(Vec3 pos, int axisIndex) {
+        switch (axisIndex) {
+            default: return 0.0F;
+            case 1: return (float) pos.x;
+            case 2: return (float) pos.y;
+            case 3: return (float) pos.z;
+        }
+    }
+
     private boolean followingPath(Path curPath, float threshold) {
         Mob pathEntity = mob;
         final Vec3 pathPos = curPath.getNextEntityPos(pathEntity);
@@ -109,7 +105,7 @@ public class DirectGroundPathNavigation extends GroundPathNavigation {
     }
 
     private boolean tryTruncateNodes(Path pathToTrim, int pathLength, Vec3 pathEntityPos, Vec3 center, Vec3 maxArea) {
-        for (int length = pathLength; --length > pathToTrim.getNextNodeIndex(); ) {
+        for (int length = pathLength; --length > pathToTrim.getNextNodeIndex();) {
             final Vec3 dist = pathToTrim.getEntityPosAtNode(mob, length).subtract(pathEntityPos);
 
             if (sweepThrough(pathEntityPos, center, maxArea)) {
@@ -181,15 +177,13 @@ public class DirectGroundPathNavigation extends GroundPathNavigation {
                     }
 
                     BlockPathTypes below = this.nodeEvaluator.getBlockPathType(this.level, x, y0 - 1, z);
-                    if (below == BlockPathTypes.WATER || below == BlockPathTypes.LAVA || below == BlockPathTypes.OPEN)
-                        return false;
+                    if (below == BlockPathTypes.WATER || below == BlockPathTypes.LAVA || below == BlockPathTypes.OPEN) return false;
 
                     BlockPathTypes in = this.nodeEvaluator.getBlockPathType(this.level, x, y0, z);
                     float priority = this.mob.getPathfindingMalus(in);
 
                     if (priority < 0.0F || priority >= 8.0F) return false;
-                    if (in == BlockPathTypes.DAMAGE_FIRE || in == BlockPathTypes.DANGER_FIRE || in == BlockPathTypes.DAMAGE_OTHER || in == BlockPathTypes.WATER)
-                        return false;
+                    if (in == BlockPathTypes.DAMAGE_FIRE || in == BlockPathTypes.DANGER_FIRE || in == BlockPathTypes.DAMAGE_OTHER || in == BlockPathTypes.WATER) return false;
                 }
             }
         } while (l <= ml);
@@ -238,6 +232,17 @@ public class DirectGroundPathNavigation extends GroundPathNavigation {
             return pathpoints;
         }
 
+        @Override
+        public @NotNull Vec3 getEntityPosAtNode(Entity pathEntity, int index) {
+            Node nextPos = getNode(index);
+            double x = nextPos.x + Math.floor(pathEntity.getBbWidth() + 1.0F) * 0.5D;
+            double y = nextPos.y;
+            double z = nextPos.z + Math.floor(pathEntity.getBbWidth() + 1.0F) * 0.5D;
+            Vec3 newNextPos = new Vec3(x, y, z);
+
+            return newNextPos;
+        }
+
         public static void divertPath(Mob pathEntity, Path from, Path to, double speedMultiplier) {
             if (pathEntity.getNavigation().isDone()) return;
             if (pathEntity.getNavigation().getPath().equals(from)) {
@@ -251,17 +256,6 @@ public class DirectGroundPathNavigation extends GroundPathNavigation {
 
         public static void divertPath(Mob pathEntity, Path from, Path to) {
             divertPath(pathEntity, from, to, 1);
-        }
-
-        @Override
-        public @NotNull Vec3 getEntityPosAtNode(Entity pathEntity, int index) {
-            Node nextPos = getNode(index);
-            double x = nextPos.x + Math.floor(pathEntity.getBbWidth() + 1.0F) * 0.5D;
-            double y = nextPos.y;
-            double z = nextPos.z + Math.floor(pathEntity.getBbWidth() + 1.0F) * 0.5D;
-            Vec3 newNextPos = new Vec3(x, y, z);
-
-            return newNextPos;
         }
 
         @Override

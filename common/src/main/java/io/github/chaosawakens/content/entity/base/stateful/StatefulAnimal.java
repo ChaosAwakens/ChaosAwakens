@@ -33,7 +33,7 @@ public abstract class StatefulAnimal extends Animal {
 
         this.goalSelector.addGoal(1, new WaterAvoidingRandomStrollGoal(this, 1.1D));
         this.goalSelector.addGoal(1, new RandomLookAroundGoal(this));
-
+        
         this.goalSelector.addGoal(2, new FloatGoal(this));
     }
 

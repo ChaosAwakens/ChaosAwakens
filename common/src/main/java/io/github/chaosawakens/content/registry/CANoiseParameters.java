@@ -20,7 +20,7 @@ public class CANoiseParameters {
     public static final Supplier<ResourceKey<NormalNoise.NoiseParameters>> MINING_PARADISE_CONTINENTALNESS = registerNoiseParameter("mining_paradise/continentalness", () -> new NormalNoise.NoiseParameters(-10, 1.0D, 1.0D, 2.0D, 2.0D, 2.0D, 1.0D, 1.0D, 1.0D, 1.0D, 1.0D));
     public static final Supplier<ResourceKey<NormalNoise.NoiseParameters>> MINING_PARADISE_EROSION = registerNoiseParameter("mining_paradise/erosion", () -> new NormalNoise.NoiseParameters(-8, 1.0D, 0.0D, 1.0D, 1.0D));
     public static final Supplier<ResourceKey<NormalNoise.NoiseParameters>> MINING_PARADISE_RIDGES = registerNoiseParameter("mining_paradise/ridges", () -> new NormalNoise.NoiseParameters(-8, 1.5D, 1.0D, 0.5D, 0.5D, 0.5D, 0.5D, 0.5D));
-    public static final Supplier<ResourceKey<NormalNoise.NoiseParameters>> MINING_PARADISE_JAGGEDNESS = registerNoiseParameter("mining_paradise/jaggedness", () -> new NormalNoise.NoiseParameters(-12, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0));
+    public static final Supplier<ResourceKey<NormalNoise.NoiseParameters>> MINING_PARADISE_JAGGEDNESS = registerNoiseParameter("mining_paradise/jaggedness", () -> new NormalNoise.NoiseParameters(-12,     1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0));
 
     public static final Supplier<ResourceKey<NormalNoise.NoiseParameters>> AQUIFER_BARRIER = registerNoiseParameter("mining_paradise/aquifer_barrier", () -> new NormalNoise.NoiseParameters(-3, 1.0D));
     public static final Supplier<ResourceKey<NormalNoise.NoiseParameters>> AQUIFER_FLUID_LEVEL_FLOODEDNESS = registerNoiseParameter("mining_paradise/aquifer_fluid_level_floodedness", () -> new NormalNoise.NoiseParameters(-4, 1.0D));
@@ -47,7 +47,7 @@ public class CANoiseParameters {
     public static final Supplier<ResourceKey<NormalNoise.NoiseParameters>> SPAGHETTI_3D_1 = registerNoiseParameter("mining_paradise/spaghetti_3d_1", () -> new NormalNoise.NoiseParameters(-7, 1.0));
     public static final Supplier<ResourceKey<NormalNoise.NoiseParameters>> SPAGHETTI_3D_2 = registerNoiseParameter("mining_paradise/spaghetti_3d_2", () -> new NormalNoise.NoiseParameters(-7, 1.0));
     public static final Supplier<ResourceKey<NormalNoise.NoiseParameters>> SPAGHETTI_3D_RARITY = registerNoiseParameter("mining_paradise/spaghetti_3d_rarity", () -> new NormalNoise.NoiseParameters(-11, 1.0));
-    public static final Supplier<ResourceKey<NormalNoise.NoiseParameters>> SPAGHETTI_3D_THICKNESS = registerNoiseParameter("mining_paradise/spaghetti_3d_thickness", () -> new NormalNoise.NoiseParameters(-8, 1.0));
+    public static final Supplier<ResourceKey<NormalNoise.NoiseParameters>> SPAGHETTI_3D_THICKNESS= registerNoiseParameter("mining_paradise/spaghetti_3d_thickness", () -> new NormalNoise.NoiseParameters(-8, 1.0));
 
     public static final Supplier<ResourceKey<NormalNoise.NoiseParameters>> SPAGHETTI_ROUGHNESS = registerNoiseParameter("mining_paradise/spaghetti_roughness", () -> new NormalNoise.NoiseParameters(-5, 1.0));
     public static final Supplier<ResourceKey<NormalNoise.NoiseParameters>> SPAGHETTI_ROUGHNESS_MODULATOR = registerNoiseParameter("mining_paradise/spaghetti_roughness_modulator", () -> new NormalNoise.NoiseParameters(-8, 1.0));

@@ -3,7 +3,7 @@ package io.github.chaosawakens.util;
 import java.util.List;
 
 public final class StringUtil {
-    public static final String[] MULTICHAR_FOSSIL_SUFFIXES = new String[]{
+    public static final String[] MULTICHAR_FOSSIL_SUFFIXES = new String[] {
             "End Stone",
             "Packed Ice",
             "Soul Soil"
@@ -41,10 +41,8 @@ public final class StringUtil {
         String literallyLocalizedBlockSoundId = com.mememan.nexus.util.StringUtil.literallyLocalize(blockSoundSubtitleKey, List.of());
 
         if (blockSoundId.endsWith("_break")) return literallyLocalizedBlockSoundId.replace("Break", "broken");
-        if (blockSoundId.endsWith("_step"))
-            return "Footsteps (%s)".formatted(literallyLocalizedBlockSoundId.replace(" Step", ""));
-        if (blockSoundId.endsWith("_fall"))
-            return "Falling (%s)".formatted(literallyLocalizedBlockSoundId.replace(" Fall", ""));
+        if (blockSoundId.endsWith("_step")) return "Footsteps (%s)".formatted(literallyLocalizedBlockSoundId.replace(" Step", ""));
+        if (blockSoundId.endsWith("_fall")) return "Falling (%s)".formatted(literallyLocalizedBlockSoundId.replace(" Fall", ""));
         if (blockSoundId.endsWith("_place")) return literallyLocalizedBlockSoundId.replace("Place", "placed");
         if (blockSoundId.endsWith("_hit")) return literallyLocalizedBlockSoundId.replace("Hit", "breaking");
 

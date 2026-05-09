@@ -16,8 +16,9 @@ import java.util.function.Supplier;
 
 @RegistrarEntry
 public class CASurfaceRuleReg {
-    public static final Supplier<Codec<? extends SurfaceRules.ConditionSource>> DENSE_DIRT_RULE = registerConditionRule("dense_dirt_rule", CASurfaceRules.DenseDirtUnderSurface.CODEC::codec);
     private static final ObjectArrayList<Supplier<MaterialRuleList>> BLOCKS = new ObjectArrayList<>();
+
+    public static final Supplier<Codec<? extends SurfaceRules.ConditionSource>> DENSE_DIRT_RULE = registerConditionRule("dense_dirt_rule", CASurfaceRules.DenseDirtUnderSurface.CODEC::codec);
 
     private static Supplier<Codec<? extends SurfaceRules.ConditionSource>> registerConditionRule(ResourceLocation id, Supplier<Codec<? extends SurfaceRules.ConditionSource>> actualCodecSup) {
         Supplier<Codec<? extends SurfaceRules.ConditionSource>> conditionRuleSup = NexusServices.REGISTRAR.registerObject(id, actualCodecSup, BuiltInRegistries.MATERIAL_CONDITION);

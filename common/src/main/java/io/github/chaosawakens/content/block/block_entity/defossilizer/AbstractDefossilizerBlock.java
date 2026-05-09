@@ -41,10 +41,6 @@ public abstract class AbstractDefossilizerBlock extends BaseEntityBlock {
         registerDefaultState(defaultBlockState().setValue(FACING, Direction.NORTH).setValue(LIT, false));
     }
 
-    protected static <BE extends BlockEntity> BlockEntityTicker<BE> createDefossilizerTicker(Level level, BlockEntityType<BE> serverType, BlockEntityType<? extends AbstractDefossilizerBlockEntity> clientType) {
-        return level.isClientSide ? null : createTickerHelper(serverType, clientType, AbstractDefossilizerBlockEntity::serverTick);
-    }
-
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         super.createBlockStateDefinition(builder);
@@ -118,6 +114,10 @@ public abstract class AbstractDefossilizerBlock extends BaseEntityBlock {
     }
 
     protected abstract void openContainer(Level curLevel, BlockPos targetPos, Player interactingPlayer);
+
+    protected static <BE extends BlockEntity> BlockEntityTicker<BE> createDefossilizerTicker(Level level, BlockEntityType<BE> serverType, BlockEntityType<? extends AbstractDefossilizerBlockEntity> clientType) {
+        return level.isClientSide ? null : createTickerHelper(serverType, clientType, AbstractDefossilizerBlockEntity::serverTick);
+    }
 
     @Override
     public void animateTick(BlockState targetState, Level curLevel, BlockPos targetPos, RandomSource randSrc) {

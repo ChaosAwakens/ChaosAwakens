@@ -23,8 +23,7 @@ public abstract class EntityRenderDispatcherMixin {
 
     @WrapOperation(method = "renderHitbox", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/LevelRenderer;renderLineBox(Lcom/mojang/blaze3d/vertex/PoseStack;Lcom/mojang/blaze3d/vertex/VertexConsumer;DDDDDDFFFF)V"))
     private static void chaosawakens$overrideStandardAABB(PoseStack poseStack, VertexConsumer consumer, double minX, double minY, double minZ, double maxX, double maxY, double maxZ, float red, float green, float blue, float alpha, Operation<Void> original, @Local(argsOnly = true) Entity owner) {
-        if (!(owner instanceof MappableHitboxOwner))
-            original.call(poseStack, consumer, minX, minY, minZ, maxX, maxY, maxZ, red, green, blue, alpha);
+        if (!(owner instanceof MappableHitboxOwner)) original.call(poseStack, consumer, minX, minY, minZ, maxX, maxY, maxZ, red, green, blue, alpha);
     }
 
     @Inject(method = "renderHitbox", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/Entity;getViewVector(F)Lnet/minecraft/world/phys/Vec3;"))

@@ -25,7 +25,9 @@ public interface BiomeConfig {
      * according to your needs.
      *
      * @param regCtx The {@link BootstapContext} used to register the parent {@link Biome}.
+     *
      * @return This config's parent {@link Biome}, passed in during registration. May not be {@code null}.
+     *
      * @see OverworldBiomes
      * @see NetherBiomes
      * @see EndBiomes
@@ -56,6 +58,7 @@ public interface BiomeConfig {
      * Whether the parent {@link Biome} should experience precipitation of any type (snow, rain, etc.).
      *
      * @return Whether the parent {@link Biome} should experience precipitation of any type.
+     *
      * @see Biome.Precipitation
      */
     boolean hasPrecipitation();

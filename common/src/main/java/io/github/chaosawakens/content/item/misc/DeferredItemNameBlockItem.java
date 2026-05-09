@@ -28,14 +28,12 @@ public class DeferredItemNameBlockItem extends ItemNameBlockItem { // Required c
 
         this.blockSup = blockSup;
 
-        if (NexusServices.PLATFORM_MANAGER.getPlatform().equals(ModLoader.FABRIC))
-            DEFERRED_BLOCK_2_ITEM_MAP.put(blockSup, () -> this);
+        if (NexusServices.PLATFORM_MANAGER.getPlatform().equals(ModLoader.FABRIC)) DEFERRED_BLOCK_2_ITEM_MAP.put(blockSup, () -> this);
     }
 
     @Override
     public void registerBlocks(Map<Block, Item> blockToItemMap, Item item) {
-        if (NexusServices.PLATFORM_MANAGER.getPlatform().equals(ModLoader.FORGE))
-            super.registerBlocks(blockToItemMap, item);
+        if (NexusServices.PLATFORM_MANAGER.getPlatform().equals(ModLoader.FORGE)) super.registerBlocks(blockToItemMap, item);
     }
 
     @Override

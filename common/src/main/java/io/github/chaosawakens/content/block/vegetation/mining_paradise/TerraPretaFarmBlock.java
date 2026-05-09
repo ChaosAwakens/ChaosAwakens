@@ -30,8 +30,7 @@ public class TerraPretaFarmBlock extends DefaultableFarmBlock {
         if (aboveState.is(BlockTags.CROPS) && curAgeProperty != null) {
             int maxAge = curAgeProperty.getPossibleValues().size() - 1;
 
-            if (randSrc.nextInt(4) == 0 && aboveState.getValue(curAgeProperty) < maxAge)
-                curServerLevel.setBlockAndUpdate(abovePos, aboveState.setValue(curAgeProperty, aboveState.getValue(curAgeProperty) + 1));
+            if (randSrc.nextInt(4) == 0 && aboveState.getValue(curAgeProperty) < maxAge) curServerLevel.setBlockAndUpdate(abovePos, aboveState.setValue(curAgeProperty, aboveState.getValue(curAgeProperty) + 1));
         }
     }
 }

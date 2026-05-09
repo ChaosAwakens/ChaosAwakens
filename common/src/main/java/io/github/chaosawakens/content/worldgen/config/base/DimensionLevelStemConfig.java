@@ -29,7 +29,9 @@ public interface DimensionLevelStemConfig {
      * The method responsible for initializing the parent dimension's {@linkplain LevelStem LevelStem's} chunk generation and all of its features.
      *
      * @param regCtx The {@link BootstapContext} used during registration. Useful for miscellaneous registry lookups in order to properly configure chunk generation. Don't mind the generic type.
+     *
      * @return The parent dimension's {@linkplain LevelStem LevelStem's} chunk gen. May not be {@code null}.
+     *
      * @see ChunkGenerator
      */
     @NotNull

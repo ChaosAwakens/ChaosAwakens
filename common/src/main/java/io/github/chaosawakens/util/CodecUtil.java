@@ -26,6 +26,5 @@ public final class CodecUtil {
         ).apply(instance, ObjectWrapper::new));
     }
 
-    public record ObjectWrapper<T>(T value) {
-    }
+    public record ObjectWrapper<T>(T value) {}
 }

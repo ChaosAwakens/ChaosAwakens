@@ -23,8 +23,8 @@ import java.util.stream.Collectors;
 
 public class MesozoicVineProcessor extends StructureProcessor {
     public static final Codec<MesozoicVineProcessor> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-            Codec.floatRange(0, 1).fieldOf("chance").forGetter(processor -> processor.chance)
-    ).apply(instance, MesozoicVineProcessor::new));
+                    Codec.floatRange(0, 1).fieldOf("chance").forGetter(processor -> processor.chance)
+            ).apply(instance, MesozoicVineProcessor::new));
 
     public final float chance;
 

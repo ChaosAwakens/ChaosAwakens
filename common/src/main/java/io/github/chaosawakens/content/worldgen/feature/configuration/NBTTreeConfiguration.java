@@ -13,8 +13,7 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemp
 
 import java.util.Optional;
 
-public record NBTTreeConfiguration(Either<ResourceLocation, StructureTemplate> template, int groundLevel,
-                                   Optional<StructureProcessorList> processors) implements FeatureConfiguration {
+public record NBTTreeConfiguration(Either<ResourceLocation, StructureTemplate> template, int groundLevel, Optional<StructureProcessorList> processors) implements FeatureConfiguration {
     public static final Codec<Either<ResourceLocation, StructureTemplate>> TEMPLATE_CODEC = Codec.of(NBTTreeConfiguration::encodeTemplate, ResourceLocation.CODEC.map(Either::left));
     public static final Codec<NBTTreeConfiguration> CODEC = RecordCodecBuilder.create(instance -> instance.group(
             TEMPLATE_CODEC.fieldOf("location").forGetter(conf -> conf.template),

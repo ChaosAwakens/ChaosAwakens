@@ -19,11 +19,11 @@ public final class NoiseRouterUtil {
      * Creates a density function that interpolates between two functions within a specified Y range,
      * and returns a constant value outside that range.
      *
-     * @param inputDensity       The primary density function to interpolate
+     * @param inputDensity The primary density function to interpolate
      * @param interpolationRange The density function used for interpolation
-     * @param minY               The minimum Y level where interpolation starts
-     * @param maxY               The maximum Y level where interpolation ends
-     * @param defaultValue       The constant value to use outside the Y range
+     * @param minY The minimum Y level where interpolation starts
+     * @param maxY The maximum Y level where interpolation ends
+     * @param defaultValue The constant value to use outside the Y range
      * @return A new density function with the specified interpolation behavior
      */
     public static DensityFunction createYLimitedInterpolation(
@@ -50,15 +50,16 @@ public final class NoiseRouterUtil {
      * Takes an input density and smoothly transitions it towards a target value at the top and bottom of the world,
      * effectively clamping the terrain shape.
      *
-     * @param inputDensity               The density function defining the base terrain shape.
-     * @param minWorldY                  The minimum Y level of the dimension (e.g., -64).
-     * @param worldHeight                The total height of the dimension (e.g., 384).
-     * @param topSlideStartFromTop       How many blocks from the world's ceiling the top slide should begin.
-     * @param topSlideSize               The vertical distance over which the top slide occurs.
-     * @param topSlideTarget             The density value to slide towards at the top. (Negative for air).
+     * @param inputDensity The density function defining the base terrain shape.
+     * @param minWorldY The minimum Y level of the dimension (e.g., -64).
+     * @param worldHeight The total height of the dimension (e.g., 384).
+     * @param topSlideStartFromTop How many blocks from the world's ceiling the top slide should begin.
+     * @param topSlideSize The vertical distance over which the top slide occurs.
+     * @param topSlideTarget The density value to slide towards at the top. (Negative for air).
      * @param bottomSlideStartFromBottom How many blocks from the world's floor the bottom slide should begin.
-     * @param bottomSlideSize            The vertical distance over which the bottom slide occurs.
-     * @param bottomSlideTarget          The density value to slide towards at the bottom. (Positive for solid).
+     * @param bottomSlideSize The vertical distance over which the bottom slide occurs.
+     * @param bottomSlideTarget The density value to slide towards at the bottom. (Positive for solid).
+     *
      * @return A new density function with the sliding behavior applied.
      */
     public static DensityFunction createTerrainSlide(DensityFunction inputDensity, int minWorldY, int worldHeight, int topSlideStartFromTop, int topSlideSize, double topSlideTarget, int bottomSlideStartFromBottom, int bottomSlideSize, double bottomSlideTarget) {

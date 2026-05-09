@@ -110,10 +110,7 @@ public final class CAArmorMaterialTemplates {
             ArmorItem.Type.HELMET, 8
     ), 20, SoundEvents.ARMOR_EQUIP_LEATHER, 7.5F, 0.4F, () -> Ingredient.EMPTY);
 
-    public record ExtendedArmorMaterial(ResourceLocation name, int durabilityMultiplier,
-                                        Map<ArmorItem.Type, Integer> protectionFunctionForType, int enchantmentValue,
-                                        SoundEvent sound, float toughness, float knockbackResistance,
-                                        Supplier<Ingredient> repairIngredient) implements ArmorMaterial {
+    public record ExtendedArmorMaterial(ResourceLocation name, int durabilityMultiplier, Map<ArmorItem.Type, Integer> protectionFunctionForType, int enchantmentValue, SoundEvent sound, float toughness, float knockbackResistance, Supplier<Ingredient> repairIngredient) implements ArmorMaterial {
         private static final EnumMap<ArmorItem.Type, Integer> HEALTH_FUNCTION_FOR_TYPE = Util.make(new EnumMap<>(ArmorItem.Type.class), (armorTypes) -> {
             armorTypes.put(ArmorItem.Type.BOOTS, 13);
             armorTypes.put(ArmorItem.Type.LEGGINGS, 15);

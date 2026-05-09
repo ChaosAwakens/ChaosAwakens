@@ -18,8 +18,7 @@ public abstract class GrowingPlantHeadBlockMixin {
 
     @WrapOperation(method = "<init>", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/state/BlockState;setValue(Lnet/minecraft/world/level/block/state/properties/Property;Ljava/lang/Comparable;)Ljava/lang/Object;"))
     private <T extends Comparable<T>> Object chaosawakens$skipVanillaAgeSetValue(BlockState state, Property<T> property, T value, Operation<BlockState> original) {
-        if ((Object) this instanceof DefaultableCropHeadBlock)
-            return state; // We need to do it like this to inject into the bytecode before it runs and inevitably throws, since the property isn't added in #createBaseDefinition
+        if ((Object) this instanceof DefaultableCropHeadBlock) return state; // We need to do it like this to inject into the bytecode before it runs and inevitably throws, since the property isn't added in #createBaseDefinition
 
         return original.call(state, property, value);
     }

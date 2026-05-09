@@ -94,22 +94,23 @@ public final class CABPWTemplates {
             .copyFrom(FOSSIL_PICKAXE)
             .withTag(() -> BlockTags.NEEDS_STONE_TOOL)
             .build();
-    public static final BlockPropertyWrapper<Block> FOSSIL_DREDGESTONE = new BlockPropertyWrapper<>()
-            .builder()
-            .copyFrom(FOSSIL_PICKAXE_STONE)
-            .withTag(CATags.CABlockTags.DREDGESTONE_FOSSILS::get)
-            .withAdditionalTag(CATags.CAItemTags.DREDGESTONE_FOSSILS::get)
-            .build();
-    public static final BlockPropertyWrapper<Block> FOSSIL_GLOOMSTONE = new BlockPropertyWrapper<>()
-            .builder()
-            .copyFrom(FOSSIL_PICKAXE_STONE)
-            .withTag(CATags.CABlockTags.GLOOMSTONE_FOSSILS::get)
-            .withAdditionalTag(CATags.CAItemTags.GLOOMSTONE_FOSSILS::get)
-            .build();
     public static final BlockPropertyWrapper<Block> FOSSIL_PICKAXE_IRON = new BlockPropertyWrapper<>()
             .builder()
             .copyFrom(FOSSIL_PICKAXE)
             .withTag(() -> BlockTags.NEEDS_IRON_TOOL)
+            .build();
+    public static final BlockPropertyWrapper<Block> FOSSIL_SHOVEL = new BlockPropertyWrapper<>()
+            .builder()
+            .copyFrom(FOSSIL)
+            .withTag(() -> BlockTags.MINEABLE_WITH_SHOVEL)
+            .build();
+
+    public static final BlockPropertyWrapper<Block> FOSSIL_BLACKSTOME = new BlockPropertyWrapper<>()
+            .builder()
+            .copyFrom(FOSSIL_PICKAXE)
+            .withTag(CATags.CABlockTags.BLACKSTONE_FOSSILS::get)
+            .withAdditionalTag(CATags.CAItemTags.BLACKSTONE_FOSSILS::get)
+            .withRecipe(CARecipeTemplates::spawnEggFromFossilLava)
             .build();
     public static final BlockPropertyWrapper<Block> FOSSIL_DEEPSLATE = new BlockPropertyWrapper<>()
             .builder()
@@ -123,12 +124,11 @@ public final class CABPWTemplates {
             .withModelDefinition(ModelUtil::rotatedPillar)
             .withBlockStateDefinition(ModelUtil::rotatedPillarBlockState)
             .build();
-    public static final BlockPropertyWrapper<Block> FOSSIL_BLACKSTOME = new BlockPropertyWrapper<>()
+    public static final BlockPropertyWrapper<Block> FOSSIL_DREDGESTONE = new BlockPropertyWrapper<>()
             .builder()
-            .copyFrom(FOSSIL_PICKAXE)
-            .withTag(CATags.CABlockTags.BLACKSTONE_FOSSILS::get)
-            .withAdditionalTag(CATags.CAItemTags.BLACKSTONE_FOSSILS::get)
-            .withRecipe(CARecipeTemplates::spawnEggFromFossilLava)
+            .copyFrom(FOSSIL_PICKAXE_STONE)
+            .withTag(CATags.CABlockTags.DREDGESTONE_FOSSILS::get)
+            .withAdditionalTag(CATags.CAItemTags.DREDGESTONE_FOSSILS::get)
             .build();
     public static final BlockPropertyWrapper<Block> FOSSIL_END_STONE = new BlockPropertyWrapper<>()
             .builder()
@@ -141,6 +141,18 @@ public final class CABPWTemplates {
             .copyFrom(FOSSIL_PICKAXE)
             .withTag(CATags.CABlockTags.FROZEN_FOSSILS::get)
             .withAdditionalTag(CATags.CAItemTags.FROZEN_FOSSILS::get)
+            .build();
+    public static final BlockPropertyWrapper<Block> FOSSIL_GLOOMSTONE = new BlockPropertyWrapper<>()
+            .builder()
+            .copyFrom(FOSSIL_PICKAXE_STONE)
+            .withTag(CATags.CABlockTags.GLOOMSTONE_FOSSILS::get)
+            .withAdditionalTag(CATags.CAItemTags.GLOOMSTONE_FOSSILS::get)
+            .build();
+    public static final BlockPropertyWrapper<Block> FOSSIL_GRAVEL = new BlockPropertyWrapper<>()
+            .builder()
+            .copyFrom(FOSSIL_SHOVEL)
+            .withTag(CATags.CABlockTags.GRAVEL_FOSSILS::get)
+            .withAdditionalTag(CATags.CAItemTags.GRAVEL_FOSSILS::get)
             .build();
     public static final BlockPropertyWrapper<Block> FOSSIL_KYANITE = new BlockPropertyWrapper<>()
             .builder()
@@ -155,35 +167,18 @@ public final class CABPWTemplates {
             .withAdditionalTag(CATags.CAItemTags.NETHERRACK_FOSSILS::get)
             .withRecipe(CARecipeTemplates::spawnEggFromFossilLava)
             .build();
+    public static final BlockPropertyWrapper<Block> FOSSIL_SAND = new BlockPropertyWrapper<>()
+            .builder()
+            .copyFrom(FOSSIL_SHOVEL)
+            .withTag(CATags.CABlockTags.SAND_FOSSILS::get)
+            .withAdditionalTag(CATags.CAItemTags.SAND_FOSSILS::get)
+            .build();
     public static final BlockPropertyWrapper<Block> FOSSIL_SANDSTONE = new BlockPropertyWrapper<>()
             .builder()
             .copyFrom(FOSSIL_PICKAXE)
             .withModelDefinition(ModelUtil::cubeBottomTop)
             .withTag(CATags.CABlockTags.SANDSTONE_FOSSILS::get)
             .withAdditionalTag(CATags.CAItemTags.SANDSTONE_FOSSILS::get)
-            .build();
-    public static final BlockPropertyWrapper<Block> FOSSIL_STONE = new BlockPropertyWrapper<>()
-            .builder()
-            .copyFrom(FOSSIL_PICKAXE)
-            .withTag(CATags.CABlockTags.STONE_FOSSILS::get)
-            .withAdditionalTag(CATags.CAItemTags.STONE_FOSSILS::get)
-            .build();
-    public static final BlockPropertyWrapper<Block> FOSSIL_SHOVEL = new BlockPropertyWrapper<>()
-            .builder()
-            .copyFrom(FOSSIL)
-            .withTag(() -> BlockTags.MINEABLE_WITH_SHOVEL)
-            .build();
-    public static final BlockPropertyWrapper<Block> FOSSIL_GRAVEL = new BlockPropertyWrapper<>()
-            .builder()
-            .copyFrom(FOSSIL_SHOVEL)
-            .withTag(CATags.CABlockTags.GRAVEL_FOSSILS::get)
-            .withAdditionalTag(CATags.CAItemTags.GRAVEL_FOSSILS::get)
-            .build();
-    public static final BlockPropertyWrapper<Block> FOSSIL_SAND = new BlockPropertyWrapper<>()
-            .builder()
-            .copyFrom(FOSSIL_SHOVEL)
-            .withTag(CATags.CABlockTags.SAND_FOSSILS::get)
-            .withAdditionalTag(CATags.CAItemTags.SAND_FOSSILS::get)
             .build();
     public static final BlockPropertyWrapper<Block> FOSSIL_SOUL_SOIL = new BlockPropertyWrapper<>()
             .builder()
@@ -192,6 +187,13 @@ public final class CABPWTemplates {
             .withAdditionalTag(CATags.CAItemTags.SOUL_SOIL_FOSSILS::get)
             .withRecipe(CARecipeTemplates::spawnEggFromFossilLava)
             .build();
+    public static final BlockPropertyWrapper<Block> FOSSIL_STONE = new BlockPropertyWrapper<>()
+            .builder()
+            .copyFrom(FOSSIL_PICKAXE)
+            .withTag(CATags.CABlockTags.STONE_FOSSILS::get)
+            .withAdditionalTag(CATags.CAItemTags.STONE_FOSSILS::get)
+            .build();
+
     public static final BlockPropertyWrapper<Block> GATE_BLOCK = new BlockPropertyWrapper<>()
             .builder()
             .literalTranslation()

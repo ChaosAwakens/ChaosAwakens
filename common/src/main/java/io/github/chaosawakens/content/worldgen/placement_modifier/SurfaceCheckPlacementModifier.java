@@ -25,7 +25,7 @@ public class SurfaceCheckPlacementModifier extends PlacementModifier {
 
     @Override
     public @NotNull Stream<BlockPos> getPositions(PlacementContext context, RandomSource source, BlockPos pos) {
-        return provider.getState(source, pos).equals(context.getBlockState(pos.below())) ? Stream.empty() : Stream.of(pos);
+        return provider.getState(source, pos).equals(context.getBlockState(pos.below())) ? Stream.empty(): Stream.of(pos);
     }
 
     @Override

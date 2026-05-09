@@ -13,8 +13,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Locale;
 
-public record DefossilizingRecipeSerializer<ADR extends AbstractDefossilizingRecipe>(FossilCache<ADR> fossilCache,
-                                                                                     int defaultDefossilizationTime) implements RecipeSerializer<ADR> {
+public record DefossilizingRecipeSerializer<ADR extends AbstractDefossilizingRecipe>(FossilCache<ADR> fossilCache, int defaultDefossilizationTime) implements RecipeSerializer<ADR> {
 
     @Override
     public @NotNull ADR fromJson(ResourceLocation recipeId, JsonObject recipeJson) {

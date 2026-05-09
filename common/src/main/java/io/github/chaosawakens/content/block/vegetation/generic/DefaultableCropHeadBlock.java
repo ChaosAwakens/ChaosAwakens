@@ -15,9 +15,7 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.GrowingPlantBodyBlock;
-import net.minecraft.world.level.block.GrowingPlantHeadBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -32,21 +30,22 @@ import java.util.Set;
 import java.util.function.Supplier;
 
 public class DefaultableCropHeadBlock extends GrowingPlantHeadBlock implements CropInstance {
+    @Nullable
+    private static IntegerProperty pendingAgeProperty;
+    @Nullable
+    private static IntegerProperty pendingHeightProperty;
     public static final IntegerProperty DEFAULT_AGE_PROPERTY = BlockStateProperties.AGE_3;
     public static final int DEFAULT_MAX_AGE = BlockStateProperties.MAX_AGE_3;
     public static final IntegerProperty DEFAULT_HEIGHT_PROPERTY = DefaultableCropBodyBlock.DEFAULT_HEIGHT_PROPERTY;
     public static final int DEFAULT_MAX_HEIGHT = DefaultableCropBodyBlock.DEFAULT_MAX_HEIGHT;
     public static final VoxelShape DEFAULT_SHAPE = Block.box(0.0, 0.0, 0.0, 16.0, 12.0, 16.0);
-    public static final VoxelShape[] DEFAULT_SHAPE_BY_AGE = new VoxelShape[]{
+    public static final VoxelShape[] DEFAULT_SHAPE_BY_AGE = new VoxelShape[] {
             Block.box(0.0, 0.0, 0.0, 16.0, 4.0, 16.0),
             Block.box(0.0, 0.0, 0.0, 16.0, 8.0, 16.0),
             Block.box(0.0, 0.0, 0.0, 16.0, 12.0, 16.0),
             Block.box(0.0, 0.0, 0.0, 16.0, 16.0, 16.0)
     };
-    @Nullable
-    private static IntegerProperty pendingAgeProperty;
-    @Nullable
-    private static IntegerProperty pendingHeightProperty;
+
     protected final Supplier<Item> produce;
     protected final Supplier<Item> seed;
     protected final Supplier<GrowingPlantBodyBlock> bodyBlock;
@@ -143,24 +142,6 @@ public class DefaultableCropHeadBlock extends GrowingPlantHeadBlock implements C
 
     public DefaultableCropHeadBlock(Properties properties) {
         this(properties, 0.1D);
-    }
-
-    public static Supplier<GrowingPlantBodyBlock> findBodyFor(Supplier<Block> targetBlockSup) {
-        return () -> RegistryUtil.getObjectFrom(targetBlockSup, targetBlockId -> targetBlockId.withPath(path -> path.replace("_head_", "_body_")))
-                .filter(GrowingPlantBodyBlock.class::isInstance)
-                .map(GrowingPlantBodyBlock.class::cast)
-                .orElse(null);
-    }
-
-    private static Properties storePropertiesInStaticInitializer(Properties properties, IntegerProperty ageProperty, IntegerProperty heightProperty) {
-        pendingAgeProperty = ageProperty;
-        pendingHeightProperty = heightProperty;
-        return properties;
-    }
-
-    private static void clearPendingProperties() {
-        pendingAgeProperty = null;
-        pendingHeightProperty = null;
     }
 
     @Override
@@ -326,5 +307,23 @@ public class DefaultableCropHeadBlock extends GrowingPlantHeadBlock implements C
 
     public boolean isMaxHeight(BlockState state) {
         return getHeight(state) >= maxHeight;
+    }
+
+    public static Supplier<GrowingPlantBodyBlock> findBodyFor(Supplier<Block> targetBlockSup) {
+        return () -> RegistryUtil.getObjectFrom(targetBlockSup, targetBlockId -> targetBlockId.withPath(path -> path.replace("_head_", "_body_")))
+                .filter(GrowingPlantBodyBlock.class::isInstance)
+                .map(GrowingPlantBodyBlock.class::cast)
+                .orElse(null);
+    }
+
+    private static Properties storePropertiesInStaticInitializer(Properties properties, IntegerProperty ageProperty, IntegerProperty heightProperty) {
+        pendingAgeProperty = ageProperty;
+        pendingHeightProperty = heightProperty;
+        return properties;
+    }
+
+    private static void clearPendingProperties() {
+        pendingAgeProperty = null;
+        pendingHeightProperty = null;
     }
 }

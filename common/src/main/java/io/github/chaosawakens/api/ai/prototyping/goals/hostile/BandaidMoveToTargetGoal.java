@@ -104,8 +104,7 @@ public class BandaidMoveToTargetGoal extends Goal {
         if (target == null) return false;
         if (target.isAlive() && !target.isSpectator()) {
             if (target instanceof Player playerTarget && playerTarget.isCreative()) return false;
-            if (owner instanceof StatefulMonster smOwner)
-                return smOwner.getSensing().hasLineOfSight(target) && smOwner.distanceToSqr(target) > (satisDist != 0.0D ? satisDist * satisDist : smOwner.getMeleeAttackRangeSqr(target)) && !smOwner.isAttackingStatically();
+            if (owner instanceof StatefulMonster smOwner) return smOwner.getSensing().hasLineOfSight(target) && smOwner.distanceToSqr(target) > (satisDist != 0.0D ? satisDist * satisDist : smOwner.getMeleeAttackRangeSqr(target)) && !smOwner.isAttackingStatically();
 
             return owner.getSensing().hasLineOfSight(target);
         }

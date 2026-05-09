@@ -1,19 +1,19 @@
 {
-  "required": true,
-  "minVersion": "0.8",
-  "package": "io.github.chaosawakens.mixins",
-  "refmap": "${mod_id}.refmap.json",
-  "compatibilityLevel": "JAVA_17",
-  "mixins": [
-  ],
-  "client": [
-  ],
-  "server": [
-  ],
-  "injectors": {
-    "defaultRequire": 1
-  },
-  "mixinextras": {
-    "minVersion": "${mixinextras_version}"
+    "required": true,
+    "minVersion": "0.8",
+    "package": "io.github.chaosawakens.mixins",
+    "refmap": "${mod_id}.refmap.json",
+    "compatibilityLevel": "JAVA_17",
+    "mixins": [
+    ],
+    "client": [
+    ],
+    "server": [
+    ],
+    "injectors": {
+      "defaultRequire": 1
+    },
+    "mixinextras": {
+        "minVersion": "${mixinextras_version}"
+    }
   }
-}

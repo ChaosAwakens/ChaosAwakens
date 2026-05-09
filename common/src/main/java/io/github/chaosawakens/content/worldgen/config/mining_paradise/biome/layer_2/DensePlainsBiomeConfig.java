@@ -23,8 +23,7 @@ public class DensePlainsBiomeConfig implements BiomeConfig {
             .skyColor(3622254)
             .build();
 
-    public DensePlainsBiomeConfig() {
-    }
+    public DensePlainsBiomeConfig() {}
 
     @Override
     public boolean hasPrecipitation() {

@@ -64,9 +64,7 @@ public abstract class AbstractDefossilizingRecipe implements Recipe<Container> {
     }
 
     public abstract Predicate<ItemStack> getBucketStackPredicate();
-
     public abstract Predicate<ItemStack> getFossilizedStackPredicate();
-
     public abstract Predicate<ItemStack> getPowerChipStackPredicate();
 
     @Override

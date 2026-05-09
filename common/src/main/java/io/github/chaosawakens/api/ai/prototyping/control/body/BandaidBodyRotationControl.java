@@ -6,9 +6,9 @@ import net.minecraft.world.entity.ai.control.BodyRotationControl;
 import net.minecraft.world.entity.ai.control.MoveControl;
 
 public class BandaidBodyRotationControl extends BodyRotationControl {
+    protected final Mob owner;
     protected static final int ROT_TICK_THRESHOLD = 10;
     protected static final int ROT_THRESHOLD = 75;
-    protected final Mob owner;
     protected int curRotTime;
     protected float targetHeadRot;
     protected double[] xRotHist = new double[ROT_TICK_THRESHOLD];
@@ -18,15 +18,6 @@ public class BandaidBodyRotationControl extends BodyRotationControl {
         super(owner);
 
         this.owner = owner;
-    }
-
-    private static float approachRot(float curRot, float targetRot, float rotThreshold) {
-        float rotDelta = Mth.degreesDifference(targetRot, curRot);
-
-        if (rotDelta < -rotThreshold) rotDelta = -rotThreshold;
-        else if (rotDelta >= rotThreshold) rotDelta = rotThreshold;
-
-        return targetRot + rotDelta * 0.55F;
     }
 
     @Override
@@ -59,8 +50,7 @@ public class BandaidBodyRotationControl extends BodyRotationControl {
 
                 this.curRotTime++;
 
-                if (curRotTime > rotSpeed)
-                    rotLimit = Math.max(1 - (curRotTime - rotSpeed) / rotSpeed, 0) * ROT_THRESHOLD;
+                if (curRotTime > rotSpeed) rotLimit = Math.max(1 - (curRotTime - rotSpeed) / rotSpeed, 0) * ROT_THRESHOLD;
 
                 owner.yBodyRot = approachRot(owner.yHeadRot, owner.yBodyRot, rotLimit);
             }
@@ -98,5 +88,14 @@ public class BandaidBodyRotationControl extends BodyRotationControl {
 
     private void rotateHeadIfNecessary() {
         this.owner.yHeadRot = Mth.rotateIfNecessary(this.owner.yHeadRot, this.owner.yBodyRot, (float) this.owner.getMaxHeadYRot());
+    }
+
+    private static float approachRot(float curRot, float targetRot, float rotThreshold) {
+        float rotDelta = Mth.degreesDifference(targetRot, curRot);
+
+        if (rotDelta < -rotThreshold) rotDelta = -rotThreshold;
+        else if (rotDelta >= rotThreshold) rotDelta = rotThreshold;
+
+        return targetRot + rotDelta * 0.55F;
     }
 }

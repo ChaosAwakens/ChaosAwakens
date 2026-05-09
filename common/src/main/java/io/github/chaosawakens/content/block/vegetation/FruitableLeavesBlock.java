@@ -44,30 +44,6 @@ public class FruitableLeavesBlock extends LeavesBlock {
         this(fruitItemSup, 15, properties);
     }
 
-    public static boolean isRipe(BlockState targetState) {
-        return targetState.hasProperty(RIPE) && targetState.getValue(RIPE);
-    }
-
-    public static BlockState setRipe(BlockState targetState, boolean ripe) {
-        return targetState.hasProperty(RIPE) ? targetState.setValue(RIPE, ripe) : targetState;
-    }
-
-    public static BlockState setRipe(BlockState targetState) {
-        return setRipe(targetState, true);
-    }
-
-    public static boolean isPersistent(BlockState targetState) {
-        return targetState.hasProperty(PERSISTENT) && targetState.getValue(PERSISTENT);
-    }
-
-    public static BlockState setPersistent(BlockState targetState, boolean persistent) {
-        return targetState.hasProperty(PERSISTENT) ? targetState.setValue(PERSISTENT, persistent) : targetState;
-    }
-
-    public static BlockState setPersistent(BlockState targetState) {
-        return setPersistent(targetState, true);
-    }
-
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         super.createBlockStateDefinition(builder);
@@ -84,8 +60,7 @@ public class FruitableLeavesBlock extends LeavesBlock {
     public void randomTick(BlockState targetState, ServerLevel curLevel, BlockPos targetPos, RandomSource random) {
         super.randomTick(targetState, curLevel, targetPos, random);
 
-        if (!isRipe(targetState) && random.nextInt(probability) == 0 && (!decaying(targetState) || isPersistent(targetState)))
-            curLevel.setBlockAndUpdate(targetPos, setRipe(targetState));
+        if (!isRipe(targetState) && random.nextInt(probability) == 0 && (!decaying(targetState) || isPersistent(targetState))) curLevel.setBlockAndUpdate(targetPos, setRipe(targetState));
     }
 
     @Override
@@ -121,5 +96,29 @@ public class FruitableLeavesBlock extends LeavesBlock {
 
     public int calculateRandomFruitDrop() {
         return maxFruitCount - minFruitCount < 0 ? 1 : RandomSource.create().nextInt(minFruitCount, maxFruitCount);
+    }
+
+    public static boolean isRipe(BlockState targetState) {
+        return targetState.hasProperty(RIPE) && targetState.getValue(RIPE);
+    }
+
+    public static BlockState setRipe(BlockState targetState, boolean ripe) {
+        return targetState.hasProperty(RIPE) ? targetState.setValue(RIPE, ripe) : targetState;
+    }
+
+    public static BlockState setRipe(BlockState targetState) {
+        return setRipe(targetState, true);
+    }
+
+    public static boolean isPersistent(BlockState targetState) {
+        return targetState.hasProperty(PERSISTENT) && targetState.getValue(PERSISTENT);
+    }
+
+    public static BlockState setPersistent(BlockState targetState, boolean persistent) {
+        return targetState.hasProperty(PERSISTENT) ? targetState.setValue(PERSISTENT, persistent) : targetState;
+    }
+
+    public static BlockState setPersistent(BlockState targetState) {
+        return setPersistent(targetState, true);
     }
 }

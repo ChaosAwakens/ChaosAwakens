@@ -7,8 +7,7 @@ import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfigur
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import net.minecraft.world.level.levelgen.feature.stateproviders.SimpleStateProvider;
 
-public record StalagmiteConfiguration(BlockStateProvider block, int minRadius, int maxRadius, float steepness,
-                                      float variation) implements FeatureConfiguration {
+public record StalagmiteConfiguration(BlockStateProvider block, int minRadius, int maxRadius, float steepness, float variation) implements FeatureConfiguration {
     public static final Codec<StalagmiteConfiguration> CODEC = RecordCodecBuilder.create(instance ->
             instance.group(
                     BlockStateProvider.CODEC.fieldOf("block").forGetter(StalagmiteConfiguration::block),

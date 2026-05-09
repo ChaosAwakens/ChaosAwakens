@@ -74,11 +74,11 @@ public final class CAModelTemplates {
         return leafCarpet(targetBlock, RegistryUtil.getTextureLocationOrDefault(
                 targetBlock,
                 RegistryUtil.getTextureLocationOrDefault(DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(targetBlock.get())
-                                .withPath(curPath -> curPath.replace("_leaf_carpet", "_leaves")),
+                        .withPath(curPath -> curPath.replace("_leaf_carpet", "_leaves")),
                         "block",
                         RegistryUtil.getTextureLocationOrDefault(DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(targetBlock.get())
                                 .withPath(curPath -> curPath.replace("_carpet", "")), "block", RegistryUtil.getTextureLocationOrDefault(
-                                new ResourceLocation(DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(targetBlock.get()).getPath().replace("_leaf_carpet", "_leaves")),
+                                        new ResourceLocation(DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(targetBlock.get()).getPath().replace("_leaf_carpet", "_leaves")),
                                 "block", RegistryUtil.getTextureLocationOrDefault(
                                         new ResourceLocation(DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(targetBlock.get()).getPath().replace("_carpet", "")),
                                         "block"
@@ -220,8 +220,7 @@ public final class CAModelTemplates {
     public static BlockStateDefinition roboSlabBlockState(Supplier<Block> targetBlock) {
         ResourceLocation defaultedTexLoc = RegistryUtil.getTextureLocationOrDefault(RegistryUtil.pickBlockId(targetBlock), RegistryUtil.getTextureLocationOrDefault(DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(targetBlock.get()).withPath(curPath -> curPath.replace("_slab", "_block"))));
 
-        if (defaultedTexLoc.getPath().contains("/"))
-            defaultedTexLoc = defaultedTexLoc.withPath(curPath -> curPath.substring(curPath.lastIndexOf('/') + 1)).withPrefix("block/");
+        if (defaultedTexLoc.getPath().contains("/")) defaultedTexLoc = defaultedTexLoc.withPath(curPath -> curPath.substring(curPath.lastIndexOf('/') + 1)).withPrefix("block/");
 
         return ModelUtil.slabBlockState(targetBlock, defaultedTexLoc);
     }

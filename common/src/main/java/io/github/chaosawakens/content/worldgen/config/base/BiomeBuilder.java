@@ -37,22 +37,22 @@ public interface BiomeBuilder {
      * In this case, {@link #getLowerSurfaceDepth()} and {@link #getUpperSurfaceDepth()} are used to place biomes on or above
      * what is deemed to be the "surface" within an implementor biome builder type {@code class}.
      *
-     * @param biomeMapper        The {@link Consumer} to which the rest of the parameters will be passed in. Usually,
-     *                           whenever you call this method (or its equivalents), you'll have access to this as a method
-     *                           parameter (conventionally, you would access this in a biome builder type {@code class}).
-     * @param temperature        The temperature noise parameter the specified biome should be placed in. Usually used as a mental
-     *                           model to differentiate between "cold" and "hot" biomes, conventionally preventing odd biome
-     *                           placements (really up to you).
-     * @param humidity           The humidity noise parameter the specified biome should be placed in. Typically used as a mental
-     *                           model for distinguishing between dry and "swampy" or otherwise humid biomes.
-     * @param continentalness    The continentalness noise parameter the specified biome should be placed in. Used as a mental
-     *                           model to represent how far inland a biome is.
-     * @param erosion            The erosion noise parameter the specified biome should be placed in. Represents a mental model for
-     *                           how "eroded" (or flattened) a biome is.
-     * @param weirdness          The weirdness noise parameter the specified biome should be placed in. In Vanilla, this is used
-     *                           to sort of allow for different biome variants (e.g. "Bamboo Jungle" VS "Normal Jungle"). This one's
-     *                           a bit of a niche and often unused parameter, set to 0 most of the time.
-     * @param offset             The vertical offset the specified biome should be placed in account of.
+     * @param biomeMapper The {@link Consumer} to which the rest of the parameters will be passed in. Usually,
+     *                    whenever you call this method (or its equivalents), you'll have access to this as a method
+     *                    parameter (conventionally, you would access this in a biome builder type {@code class}).
+     * @param temperature The temperature noise parameter the specified biome should be placed in. Usually used as a mental
+     *                    model to differentiate between "cold" and "hot" biomes, conventionally preventing odd biome
+     *                    placements (really up to you).
+     * @param humidity The humidity noise parameter the specified biome should be placed in. Typically used as a mental
+     *                 model for distinguishing between dry and "swampy" or otherwise humid biomes.
+     * @param continentalness The continentalness noise parameter the specified biome should be placed in. Used as a mental
+     *                        model to represent how far inland a biome is.
+     * @param erosion The erosion noise parameter the specified biome should be placed in. Represents a mental model for
+     *                how "eroded" (or flattened) a biome is.
+     * @param weirdness The weirdness noise parameter the specified biome should be placed in. In Vanilla, this is used
+     *                  to sort of allow for different biome variants (e.g. "Bamboo Jungle" VS "Normal Jungle"). This one's
+     *                  a bit of a niche and often unused parameter, set to 0 most of the time.
+     * @param offset The vertical offset the specified biome should be placed in account of.
      * @param actualBiomeToPlace The biome in question.
      */
     default void addSurfaceBiome(Consumer<Pair<Climate.ParameterPoint, ResourceKey<Biome>>> biomeMapper, Climate.Parameter temperature, Climate.Parameter humidity, Climate.Parameter continentalness, Climate.Parameter erosion, Climate.Parameter weirdness, float offset, ResourceKey<Biome> actualBiomeToPlace) {
@@ -69,22 +69,22 @@ public interface BiomeBuilder {
      * In this case, {@link #getUndergroundDepth()} is used to place biomes within what is deemed to be the "underground" section
      * within an implementor biome builder type {@code class}.
      *
-     * @param biomeMapper        The {@link Consumer} to which the rest of the parameters will be passed in. Usually,
-     *                           whenever you call this method (or its equivalents), you'll have access to this as a method
-     *                           parameter (conventionally, you would access this in a biome builder type {@code class}).
-     * @param temperature        The temperature noise parameter the specified biome should be placed in. Usually used as a mental
-     *                           model to differentiate between "cold" and "hot" biomes, conventionally preventing odd biome
-     *                           placements (really up to you).
-     * @param humidity           The humidity noise parameter the specified biome should be placed in. Typically used as a mental
-     *                           model for distinguishing between dry and "swampy" or otherwise humid biomes.
-     * @param continentalness    The continentalness noise parameter the specified biome should be placed in. Used as a mental
-     *                           model to represent how far inland a biome is.
-     * @param erosion            The erosion noise parameter the specified biome should be placed in. Represents a mental model for
-     *                           how "eroded" (or flattened) a biome is.
-     * @param weirdness          The weirdness noise parameter the specified biome should be placed in. In Vanilla, this is used
-     *                           to sort of allow for different biome variants (e.g. "Bamboo Jungle" VS "Normal Jungle"). This one's
-     *                           a bit of a niche and often unused parameter, set to 0 most of the time.
-     * @param offset             The vertical offset the specified biome should be placed in account of.
+     * @param biomeMapper The {@link Consumer} to which the rest of the parameters will be passed in. Usually,
+     *                    whenever you call this method (or its equivalents), you'll have access to this as a method
+     *                    parameter (conventionally, you would access this in a biome builder type {@code class}).
+     * @param temperature The temperature noise parameter the specified biome should be placed in. Usually used as a mental
+     *                    model to differentiate between "cold" and "hot" biomes, conventionally preventing odd biome
+     *                    placements (really up to you).
+     * @param humidity The humidity noise parameter the specified biome should be placed in. Typically used as a mental
+     *                 model for distinguishing between dry and "swampy" or otherwise humid biomes.
+     * @param continentalness The continentalness noise parameter the specified biome should be placed in. Used as a mental
+     *                        model to represent how far inland a biome is.
+     * @param erosion The erosion noise parameter the specified biome should be placed in. Represents a mental model for
+     *                how "eroded" (or flattened) a biome is.
+     * @param weirdness The weirdness noise parameter the specified biome should be placed in. In Vanilla, this is used
+     *                  to sort of allow for different biome variants (e.g. "Bamboo Jungle" VS "Normal Jungle"). This one's
+     *                  a bit of a niche and often unused parameter, set to 0 most of the time.
+     * @param offset The vertical offset the specified biome should be placed in account of.
      * @param actualBiomeToPlace The biome in question.
      */
     default void addUndergroundBiome(Consumer<Pair<Climate.ParameterPoint, ResourceKey<Biome>>> biomeMapper, Climate.Parameter temperature, Climate.Parameter humidity, Climate.Parameter continentalness, Climate.Parameter erosion, Climate.Parameter weirdness, float offset, ResourceKey<Biome> actualBiomeToPlace) {
@@ -100,22 +100,22 @@ public interface BiomeBuilder {
      * In this case, {@link #getBottomDepth()} is used to place biomes on what is deemed to be the "bottom" (lowest point)
      * within an implementor biome builder type {@code class}.
      *
-     * @param biomeMapper        The {@link Consumer} to which the rest of the parameters will be passed in. Usually,
-     *                           whenever you call this method (or its equivalents), you'll have access to this as a method
-     *                           parameter (conventionally, you would access this in a biome builder type {@code class}).
-     * @param temperature        The temperature noise parameter the specified biome should be placed in. Usually used as a mental
-     *                           model to differentiate between "cold" and "hot" biomes, conventionally preventing odd biome
-     *                           placements (really up to you).
-     * @param humidity           The humidity noise parameter the specified biome should be placed in. Typically used as a mental
-     *                           model for distinguishing between dry and "swampy" or otherwise humid biomes.
-     * @param continentalness    The continentalness noise parameter the specified biome should be placed in. Used as a mental
-     *                           model to represent how far inland a biome is.
-     * @param erosion            The erosion noise parameter the specified biome should be placed in. Represents a mental model for
-     *                           how "eroded" (or flattened) a biome is.
-     * @param weirdness          The weirdness noise parameter the specified biome should be placed in. In Vanilla, this is used
-     *                           to sort of allow for different biome variants (e.g. "Bamboo Jungle" VS "Normal Jungle"). This one's
-     *                           a bit of a niche and often unused parameter, set to 0 most of the time.
-     * @param offset             The vertical offset the specified biome should be placed in account of.
+     * @param biomeMapper The {@link Consumer} to which the rest of the parameters will be passed in. Usually,
+     *                    whenever you call this method (or its equivalents), you'll have access to this as a method
+     *                    parameter (conventionally, you would access this in a biome builder type {@code class}).
+     * @param temperature The temperature noise parameter the specified biome should be placed in. Usually used as a mental
+     *                    model to differentiate between "cold" and "hot" biomes, conventionally preventing odd biome
+     *                    placements (really up to you).
+     * @param humidity The humidity noise parameter the specified biome should be placed in. Typically used as a mental
+     *                 model for distinguishing between dry and "swampy" or otherwise humid biomes.
+     * @param continentalness The continentalness noise parameter the specified biome should be placed in. Used as a mental
+     *                        model to represent how far inland a biome is.
+     * @param erosion The erosion noise parameter the specified biome should be placed in. Represents a mental model for
+     *                how "eroded" (or flattened) a biome is.
+     * @param weirdness The weirdness noise parameter the specified biome should be placed in. In Vanilla, this is used
+     *                  to sort of allow for different biome variants (e.g. "Bamboo Jungle" VS "Normal Jungle"). This one's
+     *                  a bit of a niche and often unused parameter, set to 0 most of the time.
+     * @param offset The vertical offset the specified biome should be placed in account of.
      * @param actualBiomeToPlace The biome in question.
      */
     default void addBottomBiome(Consumer<Pair<Climate.ParameterPoint, ResourceKey<Biome>>> biomeMapper, Climate.Parameter temperature, Climate.Parameter humidity, Climate.Parameter continentalness, Climate.Parameter erosion, Climate.Parameter weirdness, float offset, ResourceKey<Biome> actualBiomeToPlace) {

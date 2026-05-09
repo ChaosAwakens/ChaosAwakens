@@ -44,7 +44,6 @@ public class CAConfiguredCarvers {
         CARVER_KEYS.add(configuredMiningParadiseCave);
         return configuredMiningParadiseCave;
     }
-
     public static Supplier<ResourceKey<ConfiguredWorldCarver<?>>> configuredExtraCave() {
         Supplier<ResourceKey<ConfiguredWorldCarver<?>>> configuredMiningParadiseCave = NexusServices.REGISTRAR.registerDatapackObject(
                 CAConstants.prefix("mining_paradise_extra_cave"),

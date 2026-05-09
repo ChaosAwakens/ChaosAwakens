@@ -15,6 +15,8 @@ import java.util.function.Supplier;
 
 @RegistrarEntry
 public final class CAStats {
+    protected static final ObjectArrayList<Supplier<ResourceLocation>> CUSTOM_STATS = new ObjectArrayList<>();
+
     public static final Supplier<ResourceLocation> INTERACT_WITH_IRON_DEFOSSILIZER = new SpecializedLanguagePropertyWrapper<>(registerCustomStatType("interact_with_iron_defossilizer"), CAConstants.MOD_ID)
             .builder()
             .withAdditionalLocalizationKey("stat.chaosawakens.interact_with_iron_defossilizer", "Interactions with Iron Defossilizer")
@@ -23,11 +25,11 @@ public final class CAStats {
             .builder()
             .withAdditionalLocalizationKey("stat.chaosawakens.interact_with_crystal_defossilizer", "Interactions with Crystal Defossilizer")
             .buildAndGet();
+
     public static final Supplier<ResourceLocation> OPEN_ROBO_CRATE = new SpecializedLanguagePropertyWrapper<>(registerCustomStatType("open_robo_crate"), CAConstants.MOD_ID)
             .builder()
             .withAdditionalLocalizationKey("stat.chaosawakens.open_robo_crate", "Robo Crates Opened")
             .buildAndGet();
-    protected static final ObjectArrayList<Supplier<ResourceLocation>> CUSTOM_STATS = new ObjectArrayList<>();
 
     private static Supplier<ResourceLocation> registerCustomStatType(ResourceLocation statId, Supplier<ResourceLocation> statKey, @Nullable StatFormatter statFormatter) {
         Supplier<ResourceLocation> registeredStatKey = NexusServices.REGISTRAR.registerObject(statId, statKey, BuiltInRegistries.CUSTOM_STAT);

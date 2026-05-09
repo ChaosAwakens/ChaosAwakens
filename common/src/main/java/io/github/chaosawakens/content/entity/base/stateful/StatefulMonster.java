@@ -18,8 +18,8 @@ import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 
 public abstract class StatefulMonster extends Monster {
-    public static final byte NO_ATTACK_ID = 0;
     private static final EntityDataAccessor<Byte> ATTACK_ID = SynchedEntityData.defineId(StatefulMonster.class, EntityDataSerializers.BYTE);
+    public static final byte NO_ATTACK_ID = 0;
 
     protected StatefulMonster(EntityType<? extends Monster> entityType, Level level) {
         super(entityType, level);

@@ -40,7 +40,9 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 
 public class DefaultableCropBlock extends BushBlock implements CropInstance, BonemealableBlock {
-    public static final VoxelShape[] DEFAULT_SHAPE_BY_AGE = new VoxelShape[]{
+    @Nullable
+    private static IntegerProperty pendingAgeProperty; // We can skip the whole "store in [either ThreadLocal or AtomicReference or whatever]" shtick here cuz registration is single-threaded, and if a mod does any goofy hacky stuff then it's their fault anyway
+    public static final VoxelShape[] DEFAULT_SHAPE_BY_AGE = new VoxelShape[] {
             Block.box(0.0, 0.0, 0.0, 16.0, 2.0, 16.0),
             Block.box(0.0, 0.0, 0.0, 16.0, 4.0, 16.0),
             Block.box(0.0, 0.0, 0.0, 16.0, 6.0, 16.0),
@@ -50,8 +52,6 @@ public class DefaultableCropBlock extends BushBlock implements CropInstance, Bon
             Block.box(0.0, 0.0, 0.0, 16.0, 14.0, 16.0),
             Block.box(0.0, 0.0, 0.0, 16.0, 16.0, 16.0)
     };
-    @Nullable
-    private static IntegerProperty pendingAgeProperty; // We can skip the whole "store in [either ThreadLocal or AtomicReference or whatever]" shtick here cuz registration is single-threaded, and if a mod does any goofy hacky stuff then it's their fault anyway
     @Nullable
     protected final VoxelShape[] shapeByAge;
     protected final Supplier<Item> produce;
@@ -132,78 +132,6 @@ public class DefaultableCropBlock extends BushBlock implements CropInstance, Bon
 
     public DefaultableCropBlock(Properties properties) {
         this(properties, null);
-    }
-
-    public static Supplier<Item> findProduceFor(Supplier<Block> targetBlockSup) {
-        Supplier<Item> targetBlockItem = () -> targetBlockSup.get().asItem();
-
-        return () -> RegistryUtil.getObjectFrom(targetBlockItem, targetBlockId -> targetBlockId.withPath(path -> path.replace("_seeds", "")))
-                .or(() -> RegistryUtil.getObjectFrom(targetBlockItem, targetBlockId -> targetBlockId.withPath(path -> path.replace("_body_block", ""))))
-                .or(() -> RegistryUtil.getObjectFrom(targetBlockItem, targetBlockId -> targetBlockId.withPath(path -> path.replace("_head_block", ""))))
-                .or(() -> RegistryUtil.getObjectFrom(targetBlockItem, targetBlockId -> targetBlockId.withPath(path -> path.replace("_plant", ""))))
-                .or(() -> RegistryUtil.getObjectFrom(targetBlockItem, targetBlockId -> targetBlockId.withPath(path -> path.replace("_" + StringUtil.lastToken(path), ""))))
-                .orElse(null);
-    }
-
-    public static Supplier<Item> findSeedsFor(Supplier<Block> targetBlockSup) {
-        Supplier<Item> targetBlockItem = () -> targetBlockSup.get().asItem();
-
-        return () -> RegistryUtil.getObjectFrom(targetBlockItem, Function.identity())
-                .or(() -> RegistryUtil.getObjectFrom(targetBlockItem, targetBlockId -> targetBlockId.withPath(path -> path.replace("_plant", "_seeds"))))
-                .or(() -> RegistryUtil.getObjectFrom(targetBlockItem, targetBlockId -> targetBlockId.withPath(path -> path.replace("_body_block", "_seeds"))))
-                .or(() -> RegistryUtil.getObjectFrom(targetBlockItem, targetBlockId -> targetBlockId.withPath(path -> path.replace("_head_block", "_seeds"))))
-                .or(() -> RegistryUtil.getObjectFrom(targetBlockItem, targetBlockId -> targetBlockId.withPath(path -> path.replace("_" + StringUtil.lastToken(path), "_seeds"))))
-                .orElse(null);
-    }
-
-    protected static float getGrowthSpeed(Block targetBlock, BlockGetter curLevel, BlockPos targetPos) {
-        float baseSpeed = 1.0F;
-        BlockPos belowPos = targetPos.below();
-
-        for (int offsetX = -1; offsetX <= 1; ++offsetX) {
-            for (int offsetZ = -1; offsetZ <= 1; ++offsetZ) {
-                float bonus = 0.0F;
-                BlockState curState = curLevel.getBlockState(belowPos.offset(offsetX, 0, offsetZ));
-
-                if (curState.is(Blocks.FARMLAND)) bonus = curState.getValue(FarmBlock.MOISTURE) > 0 ? 3.0F : 1.0F;
-                if (offsetX != 0 || offsetZ != 0) bonus /= 4.0F;
-
-                baseSpeed += bonus;
-            }
-        }
-
-        BlockPos westPos = targetPos.west();
-        BlockPos eastPos = targetPos.east();
-
-        if ((curLevel.getBlockState(westPos).is(targetBlock) || curLevel.getBlockState(eastPos).is(targetBlock))
-                && (curLevel.getBlockState(targetPos.north()).is(targetBlock) || curLevel.getBlockState(targetPos.south()).is(targetBlock))) {
-            baseSpeed /= 2.0F;
-        } else if (curLevel.getBlockState(westPos.north()).is(targetBlock)
-                || curLevel.getBlockState(eastPos.north()).is(targetBlock)
-                || curLevel.getBlockState(eastPos.south()).is(targetBlock)
-                || curLevel.getBlockState(westPos.south()).is(targetBlock)) {
-            baseSpeed /= 2.0F;
-        }
-
-        return baseSpeed;
-    }
-
-    private static void validateShapesByAge(Block targetBlock, VoxelShape[] shapeByAge, int maxAge) {
-        VoxelShape[] chosenShapeByAge = shapeByAge != null ? shapeByAge : DEFAULT_SHAPE_BY_AGE;
-
-        if (chosenShapeByAge.length < maxAge) {
-            throw new IllegalArgumentException(String.format("shapeByAge length must be at least maxAge for %s '%s' with maxAge: %d, got: %d", targetBlock.getClass().getSimpleName(), targetBlock.builtInRegistryHolder().key().location(), maxAge, chosenShapeByAge.length));
-        }
-    }
-
-    private static Properties storeAgeInStaticInitializer(Properties properties, IntegerProperty ageProperty, int maxAge) {
-        pendingAgeProperty = ageProperty;
-
-        return properties;
-    }
-
-    private static void cleanupPendingAge() {
-        pendingAgeProperty = null;
     }
 
     @Override
@@ -336,5 +264,77 @@ public class DefaultableCropBlock extends BushBlock implements CropInstance, Bon
 
     protected int getBoneMealAgeIncrease(Level curLevel) {
         return Mth.nextInt(curLevel.random, 1, getMaxAge());
+    }
+
+    public static Supplier<Item> findProduceFor(Supplier<Block> targetBlockSup) {
+        Supplier<Item> targetBlockItem = () -> targetBlockSup.get().asItem();
+
+        return () -> RegistryUtil.getObjectFrom(targetBlockItem, targetBlockId -> targetBlockId.withPath(path -> path.replace("_seeds", "")))
+                .or(() -> RegistryUtil.getObjectFrom(targetBlockItem, targetBlockId -> targetBlockId.withPath(path -> path.replace("_body_block", ""))))
+                .or(() -> RegistryUtil.getObjectFrom(targetBlockItem, targetBlockId -> targetBlockId.withPath(path -> path.replace("_head_block", ""))))
+                .or(() -> RegistryUtil.getObjectFrom(targetBlockItem, targetBlockId -> targetBlockId.withPath(path -> path.replace("_plant", ""))))
+                .or(() -> RegistryUtil.getObjectFrom(targetBlockItem, targetBlockId -> targetBlockId.withPath(path -> path.replace("_" + StringUtil.lastToken(path), ""))))
+                .orElse(null);
+    }
+
+    public static Supplier<Item> findSeedsFor(Supplier<Block> targetBlockSup) {
+        Supplier<Item> targetBlockItem = () -> targetBlockSup.get().asItem();
+
+        return () -> RegistryUtil.getObjectFrom(targetBlockItem, Function.identity())
+                .or(() -> RegistryUtil.getObjectFrom(targetBlockItem, targetBlockId -> targetBlockId.withPath(path -> path.replace("_plant", "_seeds"))))
+                .or(() -> RegistryUtil.getObjectFrom(targetBlockItem, targetBlockId -> targetBlockId.withPath(path -> path.replace("_body_block", "_seeds"))))
+                .or(() -> RegistryUtil.getObjectFrom(targetBlockItem, targetBlockId -> targetBlockId.withPath(path -> path.replace("_head_block", "_seeds"))))
+                .or(() -> RegistryUtil.getObjectFrom(targetBlockItem, targetBlockId -> targetBlockId.withPath(path -> path.replace("_" + StringUtil.lastToken(path), "_seeds"))))
+                .orElse(null);
+    }
+
+    protected static float getGrowthSpeed(Block targetBlock, BlockGetter curLevel, BlockPos targetPos) {
+        float baseSpeed = 1.0F;
+        BlockPos belowPos = targetPos.below();
+
+        for (int offsetX = -1; offsetX <= 1; ++offsetX) {
+            for (int offsetZ = -1; offsetZ <= 1; ++offsetZ) {
+                float bonus = 0.0F;
+                BlockState curState = curLevel.getBlockState(belowPos.offset(offsetX, 0, offsetZ));
+
+                if (curState.is(Blocks.FARMLAND)) bonus = curState.getValue(FarmBlock.MOISTURE) > 0 ? 3.0F : 1.0F;
+                if (offsetX != 0 || offsetZ != 0) bonus /= 4.0F;
+
+                baseSpeed += bonus;
+            }
+        }
+
+        BlockPos westPos = targetPos.west();
+        BlockPos eastPos = targetPos.east();
+
+        if ((curLevel.getBlockState(westPos).is(targetBlock) || curLevel.getBlockState(eastPos).is(targetBlock))
+                && (curLevel.getBlockState(targetPos.north()).is(targetBlock) || curLevel.getBlockState(targetPos.south()).is(targetBlock))) {
+            baseSpeed /= 2.0F;
+        } else if (curLevel.getBlockState(westPos.north()).is(targetBlock)
+                || curLevel.getBlockState(eastPos.north()).is(targetBlock)
+                || curLevel.getBlockState(eastPos.south()).is(targetBlock)
+                || curLevel.getBlockState(westPos.south()).is(targetBlock)) {
+            baseSpeed /= 2.0F;
+        }
+
+        return baseSpeed;
+    }
+
+    private static void validateShapesByAge(Block targetBlock, VoxelShape[] shapeByAge, int maxAge) {
+        VoxelShape[] chosenShapeByAge = shapeByAge != null ? shapeByAge : DEFAULT_SHAPE_BY_AGE;
+
+        if (chosenShapeByAge.length < maxAge) {
+            throw new IllegalArgumentException(String.format("shapeByAge length must be at least maxAge for %s '%s' with maxAge: %d, got: %d", targetBlock.getClass().getSimpleName(), targetBlock.builtInRegistryHolder().key().location(), maxAge, chosenShapeByAge.length));
+        }
+    }
+
+    private static Properties storeAgeInStaticInitializer(Properties properties, IntegerProperty ageProperty, int maxAge) {
+        pendingAgeProperty = ageProperty;
+
+        return properties;
+    }
+
+    private static void cleanupPendingAge() {
+        pendingAgeProperty = null;
     }
 }

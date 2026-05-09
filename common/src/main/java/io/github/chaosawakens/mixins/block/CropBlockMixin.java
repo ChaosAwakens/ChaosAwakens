@@ -18,13 +18,13 @@ public final class CropBlockMixin {
         throw new IllegalAccessError("Attempted to construct standalone Mixin Class! (CropBlockMixin)");
     }
 
-    @WrapOperation(method = "getGrowthSpeed", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/state/BlockState;is(Lnet/minecraft/world/level/block/Block;)Z", ordinal = 0))
-    private static boolean chaosawakens$alternativelyAmplifyGrowthSpeed(BlockState originalState, Block originalBlock, Operation<Boolean> original) {
-        return original.call(originalState, originalBlock) || originalState.is(CATags.CABlockTags.FARMLAND_BLOCKS.get());
-    }
-
     @ModifyReturnValue(method = "mayPlaceOn", at = @At("RETURN"))
     private boolean chaosawakens$mayPlaceOn(boolean original, @Local(argsOnly = true) BlockState targetState) {
         return original || targetState.is(CATags.CABlockTags.FARMLAND_BLOCKS.get());
+    }
+
+    @WrapOperation(method = "getGrowthSpeed", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/state/BlockState;is(Lnet/minecraft/world/level/block/Block;)Z", ordinal = 0))
+    private static boolean chaosawakens$alternativelyAmplifyGrowthSpeed(BlockState originalState, Block originalBlock, Operation<Boolean> original) {
+        return original.call(originalState, originalBlock) || originalState.is(CATags.CABlockTags.FARMLAND_BLOCKS.get());
     }
 }

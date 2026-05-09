@@ -25,14 +25,15 @@ public class RefactoredTerrainProvider {
     /**
      * Builds a jaggedness spline based on erosion, weirdness, and peaks/valleys.
      *
-     * @param erosionInput              Function providing erosion noise.
-     * @param weirdnessInput            Function providing weirdness noise.
-     * @param peaksAndValleysInput      Function providing peaks and valleys noise.
+     * @param erosionInput            Function providing erosion noise.
+     * @param weirdnessInput          Function providing weirdness noise.
+     * @param peaksAndValleysInput    Function providing peaks and valleys noise.
      * @param valleyWeirdnessMultiplier Multiplier for jaggedness in valleys based on weirdness.
      * @param peakWeirdnessMultiplier   Multiplier for jaggedness on peaks based on weirdness.
-     * @param lowErosionFactor          (Unused in original, kept for signature match if called elsewhere)
-     * @param highErosionFactor         (Unused in original, kept for signature match if called elsewhere)
-     * @param transformFunction         Output transformation function.
+     * @param lowErosionFactor        (Unused in original, kept for signature match if called elsewhere)
+     * @param highErosionFactor       (Unused in original, kept for signature match if called elsewhere)
+     * @param transformFunction       Output transformation function.
+     *
      * @return A CubicSpline for jaggedness based on erosion.
      */
     public static <C, I extends ToFloatFunction<C>> CubicSpline<C, I> buildErosionJaggednessSpline(
@@ -61,11 +62,11 @@ public class RefactoredTerrainProvider {
     /**
      * Builds a jaggedness spline for ridges, based on weirdness and peaks/valleys.
      *
-     * @param weirdnessInput            Function providing weirdness noise.
-     * @param peaksAndValleysInput      Function providing peaks and valleys noise.
-     * @param valleyWeirdnessMultiplier Multiplier for jaggedness in valleys.
-     * @param peakWeirdnessMultiplier   Multiplier for jaggedness on peaks.
-     * @param transformFunction         Output transformation function.
+     * @param weirdnessInput             Function providing weirdness noise.
+     * @param peaksAndValleysInput       Function providing peaks and valleys noise.
+     * @param valleyWeirdnessMultiplier  Multiplier for jaggedness in valleys.
+     * @param peakWeirdnessMultiplier    Multiplier for jaggedness on peaks.
+     * @param transformFunction          Output transformation function.
      * @return A CubicSpline for ridge jaggedness.
      */
     public static <C, I extends ToFloatFunction<C>> CubicSpline<C, I> buildRidgeJaggednessSpline(
@@ -122,12 +123,13 @@ public class RefactoredTerrainProvider {
     /**
      * Creates a scaling factor spline based on erosion, weirdness, and optionally peaks/valleys.
      *
-     * @param erosionInput         Function providing erosion noise.
-     * @param weirdnessInput       Function providing weirdness noise.
-     * @param peaksAndValleysInput Function providing peaks and valleys noise.
-     * @param targetFactor         The base scaling factor to aim for.
-     * @param applyPeaksAndValleys If true, peaks/valleys noise will influence the factor.
-     * @param transformFunction    Output transformation function.
+     * @param erosionInput           Function providing erosion noise.
+     * @param weirdnessInput         Function providing weirdness noise.
+     * @param peaksAndValleysInput   Function providing peaks and valleys noise.
+     * @param targetFactor           The base scaling factor to aim for.
+     * @param applyPeaksAndValleys   If true, peaks/valleys noise will influence the factor.
+     * @param transformFunction      Output transformation function.
+     *
      * @return A CubicSpline for a terrain scaling factor.
      */
     public static <C, I extends ToFloatFunction<C>> CubicSpline<C, I> getErosionFactor(
@@ -187,10 +189,11 @@ public class RefactoredTerrainProvider {
     /**
      * Creates a scaling factor spline based on erosion and weirdness.
      *
-     * @param erosionInput      Function providing erosion noise.
-     * @param weirdnessInput    Function providing weirdness noise.
-     * @param targetFactor      The base scaling factor to aim for.
+     * @param erosionInput     Function providing erosion noise.
+     * @param weirdnessInput   Function providing weirdness noise.
+     * @param targetFactor     The base scaling factor to aim for.
      * @param transformFunction Output transformation function.
+     *
      * @return A CubicSpline for a terrain scaling factor.
      */
     public static <C, I extends ToFloatFunction<C>> CubicSpline<C, I> getPlateauErosionFactor(
@@ -286,8 +289,8 @@ public class RefactoredTerrainProvider {
      * Calculates a height value for mountains based on peaks/valleys noise and continentalness.
      * This function defines the general shape of mountains before further spline processing.
      *
-     * @param pvValue           Current peaks and valleys noise value.
-     * @param continentalness   Current continentalness noise value.
+     * @param pvValue         Current peaks and valleys noise value.
+     * @param continentalness Current continentalness noise value.
      * @param pvValleyThreshold Peaks/Valleys threshold below which it's considered a deep valley.
      * @return A height value.
      */

@@ -8,7 +8,7 @@ import net.minecraft.world.entity.Entity;
 public final class CAClientDataEntryTemplates {
     public static final EntityClientData<Entity> BLOB = new EntityClientData<>(BlobRenderer::new);
 
-    //    public static final EntityClientData<Entity> BEDROCK_ANIMATED_ENTITY = new EntityClientData<>(ctx -> new BedrockEntitySkeletonRenderer(ctx));
+//    public static final EntityClientData<Entity> BEDROCK_ANIMATED_ENTITY = new EntityClientData<>(ctx -> new BedrockEntitySkeletonRenderer(ctx));
     public static final EntityClientData<Entity> GECKOLIB_ANIMATED_ENTITY = new EntityClientData<>(ctx -> new GeckolibEntitySkeletonRenderer(ctx));
 
     private CAClientDataEntryTemplates() {

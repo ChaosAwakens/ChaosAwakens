@@ -23,8 +23,7 @@ public class MesozoicJungleBiomeConfig implements BiomeConfig {
             .skyColor(84742)
             .build();
 
-    public MesozoicJungleBiomeConfig() {
-    }
+    public MesozoicJungleBiomeConfig() {}
 
     @Override
     public boolean hasPrecipitation() {

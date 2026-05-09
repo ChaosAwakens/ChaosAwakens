@@ -29,13 +29,6 @@ public class MegaNBTTreeGrower extends AbstractMegaTreeGrower {
         this.trees = trees;
     }
 
-    protected static void updateBranchStates(ServerLevel level, BlockPos pos, BlockState state, int pBranchX, int pBranchY) {
-        level.setBlock(pos.offset(pBranchX, 0, pBranchY), state, Block.UPDATE_INVISIBLE);
-        level.setBlock(pos.offset(pBranchX + 1, 0, pBranchY), state, Block.UPDATE_INVISIBLE);
-        level.setBlock(pos.offset(pBranchX, 0, pBranchY + 1), state, Block.UPDATE_INVISIBLE);
-        level.setBlock(pos.offset(pBranchX + 1, 0, pBranchY + 1), state, Block.UPDATE_INVISIBLE);
-    }
-
     @Override
     protected @Nullable ResourceKey<ConfiguredFeature<?, ?>> getConfiguredMegaFeature(RandomSource source) {
         return megaTrees.get(source.nextInt(megaTrees.size())).get();
@@ -71,5 +64,12 @@ public class MegaNBTTreeGrower extends AbstractMegaTreeGrower {
                 }
             }
         }
+    }
+
+    protected static void updateBranchStates(ServerLevel level, BlockPos pos, BlockState state, int pBranchX, int pBranchY) {
+        level.setBlock(pos.offset(pBranchX, 0, pBranchY), state, Block.UPDATE_INVISIBLE);
+        level.setBlock(pos.offset(pBranchX + 1, 0, pBranchY), state, Block.UPDATE_INVISIBLE);
+        level.setBlock(pos.offset(pBranchX, 0, pBranchY + 1), state, Block.UPDATE_INVISIBLE);
+        level.setBlock(pos.offset(pBranchX + 1, 0, pBranchY + 1), state, Block.UPDATE_INVISIBLE);
     }
 }

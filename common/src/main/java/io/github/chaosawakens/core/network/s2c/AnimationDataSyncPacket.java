@@ -13,13 +13,13 @@ public class AnimationDataSyncPacket {
 
     }
 
+    public void encode(FriendlyByteBuf buf) {
+
+    }
+
     public static PacketContext handle(AnimationDataSyncPacket packet) {
         return (nullablePlayerOwner, currentLevel, currentConnection, currentSide) -> {
 
         };
-    }
-
-    public void encode(FriendlyByteBuf buf) {
-
     }
 }

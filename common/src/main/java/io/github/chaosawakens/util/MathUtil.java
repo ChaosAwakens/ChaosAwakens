@@ -35,7 +35,6 @@ public final class MathUtil {
     public static double quinticEasing(double timeDelta) {
         return timeDelta * timeDelta * timeDelta * timeDelta * timeDelta;
     }
-
     public static double exponentialEasing(double timeDelta) {
         return Math.pow(2, 10 * (timeDelta - 1));
     }
@@ -132,8 +131,7 @@ public final class MathUtil {
     }
 
     public static Vec3 ground(Vec3 basePos, Level curLevel, boolean fullColumnCheck) {
-        if (!curLevel.getBlockState(BlockPos.containing(basePos)).getCollisionShape(curLevel, BlockPos.containing(basePos)).isEmpty() || !curLevel.getBlockState(BlockPos.containing(basePos).below()).getCollisionShape(curLevel, BlockPos.containing(basePos)).isEmpty())
-            return basePos; // Avoid unnecessary computation
+        if (!curLevel.getBlockState(BlockPos.containing(basePos)).getCollisionShape(curLevel, BlockPos.containing(basePos)).isEmpty() || !curLevel.getBlockState(BlockPos.containing(basePos).below()).getCollisionShape(curLevel, BlockPos.containing(basePos)).isEmpty()) return basePos; // Avoid unnecessary computation
 
         ClipContext colliderCtx = fullColumnCheck
                 ? new ClipContext(Vec3.atCenterOf(BlockPos.containing(basePos.x(), curLevel.getMinBuildHeight(), basePos.z())), Vec3.atCenterOf(BlockPos.containing(basePos.x(), curLevel.getMaxBuildHeight(), basePos.z())), ClipContext.Block.COLLIDER, ClipContext.Fluid.ANY, null)
@@ -195,7 +193,7 @@ public final class MathUtil {
 
         return new Vector3d(a).add(new Vector3d(ab).mul(sv)).add(new Vector3d(ac).mul(sw));
     }
-
+    
     public static OscillationResult oscillate(OscillationResult result, float startValue, float endValue, float delta) {
         if (result.increasing) {
             result.value += delta;
