@@ -158,7 +158,8 @@ public class CSGUnionShape implements CollisionShape { // FIXME Still no clue wh
 
             double sx = ax.length(), sy = ay.length(), sz = az.length();
 
-            if (sx < ModelCoordinateData.EPSILON || sy < ModelCoordinateData.EPSILON || sz < ModelCoordinateData.EPSILON) continue;
+            if (sx < ModelCoordinateData.EPSILON || sy < ModelCoordinateData.EPSILON || sz < ModelCoordinateData.EPSILON)
+                continue;
 
             ax.div(sx);
             ay.div(sy);
