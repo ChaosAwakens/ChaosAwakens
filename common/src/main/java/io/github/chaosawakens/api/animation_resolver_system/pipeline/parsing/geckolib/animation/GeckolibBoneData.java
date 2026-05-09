@@ -13,7 +13,8 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-public record GeckolibBoneData(String boneName, Map<KeyframeType, Map<Double, GeckolibKeyframeData>> keyframeData) implements BoneData {
+public record GeckolibBoneData(String boneName,
+                               Map<KeyframeType, Map<Double, GeckolibKeyframeData>> keyframeData) implements BoneData {
     public static final Codec<Map<Double, GeckolibKeyframeData>> KEYFRAME_TIMELINE_CODEC = Codec.unboundedMap(Codec.STRING, GeckolibKeyframeData.BARE_CODEC).xmap(
             convertedDoubleKFInfoMap -> convertedDoubleKFInfoMap.entrySet().stream().collect(Collectors.toMap(entry -> Double.parseDouble(entry.getKey()), Map.Entry::getValue, (a, b) -> a)),
             originalMappedKFInfoMap -> originalMappedKFInfoMap.entrySet().stream().collect(Collectors.toMap(entry -> entry.getKey().toString(), Map.Entry::getValue, (a, b) -> a))

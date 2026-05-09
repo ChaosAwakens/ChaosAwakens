@@ -1,0 +1,76 @@
+{
+  "carvers": {
+    "air": [
+      "chaosawakens:mining_paradise_cave",
+      "chaosawakens:mining_paradise_canyon",
+      "chaosawakens:mining_paradise_extra_cave"
+    ]
+  },
+  "downfall": 0.0,
+  "effects": {
+    "fog_color": 4080490,
+    "sky_color": 3622254,
+    "water_color": 4159204,
+    "water_fog_color": 429011
+  },
+  "features": [
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [
+      "chaosawakens:dredgestone_uranium_ore",
+      "chaosawakens:dredgestone_titanium_ore",
+      "chaosawakens:dredgestone_sunstone_ore",
+      "chaosawakens:dredgestone_ruby_ore",
+      "chaosawakens:dredgestone_redstone_ore",
+      "chaosawakens:dredgestone_platinum_ore",
+      "chaosawakens:dredgestone_lapis_ore",
+      "chaosawakens:dredgestone_kunzite_ore",
+      "chaosawakens:dredgestone_iron_ore",
+      "chaosawakens:dredgestone_gold_ore",
+      "chaosawakens:dredgestone_diamond_ore",
+      "chaosawakens:dredgestone_copper_ore",
+      "chaosawakens:dredgestone_coal_ore",
+      "chaosawakens:dredgestone_aluminum_ore",
+      "chaosawakens:gloomstone_uranium_ore",
+      "chaosawakens:gloomstone_titanium_ore",
+      "chaosawakens:gloomstone_sunstone_ore",
+      "chaosawakens:gloomstone_ruby_ore",
+      "chaosawakens:gloomstone_redstone_ore",
+      "chaosawakens:gloomstone_platinum_ore",
+      "chaosawakens:gloomstone_lapis_ore",
+      "chaosawakens:gloomstone_kunzite_ore",
+      "chaosawakens:gloomstone_iron_ore",
+      "chaosawakens:gloomstone_gold_ore",
+      "chaosawakens:gloomstone_diamond_ore",
+      "chaosawakens:gloomstone_copper_ore",
+      "chaosawakens:gloomstone_coal_ore",
+      "chaosawakens:gloomstone_aluminum_ore"
+    ],
+    [],
+    [],
+    [
+      "chaosawakens:dense_grass_patch",
+      "chaosawakens:tall_dense_grass_patch",
+      "chaosawakens:alstroemeriat_patch",
+      "chaosawakens:dense_bush_patch",
+      "chaosawakens:tall_dense_bush_patch"
+    ]
+  ],
+  "has_precipitation": true,
+  "spawn_costs": {},
+  "spawners": {
+    "ambient": [],
+    "axolotls": [],
+    "creature": [],
+    "misc": [],
+    "monster": [],
+    "underground_water_creature": [],
+    "water_ambient": [],
+    "water_creature": []
+  },
+  "temperature": 0.8
+}

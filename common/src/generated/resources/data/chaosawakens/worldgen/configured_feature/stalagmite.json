@@ -1,0 +1,15 @@
+{
+  "type": "chaosawakens:stalagmite",
+  "config": {
+    "block": {
+      "type": "minecraft:simple_state_provider",
+      "state": {
+        "Name": "chaosawakens:dredgestone"
+      }
+    },
+    "max_radius": 8,
+    "min_radius": 6,
+    "steepness": 0.8,
+    "variation": 0.5
+  }
+}

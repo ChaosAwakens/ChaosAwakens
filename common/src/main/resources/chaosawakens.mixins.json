@@ -5,6 +5,13 @@
   "refmap": "${mod_id}.refmap.json",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "block.AttachedStemBlockMixin",
+    "block.BushBlockMixin",
+    "block.CropBlockMixin",
+    "block.GrowingPlantHeadBlockMixin",
+    "block.StemBlockMixin",
+    "level.LevelMixin",
+    "server.MinecraftServerMixin"
   ],
   "client": [
     "client.EntityRenderDispatcherMixin"
@@ -13,6 +20,9 @@
   ],
   "injectors": {
     "defaultRequire": 1
+  },
+  "mixinextras": {
+    "minVersion": "${mixinextras_version}"
   }
 }
 

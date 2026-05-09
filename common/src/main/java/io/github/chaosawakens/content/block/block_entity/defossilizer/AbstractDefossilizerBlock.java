@@ -3,7 +3,11 @@ package io.github.chaosawakens.content.block.block_entity.defossilizer;
 import io.github.chaosawakens.content.block_entity.defossilizer.AbstractDefossilizerBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -35,6 +39,10 @@ public abstract class AbstractDefossilizerBlock extends BaseEntityBlock {
         super(properties);
 
         registerDefaultState(defaultBlockState().setValue(FACING, Direction.NORTH).setValue(LIT, false));
+    }
+
+    protected static <BE extends BlockEntity> BlockEntityTicker<BE> createDefossilizerTicker(Level level, BlockEntityType<BE> serverType, BlockEntityType<? extends AbstractDefossilizerBlockEntity> clientType) {
+        return level.isClientSide ? null : createTickerHelper(serverType, clientType, AbstractDefossilizerBlockEntity::serverTick);
     }
 
     @Override
@@ -111,7 +119,31 @@ public abstract class AbstractDefossilizerBlock extends BaseEntityBlock {
 
     protected abstract void openContainer(Level curLevel, BlockPos targetPos, Player interactingPlayer);
 
-    protected static <BE extends BlockEntity> BlockEntityTicker<BE> createDefossilizerTicker(Level level, BlockEntityType<BE> serverType, BlockEntityType<? extends AbstractDefossilizerBlockEntity> clientType) {
-        return level.isClientSide ? null : createTickerHelper(serverType, clientType, AbstractDefossilizerBlockEntity::serverTick);
+    @Override
+    public void animateTick(BlockState targetState, Level curLevel, BlockPos targetPos, RandomSource randSrc) {
+        if (!targetState.getValue(LIT)) return;
+
+        double baseX = targetPos.getX() + 0.5D;
+        double baseY = targetPos.getY();
+        double baseZ = targetPos.getZ() + 0.5D;
+
+        if (randSrc.nextDouble() < 0.1D) {
+            curLevel.playLocalSound(baseX, baseY, baseZ, SoundEvents.FURNACE_FIRE_CRACKLE, SoundSource.BLOCKS, 1.0F, 1.0F, false);
+        }
+
+        Direction facing = targetState.getValue(FACING);
+        Direction.Axis axis = facing.getAxis();
+        double offset = 0.52D;
+        double lateral = randSrc.nextDouble() * 0.6D - 0.3D;
+        double xOffset = axis == Direction.Axis.X ? facing.getStepX() * offset : lateral;
+        double yOffset = randSrc.nextDouble() * 6.0D / 16.0D;
+        double zOffset = axis == Direction.Axis.Z ? facing.getStepZ() * offset : lateral;
+
+        double spawnX = baseX + xOffset;
+        double spawnY = baseY + yOffset;
+        double spawnZ = baseZ + zOffset;
+
+        curLevel.addParticle(ParticleTypes.SMOKE, spawnX, spawnY, spawnZ, 0.0D, 0.0D, 0.0D);
+        curLevel.addParticle(ParticleTypes.FLAME, spawnX, spawnY, spawnZ, 0.0D, 0.0D, 0.0D);
     }
 }

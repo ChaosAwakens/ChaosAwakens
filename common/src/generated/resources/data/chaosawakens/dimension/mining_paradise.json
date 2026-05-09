@@ -1,0 +1,11 @@
+{
+  "type": "chaosawakens:mining_paradise",
+  "generator": {
+    "type": "minecraft:noise",
+    "biome_source": {
+      "type": "minecraft:multi_noise",
+      "preset": "chaosawakens:mining_paradise"
+    },
+    "settings": "chaosawakens:mining_paradise"
+  }
+}

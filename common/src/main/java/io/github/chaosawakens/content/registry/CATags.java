@@ -84,6 +84,10 @@ public final class CATags {
 
         public static final Supplier<TagKey<Block>> FLOWER_BLOCKS = TagPropertyWrapperTemplates.registerTagKey(Registries.BLOCK, CAConstants.prefix("vegetation/flower_blocks"));
 
+        public static final Supplier<TagKey<Block>> FARMLAND_BLOCKS = TagPropertyWrapperTemplates.registerAndChain(Registries.BLOCK, CAConstants.prefix("vegetation/farmland_blocks"))
+                .withTaggedObject(() -> Blocks.FARMLAND)
+                .buildAndGet();
+
         // Vegetation (Mining Paradise)
         public static final Supplier<TagKey<Block>> DENSE_SOIL = TagPropertyWrapperTemplates.registerTagKey(Registries.BLOCK, CAConstants.prefix("vegetation/mining_paradise/dense_soil"));
 
@@ -99,6 +103,9 @@ public final class CATags {
         public static final Supplier<TagKey<Block>> CRYSTAL_VEGETATION = TagPropertyWrapperTemplates.registerAndChain(Registries.BLOCK, CAConstants.prefix("vegetation/crystalworld/crystal_vegetation"))
                 .withChildTag(CRYSTAL_FLOWERS)
                 .buildAndGet();
+
+        // Ores (Mining Paradise)
+        public static final Supplier<TagKey<Block>> MINING_CARVER_REPLACEABLES = TagPropertyWrapperTemplates.registerTagKey(Registries.BLOCK, CAConstants.prefix("ore/mining_paradise/mining_carver_replaceables"));
 
         // Misc.
         public static final Supplier<TagKey<Block>> ROBO_BLOCKS = TagPropertyWrapperTemplates.registerTagKey(Registries.BLOCK, CAConstants.prefix("misc/robo_blocks"));

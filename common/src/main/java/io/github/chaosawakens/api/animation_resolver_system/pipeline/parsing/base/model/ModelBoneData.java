@@ -8,9 +8,12 @@ import java.util.Optional;
 public interface ModelBoneData {
 
     String getBoneName();
+
     Vector3d getPivot();
 
     Optional<String> getParentBoneName();
+
+    Optional<Vector3d> getRotation();
 
     <MCI extends ModelCubeData> List<MCI> getCubes();
 }

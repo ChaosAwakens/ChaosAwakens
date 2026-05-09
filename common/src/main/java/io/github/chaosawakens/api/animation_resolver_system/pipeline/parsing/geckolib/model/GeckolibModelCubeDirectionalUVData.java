@@ -6,7 +6,8 @@ import io.github.chaosawakens.api.animation_resolver_system.pipeline.parsing.bas
 import io.github.chaosawakens.util.CodecUtil;
 import org.joml.Vector2d;
 
-public record GeckolibModelCubeDirectionalUVData(Vector2d uvCoords, Vector2d uvSize) implements ModelCubeDirectionalUVData {
+public record GeckolibModelCubeDirectionalUVData(Vector2d uvCoords,
+                                                 Vector2d uvSize) implements ModelCubeDirectionalUVData {
     public static final Codec<GeckolibModelCubeDirectionalUVData> CODEC = RecordCodecBuilder.create(instance -> instance.group(
             CodecUtil.VECTOR_2D_CODEC.fieldOf("uv").forGetter(GeckolibModelCubeDirectionalUVData::uvCoords),
             CodecUtil.VECTOR_2D_CODEC.fieldOf("uv_size").forGetter(GeckolibModelCubeDirectionalUVData::uvSize)

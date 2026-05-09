@@ -7,7 +7,9 @@ public interface AnimationData {
     String getAnimationName();
 
     double getAnimationLength();
+
     double getBlendWeight();
+
     double getAnimProgressModifier();
 
     boolean shouldLoop();

@@ -4,41 +4,41 @@ license = "${mod_license}"
 issueTrackerURL = "${issue_tracker_url}"
 
 [[mods]]
-    modId = "${mod_id}"
-    version = "${mod_version}"
-    displayName = "${mod_name}"
-    updateJSONURL="${auto_update_url}"
-    displayURL="${display_url}"
-    logoFile = "${mod_logo_path}"
-    credits = "${mod_credits}"
-    authors = "${mod_authors}"
-    description = '''${mod_description}'''
+modId = "${mod_id}"
+version = "${mod_version}"
+displayName = "${mod_name}"
+updateJSONURL = "${auto_update_url}"
+displayURL = "${display_url}"
+logoFile = "${mod_logo_path}"
+credits = "${mod_credits}"
+authors = "${mod_authors}"
+description = '''${mod_description}'''
 
 [modproperties."${mod_id}"]
-    #    catalogueItemIcon = ""
-    catalogueImageIcon="${mod_logo_path}"
-    #    catalogueBackground=""
-    configuredBackground="minecraft:textures/block/netherite_block.png"
+#    catalogueItemIcon = ""
+catalogueImageIcon = "${mod_logo_path}"
+#    catalogueBackground=""
+configuredBackground = "minecraft:textures/block/netherite_block.png"
 
 # Base
-[[dependencies.${mod_id}]]
-    modId = "forge"
-    mandatory = true
-    versionRange = "${forge_version_range}"
-    ordering = "NONE"
-    side = "BOTH"
+[[dependencies.${ mod_id }]]
+modId = "forge"
+mandatory = true
+versionRange = "${forge_version_range}"
+ordering = "NONE"
+side = "BOTH"
 
-[[dependencies.${mod_id}]]
-    modId = "minecraft"
-    mandatory = true
-    versionRange = "${minecraft_version_range}"
-    ordering = "NONE"
-    side = "BOTH"
+[[dependencies.${ mod_id }]]
+modId = "minecraft"
+mandatory = true
+versionRange = "${minecraft_version_range}"
+ordering = "NONE"
+side = "BOTH"
 
 # Dependencies (Mandatory)
-[[dependencies.${mod_id}]]
-    modId = "nexus"
-    mandatory = true
-    versionRange = "${forge_nexus_version_range}"
-    ordering = "NONE"
-    side = "BOTH"
+[[dependencies.${ mod_id }]]
+modId = "nexus"
+mandatory = true
+versionRange = "${forge_nexus_version_range}"
+ordering = "NONE"
+side = "BOTH"

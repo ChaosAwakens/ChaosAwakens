@@ -42,52 +42,6 @@ public class DungeonGateBlock extends Block {
         this(false, properties);
     }
 
-    @Override
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        super.createBlockStateDefinition(builder);
-
-        builder.add(ACTIVE).add(VANISHED);
-    }
-
-    @Override
-    public @NotNull InteractionResult use(BlockState targetState, Level curLevel, BlockPos targetPos, Player interactingPlayer, InteractionHand usedHand, BlockHitResult result) {
-        return !curLevel.isClientSide ? checkAndActivate(targetState, targetPos, curLevel) : super.use(targetState, curLevel, targetPos, interactingPlayer, usedHand, result);
-    }
-
-    @Override
-    public void tick(BlockState targetState, ServerLevel curServerLevel, BlockPos targetPos, RandomSource rand) {
-        if (isActive(targetState)) {
-            if (!hasVanished(targetState)) { // By the time the gate block's active, it should already be preparing to v a n i s h (also doing dir checks for other gate blocks (duh))
-                curServerLevel.setBlockAndUpdate(targetPos, setVanished(targetState));
-
-                for (Direction curDir : Direction.values()) checkAndActivate(curServerLevel.getBlockState(targetPos.relative(curDir)), targetPos.relative(curDir), curServerLevel);
-
-                curServerLevel.scheduleTick(targetPos, targetState.getBlock(), 1);
-            } else { // Reset blockstate properties and remove
-                curServerLevel.setBlockAndUpdate(targetPos, targetState.setValue(ACTIVE, false).setValue(VANISHED, false));
-                curServerLevel.removeBlock(targetPos, false);
-            }
-        }
-    }
-
-    @Override
-    public void neighborChanged(BlockState targetState, Level curLevel, BlockPos targetPos, Block targetBlock, BlockPos originPos, boolean isMoving) {
-        if (!curLevel.isClientSide && curLevel.hasNeighborSignal(targetPos) && !isActive(targetState) && !hasVanished(targetState)) checkAndActivate(targetState, targetPos, curLevel);
-    }
-
-    @Override
-    public float getDestroyProgress(BlockState targetState, Player miningPlayer, BlockGetter curLevel, BlockPos targetPos) {
-        return isActive(targetState) ? 0.0F : super.getDestroyProgress(targetState, miningPlayer, curLevel, targetPos);
-    }
-
-    public boolean isConstantlyUpdated() {
-        return isConstantlyUpdated;
-    }
-
-    public int getBaseUpdateTickTime() {
-        return baseUpdateTickTime;
-    }
-
     protected static InteractionResult checkAndActivate(BlockState targetState, BlockPos targetPos, Level curLevel) {
         if (!isActive(targetState) && !hasVanished(targetState) && targetState.getBlock() instanceof DungeonGateBlock targetDungeonGateBlock) {
             curLevel.setBlockAndUpdate(targetPos, setActive(targetState));
@@ -121,5 +75,53 @@ public class DungeonGateBlock extends Block {
 
     public static BlockState setVanished(BlockState targetState) {
         return setVanished(targetState, true);
+    }
+
+    @Override
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        super.createBlockStateDefinition(builder);
+
+        builder.add(ACTIVE).add(VANISHED);
+    }
+
+    @Override
+    public @NotNull InteractionResult use(BlockState targetState, Level curLevel, BlockPos targetPos, Player interactingPlayer, InteractionHand usedHand, BlockHitResult result) {
+        return !curLevel.isClientSide ? checkAndActivate(targetState, targetPos, curLevel) : super.use(targetState, curLevel, targetPos, interactingPlayer, usedHand, result);
+    }
+
+    @Override
+    public void tick(BlockState targetState, ServerLevel curServerLevel, BlockPos targetPos, RandomSource rand) {
+        if (isActive(targetState)) {
+            if (!hasVanished(targetState)) { // By the time the gate block's active, it should already be preparing to v a n i s h (also doing dir checks for other gate blocks (duh))
+                curServerLevel.setBlockAndUpdate(targetPos, setVanished(targetState));
+
+                for (Direction curDir : Direction.values())
+                    checkAndActivate(curServerLevel.getBlockState(targetPos.relative(curDir)), targetPos.relative(curDir), curServerLevel);
+
+                curServerLevel.scheduleTick(targetPos, targetState.getBlock(), 1);
+            } else { // Reset blockstate properties and remove
+                curServerLevel.setBlockAndUpdate(targetPos, targetState.setValue(ACTIVE, false).setValue(VANISHED, false));
+                curServerLevel.removeBlock(targetPos, false);
+            }
+        }
+    }
+
+    @Override
+    public void neighborChanged(BlockState targetState, Level curLevel, BlockPos targetPos, Block targetBlock, BlockPos originPos, boolean isMoving) {
+        if (!curLevel.isClientSide && curLevel.hasNeighborSignal(targetPos) && !isActive(targetState) && !hasVanished(targetState))
+            checkAndActivate(targetState, targetPos, curLevel);
+    }
+
+    @Override
+    public float getDestroyProgress(BlockState targetState, Player miningPlayer, BlockGetter curLevel, BlockPos targetPos) {
+        return isActive(targetState) ? 0.0F : super.getDestroyProgress(targetState, miningPlayer, curLevel, targetPos);
+    }
+
+    public boolean isConstantlyUpdated() {
+        return isConstantlyUpdated;
+    }
+
+    public int getBaseUpdateTickTime() {
+        return baseUpdateTickTime;
     }
 }

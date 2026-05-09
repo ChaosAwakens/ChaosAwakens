@@ -20,8 +20,10 @@ import java.util.function.Function;
 public final class CAResourceReloadListeners {
 
     // Geckolib
-    public static final DefaultedCodecResourceReloadListener<GeckolibAnimationInfo> GECKOLIB_ANIM_INFO = registerDefaultReloadListener(CAConstants.prefix("geckolib_anim_info"), new DefaultedCodecResourceReloadListener<>(CAConstants.prefix("animations"), GeckolibAnimationInfo.CODEC));
-    public static final DefaultedCodecResourceReloadListener<GeckolibModelInfo> GECKOLIB_MODEL_INFO = registerDefaultReloadListener(CAConstants.prefix("geckolib_model_info"), new DefaultedCodecResourceReloadListener<>(CAConstants.prefix("models"), GeckolibModelInfo.CODEC));
+    public static final DefaultedCodecResourceReloadListener<GeckolibAnimationInfo> GECKOLIB_ANIM_INFO = registerDefaultReloadListener(CAConstants.prefix("geckolib_anim_info"), new DefaultedCodecResourceReloadListener<>(CAConstants.prefix("animations/geckolib"), GeckolibAnimationInfo.CODEC));
+    public static final DefaultedCodecResourceReloadListener<GeckolibModelInfo> GECKOLIB_MODEL_INFO = registerDefaultReloadListener(CAConstants.prefix("geckolib_model_info"), new DefaultedCodecResourceReloadListener<>(CAConstants.prefix("models/geckolib"), GeckolibModelInfo.CODEC));
+
+    // Bedrock [TODO]
 
     private static <PRL extends PreparableReloadListener> PRL registerReloadListener(ResourceLocation listenerId, PRL listener, ResourceReloadListenerConfig<PRL> config) {
         return NexusServices.REGISTRAR.registerReloadListener(listenerId, listener, config);

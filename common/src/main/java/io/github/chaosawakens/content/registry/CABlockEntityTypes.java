@@ -17,7 +17,9 @@ import java.util.function.Supplier;
 public final class CABlockEntityTypes {
     protected static final ObjectArrayList<Supplier<BlockEntityType<BlockEntity>>> BLOCK_ENTITY_TYPES = new ObjectArrayList<>();
 
-    public static final Supplier<BlockEntityType<IronDefossilizerBlockEntity>> IRON_DEFOSSILIZER = BlockEntityTypePropertyWrapperTemplates.registerBlockEntityType(CAConstants.prefix("iron_defossilizer"), () -> BlockEntityType.Builder
+    public static ImmutableList<Supplier<BlockEntityType<BlockEntity>>> getBlockEntityTypes() {
+        return ImmutableList.copyOf(BLOCK_ENTITY_TYPES);
+    }    public static final Supplier<BlockEntityType<IronDefossilizerBlockEntity>> IRON_DEFOSSILIZER = BlockEntityTypePropertyWrapperTemplates.registerBlockEntityType(CAConstants.prefix("iron_defossilizer"), () -> BlockEntityType.Builder
             .of(IronDefossilizerBlockEntity::new, CABlocks.IRON_DEFOSSILIZER.get())
             .build(null), BLOCK_ENTITY_TYPES);
     public static final Supplier<BlockEntityType<CrystalDefossilizerBlockEntity>> CRYSTAL_DEFOSSILIZER = BlockEntityTypePropertyWrapperTemplates.registerBlockEntityType(CAConstants.prefix("crystal_defossilizer"), () -> BlockEntityType.Builder
@@ -28,7 +30,5 @@ public final class CABlockEntityTypes {
             .of(RoboCrateBlockEntity::new, CABlocks.ROBO_CRATE.get())
             .build(null), BLOCK_ENTITY_TYPES);
 
-    public static ImmutableList<Supplier<BlockEntityType<BlockEntity>>> getBlockEntityTypes() {
-        return ImmutableList.copyOf(BLOCK_ENTITY_TYPES);
-    }
+
 }

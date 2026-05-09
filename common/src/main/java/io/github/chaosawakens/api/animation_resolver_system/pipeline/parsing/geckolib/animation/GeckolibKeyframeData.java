@@ -10,7 +10,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.function.Supplier;
 
-public record GeckolibKeyframeData(KeyframeType targetType, GeckolibKeyframeTarget targetValue, Supplier<GeckolibEasing> easing, List<Double> easingArgs) implements KeyframeData {
+public record GeckolibKeyframeData(KeyframeType targetType, GeckolibKeyframeTarget targetValue,
+                                   Supplier<GeckolibEasing> easing, List<Double> easingArgs) implements KeyframeData {
     public static final Codec<GeckolibKeyframeData> BARE_CODEC = RecordCodecBuilder.create(instance -> instance.group(
             GeckolibKeyframeTarget.CODEC.fieldOf("vector").forGetter(GeckolibKeyframeData::targetValue),
             Codec.STRING.optionalFieldOf("easing", "linear").xmap(
@@ -35,7 +36,7 @@ public record GeckolibKeyframeData(KeyframeType targetType, GeckolibKeyframeTarg
         this(null, targetValue, easing, easingArgs);
     }
 
-   public GeckolibKeyframeData withKeyframeType(KeyframeType targetType) {
+    public GeckolibKeyframeData withKeyframeType(KeyframeType targetType) {
         return new GeckolibKeyframeData(targetType, targetValue, easing, easingArgs);
     }
 

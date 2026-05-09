@@ -8,21 +8,21 @@ import java.util.function.Function;
 @FunctionalInterface
 public interface KeyframeTarget extends Function<RawValue, Vector3d> {
 
-    default double getX(MochaEngine engine, RawValue rawValue) {
+    default double getX(MochaEngine<?> engine, RawValue rawValue) {
         return rawValue.getX().left()
-                .map(expr -> Double.parseDouble(expr))
+                .map(engine::eval)
                 .orElseGet(rawValue.getX().right()::get);
     }
 
-    default double getY(RawValue rawValue) {
+    default double getY(MochaEngine<?> engine, RawValue rawValue) {
         return rawValue.getY().left()
-                .map(expr -> Double.parseDouble(expr))
+                .map(engine::eval)
                 .orElseGet(rawValue.getY().right()::get);
     }
 
-    default double getZ(RawValue rawValue) {
+    default double getZ(MochaEngine<?> engine, RawValue rawValue) {
         return rawValue.getZ().left()
-                .map(expr -> Double.parseDouble(expr))
+                .map(engine::eval)
                 .orElseGet(rawValue.getZ().right()::get);
     }
 }

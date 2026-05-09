@@ -8,9 +8,11 @@ import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
-public record GeckolibAnimationData(String animationName, double animationLength, Double blendWeight, boolean shouldLoop, List<GeckolibBoneData> boneData) implements AnimationData {
+public record GeckolibAnimationData(String animationName, double animationLength, Double blendWeight,
+                                    boolean shouldLoop, List<GeckolibBoneData> boneData) implements AnimationData {
     public static final Codec<GeckolibAnimationData> BARE_CODEC = RecordCodecBuilder.create(instance -> instance.group(
             Codec.DOUBLE.optionalFieldOf("animation_length", 0.0D).forGetter(GeckolibAnimationData::animationLength),
             Codec.DOUBLE.optionalFieldOf("blend_weight", 1.0D).forGetter(GeckolibAnimationData::blendWeight),
@@ -60,6 +62,7 @@ public record GeckolibAnimationData(String animationName, double animationLength
 
     @Override
     public Map<String, GeckolibBoneData> getBoneData() {
-        return boneData.stream().collect(Collectors.toMap(GeckolibBoneData::boneName, boneData -> boneData));
+        return boneData.stream()
+                .collect(Collectors.toMap(GeckolibBoneData::boneName, Function.identity()));
     }
 }

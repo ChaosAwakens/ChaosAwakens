@@ -1,8 +1,7 @@
 package io.github.chaosawakens.api.animation_resolver_system.faal.data;
 
-public class CubeData {
+import io.github.chaosawakens.api.animation_resolver_system.pipeline.processing.base.model.ModelCoordinateData;
 
-    public static class Builder {
+public record CubeData(ModelCoordinateData updatedCoordinateData) {
 
-    }
 }

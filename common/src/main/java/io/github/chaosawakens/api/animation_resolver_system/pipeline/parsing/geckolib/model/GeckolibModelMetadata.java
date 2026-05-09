@@ -6,7 +6,9 @@ import io.github.chaosawakens.api.animation_resolver_system.pipeline.parsing.bas
 import io.github.chaosawakens.util.CodecUtil;
 import org.joml.Vector3d;
 
-public record GeckolibModelMetadata(String geometryId, double textureWidth, double textureHeight, double visibleBoundsWidth, double visibleBoundsHeight, Vector3d visibleBoundsOffset) implements ModelMetadata {
+public record GeckolibModelMetadata(String geometryId, double textureWidth, double textureHeight,
+                                    double visibleBoundsWidth, double visibleBoundsHeight,
+                                    Vector3d visibleBoundsOffset) implements ModelMetadata {
     public static final Codec<GeckolibModelMetadata> CODEC = RecordCodecBuilder.create(instance -> instance.group(
             Codec.STRING.fieldOf("identifier").forGetter(GeckolibModelMetadata::geometryId),
             Codec.DOUBLE.fieldOf("texture_width").forGetter(GeckolibModelMetadata::textureWidth),

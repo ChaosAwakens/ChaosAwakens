@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "half=lower": {
+      "model": "chaosawakens:block/tall_black_crystal_growth_bottom"
+    },
+    "half=upper": {
+      "model": "chaosawakens:block/tall_black_crystal_growth_top"
+    }
+  }
+}

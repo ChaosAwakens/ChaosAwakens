@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/orientable",
+  "textures": {
+    "front": "chaosawakens:block/machine/defossilizer/iron/iron_defossilizer_lit",
+    "side": "chaosawakens:block/machine/defossilizer/iron/iron_defossilizer_side",
+    "top": "chaosawakens:block/machine/defossilizer/iron/iron_defossilizer_top"
+  }
+}

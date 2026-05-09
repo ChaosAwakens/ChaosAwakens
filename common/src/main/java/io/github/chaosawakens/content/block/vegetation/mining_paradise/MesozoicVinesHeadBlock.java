@@ -1,6 +1,7 @@
 package io.github.chaosawakens.content.block.vegetation.mining_paradise;
 
 import io.github.chaosawakens.content.registry.CABlocks;
+import io.github.chaosawakens.content.registry.CASoundTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
@@ -16,7 +17,7 @@ public class MesozoicVinesHeadBlock extends GrowingPlantHeadBlock {
     protected static final VoxelShape SHAPE = Block.box(0.0, 6.0, 0.0, 16.0, 16.0, 16.0);
 
     public MesozoicVinesHeadBlock(Properties properties) {
-        super(properties, Direction.DOWN, SHAPE, false, 0.1f);
+        super(properties.sound(CASoundTypes.DENSE_GRASS), Direction.DOWN, SHAPE, false, 0.1f);
     }
 
     @Override

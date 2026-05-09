@@ -1,7 +1,7 @@
 {
-  "parent": "minecraft:block/cross",
+  "parent": "minecraft:block/coral_fan",
   "render_type": "minecraft:cutout",
   "textures": {
-    "cross": "chaosawakens:block/vegetation/crystal/green_crystal_fan"
+    "fan": "chaosawakens:block/vegetation/crystal/green_crystal_fan"
   }
 }

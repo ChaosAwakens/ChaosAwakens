@@ -1,0 +1,21 @@
+{
+  "feature": "chaosawakens:trees_mesozoic",
+  "placement": [
+    {
+      "type": "minecraft:count",
+      "count": {
+        "type": "minecraft:weighted_list",
+        "distribution": [
+          {
+            "data": 4,
+            "weight": 9
+          },
+          {
+            "data": 5,
+            "weight": 1
+          }
+        ]
+      }
+    }
+  ]
+}

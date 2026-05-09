@@ -19,20 +19,17 @@ import java.util.function.Supplier;
 public final class CAMenuTypes {
     protected static final ObjectArrayList<Supplier<MenuType<?>>> MENU_TYPES = new ObjectArrayList<>();
 
-    public static final Supplier<MenuType<IronDefossilizerMenu>> IRON_DEFOSSILIZER = registerMenuType("iron_defossilizer", IronDefossilizerMenu::new);
-    public static final Supplier<MenuType<CrystalDefossilizerMenu>> CRYSTAL_DEFOSSILIZER = registerMenuType("crystal_defossilizer", CrystalDefossilizerMenu::new);
-
     private static <ACM extends AbstractContainerMenu, MT extends MenuType<ACM>> Supplier<MT> registerMenuType(ResourceLocation menuTypeId, Supplier<MT> menuTypeSup) {
         Supplier<MT> registeredMenuTypeSup = NexusServices.REGISTRAR.registerObjectAndReflect(menuTypeId, menuTypeSup, BuiltInRegistries.MENU);
 
         MENU_TYPES.add((Supplier<MenuType<?>>) registeredMenuTypeSup);
 
         return registeredMenuTypeSup;
-    }
+    }    public static final Supplier<MenuType<IronDefossilizerMenu>> IRON_DEFOSSILIZER = registerMenuType("iron_defossilizer", IronDefossilizerMenu::new);
 
     private static <ACM extends AbstractContainerMenu, MT extends MenuType<ACM>> Supplier<MT> registerMenuType(String menuTypeId, Supplier<MT> menuTypeSup) {
         return registerMenuType(CAConstants.prefix(menuTypeId), menuTypeSup);
-    }
+    }    public static final Supplier<MenuType<CrystalDefossilizerMenu>> CRYSTAL_DEFOSSILIZER = registerMenuType("crystal_defossilizer", CrystalDefossilizerMenu::new);
 
     private static <ACM extends AbstractContainerMenu, MT extends MenuType<ACM>> Supplier<MT> registerMenuType(ResourceLocation menuTypeId, MenuType.MenuSupplier<ACM> menuTypeSup) {
         return (Supplier<MT>) registerMenuType(menuTypeId, () -> new MenuType<>(menuTypeSup, FeatureFlags.VANILLA_SET));
@@ -45,4 +42,8 @@ public final class CAMenuTypes {
     public static ImmutableList<Supplier<MenuType<?>>> getMenuTypes() {
         return ImmutableList.copyOf(MENU_TYPES);
     }
+
+
+
+
 }

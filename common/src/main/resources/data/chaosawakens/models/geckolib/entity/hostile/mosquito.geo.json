@@ -1,0 +1,392 @@
+{
+  "format_version": "1.12.0",
+  "minecraft:geometry": [
+    {
+      "description": {
+        "identifier": "geometry.unknown",
+        "texture_width": 64,
+        "texture_height": 64,
+        "visible_bounds_width": 2,
+        "visible_bounds_height": 1.5,
+        "visible_bounds_offset": [
+          0,
+          0.25,
+          0
+        ]
+      },
+      "bones": [
+        {
+          "name": "root",
+          "pivot": [
+            0,
+            -0.1,
+            0.2
+          ]
+        },
+        {
+          "name": "Left_legs",
+          "parent": "root",
+          "pivot": [
+            1.5,
+            0,
+            -0.5
+          ],
+          "cubes": [
+            {
+              "origin": [
+                1.5,
+                -3,
+                -3
+              ],
+              "size": [
+                0,
+                3,
+                5
+              ],
+              "uv": [
+                0,
+                11
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Right_legs",
+          "parent": "root",
+          "pivot": [
+            -1.5,
+            0,
+            -0.5
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -1.5,
+                -3,
+                -3
+              ],
+              "size": [
+                0,
+                3,
+                5
+              ],
+              "uv": [
+                11,
+                11
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Body",
+          "parent": "root",
+          "pivot": [
+            0,
+            1.5,
+            -1.5
+          ]
+        },
+        {
+          "name": "Head",
+          "parent": "Body",
+          "pivot": [
+            -0.5,
+            1.6,
+            0
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -1.5,
+                0,
+                -3
+              ],
+              "size": [
+                3,
+                3,
+                3
+              ],
+              "uv": [
+                0,
+                20
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Proboscis",
+          "parent": "Head",
+          "pivot": [
+            0,
+            0.5,
+            -3
+          ],
+          "cubes": [
+            {
+              "origin": [
+                0,
+                0,
+                -8
+              ],
+              "size": [
+                0,
+                1,
+                5
+              ],
+              "uv": [
+                13,
+                20
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Right_eye",
+          "parent": "Head",
+          "pivot": [
+            -1.6,
+            2.5,
+            -3
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -2.6,
+                1.5,
+                -4
+              ],
+              "size": [
+                2,
+                2,
+                2
+              ],
+              "uv": [
+                9,
+                27
+              ]
+            }
+          ]
+        },
+        {
+          "name": "right_eye_blink",
+          "parent": "Right_eye",
+          "pivot": [
+            -2.1,
+            2.5,
+            -3.5
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -2.6,
+                1.5,
+                -4
+              ],
+              "size": [
+                1,
+                2,
+                1
+              ],
+              "inflate": 0.01,
+              "uv": [
+                2,
+                36
+              ],
+              "mirror": true
+            }
+          ]
+        },
+        {
+          "name": "Left_eye",
+          "parent": "Head",
+          "pivot": [
+            1.6,
+            2.5,
+            -3
+          ],
+          "cubes": [
+            {
+              "origin": [
+                0.6,
+                1.5,
+                -4
+              ],
+              "size": [
+                2,
+                2,
+                2
+              ],
+              "uv": [
+                0,
+                27
+              ]
+            }
+          ]
+        },
+        {
+          "name": "left_eye_blink",
+          "parent": "Left_eye",
+          "pivot": [
+            2.1,
+            2.5,
+            -3.5
+          ],
+          "cubes": [
+            {
+              "origin": [
+                1.6,
+                1.5,
+                -4
+              ],
+              "size": [
+                1,
+                2,
+                1
+              ],
+              "inflate": 0.01,
+              "uv": [
+                2,
+                36
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Left_wing",
+          "parent": "Head",
+          "pivot": [
+            1.5,
+            3,
+            -1.5
+          ],
+          "cubes": [
+            {
+              "origin": [
+                1.5,
+                3,
+                -3
+              ],
+              "size": [
+                0,
+                4,
+                3
+              ],
+              "uv": [
+                24,
+                18
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Right_wing",
+          "parent": "Head",
+          "pivot": [
+            -1.5,
+            3,
+            -1.5
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -1.5,
+                3,
+                -3
+              ],
+              "size": [
+                0,
+                4,
+                3
+              ],
+              "uv": [
+                24,
+                26
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Left_anthena",
+          "parent": "Head",
+          "pivot": [
+            0.6,
+            2.7,
+            -3
+          ],
+          "cubes": [
+            {
+              "origin": [
+                0.6,
+                2,
+                -7
+              ],
+              "size": [
+                0,
+                4,
+                4
+              ],
+              "uv": [
+                21,
+                0
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Right_anthena",
+          "parent": "Head",
+          "pivot": [
+            -0.6,
+            2.7,
+            -3
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -0.6,
+                2,
+                -7
+              ],
+              "size": [
+                0,
+                4,
+                4
+              ],
+              "uv": [
+                22,
+                9
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Blood_sac",
+          "parent": "Body",
+          "pivot": [
+            0,
+            2.5,
+            0.2
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -2.5,
+                0,
+                0
+              ],
+              "size": [
+                5,
+                5,
+                5
+              ],
+              "uv": [
+                0,
+                0
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

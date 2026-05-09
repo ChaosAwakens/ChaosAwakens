@@ -5,7 +5,9 @@ import java.util.function.Supplier;
 public interface KeyframeData {
 
     KeyframeTarget getPosition();
+
     KeyframeTarget getRotation();
+
     KeyframeTarget getScale();
 
     <E extends Easing> Supplier<E> getEasing();

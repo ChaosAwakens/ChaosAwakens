@@ -39,6 +39,19 @@ public final class CAPaintings {
     public static final Supplier<PaintingVariant> CARROT_PIG_PLAINS = registerPaintingVariant(CAConstants.prefix("carrot_pig_plains"), 64, 32);
     public static final Supplier<PaintingVariant> NIGHTMARE_SAVANNAH = registerPaintingVariant(CAConstants.prefix("nighttime_savannah"), 64, 32);
 
+    static {
+        PAINTING_VARIANTS.forEach((id, paintingVariantSup) -> {
+            String literalId = id.getPath();
+
+            new BaseDefaultableBareDataGenPropertyWrapper<>(paintingVariantSup, CAConstants.MOD_ID)
+                    .builder()
+                    .withTag(() -> PaintingVariantTags.PLACEABLE)
+                    .withAdditionalLocalizationKey("painting.chaosawakens." + literalId + ".title", StringUtil.literallyLocalize(literalId, ObjectArrayList.of()))
+                    .withAdditionalLocalizationKey("painting.chaosawakens." + literalId + ".author", "Chaos Team - T40ne")
+                    .buildAndGet();
+        });
+    }
+
     private static <P extends PaintingVariant> Supplier<P> registerPaintingVariant(ResourceLocation id, Supplier<P> paintingVariantSup) {
         Supplier<P> registeredPaintingVariant = NexusServices.REGISTRAR.registerObject(id, paintingVariantSup, BuiltInRegistries.PAINTING_VARIANT);
 
@@ -61,18 +74,5 @@ public final class CAPaintings {
 
     public static ImmutableMap<ResourceLocation, Supplier<PaintingVariant>> getPaintingVariants() {
         return ImmutableMap.copyOf(PAINTING_VARIANTS);
-    }
-
-    static {
-        PAINTING_VARIANTS.forEach((id, paintingVariantSup) -> {
-            String literalId = id.getPath();
-
-            new BaseDefaultableBareDataGenPropertyWrapper<>(paintingVariantSup, CAConstants.MOD_ID)
-                    .builder()
-                    .withTag(() -> PaintingVariantTags.PLACEABLE)
-                    .withAdditionalLocalizationKey("painting.chaosawakens." + literalId + ".title", StringUtil.literallyLocalize(literalId, ObjectArrayList.of()))
-                    .withAdditionalLocalizationKey("painting.chaosawakens." + literalId + ".author", "Chaos Team - T40ne")
-                    .buildAndGet();
-        });
     }
 }

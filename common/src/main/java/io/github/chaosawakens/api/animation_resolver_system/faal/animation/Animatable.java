@@ -5,8 +5,11 @@ import io.github.chaosawakens.api.animation_resolver_system.pipeline.parsing.bas
 
 public interface Animatable {
 
-    AnimationInfo getAnimationInfo(); // TODO Replace with "baked" equivalents
+    AnimationInfo getAnimationInfo();
+
     ModelInfo getModelInfo();
 
-    double getAge();
+    double getAnimatableAge();
+
+    boolean isValid();
 }

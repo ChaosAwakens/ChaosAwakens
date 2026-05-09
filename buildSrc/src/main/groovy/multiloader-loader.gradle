@@ -3,11 +3,11 @@ plugins {
 }
 
 configurations {
-    commonJava{
+    commonJava {
         canBeResolved = true
     }
 
-    commonResources{
+    commonResources {
         canBeResolved = true
     }
 }

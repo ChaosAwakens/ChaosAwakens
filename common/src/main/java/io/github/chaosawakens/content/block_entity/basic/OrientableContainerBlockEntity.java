@@ -21,8 +21,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 
 public abstract class OrientableContainerBlockEntity extends RandomizableContainerBlockEntity {
-    protected NonNullList<ItemStack> storedItems;
     protected final ContainerOpenersCounter openersCounter;
+    protected NonNullList<ItemStack> storedItems;
 
     protected OrientableContainerBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState blockState) {
         super(type, pos, blockState);
@@ -115,5 +115,6 @@ public abstract class OrientableContainerBlockEntity extends RandomizableContain
     }
 
     public abstract SoundEvent getOpenSound();
+
     public abstract SoundEvent getCloseSound();
 }

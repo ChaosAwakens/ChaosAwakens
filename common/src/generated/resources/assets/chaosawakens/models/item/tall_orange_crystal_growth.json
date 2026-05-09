@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "chaosawakens:block/vegetation/crystal/tall_orange_crystal_growth_top"
+  }
+}

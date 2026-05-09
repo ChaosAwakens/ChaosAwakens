@@ -1,11 +1,17 @@
 {
   "values": [
     "chaosawakens:apple_leaves",
+    "chaosawakens:blue_crystal_leaves",
     "chaosawakens:densewood_leaves",
     "chaosawakens:duplicator_leaves",
     "chaosawakens:ginkgo_leaves",
+    "chaosawakens:green_crystal_leaves",
     "chaosawakens:mesozoic_leaves",
+    "chaosawakens:orange_crystal_leaves",
     "chaosawakens:peach_leaves",
-    "chaosawakens:skywood_leaves"
+    "chaosawakens:pink_crystal_leaves",
+    "chaosawakens:red_crystal_leaves",
+    "chaosawakens:skywood_leaves",
+    "chaosawakens:yellow_crystal_leaves"
   ]
 }

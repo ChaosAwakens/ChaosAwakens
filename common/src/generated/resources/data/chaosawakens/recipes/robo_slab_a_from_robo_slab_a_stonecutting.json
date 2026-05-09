@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "count": 2,
-  "ingredient": {
-    "item": "chaosawakens:robo_slab_a"
-  },
-  "result": "chaosawakens:robo_slab_a"
-}

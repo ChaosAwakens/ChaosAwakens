@@ -2,10 +2,20 @@
   "values": [
     "chaosawakens:blue_crystal_flower",
     "chaosawakens:crystal_rose",
+    "chaosawakens:crystal_rose_bush",
     "chaosawakens:green_crystal_flower",
     "chaosawakens:orange_crystal_flower",
     "chaosawakens:pink_crystal_flower",
     "chaosawakens:red_crystal_flower",
+    "chaosawakens:tall_black_crystal_growth",
+    "chaosawakens:tall_blue_crystal_growth",
+    "chaosawakens:tall_brown_crystal_growth",
+    "chaosawakens:tall_green_crystal_growth",
+    "chaosawakens:tall_orange_crystal_growth",
+    "chaosawakens:tall_pink_crystal_growth",
+    "chaosawakens:tall_purple_crystal_growth",
+    "chaosawakens:tall_red_crystal_growth",
+    "chaosawakens:tall_yellow_crystal_growth",
     "chaosawakens:yellow_crystal_flower"
   ]
 }

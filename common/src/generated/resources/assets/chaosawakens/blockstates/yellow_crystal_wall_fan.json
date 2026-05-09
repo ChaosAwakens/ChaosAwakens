@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "chaosawakens:block/yellow_crystal_wall_fan",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "chaosawakens:block/yellow_crystal_wall_fan"
+    },
+    "facing=south": {
+      "model": "chaosawakens:block/yellow_crystal_wall_fan",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "chaosawakens:block/yellow_crystal_wall_fan",
+      "y": 270
+    }
+  }
+}

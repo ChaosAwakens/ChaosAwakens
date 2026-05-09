@@ -10,17 +10,20 @@ import org.joml.Vector3d;
 import java.util.List;
 import java.util.Optional;
 
-public record GeckolibModelBoneData(String boneName, Optional<String> parentBoneName, Vector3d pivot, List<GeckolibModelCubeData> cubes) implements ModelBoneData {
+public record GeckolibModelBoneData(String boneName, Optional<String> parentBoneName, Vector3d pivot,
+                                    Optional<Vector3d> rotation,
+                                    List<GeckolibModelCubeData> cubes) implements ModelBoneData {
     public static final Codec<GeckolibModelBoneData> BARE_CODEC = RecordCodecBuilder.create(instance -> instance.group(
             Codec.STRING.fieldOf("name").forGetter(GeckolibModelBoneData::boneName),
             Codec.STRING.optionalFieldOf("parent").forGetter(GeckolibModelBoneData::parentBoneName),
             CodecUtil.VECTOR_3D_CODEC.fieldOf("pivot").forGetter(GeckolibModelBoneData::pivot),
+            CodecUtil.VECTOR_3D_CODEC.optionalFieldOf("rotation").forGetter(GeckolibModelBoneData::getRotation),
             GeckolibModelCubeData.LIST_CODEC.optionalFieldOf("cubes", ObjectArrayList.of()).forGetter(GeckolibModelBoneData::cubes)
     ).apply(instance, GeckolibModelBoneData::new));
     public static final Codec<List<GeckolibModelBoneData>> LIST_CODEC = Codec.list(BARE_CODEC);
 
-    public GeckolibModelBoneData(String boneName, Vector3d pivot, List<GeckolibModelCubeData> cubes) {
-        this(boneName, Optional.empty(), pivot, cubes);
+    public GeckolibModelBoneData(String boneName, Vector3d pivot, Optional<Vector3d> rotation, List<GeckolibModelCubeData> cubes) {
+        this(boneName, Optional.empty(), pivot, rotation, cubes);
     }
 
     @Override
@@ -36,6 +39,11 @@ public record GeckolibModelBoneData(String boneName, Optional<String> parentBone
     @Override
     public Optional<String> getParentBoneName() {
         return parentBoneName;
+    }
+
+    @Override
+    public Optional<Vector3d> getRotation() {
+        return rotation;
     }
 
     @Override

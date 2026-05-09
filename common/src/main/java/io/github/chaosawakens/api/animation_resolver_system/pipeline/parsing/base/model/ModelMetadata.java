@@ -5,12 +5,16 @@ public interface ModelMetadata {
     String getGeometryId();
 
     double getTextureWidth();
+
     double getTextureHeight();
 
     double getVisibleBoundsWidth();
+
     double getVisibleBoundsHeight();
 
     double getVisibleBoundsOffsetX();
+
     double getVisibleBoundsOffsetY();
+
     double getVisibleBoundsOffsetZ();
 }

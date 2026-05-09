@@ -1,0 +1,8 @@
+{
+  "type": "chaosawakens:nbt_tree",
+  "config": {
+    "ground_level": 0,
+    "location": "chaosawakens:feature_presets/nbt_tree/ginkgo_tree/ginkgo_tree_2",
+    "processors": []
+  }
+}

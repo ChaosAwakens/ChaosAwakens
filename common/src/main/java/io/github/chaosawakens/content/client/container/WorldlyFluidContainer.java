@@ -9,6 +9,7 @@ public interface WorldlyFluidContainer extends WorldlyContainer {
     Fluid getFluid(int fluidSlot); // TODO Loader-agnostic "FluidStack"
 
     Fluid setFluid(int fluidSlot, double initialAmount, Fluid fluid);
+
     Fluid updateFluid(int fluidSlot, double amountToAdd);
 
     Fluid removeFluid(int fluidSlot);
@@ -16,5 +17,6 @@ public interface WorldlyFluidContainer extends WorldlyContainer {
     double getFluidAmount(int fluidSlot);
 
     boolean allowFluidExtraction(int fluidSlot, Direction extractionFace);
+
     boolean allowFluidInsertion(int fluidSlot, Direction insertionFace);
 }

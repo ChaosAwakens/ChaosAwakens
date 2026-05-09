@@ -1,0 +1,66 @@
+{
+  "type": "minecraft:cave",
+  "config": {
+    "debug_settings": {
+      "air_state": {
+        "Name": "minecraft:diamond_block"
+      },
+      "barrier_state": {
+        "Name": "minecraft:glass"
+      },
+      "lava_state": {
+        "Name": "minecraft:orange_stained_glass"
+      },
+      "water_state": {
+        "Name": "minecraft:candle",
+        "Properties": {
+          "candles": "1",
+          "lit": "false",
+          "waterlogged": "false"
+        }
+      }
+    },
+    "floor_level": {
+      "type": "minecraft:uniform",
+      "value": {
+        "max_exclusive": 0.8,
+        "min_inclusive": -0.8
+      }
+    },
+    "horizontal_radius_multiplier": {
+      "type": "minecraft:uniform",
+      "value": {
+        "max_exclusive": 3.5,
+        "min_inclusive": 1.0
+      }
+    },
+    "lava_level": {
+      "above_bottom": 0
+    },
+    "probability": 0.3,
+    "replaceable": "#chaosawakens:ore/mining_paradise/mining_carver_replaceables",
+    "vertical_radius_multiplier": {
+      "type": "minecraft:uniform",
+      "value": {
+        "max_exclusive": 3.5,
+        "min_inclusive": 1.0
+      }
+    },
+    "y": {
+      "type": "minecraft:uniform",
+      "max_inclusive": {
+        "absolute": 320
+      },
+      "min_inclusive": {
+        "above_bottom": 0
+      }
+    },
+    "yScale": {
+      "type": "minecraft:uniform",
+      "value": {
+        "max_exclusive": 3.25,
+        "min_inclusive": 0.5
+      }
+    }
+  }
+}

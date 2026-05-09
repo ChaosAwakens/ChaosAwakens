@@ -1,0 +1,528 @@
+{
+  "format_version": "1.12.0",
+  "minecraft:geometry": [
+    {
+      "description": {
+        "identifier": "geometry.unknown",
+        "texture_width": 64,
+        "texture_height": 64,
+        "visible_bounds_width": 2,
+        "visible_bounds_height": 1.5,
+        "visible_bounds_offset": [
+          0,
+          0.25,
+          0
+        ]
+      },
+      "bones": [
+        {
+          "name": "Root",
+          "pivot": [
+            0,
+            -0.01818,
+            -1.20909
+          ]
+        },
+        {
+          "name": "right_legs",
+          "parent": "Root",
+          "pivot": [
+            -2,
+            0,
+            -1.5
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -2,
+                -3,
+                -4
+              ],
+              "size": [
+                0,
+                3,
+                5
+              ],
+              "uv": [
+                11,
+                27
+              ]
+            }
+          ]
+        },
+        {
+          "name": "left_legs",
+          "parent": "Root",
+          "pivot": [
+            2,
+            0,
+            -1.5
+          ],
+          "cubes": [
+            {
+              "origin": [
+                2,
+                -3,
+                -4
+              ],
+              "size": [
+                0,
+                3,
+                5
+              ],
+              "uv": [
+                0,
+                27
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Body",
+          "parent": "Root",
+          "pivot": [
+            0,
+            2,
+            -1
+          ]
+        },
+        {
+          "name": "Head",
+          "parent": "Body",
+          "pivot": [
+            0,
+            2,
+            -1
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -2,
+                0,
+                -5
+              ],
+              "size": [
+                4,
+                4,
+                5
+              ],
+              "uv": [
+                0,
+                10
+              ]
+            }
+          ]
+        },
+        {
+          "name": "left_anthena",
+          "parent": "Head",
+          "pivot": [
+            1,
+            0.5,
+            -5
+          ],
+          "cubes": [
+            {
+              "origin": [
+                1,
+                0,
+                -8
+              ],
+              "size": [
+                0,
+                6,
+                3
+              ],
+              "uv": [
+                29,
+                27
+              ]
+            }
+          ]
+        },
+        {
+          "name": "right_anthena",
+          "parent": "Head",
+          "pivot": [
+            -1,
+            0.5,
+            -5
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -1,
+                0,
+                -8
+              ],
+              "size": [
+                0,
+                6,
+                3
+              ],
+              "uv": [
+                22,
+                27
+              ]
+            }
+          ]
+        },
+        {
+          "name": "right_eye",
+          "parent": "Head",
+          "pivot": [
+            -2,
+            1,
+            -5
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -3,
+                -0.1,
+                -6
+              ],
+              "size": [
+                2,
+                2,
+                2
+              ],
+              "uv": [
+                36,
+                32
+              ]
+            }
+          ]
+        },
+        {
+          "name": "right_eye_blink",
+          "parent": "right_eye",
+          "pivot": [
+            -2,
+            1,
+            -5
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -3,
+                -0.1,
+                -6
+              ],
+              "size": [
+                2,
+                2,
+                2
+              ],
+              "inflate": 0.02,
+              "uv": [
+                9,
+                36
+              ]
+            }
+          ]
+        },
+        {
+          "name": "left_eye",
+          "parent": "Head",
+          "pivot": [
+            2,
+            1,
+            -5
+          ],
+          "cubes": [
+            {
+              "origin": [
+                1,
+                -0.1,
+                -6
+              ],
+              "size": [
+                2,
+                2,
+                2
+              ],
+              "uv": [
+                36,
+                27
+              ]
+            }
+          ]
+        },
+        {
+          "name": "left_eye_blink",
+          "parent": "left_eye",
+          "pivot": [
+            2,
+            1,
+            -5
+          ],
+          "cubes": [
+            {
+              "origin": [
+                1,
+                -0.1,
+                -6
+              ],
+              "size": [
+                2,
+                2,
+                2
+              ],
+              "inflate": 0.02,
+              "uv": [
+                0,
+                36
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Glowing_abdomen",
+          "parent": "Body",
+          "pivot": [
+            0,
+            2,
+            0.1
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -2,
+                0,
+                0
+              ],
+              "size": [
+                4,
+                4,
+                5
+              ],
+              "inflate": 0.01,
+              "uv": [
+                0,
+                0
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Wings_w_husks",
+          "parent": "Body",
+          "pivot": [
+            0.22,
+            3.46,
+            1.16
+          ]
+        },
+        {
+          "name": "left_husk",
+          "parent": "Wings_w_husks",
+          "pivot": [
+            1.1,
+            3.1,
+            -1.4
+          ],
+          "cubes": [
+            {
+              "origin": [
+                0.1,
+                2.1,
+                -1.9
+              ],
+              "size": [
+                2,
+                2,
+                7
+              ],
+              "uv": [
+                19,
+                0
+              ]
+            }
+          ]
+        },
+        {
+          "name": "left_wing",
+          "parent": "Wings_w_husks",
+          "pivot": [
+            1.5,
+            4,
+            -1
+          ],
+          "cubes": [
+            {
+              "origin": [
+                0,
+                4,
+                -1
+              ],
+              "size": [
+                3,
+                0,
+                6
+              ],
+              "uv": [
+                0,
+                20
+              ]
+            }
+          ]
+        },
+        {
+          "name": "right_husk",
+          "parent": "Wings_w_husks",
+          "pivot": [
+            -1.1,
+            3.1,
+            -1.4
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -2.1,
+                2.1,
+                -1.9
+              ],
+              "size": [
+                2,
+                2,
+                7
+              ],
+              "uv": [
+                19,
+                10
+              ]
+            }
+          ]
+        },
+        {
+          "name": "right_wing",
+          "parent": "Wings_w_husks",
+          "pivot": [
+            -1.5,
+            4,
+            -1
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -3,
+                4,
+                -1
+              ],
+              "size": [
+                3,
+                0,
+                6
+              ],
+              "uv": [
+                19,
+                20
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Effects",
+          "parent": "Root",
+          "pivot": [
+            0,
+            1.5,
+            2.9
+          ]
+        },
+        {
+          "name": "glow_spark1",
+          "parent": "Effects",
+          "pivot": [
+            0,
+            1.5,
+            2.9
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -0.5,
+                1.5,
+                0.9
+              ],
+              "size": [
+                1,
+                0,
+                4
+              ],
+              "uv": [
+                6,
+                47
+              ]
+            }
+          ]
+        },
+        {
+          "name": "glow_spark2",
+          "parent": "Effects",
+          "pivot": [
+            0,
+            1.5,
+            2.9
+          ],
+          "rotation": [
+            -12.5,
+            57.5,
+            0
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -0.5,
+                1.5,
+                0.9
+              ],
+              "size": [
+                1,
+                0,
+                4
+              ],
+              "uv": [
+                6,
+                47
+              ]
+            }
+          ]
+        },
+        {
+          "name": "glow_spark3",
+          "parent": "Effects",
+          "pivot": [
+            0,
+            1.5,
+            2.9
+          ],
+          "rotation": [
+            20,
+            -42.5,
+            0
+          ],
+          "cubes": [
+            {
+              "origin": [
+                -0.5,
+                1.5,
+                0.9
+              ],
+              "size": [
+                1,
+                0,
+                4
+              ],
+              "uv": [
+                6,
+                47
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

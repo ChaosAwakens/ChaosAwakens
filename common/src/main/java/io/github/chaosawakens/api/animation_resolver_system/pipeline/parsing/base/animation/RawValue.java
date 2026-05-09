@@ -5,7 +5,9 @@ import com.mojang.datafixers.util.Either;
 public interface RawValue {
 
     Either<String, Double> getX();
+
     Either<String, Double> getY();
+
     Either<String, Double> getZ();
 
     default boolean isLiteral() {

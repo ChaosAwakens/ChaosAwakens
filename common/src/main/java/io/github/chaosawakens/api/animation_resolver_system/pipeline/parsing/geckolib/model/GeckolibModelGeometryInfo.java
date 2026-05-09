@@ -8,7 +8,8 @@ import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public record GeckolibModelGeometryInfo(Optional<GeckolibModelMetadata> metadata, List<GeckolibModelBoneData> bones) implements ModelGeometryInfo {
+public record GeckolibModelGeometryInfo(Optional<GeckolibModelMetadata> metadata,
+                                        List<GeckolibModelBoneData> bones) implements ModelGeometryInfo {
     public static final Codec<GeckolibModelGeometryInfo> CODEC = RecordCodecBuilder.create(instance -> instance.group(
             GeckolibModelMetadata.CODEC.optionalFieldOf("description").forGetter(GeckolibModelGeometryInfo::metadata),
             GeckolibModelBoneData.LIST_CODEC.optionalFieldOf("bones", ObjectArrayList.of()).forGetter(GeckolibModelGeometryInfo::bones)

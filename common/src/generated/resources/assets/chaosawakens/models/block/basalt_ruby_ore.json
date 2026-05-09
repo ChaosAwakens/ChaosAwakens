@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "chaosawakens:block/ore/basalt/basalt_ruby_ore_top",
+    "side": "chaosawakens:block/ore/basalt/basalt_ruby_ore"
+  }
+}

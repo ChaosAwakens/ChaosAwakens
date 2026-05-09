@@ -23,7 +23,8 @@ public final class CAItemTierTemplates {
     public static final Tier SPECIAL_MID = new ExtendedTier(100, 2.0F, 0.0F, 3, 15, () -> Ingredient.EMPTY);
     public static final Tier SPECIAL_HIGH = new ExtendedTier(100, 2.0F, 0.0F, 3, 15, () -> Ingredient.EMPTY);
 
-    public record ExtendedTier(int uses, float speed, float attackDamageBonus, int level, int enchantmentValue, Supplier<Ingredient> repairIngredient) implements Tier {
+    public record ExtendedTier(int uses, float speed, float attackDamageBonus, int level, int enchantmentValue,
+                               Supplier<Ingredient> repairIngredient) implements Tier {
 
         @Override
         public int getUses() {

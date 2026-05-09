@@ -1,6 +1,8 @@
 {
   "values": [
     "chaosawakens:aluminum_block",
+    "chaosawakens:deepslate_kunzite_ore",
+    "chaosawakens:deepslate_ruby_ore",
     "chaosawakens:fossilized_apple_cow_deepslate",
     "chaosawakens:fossilized_attack_squid_deepslate",
     "chaosawakens:fossilized_axolotl_deepslate",
@@ -50,6 +52,20 @@
     "chaosawakens:fossilized_zombie_deepslate",
     "chaosawakens:fossilized_zombie_horse_deepslate",
     "chaosawakens:fossilized_zombie_villager_deepslate",
+    "chaosawakens:gloomstone_aluminum_ore",
+    "chaosawakens:gloomstone_coal_ore",
+    "chaosawakens:gloomstone_copper_ore",
+    "chaosawakens:gloomstone_diamond_ore",
+    "chaosawakens:gloomstone_gold_ore",
+    "chaosawakens:gloomstone_iron_ore",
+    "chaosawakens:gloomstone_kunzite_ore",
+    "chaosawakens:gloomstone_lapis_ore",
+    "chaosawakens:gloomstone_platinum_ore",
+    "chaosawakens:gloomstone_redstone_ore",
+    "chaosawakens:gloomstone_ruby_ore",
+    "chaosawakens:gloomstone_sunstone_ore",
+    "chaosawakens:gloomstone_titanium_ore",
+    "chaosawakens:gloomstone_uranium_ore",
     "chaosawakens:sunstone_block"
   ]
 }

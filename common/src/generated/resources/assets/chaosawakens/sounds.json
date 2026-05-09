@@ -1,0 +1,338 @@
+{
+  "crags": {
+    "sounds": [
+      {
+        "name": "chaosawakens:soundtrack/ambient/mining_paradise/crags",
+        "preload": true,
+        "stream": true
+      }
+    ],
+    "subtitle": "subtitles.soundtrack.chaosawakens.crags"
+  },
+  "crystal_budding_break": {
+    "sounds": [
+      {
+        "name": "chaosawakens:block/crystal/stone/budding/crystal_budding_break_1"
+      },
+      {
+        "name": "chaosawakens:block/crystal/stone/budding/crystal_budding_break_2"
+      },
+      {
+        "name": "chaosawakens:block/crystal/stone/budding/crystal_budding_break_3"
+      },
+      {
+        "name": "chaosawakens:block/crystal/stone/budding/crystal_budding_break_4"
+      }
+    ],
+    "subtitle": "subtitles.block.chaosawakens.crystal_budding_break"
+  },
+  "crystal_cluster_break": {
+    "sounds": [
+      {
+        "name": "chaosawakens:block/crystal/stone/cluster/crystal_cluster_break_1"
+      },
+      {
+        "name": "chaosawakens:block/crystal/stone/cluster/crystal_cluster_break_2"
+      },
+      {
+        "name": "chaosawakens:block/crystal/stone/cluster/crystal_cluster_break_3"
+      },
+      {
+        "name": "chaosawakens:block/crystal/stone/cluster/crystal_cluster_break_4"
+      }
+    ],
+    "subtitle": "subtitles.block.chaosawakens.crystal_cluster_break"
+  },
+  "crystal_grass_break": {
+    "sounds": [
+      {
+        "name": "chaosawakens:block/crystal/vegetation/grass/break/crystal_grass_break_1"
+      },
+      {
+        "name": "chaosawakens:block/crystal/vegetation/grass/break/crystal_grass_break_2"
+      },
+      {
+        "name": "chaosawakens:block/crystal/vegetation/grass/break/crystal_grass_break_3"
+      },
+      {
+        "name": "chaosawakens:block/crystal/vegetation/grass/break/crystal_grass_break_4"
+      }
+    ],
+    "subtitle": "subtitles.block.chaosawakens.crystal_grass_break"
+  },
+  "crystal_grass_step": {
+    "sounds": [
+      {
+        "name": "chaosawakens:block/crystal/vegetation/grass/step/crystal_grass_step_1"
+      },
+      {
+        "name": "chaosawakens:block/crystal/vegetation/grass/step/crystal_grass_step_2"
+      },
+      {
+        "name": "chaosawakens:block/crystal/vegetation/grass/step/crystal_grass_step_3"
+      },
+      {
+        "name": "chaosawakens:block/crystal/vegetation/grass/step/crystal_grass_step_4"
+      },
+      {
+        "name": "chaosawakens:block/crystal/vegetation/grass/step/crystal_grass_step_5"
+      },
+      {
+        "name": "chaosawakens:block/crystal/vegetation/grass/step/crystal_grass_step_6"
+      }
+    ],
+    "subtitle": "subtitles.block.chaosawakens.crystal_grass_step"
+  },
+  "crystal_leaves_break": {
+    "sounds": [
+      {
+        "name": "chaosawakens:block/crystal/vegetation/leaves/break/crystal_leaves_break_1"
+      },
+      {
+        "name": "chaosawakens:block/crystal/vegetation/leaves/break/crystal_leaves_break_2"
+      },
+      {
+        "name": "chaosawakens:block/crystal/vegetation/leaves/break/crystal_leaves_break_3"
+      },
+      {
+        "name": "chaosawakens:block/crystal/vegetation/leaves/break/crystal_leaves_break_4"
+      }
+    ],
+    "subtitle": "subtitles.block.chaosawakens.crystal_leaves_break"
+  },
+  "crystal_leaves_step": {
+    "sounds": [
+      {
+        "name": "chaosawakens:block/crystal/vegetation/leaves/step/crystal_leaves_step_1"
+      },
+      {
+        "name": "chaosawakens:block/crystal/vegetation/leaves/step/crystal_leaves_step_2"
+      },
+      {
+        "name": "chaosawakens:block/crystal/vegetation/leaves/step/crystal_leaves_step_3"
+      },
+      {
+        "name": "chaosawakens:block/crystal/vegetation/leaves/step/crystal_leaves_step_4"
+      },
+      {
+        "name": "chaosawakens:block/crystal/vegetation/leaves/step/crystal_leaves_step_5"
+      },
+      {
+        "name": "chaosawakens:block/crystal/vegetation/leaves/step/crystal_leaves_step_6"
+      }
+    ],
+    "subtitle": "subtitles.block.chaosawakens.crystal_leaves_step"
+  },
+  "crystalwood_break": {
+    "sounds": [
+      {
+        "name": "chaosawakens:block/crystal/wood/break/crystalwood_break_1"
+      },
+      {
+        "name": "chaosawakens:block/crystal/wood/break/crystalwood_break_2"
+      },
+      {
+        "name": "chaosawakens:block/crystal/wood/break/crystalwood_break_3"
+      },
+      {
+        "name": "chaosawakens:block/crystal/wood/break/crystalwood_break_4"
+      }
+    ],
+    "subtitle": "subtitles.block.chaosawakens.crystalwood_break"
+  },
+  "crystalwood_step": {
+    "sounds": [
+      {
+        "name": "chaosawakens:block/crystal/wood/step/crystalwood_step_1"
+      },
+      {
+        "name": "chaosawakens:block/crystal/wood/step/crystalwood_step_2"
+      },
+      {
+        "name": "chaosawakens:block/crystal/wood/step/crystalwood_step_3"
+      },
+      {
+        "name": "chaosawakens:block/crystal/wood/step/crystalwood_step_4"
+      },
+      {
+        "name": "chaosawakens:block/crystal/wood/step/crystalwood_step_5"
+      },
+      {
+        "name": "chaosawakens:block/crystal/wood/step/crystalwood_step_6"
+      }
+    ],
+    "subtitle": "subtitles.block.chaosawakens.crystalwood_step"
+  },
+  "dense_grass_break": {
+    "sounds": [
+      {
+        "name": "chaosawakens:block/dense/vegetation/grass/break/dense_grass_break_1"
+      },
+      {
+        "name": "chaosawakens:block/dense/vegetation/grass/break/dense_grass_break_2"
+      },
+      {
+        "name": "chaosawakens:block/dense/vegetation/grass/break/dense_grass_break_3"
+      }
+    ],
+    "subtitle": "subtitles.block.chaosawakens.dense_grass_break"
+  },
+  "dense_grass_fall": {
+    "sounds": [
+      {
+        "name": "chaosawakens:block/dense/vegetation/grass/fall/dense_grass_fall_1"
+      },
+      {
+        "name": "chaosawakens:block/dense/vegetation/grass/fall/dense_grass_fall_2"
+      },
+      {
+        "name": "chaosawakens:block/dense/vegetation/grass/fall/dense_grass_fall_3"
+      }
+    ],
+    "subtitle": "subtitles.block.chaosawakens.dense_grass_fall"
+  },
+  "dense_grass_hit": {
+    "sounds": [
+      {
+        "name": "chaosawakens:block/dense/vegetation/grass/hit/dense_grass_hit_1"
+      },
+      {
+        "name": "chaosawakens:block/dense/vegetation/grass/hit/dense_grass_hit_2"
+      },
+      {
+        "name": "chaosawakens:block/dense/vegetation/grass/hit/dense_grass_hit_3"
+      }
+    ],
+    "subtitle": "subtitles.block.chaosawakens.dense_grass_hit"
+  },
+  "dense_grass_place": {
+    "sounds": [
+      {
+        "name": "chaosawakens:block/dense/vegetation/grass/place/dense_grass_place_1"
+      },
+      {
+        "name": "chaosawakens:block/dense/vegetation/grass/place/dense_grass_place_2"
+      },
+      {
+        "name": "chaosawakens:block/dense/vegetation/grass/place/dense_grass_place_3"
+      },
+      {
+        "name": "chaosawakens:block/dense/vegetation/grass/place/dense_grass_place_4"
+      }
+    ],
+    "subtitle": "subtitles.block.chaosawakens.dense_grass_place"
+  },
+  "dense_grass_step": {
+    "sounds": [
+      {
+        "name": "chaosawakens:block/dense/vegetation/grass/step/dense_grass_step_1"
+      },
+      {
+        "name": "chaosawakens:block/dense/vegetation/grass/step/dense_grass_step_2"
+      },
+      {
+        "name": "chaosawakens:block/dense/vegetation/grass/step/dense_grass_step_3"
+      },
+      {
+        "name": "chaosawakens:block/dense/vegetation/grass/step/dense_grass_step_4"
+      }
+    ],
+    "subtitle": "subtitles.block.chaosawakens.dense_grass_step"
+  },
+  "kyanite_break": {
+    "sounds": [
+      {
+        "name": "chaosawakens:block/crystal/stone/kyanite/break/kyanite_break_1"
+      },
+      {
+        "name": "chaosawakens:block/crystal/stone/kyanite/break/kyanite_break_2"
+      },
+      {
+        "name": "chaosawakens:block/crystal/stone/kyanite/break/kyanite_break_3"
+      },
+      {
+        "name": "chaosawakens:block/crystal/stone/kyanite/break/kyanite_break_4"
+      }
+    ],
+    "subtitle": "subtitles.block.chaosawakens.kyanite_break"
+  },
+  "kyanite_step": {
+    "sounds": [
+      {
+        "name": "chaosawakens:block/crystal/stone/kyanite/step/kyanite_step_1"
+      },
+      {
+        "name": "chaosawakens:block/crystal/stone/kyanite/step/kyanite_step_2"
+      },
+      {
+        "name": "chaosawakens:block/crystal/stone/kyanite/step/kyanite_step_3"
+      },
+      {
+        "name": "chaosawakens:block/crystal/stone/kyanite/step/kyanite_step_4"
+      },
+      {
+        "name": "chaosawakens:block/crystal/stone/kyanite/step/kyanite_step_5"
+      },
+      {
+        "name": "chaosawakens:block/crystal/stone/kyanite/step/kyanite_step_6"
+      }
+    ],
+    "subtitle": "subtitles.block.chaosawakens.kyanite_step"
+  },
+  "tar_fall": {
+    "sounds": [
+      {
+        "name": "chaosawakens:block/dense/tar/fall/tar_fall_1"
+      },
+      {
+        "name": "chaosawakens:block/dense/tar/fall/tar_fall_2"
+      },
+      {
+        "name": "chaosawakens:block/dense/tar/fall/tar_fall_3"
+      }
+    ],
+    "subtitle": "subtitles.block.chaosawakens.tar_fall"
+  },
+  "tar_hit": {
+    "sounds": [
+      {
+        "name": "chaosawakens:block/dense/tar/hit/tar_hit_1"
+      },
+      {
+        "name": "chaosawakens:block/dense/tar/hit/tar_hit_2"
+      },
+      {
+        "name": "chaosawakens:block/dense/tar/hit/tar_hit_3"
+      },
+      {
+        "name": "chaosawakens:block/dense/tar/hit/tar_hit_4"
+      }
+    ],
+    "subtitle": "subtitles.block.chaosawakens.tar_hit"
+  },
+  "tar_place": {
+    "sounds": [
+      {
+        "name": "chaosawakens:block/dense/tar/place/tar_place_1"
+      },
+      {
+        "name": "chaosawakens:block/dense/tar/place/tar_place_2"
+      },
+      {
+        "name": "chaosawakens:block/dense/tar/place/tar_place_3"
+      }
+    ],
+    "subtitle": "subtitles.block.chaosawakens.tar_place"
+  },
+  "tar_step": {
+    "sounds": [
+      {
+        "name": "chaosawakens:block/dense/tar/step/tar_step_1"
+      },
+      {
+        "name": "chaosawakens:block/dense/tar/step/tar_step_2"
+      }
+    ],
+    "subtitle": "subtitles.block.chaosawakens.tar_step"
+  }
+}

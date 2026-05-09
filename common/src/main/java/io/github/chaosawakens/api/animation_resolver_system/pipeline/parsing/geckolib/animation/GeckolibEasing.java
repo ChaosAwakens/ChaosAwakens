@@ -15,7 +15,6 @@ import java.util.function.BiFunction;
 import java.util.function.Supplier;
 
 public class GeckolibEasing implements Easing {
-    private static final BiMap<String, GeckolibEasing> VALUES = HashBiMap.create();
     public static final GeckolibEasing LINEAR = new GeckolibEasing("linear", (easingArgs, timeDelta) -> timeDelta);
     public static final GeckolibEasing EASE_IN = new GeckolibEasing("easeinsine", (easingArgs, timeDelta) -> MathUtil.sineEasing(timeDelta));
     public static final GeckolibEasing EASE_OUT = new GeckolibEasing("easeoutsine", (easingArgs, timeDelta) -> MathUtil.sineEasing(timeDelta), GeckolibEasingType.EASE_OUT);
@@ -44,6 +43,7 @@ public class GeckolibEasing implements Easing {
     public static final GeckolibEasing ELASTIC_IN = new GeckolibEasing("easeinelastic", (easingArgs, timeDelta) -> MathUtil.elasticEasing(timeDelta, pickArg(easingArgs, 0)));
     public static final GeckolibEasing ELASTIC_OUT = new GeckolibEasing("easeoutelastic", (easingArgs, timeDelta) -> MathUtil.elasticEasing(timeDelta, pickArg(easingArgs, 0)), GeckolibEasingType.EASE_OUT);
     public static final GeckolibEasing ELASTIC_IN_OUT = new GeckolibEasing("easeinoutelastic", (easingArgs, timeDelta) -> MathUtil.elasticEasing(timeDelta, pickArg(easingArgs, 0)), GeckolibEasingType.EASE_IN_OUT);
+    private static final BiMap<String, GeckolibEasing> VALUES = HashBiMap.create();
     protected final GeckolibEasingType easingType;
     protected final BiFunction<List<Double>, Double, Double> easingFunction;
     protected final List<Double> defaultEasingArgs;
@@ -64,6 +64,18 @@ public class GeckolibEasing implements Easing {
         this(easingName, GeckolibEasingType.EASE_IN, easingFunction, ObjectArrayList.of());
     }
 
+    public static Supplier<GeckolibEasing> getEasing(String easingName) {
+        return () -> VALUES.getOrDefault(easingName.toLowerCase(Locale.ROOT).trim().replaceAll("\t\n", ""), LINEAR);
+    }
+
+    public static String getEasingName(Supplier<GeckolibEasing> easing) {
+        return VALUES.inverse().getOrDefault(easing.get(), "linear");
+    }
+
+    public static Double pickArg(List<Double> easingArgs, int idx) {
+        return easingArgs.size() > idx ? easingArgs.get(idx) : null;
+    }
+
     @Override
     public double apply(double timeDelta) {
         return easingType.transformAndApply(timeDelta, defaultEasingArgs, easingFunction);
@@ -81,18 +93,6 @@ public class GeckolibEasing implements Easing {
         return ImmutableList.copyOf(defaultEasingArgs);
     }
 
-    public static Supplier<GeckolibEasing> getEasing(String easingName) {
-        return () -> VALUES.getOrDefault(easingName.toLowerCase(Locale.ROOT).trim().replaceAll("\t\n", ""), LINEAR);
-    }
-
-    public static String getEasingName(Supplier<GeckolibEasing> easing) {
-        return VALUES.inverse().getOrDefault(easing.get(), "linear");
-    }
-
-    public static Double pickArg(List<Double> easingArgs, int idx) {
-        return easingArgs.size() > idx ? easingArgs.get(idx) : null;
-    }
-
     public enum GeckolibEasingType {
         EASE_IN((timeDelta, easingArgs, originalFunction) -> originalFunction.apply(easingArgs, timeDelta)),
         EASE_OUT((timeDelta, easingArgs, originalFunction) -> 1 - originalFunction.apply(easingArgs, 1 - timeDelta)),
@@ -107,10 +107,6 @@ public class GeckolibEasing implements Easing {
             this.easingTypeFunction = easingFunction;
         }
 
-        public double transformAndApply(double timeInSeconds, List<Double> easingArgs, BiFunction<List<Double>, Double, Double> originalEasingFunction) {
-            return easingTypeFunction.apply(timeInSeconds, easingArgs, originalEasingFunction);
-        }
-
         public static GeckolibEasingType byName(String easingTypeName) {
             return Arrays.stream(values())
                     .filter(easingType -> easingType.name().equalsIgnoreCase(easingTypeName))
@@ -120,6 +116,10 @@ public class GeckolibEasing implements Easing {
 
         public static String getName(GeckolibEasingType easingType) {
             return easingType.name().toLowerCase(Locale.ROOT);
+        }
+
+        public double transformAndApply(double timeInSeconds, List<Double> easingArgs, BiFunction<List<Double>, Double, Double> originalEasingFunction) {
+            return easingTypeFunction.apply(timeInSeconds, easingArgs, originalEasingFunction);
         }
     }
 }

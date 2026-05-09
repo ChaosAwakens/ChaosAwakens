@@ -8,6 +8,9 @@ import com.mememan.nexus.util.ModelUtil;
 import com.mememan.nexus.util.RegistryUtil;
 import io.github.chaosawakens.CAConstants;
 import io.github.chaosawakens.content.block.vegetation.FruitableLeavesBlock;
+import io.github.chaosawakens.content.block.vegetation.generic.CropInstance;
+import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
+import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.core.Direction;
 import net.minecraft.data.models.blockstates.*;
@@ -19,6 +22,8 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 
 import java.util.Optional;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public final class CAModelTemplates {
     public static final ModelTemplate LEAF_CARPET = new ModelTemplate(Optional.of(CAConstants.prefix("block/leaf_carpet")), Optional.empty(), TextureSlot.TEXTURE);
@@ -69,11 +74,11 @@ public final class CAModelTemplates {
         return leafCarpet(targetBlock, RegistryUtil.getTextureLocationOrDefault(
                 targetBlock,
                 RegistryUtil.getTextureLocationOrDefault(DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(targetBlock.get())
-                        .withPath(curPath -> curPath.replace("_leaf_carpet", "_leaves")),
+                                .withPath(curPath -> curPath.replace("_leaf_carpet", "_leaves")),
                         "block",
                         RegistryUtil.getTextureLocationOrDefault(DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(targetBlock.get())
                                 .withPath(curPath -> curPath.replace("_carpet", "")), "block", RegistryUtil.getTextureLocationOrDefault(
-                                        new ResourceLocation(DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(targetBlock.get()).getPath().replace("_leaf_carpet", "_leaves")),
+                                new ResourceLocation(DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(targetBlock.get()).getPath().replace("_leaf_carpet", "_leaves")),
                                 "block", RegistryUtil.getTextureLocationOrDefault(
                                         new ResourceLocation(DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(targetBlock.get()).getPath().replace("_carpet", "")),
                                         "block"
@@ -87,7 +92,7 @@ public final class CAModelTemplates {
         return new BlockStateDefinition(targetBlock)
                 .withBlockStateSupplier(MultiPartGenerator.multiPart(targetBlock.get())
                         .with(Condition.condition()
-                                .term(PipeBlock.NORTH, true), Variant.variant() // Gotta use PipeBlock properties or it just won't work :skull:
+                                .term(PipeBlock.NORTH, true), Variant.variant()
                                 .with(VariantProperties.MODEL, targetModelLoc))
                         .with(Condition.condition()
                                 .term(PipeBlock.DOWN, false)
@@ -215,7 +220,8 @@ public final class CAModelTemplates {
     public static BlockStateDefinition roboSlabBlockState(Supplier<Block> targetBlock) {
         ResourceLocation defaultedTexLoc = RegistryUtil.getTextureLocationOrDefault(RegistryUtil.pickBlockId(targetBlock), RegistryUtil.getTextureLocationOrDefault(DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(targetBlock.get()).withPath(curPath -> curPath.replace("_slab", "_block"))));
 
-        if (defaultedTexLoc.getPath().contains("/")) defaultedTexLoc = defaultedTexLoc.withPath(curPath -> curPath.substring(curPath.lastIndexOf('/') + 1)).withPrefix("block/");
+        if (defaultedTexLoc.getPath().contains("/"))
+            defaultedTexLoc = defaultedTexLoc.withPath(curPath -> curPath.substring(curPath.lastIndexOf('/') + 1)).withPrefix("block/");
 
         return ModelUtil.slabBlockState(targetBlock, defaultedTexLoc);
     }
@@ -248,8 +254,14 @@ public final class CAModelTemplates {
     }
 
     public static BlockModelDefinition orientableCube(Supplier<Block> targetBlock) {
-        return orientableCube(RegistryUtil.getTextureLocationOrDefault(targetBlock), RegistryUtil.getTextureLocationWithSuffixOrDefault(targetBlock, "_side"), RegistryUtil.getTextureLocationWithSuffixOrDefault(targetBlock, "_top"))
+        return orientableCube(RegistryUtil.getTextureLocationOrDefault(targetBlock, "block"), RegistryUtil.getTextureLocationWithSuffixOrDefault(targetBlock, "_side", "block"), RegistryUtil.getTextureLocationWithSuffixOrDefault(targetBlock, "_top", "block"))
                 .withOrdinalModelDefinition(new ItemModelDefinition(ModelUtil.fromLocation(ModelLocationUtils.getModelLocation(targetBlock.get()))));
+    }
+
+    public static BlockModelDefinition orientableCubeLit(Supplier<Block> targetBlock) {
+        return orientableCube(targetBlock)
+                .withOrdinalModelDefinition(orientableCube(RegistryUtil.getTextureLocationWithSuffixOrDefault(targetBlock, "_lit", "block"), RegistryUtil.getTextureLocationWithSuffixOrDefault(targetBlock, "_side", "block"), RegistryUtil.getTextureLocationWithSuffixOrDefault(targetBlock, "_top", "block"))
+                        .withCustomName(DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(targetBlock.get()).withSuffix("_lit").getPath()));
     }
 
     public static BlockStateDefinition orientableCubeBlockState(Supplier<Block> targetBlock) {
@@ -333,5 +345,146 @@ public final class CAModelTemplates {
 
     public static BlockStateDefinition orientableCubeContainerBlockState(Supplier<Block> targetBlock) {
         return orientableCubeContainerBlockState(targetBlock, ModelLocationUtils.getModelLocation(targetBlock.get()), ModelLocationUtils.getModelLocation(targetBlock.get(), "_open"));
+    }
+
+    public static BlockModelDefinition coralFan(ResourceLocation fanTextureLoc) {
+        return new BlockModelDefinition(ModelTemplates.CORAL_FAN)
+                .withTextureMapping(new TextureMapping().put(TextureSlot.FAN, fanTextureLoc))
+                .withRenderType(ModelUtil.CUTOUT_RENDER_TYPE)
+                .withOrdinalModelDefinition(ModelUtil.generatedBlock(fanTextureLoc));
+    }
+
+    public static BlockModelDefinition coralFan(Supplier<Block> targetBlock) {
+        return coralFan(RegistryUtil.getTextureLocationOrDefault(targetBlock, "block"));
+    }
+
+    public static BlockModelDefinition coralWallFan(ResourceLocation fanTextureLoc) {
+        return new BlockModelDefinition(ModelTemplates.CORAL_WALL_FAN)
+                .withTextureMapping(new TextureMapping().put(TextureSlot.FAN, fanTextureLoc))
+                .withRenderType(ModelUtil.CUTOUT_RENDER_TYPE);
+    }
+
+    public static BlockModelDefinition coralWallFan(Supplier<Block> targetBlock) {
+        return coralWallFan(RegistryUtil.getTextureLocationOrDefault(targetBlock, "block", RegistryUtil.getTextureLocationOrDefault(DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(targetBlock.get()).withPath(path -> path.replace("_wall", "")))));
+    }
+
+    public static BlockStateDefinition coralWallFanBlockState(Supplier<Block> targetBlock) {
+        return new BlockStateDefinition(targetBlock)
+                .withBlockStateSupplier(MultiVariantGenerator.multiVariant(targetBlock.get(), Variant.variant()
+                                .with(VariantProperties.MODEL, ModelLocationUtils.getModelLocation(targetBlock.get())))
+                        .with(PropertyDispatch.property(BlockStateProperties.HORIZONTAL_FACING)
+                                .select(Direction.EAST, Variant.variant().with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90))
+                                .select(Direction.SOUTH, Variant.variant().with(VariantProperties.Y_ROT, VariantProperties.Rotation.R180))
+                                .select(Direction.WEST, Variant.variant().with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270))
+                                .select(Direction.NORTH, Variant.variant())));
+    }
+
+    public static BlockModelDefinition crop(Supplier<Block> targetBlock) {
+        if (targetBlock.get() instanceof CropInstance crop) {
+            ResourceLocation targetBlockId = DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(targetBlock.get());
+            BlockModelDefinition stage0 = new BlockModelDefinition(ModelTemplates.CROP)
+                    .withRenderType(ModelUtil.CUTOUT_RENDER_TYPE)
+                    .withCustomName(targetBlockId.withSuffix("_stage_0").getPath())
+                    .withTextureMapping(TextureMapping.crop(RegistryUtil.getTextureLocationWithSuffixOrDefault(new ResourceLocation(targetBlockId.getNamespace(), targetBlockId.getPath()), "_0", "block/vegetation/crop")));
+            Stream<BlockModelDefinition> ordinals = crop.getAgeProperty().getPossibleValues().stream().filter(age -> age != 0)
+                    .map((age) -> new BlockModelDefinition(ModelTemplates.CROP)
+                            .withRenderType(ModelUtil.CUTOUT_RENDER_TYPE)
+                            .withCustomName(targetBlockId.withSuffix("_stage_" + age).getPath())
+                            .withTextureMapping(TextureMapping.crop(RegistryUtil.getTextureLocationWithSuffixOrDefault(new ResourceLocation(targetBlockId.getNamespace(), targetBlockId.getPath()), "_" + age, "block/vegetation/crop"))));
+            return stage0.setOrdinalModelDefinitions(ordinals.collect(Collectors.toUnmodifiableList()));
+        } else {
+            throw new IllegalArgumentException("Target block must be instance of CropInstance");
+        }
+    }
+
+    public static BlockModelDefinition cropCross(Supplier<Block> targetBlock) {
+        if (targetBlock.get() instanceof CropInstance crop) {
+            ResourceLocation targetBlockId = DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(targetBlock.get());
+            BlockModelDefinition stage0 = new BlockModelDefinition(ModelTemplates.CROSS)
+                    .withRenderType(ModelUtil.CUTOUT_RENDER_TYPE)
+                    .withCustomName(targetBlockId.withSuffix("_stage_0").getPath())
+                    .withTextureMapping(TextureMapping.cross(RegistryUtil.getTextureLocationWithSuffixOrDefault(new ResourceLocation(targetBlockId.getNamespace(), targetBlockId.getPath()), "_0", "block/vegetation/crop")));
+            Stream<BlockModelDefinition> ordinals = crop.getAgeProperty().getPossibleValues().stream().filter(age -> age != 0)
+                    .map((age) -> new BlockModelDefinition(ModelTemplates.CROSS)
+                            .withRenderType(ModelUtil.CUTOUT_RENDER_TYPE)
+                            .withCustomName(targetBlockId.withSuffix("_stage_" + age).getPath())
+                            .withTextureMapping(TextureMapping.cross(RegistryUtil.getTextureLocationWithSuffixOrDefault(new ResourceLocation(targetBlockId.getNamespace(), targetBlockId.getPath()), "_" + age, "block/vegetation/crop"))));
+            return stage0.setOrdinalModelDefinitions(ordinals.collect(Collectors.toUnmodifiableList()));
+        } else {
+            throw new IllegalArgumentException("Target block must be instance of CropInstance");
+        }
+    }
+
+    public static BlockStateDefinition cropBlockState(Supplier<Block> targetBlock) {
+        if (targetBlock.get() instanceof CropInstance crop) {
+            Int2ObjectMap<ResourceLocation> int2objectmap = new Int2ObjectOpenHashMap<>();
+            PropertyDispatch dispatch = PropertyDispatch.property(crop.getAgeProperty()).generate((age) -> {
+                ResourceLocation stageModelLoc = int2objectmap.computeIfAbsent(age, arg ->
+                        ModelLocationUtils.getModelLocation(targetBlock.get(), "_stage_" + age)
+                );
+                return Variant.variant().with(VariantProperties.MODEL, stageModelLoc);
+            });
+            return new BlockStateDefinition(targetBlock)
+                    .withBlockStateSupplier(MultiVariantGenerator.multiVariant(targetBlock.get()).with(dispatch));
+        } else {
+            throw new IllegalArgumentException("Target block must be instance of CropInstance");
+        }
+    }
+
+    public static BlockModelDefinition cropHeadBlock(Supplier<Block> targetBlock) {
+        if (targetBlock.get() instanceof CropInstance crop) {
+            ResourceLocation targetBlockId = DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(targetBlock.get());
+            BlockModelDefinition stage0 = new BlockModelDefinition(ModelTemplates.CROSS)
+                    .withRenderType(ModelUtil.CUTOUT_RENDER_TYPE)
+                    .withCustomName(targetBlockId.withSuffix("_stage_0").getPath().replace("_head_block", ""))
+                    .withTextureMapping(TextureMapping.cross(RegistryUtil.getTextureLocationWithSuffixOrDefault(new ResourceLocation(targetBlockId.getNamespace(), targetBlockId.getPath().replace("_head_block", "")), "_0", "block/vegetation/crop")));
+            Stream<BlockModelDefinition> ordinals = crop.getAgeProperty().getPossibleValues().stream().filter(age -> age != 0 && age < crop.getMaxAge())
+                    .map((age) -> new BlockModelDefinition(ModelTemplates.CROSS)
+                            .withRenderType(ModelUtil.CUTOUT_RENDER_TYPE)
+                            .withCustomName(targetBlockId.withSuffix("_stage_" + age).getPath().replace("_head_block", ""))
+                            .withTextureMapping(TextureMapping.cross(RegistryUtil.getTextureLocationWithSuffixOrDefault(new ResourceLocation(targetBlockId.getNamespace(), targetBlockId.getPath().replace("_head_block", "")), "_" + age, "block/vegetation/crop"))));
+            return stage0.setOrdinalModelDefinitions(ordinals.collect(Collectors.toUnmodifiableList()));
+        } else {
+            throw new IllegalArgumentException("Target block must be instance of CropInstance");
+        }
+    }
+
+    public static BlockModelDefinition cropBodyBlock(Supplier<Block> targetBlock) {
+        if (targetBlock.get() instanceof CropInstance crop) {
+            ResourceLocation targetBlockId = DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(targetBlock.get());
+            int maxAge = crop.getMaxAge();
+
+            return new BlockModelDefinition(ModelTemplates.CROSS)
+                    .withRenderType(ModelUtil.CUTOUT_RENDER_TYPE)
+                    .withCustomName(targetBlockId.withSuffix("_stage_" + maxAge).getPath().replace("_body_block", ""))
+                    .withTextureMapping(TextureMapping.cross(RegistryUtil.getTextureLocationWithSuffixOrDefault(new ResourceLocation(targetBlockId.getNamespace(), targetBlockId.getPath().replace("_body_block", "")), "_" + maxAge, "block/vegetation/crop")));
+        } else throw new IllegalArgumentException("Target block must be instance of CropInstance");
+    }
+
+    public static BlockStateDefinition cropHeadBlockBlockState(Supplier<Block> targetBlock) {
+        if (targetBlock.get() instanceof CropInstance crop) {
+            Int2ObjectMap<ResourceLocation> int2objectmap = new Int2ObjectOpenHashMap<>();
+            PropertyDispatch dispatch = PropertyDispatch.property(crop.getAgeProperty()).generate((age) -> {
+                ResourceLocation stageModelLoc = int2objectmap.computeIfAbsent(age, arg ->
+                        CAConstants.prefix(ModelLocationUtils.getModelLocation(targetBlock.get(), "_stage_" + age).getPath().replace("_head_block", ""))
+                );
+                return Variant.variant().with(VariantProperties.MODEL, stageModelLoc);
+            });
+            return new BlockStateDefinition(targetBlock).withBlockStateSupplier(MultiVariantGenerator.multiVariant(targetBlock.get()).with(dispatch));
+        } else {
+            throw new IllegalArgumentException("Target block must be instance of CropInstance");
+        }
+    }
+
+    public static BlockStateDefinition cropBodyBlockBlockState(Supplier<Block> targetBlock) {
+        if (targetBlock.get() instanceof CropInstance crop) {
+            int maxAge = crop.getMaxAge();
+            return new BlockStateDefinition(targetBlock)
+                    .withBlockStateSupplier(MultiVariantGenerator
+                            .multiVariant(targetBlock.get(), Variant.variant()
+                                    .with(VariantProperties.MODEL, CAConstants.prefix(ModelLocationUtils.getModelLocation(targetBlock.get(), "_stage_" + maxAge).getPath().replace("_body_block", "")))));
+        } else {
+            throw new IllegalArgumentException("Target block must be instance of CropInstance");
+        }
     }
 }

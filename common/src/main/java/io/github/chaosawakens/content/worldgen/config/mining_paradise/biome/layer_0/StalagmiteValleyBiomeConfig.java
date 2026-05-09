@@ -1,0 +1,114 @@
+package io.github.chaosawakens.content.worldgen.config.mining_paradise.biome.layer_0;
+
+import io.github.chaosawakens.content.registry.CAConfiguredCarvers;
+import io.github.chaosawakens.content.registry.CAFeatures;
+import io.github.chaosawakens.content.worldgen.config.base.BiomeConfig;
+import net.minecraft.core.HolderGetter;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.data.worldgen.BootstapContext;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.biome.BiomeGenerationSettings;
+import net.minecraft.world.level.biome.BiomeSpecialEffects;
+import net.minecraft.world.level.biome.MobSpawnSettings;
+import net.minecraft.world.level.levelgen.GenerationStep;
+import net.minecraft.world.level.levelgen.carver.ConfiguredWorldCarver;
+import net.minecraft.world.level.levelgen.placement.PlacedFeature;
+import org.jetbrains.annotations.Nullable;
+
+public class StalagmiteValleyBiomeConfig implements BiomeConfig {
+    public static final BiomeSpecialEffects EFFECTS = new BiomeSpecialEffects.Builder()
+            .fogColor(339026)
+            .waterColor(4159204)
+            .waterFogColor(429011)
+            .skyColor(84742)
+            .build();
+
+    public StalagmiteValleyBiomeConfig() {
+    }
+
+    @Override
+    public boolean hasPrecipitation() {
+        return true;
+    }
+
+    @Override
+    public float getTemperature() {
+        return 0.5F;
+    }
+
+    @Override
+    public float getDownfall() {
+        return 0;
+    }
+
+    @Override
+    public @Nullable BiomeSpecialEffects getSpecialEffects() {
+        return EFFECTS;
+    }
+
+    @Override
+    public @Nullable MobSpawnSettings getMobSpawnSettings() {
+        return null;
+    }
+
+    @Override
+    public @Nullable BiomeGenerationSettings getGenerationSettings(BootstapContext<Biome> regCtx) {
+        HolderGetter<PlacedFeature> placedFeatureGetter = regCtx.lookup(Registries.PLACED_FEATURE);
+        HolderGetter<ConfiguredWorldCarver<?>> configuredWorldCarverGetter = regCtx.lookup(Registries.CONFIGURED_CARVER);
+
+        BiomeGenerationSettings.Builder biomeBuilder = new BiomeGenerationSettings.Builder(placedFeatureGetter, configuredWorldCarverGetter);
+
+        // Vegetation
+        biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, placedFeatureGetter.getOrThrow(CAFeatures.CAPlacedFeatures.DENSE_GRASS_PATCH.get()));
+        biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, placedFeatureGetter.getOrThrow(CAFeatures.CAPlacedFeatures.ALSTROEMERIAT_PATCH.get()));
+        biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, placedFeatureGetter.getOrThrow(CAFeatures.CAPlacedFeatures.SMALL_CARNIVOROUS_PLANT_PATCH.get()));
+        biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, placedFeatureGetter.getOrThrow(CAFeatures.CAPlacedFeatures.BIG_CARNIVOROUS_PLANT_PATCH.get()));
+        biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, placedFeatureGetter.getOrThrow(CAFeatures.CAPlacedFeatures.BUSH_PATCH.get()));
+        biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, placedFeatureGetter.getOrThrow(CAFeatures.CAPlacedFeatures.TALL_BUSH_PATCH.get()));
+
+        // Ores
+        biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, placedFeatureGetter.getOrThrow(CAFeatures.CAPlacedFeatures.DREDGESTONE_URANIUM_ORE.get()));
+        biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, placedFeatureGetter.getOrThrow(CAFeatures.CAPlacedFeatures.DREDGESTONE_TITANIUM_ORE.get()));
+        biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, placedFeatureGetter.getOrThrow(CAFeatures.CAPlacedFeatures.DREDGESTONE_SUNSTONE_ORE.get()));
+        biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, placedFeatureGetter.getOrThrow(CAFeatures.CAPlacedFeatures.DREDGESTONE_RUBY_ORE.get()));
+        biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, placedFeatureGetter.getOrThrow(CAFeatures.CAPlacedFeatures.DREDGESTONE_REDSTONE_ORE.get()));
+        biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, placedFeatureGetter.getOrThrow(CAFeatures.CAPlacedFeatures.DREDGESTONE_PLATINUM_ORE.get()));
+        biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, placedFeatureGetter.getOrThrow(CAFeatures.CAPlacedFeatures.DREDGESTONE_LAPIS_ORE.get()));
+        biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, placedFeatureGetter.getOrThrow(CAFeatures.CAPlacedFeatures.DREDGESTONE_KUNZITE_ORE.get()));
+        biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, placedFeatureGetter.getOrThrow(CAFeatures.CAPlacedFeatures.DREDGESTONE_IRON_ORE.get()));
+        biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, placedFeatureGetter.getOrThrow(CAFeatures.CAPlacedFeatures.DREDGESTONE_GOLD_ORE.get()));
+        biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, placedFeatureGetter.getOrThrow(CAFeatures.CAPlacedFeatures.DREDGESTONE_DIAMOND_ORE.get()));
+        biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, placedFeatureGetter.getOrThrow(CAFeatures.CAPlacedFeatures.DREDGESTONE_COPPER_ORE.get()));
+        biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, placedFeatureGetter.getOrThrow(CAFeatures.CAPlacedFeatures.DREDGESTONE_COAL_ORE.get()));
+        biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, placedFeatureGetter.getOrThrow(CAFeatures.CAPlacedFeatures.DREDGESTONE_ALUMINUM_ORE.get()));
+
+        biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, placedFeatureGetter.getOrThrow(CAFeatures.CAPlacedFeatures.GLOOMSTONE_URANIUM_ORE.get()));
+        biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, placedFeatureGetter.getOrThrow(CAFeatures.CAPlacedFeatures.GLOOMSTONE_TITANIUM_ORE.get()));
+        biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, placedFeatureGetter.getOrThrow(CAFeatures.CAPlacedFeatures.GLOOMSTONE_SUNSTONE_ORE.get()));
+        biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, placedFeatureGetter.getOrThrow(CAFeatures.CAPlacedFeatures.GLOOMSTONE_RUBY_ORE.get()));
+        biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, placedFeatureGetter.getOrThrow(CAFeatures.CAPlacedFeatures.GLOOMSTONE_REDSTONE_ORE.get()));
+        biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, placedFeatureGetter.getOrThrow(CAFeatures.CAPlacedFeatures.GLOOMSTONE_PLATINUM_ORE.get()));
+        biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, placedFeatureGetter.getOrThrow(CAFeatures.CAPlacedFeatures.GLOOMSTONE_LAPIS_ORE.get()));
+        biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, placedFeatureGetter.getOrThrow(CAFeatures.CAPlacedFeatures.GLOOMSTONE_KUNZITE_ORE.get()));
+        biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, placedFeatureGetter.getOrThrow(CAFeatures.CAPlacedFeatures.GLOOMSTONE_IRON_ORE.get()));
+        biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, placedFeatureGetter.getOrThrow(CAFeatures.CAPlacedFeatures.GLOOMSTONE_GOLD_ORE.get()));
+        biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, placedFeatureGetter.getOrThrow(CAFeatures.CAPlacedFeatures.GLOOMSTONE_DIAMOND_ORE.get()));
+        biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, placedFeatureGetter.getOrThrow(CAFeatures.CAPlacedFeatures.GLOOMSTONE_COPPER_ORE.get()));
+        biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, placedFeatureGetter.getOrThrow(CAFeatures.CAPlacedFeatures.GLOOMSTONE_COAL_ORE.get()));
+        biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, placedFeatureGetter.getOrThrow(CAFeatures.CAPlacedFeatures.GLOOMSTONE_ALUMINUM_ORE.get()));
+
+        // Terrain
+        biomeBuilder.addCarver(GenerationStep.Carving.AIR, configuredWorldCarverGetter.getOrThrow(CAConfiguredCarvers.CONFIGURED_MINING_PARADISE_CAVE.get()));
+        biomeBuilder.addCarver(GenerationStep.Carving.AIR, configuredWorldCarverGetter.getOrThrow(CAConfiguredCarvers.CONFIGURED_MINING_PARADISE_CANYON.get()));
+        biomeBuilder.addCarver(GenerationStep.Carving.AIR, configuredWorldCarverGetter.getOrThrow(CAConfiguredCarvers.CONFIGURED_MINING_PARADISE_EXTRA_CAVE.get()));
+
+        biomeBuilder.addFeature(GenerationStep.Decoration.LOCAL_MODIFICATIONS, placedFeatureGetter.getOrThrow(CAFeatures.CAPlacedFeatures.STALAGMITE_PLACED.get()));
+
+        return biomeBuilder.build();
+    }
+
+    @Override
+    public @Nullable Biome.TemperatureModifier getTemperatureModifier() {
+        return null;
+    }
+}

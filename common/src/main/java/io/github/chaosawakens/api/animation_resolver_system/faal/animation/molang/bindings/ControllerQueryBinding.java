@@ -9,46 +9,23 @@ import org.jetbrains.annotations.Nullable;
 import team.unnamed.mocha.MochaEngine;
 import team.unnamed.mocha.parser.ast.Expression;
 import team.unnamed.mocha.runtime.ExecutionContext;
-import team.unnamed.mocha.runtime.value.*;
+import team.unnamed.mocha.runtime.value.Function;
+import team.unnamed.mocha.runtime.value.MutableObjectBinding;
+import team.unnamed.mocha.runtime.value.ObjectProperty;
+import team.unnamed.mocha.runtime.value.Value;
 
+import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
 public class ControllerQueryBinding<A extends Animatable, AC extends AnimationController<A>> extends MutableObjectBinding implements ExecutionContext<AC> {
+    private static final BiConsumer<AnimationController<?>, ControllerQueryBinding<?, ?>> BASE_CONTROLLER_QUERIES = (targetController, queryBinding) -> {
+        queryBinding.setFunction("anim_time", input -> targetController.getTickProgress());
+        queryBinding.setFunction("life_time", input -> targetController.getOwner().getAnimatableAge());
+    };
     protected final AC ownerController;
 
     public ControllerQueryBinding(AC ownerController) {
         this.ownerController = ownerController;
-    }
-
-    @Override
-    public AC entity() {
-        return ownerController;
-    }
-
-    @Override
-    public @Nullable ObjectProperty getProperty(@NotNull String name) { // We want to directly return the evaluated value, if appropriate
-        ObjectProperty targetProperty = super.getProperty(name);
-
-        if (targetProperty != null && targetProperty.value() instanceof Function evaluableFunc && !targetProperty.constant()) {
-            return ObjectProperty.property(Validate.notNull(evaluableFunc.evaluate(this)), false);
-        }
-
-        return targetProperty;
-    }
-
-    @Override
-    public @Nullable Value eval(@NotNull Expression expression) {
-        throw new UnsupportedOperationException("ControllerQueryBinding does not support evaluation");
-    }
-
-    @Override
-    public @Nullable Object flag() {
-        throw new UnsupportedOperationException("ControllerQueryBinding does not support flags");
-    }
-
-    @Override
-    public void flag(@Nullable Object flag) { // Looks to be unused for now within Mocha, anyway
-        throw new UnsupportedOperationException("ControllerQueryBinding does not support flags");
     }
 
     @NotNull
@@ -72,15 +49,38 @@ public class ControllerQueryBinding<A extends Animatable, AC extends AnimationCo
     public static <A extends Animatable> MochaEngine<AnimationController<A>> bindDefault(@NotNull AnimationController<A> targetController) {
         return bindTo(targetController, (queryBinding) -> {
             queryBinding.setFunction("anim_time", input -> targetController.getTickProgress());
-            queryBinding.setFunction("life_time", input -> targetController.getOwner().getAge());
+            queryBinding.setFunction("life_time", input -> targetController.getOwner().getAnimatableAge());
         });
     }
 
-    @NotNull
-    public static <A extends Animatable> MochaEngine<AnimationController<A>> bindAuthoritative(@NotNull AnimationController<A> targetController) {
-        return bindTo(targetController, (queryBinding) -> { // TODO Maybe chain?
-            queryBinding.setFunction("anim_time", input -> targetController.getTickProgress());
-            queryBinding.setFunction("life_time", input -> targetController.getOwner().getAge());
-        });
+    @Override
+    public AC entity() {
+        return ownerController;
+    }
+
+    @Override
+    public @Nullable ObjectProperty getProperty(@NotNull String name) { // We want to directly return the evaluated value, if appropriate
+        ObjectProperty targetProperty = super.getProperty(name);
+
+        if (targetProperty != null && targetProperty.value() instanceof Function evaluableFunc && !targetProperty.constant()) {
+            return ObjectProperty.property(Validate.notNull(evaluableFunc.evaluate(this)), false);
+        }
+
+        return targetProperty;
+    }
+
+    @Override
+    public @Nullable Value eval(@NotNull Expression expression) {
+        throw new UnsupportedOperationException("ControllerQueryBinding does not gjkSupport evaluation");
+    }
+
+    @Override
+    public @Nullable Object flag() {
+        throw new UnsupportedOperationException("ControllerQueryBinding does not gjkSupport flags");
+    }
+
+    @Override
+    public void flag(@Nullable Object flag) { // Looks to be unused for now within Mocha, anyway
+        throw new UnsupportedOperationException("ControllerQueryBinding does not gjkSupport flags");
     }
 }

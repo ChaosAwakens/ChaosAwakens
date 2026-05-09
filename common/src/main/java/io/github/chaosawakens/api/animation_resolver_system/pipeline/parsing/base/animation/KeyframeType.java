@@ -8,12 +8,12 @@ public enum KeyframeType implements StringRepresentable {
     ROTATION,
     SCALE;
 
+    public static KeyframeType byName(String name) {
+        return valueOf(name.toUpperCase());
+    }
+
     @Override
     public @NotNull String getSerializedName() {
         return name().toLowerCase();
-    }
-
-    public static KeyframeType byName(String name) {
-        return valueOf(name.toUpperCase());
     }
 }

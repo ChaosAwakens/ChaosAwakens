@@ -6,7 +6,7 @@ import com.mememan.nexus.network.NetworkSide;
 import com.mememan.nexus.network.PacketContext;
 import com.mememan.nexus.platform.NexusServices;
 import io.github.chaosawakens.CAConstants;
-import io.github.chaosawakens.core.network.s2c.SkeletalDataSyncPacket;
+import io.github.chaosawakens.core.network.s2c.AnimationDataSyncPacket;
 import net.minecraft.network.FriendlyByteBuf;
 
 import java.util.function.BiConsumer;
@@ -16,7 +16,7 @@ import java.util.function.Function;
 public class CAPackets {
 
     // S2C
-    public static final BasePacket<SkeletalDataSyncPacket> SKELETAL_DATA_SYNC_PACKET = registerS2CPacket(SkeletalDataSyncPacket.class, SkeletalDataSyncPacket::encode, SkeletalDataSyncPacket::new, SkeletalDataSyncPacket::handle);
+    public static final BasePacket<AnimationDataSyncPacket> ANIMATION_DATA_SYNC_PACKET = registerS2CPacket(AnimationDataSyncPacket.class, AnimationDataSyncPacket::encode, AnimationDataSyncPacket::new, AnimationDataSyncPacket::handle);
 
     // C2S
 
