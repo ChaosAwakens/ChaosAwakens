@@ -11,31 +11,6 @@ import org.joml.Vector4d;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * A {@link CollisionShape} representing the exact CSG (Constructive Solid Geometry) union
- * of multiple oriented bounding boxes (OBBs).
- *
- * <h2>What this is</h2>
- * Given N OBBs (e.g. the cubes of a bone), this shape computes the outer surface of their
- * union: each OBB's faces are clipped against every other OBB, retaining only the portions
- * that are <em>outside</em> all other OBBs. The result is a triangle mesh that exactly
- * represents the merged solid with all internal geometry removed.
- *
- * <h2>Collision gjkSupport</h2>
- * <ul>
- *   <li><b>Broad-phase AABB</b>: AABB of all mesh vertices — exact.</li>
- *   <li><b>SAT fast-reject</b>: triangle face normals + deduplicated edge directions.</li>
- *   <li><b>containsPoint</b>: point-in-any-source-OBB — O(N), exact.</li>
- *   <li><b>closestPoint</b>: min distance over all triangles — O(T), exact.</li>
- *   <li><b>GJK gjkSupport</b>: union gjkSupport = max gjkSupport across all source OBBs — correct for
- *       separation queries; EPA for penetration depth should fall back to per-OBB EPA.</li>
- * </ul>
- *
- * <h2>Sutherland-Hodgman clipping</h2>
- * Each OBB face polygon is clipped against the 6 half-spaces of every other OBB, keeping
- * the <em>outside</em> portion at each step. Surviving polygons are triangulated and
- * collected into the final mesh.
- */
 public class CSGUnionShape implements CollisionShape { // FIXME Still no clue whether it's the math here or in the test code for rendering, but small artifacts appear as a result of several close SourceOBBs clipping with each other and being "subtracted"/unionized (maybe we should try to perform edge-snapping (if we can confirm irregular gaps being present) or just eliminate orphaned edges(?). Idk, requires further testing)
     public static final double EXTERIOR_EDGE_CLIPPING_THRESHOLD = 1.0E-7D;
     public static final double SLAB_EPSILON = 1.0E-12D;
