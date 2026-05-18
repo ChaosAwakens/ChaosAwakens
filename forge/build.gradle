@@ -101,6 +101,9 @@ dependencies {
 
     modCompileOnly("squeek.appleskin:appleskin-forge:${forge_appleskin_version}:api")
     modRuntimeOnly("squeek.appleskin:appleskin-forge:${forge_appleskin_version}")
+
+    // Dependencies (Temp)
+    modImplementation("curse.maven:journeymap-32274:5789363")
 }
 
 jar {
