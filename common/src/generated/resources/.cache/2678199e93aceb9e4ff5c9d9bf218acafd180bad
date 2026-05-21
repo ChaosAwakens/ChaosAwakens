@@ -1,4 +1,4 @@
-// 1.20.1	2026-05-04T12:53:06.9791974	Recipes [chaosawakens]
+// 1.20.1	2026-05-21T00:15:17.3972029	Recipes [chaosawakens]
 72b853d49eb72bc3feeb82d40164801ba4e58d69 data/chaosawakens/advancements/recipes/building_blocks/acacia_leaf_carpet.json
 f3b0e3866aca28e62d503c63797f53a6115f6dea data/chaosawakens/advancements/recipes/building_blocks/aluminum_block.json
 b3422a4a3bcb8d85462012b856bc01ac0d4d73f5 data/chaosawakens/advancements/recipes/building_blocks/apple_leaf_carpet.json
@@ -7,6 +7,7 @@ dde5b9a80d06ff84c2f8e7ebb1cc1919cb767c04 data/chaosawakens/advancements/recipes/
 5bc4863cedce2daf8444bba3210d4349220b7d82 data/chaosawakens/advancements/recipes/building_blocks/apple_stairs.json
 358e4424b63e820944ff6ef843a4def5d3d8f087 data/chaosawakens/advancements/recipes/building_blocks/apple_wood.json
 08a8a68cf141d04a690739b1d62c64e890b694bc data/chaosawakens/advancements/recipes/building_blocks/basilisk_scale_block.json
+1445ff6a40cc789fff2705394a0dcec56e5ec46f data/chaosawakens/advancements/recipes/building_blocks/big_bertha.json
 a749098cb59ae9ba9432840a1ffdb6b7fe0e472a data/chaosawakens/advancements/recipes/building_blocks/birch_leaf_carpet.json
 daca57b4e1f9327e3bb03a07be076e9fcbf26fd4 data/chaosawakens/advancements/recipes/building_blocks/cherry_leaf_carpet.json
 1f3d386184e9a94fef542f698cc8541005819eda data/chaosawakens/advancements/recipes/building_blocks/chiseled_dredgestone.json
@@ -630,6 +631,7 @@ cc1a20bfd91acb89cff11bd2743d9aa0473099ac data/chaosawakens/recipes/apple_stairs.
 f17ba29c97b953bd5db1eaea72e9c44135460196 data/chaosawakens/recipes/apple_wood.json
 5b13b94b6a637a7bdc83f7af7513f7eb82dc1e16 data/chaosawakens/recipes/basilisk_scale_block.json
 e46d28981b195dedb173bea2f5cc89ba5d8e3dd9 data/chaosawakens/recipes/basilisk_scale_from_basilisk_scale_block.json
+15cd437ebbb510604df4fca53679a3825ae7e021 data/chaosawakens/recipes/big_bertha.json
 6896ae981209ab7098f81c5a83a828619c68977a data/chaosawakens/recipes/birch_leaf_carpet.json
 43e321b61dd30a7b2fb90a304633620027ea0f14 data/chaosawakens/recipes/buttered_popcorn_bag_from_butter.json
 21c2ac96f64e986319ea49777806e57605aab675 data/chaosawakens/recipes/cherry_leaf_carpet.json

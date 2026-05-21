@@ -4,6 +4,8 @@ import com.google.common.collect.ImmutableList;
 import com.mememan.nexus.asm.annotations.RegistrarEntry;
 import com.mememan.nexus.template.property_wrapper.ItemPropertyWrapperTemplates;
 import io.github.chaosawakens.CAConstants;
+import io.github.chaosawakens.content.item.equipment.big_wepons.BigBertha;
+import io.github.chaosawakens.content.item.equipment.big_wepons.RoyalGuard;
 import io.github.chaosawakens.content.item.food.BaggedPopcornItem;
 import io.github.chaosawakens.content.item.misc.BlackListItemNameBlockItem;
 import io.github.chaosawakens.content.item.misc.DeferredItemNameBlockItem;
@@ -172,7 +174,19 @@ public final class CAItems {
             .withRecipe(recipeConsumer -> CARecipeTemplates.threeRowRecipe(recipeConsumer, KUNZITE.get(), Items.REDSTONE_BLOCK, Items.GUNPOWDER))
             .buildAndGet();
 
+    // Big Swords
+    /*
+     * needs sword template but with a custom recipe
+     * made a custom recipe template three diagonal right
+     * has its own class to handle the custom recipe
+     */
+    public static final Supplier<BigBertha> BIG_BERTHA = ItemPropertyWrapperTemplates.registerAndChain(CAConstants.prefix("big_bertha"), () -> new BigBertha(CAItemTierTemplates.BIG_SWORD, 499, -3F, new Item.Properties().fireResistant().rarity(Rarity.EPIC)), ItemPropertyWrapperTemplates.BASIC_HANDHELD, EQUIPMENT)
+            .withRecipe(recipeConsumer -> CARecipeTemplates.diagonalLeftRecipe(recipeConsumer, BIG_BERTHA_BLADE.get(), BIG_BERTHA_GUARD.get(), BIG_BERTHA_HANDLE.get()))
+            .buildAndGet();
+    public static final Supplier<RoyalGuard> ROYAL_GUARD = ItemPropertyWrapperTemplates.registerItemFromTemplate(CAConstants.prefix("royal_guard"), () -> new RoyalGuard(CAItemTierTemplates.BIG_SWORD, 749, -3F, new Item.Properties().fireResistant().rarity(Rarity.EPIC)), ItemPropertyWrapperTemplates.BASIC_HANDHELD, EQUIPMENT);
+
     // Material Weapons and Tools
+
     public static final Supplier<SwordItem> ULTIMATE_SWORD = ItemPropertyWrapperTemplates.registerItemFromTemplate(CAConstants.prefix("ultimate_sword"), () -> new SwordItem(CAItemTierTemplates.ULTIMATE, 22, -2.4F, new Item.Properties().fireResistant().rarity(Rarity.EPIC)), ItemPropertyWrapperTemplates.BASIC_HANDHELD, EQUIPMENT);
     public static final Supplier<ShovelItem> ULTIMATE_SHOVEL = ItemPropertyWrapperTemplates.registerItemFromTemplate(CAConstants.prefix("ultimate_shovel"), () -> new ShovelItem(CAItemTierTemplates.ULTIMATE, 8, -3.0F, new Item.Properties().fireResistant().rarity(Rarity.EPIC)), ItemPropertyWrapperTemplates.BASIC_HANDHELD, EQUIPMENT);
     public static final Supplier<PickaxeItem> ULTIMATE_PICKAXE = ItemPropertyWrapperTemplates.registerItemFromTemplate(CAConstants.prefix("ultimate_pickaxe"), () -> new PickaxeItem(CAItemTierTemplates.ULTIMATE, 6, -2.8F, new Item.Properties().fireResistant().rarity(Rarity.EPIC)), ItemPropertyWrapperTemplates.BASIC_HANDHELD, EQUIPMENT);

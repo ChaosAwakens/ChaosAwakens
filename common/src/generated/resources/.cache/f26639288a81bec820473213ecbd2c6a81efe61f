@@ -1,4 +1,4 @@
-// 1.20.1	2026-05-04T12:53:06.9688356	Models [chaosawakens]
+// 1.20.1	2026-05-21T01:47:31.7819008	Models [chaosawakens]
 545cc7a8d51438ddca6429e9262d81c625d1162d assets/chaosawakens/models/block/acacia_gate_block.json
 8d130b2889cdfedadd99deba33ebbc7ef31085f7 assets/chaosawakens/models/block/acacia_leaf_carpet.json
 f700a074b4699cc3621d597ffe655047e0bf4a44 assets/chaosawakens/models/block/acacia_leaf_carpet_inventory.json
@@ -1076,6 +1076,7 @@ aa96feb8669cbac7c0db17ab1b470cdd50c606d8 assets/chaosawakens/models/item/apple_s
 09e2e3cba220805db46a5a502d1bbff2c28752ae assets/chaosawakens/models/item/basilisk_scale.json
 f2b3dd8e59f763a6f3658c651b3dcbf57cff8ddb assets/chaosawakens/models/item/basilisk_scale_block.json
 bcd8f20899bdea12357df0a7ee91d6bd6298a83d assets/chaosawakens/models/item/basilisk_sword.json
+7cf940841d5a4cf0637a9a10aa990b0c20c722d9 assets/chaosawakens/models/item/big_bertha.json
 27a25f54da34292817a2e5e2a9966421e3cff40f assets/chaosawakens/models/item/big_bertha_blade.json
 3a72b3ff807badea9842b5dcdec0f1972b9e6aca assets/chaosawakens/models/item/big_bertha_guard.json
 8d7483e8b9deb0e77b325c35755c9b63aa9e649a assets/chaosawakens/models/item/big_bertha_handle.json
@@ -1793,6 +1794,7 @@ a637a28078af0e14e127c83ba0dc3bb6f0182a82 assets/chaosawakens/models/item/robo_sl
 cb00240e6787ad7e9e48c509005e5bd086dfaee9 assets/chaosawakens/models/item/robo_wall_a.json
 660533d9f0ef54534a05b6c178660e2819f46057 assets/chaosawakens/models/item/robo_wall_l.json
 c1aa47b81b3a0a1e7a1c3f577fc59173f8da71bf assets/chaosawakens/models/item/rock_fish.json
+7768cc7e74fc6d43df1bc2c734069fc1388326f8 assets/chaosawakens/models/item/royal_guard.json
 9f7e7bfa7b9e4640d91501b39b4b0a566979ee08 assets/chaosawakens/models/item/royal_guardian_boots.json
 365ac47eac56ba1410d6f01c560dacb24daf5f1b assets/chaosawakens/models/item/royal_guardian_chestplate.json
 0a440ebf12ac5e16a28ac039372979889e9368a4 assets/chaosawakens/models/item/royal_guardian_helmet.json

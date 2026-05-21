@@ -9,6 +9,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.function.Supplier;
 
 public final class CAItemTierTemplates {
+    public static final Tier BIG_SWORD = new ExtendedTier(10000, 10.0F, 0.0F, 6, 15, () -> Ingredient.EMPTY);
     public static final Tier ULTIMATE = new ExtendedTier(6000, 14.0F, 4.0F, 5, 15, () -> Ingredient.EMPTY);
     public static final Tier RUBY = new ExtendedTier(3000, 8.5F, 3.0F, 3, 15, () -> Ingredient.of(CAItems.RUBY.get()));
     public static final Tier KUNZITE = new ExtendedTier(2700, 8.0F, 3.0F, 3, 14, () -> Ingredient.of(CAItems.KUNZITE.get()));
