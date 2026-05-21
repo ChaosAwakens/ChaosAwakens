@@ -1,4 +1,4 @@
-// 1.20.1	2026-05-21T01:47:31.7819008	Models [chaosawakens]
+// 1.20.1	2026-05-22T00:50:58.1349888	Models [chaosawakens]
 545cc7a8d51438ddca6429e9262d81c625d1162d assets/chaosawakens/models/block/acacia_gate_block.json
 8d130b2889cdfedadd99deba33ebbc7ef31085f7 assets/chaosawakens/models/block/acacia_leaf_carpet.json
 f700a074b4699cc3621d597ffe655047e0bf4a44 assets/chaosawakens/models/block/acacia_leaf_carpet_inventory.json
@@ -1103,6 +1103,7 @@ c8b3a2214e4dd60ad5802f7dd4611248a27a22c2 assets/chaosawakens/models/item/brown_c
 16bfdb6a4fb3456ca7e8c9fa5982e2a1db892a2a assets/chaosawakens/models/item/buttered_popcorn_bag.json
 8e6afba8d177f5a840cef3d1d70bb4c1efe3efa7 assets/chaosawakens/models/item/butter_candy.json
 744c8b146cec0e045892875f6e9aa3e37de37bea assets/chaosawakens/models/item/candycane.json
+7c19af8ab89f191fa7ce9130f99405200ac942c9 assets/chaosawakens/models/item/cats_eye.json
 ba0a7500847f24baf5277f58a4e81d5ef518dfb6 assets/chaosawakens/models/item/cats_eye_axe.json
 c24c4bf8dd4cd4b8ece31da21042c42277c7c150 assets/chaosawakens/models/item/cats_eye_boots.json
 299090d23028cd1c3c6c1fa7a8e7e53cd15ad45f assets/chaosawakens/models/item/cats_eye_chestplate.json
@@ -1730,6 +1731,7 @@ d3b5293ef8710153be8bb67fac90dd7276bec11a assets/chaosawakens/models/item/pink_cr
 b7db2058de61697195aacbc4bd8ff13ff29228eb assets/chaosawakens/models/item/pink_crystal_growth.json
 caa83c0c81ace45f35c9702c741b4bb1b9e39dcd assets/chaosawakens/models/item/pink_crystal_leaves.json
 b1ee38661403055cae9b0b2d0c9103a4301d767b assets/chaosawakens/models/item/pink_fish.json
+7c19af8ab89f191fa7ce9130f99405200ac942c9 assets/chaosawakens/models/item/pink_tourmaline.json
 18d44847db4e4d0b25e5247a3a48de16c224e218 assets/chaosawakens/models/item/pink_tourmaline_axe.json
 3825b0edb23d86a448f5a2ed4be2133c69bf6412 assets/chaosawakens/models/item/pink_tourmaline_boots.json
 44b215cda795dc6c87820b2d1157ea124bb68f3d assets/chaosawakens/models/item/pink_tourmaline_chestplate.json
@@ -1794,7 +1796,7 @@ a637a28078af0e14e127c83ba0dc3bb6f0182a82 assets/chaosawakens/models/item/robo_sl
 cb00240e6787ad7e9e48c509005e5bd086dfaee9 assets/chaosawakens/models/item/robo_wall_a.json
 660533d9f0ef54534a05b6c178660e2819f46057 assets/chaosawakens/models/item/robo_wall_l.json
 c1aa47b81b3a0a1e7a1c3f577fc59173f8da71bf assets/chaosawakens/models/item/rock_fish.json
-7768cc7e74fc6d43df1bc2c734069fc1388326f8 assets/chaosawakens/models/item/royal_guard.json
+86029103393255fdb9f466d98aa38f7909a1cc99 assets/chaosawakens/models/item/royal_guardian.json
 9f7e7bfa7b9e4640d91501b39b4b0a566979ee08 assets/chaosawakens/models/item/royal_guardian_boots.json
 365ac47eac56ba1410d6f01c560dacb24daf5f1b assets/chaosawakens/models/item/royal_guardian_chestplate.json
 0a440ebf12ac5e16a28ac039372979889e9368a4 assets/chaosawakens/models/item/royal_guardian_helmet.json

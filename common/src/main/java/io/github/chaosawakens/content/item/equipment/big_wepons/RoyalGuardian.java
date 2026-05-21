@@ -4,10 +4,10 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.Tier;
 
-public class BigBertha extends SwordItem {
-    public static final int attackDamage = 499;
+public class RoyalGuardian extends SwordItem {
+    public static final int attackDamage = 749;
 
-    public BigBertha(Tier tier, int attackDamage, float attackSpeedModifier, Item.Properties properties){
+    public RoyalGuardian(Tier tier, int attackDamage, float attackSpeedModifier, Item.Properties properties) {
         super(tier, attackDamage, attackSpeedModifier, properties);
     }
 }
