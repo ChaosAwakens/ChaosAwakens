@@ -5,7 +5,7 @@ import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.Tier;
 
 public class BigBertha extends SwordItem {
-    public static final int attackDamage = 499;
+    public static final int ATTACK_DAMAGE = 499;
 
     public BigBertha(Tier tier, int attackDamage, float attackSpeedModifier, Item.Properties properties){
         super(tier, attackDamage, attackSpeedModifier, properties);
