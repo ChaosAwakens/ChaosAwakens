@@ -1,4 +1,4 @@
-// 1.20.1	2026-05-22T00:50:58.1349888	Models [chaosawakens]
+// 1.20.1	2026-05-25T21:24:58.3655607	Models [chaosawakens]
 545cc7a8d51438ddca6429e9262d81c625d1162d assets/chaosawakens/models/block/acacia_gate_block.json
 8d130b2889cdfedadd99deba33ebbc7ef31085f7 assets/chaosawakens/models/block/acacia_leaf_carpet.json
 f700a074b4699cc3621d597ffe655047e0bf4a44 assets/chaosawakens/models/block/acacia_leaf_carpet_inventory.json
@@ -1076,6 +1076,7 @@ aa96feb8669cbac7c0db17ab1b470cdd50c606d8 assets/chaosawakens/models/item/apple_s
 09e2e3cba220805db46a5a502d1bbff2c28752ae assets/chaosawakens/models/item/basilisk_scale.json
 f2b3dd8e59f763a6f3658c651b3dcbf57cff8ddb assets/chaosawakens/models/item/basilisk_scale_block.json
 bcd8f20899bdea12357df0a7ee91d6bd6298a83d assets/chaosawakens/models/item/basilisk_sword.json
+08087a86cb863aa1b0bf41d2f1fbfa78af20566e assets/chaosawakens/models/item/battle_axe.json
 7cf940841d5a4cf0637a9a10aa990b0c20c722d9 assets/chaosawakens/models/item/big_bertha.json
 27a25f54da34292817a2e5e2a9966421e3cff40f assets/chaosawakens/models/item/big_bertha_blade.json
 3a72b3ff807badea9842b5dcdec0f1972b9e6aca assets/chaosawakens/models/item/big_bertha_guard.json
@@ -1751,6 +1752,7 @@ ebe1aa49b2c26d14fc1c8d6d80d350e1f7340e74 assets/chaosawakens/models/item/pink_to
 45099f3d2049e9072bbad79a9b37885f3c67c922 assets/chaosawakens/models/item/purple_bulb.json
 296b343263c4ad155dfefab8a86300ad61165a3f assets/chaosawakens/models/item/purple_crystal_fan.json
 7b4cf3a4f874c8ecd56d757e42e1abcea3405faa assets/chaosawakens/models/item/purple_crystal_growth.json
+f593a3a36eab8fb025f44b8f69210f74a5ae0aa2 assets/chaosawakens/models/item/queen_battle_axe.json
 394ba38e7aa900712fa1babef9063c5614aba90e assets/chaosawakens/models/item/queen_scale.json
 3a70cea3e40e60459a68c51d500c7f5dd84946f4 assets/chaosawakens/models/item/queen_scale_block.json
 99915ac07c3680be58574604dc0e63d3bf462a17 assets/chaosawakens/models/item/queen_scale_boots.json
@@ -1840,6 +1842,7 @@ b2ba9be0f5fbe63ab3d02bbc242e4773173af7bf assets/chaosawakens/models/item/skywood
 de597f4cdd23d2431dacf819e2eee18893a6af13 assets/chaosawakens/models/item/skywood_trapdoor.json
 51fb58f8d63256d52d574dc18b228989346830b0 assets/chaosawakens/models/item/sky_moss.json
 ced750052c5d089d5503d745dc12ffc8de35674c assets/chaosawakens/models/item/sky_moss_carpet.json
+af77616e35a636b86ad97fb6ed354da93cdc97d7 assets/chaosawakens/models/item/slayer_chainsaw.json
 8333dd3637f2bfacf567956aae13c8a7a7225d9f assets/chaosawakens/models/item/small_carnivorous_plant.json
 f61ec0bb5ba7fe991df9bb78c382a3c876ad1ded assets/chaosawakens/models/item/spark_fish.json
 4a3ea5ee4bb6dae1991ada6554d75dea5e4bfd4f assets/chaosawakens/models/item/spruce_gate_block.json
