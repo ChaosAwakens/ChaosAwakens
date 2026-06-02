@@ -21,11 +21,6 @@ public class QueenBattleAxe extends EnchantedSwordItem {
     }
 
     @Override
-    public boolean isFoil(ItemStack stack) {
-        return true;
-    }
-
-    @Override
     public void onCraftedBy(ItemStack stack, Level world, Player player) {
         super.onCraftedBy(stack, world, player);
         if (world.isClientSide) return;
