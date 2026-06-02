@@ -4,7 +4,7 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.food.FoodProperties;
 
-public final class CAFood {
+public final class  CAFood {
     // Dairy
     public static final FoodProperties FOOD_BUTTER = new FoodProperties.Builder().nutrition(2).saturationMod(0.2F).build();
     public static final FoodProperties FOOD_CHEESE = new FoodProperties.Builder().nutrition(4).saturationMod(0.5F).build();
