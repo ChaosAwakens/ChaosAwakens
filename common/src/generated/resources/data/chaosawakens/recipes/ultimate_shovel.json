@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "P": {
+      "item": "chaosawakens:platinum_lump"
+    },
+    "T": {
+      "item": "chaosawakens:titanium_ingot"
+    },
+    "U": {
+      "item": "chaosawakens:uranium_ingot"
+    }
+  },
+  "pattern": [
+    " U ",
+    " T ",
+    " P "
+  ],
+  "result": {
+    "item": "chaosawakens:ultimate_shovel"
+  },
+  "show_notification": true
+}

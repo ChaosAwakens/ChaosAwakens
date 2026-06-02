@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "C": {
+      "item": "chaosawakens:queen_scale"
+    },
+    "D": {
+      "item": "chaosawakens:ultimate_axe"
+    }
+  },
+  "pattern": [
+    " C ",
+    "CDC",
+    " C "
+  ],
+  "result": {
+    "item": "chaosawakens:queen_battle_axe"
+  },
+  "show_notification": true
+}

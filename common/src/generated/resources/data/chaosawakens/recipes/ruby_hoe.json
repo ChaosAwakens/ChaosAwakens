@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "M": {
+      "item": "chaosawakens:ruby"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "MM ",
+    " S ",
+    " S "
+  ],
+  "result": {
+    "item": "chaosawakens:ruby_hoe"
+  },
+  "show_notification": true
+}

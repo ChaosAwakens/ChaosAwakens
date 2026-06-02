@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "D": {
+      "item": "chaosawakens:emerald_sword"
+    },
+    "R": {
+      "item": "chaosawakens:dead_stink_bug"
+    }
+  },
+  "pattern": [
+    "RRR",
+    "RDR",
+    "RRR"
+  ],
+  "result": {
+    "item": "chaosawakens:poison_sword"
+  },
+  "show_notification": true
+}

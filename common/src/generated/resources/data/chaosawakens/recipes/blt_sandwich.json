@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "A": {
+      "item": "chaosawakens:cooked_bacon"
+    },
+    "B": {
+      "item": "minecraft:bread"
+    },
+    "L": {
+      "item": "chaosawakens:lettuce"
+    },
+    "R": {
+      "item": "chaosawakens:butter"
+    },
+    "T": {
+      "item": "chaosawakens:tomato"
+    }
+  },
+  "pattern": [
+    "RB ",
+    "LAT",
+    "   "
+  ],
+  "result": {
+    "item": "chaosawakens:blt_sandwich"
+  },
+  "show_notification": true
+}

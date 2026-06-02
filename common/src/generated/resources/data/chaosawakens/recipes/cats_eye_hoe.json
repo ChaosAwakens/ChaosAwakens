@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "M": {
+      "item": "chaosawakens:cats_eye"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "MM ",
+    " S ",
+    " S "
+  ],
+  "result": {
+    "item": "chaosawakens:cats_eye_hoe"
+  },
+  "show_notification": true
+}

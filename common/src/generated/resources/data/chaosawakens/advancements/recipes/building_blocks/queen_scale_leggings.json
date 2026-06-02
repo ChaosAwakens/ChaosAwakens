@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_chaosawakens:queen_scale": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "chaosawakens:queen_scale"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "chaosawakens:queen_scale_leggings"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_chaosawakens:queen_scale",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "chaosawakens:queen_scale_leggings"
+    ]
+  },
+  "sends_telemetry_event": false
+}
