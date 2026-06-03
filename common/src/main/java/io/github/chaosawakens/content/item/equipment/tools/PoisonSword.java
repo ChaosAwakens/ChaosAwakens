@@ -12,10 +12,10 @@ import net.minecraft.world.level.Level;
 
 import java.util.Map;
 
-public class PoisionSword extends EnchantedSwordItem {
+public class PoisonSword extends EnchantedSwordItem {
     public static final int ATTACK_DAMAGE = 12;
 
-    public PoisionSword(Tier tier, int attackDamage, float attackSpeedModifier, Item.Properties properties, Map<Enchantment, Integer> enchantment) {
+    public PoisonSword(Tier tier, int attackDamage, float attackSpeedModifier, Item.Properties properties, Map<Enchantment, Integer> enchantment) {
         super(tier, attackDamage, attackSpeedModifier, properties, enchantment);
     }
 

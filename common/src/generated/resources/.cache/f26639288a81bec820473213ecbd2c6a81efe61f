@@ -1,4 +1,4 @@
-// 1.20.1	2026-05-25T21:24:58.3655607	Models [chaosawakens]
+// 1.20.1	2026-06-02T22:39:07.2522698	Models [chaosawakens]
 545cc7a8d51438ddca6429e9262d81c625d1162d assets/chaosawakens/models/block/acacia_gate_block.json
 8d130b2889cdfedadd99deba33ebbc7ef31085f7 assets/chaosawakens/models/block/acacia_leaf_carpet.json
 f700a074b4699cc3621d597ffe655047e0bf4a44 assets/chaosawakens/models/block/acacia_leaf_carpet_inventory.json
@@ -1887,6 +1887,7 @@ fb8336089f471e1568ee2690a77e73f59a4bdb51 assets/chaosawakens/models/item/tall_pi
 0ba90112796c802069f5c360455ba1e355fb0dfe assets/chaosawakens/models/item/ultimate_apple.json
 087f63d1ce959db2067955880c8681e1c3aa0412 assets/chaosawakens/models/item/ultimate_axe.json
 df13ea522ffafb04c913d02a2d96ff5f5be85824 assets/chaosawakens/models/item/ultimate_boots.json
+7768cc7e74fc6d43df1bc2c734069fc1388326f8 assets/chaosawakens/models/item/ultimate_bow.json
 6c49a160d0e77b5ac98dd979c91cb1d6d3ed9aa7 assets/chaosawakens/models/item/ultimate_chestplate.json
 8290a5189322e0bf1ef44f98ae63d0a8ea89bb62 assets/chaosawakens/models/item/ultimate_helmet.json
 abc4e99f92d2fc0a0e34e1bd1280c4c4f8ceb462 assets/chaosawakens/models/item/ultimate_hoe.json

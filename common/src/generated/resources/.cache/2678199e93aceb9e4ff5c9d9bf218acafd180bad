@@ -1,4 +1,4 @@
-// 1.20.1	2026-05-25T21:24:58.392007	Recipes [chaosawakens]
+// 1.20.1	2026-06-02T22:39:07.2753662	Recipes [chaosawakens]
 72b853d49eb72bc3feeb82d40164801ba4e58d69 data/chaosawakens/advancements/recipes/building_blocks/acacia_leaf_carpet.json
 f3b0e3866aca28e62d503c63797f53a6115f6dea data/chaosawakens/advancements/recipes/building_blocks/aluminum_block.json
 b3422a4a3bcb8d85462012b856bc01ac0d4d73f5 data/chaosawakens/advancements/recipes/building_blocks/apple_leaf_carpet.json
@@ -232,6 +232,7 @@ b5ffbeba7c8373ad5aba42b666841560704c52c2 data/chaosawakens/advancements/recipes/
 88f94baec39067d697074e3deb928c66c6b0c6af data/chaosawakens/advancements/recipes/building_blocks/ultimate_apple.json
 2229524ea8832ebd56a97b58f31737b8b0b2d7a1 data/chaosawakens/advancements/recipes/building_blocks/ultimate_axe.json
 4c999d905524af351cfa29a16a811401f37c6267 data/chaosawakens/advancements/recipes/building_blocks/ultimate_boots.json
+93c2756d8dcf75ef8744e04493e92fec2bdc66f5 data/chaosawakens/advancements/recipes/building_blocks/ultimate_bow.json
 cb9ae726393d86a990ab8b1a9d7e6f43d83106a8 data/chaosawakens/advancements/recipes/building_blocks/ultimate_chestplate.json
 ba4921f8a897527007a63cd93b331cc2a5e52ccf data/chaosawakens/advancements/recipes/building_blocks/ultimate_helmet.json
 bf92befbb521733e49e455288f769dbe4ce9a3ec data/chaosawakens/advancements/recipes/building_blocks/ultimate_hoe.json
@@ -1432,6 +1433,7 @@ e3199672610c028561cf5d446248605c7c4ac371 data/chaosawakens/recipes/titanium_ingo
 851d2ee58f083d9f395d0bd230f7583fa8d4cf0d data/chaosawakens/recipes/ultimate_apple.json
 dcfe6cfaadf52ec8ca733bebb456efcd47b5f94f data/chaosawakens/recipes/ultimate_axe.json
 38eb2861a0ed1f69d5e87803c5b1fe2cdeb2d634 data/chaosawakens/recipes/ultimate_boots.json
+a8142db56c205ba95dfa7f46fa160b3f3e958348 data/chaosawakens/recipes/ultimate_bow.json
 9183798e3b9db11f465a7568beb664f90c2994f9 data/chaosawakens/recipes/ultimate_chestplate.json
 984e4656f09615fdb555c9e7e0d33cc2501be516 data/chaosawakens/recipes/ultimate_helmet.json
 6444426f6a04eeb98e555df1ca2e04a4a81120cb data/chaosawakens/recipes/ultimate_hoe.json

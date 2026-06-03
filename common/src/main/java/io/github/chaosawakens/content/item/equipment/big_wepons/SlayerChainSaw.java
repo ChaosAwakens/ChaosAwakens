@@ -1,14 +1,11 @@
 package io.github.chaosawakens.content.item.equipment.big_wepons;
 
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.SwordItem;
-import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.*;
 
-public class ChainSaw extends SwordItem {
+public class SlayerChainSaw extends AxeItem {
     public static final int ATTACK_DAMAGE = 49;
 
-    public ChainSaw(Tier tier, int attackDamage, float attackSpeedModifier, Item.Properties properties) {
+    public SlayerChainSaw(Tier tier, int attackDamage, float attackSpeedModifier, Item.Properties properties) {
         super(tier, attackDamage, attackSpeedModifier, properties);
     }
 
@@ -16,6 +13,9 @@ public class ChainSaw extends SwordItem {
     public boolean isFoil(ItemStack stack) {
         return true;
     }
+
+
+
     /*
     public class Behavior {
         public static chainMining() {

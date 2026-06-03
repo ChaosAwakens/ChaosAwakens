@@ -1,16 +1,17 @@
 package io.github.chaosawakens.content.item.misc;
 
+import com.ibm.icu.impl.number.Properties;
+import net.minecraft.world.item.BowItem;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.SwordItem;
-import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.enchantment.Enchantment;
+
 import java.util.Map;
 
-public class EnchantedSwordItem extends SwordItem {
+public class EnchantedBowItem extends BowItem {
     private final Map<Enchantment, Integer> defaultEnchantments;
 
-    public EnchantedSwordItem(Tier tier, int attackDamageModifier, float attackSpeedModifier, Properties properties, Map<Enchantment, Integer> enchantments) {
-        super(tier, attackDamageModifier, attackSpeedModifier, properties);
+    public EnchantedBowItem(Properties properties, Map<Enchantment, Integer> enchantments) {
+        super(properties);
         this.defaultEnchantments = enchantments;
     }
 
