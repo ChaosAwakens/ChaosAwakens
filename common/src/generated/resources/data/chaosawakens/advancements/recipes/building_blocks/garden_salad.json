@@ -1,54 +1,6 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_chaosawakens:corn": {
-      "conditions": {
-        "items": [
-          {
-            "items": [
-              "chaosawakens:corn"
-            ]
-          }
-        ]
-      },
-      "trigger": "minecraft:inventory_changed"
-    },
-    "has_chaosawakens:lettuce": {
-      "conditions": {
-        "items": [
-          {
-            "items": [
-              "chaosawakens:lettuce"
-            ]
-          }
-        ]
-      },
-      "trigger": "minecraft:inventory_changed"
-    },
-    "has_chaosawakens:radish": {
-      "conditions": {
-        "items": [
-          {
-            "items": [
-              "chaosawakens:radish"
-            ]
-          }
-        ]
-      },
-      "trigger": "minecraft:inventory_changed"
-    },
-    "has_chaosawakens:tomato": {
-      "conditions": {
-        "items": [
-          {
-            "items": [
-              "chaosawakens:tomato"
-            ]
-          }
-        ]
-      },
-      "trigger": "minecraft:inventory_changed"
-    },
     "has_minecraft:bowl": {
       "conditions": {
         "items": [
@@ -71,10 +23,6 @@
   "requirements": [
     [
       "has_minecraft:bowl",
-      "has_chaosawakens:lettuce",
-      "has_chaosawakens:tomato",
-      "has_chaosawakens:corn",
-      "has_chaosawakens:radish",
       "has_the_recipe"
     ]
   ],

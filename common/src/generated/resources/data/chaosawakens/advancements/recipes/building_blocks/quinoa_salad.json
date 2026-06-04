@@ -1,30 +1,6 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_chaosawakens:lettuce": {
-      "conditions": {
-        "items": [
-          {
-            "items": [
-              "chaosawakens:lettuce"
-            ]
-          }
-        ]
-      },
-      "trigger": "minecraft:inventory_changed"
-    },
-    "has_chaosawakens:quinoa": {
-      "conditions": {
-        "items": [
-          {
-            "items": [
-              "chaosawakens:quinoa"
-            ]
-          }
-        ]
-      },
-      "trigger": "minecraft:inventory_changed"
-    },
     "has_minecraft:bowl": {
       "conditions": {
         "items": [
@@ -47,8 +23,6 @@
   "requirements": [
     [
       "has_minecraft:bowl",
-      "has_chaosawakens:lettuce",
-      "has_chaosawakens:quinoa",
       "has_the_recipe"
     ]
   ],

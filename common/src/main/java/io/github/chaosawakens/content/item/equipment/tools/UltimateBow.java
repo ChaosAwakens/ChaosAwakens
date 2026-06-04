@@ -20,9 +20,4 @@ public class UltimateBow extends EnchantedBowItem {
     public int getDefaultProjectileRange() {
         return 15;
     }
-    
-    @Override
-    public boolean isFoil(ItemStack stack){
-        return true;
-    }
 }

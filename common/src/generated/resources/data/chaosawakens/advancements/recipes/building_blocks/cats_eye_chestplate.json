@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_chaosawakens:cats_eye": {
+    "has_chaosawakens:cats_eye_shard": {
       "conditions": {
         "items": [
           {
             "items": [
-              "chaosawakens:cats_eye"
+              "chaosawakens:cats_eye_shard"
             ]
           }
         ]
@@ -22,7 +22,7 @@
   },
   "requirements": [
     [
-      "has_chaosawakens:cats_eye",
+      "has_chaosawakens:cats_eye_shard",
       "has_the_recipe"
     ]
   ],

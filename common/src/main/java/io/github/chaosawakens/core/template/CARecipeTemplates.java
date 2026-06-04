@@ -31,6 +31,8 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
+import static io.github.chaosawakens.content.registry.CAItems.*;
+
 public final class CARecipeTemplates {
 
     private CARecipeTemplates() {
@@ -68,11 +70,9 @@ public final class CARecipeTemplates {
             }
         };
     }
-
     public static <B extends Block> Consumer<Supplier<B>> patternBlockRecipeFrom(Consumer<FinishedRecipe> finishedRecipe, Function<ResourceLocation, ResourceLocation> recipeIdMapper) {
         return patternBlockRecipeFrom(finishedRecipe, parentBricks -> RegistryUtil.getObjectFrom(parentBricks, parentBricksId -> parentBricksId.withPath(curPath -> curPath.replace("pattern_", ""))).orElse(null), recipeIdMapper);
     }
-
     public static <B extends Block> Consumer<Supplier<B>> patternBlockRecipeFrom(Consumer<FinishedRecipe> finishedRecipe) {
         return patternBlockRecipeFrom(finishedRecipe, Function.identity());
     }
@@ -96,7 +96,6 @@ public final class CARecipeTemplates {
             }
         };
     }
-
     public static <B extends Block> Consumer<Supplier<B>> leafCarpetRecipeFrom(Consumer<FinishedRecipe> finishedRecipe, Function<ResourceLocation, ResourceLocation> recipeIdMapper) {
         return leafCarpetRecipeFrom(finishedRecipe, parentLeafCarpet -> RegistryUtil.getObjectFrom(parentLeafCarpet, parentLeafCarpetId -> parentLeafCarpetId.withPath(curPath -> curPath.replace("_leaf_carpet", "_leaves")))
                 .or(() -> RegistryUtil.getObjectFrom(parentLeafCarpet, parentLeafCarpetId -> parentLeafCarpetId.withPath(curPath -> curPath.replace("_carpet", ""))))
@@ -104,100 +103,134 @@ public final class CARecipeTemplates {
                 .or(() -> RegistryUtil.getObjectFrom(parentLeafCarpet, parentLeafCarpetId -> new ResourceLocation(parentLeafCarpetId.getPath().replace("_carpet", ""))))
                 .orElse(null), recipeIdMapper);
     }
-
     public static <B extends Block> Consumer<Supplier<B>> leafCarpetRecipeFrom(Consumer<FinishedRecipe> finishedRecipe) {
         return leafCarpetRecipeFrom(finishedRecipe, Function.identity());
     }
 
     // Overloaded Ultimate Tools
-    public static <I extends Item> Consumer<Supplier<I>> ultSwordRecipe(Consumer<FinishedRecipe> recipeConsumer, I itemUranium, I itemTitanium, I itemPlatinum, int resultItemCount) {
+    public static <I extends Item> Consumer<Supplier<I>> ultSwordRecipe(Consumer<FinishedRecipe> recipeConsumer, int resultItemCount) {
         return (resultItemSup) -> ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, resultItemSup.get(), resultItemCount)
-                .define('U', itemUranium)
-                .define('T', itemTitanium)
-                .define('P', itemPlatinum)
+                .define('U', URANIUM_INGOT.get())
+                .define('T', TITANIUM_INGOT.get())
+                .define('P', PLATINUM_LUMP.get())
                 .pattern(" T ")
                 .pattern(" U ")
                 .pattern(" P ")
-                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(itemUranium), PredicateUtil.has(itemUranium))
-                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(itemTitanium), PredicateUtil.has(itemTitanium))
-                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(itemPlatinum), PredicateUtil.has(itemPlatinum))
+                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(PLATINUM_LUMP.get()), PredicateUtil.has(PLATINUM_LUMP.get()))
                 .save(recipeConsumer);
     }
-
-    public static <I extends Item> Consumer<Supplier<I>> ultSwordRecipe(Consumer<FinishedRecipe> recipeConsumer, Item itemUranium, Item itemTitanium, Item itemPlatinum) {
-        return (resultItemSup) -> ultSwordRecipe(recipeConsumer, itemUranium, itemTitanium, itemPlatinum, 1).accept((Supplier<Item>) resultItemSup);
+    public static <I extends Item> Consumer<Supplier<I>> ultSwordRecipe(Consumer<FinishedRecipe> recipeConsumer) {
+        return (resultItemSup) -> ultSwordRecipe(recipeConsumer, 1).accept((Supplier<Item>) resultItemSup);
     }
 
-    public static <I extends Item> Consumer<Supplier<I>> ultPickaxeRecipe(Consumer<FinishedRecipe> recipeConsumer, I itemUranium, I itemTitanium, I itemPlatinum, int resultItemCount) {
+    public static <I extends Item> Consumer<Supplier<I>> ultPickaxeRecipe(Consumer<FinishedRecipe> recipeConsumer, int resultItemCount) {
         return (resultItemSup) -> ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, resultItemSup.get(), resultItemCount)
-                .define('U', itemUranium)
-                .define('T', itemTitanium)
-                .define('P', itemPlatinum)
+                .define('U', URANIUM_INGOT.get())
+                .define('T', TITANIUM_INGOT.get())
+                .define('P', PLATINUM_LUMP.get())
                 .pattern("TUT")
                 .pattern(" U ")
                 .pattern(" P ")
-                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(itemUranium), PredicateUtil.has(itemUranium))
-                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(itemTitanium), PredicateUtil.has(itemTitanium))
-                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(itemPlatinum), PredicateUtil.has(itemPlatinum))
+                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(PLATINUM_LUMP.get()), PredicateUtil.has(PLATINUM_LUMP.get()))
                 .save(recipeConsumer);
     }
-
-    public static <I extends Item> Consumer<Supplier<I>> ultPickaxeRecipe(Consumer<FinishedRecipe> recipeConsumer, Item itemUranium, Item itemTitanium, Item itemPlatinum) {
-        return (resultItemSup) -> ultPickaxeRecipe(recipeConsumer, itemUranium, itemTitanium, itemPlatinum, 1).accept((Supplier<Item>) resultItemSup);
+    public static <I extends Item> Consumer<Supplier<I>> ultPickaxeRecipe(Consumer<FinishedRecipe> recipeConsumer) {
+        return (resultItemSup) -> ultPickaxeRecipe(recipeConsumer, 1).accept((Supplier<Item>) resultItemSup);
     }
 
-    public static <I extends Item> Consumer<Supplier<I>> ultAxeRecipe(Consumer<FinishedRecipe> recipeConsumer, I itemUranium, I itemTitanium, I itemPlatinum, int resultItemCount) {
+    public static <I extends Item> Consumer<Supplier<I>> ultAxeRecipe(Consumer<FinishedRecipe> recipeConsumer, int resultItemCount) {
         return (resultItemSup) -> ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, resultItemSup.get(), resultItemCount)
-                .define('U', itemUranium)
-                .define('T', itemTitanium)
-                .define('P', itemPlatinum)
+                .define('U', URANIUM_INGOT.get())
+                .define('T', TITANIUM_INGOT.get())
+                .define('P', PLATINUM_LUMP.get())
                 .pattern("TT ")
                 .pattern("UP ")
                 .pattern(" P ")
-                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(itemUranium), PredicateUtil.has(itemUranium))
-                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(itemTitanium), PredicateUtil.has(itemTitanium))
-                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(itemPlatinum), PredicateUtil.has(itemPlatinum))
+                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(PLATINUM_LUMP.get()), PredicateUtil.has(PLATINUM_LUMP.get()))
                 .save(recipeConsumer);
     }
-
-    public static <I extends Item> Consumer<Supplier<I>> ultAxeRecipe(Consumer<FinishedRecipe> recipeConsumer, Item itemUranium, Item itemTitanium, Item itemPlatinum) {
-        return (resultItemSup) -> ultAxeRecipe(recipeConsumer, itemUranium, itemTitanium, itemPlatinum, 1).accept((Supplier<Item>) resultItemSup);
+    public static <I extends Item> Consumer<Supplier<I>> ultAxeRecipe(Consumer<FinishedRecipe> recipeConsumer) {
+        return (resultItemSup) -> ultAxeRecipe(recipeConsumer, 1).accept((Supplier<Item>) resultItemSup);
     }
 
-    public static <I extends Item> Consumer<Supplier<I>> ultShovelRecipe(Consumer<FinishedRecipe> recipeConsumer, I itemUranium, I itemTitanium, I itemPlatinum, int resultItemCount) {
+    public static <I extends Item> Consumer<Supplier<I>> ultShovelRecipe(Consumer<FinishedRecipe> recipeConsumer, int resultItemCount) {
         return (resultItemSup) -> ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, resultItemSup.get(), resultItemCount)
-                .define('U', itemUranium)
-                .define('T', itemTitanium)
-                .define('P', itemPlatinum)
+                .define('U', URANIUM_INGOT.get())
+                .define('T', TITANIUM_INGOT.get())
+                .define('P', PLATINUM_LUMP.get())
                 .pattern(" U ")
                 .pattern(" T ")
                 .pattern(" P ")
-                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(itemUranium), PredicateUtil.has(itemUranium))
-                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(itemTitanium), PredicateUtil.has(itemTitanium))
-                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(itemPlatinum), PredicateUtil.has(itemPlatinum))
+                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(URANIUM_INGOT.get()), PredicateUtil.has(URANIUM_INGOT.get()))
                 .save(recipeConsumer);
     }
-
-    public static <I extends Item> Consumer<Supplier<I>> ultShovelRecipe(Consumer<FinishedRecipe> recipeConsumer, Item itemUranium, Item itemTitanium, Item itemPlatinum) {
-        return (resultItemSup) -> ultShovelRecipe(recipeConsumer, itemUranium, itemTitanium, itemPlatinum, 1).accept((Supplier<Item>) resultItemSup);
+    public static <I extends Item> Consumer<Supplier<I>> ultShovelRecipe(Consumer<FinishedRecipe> recipeConsumer) {
+        return (resultItemSup) -> ultShovelRecipe(recipeConsumer, 1).accept((Supplier<Item>) resultItemSup);
     }
 
-    public static <I extends Item> Consumer<Supplier<I>> ultHoeRecipe(Consumer<FinishedRecipe> recipeConsumer, I itemUranium, I itemTitanium, I itemPlatinum, int resultItemCount) {
+    public static <I extends Item> Consumer<Supplier<I>> ultHoeRecipe(Consumer<FinishedRecipe> recipeConsumer, int resultItemCount) {
         return (resultItemSup) -> ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, resultItemSup.get(), resultItemCount)
-                .define('U', itemUranium)
-                .define('T', itemTitanium)
-                .define('P', itemPlatinum)
+                .define('U', URANIUM_INGOT.get())
+                .define('T', TITANIUM_INGOT.get())
+                .define('P', PLATINUM_LUMP.get())
                 .pattern("UU ")
                 .pattern(" T ")
                 .pattern(" P ")
-                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(itemUranium), PredicateUtil.has(itemUranium))
-                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(itemTitanium), PredicateUtil.has(itemTitanium))
-                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(itemPlatinum), PredicateUtil.has(itemPlatinum))
+                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(PLATINUM_LUMP.get()), PredicateUtil.has(PLATINUM_LUMP.get()))
                 .save(recipeConsumer);
     }
+    public static <I extends Item> Consumer<Supplier<I>> ultHoeRecipe(Consumer<FinishedRecipe> recipeConsumer) {
+        return (resultItemSup) -> ultHoeRecipe(recipeConsumer, 1).accept((Supplier<Item>) resultItemSup);
+    }
 
-    public static <I extends Item> Consumer<Supplier<I>> ultHoeRecipe(Consumer<FinishedRecipe> recipeConsumer, Item itemUranium, Item itemTitanium, Item itemPlatinum) {
-        return (resultItemSup) -> ultHoeRecipe(recipeConsumer, itemUranium, itemTitanium, itemPlatinum, 1).accept((Supplier<Item>) resultItemSup);
+    public static <I extends Item> Consumer<Supplier<I>> ultBowRecipe(Consumer<FinishedRecipe> recipeConsumer, int resultItemCount) {
+        return (resultItemSup) -> ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, resultItemSup.get(), resultItemCount)
+                .define('U', URANIUM_INGOT.get())
+                .define('T', TITANIUM_INGOT.get())
+                .define('P', PLATINUM_LUMP.get())
+                .define('B', Items.BOW)
+                .define('S', Items.STRING)
+                .pattern(" TS")
+                .pattern("PBS")
+                .pattern(" US")
+                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(Items.BOW), PredicateUtil.has(Items.BOW))
+                .save(recipeConsumer);
+    }
+    public static <I extends Item> Consumer<Supplier<I>> ultBowRecipe(Consumer<FinishedRecipe> recipeConsumer) {
+        return (resultItemSup) -> ultBowRecipe(recipeConsumer, 1).accept((Supplier<Item>) resultItemSup);
+    }
+
+    public static <I extends Item> Consumer<Supplier<I>> ultCrossBowRecipe(Consumer<FinishedRecipe> recipeConsumer, int resultItemCount) {
+        return (resultItemSup) -> ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, resultItemSup.get(), resultItemCount)
+                .define('U', URANIUM_INGOT.get())
+                .define('T', TITANIUM_INGOT.get())
+                .define('P', PLATINUM_LUMP.get())
+                .define('B', Items.CROSSBOW)
+                .define('S', Items.STRING)
+                .pattern("TST")
+                .pattern("UBU")
+                .pattern(" P ")
+                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(Items.CROSSBOW), PredicateUtil.has(Items.CROSSBOW))
+                .save(recipeConsumer);
+    }
+    public static <I extends Item> Consumer<Supplier<I>> ultCrossBowRecipe(Consumer<FinishedRecipe> recipeConsumer) {
+        return (resultItemSup) -> ultCrossBowRecipe(recipeConsumer,1).accept((Supplier<Item>) resultItemSup);
+    }
+
+    public static <I extends Item> Consumer<Supplier<I>> ultFishRodRecipe(Consumer<FinishedRecipe> recipeConsumer, int resultItemCount) {
+        return (resultItemSup) -> ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, resultItemSup.get(), resultItemCount)
+                .define('U', URANIUM_INGOT.get())
+                .define('T', TITANIUM_INGOT.get())
+                .define('P', PLATINUM_LUMP.get())
+                .define('S', Items.STRING)
+                .pattern("  T")
+                .pattern(" US")
+                .pattern("P S")
+                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(Items.FISHING_ROD), PredicateUtil.has(Items.FISHING_ROD))
+                .save(recipeConsumer);
+    }
+    public static <I extends Item> Consumer<Supplier<I>> ultFishRodRecipe(Consumer<FinishedRecipe> recipeConsumer) {
+        return (resultItemSup) -> ultFishRodRecipe(recipeConsumer,1).accept((Supplier<Item>) resultItemSup);
     }
 
     // Tools
@@ -212,7 +245,6 @@ public final class CARecipeTemplates {
                 .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(itemStick), PredicateUtil.has(itemStick))
                 .save(recipeConsumer);
     }
-
     public static <I extends Item> Consumer<Supplier<I>> swordRecipe(Consumer<FinishedRecipe> recipeConsumer, Item itemMaterial, Item itemStick) {
         return (resultItemSup) -> swordRecipe(recipeConsumer, itemMaterial, itemStick, 1).accept((Supplier<Item>) resultItemSup);
     }
@@ -228,7 +260,6 @@ public final class CARecipeTemplates {
                 .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(itemStick), PredicateUtil.has(itemStick))
                 .save(recipeConsumer);
     }
-
     public static <I extends Item> Consumer<Supplier<I>> pickaxeRecipe(Consumer<FinishedRecipe> recipeConsumer, Item itemMaterial, Item itemStick) {
         return (resultItemSup) -> pickaxeRecipe(recipeConsumer, itemMaterial, itemStick, 1).accept((Supplier<Item>) resultItemSup);
     }
@@ -244,7 +275,6 @@ public final class CARecipeTemplates {
                 .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(itemStick), PredicateUtil.has(itemStick))
                 .save(recipeConsumer);
     }
-
     public static <I extends Item> Consumer<Supplier<I>> axeRecipe(Consumer<FinishedRecipe> recipeConsumer, Item itemMaterial, Item itemStick) {
         return (resultItemSup) -> axeRecipe(recipeConsumer, itemMaterial, itemStick, 1).accept((Supplier<Item>) resultItemSup);
     }
@@ -260,7 +290,6 @@ public final class CARecipeTemplates {
                 .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(itemStick), PredicateUtil.has(itemStick))
                 .save(recipeConsumer);
     }
-
     public static <I extends Item> Consumer<Supplier<I>> shovelRecipe(Consumer<FinishedRecipe> recipeConsumer, Item itemMaterial, Item itemStick) {
         return (resultItemSup) -> shovelRecipe(recipeConsumer, itemMaterial, itemStick, 1).accept((Supplier<Item>) resultItemSup);
     }
@@ -276,7 +305,6 @@ public final class CARecipeTemplates {
                 .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(itemStick), PredicateUtil.has(itemStick))
                 .save(recipeConsumer);
     }
-
     public static <I extends Item> Consumer<Supplier<I>> hoeRecipe(Consumer<FinishedRecipe> recipeConsumer, Item itemMaterial, Item itemStick) {
         return (resultItemSup) -> hoeRecipe(recipeConsumer, itemMaterial, itemStick, 1).accept((Supplier<Item>) resultItemSup);
     }
@@ -293,7 +321,6 @@ public final class CARecipeTemplates {
                 .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(itemStick), PredicateUtil.has(itemStick))
                 .save(recipeConsumer);
     }
-
     public static <I extends Item> Consumer<Supplier<I>> swordRecipe(Consumer<FinishedRecipe> recipeConsumer, Block itemBlockMaterial, Item itemStick) {
         return (resultItemSup) -> swordRecipe(recipeConsumer, itemBlockMaterial, itemStick, 1).accept((Supplier<Item>) resultItemSup);
     }
@@ -309,7 +336,6 @@ public final class CARecipeTemplates {
                 .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(itemStick), PredicateUtil.has(itemStick))
                 .save(recipeConsumer);
     }
-
     public static <I extends Item> Consumer<Supplier<I>> pickaxeRecipe(Consumer<FinishedRecipe> recipeConsumer, Block itemBlockMaterial, Item itemStick) {
         return (resultItemSup) -> pickaxeRecipe(recipeConsumer, itemBlockMaterial, itemStick, 1).accept((Supplier<Item>) resultItemSup);
     }
@@ -325,7 +351,6 @@ public final class CARecipeTemplates {
                 .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(itemStick), PredicateUtil.has(itemStick))
                 .save(recipeConsumer);
     }
-
     public static <I extends Item> Consumer<Supplier<I>> axeRecipe(Consumer<FinishedRecipe> recipeConsumer, Block itemBlockMaterial, Item itemStick) {
         return (resultItemSup) -> axeRecipe(recipeConsumer, itemBlockMaterial, itemStick, 1).accept((Supplier<Item>) resultItemSup);
     }
@@ -341,7 +366,6 @@ public final class CARecipeTemplates {
                 .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(itemStick), PredicateUtil.has(itemStick))
                 .save(recipeConsumer);
     }
-
     public static <I extends Item> Consumer<Supplier<I>> shovelRecipe(Consumer<FinishedRecipe> recipeConsumer, Block itemBlockMaterial, Item itemStick) {
         return (resultItemSup) -> shovelRecipe(recipeConsumer, itemBlockMaterial, itemStick, 1).accept((Supplier<Item>) resultItemSup);
     }
@@ -357,7 +381,6 @@ public final class CARecipeTemplates {
                 .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(itemStick), PredicateUtil.has(itemStick))
                 .save(recipeConsumer);
     }
-
     public static <I extends Item> Consumer<Supplier<I>> hoeRecipe(Consumer<FinishedRecipe> recipeConsumer, Block itemBlockMaterial, Item itemStick) {
         return (resultItemSup) -> hoeRecipe(recipeConsumer, itemBlockMaterial, itemStick, 1).accept((Supplier<Item>) resultItemSup);
     }
@@ -444,75 +467,66 @@ public final class CARecipeTemplates {
         return (resultItemSup) -> hoeWoodRecipe(recipeConsumer, itemBlockMaterial, itemStick, 1).accept((Supplier<Item>) resultItemSup);
     }
     */
+
     // Overloaded Ultimate Armour
-    public static <I extends Item> Consumer<Supplier<I>> ultHelmetRecipe(Consumer<FinishedRecipe> recipeConsumer, I itemUranium, I itemTitanium, I itemPlatinum, int resultItemCount) {
+    public static <I extends Item> Consumer<Supplier<I>> ultHelmetRecipe(Consumer<FinishedRecipe> recipeConsumer, int resultItemCount) {
         return (resultItemSup) -> ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, resultItemSup.get(), resultItemCount)
-                .define('U', itemUranium)
-                .define('T', itemTitanium)
-                .define('P', itemPlatinum)
+                .define('U', URANIUM_INGOT.get())
+                .define('T', TITANIUM_INGOT.get())
+                .define('P', PLATINUM_LUMP.get())
                 .pattern("TPT")
                 .pattern("U U")
                 .pattern("   ")
-                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(itemUranium), PredicateUtil.has(itemUranium))
-                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(itemTitanium), PredicateUtil.has(itemTitanium))
-                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(itemPlatinum), PredicateUtil.has(itemPlatinum))
+                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(PLATINUM_LUMP.get()), PredicateUtil.has(PLATINUM_LUMP.get()))
                 .save(recipeConsumer);
     }
-
-    public static <I extends Item> Consumer<Supplier<I>> ultHelmetRecipe(Consumer<FinishedRecipe> recipeConsumer, Item itemUranium, Item itemTitanium, Item itemPlatinum) {
-        return (resultItemSup) -> ultHelmetRecipe(recipeConsumer, itemUranium, itemTitanium, itemPlatinum, 1).accept((Supplier<Item>) resultItemSup);
+    public static <I extends Item> Consumer<Supplier<I>> ultHelmetRecipe(Consumer<FinishedRecipe> recipeConsumer) {
+        return (resultItemSup) -> ultHelmetRecipe(recipeConsumer,1).accept((Supplier<Item>) resultItemSup);
     }
 
-    public static <I extends Item> Consumer<Supplier<I>> ultChestplateRecipe(Consumer<FinishedRecipe> recipeConsumer, I itemUranium, I itemTitanium, I itemPlatinum, int resultItemCount) {
+    public static <I extends Item> Consumer<Supplier<I>> ultChestplateRecipe(Consumer<FinishedRecipe> recipeConsumer, int resultItemCount) {
         return (resultItemSup) -> ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, resultItemSup.get(), resultItemCount)
-                .define('U', itemUranium)
-                .define('T', itemTitanium)
-                .define('P', itemPlatinum)
+                .define('U', URANIUM_INGOT.get())
+                .define('T', TITANIUM_INGOT.get())
+                .define('P', PLATINUM_LUMP.get())
                 .pattern("P P")
                 .pattern("TTT")
                 .pattern("UUU")
-                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(itemUranium), PredicateUtil.has(itemUranium))
-                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(itemTitanium), PredicateUtil.has(itemTitanium))
-                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(itemPlatinum), PredicateUtil.has(itemPlatinum))
+                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(PLATINUM_LUMP.get()), PredicateUtil.has(PLATINUM_LUMP.get()))
                 .save(recipeConsumer);
     }
-
-    public static <I extends Item> Consumer<Supplier<I>> ultChestplateRecipe(Consumer<FinishedRecipe> recipeConsumer, Item itemUranium, Item itemTitanium, Item itemPlatinum) {
-        return (resultItemSup) -> ultChestplateRecipe(recipeConsumer, itemUranium, itemTitanium, itemPlatinum, 1).accept((Supplier<Item>) resultItemSup);
+    public static <I extends Item> Consumer<Supplier<I>> ultChestplateRecipe(Consumer<FinishedRecipe> recipeConsumer) {
+        return (resultItemSup) -> ultChestplateRecipe(recipeConsumer, 1).accept((Supplier<Item>) resultItemSup);
     }
 
-    public static <I extends Item> Consumer<Supplier<I>> ultLeggingsRecipe(Consumer<FinishedRecipe> recipeConsumer, I itemUranium, I itemTitanium, I itemPlatinum, int resultItemCount) {
+    public static <I extends Item> Consumer<Supplier<I>> ultLeggingsRecipe(Consumer<FinishedRecipe> recipeConsumer, int resultItemCount) {
         return (resultItemSup) -> ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, resultItemSup.get(), resultItemCount)
-                .define('U', itemUranium)
-                .define('T', itemTitanium)
-                .define('P', itemPlatinum)
+                .define('U', URANIUM_INGOT.get())
+                .define('T', TITANIUM_INGOT.get())
+                .define('P', PLATINUM_LUMP.get())
                 .pattern("TTT")
                 .pattern("U U")
                 .pattern("P P")
-                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(itemUranium), PredicateUtil.has(itemUranium))
-                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(itemTitanium), PredicateUtil.has(itemTitanium))
-                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(itemPlatinum), PredicateUtil.has(itemPlatinum))
+                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(PLATINUM_LUMP.get()), PredicateUtil.has(PLATINUM_LUMP.get()))
                 .save(recipeConsumer);
     }
-
-    public static <I extends Item> Consumer<Supplier<I>> ultLeggingsRecipe(Consumer<FinishedRecipe> recipeConsumer, Item itemUranium, Item itemTitanium, Item itemPlatinum) {
-        return (resultItemSup) -> ultLeggingsRecipe(recipeConsumer, itemUranium, itemTitanium, itemPlatinum, 1).accept((Supplier<Item>) resultItemSup);
+    public static <I extends Item> Consumer<Supplier<I>> ultLeggingsRecipe(Consumer<FinishedRecipe> recipeConsumer) {
+        return (resultItemSup) -> ultLeggingsRecipe(recipeConsumer, 1).accept((Supplier<Item>) resultItemSup);
     }
 
-    public static <I extends Item> Consumer<Supplier<I>> ultBootsRecipe(Consumer<FinishedRecipe> recipeConsumer, I itemUranium, I itemTitanium, int resultItemCount) {
+    public static <I extends Item> Consumer<Supplier<I>> ultBootsRecipe(Consumer<FinishedRecipe> recipeConsumer, int resultItemCount) {
         return (resultItemSup) -> ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, resultItemSup.get(), resultItemCount)
-                .define('U', itemUranium)
-                .define('T', itemTitanium)
+                .define('U', URANIUM_INGOT.get())
+                .define('T', TITANIUM_INGOT.get())
                 .pattern("T T")
                 .pattern("U U")
                 .pattern("   ")
-                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(itemUranium), PredicateUtil.has(itemUranium))
-                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(itemTitanium), PredicateUtil.has(itemTitanium))
+                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(URANIUM_INGOT.get()), PredicateUtil.has(URANIUM_INGOT.get()))
+                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(TITANIUM_INGOT.get()), PredicateUtil.has(TITANIUM_INGOT.get()))
                 .save(recipeConsumer);
     }
-
-    public static <I extends Item> Consumer<Supplier<I>> ultBootsRecipe(Consumer<FinishedRecipe> recipeConsumer, Item itemUranium, Item itemTitanium, Item itemPlatinum) {
-        return (resultItemSup) -> ultBootsRecipe(recipeConsumer, itemUranium, itemTitanium, 1).accept((Supplier<Item>) resultItemSup);
+    public static <I extends Item> Consumer<Supplier<I>> ultBootsRecipe(Consumer<FinishedRecipe> recipeConsumer) {
+        return (resultItemSup) -> ultBootsRecipe(recipeConsumer,1).accept((Supplier<Item>) resultItemSup);
     }
 
     // Armour
@@ -525,7 +539,6 @@ public final class CARecipeTemplates {
                 .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(itemMaterial), PredicateUtil.has(itemMaterial))
                 .save(recipeConsumer);
     }
-
     public static <I extends Item> Consumer<Supplier<I>> helmetRecipe(Consumer<FinishedRecipe> recipeConsumer, Item itemMaterial) {
         return (resultItemSup) -> helmetRecipe(recipeConsumer, itemMaterial, 1).accept((Supplier<Item>) resultItemSup);
     }
@@ -539,7 +552,6 @@ public final class CARecipeTemplates {
                 .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(itemMaterial), PredicateUtil.has(itemMaterial))
                 .save(recipeConsumer);
     }
-
     public static <I extends Item> Consumer<Supplier<I>> chestplateRecipe(Consumer<FinishedRecipe> recipeConsumer, Item itemMaterial) {
         return (resultItemSup) -> chestplateRecipe(recipeConsumer, itemMaterial, 1).accept((Supplier<Item>) resultItemSup);
     }
@@ -553,7 +565,6 @@ public final class CARecipeTemplates {
                 .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(itemMaterial), PredicateUtil.has(itemMaterial))
                 .save(recipeConsumer);
     }
-
     public static <I extends Item> Consumer<Supplier<I>> leggingsRecipe(Consumer<FinishedRecipe> recipeConsumer, Item itemMaterial) {
         return (resultItemSup) -> leggingsRecipe(recipeConsumer, itemMaterial, 1).accept((Supplier<Item>) resultItemSup);
     }
@@ -567,55 +578,44 @@ public final class CARecipeTemplates {
                 .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(itemMaterial), PredicateUtil.has(itemMaterial))
                 .save(recipeConsumer);
     }
-
     public static <I extends Item> Consumer<Supplier<I>> bootsRecipe(Consumer<FinishedRecipe> recipeConsumer, Item itemMaterial) {
         return (resultItemSup) -> bootsRecipe(recipeConsumer, itemMaterial, 1).accept((Supplier<Item>) resultItemSup);
     }
 
     //Prismatic Reaper
-    public static <I extends Item> Consumer<Supplier<I>> prismaticReaperRecipe(Consumer<FinishedRecipe> recipeConsumer, I itemKunzite, I itemRuby, I itemDiamond, I itemEmerald, I itemStick, int resultItemCount) {
+    public static <I extends Item> Consumer<Supplier<I>> prismaticReaperRecipe(Consumer<FinishedRecipe> recipeConsumer, int resultItemCount) {
         return (resultItemSup) -> ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, resultItemSup.get(), resultItemCount)
-                .define('K', itemKunzite)
-                .define('R', itemRuby)
-                .define('D', itemDiamond)
-                .define('E', itemEmerald)
-                .define('S', itemStick)
+                .define('K', KUNZITE.get())
+                .define('R', RUBY.get())
+                .define('D', Items.DIAMOND)
+                .define('E', Items.EMERALD)
+                .define('S', Items.STICK)
                 .pattern("KDE")
                 .pattern("RS ")
                 .pattern("S  ")
-                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(itemKunzite), PredicateUtil.has(itemKunzite))
-                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(itemRuby), PredicateUtil.has(itemRuby))
-                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(itemDiamond), PredicateUtil.has(itemDiamond))
-                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(itemEmerald), PredicateUtil.has(itemEmerald))
-                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(itemStick), PredicateUtil.has(itemStick))
+                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(RUBY.get()), PredicateUtil.has(RUBY.get()))
                 .save(recipeConsumer);
     }
-
-    public static <I extends Item> Consumer<Supplier<I>> prismaticReaperRecipe(Consumer<FinishedRecipe> recipeConsumer, Item itemKunzite, Item itemRuby, Item itemDiamond, Item itemEmerald, Item itemStick) {
-        return (resultItemSup) -> prismaticReaperRecipe(recipeConsumer, itemKunzite, itemRuby, itemDiamond, itemEmerald, itemStick, 1).accept((Supplier<Item>) resultItemSup);
+    public static <I extends Item> Consumer<Supplier<I>> prismaticReaperRecipe(Consumer<FinishedRecipe> recipeConsumer) {
+        return (resultItemSup) -> prismaticReaperRecipe(recipeConsumer, 1).accept((Supplier<Item>) resultItemSup);
     }
 
     // Nightmare Sword
-    public static <I extends Item> Consumer<Supplier<I>> nightmareSwordRecipe(Consumer<FinishedRecipe> recipeConsumer, I itemNightmare, I itemDiamond, I itemTitanium, I itemRedstone, I itemIron, int resultItemCount) {
+    public static <I extends Item> Consumer<Supplier<I>> nightmareSwordRecipe(Consumer<FinishedRecipe> recipeConsumer, int resultItemCount) {
         return (resultItemSup) -> ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, resultItemSup.get(), resultItemCount)
-                .define('N', itemNightmare)
-                .define('D', itemDiamond)
-                .define('T', itemTitanium)
-                .define('R', itemRedstone)
-                .define('I', itemIron)
+                .define('N', NIGHTMARE_SCALE.get())
+                .define('D', Items.DIAMOND)
+                .define('T', TITANIUM_INGOT.get())
+                .define('R', Items.REDSTONE)
+                .define('I', Items.IRON_INGOT)
                 .pattern("NDN")
                 .pattern("RTR")
                 .pattern("NIN")
-                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(itemNightmare), PredicateUtil.has(itemNightmare))
-                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(itemDiamond), PredicateUtil.has(itemDiamond))
-                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(itemTitanium), PredicateUtil.has(itemTitanium))
-                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(itemRedstone), PredicateUtil.has(itemRedstone))
-                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(itemIron), PredicateUtil.has(itemIron))
+                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(NIGHTMARE_SCALE.get()), PredicateUtil.has(NIGHTMARE_SCALE.get()))
                 .save(recipeConsumer);
     }
-
-    public static <I extends Item> Consumer<Supplier<I>> nightmareSwordRecipe(Consumer<FinishedRecipe> recipeConsumer, Item itemNightmare, Item itemDiamond, Item itemTitanium, Item itemRedstone, Item itemIron) {
-        return (resultItemSup) -> nightmareSwordRecipe(recipeConsumer, itemNightmare, itemDiamond, itemTitanium, itemRedstone, itemIron, 1).accept((Supplier<Item>) resultItemSup);
+    public static <I extends Item> Consumer<Supplier<I>> nightmareSwordRecipe(Consumer<FinishedRecipe> recipeConsumer) {
+        return (resultItemSup) -> nightmareSwordRecipe(recipeConsumer, 1).accept((Supplier<Item>) resultItemSup);
     }
 
     // Big Bethra Parts
@@ -636,7 +636,6 @@ public final class CARecipeTemplates {
                 .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(itemTriffidGoo), PredicateUtil.has(itemTriffidGoo))
                 .save(recipeConsumer);
     }
-
     public static <I extends Item> Consumer<Supplier<I>> bigBerthaHandelRecipe(Consumer<FinishedRecipe> recipeConsumer, Item itemJefferyCore, SwordItem itemHammer, SwordItem itemMantisClaw, Item itemWaterDragon, Item itemTriffidGoo) {
         return (resultItemSup) -> bigBerthaHandelRecipe(recipeConsumer, itemJefferyCore, itemHammer, itemMantisClaw, itemWaterDragon, itemTriffidGoo, 1).accept((Supplier<Item>) resultItemSup);
     }
@@ -662,7 +661,6 @@ public final class CARecipeTemplates {
                 .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(itemNightmareScale), PredicateUtil.has(itemNightmareScale))
                 .save(recipeConsumer);
     }
-
     public static <I extends Item> Consumer<Supplier<I>> bigBerthaGuardRecipe(Consumer<FinishedRecipe> recipeConsumer, Item itemEnderDragon, Item itemNightmareSword, Item itemVortexEye, Item itemMothScale, Item itemBascaliscScale, Item itemScorpionScale, Item itemNightmareScale) {
         return (resultItemSup) -> bigBerthaGuardRecipe(recipeConsumer, itemEnderDragon, itemNightmareSword, itemVortexEye, itemMothScale, itemBascaliscScale, itemScorpionScale, itemNightmareScale, 1).accept((Supplier<Item>) resultItemSup);
     }
@@ -688,31 +686,26 @@ public final class CARecipeTemplates {
                 .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(itemViperTounge), PredicateUtil.has(itemViperTounge))
                 .save(recipeConsumer);
     }
-
     public static <I extends Item> Consumer<Supplier<I>> bigBerthaBladeRecipe(Consumer<FinishedRecipe> recipeConsumer, Item itemWormTooth, Item itemVexEye, Item itemTrexTooth, Item itemUltimateSword, Item itemKrakenTooth, Item itemCatakillerJaw, Item itemViperTounge) {
         return (resultItemSup) -> bigBerthaBladeRecipe(recipeConsumer, itemWormTooth, itemVexEye, itemTrexTooth, itemUltimateSword, itemKrakenTooth, itemCatakillerJaw, itemViperTounge, 1).accept((Supplier<Item>) resultItemSup);
     }
 
     // Big Weapons
     // BattleAxe
-    public static <I extends Item> Consumer<Supplier<I>> battleAxeRecipe(Consumer<FinishedRecipe> recipeConsumer, I itemUltAxe, I itemRedstoneBlock, I itemTriffidGoo, I itemUltSword, int resultItemCount) {
+    public static <I extends Item> Consumer<Supplier<I>> battleAxeRecipe(Consumer<FinishedRecipe> recipeConsumer, int resultItemCount) {
         return (resultItemSup) -> ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, resultItemSup.get(), resultItemCount)
-                .define('A', itemUltAxe)
-                .define('B', itemRedstoneBlock)
-                .define('C', itemTriffidGoo)
-                .define('D', itemUltSword)
+                .define('A', ULTIMATE_AXE.get())
+                .define('B', Items.REDSTONE_BLOCK)
+                .define('C', TRIFFID_GOO.get())
+                .define('D', ULTIMATE_SWORD.get())
                 .pattern("ABA")
                 .pattern(" C ")
                 .pattern(" D ")
-                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(itemUltAxe), PredicateUtil.has(itemUltAxe))
-                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(itemRedstoneBlock), PredicateUtil.has(itemRedstoneBlock))
-                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(itemTriffidGoo), PredicateUtil.has(itemTriffidGoo))
-                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(itemUltSword), PredicateUtil.has(itemUltSword))
+                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(ULTIMATE_AXE.get()), PredicateUtil.has(ULTIMATE_AXE.get()))
                 .save(recipeConsumer);
     }
-
-    public static <I extends Item> Consumer<Supplier<I>> battleAxeRecipe(Consumer<FinishedRecipe> recipeConsumer, Item itemUltAxe, Item itemRedstoneBlock, Item itemTriffidGoo, Item itemUltSword) {
-        return (resultItemSup) -> battleAxeRecipe(recipeConsumer, itemUltAxe, itemRedstoneBlock, itemTriffidGoo, itemUltSword, 1).accept((Supplier<Item>) resultItemSup);
+    public static <I extends Item> Consumer<Supplier<I>> battleAxeRecipe(Consumer<FinishedRecipe> recipeConsumer) {
+        return (resultItemSup) -> battleAxeRecipe(recipeConsumer, 1).accept((Supplier<Item>) resultItemSup);
     }
 
     // General shapes
@@ -727,7 +720,6 @@ public final class CARecipeTemplates {
                 .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(itemCross), PredicateUtil.has(itemCross))
                 .save(recipeConsumer);
     }
-
     public static <I extends Item> Consumer<Supplier<I>> crossDotRecipe(Consumer<FinishedRecipe> recipeConsumer, Item itemCross, Item itemDot) {
         return (resultItemSup) -> crossDotRecipe(recipeConsumer, itemCross, itemDot, 1).accept((Supplier<Item>) resultItemSup);
     }
@@ -745,7 +737,6 @@ public final class CARecipeTemplates {
                 .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(itemSideCross), PredicateUtil.has(itemSideCross))
                 .save(recipeConsumer);
     }
-
     public static <I extends Item> Consumer<Supplier<I>> crossTwoDotRecipe(Consumer<FinishedRecipe> recipeConsumer, Item itemTopBotCross, Item itemSideCross, Item itemDot) {
         return (resultItemSup) -> crossTwoDotRecipe(recipeConsumer, itemTopBotCross, itemSideCross, itemDot, 1).accept((Supplier<Item>) resultItemSup);
     }
@@ -761,7 +752,6 @@ public final class CARecipeTemplates {
                 .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(itemDot), PredicateUtil.has(itemDot))
                 .save(recipeConsumer);
     }
-
     public static <I extends Item> Consumer<Supplier<I>> dotRingRecipe(Consumer<FinishedRecipe> recipeConsumer, Item itemRing, Item itemDot) {
         return (resultItemSup) -> dotRingRecipe(recipeConsumer, itemRing, itemDot, 1).accept((Supplier<Item>) resultItemSup);
     }
@@ -779,7 +769,6 @@ public final class CARecipeTemplates {
                 .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(bottomItemReference), PredicateUtil.has(bottomItemReference))
                 .save(recipeConsumer);
     }
-
     public static <I extends Item> Consumer<Supplier<I>> threeRowRecipe(Consumer<FinishedRecipe> recipeConsumer, Item topItemReference, Item middleItemReference, Item bottomItemReference) {
         return (resultItemSup) -> threeRowRecipe(recipeConsumer, topItemReference, middleItemReference, bottomItemReference, 1).accept((Supplier<Item>) resultItemSup);
     }
@@ -797,7 +786,6 @@ public final class CARecipeTemplates {
                 .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(bottomItemReference), PredicateUtil.has(bottomItemReference))
                 .save(recipeConsumer);
     }
-
     public static <I extends Item> Consumer<Supplier<I>> diagonalLeftRecipe(Consumer<FinishedRecipe> recipeConsumer, Item topItemReference, Item middleItemReference, Item bottomItemReference) {
         return (resultItemSup) -> diagonalLeftRecipe(recipeConsumer, topItemReference, middleItemReference, bottomItemReference, 1).accept((Supplier<Item>) resultItemSup);
     }
@@ -910,104 +898,91 @@ public final class CARecipeTemplates {
     }
 
     // FOOD
-    public static <I extends Item> Consumer<Supplier<I>> BLTRecipe(Consumer<FinishedRecipe> recipeConsumer, I itemBread, I itemLetuce, I itemTomato, I itemBacon, I itemButter, int resultItemCount) {
+    public static <I extends Item> Consumer<Supplier<I>> BLTRecipe(Consumer<FinishedRecipe> recipeConsumer, int resultItemCount) {
         return (resultItemSup) -> ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, resultItemSup.get(), resultItemCount)
-                .define('B', itemBread)
-                .define('L', itemLetuce)
-                .define('T', itemTomato)
-                .define('A', itemBacon)
-                .define('R', itemButter)
+                .define('B', Items.BREAD)
+                .define('L', LETTUCE.get())
+                .define('T', TOMATO.get())
+                .define('A', COOKED_BACON.get())
+                .define('R', BUTTER.get())
                 .pattern("RB ")
                 .pattern("LAT")
                 .pattern("   ")
-                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(itemBread), PredicateUtil.has(itemBread))
-                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(itemLetuce), PredicateUtil.has(itemLetuce))
-                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(itemTomato), PredicateUtil.has(itemTomato))
-                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(itemBacon), PredicateUtil.has(itemBacon))
-                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(itemButter), PredicateUtil.has(itemButter))
+                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(Items.BREAD), PredicateUtil.has(Items.BREAD))
                 .save(recipeConsumer);
     }
-
-    public static <I extends Item> Consumer<Supplier<I>> BLTRecipe(Consumer<FinishedRecipe> recipeConsumer, Item itemBread, Item itemLetuce, Item itemTomato, Item itemBacon, Item itemButter) {
-        return (resultItemSup) -> BLTRecipe(recipeConsumer, itemBread, itemLetuce, itemTomato, itemBacon, itemButter, 1).accept((Supplier<Item>) resultItemSup);
+    public static <I extends Item> Consumer<Supplier<I>> BLTRecipe(Consumer<FinishedRecipe> recipeConsumer) {
+        return (resultItemSup) -> BLTRecipe(recipeConsumer, 1).accept((Supplier<Item>) resultItemSup);
     }
 
-    public static <I extends Item> Consumer<Supplier<I>> gardenSaladRecipe(Consumer<FinishedRecipe> recipeConsumer, I itemBowl, I itemLetuce, I itemTomato, I itemCorn, I itemRadish, int resultItemCount) {
+    public static <I extends Item> Consumer<Supplier<I>> gardenSaladRecipe(Consumer<FinishedRecipe> recipeConsumer, int resultItemCount) {
         return (resultItemSup) -> ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, resultItemSup.get(), resultItemCount)
-                .define('B', itemBowl)
-                .define('L', itemLetuce)
-                .define('T', itemTomato)
-                .define('C', itemCorn)
-                .define('R', itemRadish)
+                .define('B', Items.BOWL)
+                .define('L', LETTUCE.get())
+                .define('T', TOMATO.get())
+                .define('C', CORN.get())
+                .define('R', RADISH.get())
                 .pattern(" R ")
                 .pattern("LTC")
                 .pattern(" B ")
-                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(itemBowl), PredicateUtil.has(itemBowl))
-                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(itemLetuce), PredicateUtil.has(itemLetuce))
-                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(itemTomato), PredicateUtil.has(itemTomato))
-                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(itemCorn), PredicateUtil.has(itemCorn))
-                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(itemRadish), PredicateUtil.has(itemRadish))
+                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(Items.BOWL), PredicateUtil.has(Items.BOWL))
                 .save(recipeConsumer);
     }
-
-    public static <I extends Item> Consumer<Supplier<I>> gardenSaladRecipe(Consumer<FinishedRecipe> recipeConsumer, Item itemBread, Item itemLetuce, Item itemTomato, Item itemCorn, Item itemRadish) {
-        return (resultItemSup) -> gardenSaladRecipe(recipeConsumer, itemBread, itemLetuce, itemTomato, itemCorn, itemRadish, 1).accept((Supplier<Item>) resultItemSup);
+    public static <I extends Item> Consumer<Supplier<I>> gardenSaladRecipe(Consumer<FinishedRecipe> recipeConsumer) {
+        return (resultItemSup) -> gardenSaladRecipe(recipeConsumer, 1).accept((Supplier<Item>) resultItemSup);
     }
 
-    public static <I extends Item> Consumer<Supplier<I>> seafoodPattyRecipe(Consumer<FinishedRecipe> recipeConsumer, I itemBread, I itemLetuce, Item itemCrab, Item itemTomato, int resultItemCount) {
+    public static <I extends Item> Consumer<Supplier<I>> seafoodPattyRecipe(Consumer<FinishedRecipe> recipeConsumer, int resultItemCount) {
         return (resultItemSup) -> ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, resultItemSup.get(), resultItemCount)
-                .define('B', itemBread)
-                .define('L', itemLetuce)
-                .define('C', itemCrab)
-                .define('T', itemTomato)
+                .define('B', Items.BREAD)
+                .define('L', LETTUCE.get())
+                .define('C', COOKED_CRAB_MEAT.get())
+                .define('T', TOMATO.get())
                 .pattern(" B ")
                 .pattern("LCT")
                 .pattern(" B ")
-                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(itemBread), PredicateUtil.has(itemBread))
-                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(itemLetuce), PredicateUtil.has(itemLetuce))
-                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(itemCrab), PredicateUtil.has(itemCrab))
-                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(itemTomato), PredicateUtil.has(itemTomato))
+                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(Items.BREAD), PredicateUtil.has(Items.BREAD))
                 .save(recipeConsumer);
     }
-
-    public static <I extends Item> Consumer<Supplier<I>> seafoodPattyRecipe(Consumer<FinishedRecipe> recipeConsumer, Item itemBread, Item itemLetuce, Item itemCrab, Item itemTomato) {
-        return (resultItemSup) -> seafoodPattyRecipe(recipeConsumer, itemBread, itemLetuce, itemCrab, itemTomato, 1).accept((Supplier<Item>) resultItemSup);
+    public static <I extends Item> Consumer<Supplier<I>> seafoodPattyRecipe(Consumer<FinishedRecipe> recipeConsumer) {
+        return (resultItemSup) -> seafoodPattyRecipe(recipeConsumer, 1).accept((Supplier<Item>) resultItemSup);
     }
 
-    public static <I extends Item> Consumer<Supplier<I>> radishStewRecipe(Consumer<FinishedRecipe> recipeConsumer, I itemBowl, I itemRadish, Item itemPotato, int resultItemCount) {
+    public static <I extends Item> Consumer<Supplier<I>> radishStewRecipe(Consumer<FinishedRecipe> recipeConsumer, int resultItemCount) {
         return (resultItemSup) -> ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, resultItemSup.get(), resultItemCount)
-                .define('B', itemBowl)
-                .define('R', itemRadish)
-                .define('P', itemPotato)
+                .define('B', Items.BOWL)
+                .define('R', RADISH.get())
+                .define('P', Items.POTATO)
                 .pattern(" R ")
                 .pattern("RPR")
                 .pattern(" B ")
-                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(itemBowl), PredicateUtil.has(itemBowl))
-                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(itemRadish), PredicateUtil.has(itemRadish))
-                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(itemPotato), PredicateUtil.has(itemPotato))
+                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(Items.BOWL), PredicateUtil.has(Items.BOWL))
                 .save(recipeConsumer);
     }
-
-    public static <I extends Item> Consumer<Supplier<I>> radishStewRecipe(Consumer<FinishedRecipe> recipeConsumer, Item itemBowl, Item itemRadish, Item itemPotato) {
-        return (resultItemSup) -> radishStewRecipe(recipeConsumer, itemBowl, itemRadish, itemPotato, 1).accept((Supplier<Item>) resultItemSup);
+    public static <I extends Item> Consumer<Supplier<I>> radishStewRecipe(Consumer<FinishedRecipe> recipeConsumer) {
+        return (resultItemSup) -> radishStewRecipe(recipeConsumer, 1).accept((Supplier<Item>) resultItemSup);
     }
 
-    public static <I extends Item> Consumer<Supplier<I>> quinoaSaladRecipe(Consumer<FinishedRecipe> recipeConsumer, I itemBowl, I itemLetuce, Item itemQuinoa, int resultItemCount) {
+    public static <I extends Item> Consumer<Supplier<I>> quinoaSaladRecipe(Consumer<FinishedRecipe> recipeConsumer, int resultItemCount) {
         return (resultItemSup) -> ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, resultItemSup.get(), resultItemCount)
-                .define('B', itemBowl)
-                .define('L', itemLetuce)
-                .define('Q', itemQuinoa)
+                .define('B', Items.BOWL)
+                .define('L', LETTUCE.get())
+                .define('Q', QUINOA.get())
                 .pattern(" Q ")
                 .pattern("QLQ")
                 .pattern(" B ")
-                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(itemBowl), PredicateUtil.has(itemBowl))
-                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(itemLetuce), PredicateUtil.has(itemLetuce))
-                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(itemQuinoa), PredicateUtil.has(itemQuinoa))
+                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(Items.BOWL), PredicateUtil.has(Items.BOWL))
                 .save(recipeConsumer);
     }
+    public static <I extends Item> Consumer<Supplier<I>> quinoaSaladRecipe(Consumer<FinishedRecipe> recipeConsumer) {
+        return (resultItemSup) -> quinoaSaladRecipe(recipeConsumer, 1).accept((Supplier<Item>) resultItemSup);
+    }
 
-    public static <I extends Item> Consumer<Supplier<I>> quinoaSaladRecipe(Consumer<FinishedRecipe> recipeConsumer, Item itemBowl, Item itemLetuce, Item itemQuinoa) {
-        return (resultItemSup) -> quinoaSaladRecipe(recipeConsumer, itemBowl, itemLetuce, itemQuinoa, 1).accept((Supplier<Item>) resultItemSup);
+    public static <I extends Item> Consumer<Supplier<I>> goldenBakedPotatoRecipe(Consumer<FinishedRecipe> finishedRecipe,  Function<ResourceLocation, ResourceLocation> recipeIdMapper) {
+        return RecipeUtil.cookedFoodFromSmelting(finishedRecipe, parentBakedGoldenPotato -> (I) GOLDEN_POTATO.get(), recipeIdMapper);
+    }
+    public static <I extends Item> Consumer<Supplier<I>> goldenBakedPotatoRecipe(Consumer<FinishedRecipe> finishedRecipe) {
+        return goldenBakedPotatoRecipe(finishedRecipe, Function.identity());
     }
 
     // Popcorn Bag
@@ -1028,7 +1003,6 @@ public final class CARecipeTemplates {
                     .save(finishedRecipe, recipeIdMapper.apply(parentItemLikeId));
         };
     }
-
     public static <I extends Item> Consumer<Supplier<I>> popcornBagRecipe(Consumer<FinishedRecipe> finishedRecipe) {
         return popcornBagRecipe(finishedRecipe, Function.identity());
     }
@@ -1036,7 +1010,6 @@ public final class CARecipeTemplates {
     public static <I extends Item> Consumer<Supplier<I>> popcornRecipe(Consumer<FinishedRecipe> finishedRecipe,  Function<ResourceLocation, ResourceLocation> recipeIdMapper) {
         return RecipeUtil.cookedFoodFromSmelting(finishedRecipe, parentPopcorn -> (I) CAItems.CORN.get(), recipeIdMapper);
     }
-
     public static <I extends Item> Consumer<Supplier<I>> popcornRecipe(Consumer<FinishedRecipe> finishedRecipe) {
         return popcornRecipe(finishedRecipe, Function.identity());
     }
@@ -1060,7 +1033,6 @@ public final class CARecipeTemplates {
             }
         };
     }
-
     public static <I extends Item> Consumer<Supplier<I>> baggedPopcornRecipeFrom(Consumer<FinishedRecipe> finishedRecipe, Function<I, I> recipeComponentMapper, boolean fromEmptyBag) {
         return baggedPopcornRecipeFrom(finishedRecipe, recipeComponentMapper, Function.identity(), fromEmptyBag);
     }

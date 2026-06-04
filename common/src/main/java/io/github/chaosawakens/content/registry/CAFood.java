@@ -6,65 +6,65 @@ import net.minecraft.world.food.FoodProperties;
 
 public final class  CAFood {
     // Dairy
-    public static final FoodProperties FOOD_BUTTER = new FoodProperties.Builder().nutrition(2).saturationMod(0.2F).build();
-    public static final FoodProperties FOOD_CHEESE = new FoodProperties.Builder().nutrition(4).saturationMod(0.5F).build();
+    public static final FoodProperties FOOD_BUTTER = new FoodProperties.Builder().nutrition(2).saturationMod(0.2F).alwaysEat().build();
+    public static final FoodProperties FOOD_CHEESE = new FoodProperties.Builder().nutrition(4).saturationMod(0.5F).alwaysEat().build();
 
     // Meat
-    public static final FoodProperties FOOD_RAW_BACON = new FoodProperties.Builder().nutrition(3).saturationMod(0.33F).meat().build();
-    public static final FoodProperties FOOD_COOKED_BACON = new FoodProperties.Builder().nutrition(8).saturationMod(1F).meat().build();
-    public static final FoodProperties FOOD_RAW_CORNDOG = new FoodProperties.Builder().nutrition(4).saturationMod(0.25F).build();
-    public static final FoodProperties FOOD_COOKED_CORNDOG = new FoodProperties.Builder().nutrition(8).saturationMod(1F).build();
-    public static final FoodProperties FOOD_RAW_CRAB_MEAT = new FoodProperties.Builder().nutrition(3).saturationMod(0.25F).meat().build();
-    public static final FoodProperties FOOD_COOKED_CRAB_MEAT = new FoodProperties.Builder().nutrition(6).saturationMod(0.75F).meat().build();
-    public static final FoodProperties FOOD_RAW_PEACOCK_LEG = new FoodProperties.Builder().nutrition(2).saturationMod(0.5F).build();
-    public static final FoodProperties FOOD_COOKED_PEACOCK_LEG = new FoodProperties.Builder().nutrition(6).saturationMod(0.8F).build();
-    public static final FoodProperties FOOD_RAW_VENISON = new FoodProperties.Builder().nutrition(2).saturationMod(0.5F).meat().build();
-    public static final FoodProperties FOOD_COOKED_VENISON = new FoodProperties.Builder().nutrition(6).saturationMod(0.8F).meat().build();
+    public static final FoodProperties FOOD_RAW_BACON = new FoodProperties.Builder().nutrition(3).saturationMod(0.33F).alwaysEat().meat().build();
+    public static final FoodProperties FOOD_COOKED_BACON = new FoodProperties.Builder().nutrition(8).saturationMod(1F).alwaysEat().meat().build();
+    public static final FoodProperties FOOD_RAW_CORNDOG = new FoodProperties.Builder().nutrition(4).saturationMod(0.25F).alwaysEat().build();
+    public static final FoodProperties FOOD_COOKED_CORNDOG = new FoodProperties.Builder().nutrition(8).saturationMod(1F).alwaysEat().build();
+    public static final FoodProperties FOOD_RAW_CRAB_MEAT = new FoodProperties.Builder().nutrition(3).saturationMod(0.25F).alwaysEat().meat().build();
+    public static final FoodProperties FOOD_COOKED_CRAB_MEAT = new FoodProperties.Builder().nutrition(6).saturationMod(0.75F).alwaysEat().meat().build();
+    public static final FoodProperties FOOD_RAW_PEACOCK_LEG = new FoodProperties.Builder().nutrition(2).saturationMod(0.5F).alwaysEat().build();
+    public static final FoodProperties FOOD_COOKED_PEACOCK_LEG = new FoodProperties.Builder().nutrition(6).saturationMod(0.8F).alwaysEat().build();
+    public static final FoodProperties FOOD_RAW_VENISON = new FoodProperties.Builder().nutrition(2).saturationMod(0.5F).alwaysEat().meat().build();
+    public static final FoodProperties FOOD_COOKED_VENISON = new FoodProperties.Builder().nutrition(6).saturationMod(0.8F).alwaysEat().meat().build();
 
     // Plants
-    public static final FoodProperties FOOD_CHERRIES = new FoodProperties.Builder().nutrition(2).saturationMod(0.45F).build();
-    public static final FoodProperties FOOD_CORN = new FoodProperties.Builder().nutrition(2).saturationMod(0.5F).build();
-    public static final FoodProperties FOOD_LETTUCE = new FoodProperties.Builder().nutrition(3).saturationMod(0.45F).build();
-    public static final FoodProperties FOOD_PEACH = new FoodProperties.Builder().nutrition(3).saturationMod(0.55F).build();
-    public static final FoodProperties FOOD_RADISH = new FoodProperties.Builder().nutrition(2).saturationMod(0.45F).build();
-    public static final FoodProperties FOOD_QUINOA = new FoodProperties.Builder().nutrition(2).saturationMod(0.6F).build();
-    public static final FoodProperties FOOD_STRAWBERRY = new FoodProperties.Builder().nutrition(2).saturationMod(0.65F).build();
-    public static final FoodProperties FOOD_TOMATO = new FoodProperties.Builder().nutrition(2).saturationMod(0.55F).build();
+    public static final FoodProperties FOOD_CHERRIES = new FoodProperties.Builder().nutrition(2).saturationMod(0.45F).alwaysEat().build();
+    public static final FoodProperties FOOD_CORN = new FoodProperties.Builder().nutrition(2).saturationMod(0.5F).alwaysEat().build();
+    public static final FoodProperties FOOD_LETTUCE = new FoodProperties.Builder().nutrition(3).saturationMod(0.45F).alwaysEat().build();
+    public static final FoodProperties FOOD_PEACH = new FoodProperties.Builder().nutrition(3).saturationMod(0.55F).alwaysEat().build();
+    public static final FoodProperties FOOD_RADISH = new FoodProperties.Builder().nutrition(2).saturationMod(0.45F).alwaysEat().build();
+    public static final FoodProperties FOOD_QUINOA = new FoodProperties.Builder().nutrition(2).saturationMod(0.6F).alwaysEat().build();
+    public static final FoodProperties FOOD_STRAWBERRY = new FoodProperties.Builder().nutrition(2).saturationMod(0.65F).alwaysEat().build();
+    public static final FoodProperties FOOD_TOMATO = new FoodProperties.Builder().nutrition(2).saturationMod(0.55F).alwaysEat().build();
 
     // Crystal Plants
-    public static final FoodProperties FOOD_CRYSTAL_APPLE = new FoodProperties.Builder().nutrition(5).saturationMod(0.85F).alwaysEat().effect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 3000, 0), 1.0F).effect(new MobEffectInstance(MobEffects.REGENERATION, 3000, 0), 1.0F).build();
-    public static final FoodProperties FOOD_CRYSTAL_BEETROOT = new FoodProperties.Builder().nutrition(1).saturationMod(0.15F).alwaysEat().effect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 3000, 0), 1.0F).effect(new MobEffectInstance(MobEffects.REGENERATION, 3000, 0), 1.0F).build();
-    public static final FoodProperties FOOD_CRYSTAL_CARROT = new FoodProperties.Builder().nutrition(3).saturationMod(0.35F).alwaysEat().effect(new MobEffectInstance(MobEffects.NIGHT_VISION, 3000, 0), 1.0F).effect(new MobEffectInstance(MobEffects.REGENERATION, 3000, 0), 1.0F).build();
-    public static final FoodProperties FOOD_CRYSTAL_POTATO = new FoodProperties.Builder().nutrition(2).saturationMod(0.30F).alwaysEat().effect(new MobEffectInstance(MobEffects.SATURATION, 3000, 0), 1.0F).effect(new MobEffectInstance(MobEffects.REGENERATION, 3000, 0), 1.0F).build();
+    public static final FoodProperties FOOD_CRYSTAL_APPLE = new FoodProperties.Builder().nutrition(5).saturationMod(0.85F).alwaysEat().effect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 3000, 0), 1.0F).build();
+    public static final FoodProperties FOOD_CRYSTAL_BEETROOT = new FoodProperties.Builder().nutrition(1).saturationMod(0.15F).alwaysEat().effect(new MobEffectInstance(MobEffects.HEAL, 0, 2), 0.65F).build();
+    public static final FoodProperties FOOD_CRYSTAL_CARROT = new FoodProperties.Builder().nutrition(3).saturationMod(0.35F).alwaysEat().effect(new MobEffectInstance(MobEffects.NIGHT_VISION, 3000, 0), 1.0F).build();
+    public static final FoodProperties FOOD_CRYSTAL_POTATO = new FoodProperties.Builder().nutrition(2).saturationMod(0.30F).alwaysEat().effect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 3000, 0), 1.0F).build();
 
     // Manufactured
-    public static final FoodProperties FOOD_BLT_SANDWICH = new FoodProperties.Builder().nutrition(9).saturationMod(1.1F).build();
-    public static final FoodProperties FOOD_GARDEN_SALAD = new FoodProperties.Builder().nutrition(5).saturationMod(0.95F).build();
-    public static final FoodProperties FOOD_SEAFOOD_PATTY = new FoodProperties.Builder().nutrition(8).saturationMod(0.9F).build();
-    public static final FoodProperties FOOD_RADISH_STEW = new FoodProperties.Builder().nutrition(5).saturationMod(0.75F).build();
-    public static final FoodProperties FOOD_QUINOA_SALAD = new FoodProperties.Builder().nutrition(7).saturationMod(0.9F).build();
+    public static final FoodProperties FOOD_BLT_SANDWICH = new FoodProperties.Builder().nutrition(12).saturationMod(1.1F).alwaysEat().build();
+    public static final FoodProperties FOOD_GARDEN_SALAD = new FoodProperties.Builder().nutrition(7).saturationMod(0.95F).alwaysEat().build();
+    public static final FoodProperties FOOD_SEAFOOD_PATTY = new FoodProperties.Builder().nutrition(10).saturationMod(0.9F).alwaysEat().build();
+    public static final FoodProperties FOOD_RADISH_STEW = new FoodProperties.Builder().nutrition(7).saturationMod(0.75F).alwaysEat().build();
+    public static final FoodProperties FOOD_QUINOA_SALAD = new FoodProperties.Builder().nutrition(9).saturationMod(0.9F).alwaysEat().build();
 
     // Popcorn
-    public static final FoodProperties FOOD_POPCORN = new FoodProperties.Builder().nutrition(2).saturationMod(0.2F).build();
-    public static final FoodProperties FOOD_POPCORN_BAG = new FoodProperties.Builder().nutrition(4).saturationMod(0.25F).build();
-    public static final FoodProperties FOOD_SALTED_POPCORN_BAG = new FoodProperties.Builder().nutrition(5).saturationMod(0.275F).build();
-    public static final FoodProperties FOOD_BUTTERED_POPCORN_BAG = new FoodProperties.Builder().nutrition(6).saturationMod(0.3F).build();
+    public static final FoodProperties FOOD_POPCORN = new FoodProperties.Builder().nutrition(2).saturationMod(0.2F).alwaysEat().build();
+    public static final FoodProperties FOOD_POPCORN_BAG = new FoodProperties.Builder().nutrition(4).saturationMod(0.25F).alwaysEat().build();
+    public static final FoodProperties FOOD_SALTED_POPCORN_BAG = new FoodProperties.Builder().nutrition(5).saturationMod(0.275F).alwaysEat().build();
+    public static final FoodProperties FOOD_BUTTERED_POPCORN_BAG = new FoodProperties.Builder().nutrition(6).saturationMod(0.3F).alwaysEat().build();
 
     // Candy
     public static final FoodProperties FOOD_BUTTER_CANDY = new FoodProperties.Builder().nutrition(2).saturationMod(0.15F).alwaysEat().effect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 400, 1), 1.0F).build();
     public static final FoodProperties FOOD_CANDYCANE = new FoodProperties.Builder().nutrition(2).saturationMod(0.15F).alwaysEat().effect(new MobEffectInstance(MobEffects.DIG_SPEED, 400, 1), 1.0F).build();
 
     // Fish
-    public static final FoodProperties FOOD_BLUE_FISH = new FoodProperties.Builder().nutrition(5).saturationMod(0.6F).build();
-    public static final FoodProperties FOOD_GRAY_FISH = new FoodProperties.Builder().nutrition(5).saturationMod(0.6F).build();
-    public static final FoodProperties FOOD_GREEN_FISH = new FoodProperties.Builder().nutrition(5).saturationMod(0.6F).build();
-    public static final FoodProperties FOOD_ROCK_FISH = new FoodProperties.Builder().nutrition(4).saturationMod(0.8F).build();
-    public static final FoodProperties FOOD_PINK_FISH = new FoodProperties.Builder().nutrition(5).saturationMod(0.6F).build();
+    public static final FoodProperties FOOD_BLUE_FISH = new FoodProperties.Builder().nutrition(5).saturationMod(0.6F).alwaysEat().build();
+    public static final FoodProperties FOOD_GRAY_FISH = new FoodProperties.Builder().nutrition(5).saturationMod(0.6F).alwaysEat().build();
+    public static final FoodProperties FOOD_GREEN_FISH = new FoodProperties.Builder().nutrition(5).saturationMod(0.6F).alwaysEat().build();
+    public static final FoodProperties FOOD_ROCK_FISH = new FoodProperties.Builder().nutrition(4).saturationMod(0.8F).alwaysEat().build();
+    public static final FoodProperties FOOD_PINK_FISH = new FoodProperties.Builder().nutrition(5).saturationMod(0.6F).alwaysEat().build();
     public static final FoodProperties FOOD_SPARK_FISH = new FoodProperties.Builder().nutrition(3).saturationMod(0.2F).alwaysEat().effect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 100, 0), 1.0F).build();
     public static final FoodProperties FOOD_FIRE_FISH = new FoodProperties.Builder().nutrition(3).saturationMod(0.4F).alwaysEat().effect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 200, 0), 1.0F).build();
     public static final FoodProperties FOOD_LAVA_EEL = new FoodProperties.Builder().nutrition(4).saturationMod(0.4F).alwaysEat().effect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 400, 0), 1.0F).build();
     public static final FoodProperties FOOD_SUN_FISH = new FoodProperties.Builder().nutrition(4).saturationMod(0.6F).alwaysEat().effect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 600, 0), 1.0F).build();
-    public static final FoodProperties FOOD_WOOD_FISH = new FoodProperties.Builder().nutrition(2).saturationMod(0.4F).build();
+    public static final FoodProperties FOOD_WOOD_FISH = new FoodProperties.Builder().nutrition(2).saturationMod(0.4F).alwaysEat().build();
 
     // Golden Food
     public static final FoodProperties FOOD_GOLDEN_MELON_SLICE = new FoodProperties.Builder().nutrition(2).saturationMod(0.45F).alwaysEat().build();

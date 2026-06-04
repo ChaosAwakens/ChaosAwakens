@@ -6,10 +6,10 @@
       "item": "minecraft:bowl"
     },
     "P": {
-      "item": "chaosawakens:radish"
+      "item": "minecraft:potato"
     },
     "R": {
-      "item": "minecraft:potato"
+      "item": "chaosawakens:radish"
     }
   },
   "pattern": [

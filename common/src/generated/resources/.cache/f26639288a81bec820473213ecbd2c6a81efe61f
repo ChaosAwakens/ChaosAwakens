@@ -1,4 +1,4 @@
-// 1.20.1	2026-06-02T22:39:07.2522698	Models [chaosawakens]
+// 1.20.1	2026-06-04T00:45:05.3247797	Models [chaosawakens]
 545cc7a8d51438ddca6429e9262d81c625d1162d assets/chaosawakens/models/block/acacia_gate_block.json
 8d130b2889cdfedadd99deba33ebbc7ef31085f7 assets/chaosawakens/models/block/acacia_leaf_carpet.json
 f700a074b4699cc3621d597ffe655047e0bf4a44 assets/chaosawakens/models/block/acacia_leaf_carpet_inventory.json
@@ -1104,7 +1104,6 @@ c8b3a2214e4dd60ad5802f7dd4611248a27a22c2 assets/chaosawakens/models/item/brown_c
 16bfdb6a4fb3456ca7e8c9fa5982e2a1db892a2a assets/chaosawakens/models/item/buttered_popcorn_bag.json
 8e6afba8d177f5a840cef3d1d70bb4c1efe3efa7 assets/chaosawakens/models/item/butter_candy.json
 744c8b146cec0e045892875f6e9aa3e37de37bea assets/chaosawakens/models/item/candycane.json
-7c19af8ab89f191fa7ce9130f99405200ac942c9 assets/chaosawakens/models/item/cats_eye.json
 ba0a7500847f24baf5277f58a4e81d5ef518dfb6 assets/chaosawakens/models/item/cats_eye_axe.json
 c24c4bf8dd4cd4b8ece31da21042c42277c7c150 assets/chaosawakens/models/item/cats_eye_boots.json
 299090d23028cd1c3c6c1fa7a8e7e53cd15ad45f assets/chaosawakens/models/item/cats_eye_chestplate.json
@@ -1112,6 +1111,7 @@ c24c4bf8dd4cd4b8ece31da21042c42277c7c150 assets/chaosawakens/models/item/cats_ey
 92de5175a6f6ca2c0b50c7cdf0ca3c75ddb1bd6f assets/chaosawakens/models/item/cats_eye_hoe.json
 c5c4b082c681d2302e29c2fcc30a15e7814891c2 assets/chaosawakens/models/item/cats_eye_leggings.json
 0467a35b7aca6cd5132fc5394d705f1f0f8f6446 assets/chaosawakens/models/item/cats_eye_pickaxe.json
+2a8805f13c2e45e38c8c4c2b56130d2da367e95c assets/chaosawakens/models/item/cats_eye_shard.json
 80d8d224cfbd35913d80066995eb1392a346569e assets/chaosawakens/models/item/cats_eye_shovel.json
 09f66e5766e669c7dd860fa2dc13a48cc2c6cbe2 assets/chaosawakens/models/item/cats_eye_sword.json
 20d450322a6fb1cde46110271919d3dbe1c08c4b assets/chaosawakens/models/item/cheese.json
@@ -1732,7 +1732,6 @@ d3b5293ef8710153be8bb67fac90dd7276bec11a assets/chaosawakens/models/item/pink_cr
 b7db2058de61697195aacbc4bd8ff13ff29228eb assets/chaosawakens/models/item/pink_crystal_growth.json
 caa83c0c81ace45f35c9702c741b4bb1b9e39dcd assets/chaosawakens/models/item/pink_crystal_leaves.json
 b1ee38661403055cae9b0b2d0c9103a4301d767b assets/chaosawakens/models/item/pink_fish.json
-7c19af8ab89f191fa7ce9130f99405200ac942c9 assets/chaosawakens/models/item/pink_tourmaline.json
 18d44847db4e4d0b25e5247a3a48de16c224e218 assets/chaosawakens/models/item/pink_tourmaline_axe.json
 3825b0edb23d86a448f5a2ed4be2133c69bf6412 assets/chaosawakens/models/item/pink_tourmaline_boots.json
 44b215cda795dc6c87820b2d1157ea124bb68f3d assets/chaosawakens/models/item/pink_tourmaline_chestplate.json
@@ -1740,6 +1739,7 @@ d1061d243c058a3761c3e479221d406525d93e1f assets/chaosawakens/models/item/pink_to
 f9e7115ba1e53a347b41982efc87a29da04e3a9c assets/chaosawakens/models/item/pink_tourmaline_hoe.json
 d171b9fdf9214f19c57b7bda03da25872bf36d21 assets/chaosawakens/models/item/pink_tourmaline_leggings.json
 c5b4b72031c4f3311f0f35b2fef98e7a985b9a81 assets/chaosawakens/models/item/pink_tourmaline_pickaxe.json
+adbc543335dd7807072b34fabcb03f2d54cdd787 assets/chaosawakens/models/item/pink_tourmaline_shard.json
 ebe1aa49b2c26d14fc1c8d6d80d350e1f7340e74 assets/chaosawakens/models/item/pink_tourmaline_shovel.json
 58dad4fdec03a2b31c54f6e2bd8f8f149afd00c9 assets/chaosawakens/models/item/pink_tourmaline_sword.json
 6a56779ef44436d4a9d9b33a4a2e66bc794ed92c assets/chaosawakens/models/item/platinum_block.json
@@ -1887,8 +1887,10 @@ fb8336089f471e1568ee2690a77e73f59a4bdb51 assets/chaosawakens/models/item/tall_pi
 0ba90112796c802069f5c360455ba1e355fb0dfe assets/chaosawakens/models/item/ultimate_apple.json
 087f63d1ce959db2067955880c8681e1c3aa0412 assets/chaosawakens/models/item/ultimate_axe.json
 df13ea522ffafb04c913d02a2d96ff5f5be85824 assets/chaosawakens/models/item/ultimate_boots.json
-7768cc7e74fc6d43df1bc2c734069fc1388326f8 assets/chaosawakens/models/item/ultimate_bow.json
+e941b564ad8b7c1855483f49b9396a6ed205c2e6 assets/chaosawakens/models/item/ultimate_bow.json
 6c49a160d0e77b5ac98dd979c91cb1d6d3ed9aa7 assets/chaosawakens/models/item/ultimate_chestplate.json
+7768cc7e74fc6d43df1bc2c734069fc1388326f8 assets/chaosawakens/models/item/ultimate_crossbow.json
+18f863d6565ed4079199ee1a008478122221b9f6 assets/chaosawakens/models/item/ultimate_fishing_rod.json
 8290a5189322e0bf1ef44f98ae63d0a8ea89bb62 assets/chaosawakens/models/item/ultimate_helmet.json
 abc4e99f92d2fc0a0e34e1bd1280c4c4f8ceb462 assets/chaosawakens/models/item/ultimate_hoe.json
 999e85685a050255e8b17f67beeb25e5e6231f00 assets/chaosawakens/models/item/ultimate_leggings.json

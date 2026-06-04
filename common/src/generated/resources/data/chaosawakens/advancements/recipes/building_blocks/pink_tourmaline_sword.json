@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_chaosawakens:pink_tourmaline_ingot": {
+    "has_chaosawakens:pink_tourmaline_shard": {
       "conditions": {
         "items": [
           {
             "items": [
-              "chaosawakens:pink_tourmaline_ingot"
+              "chaosawakens:pink_tourmaline_shard"
             ]
           }
         ]
@@ -34,7 +34,7 @@
   },
   "requirements": [
     [
-      "has_chaosawakens:pink_tourmaline_ingot",
+      "has_chaosawakens:pink_tourmaline_shard",
       "has_minecraft:stick",
       "has_the_recipe"
     ]

@@ -1,54 +1,6 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_chaosawakens:butter": {
-      "conditions": {
-        "items": [
-          {
-            "items": [
-              "chaosawakens:butter"
-            ]
-          }
-        ]
-      },
-      "trigger": "minecraft:inventory_changed"
-    },
-    "has_chaosawakens:cooked_bacon": {
-      "conditions": {
-        "items": [
-          {
-            "items": [
-              "chaosawakens:cooked_bacon"
-            ]
-          }
-        ]
-      },
-      "trigger": "minecraft:inventory_changed"
-    },
-    "has_chaosawakens:lettuce": {
-      "conditions": {
-        "items": [
-          {
-            "items": [
-              "chaosawakens:lettuce"
-            ]
-          }
-        ]
-      },
-      "trigger": "minecraft:inventory_changed"
-    },
-    "has_chaosawakens:tomato": {
-      "conditions": {
-        "items": [
-          {
-            "items": [
-              "chaosawakens:tomato"
-            ]
-          }
-        ]
-      },
-      "trigger": "minecraft:inventory_changed"
-    },
     "has_minecraft:bread": {
       "conditions": {
         "items": [
@@ -71,10 +23,6 @@
   "requirements": [
     [
       "has_minecraft:bread",
-      "has_chaosawakens:lettuce",
-      "has_chaosawakens:tomato",
-      "has_chaosawakens:cooked_bacon",
-      "has_chaosawakens:butter",
       "has_the_recipe"
     ]
   ],

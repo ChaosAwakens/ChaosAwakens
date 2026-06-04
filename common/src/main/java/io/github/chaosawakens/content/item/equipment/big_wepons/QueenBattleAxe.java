@@ -14,7 +14,7 @@ import net.minecraft.world.level.Level;
 import java.util.Map;
 
 public class QueenBattleAxe extends EnchantedSwordItem {
-    public static final int ATTACK_DAMAGE = 665;
+    public static final int ATTACK_DAMAGE = 662;
 
     public QueenBattleAxe(Tier tier, int attackDamage, float attackSpeedModifier, Item.Properties properties, Map<Enchantment, Integer> enchantment) {
         super(tier, attackDamage, attackSpeedModifier, properties, enchantment);
@@ -25,7 +25,6 @@ public class QueenBattleAxe extends EnchantedSwordItem {
         super.onCraftedBy(stack, world, player);
         if (world.isClientSide) return;
         if (!EnchantmentHelper.getEnchantments(stack).isEmpty()) return;
-        stack.enchant(Enchantments.SHARPNESS, 5);
         stack.enchant(Enchantments.SMITE, 5);
         stack.enchant(Enchantments.BANE_OF_ARTHROPODS, 5);
         stack.enchant(Enchantments.KNOCKBACK, 3);
