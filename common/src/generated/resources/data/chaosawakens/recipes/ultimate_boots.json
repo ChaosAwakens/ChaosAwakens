@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "T": {
+      "item": "chaosawakens:titanium_ingot"
+    },
+    "U": {
+      "item": "chaosawakens:uranium_ingot"
+    }
+  },
+  "pattern": [
+    "T T",
+    "U U",
+    "   "
+  ],
+  "result": {
+    "item": "chaosawakens:ultimate_boots"
+  },
+  "show_notification": true
+}

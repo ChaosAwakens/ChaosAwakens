@@ -1,7 +1,7 @@
 {
 	"parent": "minecraft:item/handheld",
 	"textures": {
-		"layer0": "chaosawakens:item/prismatic_reaper"
+		"layer0": "chaosawakens:item/big_bertha"
 	},
 	"display": {
 		"ground": {

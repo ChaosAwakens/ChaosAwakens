@@ -1,0 +1,87 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_chaosawakens:big_hammer": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "chaosawakens:big_hammer"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_chaosawakens:jeffery_core": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "chaosawakens:jeffery_core"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_chaosawakens:mantis_claw": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "chaosawakens:mantis_claw"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_chaosawakens:triffid_goo": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "chaosawakens:triffid_goo"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_chaosawakens:water_dragon_scale": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "chaosawakens:water_dragon_scale"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "chaosawakens:big_bertha_handle"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_chaosawakens:jeffery_core",
+      "has_chaosawakens:big_hammer",
+      "has_chaosawakens:mantis_claw",
+      "has_chaosawakens:water_dragon_scale",
+      "has_chaosawakens:triffid_goo",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "chaosawakens:big_bertha_handle"
+    ]
+  },
+  "sends_telemetry_event": false
+}

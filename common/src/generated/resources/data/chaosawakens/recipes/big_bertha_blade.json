@@ -1,0 +1,36 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "C": {
+      "item": "chaosawakens:poison_sword"
+    },
+    "I": {
+      "item": "chaosawakens:fairy_sword"
+    },
+    "K": {
+      "item": "chaosawakens:rat_sword"
+    },
+    "T": {
+      "item": "chaosawakens:sea_viper_tongue"
+    },
+    "U": {
+      "item": "chaosawakens:ultimate_sword"
+    },
+    "V": {
+      "item": "chaosawakens:wasp_stinger"
+    },
+    "W": {
+      "item": "chaosawakens:worm_tooth"
+    }
+  },
+  "pattern": [
+    " WV",
+    "TUK",
+    "CI "
+  ],
+  "result": {
+    "item": "chaosawakens:big_bertha_blade"
+  },
+  "show_notification": true
+}

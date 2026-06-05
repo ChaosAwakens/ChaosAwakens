@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "B": {
+      "item": "minecraft:bowl"
+    },
+    "C": {
+      "item": "chaosawakens:corn"
+    },
+    "L": {
+      "item": "chaosawakens:lettuce"
+    },
+    "R": {
+      "item": "chaosawakens:radish"
+    },
+    "T": {
+      "item": "chaosawakens:tomato"
+    }
+  },
+  "pattern": [
+    " R ",
+    "LTC",
+    " B "
+  ],
+  "result": {
+    "item": "chaosawakens:garden_salad"
+  },
+  "show_notification": true
+}

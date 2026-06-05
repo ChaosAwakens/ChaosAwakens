@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "C": {
+      "item": "chaosawakens:royal_guardian_scale"
+    },
+    "D": {
+      "item": "chaosawakens:big_bertha"
+    }
+  },
+  "pattern": [
+    " C ",
+    "CDC",
+    " C "
+  ],
+  "result": {
+    "item": "chaosawakens:royal_guardian"
+  },
+  "show_notification": true
+}
