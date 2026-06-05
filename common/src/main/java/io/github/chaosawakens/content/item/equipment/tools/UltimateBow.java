@@ -10,6 +10,7 @@ import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.ArrowItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
@@ -18,19 +19,13 @@ import net.minecraft.world.level.Level;
 import java.util.Map;
 
 public class UltimateBow extends EnchantedBowItem {
-    private static final float FULL_POWER_DRAW_TICKS = 2.0F;
-    private static final float MAX_ARROW_POWER = 1.0F;
     private static final double MINIMUM_ARROW_POWER = 0.1D;
-    private static final int MAX_CHARGE_TIME = 600;
-    private static final int DEFAULT_PROJECTILE_RANGE = 15/2; // 15 blocks
+    private static final int DEFAULT_PROJECTILE_RANGE = 20; // 15 blocks
+    private static final float ARROW_VELOCITY_MULTIPLIER = 3.5F;
+    private static final float INACCURACY_MULTIPLIER = 0.8F;
 
     public UltimateBow(Properties properties, Map<Enchantment, Integer> enchantments) {
         super(properties, enchantments);
-    }
-
-    @Override
-    public int getUseDuration(ItemStack stack) {
-        return MAX_CHARGE_TIME;
     }
 
     @Override
@@ -38,15 +33,8 @@ public class UltimateBow extends EnchantedBowItem {
         return DEFAULT_PROJECTILE_RANGE;
     }
 
-    public static float getUltimatePowerForTime(int charge) {
-        float power = charge / FULL_POWER_DRAW_TICKS;
-        power = (power * power + power * 2.0F) / 3.0F;
-        return Math.min(power, MAX_ARROW_POWER);
-    }
-
     @Override
     public void releaseUsing(ItemStack stack, Level level, LivingEntity entityLiving, int timeLeft) {
-        // Implement shooting logic with the calculated power
         if (entityLiving instanceof Player player) {
             boolean flag = player.getAbilities().instabuild || EnchantmentHelper.getItemEnchantmentLevel(Enchantments.INFINITY_ARROWS, stack) > 0;
             ItemStack itemstack = player.getProjectile(stack);
@@ -55,21 +43,21 @@ public class UltimateBow extends EnchantedBowItem {
                     itemstack = new ItemStack(Items.ARROW);
                 }
 
-                int charge = Math.max(0, this.getUseDuration(stack) - timeLeft);
-                float f = getUltimatePowerForTime(charge);
-                if (f >= MINIMUM_ARROW_POWER) {
+                int i = 10 * this.getUseDuration(stack) - timeLeft;
+                float f = getPowerForTime(i);
+                if (!((double) f < MINIMUM_ARROW_POWER)) {
                     boolean flag1 = flag && itemstack.is(Items.ARROW);
                     if (!level.isClientSide) {
-                        ArrowItem arrowitem = (ArrowItem)(itemstack.getItem() instanceof ArrowItem ? itemstack.getItem() : Items.ARROW);
+                        ArrowItem arrowitem = (ArrowItem) (itemstack.getItem() instanceof ArrowItem ? itemstack.getItem() : Items.ARROW);
                         AbstractArrow abstractarrow = arrowitem.createArrow(level, itemstack, player);
-                        abstractarrow.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, f * 3.0F, 1.0F);
+                        abstractarrow.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, f * ARROW_VELOCITY_MULTIPLIER, INACCURACY_MULTIPLIER);
                         if (f == 1.0F) {
                             abstractarrow.setCritArrow(true);
                         }
 
                         int j = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.POWER_ARROWS, stack);
                         if (j > 0) {
-                            abstractarrow.setBaseDamage(abstractarrow.getBaseDamage() + (double)j * (double)0.5F + (double)0.5F);
+                            abstractarrow.setBaseDamage(abstractarrow.getBaseDamage() + (double) j * 0.5D + 0.5D);
                         }
 
                         int k = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.PUNCH_ARROWS, stack);
@@ -81,7 +69,9 @@ public class UltimateBow extends EnchantedBowItem {
                             abstractarrow.setSecondsOnFire(100);
                         }
 
-                        stack.hurtAndBreak(1, player, (p_289501_) -> p_289501_.broadcastBreakEvent(player.getUsedItemHand()));
+                        stack.hurtAndBreak(1, player, (p_289501_) -> {
+                            p_289501_.broadcastBreakEvent(player.getUsedItemHand());
+                        });
                         if (flag1 || player.getAbilities().instabuild && (itemstack.is(Items.SPECTRAL_ARROW) || itemstack.is(Items.TIPPED_ARROW))) {
                             abstractarrow.pickup = AbstractArrow.Pickup.CREATIVE_ONLY;
                         }
@@ -89,7 +79,7 @@ public class UltimateBow extends EnchantedBowItem {
                         level.addFreshEntity(abstractarrow);
                     }
 
-                    level.playSound((Player)null, player.getX(), player.getY(), player.getZ(), SoundEvents.ARROW_SHOOT, SoundSource.PLAYERS, 1.0F, 1.0F / (level.getRandom().nextFloat() * 0.4F + 1.2F) + f * 0.5F);
+                    level.playSound((Player) null, player.getX(), player.getY(), player.getZ(), SoundEvents.ARROW_SHOOT, SoundSource.PLAYERS, 1.0F, 1.0F / (level.getRandom().nextFloat() * 0.4F + 1.2F) + f * 0.5F);
                     if (!flag1 && !player.getAbilities().instabuild) {
                         itemstack.shrink(1);
                         if (itemstack.isEmpty()) {

@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "chaosawakens:block/kyanite_slab"
+    },
+    "type=double": {
+      "model": "chaosawakens:block/kyanite"
+    },
+    "type=top": {
+      "model": "chaosawakens:block/kyanite_slab_top"
+    }
+  }
+}

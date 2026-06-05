@@ -2,12 +2,16 @@
   "values": [
     "chaosawakens:chiseled_dredgestone_wall",
     "chaosawakens:chiseled_gloomstone_wall",
+    "chaosawakens:chiseled_kyanite_wall",
     "chaosawakens:cobbled_dredgestone_wall",
     "chaosawakens:cobbled_gloomstone_wall",
+    "chaosawakens:cobbled_kyanite_wall",
     "chaosawakens:dredgestone_brick_wall",
     "chaosawakens:dredgestone_wall",
     "chaosawakens:gloomstone_brick_wall",
     "chaosawakens:gloomstone_wall",
+    "chaosawakens:kyanite_brick_wall",
+    "chaosawakens:kyanite_wall",
     "chaosawakens:robo_brick_wall",
     "chaosawakens:robo_wall_a",
     "chaosawakens:robo_wall_l"

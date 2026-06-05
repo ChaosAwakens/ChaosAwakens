@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 1,
+  "ingredient": {
+    "item": "chaosawakens:kyanite_bricks"
+  },
+  "result": "chaosawakens:kyanite_brick_stairs"
+}

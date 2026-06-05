@@ -14,7 +14,7 @@
             "argument1": 0.0,
             "argument2": {
               "type": "minecraft:noise",
-              "noise": "chaosawakens:mining_paradise/spaghetti_roughness_modulator",
+              "noise": "chaosawakens:mining_paradise/spaghetti_2d_modulator",
               "xz_scale": 1.0,
               "y_scale": 1.0
             }

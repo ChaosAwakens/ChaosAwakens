@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:cache_once",
+  "argument": {
+    "type": "minecraft:mul",
+    "argument1": {
+      "type": "minecraft:add",
+      "argument1": -0.05,
+      "argument2": {
+        "type": "minecraft:mul",
+        "argument1": -0.05,
+        "argument2": "chaosawakens:crystal/land/spaghetti_roughness_modulator"
+      }
+    },
+    "argument2": {
+      "type": "minecraft:add",
+      "argument1": -0.4,
+      "argument2": "chaosawakens:crystal/land/spaghetti_roughness"
+    }
+  }
+}

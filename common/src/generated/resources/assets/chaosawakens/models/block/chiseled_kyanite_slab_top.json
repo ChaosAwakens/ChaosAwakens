@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab_top",
+  "textures": {
+    "bottom": "chaosawakens:block/chiseled_kyanite",
+    "side": "chaosawakens:block/chiseled_kyanite",
+    "top": "chaosawakens:block/chiseled_kyanite"
+  }
+}

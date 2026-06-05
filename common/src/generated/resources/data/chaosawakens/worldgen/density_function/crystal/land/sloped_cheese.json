@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:mul",
+  "argument1": 1.4,
+  "argument2": {
+    "type": "minecraft:mul",
+    "argument1": "chaosawakens:crystal/land/factor",
+    "argument2": {
+      "type": "minecraft:add",
+      "argument1": "chaosawakens:crystal/land/depth",
+      "argument2": {
+        "type": "minecraft:mul",
+        "argument1": "chaosawakens:crystal/land/jaggedness",
+        "argument2": {
+          "type": "minecraft:half_negative",
+          "argument": "chaosawakens:crystal/land/jaggedness"
+        }
+      }
+    }
+  }
+}
