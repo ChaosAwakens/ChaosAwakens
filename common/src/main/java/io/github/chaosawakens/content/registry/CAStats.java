@@ -15,7 +15,7 @@ import java.util.function.Supplier;
 
 @RegistrarEntry
 public final class CAStats {
-    protected static final ObjectArrayList<Supplier<ResourceLocation>> CUSTOM_STATS = new ObjectArrayList<>();
+    protected static final ObjectArrayList<Supplier<ResourceLocation>> CUSTOM_STATS = ObjectArrayList.of();
 
     public static final Supplier<ResourceLocation> INTERACT_WITH_IRON_DEFOSSILIZER = new SpecializedLanguagePropertyWrapper<>(registerCustomStatType("interact_with_iron_defossilizer"), CAConstants.MOD_ID)
             .builder()

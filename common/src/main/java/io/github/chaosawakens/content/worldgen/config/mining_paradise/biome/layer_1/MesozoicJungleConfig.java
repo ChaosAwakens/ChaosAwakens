@@ -15,7 +15,7 @@ import net.minecraft.world.level.levelgen.carver.ConfiguredWorldCarver;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import org.jetbrains.annotations.Nullable;
 
-public class MesozoicJungleBiomeConfig implements BiomeConfig {
+public class MesozoicJungleConfig implements BiomeConfig {
     public static final BiomeSpecialEffects EFFECTS = new BiomeSpecialEffects.Builder()
             .fogColor(339026)
             .waterColor(4159204)
@@ -23,7 +23,8 @@ public class MesozoicJungleBiomeConfig implements BiomeConfig {
             .skyColor(84742)
             .build();
 
-    public MesozoicJungleBiomeConfig() {}
+    public MesozoicJungleConfig() {
+    }
 
     @Override
     public boolean hasPrecipitation() {
