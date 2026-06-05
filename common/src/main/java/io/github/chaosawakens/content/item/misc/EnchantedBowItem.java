@@ -1,13 +1,12 @@
 package io.github.chaosawakens.content.item.misc;
 
-import com.ibm.icu.impl.number.Properties;
 import net.minecraft.world.item.BowItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
 
 import java.util.Map;
 
-public class EnchantedBowItem extends BowItem {
+public abstract class EnchantedBowItem extends BowItem {
     private final Map<Enchantment, Integer> defaultEnchantments;
 
     public EnchantedBowItem(Properties properties, Map<Enchantment, Integer> enchantments) {
@@ -28,4 +27,5 @@ public class EnchantedBowItem extends BowItem {
     public boolean isFoil(ItemStack stack) {
         return true;
     }
+
 }
