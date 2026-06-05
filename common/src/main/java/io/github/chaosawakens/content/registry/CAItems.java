@@ -37,6 +37,7 @@ import io.github.chaosawakens.content.item.equipment.tools.ruby.RubySword;
 import io.github.chaosawakens.content.item.equipment.tools.ultimate.*;
 import io.github.chaosawakens.content.item.food.BaggedPopcornItem;
 import io.github.chaosawakens.content.item.food.BowledFoodItem;
+import io.github.chaosawakens.content.item.food.CatsEyeChorusItem;
 import io.github.chaosawakens.content.item.misc.*;
 import io.github.chaosawakens.content.item.utility.MinersDreamItem;
 import io.github.chaosawakens.content.item.utility.PowerChipItem;
@@ -100,6 +101,7 @@ public final class CAItems {
     public static final Supplier<Item> CRYSTAL_BEETROOT = ItemPropertyWrapperTemplates.registerItemFromTemplate(CAConstants.prefix("crystal_beetroot"), () -> new Item(food(CAFood.FOOD_CRYSTAL_BEETROOT)), CAIPWTemplates.FOOD, ITEMS);
     public static final Supplier<Item> CRYSTAL_CARROT = ItemPropertyWrapperTemplates.registerItemFromTemplate(CAConstants.prefix("crystal_carrot"), () -> new Item(food(CAFood.FOOD_CRYSTAL_CARROT)), CAIPWTemplates.FOOD, ITEMS);
     public static final Supplier<Item> CRYSTAL_POTATO = ItemPropertyWrapperTemplates.registerItemFromTemplate(CAConstants.prefix("crystal_potato"), () -> new Item(food(CAFood.FOOD_CRYSTAL_POTATO)), CAIPWTemplates.FOOD, ITEMS);
+    public static final Supplier<Item> CATS_EYE_CHORUS = ItemPropertyWrapperTemplates.registerItemFromTemplate(CAConstants.prefix("cats_eye_chorus"), () -> new CatsEyeChorusItem(food(CAFood.FOOD_CATS_EYE_CHORUS)), CAIPWTemplates.FOOD, ITEMS);
 
     // Manufactured
     public static final Supplier<Item>           BLT_SANDWICH = ItemPropertyWrapperTemplates.registerAndChain(CAConstants.prefix("blt_sandwich"), () -> new Item(food(CAFood.FOOD_BLT_SANDWICH).stacksTo(16)), CAIPWTemplates.FOOD, ITEMS).withRecipe(CARecipeTemplates::BLTRecipe).buildAndGet();

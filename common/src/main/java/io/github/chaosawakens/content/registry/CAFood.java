@@ -36,6 +36,7 @@ public final class  CAFood {
     public static final FoodProperties FOOD_CRYSTAL_BEETROOT = new FoodProperties.Builder().nutrition(1).saturationMod(0.15F).alwaysEat().effect(new MobEffectInstance(MobEffects.HEAL, 0, 2), 0.65F).build();
     public static final FoodProperties FOOD_CRYSTAL_CARROT = new FoodProperties.Builder().nutrition(3).saturationMod(0.35F).alwaysEat().effect(new MobEffectInstance(MobEffects.NIGHT_VISION, 3000, 0), 1.0F).build();
     public static final FoodProperties FOOD_CRYSTAL_POTATO = new FoodProperties.Builder().nutrition(2).saturationMod(0.30F).alwaysEat().effect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 3000, 0), 1.0F).build();
+    public static final FoodProperties FOOD_CATS_EYE_CHORUS = new FoodProperties.Builder().nutrition(2).saturationMod(0.30F).alwaysEat().effect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 3000, 0), 1.0F).build();
 
     // Manufactured
     public static final FoodProperties FOOD_BLT_SANDWICH = new FoodProperties.Builder().nutrition(12).saturationMod(1.1F).alwaysEat().build();

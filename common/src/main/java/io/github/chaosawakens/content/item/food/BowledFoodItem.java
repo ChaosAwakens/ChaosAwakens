@@ -1,6 +1,5 @@
 package io.github.chaosawakens.content.item.food;
 
-import io.github.chaosawakens.content.registry.CAItems;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
