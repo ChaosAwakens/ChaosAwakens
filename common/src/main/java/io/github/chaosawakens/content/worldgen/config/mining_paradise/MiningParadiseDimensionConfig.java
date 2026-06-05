@@ -1,4 +1,4 @@
-package io.github.chaosawakens.content.worldgen.config.mining_paradise.dimension;
+package io.github.chaosawakens.content.worldgen.config.mining_paradise;
 
 import com.google.common.collect.ImmutableList;
 import com.mojang.datafixers.util.Pair;
@@ -56,7 +56,7 @@ public class MiningParadiseDimensionConfig implements DimensionLevelStemConfig {
     }
 
     public static DimensionType createDimensionType() {
-        return new DimensionType(OptionalLong.empty(), true, false, false, true, 1.0D, true, false, -128, 640, 512, BlockTags.INFINIBURN_OVERWORLD, BuiltinDimensionTypes.OVERWORLD_EFFECTS, 0.0F, new DimensionType.MonsterSettings(false, false, ConstantInt.of(4), 0));
+        return new DimensionType(OptionalLong.empty(), true, false, false, true, 1.0D, true, false, -128, 512, 384, BlockTags.INFINIBURN_OVERWORLD, BuiltinDimensionTypes.OVERWORLD_EFFECTS, 0.0F, new DimensionType.MonsterSettings(false, false, ConstantInt.of(4), 0));
     }
 
     public static Supplier<NoiseGeneratorSettings> createMiningParadiseNoiseGenSettings(BootstapContext<NoiseGeneratorSettings> regCtx) {
@@ -104,23 +104,20 @@ public class MiningParadiseDimensionConfig implements DimensionLevelStemConfig {
     }
 
     protected static NoiseRouter createMiningParadiseNoiseRouter(BootstapContext<NoiseGeneratorSettings> regCtx) {
-        DensityFunction aquiferBarrier = DensityFunctions.mul(DensityFunctions.constant(10), DensityFunctions.add(DensityFunctions.constant(0.75), DensityFunctions.noise(regCtx.lookup(Registries.NOISE).getOrThrow(CANoiseParameters.AQUIFER_BARRIER.get()), 0.5D, 0.5D)));
-        DensityFunction fluidFloodedness = DensityFunctions.noise(regCtx.lookup(Registries.NOISE).getOrThrow(CANoiseParameters.AQUIFER_FLUID_LEVEL_FLOODEDNESS.get()), 0.5D, 2.0D);
-        DensityFunction fluidSpread = DensityFunctions.noise(regCtx.lookup(Registries.NOISE).getOrThrow(CANoiseParameters.AQUIFER_FLUID_LEVEL_SPREAD.get()), 2.0D, 2.0D);
-        DensityFunction aquiferLava = DensityFunctions.noise(regCtx.lookup(Registries.NOISE).getOrThrow(CANoiseParameters.AQUIFER_LAVA.get()), 1.0D);
+        DensityFunction aquiferBarrier = DensityFunctions.mul(DensityFunctions.constant(10), DensityFunctions.add(DensityFunctions.constant(0.75), DensityFunctions.noise(regCtx.lookup(Registries.NOISE).getOrThrow(CANoiseParameters.MINING_AQUIFER_BARRIER.get()), 0.5D, 0.5D)));
+        DensityFunction fluidFloodedness = DensityFunctions.noise(regCtx.lookup(Registries.NOISE).getOrThrow(CANoiseParameters.MINING_AQUIFER_FLUID_LEVEL_FLOODEDNESS.get()), 0.5D, 2.0D);
+        DensityFunction fluidSpread = DensityFunctions.noise(regCtx.lookup(Registries.NOISE).getOrThrow(CANoiseParameters.MINING_AQUIFER_FLUID_LEVEL_SPREAD.get()), 2.0D, 2.0D);
+        DensityFunction aquiferLava = DensityFunctions.noise(regCtx.lookup(Registries.NOISE).getOrThrow(CANoiseParameters.MINING_AQUIFER_LAVA.get()), 1.0D);
         DensityFunction shiftX = CADensityFunctions.getWrappedDensityFunctionHolder(regCtx, CADensityFunctions.SHIFT_X);
         DensityFunction shiftZ = CADensityFunctions.getWrappedDensityFunctionHolder(regCtx, CADensityFunctions.SHIFT_Z);
         DensityFunction shiftedTemperature = DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.5D, regCtx.lookup(Registries.NOISE).getOrThrow(Noises.TEMPERATURE));
         DensityFunction shiftedVegetation = DensityFunctions.shiftedNoise2d(shiftX, shiftZ, 0.5D, regCtx.lookup(Registries.NOISE).getOrThrow(Noises.VEGETATION));
         DensityFunction y = CADensityFunctions.getWrappedDensityFunctionHolder(regCtx, CADensityFunctions.Y);
         DensityFunction[] oreFunctions = createOreDensityFunctions(y, regCtx.lookup(Registries.NOISE));
-        DensityFunction zero = DensityFunctions.zero();
         DensityFunction landContinents = CADensityFunctions.getWrappedDensityFunctionHolder(regCtx, CADensityFunctions.MINING_PARADISE_CONTINENTS);
         DensityFunction landErosion = CADensityFunctions.getWrappedDensityFunctionHolder(regCtx, CADensityFunctions.MINING_PARADISE_EROSION);
         DensityFunction terrainWeirdness = CADensityFunctions.getWrappedDensityFunctionHolder(regCtx, CADensityFunctions.MINING_PARADISE_RIDGES_FOLDED);
-        DensityFunction terrainFactor = CADensityFunctions.getWrappedDensityFunctionHolder(regCtx, CADensityFunctions.MINING_PARADISE_FACTOR);
         DensityFunction terrainDepth = CADensityFunctions.getWrappedDensityFunctionHolder(regCtx, CADensityFunctions.MINING_PARADISE_DEPTH);
-        DensityFunction continentRidges = CADensityFunctions.getWrappedDensityFunctionHolder(regCtx, CADensityFunctions.MINING_PARADISE_RIDGES);
         DensityFunction slopedCheese = CADensityFunctions.getWrappedDensityFunctionHolder(regCtx, CADensityFunctions.MINING_PARADISE_SLOPED_CHEESE);
         DensityFunction entrances = CADensityFunctions.getWrappedDensityFunctionHolder(regCtx, CADensityFunctions.MINING_PARADISE_ENTRANCES);
         DensityFunction spaghetti = CADensityFunctions.getWrappedDensityFunctionHolder(regCtx, CADensityFunctions.MINING_PARADISE_SPAGHETTI_2D);
@@ -168,11 +165,11 @@ public class MiningParadiseDimensionConfig implements DimensionLevelStemConfig {
                                                                                                                                 DensityFunctions.mul(
                                                                                                                                         DensityFunctions.constant(4),
                                                                                                                                         DensityFunctions.noise(
-                                                                                                                                                regCtx.lookup(Registries.NOISE).getOrThrow(CANoiseParameters.CAVE_LAYER.get()), 1, 8)),
+                                                                                                                                                regCtx.lookup(Registries.NOISE).getOrThrow(CANoiseParameters.MINING_CAVE_LAYER.get()), 1, 8)),
                                                                                                                                 DensityFunctions.add(
                                                                                                                                         DensityFunctions.add(
                                                                                                                                                 DensityFunctions.constant(0.27),
-                                                                                                                                                DensityFunctions.noise(regCtx.lookup(Registries.NOISE).getOrThrow(CANoiseParameters.CAVE_CHEESE.get()), 1, 0.666)
+                                                                                                                                                DensityFunctions.noise(regCtx.lookup(Registries.NOISE).getOrThrow(CANoiseParameters.MINING_CAVE_CHEESE.get()), 1, 0.666)
                                                                                                                                         ).clamp(-0.25,0.75),
                                                                                                                                         DensityFunctions.add(
                                                                                                                                                         DensityFunctions.constant(1.5),

@@ -15,7 +15,7 @@ import net.minecraft.world.level.levelgen.carver.ConfiguredWorldCarver;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import org.jetbrains.annotations.Nullable;
 
-public class DensePlainsBiomeConfig implements BiomeConfig {
+public class DensePlainsConfig implements BiomeConfig {
     public static final BiomeSpecialEffects EFFECTS = new BiomeSpecialEffects.Builder()
             .fogColor(4080490)
             .waterColor(4159204)
@@ -23,7 +23,8 @@ public class DensePlainsBiomeConfig implements BiomeConfig {
             .skyColor(3622254)
             .build();
 
-    public DensePlainsBiomeConfig() {}
+    public DensePlainsConfig() {
+    }
 
     @Override
     public boolean hasPrecipitation() {

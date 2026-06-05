@@ -38,7 +38,6 @@ public class CARecipeData {
         private static <C extends Container, R extends Recipe<C>> Supplier<RecipeType<R>> registerRecipeType(ResourceLocation recipeTypeId) {
             return registerRecipeType(recipeTypeId, () -> new RecipeType<>() {
 
-
                 @Override
                 public String toString() {
                     return recipeTypeId.toString();

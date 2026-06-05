@@ -4,7 +4,8 @@ import com.google.common.collect.ImmutableList;
 import com.mememan.nexus.asm.annotations.RegistrarEntry;
 import com.mememan.nexus.platform.NexusServices;
 import io.github.chaosawakens.CAConstants;
-import io.github.chaosawakens.content.worldgen.config.mining_paradise.dimension.MiningParadiseDimensionConfig;
+import io.github.chaosawakens.content.worldgen.config.crystal_world.CrystalDimensionConfig;
+import io.github.chaosawakens.content.worldgen.config.mining_paradise.MiningParadiseDimensionConfig;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstapContext;
@@ -19,7 +20,7 @@ import java.util.function.Supplier;
 public class CANoiseGeneratorSettings {
     private static final ObjectArrayList<Supplier<ResourceKey<NoiseGeneratorSettings>>> NOISE_GENERATOR_SETTINGS = new ObjectArrayList<>();
 
-    // Mining Paradise
+    public static final Supplier<ResourceKey<NoiseGeneratorSettings>> CRYSTAL_WORLD = registerNoiseGeneratorSetting("crystal_world", CrystalDimensionConfig::createCrystalNoiseGenSettings);
     public static final Supplier<ResourceKey<NoiseGeneratorSettings>> MINING_PARADISE = registerNoiseGeneratorSetting("mining_paradise", MiningParadiseDimensionConfig::createMiningParadiseNoiseGenSettings);
 
     private static Supplier<ResourceKey<NoiseGeneratorSettings>> registerNoiseGeneratorSetting(ResourceLocation id, Function<BootstapContext<NoiseGeneratorSettings>, Supplier<NoiseGeneratorSettings>> ngsConfigFunc) {

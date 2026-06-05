@@ -15,7 +15,7 @@ import net.minecraft.world.level.levelgen.carver.ConfiguredWorldCarver;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import org.jetbrains.annotations.Nullable;
 
-public class StalagmiteValleyBiomeConfig implements BiomeConfig {
+public class StalagmiteValleyConfig implements BiomeConfig {
     public static final BiomeSpecialEffects EFFECTS = new BiomeSpecialEffects.Builder()
             .fogColor(339026)
             .waterColor(4159204)
@@ -23,7 +23,8 @@ public class StalagmiteValleyBiomeConfig implements BiomeConfig {
             .skyColor(84742)
             .build();
 
-    public StalagmiteValleyBiomeConfig() {}
+    public StalagmiteValleyConfig() {
+    }
 
     @Override
     public boolean hasPrecipitation() {
