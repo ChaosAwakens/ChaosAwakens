@@ -1,0 +1,74 @@
+{
+  "type": "minecraft:range_choice",
+  "input": {
+    "type": "minecraft:range_choice",
+    "input": "chaosawakens:vanilla/y",
+    "max_exclusive": 120.0,
+    "min_inclusive": -120.0,
+    "when_in_range": {
+      "type": "minecraft:noise",
+      "noise": "chaosawakens:crystal_world/noodle",
+      "xz_scale": 1.0,
+      "y_scale": 0.25
+    },
+    "when_out_of_range": -1.0
+  },
+  "max_exclusive": 0.0,
+  "min_inclusive": -1.0,
+  "when_in_range": 92.0,
+  "when_out_of_range": {
+    "type": "minecraft:add",
+    "argument1": {
+      "type": "minecraft:range_choice",
+      "input": "chaosawakens:vanilla/y",
+      "max_exclusive": 120.0,
+      "min_inclusive": -120.0,
+      "when_in_range": {
+        "type": "minecraft:noise",
+        "noise": "chaosawakens:crystal_world/noodle_thickness",
+        "xz_scale": 1.0,
+        "y_scale": 1.0
+      },
+      "when_out_of_range": 1.0
+    },
+    "argument2": {
+      "type": "minecraft:mul",
+      "argument1": 1.5,
+      "argument2": {
+        "type": "minecraft:max",
+        "argument1": {
+          "type": "minecraft:abs",
+          "argument": {
+            "type": "minecraft:range_choice",
+            "input": "chaosawakens:vanilla/y",
+            "max_exclusive": 120.0,
+            "min_inclusive": -120.0,
+            "when_in_range": {
+              "type": "minecraft:noise",
+              "noise": "chaosawakens:crystal_world/noodle_ridge_a",
+              "xz_scale": 2.0,
+              "y_scale": 2.0
+            },
+            "when_out_of_range": 0.0
+          }
+        },
+        "argument2": {
+          "type": "minecraft:abs",
+          "argument": {
+            "type": "minecraft:range_choice",
+            "input": "chaosawakens:vanilla/y",
+            "max_exclusive": 120.0,
+            "min_inclusive": -120.0,
+            "when_in_range": {
+              "type": "minecraft:noise",
+              "noise": "chaosawakens:crystal_world/noodle_ridge_b",
+              "xz_scale": 0.5,
+              "y_scale": 0.75
+            },
+            "when_out_of_range": 0.0
+          }
+        }
+      }
+    }
+  }
+}

@@ -2,15 +2,34 @@
   "pools": [
     {
       "bonus_rolls": 0.0,
-      "conditions": [
-        {
-          "condition": "minecraft:survives_explosion"
-        }
-      ],
       "entries": [
         {
-          "type": "minecraft:item",
-          "name": "chaosawakens:kyanite"
+          "type": "minecraft:alternatives",
+          "children": [
+            {
+              "type": "minecraft:item",
+              "conditions": [
+                {
+                  "condition": "minecraft:match_tool",
+                  "predicate": {
+                    "enchantments": [
+                      {
+                        "enchantment": "minecraft:silk_touch",
+                        "levels": {
+                          "min": 1
+                        }
+                      }
+                    ]
+                  }
+                }
+              ],
+              "name": "chaosawakens:kyanite"
+            },
+            {
+              "type": "minecraft:item",
+              "name": "chaosawakens:cobbled_kyanite"
+            }
+          ]
         }
       ],
       "rolls": 1.0

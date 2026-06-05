@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "chaosawakens:block/kyanite_pillar_top",
+    "side": "minecraft:block/invalid"
+  }
+}

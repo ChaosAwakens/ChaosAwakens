@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:mul",
+  "argument1": 2.0,
+  "argument2": {
+    "type": "minecraft:add",
+    "argument1": -0.3,
+    "argument2": {
+      "type": "minecraft:abs",
+      "argument": {
+        "type": "minecraft:add",
+        "argument1": -0.56,
+        "argument2": {
+          "type": "minecraft:abs",
+          "argument": "chaosawakens:crystal/land/ridges"
+        }
+      }
+    }
+  }
+}

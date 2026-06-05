@@ -1,0 +1,1291 @@
+{
+  "type": "minecraft:flat_cache",
+  "argument": {
+    "type": "minecraft:cache_2d",
+    "argument": {
+      "type": "minecraft:add",
+      "argument1": {
+        "type": "minecraft:mul",
+        "argument1": {
+          "type": "minecraft:blend_offset"
+        },
+        "argument2": {
+          "type": "minecraft:add",
+          "argument1": 1.0,
+          "argument2": {
+            "type": "minecraft:mul",
+            "argument1": -1.0,
+            "argument2": {
+              "type": "minecraft:cache_once",
+              "argument": {
+                "type": "minecraft:blend_alpha"
+              }
+            }
+          }
+        }
+      },
+      "argument2": {
+        "type": "minecraft:mul",
+        "argument1": {
+          "type": "minecraft:mul",
+          "argument1": 1.0,
+          "argument2": {
+            "type": "minecraft:add",
+            "argument1": 0.03,
+            "argument2": {
+              "type": "minecraft:spline",
+              "spline": {
+                "coordinate": "chaosawakens:crystal/land/continents",
+                "points": [
+                  {
+                    "derivative": 0.0,
+                    "location": -0.7,
+                    "value": {
+                      "coordinate": "chaosawakens:crystal/land/erosion",
+                      "points": [
+                        {
+                          "derivative": 0.0,
+                          "location": -0.35,
+                          "value": {
+                            "coordinate": "chaosawakens:crystal/land/ridges_folded",
+                            "points": [
+                              {
+                                "derivative": 0.5,
+                                "location": -1.0,
+                                "value": -0.14
+                              },
+                              {
+                                "derivative": 0.0,
+                                "location": -0.4,
+                                "value": 0.0
+                              },
+                              {
+                                "derivative": 0.0,
+                                "location": 0.0,
+                                "value": 0.0
+                              },
+                              {
+                                "derivative": 0.0,
+                                "location": 0.4,
+                                "value": 0.0
+                              },
+                              {
+                                "derivative": 0.0,
+                                "location": 1.0,
+                                "value": 0.0
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "derivative": 0.0,
+                          "location": -0.1,
+                          "value": {
+                            "coordinate": "chaosawakens:crystal/land/ridges_folded",
+                            "points": [
+                              {
+                                "derivative": 0.5,
+                                "location": -1.0,
+                                "value": 0.01
+                              },
+                              {
+                                "derivative": 0.0,
+                                "location": -0.4,
+                                "value": 0.0
+                              },
+                              {
+                                "derivative": 0.0,
+                                "location": 0.0,
+                                "value": 0.0
+                              },
+                              {
+                                "derivative": 0.0,
+                                "location": 0.4,
+                                "value": 0.0
+                              },
+                              {
+                                "derivative": 0.0,
+                                "location": 1.0,
+                                "value": 0.0
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "derivative": 0.0,
+                          "location": 0.2,
+                          "value": {
+                            "coordinate": "chaosawakens:crystal/land/ridges_folded",
+                            "points": [
+                              {
+                                "derivative": 0.5,
+                                "location": -1.0,
+                                "value": 0.01
+                              },
+                              {
+                                "derivative": 0.0,
+                                "location": -0.4,
+                                "value": 0.011
+                              },
+                              {
+                                "derivative": 0.0,
+                                "location": 0.0,
+                                "value": 0.011
+                              },
+                              {
+                                "derivative": -0.005999999,
+                                "location": 0.4,
+                                "value": 0.008
+                              },
+                              {
+                                "derivative": 0.0048999996,
+                                "location": 1.0,
+                                "value": 0.015
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "derivative": 0.0,
+                          "location": 0.7,
+                          "value": {
+                            "coordinate": "chaosawakens:crystal/land/ridges_folded",
+                            "points": [
+                              {
+                                "derivative": 0.0,
+                                "location": -1.0,
+                                "value": -0.02
+                              },
+                              {
+                                "derivative": 0.0,
+                                "location": -0.4,
+                                "value": -0.03
+                              },
+                              {
+                                "derivative": 0.0,
+                                "location": 0.0,
+                                "value": -0.03
+                              },
+                              {
+                                "derivative": 0.076,
+                                "location": 0.4,
+                                "value": 0.008
+                              },
+                              {
+                                "derivative": 0.0048999996,
+                                "location": 1.0,
+                                "value": 0.015
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "derivative": 0.0,
+                    "location": -0.3,
+                    "value": {
+                      "coordinate": "chaosawakens:crystal/land/erosion",
+                      "points": [
+                        {
+                          "derivative": 0.0,
+                          "location": -0.85,
+                          "value": {
+                            "coordinate": "chaosawakens:crystal/land/ridges_folded",
+                            "points": [
+                              {
+                                "derivative": 0.37695855,
+                                "location": -1.0,
+                                "value": -0.117917046
+                              },
+                              {
+                                "derivative": 0.37695855,
+                                "location": 1.0,
+                                "value": 0.63600004
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "derivative": 0.0,
+                          "location": -0.7,
+                          "value": {
+                            "coordinate": "chaosawakens:crystal/land/ridges_folded",
+                            "points": [
+                              {
+                                "derivative": 0.37235022,
+                                "location": -1.0,
+                                "value": -0.12870048
+                              },
+                              {
+                                "derivative": 0.37235022,
+                                "location": 1.0,
+                                "value": 0.61599994
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "derivative": 0.0,
+                          "location": -0.4,
+                          "value": {
+                            "coordinate": "chaosawakens:crystal/land/ridges_folded",
+                            "points": [
+                              {
+                                "derivative": 0.0,
+                                "location": -1.0,
+                                "value": -0.2222
+                              },
+                              {
+                                "derivative": 0.0,
+                                "location": -0.75,
+                                "value": -0.2222
+                              },
+                              {
+                                "derivative": 0.0,
+                                "location": -0.65,
+                                "value": 0.0
+                              },
+                              {
+                                "derivative": 0.0,
+                                "location": 0.8230771,
+                                "value": 0.0
+                              },
+                              {
+                                "derivative": 0.2396315,
+                                "location": 0.8330771,
+                                "value": 0.0
+                              },
+                              {
+                                "derivative": 0.2396315,
+                                "location": 1.0,
+                                "value": 0.03999999
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "derivative": 0.0,
+                          "location": -0.35,
+                          "value": {
+                            "coordinate": "chaosawakens:crystal/land/ridges_folded",
+                            "points": [
+                              {
+                                "derivative": 0.5,
+                                "location": -1.0,
+                                "value": -0.13800001
+                              },
+                              {
+                                "derivative": 0.0,
+                                "location": -0.4,
+                                "value": 0.02
+                              },
+                              {
+                                "derivative": 0.0,
+                                "location": 0.0,
+                                "value": 0.02
+                              },
+                              {
+                                "derivative": 0.0,
+                                "location": 0.4,
+                                "value": 0.02
+                              },
+                              {
+                                "derivative": 0.0028000004,
+                                "location": 1.0,
+                                "value": 0.024
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "derivative": 0.0,
+                          "location": -0.1,
+                          "value": {
+                            "coordinate": "chaosawakens:crystal/land/ridges_folded",
+                            "points": [
+                              {
+                                "derivative": 0.5,
+                                "location": -1.0,
+                                "value": 0.012
+                              },
+                              {
+                                "derivative": -9.999999E-4,
+                                "location": -0.4,
+                                "value": 5.2E-4
+                              },
+                              {
+                                "derivative": -9.999999E-4,
+                                "location": 0.0,
+                                "value": 3.2000002E-4
+                              },
+                              {
+                                "derivative": 0.039359998,
+                                "location": 0.4,
+                                "value": 0.02
+                              },
+                              {
+                                "derivative": 0.0028000004,
+                                "location": 1.0,
+                                "value": 0.024
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "derivative": 0.0,
+                          "location": 0.2,
+                          "value": {
+                            "coordinate": "chaosawakens:crystal/land/ridges_folded",
+                            "points": [
+                              {
+                                "derivative": 0.5,
+                                "location": -1.0,
+                                "value": 0.012
+                              },
+                              {
+                                "derivative": 0.0,
+                                "location": -0.4,
+                                "value": 0.013
+                              },
+                              {
+                                "derivative": 0.0,
+                                "location": 0.0,
+                                "value": 0.013
+                              },
+                              {
+                                "derivative": -0.01,
+                                "location": 0.4,
+                                "value": 0.008
+                              },
+                              {
+                                "derivative": 0.0063000005,
+                                "location": 1.0,
+                                "value": 0.017
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "derivative": 0.0,
+                          "location": 0.7,
+                          "value": {
+                            "coordinate": "chaosawakens:crystal/land/ridges_folded",
+                            "points": [
+                              {
+                                "derivative": 0.0,
+                                "location": -1.0,
+                                "value": -0.02
+                              },
+                              {
+                                "derivative": 0.0,
+                                "location": -0.4,
+                                "value": -0.03
+                              },
+                              {
+                                "derivative": 0.0,
+                                "location": 0.0,
+                                "value": -0.03
+                              },
+                              {
+                                "derivative": 0.076,
+                                "location": 0.4,
+                                "value": 0.008
+                              },
+                              {
+                                "derivative": 0.0063000005,
+                                "location": 1.0,
+                                "value": 0.017
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "derivative": 0.0,
+                    "location": 0.3,
+                    "value": {
+                      "coordinate": "chaosawakens:crystal/land/erosion",
+                      "points": [
+                        {
+                          "derivative": 0.0,
+                          "location": -0.35,
+                          "value": {
+                            "coordinate": "chaosawakens:crystal/land/ridges_folded",
+                            "points": [
+                              {
+                                "derivative": 0.5,
+                                "location": -1.0,
+                                "value": -0.132
+                              },
+                              {
+                                "derivative": 0.0,
+                                "location": -0.4,
+                                "value": 0.02
+                              },
+                              {
+                                "derivative": 0.0,
+                                "location": 0.0,
+                                "value": 0.02
+                              },
+                              {
+                                "derivative": 0.0,
+                                "location": 0.4,
+                                "value": 0.02
+                              },
+                              {
+                                "derivative": 0.0028000004,
+                                "location": 1.0,
+                                "value": 0.024
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "derivative": 0.0,
+                          "location": -0.1,
+                          "value": {
+                            "coordinate": "chaosawakens:crystal/land/ridges_folded",
+                            "points": [
+                              {
+                                "derivative": 0.5,
+                                "location": -1.0,
+                                "value": 0.018
+                              },
+                              {
+                                "derivative": -0.0011999998,
+                                "location": -0.4,
+                                "value": 7.5999997E-4
+                              },
+                              {
+                                "derivative": -0.0011999998,
+                                "location": 0.0,
+                                "value": 5.2E-4
+                              },
+                              {
+                                "derivative": 0.03896,
+                                "location": 0.4,
+                                "value": 0.02
+                              },
+                              {
+                                "derivative": 0.0028000004,
+                                "location": 1.0,
+                                "value": 0.024
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "derivative": 0.0,
+                          "location": 0.2,
+                          "value": {
+                            "coordinate": "chaosawakens:crystal/land/ridges_folded",
+                            "points": [
+                              {
+                                "derivative": 0.5,
+                                "location": -1.0,
+                                "value": 0.018
+                              },
+                              {
+                                "derivative": 0.0,
+                                "location": -0.4,
+                                "value": 0.019
+                              },
+                              {
+                                "derivative": 0.0,
+                                "location": 0.0,
+                                "value": 0.019
+                              },
+                              {
+                                "derivative": -0.011999998,
+                                "location": 0.4,
+                                "value": 0.013
+                              },
+                              {
+                                "derivative": 0.0069999998,
+                                "location": 1.0,
+                                "value": 0.023
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "derivative": 0.0,
+                          "location": 0.7,
+                          "value": {
+                            "coordinate": "chaosawakens:crystal/land/ridges_folded",
+                            "points": [
+                              {
+                                "derivative": 0.0,
+                                "location": -1.0,
+                                "value": -0.02
+                              },
+                              {
+                                "derivative": 0.0,
+                                "location": -0.4,
+                                "value": -0.03
+                              },
+                              {
+                                "derivative": 0.0,
+                                "location": 0.0,
+                                "value": -0.03
+                              },
+                              {
+                                "derivative": 0.085999995,
+                                "location": 0.4,
+                                "value": 0.013
+                              },
+                              {
+                                "derivative": 0.0069999998,
+                                "location": 1.0,
+                                "value": 0.023
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "derivative": 0.0,
+                    "location": 0.55,
+                    "value": {
+                      "coordinate": "chaosawakens:crystal/land/erosion",
+                      "points": [
+                        {
+                          "derivative": 0.0,
+                          "location": -0.35,
+                          "value": {
+                            "coordinate": "chaosawakens:crystal/land/ridges_folded",
+                            "points": [
+                              {
+                                "derivative": 0.5,
+                                "location": -1.0,
+                                "value": -0.125
+                              },
+                              {
+                                "derivative": 0.0,
+                                "location": -0.4,
+                                "value": 0.03
+                              },
+                              {
+                                "derivative": 0.0,
+                                "location": 0.0,
+                                "value": 0.03
+                              },
+                              {
+                                "derivative": 0.0,
+                                "location": 0.4,
+                                "value": 0.03
+                              },
+                              {
+                                "derivative": 0.0042000017,
+                                "location": 1.0,
+                                "value": 0.036000002
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "derivative": 0.0,
+                          "location": -0.1,
+                          "value": {
+                            "coordinate": "chaosawakens:crystal/land/ridges_folded",
+                            "points": [
+                              {
+                                "derivative": 0.5,
+                                "location": -1.0,
+                                "value": 0.025
+                              },
+                              {
+                                "derivative": -0.0033,
+                                "location": -0.4,
+                                "value": 0.0018
+                              },
+                              {
+                                "derivative": -0.0033,
+                                "location": 0.0,
+                                "value": 0.00114
+                              },
+                              {
+                                "derivative": 0.057719998,
+                                "location": 0.4,
+                                "value": 0.03
+                              },
+                              {
+                                "derivative": 0.0042000017,
+                                "location": 1.0,
+                                "value": 0.036000002
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "derivative": 0.0,
+                          "location": 0.2,
+                          "value": {
+                            "coordinate": "chaosawakens:crystal/land/ridges_folded",
+                            "points": [
+                              {
+                                "derivative": 0.5,
+                                "location": -1.0,
+                                "value": 0.025
+                              },
+                              {
+                                "derivative": 0.0,
+                                "location": -0.4,
+                                "value": 0.03
+                              },
+                              {
+                                "derivative": 0.0,
+                                "location": 0.0,
+                                "value": 0.03
+                              },
+                              {
+                                "derivative": -0.022,
+                                "location": 0.4,
+                                "value": 0.019
+                              },
+                              {
+                                "derivative": 0.0077,
+                                "location": 1.0,
+                                "value": 0.03
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "derivative": 0.0,
+                          "location": 0.4,
+                          "value": {
+                            "coordinate": "chaosawakens:crystal/land/ridges_folded",
+                            "points": [
+                              {
+                                "derivative": 0.5,
+                                "location": -1.0,
+                                "value": 0.025
+                              },
+                              {
+                                "derivative": 0.0,
+                                "location": -0.4,
+                                "value": 0.03
+                              },
+                              {
+                                "derivative": 0.0,
+                                "location": 0.0,
+                                "value": 0.03
+                              },
+                              {
+                                "derivative": -0.022,
+                                "location": 0.4,
+                                "value": 0.019
+                              },
+                              {
+                                "derivative": 0.0077,
+                                "location": 1.0,
+                                "value": 0.03
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "derivative": 0.0,
+                          "location": 0.45,
+                          "value": {
+                            "coordinate": "chaosawakens:crystal/land/ridges_folded",
+                            "points": [
+                              {
+                                "derivative": 0.0,
+                                "location": -1.0,
+                                "value": 0.025
+                              },
+                              {
+                                "derivative": 0.0,
+                                "location": -0.4,
+                                "value": {
+                                  "coordinate": "chaosawakens:crystal/land/ridges_folded",
+                                  "points": [
+                                    {
+                                      "derivative": 0.5,
+                                      "location": -1.0,
+                                      "value": 0.025
+                                    },
+                                    {
+                                      "derivative": 0.0,
+                                      "location": -0.4,
+                                      "value": 0.03
+                                    },
+                                    {
+                                      "derivative": 0.0,
+                                      "location": 0.0,
+                                      "value": 0.03
+                                    },
+                                    {
+                                      "derivative": -0.022,
+                                      "location": 0.4,
+                                      "value": 0.019
+                                    },
+                                    {
+                                      "derivative": 0.0077,
+                                      "location": 1.0,
+                                      "value": 0.03
+                                    }
+                                  ]
+                                }
+                              },
+                              {
+                                "derivative": 0.0,
+                                "location": 0.0,
+                                "value": 0.1
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "derivative": 0.0,
+                          "location": 0.55,
+                          "value": {
+                            "coordinate": "chaosawakens:crystal/land/ridges_folded",
+                            "points": [
+                              {
+                                "derivative": 0.0,
+                                "location": -1.0,
+                                "value": 0.025
+                              },
+                              {
+                                "derivative": 0.0,
+                                "location": -0.4,
+                                "value": {
+                                  "coordinate": "chaosawakens:crystal/land/ridges_folded",
+                                  "points": [
+                                    {
+                                      "derivative": 0.5,
+                                      "location": -1.0,
+                                      "value": 0.025
+                                    },
+                                    {
+                                      "derivative": 0.0,
+                                      "location": -0.4,
+                                      "value": 0.03
+                                    },
+                                    {
+                                      "derivative": 0.0,
+                                      "location": 0.0,
+                                      "value": 0.03
+                                    },
+                                    {
+                                      "derivative": -0.022,
+                                      "location": 0.4,
+                                      "value": 0.019
+                                    },
+                                    {
+                                      "derivative": 0.0077,
+                                      "location": 1.0,
+                                      "value": 0.03
+                                    }
+                                  ]
+                                }
+                              },
+                              {
+                                "derivative": 0.0,
+                                "location": 0.0,
+                                "value": 0.1
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "derivative": 0.0,
+                          "location": 0.58,
+                          "value": {
+                            "coordinate": "chaosawakens:crystal/land/ridges_folded",
+                            "points": [
+                              {
+                                "derivative": 0.5,
+                                "location": -1.0,
+                                "value": 0.025
+                              },
+                              {
+                                "derivative": 0.0,
+                                "location": -0.4,
+                                "value": 0.03
+                              },
+                              {
+                                "derivative": 0.0,
+                                "location": 0.0,
+                                "value": 0.03
+                              },
+                              {
+                                "derivative": -0.022,
+                                "location": 0.4,
+                                "value": 0.019
+                              },
+                              {
+                                "derivative": 0.0077,
+                                "location": 1.0,
+                                "value": 0.03
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "derivative": 0.0,
+                          "location": 0.7,
+                          "value": {
+                            "coordinate": "chaosawakens:crystal/land/ridges_folded",
+                            "points": [
+                              {
+                                "derivative": 0.0,
+                                "location": -1.0,
+                                "value": -0.02
+                              },
+                              {
+                                "derivative": 0.0,
+                                "location": -0.4,
+                                "value": -0.03
+                              },
+                              {
+                                "derivative": 0.0,
+                                "location": 0.0,
+                                "value": -0.03
+                              },
+                              {
+                                "derivative": 0.098,
+                                "location": 0.4,
+                                "value": 0.019
+                              },
+                              {
+                                "derivative": 0.0077,
+                                "location": 1.0,
+                                "value": 0.03
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "derivative": 0.0,
+                    "location": 0.71,
+                    "value": {
+                      "coordinate": "chaosawakens:crystal/land/erosion",
+                      "points": [
+                        {
+                          "derivative": 0.0,
+                          "location": -0.85,
+                          "value": {
+                            "coordinate": "chaosawakens:crystal/land/ridges_folded",
+                            "points": [
+                              {
+                                "derivative": 0.0,
+                                "location": -1.0,
+                                "value": 0.2
+                              },
+                              {
+                                "derivative": 0.38940096,
+                                "location": 0.0,
+                                "value": 0.3005991
+                              },
+                              {
+                                "derivative": 0.38940096,
+                                "location": 1.0,
+                                "value": 0.69000006
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "derivative": 0.0,
+                          "location": -0.7,
+                          "value": {
+                            "coordinate": "chaosawakens:crystal/land/ridges_folded",
+                            "points": [
+                              {
+                                "derivative": 0.0,
+                                "location": -1.0,
+                                "value": 0.2
+                              },
+                              {
+                                "derivative": 0.37788022,
+                                "location": 0.0,
+                                "value": 0.26211986
+                              },
+                              {
+                                "derivative": 0.37788022,
+                                "location": 1.0,
+                                "value": 0.6400001
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "derivative": 0.0,
+                          "location": -0.4,
+                          "value": {
+                            "coordinate": "chaosawakens:crystal/land/ridges_folded",
+                            "points": [
+                              {
+                                "derivative": 0.0,
+                                "location": -1.0,
+                                "value": -0.2222
+                              },
+                              {
+                                "derivative": 0.0,
+                                "location": -0.75,
+                                "value": -0.2222
+                              },
+                              {
+                                "derivative": 0.0,
+                                "location": -0.65,
+                                "value": 0.0
+                              },
+                              {
+                                "derivative": 0.0,
+                                "location": 0.5954547,
+                                "value": 2.9802322E-8
+                              },
+                              {
+                                "derivative": 0.2534563,
+                                "location": 0.6054547,
+                                "value": 2.9802322E-8
+                              },
+                              {
+                                "derivative": 0.2534563,
+                                "location": 1.0,
+                                "value": 0.100000024
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "derivative": 0.0,
+                          "location": -0.35,
+                          "value": {
+                            "coordinate": "chaosawakens:crystal/land/ridges_folded",
+                            "points": [
+                              {
+                                "derivative": 0.5,
+                                "location": -1.0,
+                                "value": -0.120000005
+                              },
+                              {
+                                "derivative": 0.0,
+                                "location": -0.4,
+                                "value": 0.05
+                              },
+                              {
+                                "derivative": 0.0,
+                                "location": 0.0,
+                                "value": 0.05
+                              },
+                              {
+                                "derivative": 0.0,
+                                "location": 0.4,
+                                "value": 0.05
+                              },
+                              {
+                                "derivative": 0.007000001,
+                                "location": 1.0,
+                                "value": 0.060000002
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "derivative": 0.0,
+                          "location": -0.1,
+                          "value": {
+                            "coordinate": "chaosawakens:crystal/land/ridges_folded",
+                            "points": [
+                              {
+                                "derivative": 0.5,
+                                "location": -1.0,
+                                "value": 0.03
+                              },
+                              {
+                                "derivative": -0.0065000006,
+                                "location": -0.4,
+                                "value": 0.0035
+                              },
+                              {
+                                "derivative": -0.0065000006,
+                                "location": 0.0,
+                                "value": 0.0022
+                              },
+                              {
+                                "derivative": 0.0956,
+                                "location": 0.4,
+                                "value": 0.05
+                              },
+                              {
+                                "derivative": 0.007000001,
+                                "location": 1.0,
+                                "value": 0.060000002
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "derivative": 0.0,
+                          "location": 0.2,
+                          "value": {
+                            "coordinate": "chaosawakens:crystal/land/ridges_folded",
+                            "points": [
+                              {
+                                "derivative": 0.5,
+                                "location": -1.0,
+                                "value": 0.03
+                              },
+                              {
+                                "derivative": 0.0,
+                                "location": -0.4,
+                                "value": 0.035
+                              },
+                              {
+                                "derivative": 0.0,
+                                "location": 0.0,
+                                "value": 0.035
+                              },
+                              {
+                                "derivative": -0.026,
+                                "location": 0.4,
+                                "value": 0.022
+                              },
+                              {
+                                "derivative": 0.0091,
+                                "location": 1.0,
+                                "value": 0.035
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "derivative": 0.0,
+                          "location": 0.4,
+                          "value": {
+                            "coordinate": "chaosawakens:crystal/land/ridges_folded",
+                            "points": [
+                              {
+                                "derivative": 0.5,
+                                "location": -1.0,
+                                "value": 0.03
+                              },
+                              {
+                                "derivative": 0.0,
+                                "location": -0.4,
+                                "value": 0.035
+                              },
+                              {
+                                "derivative": 0.0,
+                                "location": 0.0,
+                                "value": 0.035
+                              },
+                              {
+                                "derivative": -0.026,
+                                "location": 0.4,
+                                "value": 0.022
+                              },
+                              {
+                                "derivative": 0.0091,
+                                "location": 1.0,
+                                "value": 0.035
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "derivative": 0.0,
+                          "location": 0.45,
+                          "value": {
+                            "coordinate": "chaosawakens:crystal/land/ridges_folded",
+                            "points": [
+                              {
+                                "derivative": 0.0,
+                                "location": -1.0,
+                                "value": 0.03
+                              },
+                              {
+                                "derivative": 0.0,
+                                "location": -0.4,
+                                "value": {
+                                  "coordinate": "chaosawakens:crystal/land/ridges_folded",
+                                  "points": [
+                                    {
+                                      "derivative": 0.5,
+                                      "location": -1.0,
+                                      "value": 0.03
+                                    },
+                                    {
+                                      "derivative": 0.0,
+                                      "location": -0.4,
+                                      "value": 0.035
+                                    },
+                                    {
+                                      "derivative": 0.0,
+                                      "location": 0.0,
+                                      "value": 0.035
+                                    },
+                                    {
+                                      "derivative": -0.026,
+                                      "location": 0.4,
+                                      "value": 0.022
+                                    },
+                                    {
+                                      "derivative": 0.0091,
+                                      "location": 1.0,
+                                      "value": 0.035
+                                    }
+                                  ]
+                                }
+                              },
+                              {
+                                "derivative": 0.0,
+                                "location": 0.0,
+                                "value": 0.105000004
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "derivative": 0.0,
+                          "location": 0.55,
+                          "value": {
+                            "coordinate": "chaosawakens:crystal/land/ridges_folded",
+                            "points": [
+                              {
+                                "derivative": 0.0,
+                                "location": -1.0,
+                                "value": 0.03
+                              },
+                              {
+                                "derivative": 0.0,
+                                "location": -0.4,
+                                "value": {
+                                  "coordinate": "chaosawakens:crystal/land/ridges_folded",
+                                  "points": [
+                                    {
+                                      "derivative": 0.5,
+                                      "location": -1.0,
+                                      "value": 0.03
+                                    },
+                                    {
+                                      "derivative": 0.0,
+                                      "location": -0.4,
+                                      "value": 0.035
+                                    },
+                                    {
+                                      "derivative": 0.0,
+                                      "location": 0.0,
+                                      "value": 0.035
+                                    },
+                                    {
+                                      "derivative": -0.026,
+                                      "location": 0.4,
+                                      "value": 0.022
+                                    },
+                                    {
+                                      "derivative": 0.0091,
+                                      "location": 1.0,
+                                      "value": 0.035
+                                    }
+                                  ]
+                                }
+                              },
+                              {
+                                "derivative": 0.0,
+                                "location": 0.0,
+                                "value": 0.105000004
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "derivative": 0.0,
+                          "location": 0.58,
+                          "value": {
+                            "coordinate": "chaosawakens:crystal/land/ridges_folded",
+                            "points": [
+                              {
+                                "derivative": 0.5,
+                                "location": -1.0,
+                                "value": 0.03
+                              },
+                              {
+                                "derivative": 0.0,
+                                "location": -0.4,
+                                "value": 0.035
+                              },
+                              {
+                                "derivative": 0.0,
+                                "location": 0.0,
+                                "value": 0.035
+                              },
+                              {
+                                "derivative": -0.026,
+                                "location": 0.4,
+                                "value": 0.022
+                              },
+                              {
+                                "derivative": 0.0091,
+                                "location": 1.0,
+                                "value": 0.035
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "derivative": 0.0,
+                          "location": 0.7,
+                          "value": {
+                            "coordinate": "chaosawakens:crystal/land/ridges_folded",
+                            "points": [
+                              {
+                                "derivative": 0.0,
+                                "location": -1.0,
+                                "value": -0.02
+                              },
+                              {
+                                "derivative": 0.0,
+                                "location": -0.4,
+                                "value": -0.03
+                              },
+                              {
+                                "derivative": 0.0,
+                                "location": 0.0,
+                                "value": -0.03
+                              },
+                              {
+                                "derivative": 0.104,
+                                "location": 0.4,
+                                "value": 0.022
+                              },
+                              {
+                                "derivative": 0.0091,
+                                "location": 1.0,
+                                "value": 0.035
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "argument2": {
+          "type": "minecraft:cache_once",
+          "argument": {
+            "type": "minecraft:blend_alpha"
+          }
+        }
+      }
+    }
+  }
+}

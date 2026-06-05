@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_kyanite_brick_slab": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "chaosawakens:kyanite_brick_slab"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "chaosawakens:chiseled_kyanite"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_kyanite_brick_slab",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "chaosawakens:chiseled_kyanite"
+    ]
+  },
+  "sends_telemetry_event": false
+}

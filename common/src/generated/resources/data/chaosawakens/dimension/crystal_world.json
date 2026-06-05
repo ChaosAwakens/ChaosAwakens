@@ -1,0 +1,11 @@
+{
+  "type": "chaosawakens:crystal_world",
+  "generator": {
+    "type": "minecraft:noise",
+    "biome_source": {
+      "type": "minecraft:multi_noise",
+      "preset": "chaosawakens:crystal_world"
+    },
+    "settings": "chaosawakens:crystal_world"
+  }
+}

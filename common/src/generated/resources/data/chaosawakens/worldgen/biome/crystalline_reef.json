@@ -1,0 +1,44 @@
+{
+  "carvers": {},
+  "downfall": 0.0,
+  "effects": {
+    "fog_color": 6986985,
+    "sky_color": 14722514,
+    "water_color": 6014659,
+    "water_fog_color": 13937093
+  },
+  "features": [
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [
+      "chaosawakens:crystal_grass_patch",
+      "chaosawakens:purple_crystal_growth_patch",
+      "chaosawakens:green_crystal_growth_patch",
+      "chaosawakens:pink_crystal_growth_patch",
+      "chaosawakens:yellow_crystal_growth_patch",
+      "chaosawakens:red_crystal_flower_patch",
+      "chaosawakens:blue_crystal_flower_patch",
+      "chaosawakens:pink_crystal_flower_patch"
+    ]
+  ],
+  "has_precipitation": false,
+  "spawn_costs": {},
+  "spawners": {
+    "ambient": [],
+    "axolotls": [],
+    "creature": [],
+    "misc": [],
+    "monster": [],
+    "underground_water_creature": [],
+    "water_ambient": [],
+    "water_creature": []
+  },
+  "temperature": 0.8
+}
