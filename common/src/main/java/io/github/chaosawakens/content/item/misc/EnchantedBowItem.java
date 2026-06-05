@@ -6,7 +6,7 @@ import net.minecraft.world.item.enchantment.Enchantment;
 
 import java.util.Map;
 
-public abstract class EnchantedBowItem extends BowItem {
+public class EnchantedBowItem extends BowItem {
     private final Map<Enchantment, Integer> defaultEnchantments;
 
     public EnchantedBowItem(Properties properties, Map<Enchantment, Integer> enchantments) {
