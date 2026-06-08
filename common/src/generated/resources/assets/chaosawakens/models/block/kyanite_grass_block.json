@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "bottom": "chaosawakens:block/vegetation/crystal/kyanite_grass_block_bottom",
+    "side": "chaosawakens:block/vegetation/crystal/kyanite_grass_block_side",
+    "top": "chaosawakens:block/vegetation/crystal/kyanite_grass_block_top"
+  }
+}

@@ -2,13 +2,11 @@ package io.github.chaosawakens.core.template;
 
 import com.mememan.nexus.platform.NexusServices;
 import com.mememan.nexus.property_wrapper.base.generic.DataGenPropertyWrapper;
-import com.mememan.nexus.template.object.block.misc.WoodenBlockGroup;
 import com.mememan.nexus.util.PredicateUtil;
 import com.mememan.nexus.util.RecipeUtil;
 import com.mememan.nexus.util.RegistryUtil;
 import com.mememan.nexus.util.StringUtil;
 import io.github.chaosawakens.content.data.recipe_builder.DefossilizingRecipeBuilder;
-import io.github.chaosawakens.content.registry.CABlocks;
 import io.github.chaosawakens.content.registry.CAItems;
 import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -34,6 +32,10 @@ import java.util.function.Supplier;
 import static io.github.chaosawakens.content.registry.CAItems.*;
 
 public final class CARecipeTemplates {
+
+    private static final Item URANIUM_INGOT = CAItems.URANIUM_INGOT.get();
+    private static final Item TITANIUM_INGOT = CAItems.TITANIUM_INGOT.get();
+    private static final Item PLATINUM_LUMP = CAItems.PLATINUM_LUMP.get();
 
     private CARecipeTemplates() {
         throw new IllegalAccessError("Attempted to construct instance of template class! (CARecipeTemplates)");
@@ -110,13 +112,13 @@ public final class CARecipeTemplates {
     // Overloaded Ultimate Tools
     public static <I extends Item> Consumer<Supplier<I>> ultSwordRecipe(Consumer<FinishedRecipe> recipeConsumer, int resultItemCount) {
         return (resultItemSup) -> ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, resultItemSup.get(), resultItemCount)
-                .define('U', URANIUM_INGOT.get())
-                .define('T', TITANIUM_INGOT.get())
-                .define('P', PLATINUM_LUMP.get())
+                .define('U', URANIUM_INGOT)
+                .define('T', TITANIUM_INGOT)
+                .define('P', PLATINUM_LUMP)
                 .pattern(" T ")
                 .pattern(" U ")
                 .pattern(" P ")
-                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(PLATINUM_LUMP.get()), PredicateUtil.has(PLATINUM_LUMP.get()))
+                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(PLATINUM_LUMP), PredicateUtil.has(PLATINUM_LUMP))
                 .save(recipeConsumer);
     }
     public static <I extends Item> Consumer<Supplier<I>> ultSwordRecipe(Consumer<FinishedRecipe> recipeConsumer) {
@@ -125,13 +127,13 @@ public final class CARecipeTemplates {
 
     public static <I extends Item> Consumer<Supplier<I>> ultPickaxeRecipe(Consumer<FinishedRecipe> recipeConsumer, int resultItemCount) {
         return (resultItemSup) -> ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, resultItemSup.get(), resultItemCount)
-                .define('U', URANIUM_INGOT.get())
-                .define('T', TITANIUM_INGOT.get())
-                .define('P', PLATINUM_LUMP.get())
+                .define('U', URANIUM_INGOT)
+                .define('T', TITANIUM_INGOT)
+                .define('P', PLATINUM_LUMP)
                 .pattern("TUT")
                 .pattern(" U ")
                 .pattern(" P ")
-                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(PLATINUM_LUMP.get()), PredicateUtil.has(PLATINUM_LUMP.get()))
+                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(PLATINUM_LUMP), PredicateUtil.has(PLATINUM_LUMP))
                 .save(recipeConsumer);
     }
     public static <I extends Item> Consumer<Supplier<I>> ultPickaxeRecipe(Consumer<FinishedRecipe> recipeConsumer) {
@@ -140,13 +142,13 @@ public final class CARecipeTemplates {
 
     public static <I extends Item> Consumer<Supplier<I>> ultAxeRecipe(Consumer<FinishedRecipe> recipeConsumer, int resultItemCount) {
         return (resultItemSup) -> ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, resultItemSup.get(), resultItemCount)
-                .define('U', URANIUM_INGOT.get())
-                .define('T', TITANIUM_INGOT.get())
-                .define('P', PLATINUM_LUMP.get())
+                .define('U', URANIUM_INGOT)
+                .define('T', TITANIUM_INGOT)
+                .define('P', PLATINUM_LUMP)
                 .pattern("TT ")
                 .pattern("UP ")
                 .pattern(" P ")
-                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(PLATINUM_LUMP.get()), PredicateUtil.has(PLATINUM_LUMP.get()))
+                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(PLATINUM_LUMP), PredicateUtil.has(PLATINUM_LUMP))
                 .save(recipeConsumer);
     }
     public static <I extends Item> Consumer<Supplier<I>> ultAxeRecipe(Consumer<FinishedRecipe> recipeConsumer) {
@@ -155,13 +157,13 @@ public final class CARecipeTemplates {
 
     public static <I extends Item> Consumer<Supplier<I>> ultShovelRecipe(Consumer<FinishedRecipe> recipeConsumer, int resultItemCount) {
         return (resultItemSup) -> ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, resultItemSup.get(), resultItemCount)
-                .define('U', URANIUM_INGOT.get())
-                .define('T', TITANIUM_INGOT.get())
-                .define('P', PLATINUM_LUMP.get())
+                .define('U', URANIUM_INGOT)
+                .define('T', TITANIUM_INGOT)
+                .define('P', PLATINUM_LUMP)
                 .pattern(" U ")
                 .pattern(" T ")
                 .pattern(" P ")
-                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(URANIUM_INGOT.get()), PredicateUtil.has(URANIUM_INGOT.get()))
+                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(URANIUM_INGOT), PredicateUtil.has(URANIUM_INGOT))
                 .save(recipeConsumer);
     }
     public static <I extends Item> Consumer<Supplier<I>> ultShovelRecipe(Consumer<FinishedRecipe> recipeConsumer) {
@@ -170,13 +172,13 @@ public final class CARecipeTemplates {
 
     public static <I extends Item> Consumer<Supplier<I>> ultHoeRecipe(Consumer<FinishedRecipe> recipeConsumer, int resultItemCount) {
         return (resultItemSup) -> ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, resultItemSup.get(), resultItemCount)
-                .define('U', URANIUM_INGOT.get())
-                .define('T', TITANIUM_INGOT.get())
-                .define('P', PLATINUM_LUMP.get())
+                .define('U', URANIUM_INGOT)
+                .define('T', TITANIUM_INGOT)
+                .define('P', PLATINUM_LUMP)
                 .pattern("UU ")
                 .pattern(" T ")
                 .pattern(" P ")
-                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(PLATINUM_LUMP.get()), PredicateUtil.has(PLATINUM_LUMP.get()))
+                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(PLATINUM_LUMP), PredicateUtil.has(PLATINUM_LUMP))
                 .save(recipeConsumer);
     }
     public static <I extends Item> Consumer<Supplier<I>> ultHoeRecipe(Consumer<FinishedRecipe> recipeConsumer) {
@@ -184,16 +186,19 @@ public final class CARecipeTemplates {
     }
 
     public static <I extends Item> Consumer<Supplier<I>> ultBowRecipe(Consumer<FinishedRecipe> recipeConsumer, int resultItemCount) {
+
         return (resultItemSup) -> ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, resultItemSup.get(), resultItemCount)
-                .define('U', URANIUM_INGOT.get())
-                .define('T', TITANIUM_INGOT.get())
-                .define('P', PLATINUM_LUMP.get())
+                .define('U', URANIUM_INGOT)
+                .define('T', TITANIUM_INGOT)
+                .define('P', PLATINUM_LUMP)
                 .define('B', Items.BOW)
                 .define('S', Items.STRING)
                 .pattern(" TS")
                 .pattern("PBS")
                 .pattern(" US")
-                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(Items.BOW), PredicateUtil.has(Items.BOW))
+                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(URANIUM_INGOT), PredicateUtil.has(URANIUM_INGOT))
+                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(TITANIUM_INGOT), PredicateUtil.has(TITANIUM_INGOT))
+                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(PLATINUM_LUMP), PredicateUtil.has(PLATINUM_LUMP))
                 .save(recipeConsumer);
     }
     public static <I extends Item> Consumer<Supplier<I>> ultBowRecipe(Consumer<FinishedRecipe> recipeConsumer) {
@@ -201,16 +206,20 @@ public final class CARecipeTemplates {
     }
 
     public static <I extends Item> Consumer<Supplier<I>> ultCrossBowRecipe(Consumer<FinishedRecipe> recipeConsumer, int resultItemCount) {
+
+
         return (resultItemSup) -> ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, resultItemSup.get(), resultItemCount)
-                .define('U', URANIUM_INGOT.get())
-                .define('T', TITANIUM_INGOT.get())
-                .define('P', PLATINUM_LUMP.get())
+                .define('U', URANIUM_INGOT)
+                .define('T', TITANIUM_INGOT)
+                .define('P', PLATINUM_LUMP)
                 .define('B', Items.CROSSBOW)
                 .define('S', Items.STRING)
                 .pattern("TST")
                 .pattern("UBU")
                 .pattern(" P ")
-                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(Items.CROSSBOW), PredicateUtil.has(Items.CROSSBOW))
+                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(URANIUM_INGOT), PredicateUtil.has(URANIUM_INGOT))
+                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(TITANIUM_INGOT), PredicateUtil.has(TITANIUM_INGOT))
+                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(PLATINUM_LUMP), PredicateUtil.has(PLATINUM_LUMP))
                 .save(recipeConsumer);
     }
     public static <I extends Item> Consumer<Supplier<I>> ultCrossBowRecipe(Consumer<FinishedRecipe> recipeConsumer) {
@@ -218,15 +227,19 @@ public final class CARecipeTemplates {
     }
 
     public static <I extends Item> Consumer<Supplier<I>> ultFishRodRecipe(Consumer<FinishedRecipe> recipeConsumer, int resultItemCount) {
+
+
         return (resultItemSup) -> ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, resultItemSup.get(), resultItemCount)
-                .define('U', URANIUM_INGOT.get())
-                .define('T', TITANIUM_INGOT.get())
-                .define('P', PLATINUM_LUMP.get())
+                .define('U', URANIUM_INGOT)
+                .define('T', TITANIUM_INGOT)
+                .define('P', PLATINUM_LUMP)
                 .define('S', Items.STRING)
                 .pattern("  T")
                 .pattern(" US")
                 .pattern("P S")
-                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(Items.FISHING_ROD), PredicateUtil.has(Items.FISHING_ROD))
+                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(URANIUM_INGOT), PredicateUtil.has(URANIUM_INGOT))
+                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(TITANIUM_INGOT), PredicateUtil.has(TITANIUM_INGOT))
+                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(PLATINUM_LUMP), PredicateUtil.has(PLATINUM_LUMP))
                 .save(recipeConsumer);
     }
     public static <I extends Item> Consumer<Supplier<I>> ultFishRodRecipe(Consumer<FinishedRecipe> recipeConsumer) {
@@ -471,13 +484,13 @@ public final class CARecipeTemplates {
     // Overloaded Ultimate Armour
     public static <I extends Item> Consumer<Supplier<I>> ultHelmetRecipe(Consumer<FinishedRecipe> recipeConsumer, int resultItemCount) {
         return (resultItemSup) -> ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, resultItemSup.get(), resultItemCount)
-                .define('U', URANIUM_INGOT.get())
-                .define('T', TITANIUM_INGOT.get())
-                .define('P', PLATINUM_LUMP.get())
+                .define('U', URANIUM_INGOT)
+                .define('T', TITANIUM_INGOT)
+                .define('P', PLATINUM_LUMP)
                 .pattern("TPT")
                 .pattern("U U")
                 .pattern("   ")
-                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(PLATINUM_LUMP.get()), PredicateUtil.has(PLATINUM_LUMP.get()))
+                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(PLATINUM_LUMP), PredicateUtil.has(PLATINUM_LUMP))
                 .save(recipeConsumer);
     }
     public static <I extends Item> Consumer<Supplier<I>> ultHelmetRecipe(Consumer<FinishedRecipe> recipeConsumer) {
@@ -486,13 +499,13 @@ public final class CARecipeTemplates {
 
     public static <I extends Item> Consumer<Supplier<I>> ultChestplateRecipe(Consumer<FinishedRecipe> recipeConsumer, int resultItemCount) {
         return (resultItemSup) -> ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, resultItemSup.get(), resultItemCount)
-                .define('U', URANIUM_INGOT.get())
-                .define('T', TITANIUM_INGOT.get())
-                .define('P', PLATINUM_LUMP.get())
+                .define('U', URANIUM_INGOT)
+                .define('T', TITANIUM_INGOT)
+                .define('P', PLATINUM_LUMP)
                 .pattern("P P")
                 .pattern("TTT")
                 .pattern("UUU")
-                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(PLATINUM_LUMP.get()), PredicateUtil.has(PLATINUM_LUMP.get()))
+                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(PLATINUM_LUMP), PredicateUtil.has(PLATINUM_LUMP))
                 .save(recipeConsumer);
     }
     public static <I extends Item> Consumer<Supplier<I>> ultChestplateRecipe(Consumer<FinishedRecipe> recipeConsumer) {
@@ -501,13 +514,13 @@ public final class CARecipeTemplates {
 
     public static <I extends Item> Consumer<Supplier<I>> ultLeggingsRecipe(Consumer<FinishedRecipe> recipeConsumer, int resultItemCount) {
         return (resultItemSup) -> ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, resultItemSup.get(), resultItemCount)
-                .define('U', URANIUM_INGOT.get())
-                .define('T', TITANIUM_INGOT.get())
-                .define('P', PLATINUM_LUMP.get())
+                .define('U', URANIUM_INGOT)
+                .define('T', TITANIUM_INGOT)
+                .define('P', PLATINUM_LUMP)
                 .pattern("TTT")
                 .pattern("U U")
                 .pattern("P P")
-                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(PLATINUM_LUMP.get()), PredicateUtil.has(PLATINUM_LUMP.get()))
+                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(PLATINUM_LUMP), PredicateUtil.has(PLATINUM_LUMP))
                 .save(recipeConsumer);
     }
     public static <I extends Item> Consumer<Supplier<I>> ultLeggingsRecipe(Consumer<FinishedRecipe> recipeConsumer) {
@@ -516,13 +529,13 @@ public final class CARecipeTemplates {
 
     public static <I extends Item> Consumer<Supplier<I>> ultBootsRecipe(Consumer<FinishedRecipe> recipeConsumer, int resultItemCount) {
         return (resultItemSup) -> ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, resultItemSup.get(), resultItemCount)
-                .define('U', URANIUM_INGOT.get())
-                .define('T', TITANIUM_INGOT.get())
+                .define('U', URANIUM_INGOT)
+                .define('T', TITANIUM_INGOT)
                 .pattern("T T")
                 .pattern("U U")
                 .pattern("   ")
-                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(URANIUM_INGOT.get()), PredicateUtil.has(URANIUM_INGOT.get()))
-                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(TITANIUM_INGOT.get()), PredicateUtil.has(TITANIUM_INGOT.get()))
+                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(URANIUM_INGOT), PredicateUtil.has(URANIUM_INGOT))
+                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(TITANIUM_INGOT), PredicateUtil.has(TITANIUM_INGOT))
                 .save(recipeConsumer);
     }
     public static <I extends Item> Consumer<Supplier<I>> ultBootsRecipe(Consumer<FinishedRecipe> recipeConsumer) {
@@ -605,7 +618,7 @@ public final class CARecipeTemplates {
         return (resultItemSup) -> ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, resultItemSup.get(), resultItemCount)
                 .define('N', NIGHTMARE_SCALE.get())
                 .define('D', Items.DIAMOND)
-                .define('T', TITANIUM_INGOT.get())
+                .define('T', TITANIUM_INGOT)
                 .define('R', Items.REDSTONE)
                 .define('I', Items.IRON_INGOT)
                 .pattern("NDN")

@@ -8,6 +8,7 @@ import io.github.chaosawakens.content.item.equipment.tools.UltimateBow;
 import io.github.chaosawakens.content.item.food.BaggedPopcornItem;
 import io.github.chaosawakens.content.item.misc.BlackListItemNameBlockItem;
 import io.github.chaosawakens.content.item.misc.DeferredItemNameBlockItem;
+import io.github.chaosawakens.content.item.misc.EnchantedBowItem;
 import io.github.chaosawakens.content.item.misc.EnchantedItem;
 import io.github.chaosawakens.content.item.utility.MinersDreamItem;
 import io.github.chaosawakens.content.item.utility.PowerChipItem;
@@ -122,9 +123,10 @@ public final class CAItems {
 
     // Materials
     public static final Supplier<Item> KUNZITE = ItemPropertyWrapperTemplates.registerItemFromTemplate(CAConstants.prefix("kunzite"), () -> new Item(new Item.Properties()), ItemPropertyWrapperTemplates.MATERIAL, ITEMS);
-    public static final Supplier<Item> RUBY = ItemPropertyWrapperTemplates.registerItemFromTemplate(CAConstants.prefix("ruby"), () -> new Item(new Item.Properties().fireResistant()), ItemPropertyWrapperTemplates.MATERIAL, ITEMS);
-    public static final Supplier<Item> CATS_EYE = ItemPropertyWrapperTemplates.registerItemFromTemplate(CAConstants.prefix("cats_eye"), () -> new Item(new Item.Properties().fireResistant()), ItemPropertyWrapperTemplates.MATERIAL, ITEMS);
 
+    public static final Supplier<Item> RUBY = ItemPropertyWrapperTemplates.registerItemFromTemplate(CAConstants.prefix("ruby"), () -> new Item(new Item.Properties().fireResistant()), ItemPropertyWrapperTemplates.MATERIAL, ITEMS);
+
+    public static final Supplier<Item> CATS_EYE = ItemPropertyWrapperTemplates.registerItemFromTemplate(CAConstants.prefix("cats_eye_shard"), () -> new Item(new Item.Properties().fireResistant()), ItemPropertyWrapperTemplates.MATERIAL, ITEMS);
 
     public static final Supplier<Item> SUNSTONE = ItemPropertyWrapperTemplates.registerItemFromTemplate(CAConstants.prefix("sunstone"), () -> new Item(new Item.Properties()), ItemPropertyWrapperTemplates.MATERIAL, ITEMS);
 
@@ -183,7 +185,7 @@ public final class CAItems {
     public static final Supplier<PickaxeItem> ULTIMATE_PICKAXE = ItemPropertyWrapperTemplates.registerItemFromTemplate(CAConstants.prefix("ultimate_pickaxe"), () -> new PickaxeItem(CAItemTierTemplates.ULTIMATE, 6, -2.8F, new Item.Properties().fireResistant().rarity(Rarity.EPIC)), ItemPropertyWrapperTemplates.BASIC_HANDHELD, EQUIPMENT);
     public static final Supplier<AxeItem> ULTIMATE_AXE = ItemPropertyWrapperTemplates.registerItemFromTemplate(CAConstants.prefix("ultimate_axe"), () -> new AxeItem(CAItemTierTemplates.ULTIMATE, 28, -3.0F, new Item.Properties().fireResistant().rarity(Rarity.EPIC)), ItemPropertyWrapperTemplates.BASIC_HANDHELD, EQUIPMENT);
     public static final Supplier<HoeItem> ULTIMATE_HOE = ItemPropertyWrapperTemplates.registerItemFromTemplate(CAConstants.prefix("ultimate_hoe"), () -> new HoeItem(CAItemTierTemplates.ULTIMATE, -4, -2.0F, new Item.Properties().fireResistant().rarity(Rarity.EPIC)), ItemPropertyWrapperTemplates.BASIC_HANDHELD, EQUIPMENT);
-    public static final Supplier<UltimateBow>       ULTIMATE_BOW = ItemPropertyWrapperTemplates.registerItemFromTemplate(CAConstants.prefix("ultimate_bow"), () -> new UltimateBow(new Item.Properties().fireResistant().rarity(Rarity.EPIC), Map.ofEntries(Map.entry(Enchantments.UNBREAKING, 3))), ItemPropertyWrapperTemplates.BASIC_HANDHELD, EQUIPMENT);
+    public static final Supplier<UltimateBow> ULTIMATE_BOW = ItemPropertyWrapperTemplates.registerItemFromTemplate(CAConstants.prefix("ultimate_bow"), () -> new UltimateBow(new Item.Properties().fireResistant().rarity(Rarity.EPIC), Map.ofEntries(Map.entry(Enchantments.UNBREAKING, 3))), ItemPropertyWrapperTemplates.BASIC_HANDHELD, EQUIPMENT);
 
     public static final Supplier<SwordItem> RUBY_SWORD = ItemPropertyWrapperTemplates.registerItemFromTemplate(CAConstants.prefix("ruby_sword"), () -> new SwordItem(CAItemTierTemplates.RUBY, 16, -2.4F, new Item.Properties().fireResistant().rarity(Rarity.UNCOMMON)), ItemPropertyWrapperTemplates.BASIC_HANDHELD, EQUIPMENT);
     public static final Supplier<ShovelItem> RUBY_SHOVEL = ItemPropertyWrapperTemplates.registerItemFromTemplate(CAConstants.prefix("ruby_shovel"), () -> new ShovelItem(CAItemTierTemplates.RUBY, 5, -3.0F, new Item.Properties().fireResistant().rarity(Rarity.UNCOMMON)), ItemPropertyWrapperTemplates.BASIC_HANDHELD, EQUIPMENT);

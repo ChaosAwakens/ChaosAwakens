@@ -24,7 +24,7 @@ public class CASurfaceRules {
                                     SurfaceRules.not(SurfaceRules.hole()),
                                     SurfaceRules.ifTrue(
                                             CAConditionSources.AT_ABOVE_WATER_LEVEL,
-                                            CAStateRules.CRYSTAL_GRASS_BLOCK
+                                            CAStateRules.KYANITE_GRASS
                                     )
                             )
                     )
@@ -90,7 +90,7 @@ public class CASurfaceRules {
         public static final SurfaceRules.RuleSource BEDROCK = SurfaceRules.state(Blocks.BEDROCK.defaultBlockState());
 
         // Crystal World
-        public static final SurfaceRules.RuleSource CRYSTAL_GRASS_BLOCK = SurfaceRules.state(CABlocks.CRYSTAL_GRASS_BLOCK.get().defaultBlockState());
+        public static final SurfaceRules.RuleSource KYANITE_GRASS = SurfaceRules.state(CABlocks.KYANITE_GRASS_BLOCK.get().defaultBlockState());
 
         // Mining Paradise
         public static final SurfaceRules.RuleSource DENSE_GRASS_BLOCK = SurfaceRules.state(CABlocks.DENSE_GRASS_BLOCK.get().defaultBlockState());
