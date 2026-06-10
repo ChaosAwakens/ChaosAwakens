@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "B": {
+      "item": "minecraft:crossbow"
+    },
+    "P": {
+      "item": "chaosawakens:platinum_lump"
+    },
+    "S": {
+      "item": "minecraft:string"
+    },
+    "T": {
+      "item": "chaosawakens:titanium_ingot"
+    },
+    "U": {
+      "item": "chaosawakens:uranium_ingot"
+    }
+  },
+  "pattern": [
+    "TST",
+    "UBU",
+    " P "
+  ],
+  "result": {
+    "item": "chaosawakens:ultimate_crossbow"
+  },
+  "show_notification": true
+}

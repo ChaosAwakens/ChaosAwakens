@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "B": {
+      "item": "minecraft:bow"
+    },
+    "P": {
+      "item": "chaosawakens:platinum_lump"
+    },
+    "S": {
+      "item": "minecraft:string"
+    },
+    "T": {
+      "item": "chaosawakens:titanium_ingot"
+    },
+    "U": {
+      "item": "chaosawakens:uranium_ingot"
+    }
+  },
+  "pattern": [
+    " TS",
+    "PBS",
+    " US"
+  ],
+  "result": {
+    "item": "chaosawakens:ultimate_bow"
+  },
+  "show_notification": true
+}

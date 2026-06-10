@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "P": {
+      "item": "chaosawakens:platinum_lump"
+    },
+    "S": {
+      "item": "minecraft:string"
+    },
+    "T": {
+      "item": "chaosawakens:titanium_ingot"
+    },
+    "U": {
+      "item": "chaosawakens:uranium_ingot"
+    }
+  },
+  "pattern": [
+    "  T",
+    " US",
+    "P S"
+  ],
+  "result": {
+    "item": "chaosawakens:ultimate_fishing_rod"
+  },
+  "show_notification": true
+}

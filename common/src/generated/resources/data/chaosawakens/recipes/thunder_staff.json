@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "D": {
+      "item": "minecraft:diamond"
+    },
+    "R": {
+      "item": "chaosawakens:ruby"
+    }
+  },
+  "pattern": [
+    " RD",
+    " RR",
+    "R  "
+  ],
+  "result": {
+    "item": "chaosawakens:thunder_staff"
+  },
+  "show_notification": true
+}

@@ -385,6 +385,21 @@ public final class CARecipeTemplates {
         return (resultItemSup) -> hoeRecipe(recipeConsumer, itemBlockMaterial, itemStick, 1).accept((Supplier<Item>) resultItemSup);
     }
 
+    // ThunderStaff Recipe stuff
+    public static <I extends Item> Consumer<Supplier<I>> thunderStaffRecipe(Consumer<FinishedRecipe> recipeConsumer, int resultItemCount) {
+        return (resultItemSup) -> ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, resultItemSup.get(), resultItemCount)
+                .define('R', RUBY.get())
+                .define('D', Items.DIAMOND)
+                .pattern(" RD")
+                .pattern(" RR")
+                .pattern("R  ")
+                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(RUBY.get()), PredicateUtil.has(RUBY.get()))
+                .save(recipeConsumer);
+    }
+    public static <I extends Item> Consumer<Supplier<I>> thunderStaffRecipe(Consumer<FinishedRecipe> recipeConsumer) {
+        return (resultItemSup) -> thunderStaffRecipe(recipeConsumer, 1).accept((Supplier<Item>) resultItemSup);
+    }
+
     // Overloaded Crystalwood Tools
     /*
     public static <I extends Item, B extends Block> Consumer<Supplier<I>> swordWoodRecipe(Consumer<FinishedRecipe> recipeConsumer, B itemBlockMaterial, I itemStick, int resultItemCount) {
