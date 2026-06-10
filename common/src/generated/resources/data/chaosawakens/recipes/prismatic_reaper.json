@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "D": {
+      "item": "minecraft:diamond"
+    },
+    "E": {
+      "item": "minecraft:emerald"
+    },
+    "K": {
+      "item": "chaosawakens:kunzite"
+    },
+    "R": {
+      "item": "chaosawakens:ruby"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "KDE",
+    "RS ",
+    "S  "
+  ],
+  "result": {
+    "item": "chaosawakens:prismatic_reaper"
+  },
+  "show_notification": true
+}

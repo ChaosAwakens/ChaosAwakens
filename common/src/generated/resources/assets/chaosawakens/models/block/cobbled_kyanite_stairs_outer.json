@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/outer_stairs",
-  "textures": {
-    "bottom": "chaosawakens:block/cobbled_kyanite",
-    "side": "chaosawakens:block/cobbled_kyanite",
-    "top": "chaosawakens:block/cobbled_kyanite"
-  }
-}

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "M": {
+      "item": "chaosawakens:kunzite"
+    }
+  },
+  "pattern": [
+    "M M",
+    "M M",
+    "   "
+  ],
+  "result": {
+    "item": "chaosawakens:kunzite_boots"
+  },
+  "show_notification": true
+}

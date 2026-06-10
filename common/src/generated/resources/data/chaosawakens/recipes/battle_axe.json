@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "A": {
+      "item": "chaosawakens:ultimate_axe"
+    },
+    "B": {
+      "item": "minecraft:redstone_block"
+    },
+    "C": {
+      "item": "chaosawakens:triffid_goo"
+    },
+    "D": {
+      "item": "chaosawakens:ultimate_sword"
+    }
+  },
+  "pattern": [
+    "ABA",
+    " C ",
+    " D "
+  ],
+  "result": {
+    "item": "chaosawakens:battle_axe"
+  },
+  "show_notification": true
+}

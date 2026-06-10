@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "C": {
+      "item": "chaosawakens:jeffery_core"
+    },
+    "G": {
+      "item": "chaosawakens:triffid_goo"
+    },
+    "H": {
+      "item": "chaosawakens:big_hammer"
+    },
+    "M": {
+      "item": "chaosawakens:mantis_claw"
+    },
+    "W": {
+      "item": "chaosawakens:water_dragon_scale"
+    }
+  },
+  "pattern": [
+    "  W",
+    "MG ",
+    "CH "
+  ],
+  "result": {
+    "item": "chaosawakens:big_bertha_handle"
+  },
+  "show_notification": true
+}

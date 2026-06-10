@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "count": 2,
-  "ingredient": {
-    "item": "chaosawakens:chiseled_kyanite"
-  },
-  "result": "chaosawakens:chiseled_kyanite_slab"
-}

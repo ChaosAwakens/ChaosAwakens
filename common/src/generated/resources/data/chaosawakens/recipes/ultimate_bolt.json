@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "B": {
+      "item": "minecraft:gunpowder"
+    },
+    "M": {
+      "item": "minecraft:redstone_block"
+    },
+    "T": {
+      "item": "chaosawakens:kunzite"
+    }
+  },
+  "pattern": [
+    "TTT",
+    "MMM",
+    "BBB"
+  ],
+  "result": {
+    "item": "chaosawakens:ultimate_bolt"
+  },
+  "show_notification": true
+}

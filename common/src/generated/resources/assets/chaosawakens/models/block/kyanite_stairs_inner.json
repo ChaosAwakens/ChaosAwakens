@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/inner_stairs",
-  "textures": {
-    "bottom": "chaosawakens:block/stone/kyanite/kyanite",
-    "side": "chaosawakens:block/stone/kyanite/kyanite",
-    "top": "chaosawakens:block/stone/kyanite/kyanite"
-  }
-}

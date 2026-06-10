@@ -1,0 +1,61 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_chaosawakens:big_bertha_blade": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "chaosawakens:big_bertha_blade"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_chaosawakens:big_bertha_guard": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "chaosawakens:big_bertha_guard"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_chaosawakens:big_bertha_handle": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "chaosawakens:big_bertha_handle"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "chaosawakens:big_bertha"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_chaosawakens:big_bertha_blade",
+      "has_chaosawakens:big_bertha_guard",
+      "has_chaosawakens:big_bertha_handle",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "chaosawakens:big_bertha"
+    ]
+  },
+  "sends_telemetry_event": false
+}
