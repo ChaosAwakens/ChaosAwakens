@@ -2,18 +2,10 @@ package io.github.chaosawakens.content.worldgen.config.crystal_world;
 
 import com.google.common.collect.ImmutableList;
 import com.mojang.datafixers.util.Pair;
-import io.github.chaosawakens.CAConstants;
-import io.github.chaosawakens.content.registry.CABiomes;
-import io.github.chaosawakens.content.registry.CABlocks;
-import io.github.chaosawakens.content.registry.CADensityFunctions;
-import io.github.chaosawakens.content.registry.CADimensions;
-import io.github.chaosawakens.content.registry.CAMultiNoiseBiomeSourceParameterLists;
-import io.github.chaosawakens.content.registry.CANoiseGeneratorSettings;
-import io.github.chaosawakens.content.registry.CANoiseParameters;
+import io.github.chaosawakens.content.registry.*;
 import io.github.chaosawakens.content.worldgen.chunk_gen.chunk.OptimizedNoiseBasedChunkGenerator;
 import io.github.chaosawakens.content.worldgen.config.base.DimensionLevelStemConfig;
 import io.github.chaosawakens.content.worldgen.config.crystal_world.biome.CrystalWorldBiomeBuilder;
-import io.github.chaosawakens.content.worldgen.config.mining_paradise.biome.MiningParadiseBiomeBuilder;
 import io.github.chaosawakens.content.worldgen.surface_rule.CASurfaceRules;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.core.Holder;
@@ -23,33 +15,19 @@ import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.valueproviders.ConstantInt;
-import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.biome.BiomeSource;
-import net.minecraft.world.level.biome.Climate;
-import net.minecraft.world.level.biome.MultiNoiseBiomeSource;
-import net.minecraft.world.level.biome.MultiNoiseBiomeSourceParameterList;
+import net.minecraft.world.level.biome.*;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.dimension.BuiltinDimensionTypes;
 import net.minecraft.world.level.dimension.DimensionType;
 import net.minecraft.world.level.dimension.LevelStem;
-import net.minecraft.world.level.levelgen.DensityFunction;
-import net.minecraft.world.level.levelgen.DensityFunctions;
-import net.minecraft.world.level.levelgen.NoiseGeneratorSettings;
-import net.minecraft.world.level.levelgen.NoiseRouter;
-import net.minecraft.world.level.levelgen.NoiseSettings;
-import net.minecraft.world.level.levelgen.Noises;
-import net.minecraft.world.level.levelgen.OreVeinifier;
-import net.minecraft.world.level.levelgen.SurfaceRules;
+import net.minecraft.world.level.levelgen.*;
 import net.minecraft.world.level.levelgen.synth.NormalNoise;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.OptionalLong;
 import java.util.function.Function;
 import java.util.function.Supplier;
-import java.util.stream.Stream;
-
-import static net.minecraft.world.level.levelgen.NoiseRouterData.yLimitedInterpolatable;
 
 public class CrystalDimensionConfig implements DimensionLevelStemConfig {
     public static final NoiseSettings BASE_NOISE_SETTINGS = NoiseSettings.create(-96, 448, 4, 4);
@@ -64,7 +42,7 @@ public class CrystalDimensionConfig implements DimensionLevelStemConfig {
     public static Supplier<NoiseGeneratorSettings> createCrystalNoiseGenSettings(BootstapContext<NoiseGeneratorSettings> regCtx) {
         return () -> new NoiseGeneratorSettings(
                 BASE_NOISE_SETTINGS,
-                CABlocks.KYANITE.stoneBlockFamily().get(CAConstants.prefix("kyanite")).get().defaultBlockState(),
+                CABlocks.KYANITE.get().defaultBlockState(),
                 Blocks.WATER.defaultBlockState(),
                 createCrystalNoiseRouter(regCtx),
                 createCrystalSurfaceRules(),

@@ -14,6 +14,22 @@ import org.jetbrains.annotations.NotNull;
 import static net.minecraft.world.level.levelgen.SurfaceRules.abovePreliminarySurface;
 
 public class CASurfaceRules {
+
+    public static final SurfaceRules.RuleSource ADD_CRYSTAL_GRASS_BLOCK_TOP =
+            SurfaceRules.sequence(
+                    // Top layer: grass above water, dirt underwater
+                    SurfaceRules.ifTrue(
+                            abovePreliminarySurface(),
+                            SurfaceRules.ifTrue(
+                                    SurfaceRules.not(SurfaceRules.hole()),
+                                    SurfaceRules.ifTrue(
+                                            CAConditionSources.AT_ABOVE_WATER_LEVEL,
+                                            CAStateRules.CRYSTAL_GRASS
+                                    )
+                            )
+                    )
+            );
+
     public static final SurfaceRules.RuleSource ADD_GLOOMSTONE_LAYER =
             SurfaceRules.ifTrue(
                     SurfaceRules.verticalGradient(
@@ -24,7 +40,7 @@ public class CASurfaceRules {
                                     8)),
                     CAStateRules.GLOOMSTONE);
 
-    public static final SurfaceRules.RuleSource ADD_GRASS_BLOCK_TOP =
+    public static final SurfaceRules.RuleSource ADD_DENSE_GRASS_BLOCK_TOP =
             SurfaceRules.sequence(
                     // Top layer: grass above water, dirt underwater
                     SurfaceRules.ifTrue(
@@ -53,6 +69,7 @@ public class CASurfaceRules {
                             )
                     )
             );
+
     public static final SurfaceRules.RuleSource ADD_BEDROCK_LAYER =
             SurfaceRules.ifTrue(
                     SurfaceRules.verticalGradient(
@@ -71,6 +88,9 @@ public class CASurfaceRules {
     public static class CAStateRules {
         // General
         public static final SurfaceRules.RuleSource BEDROCK = SurfaceRules.state(Blocks.BEDROCK.defaultBlockState());
+
+        // Crystal World
+        public static final SurfaceRules.RuleSource CRYSTAL_GRASS = SurfaceRules.state(CABlocks.CRYSTAL_GRASS_BLOCK.get().defaultBlockState());
 
         // Mining Paradise
         public static final SurfaceRules.RuleSource DENSE_GRASS_BLOCK = SurfaceRules.state(CABlocks.DENSE_GRASS_BLOCK.get().defaultBlockState());

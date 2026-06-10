@@ -90,7 +90,7 @@ public class MiningParadiseDimensionConfig implements DimensionLevelStemConfig {
     public static SurfaceRules.RuleSource createMiningParadiseSurfaceRules() {
         // Order is important here: bottom to top
 
-        SurfaceRules.RuleSource defaultSurfaceRuleSource = SurfaceRules.sequence(CASurfaceRules.ADD_GLOOMSTONE_LAYER, CASurfaceRules.ADD_GRASS_BLOCK_TOP);
+        SurfaceRules.RuleSource defaultSurfaceRuleSource = SurfaceRules.sequence(CASurfaceRules.ADD_GLOOMSTONE_LAYER, CASurfaceRules.ADD_DENSE_GRASS_BLOCK_TOP);
         SurfaceRules.RuleSource stalagmiteValleySurfaceRuleSource = CASurfaceRules.ADD_GLOOMSTONE_LAYER;
 
         SurfaceRules.RuleSource stalagmiteValleyRuleSource = SurfaceRules.ifTrue(SurfaceRules.isBiome(CABiomes.STALAGMITE_VALLEY.get()), stalagmiteValleySurfaceRuleSource);
