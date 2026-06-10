@@ -10,6 +10,7 @@ import java.util.List;
  * Defines collision shape topology for use in conjunction with {@link ModelCoordinateData}.
  *
  * @apiNote All shapes are defined relative to their local origin (0, 0, 0).
+ *
  * @implSpec Implementors should consider providing vertices in local space (i.e. untransformed), and that vertices form
  * a hull for SAT implementations to work as-expected. Half-extents should be as accurate as possible for broad-phase checks
  * (i.e. AABBs) to work as-expected, too.
@@ -20,9 +21,11 @@ import java.util.List;
  * Shapes should be immutable or stateless. For stateful shape impls, bound information should NOT be stored, as it's
  * parameterized in the core methods provided by this {@code interface}. Composite shapes should prefer immutable builder
  * patterns, and data should be eagerly-computed where possible.
+ *
  * @implNote Composite shape impls of this {@code interface} may not necessarily utilise the bound parameters each method
  * here specifies in favour of caching that information for children (or other encapsulated data), thus making them (the
  * method parameters) {@code null}-safe.
+ *
  * @see ModelCoordinateData
  */
 public interface CollisionShape {
@@ -39,6 +42,7 @@ public interface CollisionShape {
      *
      * @param minBounds The minimum bounds (corner) of the shape's bounding box.
      * @param maxBounds The maximum bounds (corner) of the shape's bounding box.
+     *
      * @return An exhaustive {@link List} of the shape's vertices, in local space (mutable copy).
      */
     List<Vector3d> generateLocalVertices(Vector3d minBounds, Vector3d maxBounds);
@@ -51,6 +55,7 @@ public interface CollisionShape {
      *
      * @param minBounds The minimum shape bounds.
      * @param maxBounds The maximum shape bounds.
+     *
      * @return Half-extents, represented in a {@link Vector3d} (always positive).
      */
     Vector3d computeHalfExtents(Vector3d minBounds, Vector3d maxBounds);
@@ -63,6 +68,7 @@ public interface CollisionShape {
      *
      * @param minBounds The minimum shape bounds.
      * @param maxBounds The maximum shape bounds.
+     *
      * @return The geometric center, represented in a {@link Vector3d} (in local space).
      */
     default Vector3d computeCenter(Vector3d minBounds, Vector3d maxBounds) {
@@ -87,6 +93,7 @@ public interface CollisionShape {
      * Returns the unique edges of this shape for Separating AlignmentAxis Theorem (SAT) collision detection purposes.
      *
      * @return A {@link List} of <u>unique</u> edge direction vectors, represented in {@link Vector3d} objects.
+     *
      * @implNote This method (in its impls) would usually compute edge directions, not positions. For edge-edge
      * collision tests in SAT, we need cross products of edges from both shapes.
      */
@@ -95,13 +102,16 @@ public interface CollisionShape {
     /**
      * Tests if a provided {@linkplain Vector3d point} is inside this shape (in local space).
      *
-     * @param point     The point to test against (should be in local space).
+     * @param point The point to test against (should be in local space).
      * @param minBounds The shape's minimum bounds.
      * @param maxBounds The shape's maximum bounds.
+     *
      * @return {@code true} if the provided {@code point} is inside or on the surface of this shape, otherwise
      * {@code false}.
+     *
      * @implNote Shapes that aggregate other shapes should delegate to their constituent shapes' implementations for
      * accurate results.
+     *
      * @see CompoundUnionShape
      * @see CSGUnionShape
      */
@@ -110,9 +120,10 @@ public interface CollisionShape {
     /**
      * Computes the closest point on this shape's surface to a given point (in local space).
      *
-     * @param point     The point to test against (should be in local space).
+     * @param point The point to test against (should be in local space).
      * @param minBounds The shape's minimum bounds.
      * @param maxBounds The shape's maximum bounds.
+     *
      * @return The closest point on the shape's surface, represented as a {@link Vector3d}.
      */
     Vector3d closestPoint(Vector3d point, Vector3d minBounds, Vector3d maxBounds);
@@ -134,6 +145,7 @@ public interface CollisionShape {
      *
      * @param minBounds The shape's minimum bounds.
      * @param maxBounds The shape's maximum bounds.
+     *
      * @return Approximate volume in cubic units (as provided).
      */
     default double computeVolume(Vector3d minBounds, Vector3d maxBounds) {
@@ -152,7 +164,8 @@ public interface CollisionShape {
      *
      * @param minBounds The shape's minimum bounds.
      * @param maxBounds The shape's maximum bounds.
-     * @param mass      The "mass" of the object (it should probably be how "weighty" the object should be in this case).
+     * @param mass The "mass" of the object (it should probably be how "weighty" the object should be in this case).
+     *
      * @return A 3x3 inertia tensor, represented as a {@link Matrix4d} (diagonal for symmetric shapes).
      */
     default Matrix4d computeInertiaTensor(Vector3d minBounds, Vector3d maxBounds, double mass) {

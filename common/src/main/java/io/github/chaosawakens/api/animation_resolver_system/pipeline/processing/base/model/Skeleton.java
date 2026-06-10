@@ -1,108 +1,130 @@
 package io.github.chaosawakens.api.animation_resolver_system.pipeline.processing.base.model;
 
 import io.github.chaosawakens.api.animation_resolver_system.pipeline.parsing.base.model.ModelInfo;
-import io.github.chaosawakens.api.animation_resolver_system.pipeline.processing.base.model.shape.ConvexHullShape;
+import io.github.chaosawakens.api.animation_resolver_system.pipeline.processing.base.model.template.SkeletonTemplate;
+import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.phys.AABB;
+import org.jetbrains.annotations.NotNull;
+import org.joml.Matrix4d;
 import org.joml.Vector3d;
+import org.joml.Vector3dc;
 
-import java.util.*;
+import java.util.Comparator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Optional;
+import java.util.function.BiConsumer;
 
 public interface Skeleton { // Topological + Upward Traversal
+    Comparator<Bone> DEFAULT_BONE_SORTER = Comparator.comparingInt((Bone bone) -> bone.getDirectParents().size()).thenComparing(Bone::getName);
 
-    private static boolean skeletonCubeFullyContained(List<Vector3d> corners,
-                                                      ModelCoordinateData obb) {
-        Vector3d center = obb.getModelObbCenter();
-        Vector3d[] axes = obb.getModelObbAxes();
-        Vector3d half = obb.getModelObbHalfExtents();
+    @NotNull
+    SkeletonTemplate getTemplate();
 
-        for (Vector3d c : corners) {
-            Vector3d d = new Vector3d(c).sub(center);
-            if (Math.abs(d.dot(axes[0])) > half.x + ModelCoordinateData.EPSILON) return false;
-            if (Math.abs(d.dot(axes[1])) > half.y + ModelCoordinateData.EPSILON) return false;
-            if (Math.abs(d.dot(axes[2])) > half.z + ModelCoordinateData.EPSILON) return false;
-        }
-        return true;
-    }
+    int getTotalBoneCount();
+    int getTotalCubeCount();
 
-    Set<Bone> getAllBones();
+    @NotNull
+    Bone getBone(int boneIndex);
 
-    Set<Bone> getRootBones();
+    @NotNull
+    Cube getCube(int cubeIndex);
 
-    Map<String, Bone> getBonesByName();
+    @NotNull
+    List<? extends Bone> getAllBones();
 
-    Map<Bone, Set<Bone>> getBoneBranches();
+    @NotNull
+    List<? extends Bone> getRootBones();
 
-    Optional<Bone> getBoneByName(String boneName);
+    @NotNull
+    List<? extends Cube> getAllCubes();
 
-    void initializeBoneTree(ModelInfo modelInfo);
+    Optional<? extends Bone> getBoneByName(String boneName);
 
-    void updateBranch(Bone bone);
+    List<? extends Bone> getChildren(Bone bone);
+    List<? extends Cube> getCubesFor(Bone bone);
 
     void refresh(ModelInfo updatedModelInfo);
+    void markDirty();
 
-    default AABB getGeneralBounds() {
-        return getCoordinateData(false).getWorldAABB();
+    @NotNull
+    Vector3d getPivot();
+
+    Optional<Vector3d> getRotation();
+    Optional<Vector3d> getScale();
+
+    void setRotation(Vector3dc rotation);
+    void setRotation(double xRotDeg, double yRotDeg, double zRotDeg); // See below
+
+    void setScale(Vector3dc scale);
+    void setScale(double xScale, double yScale, double zScale); // Not defaulted cuz we want to be able to directly set it via the field instead of creating a new object every time this is called (and vice-versa cuz we want to be able to clear rot entirely by passing "null" in)
+
+    Matrix4d buildSkeletonMatrix(); // Probably the most mathematically-sound approach to skeleton-level transforms. instead of abusing tf out of root bones (which may not hierarch-ally(?) exist)
+    Matrix4d buildBoneMatrix(Bone targetBone);
+
+    AABB getGeneralWorldBounds(Entity owner);
+
+    AABB getGeneralModelBounds();
+
+    default boolean isEmpty() {
+        return getTotalBoneCount() == 0;
     }
 
-    default ModelCoordinateData getCoordinateData(boolean cleanupBoneCollisions) {
-        // Collect all cube MCDs from every bone into a flat list (with per-bone model-space verts)
-        List<ModelCoordinateData> allCubeMcds = new ArrayList<>();
-        List<List<Vector3d>> allCubeVerts = new ArrayList<>();
-
-        for (Bone bone : getAllBones()) {
-            for (Cube cube : bone.getCubes()) {
-                if (!cube.isEnabled() || !cube.hasCollision()) continue;
-                ModelCoordinateData mcd = cube.getCoordinateData();
-                if (mcd == null) continue;
-                List<Vector3d> verts = mcd.getModelSpaceVertices();
-                if (verts.isEmpty()) continue;
-                allCubeMcds.add(mcd);
-                allCubeVerts.add(new ArrayList<>(verts));
-            }
-        }
-
-        if (allCubeVerts.isEmpty()) return null;
-
-        // Skeleton-level cross-bone OBB containment pruning
-        if (cleanupBoneCollisions && allCubeVerts.size() > 1) {
-            int n = allCubeVerts.size();
-            boolean[] pruned = new boolean[n];
-            for (int a = 0; a < n; a++) {
-                if (pruned[a]) continue;
-                for (int b = 0; b < n; b++) {
-                    if (a == b || pruned[b]) continue;
-                    if (skeletonCubeFullyContained(allCubeVerts.get(a), allCubeMcds.get(b))) {
-                        pruned[a] = true;
-                        break;
-                    }
-                }
-            }
-            List<List<Vector3d>> surviving = new ArrayList<>();
-            for (int i = 0; i < n; i++)
-                if (!pruned[i]) surviving.add(allCubeVerts.get(i));
-            allCubeVerts = surviving;
-        }
-
-        List<Vector3d> allPts = new ArrayList<>();
-        for (List<Vector3d> verts : allCubeVerts) allPts.addAll(verts);
-
-        if (allPts.size() < 4) return null;
-
-        ConvexHullShape skeletonHull = ConvexHullShape.fromPointCloud(allPts);
-
-        double minX = Double.MAX_VALUE, minY = Double.MAX_VALUE, minZ = Double.MAX_VALUE;
-        double maxX = -Double.MAX_VALUE, maxY = -Double.MAX_VALUE, maxZ = -Double.MAX_VALUE;
-        for (Vector3d v : allPts) {
-            minX = Math.min(minX, v.x);
-            minY = Math.min(minY, v.y);
-            minZ = Math.min(minZ, v.z);
-            maxX = Math.max(maxX, v.x);
-            maxY = Math.max(maxY, v.y);
-            maxZ = Math.max(maxZ, v.z);
-        }
-
-        ModelCoordinateData result = new ModelCoordinateData(skeletonHull);
-        result.setBounds(minX, minY, minZ, maxX, maxY, maxZ);
-        return result;
+    @NotNull
+    default ModelInfo getBackingInfo() {
+        return getTemplate().getBackingInfo();
     }
+
+    default void updateStructure(BiConsumer<Cube, ModelCoordinateData> cubeUpdateConsumer) {
+        for (Cube cube : getAllCubes()) {
+            if (!cube.isEnabled()) continue;
+
+            cubeUpdateConsumer.accept(cube, cube.getCoordinateData());
+        }
+
+        markDirty();
+    }
+
+    default void refreshStructure() {
+        updateStructure((curCube, cubeMcd) -> curCube.refreshCoordinateData());
+    }
+
+    default List<? extends Bone> getAllParentsFor(Bone targetBone, boolean topological) {
+        List<Bone> parentChain = topological ? new LinkedList<>() : new ObjectArrayList<>();
+        Bone cur = targetBone;
+
+        while (cur != null) {
+            if (topological) parentChain.add(0, cur); // LIFO retrieval, cuz that's how we read targetBone chains for applying parent transforms (i.e. standard iterations go in order of the eldest bone in the chain, down to the current one)
+            else parentChain.add(cur);
+
+            cur = cur.getParentBone()
+                    .filter(curBone -> getBoneByName(curBone.getName()).isPresent())
+                    .orElse(null);
+        }
+
+        return parentChain;
+    }
+
+    default List<? extends Bone> getAllParentsFor(Bone targetBone) {
+        return getAllParentsFor(targetBone, true);
+    }
+
+    default Matrix4d buildCubeMatrix(Cube targetCube) {
+        Matrix4d accumParentMat = targetCube.getParentBone()
+                .map(this::buildBoneMatrix)
+                .orElseGet(Matrix4d::new);
+
+        return accumParentMat.mul(targetCube.buildCubeLocalMatrix());
+    }
+
+    default void setPivot(Vector3dc pivot) {
+        getPivot().set(pivot);
+    }
+
+    default void setPivot(double xModelSpace, double yModelSpace, double zModelSpace) {
+        getPivot().set(xModelSpace, yModelSpace, zModelSpace);
+    }
+
+    // TODO Implement aggregator MCD that can perform selective CSGUnions and compound bones/cubes as needed
 }

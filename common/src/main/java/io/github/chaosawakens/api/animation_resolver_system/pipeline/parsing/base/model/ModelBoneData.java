@@ -15,5 +15,5 @@ public interface ModelBoneData {
 
     Optional<Vector3d> getRotation();
 
-    <MCI extends ModelCubeData> List<MCI> getCubes();
+    <MCD extends ModelCubeData> List<MCD> getCubes();
 }

@@ -4,13 +4,13 @@ import com.mojang.datafixers.util.Either;
 
 public interface RawValue {
 
-    Either<String, Double> getX();
+    Either<String, Double> x();
 
-    Either<String, Double> getY();
+    Either<String, Double> y();
 
-    Either<String, Double> getZ();
+    Either<String, Double> z();
 
     default boolean isLiteral() {
-        return getX().right().isPresent() && getY().right().isPresent() && getZ().right().isPresent();
+        return x().right().isPresent() && y().right().isPresent() && z().right().isPresent();
     }
 }

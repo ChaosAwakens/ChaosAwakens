@@ -1,4 +1,4 @@
-// 1.20.1	2026-05-04T12:53:06.961661	Tags [chaosawakens]
+// 1.20.1	2026-06-10T12:08:44.9968826	Tags [chaosawakens]
 d17916840a85e4cd69be8070b08ba77339e26a90 data/chaosawakens/tags/blocks/fossil/chaosawakens_fossils.json
 705ca8c367d17aac5f53435124cc22bceefa19f9 data/chaosawakens/tags/blocks/fossil/crystalworld/kyanite_fossils.json
 c391d50e91f1c3fac61ba07a97fccd32048a9c5d data/chaosawakens/tags/blocks/fossil/crystalworld_fossils.json
@@ -26,7 +26,7 @@ cbd41a2a653b3094086fdcaf5ad8b3ba17284a5c data/chaosawakens/tags/blocks/fossil/va
 009f464a4e0e009368c50e873e41744ae605315c data/chaosawakens/tags/blocks/stone/base_stone_mining_paradise.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/chaosawakens/tags/blocks/stone/base_stone_village_mania.json
 f68cade8718c544e257ac0996e11ea90f4b7cd24 data/chaosawakens/tags/blocks/vegetation/crystalworld/crystal_flowers.json
-622fd517bcb5a542b132204650fbb487251fc8b7 data/chaosawakens/tags/blocks/vegetation/crystalworld/crystal_soil.json
+ba8c24b3c6a0da6e265ae18a904b05b42993d51c data/chaosawakens/tags/blocks/vegetation/crystalworld/crystal_soil.json
 ad9d6cfea14c7176552b1350ff90d3bbe150a493 data/chaosawakens/tags/blocks/vegetation/crystalworld/crystal_vegetation.json
 19a49a226148afa94a3b6f7e8f51f2be4a476264 data/chaosawakens/tags/blocks/vegetation/farmland_blocks.json
 c3ad16b4bf34cc42eb49d410cca1e515c954c11d data/chaosawakens/tags/blocks/vegetation/flower_blocks.json
@@ -81,10 +81,10 @@ b9d68c676e5c2d6e6ca28fc6b4ebadf2700c3242 data/chaosawakens/tags/items/wood/ginkg
 bc460cfd521e30d558d4a4d759ae0f0cb57d5f01 data/minecraft/tags/blocks/logs_that_burn.json
 70268757f289027d7378341340e504e092299e8e data/minecraft/tags/blocks/mineable/axe.json
 4b61ef3e9f30e5959cb50469b3b413e152589305 data/minecraft/tags/blocks/mineable/hoe.json
-82280a044a2cce613b964fae8d7a721d5520a0b0 data/minecraft/tags/blocks/mineable/pickaxe.json
+e5b8ea68b88f45ee087002c5aa4d495484ce1221 data/minecraft/tags/blocks/mineable/pickaxe.json
 7f0470bf5e23042765892cc82a450fe430ba7d7c data/minecraft/tags/blocks/mineable/shovel.json
 4c64c91dd24f1e056516290b1b12d10051e71638 data/minecraft/tags/blocks/needs_diamond_tool.json
-2e749eae85aba56fc4b87c87ef6c25a4eccce3b3 data/minecraft/tags/blocks/needs_iron_tool.json
+c0ccb3f9ed102be79937ca7f025278f870b02fa0 data/minecraft/tags/blocks/needs_iron_tool.json
 ecb33d4b2bb48f9091a901b9a2d1c3c89c473091 data/minecraft/tags/blocks/needs_stone_tool.json
 5e6d5f5dcbcc29097f70c164f8eb1ecfd21469e4 data/minecraft/tags/blocks/planks.json
 8a9374b39bb398bb95e1942fde0ceb305c489174 data/minecraft/tags/blocks/pressure_plates.json

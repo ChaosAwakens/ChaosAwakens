@@ -1,0 +1,55 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+<<<<<<<< HEAD:common/src/generated/resources/data/chaosawakens/advancements/recipes/building_blocks/chiseled_kyanite_from_kyanite_stonecutting.json
+    "has_kyanite": {
+========
+    "has_cats_eye_block": {
+>>>>>>>> cedfb062eb5b72755afcf95feea8d32a83faa7e7:common/src/generated/resources/data/chaosawakens/advancements/recipes/misc/cats_eye_shard_from_cats_eye_block.json
+      "conditions": {
+        "items": [
+          {
+            "items": [
+<<<<<<<< HEAD:common/src/generated/resources/data/chaosawakens/advancements/recipes/building_blocks/chiseled_kyanite_from_kyanite_stonecutting.json
+              "chaosawakens:kyanite"
+========
+              "chaosawakens:cats_eye_block"
+>>>>>>>> cedfb062eb5b72755afcf95feea8d32a83faa7e7:common/src/generated/resources/data/chaosawakens/advancements/recipes/misc/cats_eye_shard_from_cats_eye_block.json
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+<<<<<<<< HEAD:common/src/generated/resources/data/chaosawakens/advancements/recipes/building_blocks/chiseled_kyanite_from_kyanite_stonecutting.json
+        "recipe": "chaosawakens:chiseled_kyanite_from_kyanite_stonecutting"
+========
+        "recipe": "chaosawakens:cats_eye_shard_from_cats_eye_block"
+>>>>>>>> cedfb062eb5b72755afcf95feea8d32a83faa7e7:common/src/generated/resources/data/chaosawakens/advancements/recipes/misc/cats_eye_shard_from_cats_eye_block.json
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+<<<<<<<< HEAD:common/src/generated/resources/data/chaosawakens/advancements/recipes/building_blocks/chiseled_kyanite_from_kyanite_stonecutting.json
+      "has_kyanite",
+========
+      "has_cats_eye_block",
+>>>>>>>> cedfb062eb5b72755afcf95feea8d32a83faa7e7:common/src/generated/resources/data/chaosawakens/advancements/recipes/misc/cats_eye_shard_from_cats_eye_block.json
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+<<<<<<<< HEAD:common/src/generated/resources/data/chaosawakens/advancements/recipes/building_blocks/chiseled_kyanite_from_kyanite_stonecutting.json
+      "chaosawakens:chiseled_kyanite_from_kyanite_stonecutting"
+========
+      "chaosawakens:cats_eye_shard_from_cats_eye_block"
+>>>>>>>> cedfb062eb5b72755afcf95feea8d32a83faa7e7:common/src/generated/resources/data/chaosawakens/advancements/recipes/misc/cats_eye_shard_from_cats_eye_block.json
+    ]
+  },
+  "sends_telemetry_event": false
+}

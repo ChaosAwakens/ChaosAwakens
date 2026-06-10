@@ -4,8 +4,7 @@ import com.google.common.collect.ImmutableList;
 import com.mememan.nexus.asm.annotations.RegistrarEntry;
 import com.mememan.nexus.platform.NexusServices;
 import io.github.chaosawakens.CAConstants;
-import io.github.chaosawakens.content.worldgen.config.crystal_world.CrystalDimensionConfig;
-import io.github.chaosawakens.content.worldgen.config.mining_paradise.MiningParadiseDimensionConfig;
+import io.github.chaosawakens.content.worldgen.config.mining_paradise.dimension.MiningParadiseDimensionConfig;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.Util;
 import net.minecraft.core.registries.Registries;
@@ -21,7 +20,6 @@ import java.util.function.Supplier;
 public class CAMultiNoiseBiomeSourceParameterLists {
     private static final ObjectArrayList<Supplier<ResourceKey<MultiNoiseBiomeSourceParameterList>>> MULTI_NOISE_BIOME_SOURCE_PARAMETER_LISTS = new ObjectArrayList<>();
 
-    public static final Supplier<ResourceKey<MultiNoiseBiomeSourceParameterList>> CRYSTAL_WORLD_BIOME_LIST = registerMultiNoiseBiomeSourceParameterList("crystal_world", CrystalDimensionConfig::createCrystalNoiseBiomes);
     public static final Supplier<ResourceKey<MultiNoiseBiomeSourceParameterList>> MINING_PARADISE_BIOME_LIST = registerMultiNoiseBiomeSourceParameterList("mining_paradise", MiningParadiseDimensionConfig::createMiningParadiseNoiseBiomes);
 
     private static Supplier<ResourceKey<MultiNoiseBiomeSourceParameterList>> registerMultiNoiseBiomeSourceParameterList(ResourceLocation id, Function<BootstapContext<MultiNoiseBiomeSourceParameterList>, Supplier<MultiNoiseBiomeSourceParameterList>> actualMultiNoiseBiomeSourceParameterListConfigFunc) {
@@ -42,7 +40,6 @@ public class CAMultiNoiseBiomeSourceParameterLists {
     public static class Presets {
         private static final ObjectArrayList<Supplier<MultiNoiseBiomeSourceParameterList.Preset>> MULTI_NOISE_BIOME_SOURCE_PARAMETER_LIST_PRESETS = new ObjectArrayList<>();
 
-        public static final Supplier<MultiNoiseBiomeSourceParameterList.Preset> CRYSTAL_WORLD_BIOME_SOURCE_PRESET = registerBiomeSourceParameterListPreset(CAConstants.prefix("crystal_world"), () -> new MultiNoiseBiomeSourceParameterList.Preset(CAConstants.prefix("crystal_world"), CrystalDimensionConfig::generateCrystalWorldBiomes));
         public static final Supplier<MultiNoiseBiomeSourceParameterList.Preset> MINING_PARADISE_BIOME_SOURCE_PRESET = registerBiomeSourceParameterListPreset(CAConstants.prefix("mining_paradise"), () -> new MultiNoiseBiomeSourceParameterList.Preset(CAConstants.prefix("mining_paradise"), MiningParadiseDimensionConfig::generateMiningParadiseBiomes));
 
         private static Supplier<MultiNoiseBiomeSourceParameterList.Preset> registerBiomeSourceParameterListPreset(ResourceLocation presetId, Supplier<MultiNoiseBiomeSourceParameterList.Preset> presetSup) {

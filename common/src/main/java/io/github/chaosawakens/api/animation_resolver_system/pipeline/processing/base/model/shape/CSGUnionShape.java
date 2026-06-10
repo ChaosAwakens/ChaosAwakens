@@ -3,6 +3,7 @@ package io.github.chaosawakens.api.animation_resolver_system.pipeline.processing
 import io.github.chaosawakens.api.animation_resolver_system.pipeline.processing.base.model.ModelCoordinateData;
 import io.github.chaosawakens.util.MathUtil;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+import it.unimi.dsi.fastutil.objects.ObjectList;
 import it.unimi.dsi.fastutil.objects.ObjectLists;
 import org.joml.Matrix4d;
 import org.joml.Vector3d;
@@ -11,7 +12,39 @@ import org.joml.Vector4d;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class CSGUnionShape implements CollisionShape { // FIXME Still no clue whether it's the math here or in the test code for rendering, but small artifacts appear as a result of several close SourceOBBs clipping with each other and being "subtracted"/unionized (maybe we should try to perform edge-snapping (if we can confirm irregular gaps being present) or just eliminate orphaned edges(?). Idk, requires further testing)
+/**
+ * Constructive Solid Geometry (CSG) {@link CollisionShape} implementation.
+ * <br></br>
+ * Constructive Solid Geometry (CSG) is essentially the practice of fusing primitive shapes together using boolean
+ * algebra (+ the math required to actually merge them into their final representative state). In this shape's case,
+ * the fusion between shapes/MCDs is done using unions, which basically merges the "outer"/non-intersecting segments
+ * together and culls intersecting volumes entirely from the final result (you can read more about this in the references
+ * below).
+ * <br></br>
+ * This implementation treats each source primitive as a model-space OBB, which is more or less the natural
+ * end-state of a transformed cube MCD after bone transforms, local pivots/rotations/scales, and bounds have all been
+ * resolved. {@link #fromMCDs(List)} performs that conversion by sampling transformed basis points instead of trying to
+ * decompose the final transform matrix, since decomposition gets annoying very quickly once pivots and accumulated bone
+ * transforms make an appearance.
+ * <br></br>
+ * Internally, the shape keeps three different representations of the same union because they serve different parts of
+ * the collision/debug pipeline:
+ * <ul>
+ *     <li>{@link SourceOBB}s are the authoritative primitives used for containment checks and support mapping.</li>
+ *     <li>{@link Triangle}s provide a surface mesh for closest-point queries and flattened MCD vertex access.</li>
+ *     <li>{@link Edge}s are clipped exterior edge segments used for clean-ish wireframe/debug rendering.</li>
+ * </ul>
+ * The exterior wireframe pass works by taking every raw OBB edge as a {@code [0, 1]} parametric segment, clipping that
+ * segment against every other OBB's interior via slab intersection, and keeping only the portions that survive outside
+ * all other sources. In other words, internal/intersecting edge portions get eaten, while visible boundary pieces remain
+ * available through {@link #getEdges()}.
+ * <br></br>
+ * <b>Important:</b> This is a pragmatic CSG union tailored for animated model collision/debug geometry, not a full
+ * general-purpose polygon "boolean solver", per-se. Triangles are currently generated per source OBB, supported primitives
+ * are boxes only atm, and very tight/near-coplanar intersections can still produce tiny visual artifacts unless the numeric
+ * tolerances and edge-snapping/orphan-edge cleanup logic are improved further.
+ */
+public class CSGUnionShape implements CollisionShape { // FIXME Still no clue whether it's the math here or in the test code for rendering, but small artifacts appear as a result of several close/possibly coplanar SourceOBBs clipping with each other and being "subtracted"/unionized (maybe we should try to perform edge-snapping (if we can confirm irregular gaps being present) or just eliminate orphaned edges(?). Idk, requires further testing)
     public static final double EXTERIOR_EDGE_CLIPPING_THRESHOLD = 1.0E-7D;
     public static final double SLAB_EPSILON = 1.0E-12D;
     public static final double DIRECTION_DEDUP = 1.0-4D;
@@ -22,8 +55,8 @@ public class CSGUnionShape implements CollisionShape { // FIXME Still no clue wh
     private final List<Vector3d> faceNormals;
     private final List<Vector3d> edgeDirections;
 
-    public CSGUnionShape(List<SourceOBB> obbs) {
-        this.sourceOBBs = ObjectLists.unmodifiable(new ObjectArrayList<>(obbs));
+    public CSGUnionShape(ObjectList<SourceOBB> obbs) {
+        this.sourceOBBs = ObjectLists.unmodifiable(obbs);
 
         ObjectArrayList<Triangle> tempTriangles = new ObjectArrayList<>();
         ObjectArrayList<Edge> tempEdges = new ObjectArrayList<>();
@@ -40,7 +73,7 @@ public class CSGUnionShape implements CollisionShape { // FIXME Still no clue wh
                 obbEdges(obbs.get(a), rawEdges);
 
                 for (Edge rawEdge : rawEdges) {
-                    List<double[]> segs = new ObjectArrayList<>(); // (Insert patrick drooling image here)
+                    ObjectList<double[]> segs = new ObjectArrayList<>(); // (Insert patrick drooling image here)
 
                     segs.add(new double[]{0.0, 1.0}); // [t0, t1] parametric intervals on rawEdge
 
@@ -93,7 +126,7 @@ public class CSGUnionShape implements CollisionShape { // FIXME Still no clue wh
     }
 
     public static CSGUnionShape fromMCDs(List<ModelCoordinateData> cubeMcds) { // cubeMcds should have model-space data ready (i.e. getModelSpaceVertices() non-empty, getModelObbAxes() valid)
-        List<SourceOBB> obbs = new ObjectArrayList<>();
+        ObjectArrayList<SourceOBB> obbs = new ObjectArrayList<>();
 
         // Painstaking MCD -> SOBB conversion inbound :manimdea:
         for (ModelCoordinateData mcd : cubeMcds) {
@@ -107,7 +140,7 @@ public class CSGUnionShape implements CollisionShape { // FIXME Still no clue wh
 
             if (dx < ModelCoordinateData.EPSILON && dy < ModelCoordinateData.EPSILON && dz < ModelCoordinateData.EPSILON) continue;
 
-            // Full model-space matrix = accumulatedBoneMatrix * localTransform, but without using mul() to avoid JOML property-flag shortcuts (we js transform known reference points directly instead :trol:)
+            // Full model-space matrix = accumulatedBoneMatrix * localTransform, but without using mul() to avoid some JOML property-flag shortcuts (we js transform known reference points directly instead :trol:)
             Matrix4d accumulatedBoneMatrix = mcd.getBoneMatrix();
             Matrix4d localTransformMatrix = mcd.buildLocalTransformMatrix();
 
@@ -121,6 +154,7 @@ public class CSGUnionShape implements CollisionShape { // FIXME Still no clue wh
             localTransformMatrix.transform(px);
             localTransformMatrix.transform(py);
             localTransformMatrix.transform(pz);
+
             accumulatedBoneMatrix.transform(o);
             accumulatedBoneMatrix.transform(px);
             accumulatedBoneMatrix.transform(py);
@@ -333,24 +367,29 @@ public class CSGUnionShape implements CollisionShape { // FIXME Still no clue wh
      * @param b End of the target segment.
      * @param clipper The OBB to clip against.
      *
-     * @return An unmodifiable {@link List} of remaining parametric intervals outside the OBB.
+     * @return An unmodifiable {@link ObjectList} of remaining parametric intervals outside the OBB.
      */
-    private static List<double[]> clipSegmentsOutside(List<double[]> segs,
+    private static ObjectList<double[]> clipSegmentsOutside(ObjectList<double[]> segs,
                                                       Vector3d a, Vector3d b,
                                                       SourceOBB clipper) {
-        double tEnter = 0.0, tExit = 1.0;
+        double tEnter = 0.0D, tExit = 1.0D;
         Vector3d ab = new Vector3d(b).sub(a);
 
         /*
          * Compute the parametric interval where the full ray a -> b is inside the OBB.
          * That'd be the intersection of all 6 half-space intervals.
          */
+        Vector3d tmpVc = new Vector3d();
+
         for (int axis = 0; axis < 3; axis++) {
             Vector3d axisVec = clipper.axes[axis];
             double halfE = (axis == 0.0D
                     ? clipper.half.x
                     : (axis == 1.0D ? clipper.half.y : clipper.half.z));
-            double da = new Vector3d(a).sub(clipper.center).dot(axisVec); // Signed distance of a and direction along this axis
+
+            tmpVc.set(a);
+
+            double da = tmpVc.sub(clipper.center).dot(axisVec); // Signed distance of a and direction along this axis
             double dd = ab.dot(axisVec);
             double t1, t2;
 
@@ -383,7 +422,7 @@ public class CSGUnionShape implements CollisionShape { // FIXME Still no clue wh
         }
 
         // No overlap with OBB interior (i.e. all input segments survive unchanged) (yay early exit)
-        if (tEnter >= tExit - EXTERIOR_EDGE_CLIPPING_THRESHOLD) return ObjectLists.unmodifiable(new ObjectArrayList<>(segs));
+        if (tEnter >= tExit - EXTERIOR_EDGE_CLIPPING_THRESHOLD) return segs;
 
         ObjectArrayList<double[]> result = new ObjectArrayList<>();
 
@@ -399,7 +438,7 @@ public class CSGUnionShape implements CollisionShape { // FIXME Still no clue wh
             }
         }
 
-        return ObjectLists.unmodifiable(result);
+        return result;
     }
 
     private static void triangulateOBB(SourceOBB obb, List<Triangle> out) {
@@ -439,11 +478,15 @@ public class CSGUnionShape implements CollisionShape { // FIXME Still no clue wh
 
     private static List<Vector3d> deduplicateDirections(List<Vector3d> dirs) {
         ObjectArrayList<Vector3d> uniqueDirs = new ObjectArrayList<>();
+        Vector3d tmp = new Vector3d();
 
         outer:
         for (Vector3d d : dirs) {
             if (d.lengthSquared() < ModelCoordinateData.EPSILON) continue;
-            Vector3d dn = new Vector3d(d).normalize();
+
+            tmp.set(d);
+
+            Vector3d dn = tmp.normalize();
 
             for (Vector3d curUniqueDir : uniqueDirs) {
                 double dot = Math.abs(dn.dot(curUniqueDir));
@@ -522,8 +565,7 @@ public class CSGUnionShape implements CollisionShape { // FIXME Still no clue wh
         }
     }
 
-    public record SourceOBB(Vector3d center, Vector3d[] axes,
-                            Vector3d half) { // TODO Support other shapes besides boxes
+    public record SourceOBB(Vector3d center, Vector3d[] axes, Vector3d half) { // TODO Support other shapes besides boxes
         public static final double BURY_TOLERANCE = 0.1D;
 
         public SourceOBB(Vector3d center, Vector3d[] axes, Vector3d half) {

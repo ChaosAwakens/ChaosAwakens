@@ -2,7 +2,7 @@ package io.github.chaosawakens.api.animation_resolver_system.faal.animation.mola
 
 import io.github.chaosawakens.CAConstants;
 import io.github.chaosawakens.api.animation_resolver_system.faal.animation.Animatable;
-import io.github.chaosawakens.api.animation_resolver_system.faal.controller.AnimationController;
+import io.github.chaosawakens.api.animation_resolver_system.faal.animation.controller.AnimationController;
 import org.apache.commons.lang3.Validate;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -26,6 +26,37 @@ public class ControllerQueryBinding<A extends Animatable, AC extends AnimationCo
 
     public ControllerQueryBinding(AC ownerController) {
         this.ownerController = ownerController;
+    }
+
+    @Override
+    public AC entity() {
+        return ownerController;
+    }
+
+    @Override
+    public @Nullable ObjectProperty getProperty(@NotNull String name) { // We want to directly return the evaluated value, if appropriate
+        ObjectProperty targetProperty = super.getProperty(name);
+
+        if (targetProperty != null && targetProperty.value() instanceof Function evaluableFunc && !targetProperty.constant()) {
+            return ObjectProperty.property(Validate.notNull(evaluableFunc.evaluate(this)), false);
+        }
+
+        return targetProperty;
+    }
+
+    @Override
+    public @Nullable Value eval(@NotNull Expression expression) {
+        throw new UnsupportedOperationException("ControllerQueryBinding does not support evaluation");
+    }
+
+    @Override
+    public @Nullable Object flag() {
+        throw new UnsupportedOperationException("ControllerQueryBinding does not support flags");
+    }
+
+    @Override
+    public void flag(@Nullable Object flag) { // Looks to be unused for now within Mocha, anyway
+        throw new UnsupportedOperationException("ControllerQueryBinding does not support flags");
     }
 
     @NotNull
@@ -53,34 +84,4 @@ public class ControllerQueryBinding<A extends Animatable, AC extends AnimationCo
         });
     }
 
-    @Override
-    public AC entity() {
-        return ownerController;
-    }
-
-    @Override
-    public @Nullable ObjectProperty getProperty(@NotNull String name) { // We want to directly return the evaluated value, if appropriate
-        ObjectProperty targetProperty = super.getProperty(name);
-
-        if (targetProperty != null && targetProperty.value() instanceof Function evaluableFunc && !targetProperty.constant()) {
-            return ObjectProperty.property(Validate.notNull(evaluableFunc.evaluate(this)), false);
-        }
-
-        return targetProperty;
-    }
-
-    @Override
-    public @Nullable Value eval(@NotNull Expression expression) {
-        throw new UnsupportedOperationException("ControllerQueryBinding does not gjkSupport evaluation");
-    }
-
-    @Override
-    public @Nullable Object flag() {
-        throw new UnsupportedOperationException("ControllerQueryBinding does not gjkSupport flags");
-    }
-
-    @Override
-    public void flag(@Nullable Object flag) { // Looks to be unused for now within Mocha, anyway
-        throw new UnsupportedOperationException("ControllerQueryBinding does not gjkSupport flags");
-    }
 }

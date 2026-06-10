@@ -9,6 +9,7 @@ import io.github.chaosawakens.api.animation_resolver_system.faal.hitbox.Mappable
 import io.github.chaosawakens.util.RenderUtil;
 import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.phys.AABB;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -26,10 +27,15 @@ public abstract class EntityRenderDispatcherMixin {
         if (!(owner instanceof MappableHitboxOwner)) original.call(poseStack, consumer, minX, minY, minZ, maxX, maxY, maxZ, red, green, blue, alpha);
     }
 
+    @WrapOperation(method = "renderHitbox", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/LevelRenderer;renderLineBox(Lcom/mojang/blaze3d/vertex/PoseStack;Lcom/mojang/blaze3d/vertex/VertexConsumer;Lnet/minecraft/world/phys/AABB;FFFF)V", ordinal = 0))
+    private static void chaosawakens$overrideStandardAABB(PoseStack poseStack, VertexConsumer consumer, AABB box, float red, float green, float blue, float alpha, Operation<Void> original, @Local(argsOnly = true) Entity owner) {
+        if (!(owner instanceof MappableHitboxOwner)) original.call(poseStack, consumer, box, red, green, blue, alpha);
+    }
+
     @Inject(method = "renderHitbox", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/Entity;getViewVector(F)Lnet/minecraft/world/phys/Vec3;"))
     private static void chaosawakens$renderSkeletonHitbox(PoseStack poseStack, VertexConsumer buffer, Entity entity, float partialTicks, CallbackInfo ci) {
         if (entity instanceof MappableHitboxOwner mappableHitboxOwner) {
-            RenderUtil.renderSkeletonHitbox(mappableHitboxOwner.getSkeleton(), poseStack, buffer);
+            RenderUtil.renderSkeletonHitbox(mappableHitboxOwner.getSkeleton(), poseStack, buffer, entity, true);
         }
     }
 }

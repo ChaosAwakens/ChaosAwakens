@@ -208,3 +208,6 @@ accessible class net/minecraft/world/level/levelgen/DensityFunctions$BeardifierM
 
 # BlockStateProviderType
 accessible method net/minecraft/world/level/levelgen/feature/stateproviders/BlockStateProviderType <init> (Lcom/mojang/serialization/Codec;)V
+
+# Entity
+extendable method net/minecraft/world/entity/Entity getBoundingBox ()Lnet/minecraft/world/phys/AABB;

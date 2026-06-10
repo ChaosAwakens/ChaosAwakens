@@ -30,7 +30,7 @@ import java.util.List;
  * @see <a href="https://usaco.guide/plat/convex-hull">USACO Guide - Convex Hull</a>
  * @see <a href="https://www.geeksforgeeks.org/dsa/convex-hull-algorithm/">GeeksforGeeks - Convex Hull algorithm</a>
  */
-public class ConvexHullShape implements CollisionShape {
+public class ConvexHullShape implements CollisionShape { // TODO This is a primary culprit, but shapes in general need to be rigorously optimized
     public static final double EPSILON = 1.0E-10D;
     public static final double DEDUP = 0.999D; // Edge deduplication threshold; cos(~2.6 deg)
     private final List<Vector3d> hullVertices;
@@ -59,6 +59,159 @@ public class ConvexHullShape implements CollisionShape {
 
     public ConvexHullShape(List<Vector3d> vertices) {
         this(vertices, new IntArrayList());
+    }
+
+    @Override
+    public ShapeType getShapeType() {
+        return ShapeType.CONVEX_HULL;
+    }
+
+    @Override
+    public List<Vector3d> generateLocalVertices(Vector3d minBounds, Vector3d maxBounds) {
+        if (!hullVertices.isEmpty()) {
+            List<Vector3d> result = new ObjectArrayList<>(hullVertices.size());
+
+            for (Vector3d vertex : hullVertices) result.add(new Vector3d(vertex));
+
+            return result;
+        } else return BoxShape.INSTANCE.generateLocalVertices(minBounds, maxBounds);
+    }
+
+    @Override
+    public Vector3d computeHalfExtents(Vector3d minBounds, Vector3d maxBounds) {
+        if (hullVertices.isEmpty()) return BoxShape.INSTANCE.computeHalfExtents(minBounds, maxBounds);
+
+        double minX = Double.MAX_VALUE, minY = Double.MAX_VALUE, minZ = Double.MAX_VALUE;
+        double maxX = -Double.MAX_VALUE, maxY = -Double.MAX_VALUE, maxZ = -Double.MAX_VALUE;
+
+        for (Vector3d vertex : hullVertices) {
+            minX = Math.min(minX, vertex.x);
+            minY = Math.min(minY, vertex.y);
+            minZ = Math.min(minZ, vertex.z);
+            maxX = Math.max(maxX, vertex.x);
+            maxY = Math.max(maxY, vertex.y);
+            maxZ = Math.max(maxZ, vertex.z);
+        }
+
+        return new Vector3d((maxX - minX) / 2.0D, (maxY - minY) / 2.0D, (maxZ - minZ) / 2.0D);
+    }
+
+    @Override
+    public Vector3d computeCenter(Vector3d minBounds, Vector3d maxBounds) {
+        return hullVertices.isEmpty()
+                ? CollisionShape.super.computeCenter(minBounds, maxBounds)
+                : cachedCenter;
+    }
+
+    @Override
+    public List<Vector3d> getFaceNormals() {
+        return cachedFaceNormals;
+    }
+
+    @Override
+    public List<Vector3d> getEdgeDirections() {
+        return cachedEdgeDirections;
+    }
+
+    @Override
+    public boolean containsPoint(Vector3d point, Vector3d minBounds, Vector3d maxBounds) {
+        if (faceIndices.isEmpty() || hullVertices.size() < 4)
+            return BoxShape.INSTANCE.containsPoint(point, minBounds, maxBounds);
+
+        for (int faceIdx = 0; faceIdx < faceIndices.size(); faceIdx += 3) { // A point is considered to be inside a convex hull if it happens to be on the inward side of every plane
+            Vector3d a = hullVertices.get(faceIndices.getInt(faceIdx));
+            Vector3d b = hullVertices.get(faceIndices.getInt(faceIdx + 1));
+            Vector3d c = hullVertices.get(faceIndices.getInt(faceIdx + 2));
+
+            Vector3d normal = new Vector3d(b).sub(a).cross(new Vector3d(c).sub(a));
+            double len = normal.length();
+
+            if (len < EPSILON) continue;
+
+            normal.div(len);
+
+            double d = new Vector3d(point).sub(a).dot(normal); // If point is on the positive (outward) side of any face, it's outside
+
+            if (d > EPSILON) return false;
+        }
+
+        return true;
+    }
+
+    @Override
+    public Vector3d closestPoint(Vector3d point, Vector3d minBounds, Vector3d maxBounds) {
+        if (hullVertices.isEmpty()) return BoxShape.INSTANCE.closestPoint(point, minBounds, maxBounds);
+        if (containsPoint(point, minBounds, maxBounds)) return new Vector3d(point);
+
+        // Project onto each face triangle and find the closest point
+        Vector3d closestPoint = null;
+        double minDistSq = Double.MAX_VALUE;
+
+        if (!faceIndices.isEmpty()) {
+            for (int faceIdx = 0; faceIdx < faceIndices.size(); faceIdx += 3) {
+                Vector3d a = hullVertices.get(faceIndices.getInt(faceIdx));
+                Vector3d b = hullVertices.get(faceIndices.getInt(faceIdx + 1));
+                Vector3d c = hullVertices.get(faceIndices.getInt(faceIdx + 2));
+
+                Vector3d closestTrianglePoint = MathUtil.closestPointOnTriangle(point, a, b, c);
+                double dSq = closestTrianglePoint.distanceSquared(point);
+
+                if (dSq < minDistSq) {
+                    minDistSq = dSq;
+                    closestPoint = closestTrianglePoint;
+                }
+            }
+        } else { // Fallback to closest vertex
+            for (Vector3d vertex : hullVertices) {
+                double dSq = vertex.distanceSquared(point);
+
+                if (dSq < minDistSq) {
+                    minDistSq = dSq;
+                    closestPoint = new Vector3d(vertex);
+                }
+            }
+        }
+
+        return closestPoint != null ? closestPoint : new Vector3d(point);
+    }
+
+    @Override
+    public int getVertexCount() {
+        return Math.max(hullVertices.size(), 8);
+    }
+
+    @Override
+    public double computeVolume(Vector3d minBounds, Vector3d maxBounds) {
+        if (faceIndices.isEmpty() || hullVertices.size() < 4)
+            return CollisionShape.super.computeVolume(minBounds, maxBounds);
+
+        double volume = 0.0D;
+
+        for (int faceIdx = 0; faceIdx < faceIndices.size(); faceIdx += 3) {
+            Vector3d a = hullVertices.get(faceIndices.getInt(faceIdx));
+            Vector3d b = hullVertices.get(faceIndices.getInt(faceIdx + 1));
+            Vector3d c = hullVertices.get(faceIndices.getInt(faceIdx + 2));
+
+            volume += a.dot(new Vector3d(b).cross(c));
+        }
+
+        return Math.abs(volume) / 6.0D; // Signed tetrahedra from origin V = (1/6) * |sum(a dot (b x c) )|
+    }
+
+    public List<Vector3d> getHullVertices() {
+        return hullVertices;
+    }
+
+    public Vector3d getCachedCenter() {
+        return new Vector3d(cachedCenter);
+    }
+
+    public IntList getFaceIndices() {
+        return faceIndices;
+    }
+
+    public int getFaceCount() {
+        return faceIndices.size() / 3;
     }
 
     public static ConvexHullShape fromPointCloud(List<Vector3d> points) {
@@ -418,158 +571,5 @@ public class ConvexHullShape implements CollisionShape {
         int hullVertexCount = hullVertices.size();
 
         return new Vector3d(cx / hullVertexCount, cy / hullVertexCount, cz / hullVertexCount);
-    }
-
-    @Override
-    public ShapeType getShapeType() {
-        return ShapeType.CONVEX_HULL;
-    }
-
-    @Override
-    public List<Vector3d> generateLocalVertices(Vector3d minBounds, Vector3d maxBounds) {
-        if (!hullVertices.isEmpty()) {
-            List<Vector3d> result = new ObjectArrayList<>(hullVertices.size());
-
-            for (Vector3d vertex : hullVertices) result.add(new Vector3d(vertex));
-
-            return result;
-        } else return BoxShape.INSTANCE.generateLocalVertices(minBounds, maxBounds);
-    }
-
-    @Override
-    public Vector3d computeHalfExtents(Vector3d minBounds, Vector3d maxBounds) {
-        if (hullVertices.isEmpty()) return BoxShape.INSTANCE.computeHalfExtents(minBounds, maxBounds);
-
-        double minX = Double.MAX_VALUE, minY = Double.MAX_VALUE, minZ = Double.MAX_VALUE;
-        double maxX = -Double.MAX_VALUE, maxY = -Double.MAX_VALUE, maxZ = -Double.MAX_VALUE;
-
-        for (Vector3d vertex : hullVertices) {
-            minX = Math.min(minX, vertex.x);
-            minY = Math.min(minY, vertex.y);
-            minZ = Math.min(minZ, vertex.z);
-            maxX = Math.max(maxX, vertex.x);
-            maxY = Math.max(maxY, vertex.y);
-            maxZ = Math.max(maxZ, vertex.z);
-        }
-
-        return new Vector3d((maxX - minX) / 2.0D, (maxY - minY) / 2.0D, (maxZ - minZ) / 2.0D);
-    }
-
-    @Override
-    public Vector3d computeCenter(Vector3d minBounds, Vector3d maxBounds) {
-        return hullVertices.isEmpty()
-                ? CollisionShape.super.computeCenter(minBounds, maxBounds)
-                : cachedCenter;
-    }
-
-    @Override
-    public List<Vector3d> getFaceNormals() {
-        return cachedFaceNormals;
-    }
-
-    @Override
-    public List<Vector3d> getEdgeDirections() {
-        return cachedEdgeDirections;
-    }
-
-    @Override
-    public boolean containsPoint(Vector3d point, Vector3d minBounds, Vector3d maxBounds) {
-        if (faceIndices.isEmpty() || hullVertices.size() < 4)
-            return BoxShape.INSTANCE.containsPoint(point, minBounds, maxBounds);
-
-        for (int faceIdx = 0; faceIdx < faceIndices.size(); faceIdx += 3) { // A point is considered to be inside a convex hull if it happens to be on the inward side of every plane
-            Vector3d a = hullVertices.get(faceIndices.getInt(faceIdx));
-            Vector3d b = hullVertices.get(faceIndices.getInt(faceIdx + 1));
-            Vector3d c = hullVertices.get(faceIndices.getInt(faceIdx + 2));
-
-            Vector3d normal = new Vector3d(b).sub(a).cross(new Vector3d(c).sub(a));
-            double len = normal.length();
-
-            if (len < EPSILON) continue;
-
-            normal.div(len);
-
-            double d = new Vector3d(point).sub(a).dot(normal); // If point is on the positive (outward) side of any face, it's outside
-
-            if (d > EPSILON) return false;
-        }
-
-        return true;
-    }
-
-    @Override
-    public Vector3d closestPoint(Vector3d point, Vector3d minBounds, Vector3d maxBounds) {
-        if (hullVertices.isEmpty()) return BoxShape.INSTANCE.closestPoint(point, minBounds, maxBounds);
-        if (containsPoint(point, minBounds, maxBounds)) return new Vector3d(point);
-
-        // Project onto each face triangle and find the closest point
-        Vector3d closestPoint = null;
-        double minDistSq = Double.MAX_VALUE;
-
-        if (!faceIndices.isEmpty()) {
-            for (int faceIdx = 0; faceIdx < faceIndices.size(); faceIdx += 3) {
-                Vector3d a = hullVertices.get(faceIndices.getInt(faceIdx));
-                Vector3d b = hullVertices.get(faceIndices.getInt(faceIdx + 1));
-                Vector3d c = hullVertices.get(faceIndices.getInt(faceIdx + 2));
-
-                Vector3d closestTrianglePoint = MathUtil.closestPointOnTriangle(point, a, b, c);
-                double dSq = closestTrianglePoint.distanceSquared(point);
-
-                if (dSq < minDistSq) {
-                    minDistSq = dSq;
-                    closestPoint = closestTrianglePoint;
-                }
-            }
-        } else { // Fallback to closest vertex
-            for (Vector3d vertex : hullVertices) {
-                double dSq = vertex.distanceSquared(point);
-
-                if (dSq < minDistSq) {
-                    minDistSq = dSq;
-                    closestPoint = new Vector3d(vertex);
-                }
-            }
-        }
-
-        return closestPoint != null ? closestPoint : new Vector3d(point);
-    }
-
-    @Override
-    public int getVertexCount() {
-        return Math.max(hullVertices.size(), 8);
-    }
-
-    @Override
-    public double computeVolume(Vector3d minBounds, Vector3d maxBounds) {
-        if (faceIndices.isEmpty() || hullVertices.size() < 4)
-            return CollisionShape.super.computeVolume(minBounds, maxBounds);
-
-        double volume = 0.0D;
-
-        for (int faceIdx = 0; faceIdx < faceIndices.size(); faceIdx += 3) {
-            Vector3d a = hullVertices.get(faceIndices.getInt(faceIdx));
-            Vector3d b = hullVertices.get(faceIndices.getInt(faceIdx + 1));
-            Vector3d c = hullVertices.get(faceIndices.getInt(faceIdx + 2));
-
-            volume += a.dot(new Vector3d(b).cross(c));
-        }
-
-        return Math.abs(volume) / 6.0D; // Signed tetrahedra from origin V = (1/6) * |sum(a dot (b x c) )|
-    }
-
-    public List<Vector3d> getHullVertices() {
-        return hullVertices;
-    }
-
-    public Vector3d getCachedCenter() {
-        return new Vector3d(cachedCenter);
-    }
-
-    public IntList getFaceIndices() {
-        return faceIndices;
-    }
-
-    public int getFaceCount() {
-        return faceIndices.size() / 3;
     }
 }
