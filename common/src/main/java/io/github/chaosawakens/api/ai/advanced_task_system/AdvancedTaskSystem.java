@@ -1,6 +1,5 @@
 package io.github.chaosawakens.api.ai.advanced_task_system;
 
-import com.mememan.nexus.event.result.EventResult;
 import com.mememan.nexus.template.event.blueprint.server.ServerLifeCycleEventBlueprint;
 import io.github.chaosawakens.api.ai.advanced_task_system.task.TaskDeviser;
 import it.unimi.dsi.fastutil.Hash;
@@ -46,17 +45,15 @@ public final class AdvancedTaskSystem {
                 .ifPresent(mappedDeviserIds -> mappedDeviserIds.add(targetEntityId));
     }
 
-    public static void initializeATS() { // TODO Events when dep is added
+    public static void initializeATS() {
         ServerLifeCycleEventBlueprint.SERVER_STARTED.onEvent(event -> {
             initializeTickHooks();
-            return EventResult.success(event);
         });
     }
 
-    public static void shutdownATS() { // TODO Events when dep is added
+    public static void shutdownATS() {
         ServerLifeCycleEventBlueprint.SERVER_STOPPING.onEvent(event -> {
 
-            return EventResult.success(event);
         });
     }
 

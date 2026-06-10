@@ -8,4 +8,5 @@ public interface MappableHitboxOwner extends Animatable {
 
     @NotNull
     Skeleton getSkeleton();
+
 }

@@ -3,12 +3,12 @@ package io.github.chaosawakens.api.animation_resolver_system.faal;
 import com.mememan.nexus.asm.annotations.PostInit;
 import com.mememan.nexus.template.event.blueprint.common.TickEventBlueprint;
 import io.github.chaosawakens.api.animation_resolver_system.faal.animation.Animatable;
-import io.github.chaosawakens.api.animation_resolver_system.faal.controller.AnimationController;
+import io.github.chaosawakens.api.animation_resolver_system.faal.animation.controller.AnimationController;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+import it.unimi.dsi.fastutil.objects.ObjectLists;
 import net.minecraft.resources.ResourceLocation;
 
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -30,7 +30,7 @@ public final class AnimationManager<A extends Animatable> {
     }
 
     private final A owner;
-    private final List<AnimationController<A>> activeControllers = new LinkedList<>();
+    private final ObjectArrayList<AnimationController<A>> activeControllers = new ObjectArrayList<>();
 
     private AnimationManager(A owner) {
         this.owner = owner;
@@ -56,7 +56,7 @@ public final class AnimationManager<A extends Animatable> {
     }
 
     public List<AnimationController<A>> getActiveControllers() {
-        return new ObjectArrayList<>(activeControllers);
+        return ObjectLists.unmodifiable(activeControllers);
     }
 
     public Optional<AnimationController<A>> getActiveController(ResourceLocation controllerId) {

@@ -9,7 +9,7 @@ public final class CAETPWTemplates {
             .withClientData(() -> CAClientDataEntryTemplates.BLOB)
             .build();
 
-    public static final EntityTypePropertyWrapper<Entity> GECKOLIB_ANIMATED_ENTITY = new EntityTypePropertyWrapper<>()
+    public static final EntityTypePropertyWrapper<Entity> GECKOLIB_ANIMATED_BOSS = new EntityTypePropertyWrapper<>()
             .builder()
             .withClientData(() -> CAClientDataEntryTemplates.GECKOLIB_ANIMATED_ENTITY)
             .build();

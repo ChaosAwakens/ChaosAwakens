@@ -1,8 +1,12 @@
 package io.github.chaosawakens.api.animation_resolver_system.pipeline.processing.base.model;
 
-import io.github.chaosawakens.api.animation_resolver_system.pipeline.processing.base.model.shape.ConvexHullShape;
+import io.github.chaosawakens.api.animation_resolver_system.pipeline.parsing.base.model.ModelBoneData;
+import io.github.chaosawakens.api.animation_resolver_system.pipeline.processing.base.model.template.BoneTemplate;
 import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
 import net.minecraft.world.phys.AABB;
+import org.jetbrains.annotations.NotNull;
+import org.joml.Vector3d;
+import org.joml.Vector3dc;
 
 import java.util.List;
 import java.util.Optional;
@@ -10,49 +14,44 @@ import java.util.Set;
 
 public interface Bone {
 
-    private static List<List<org.joml.Vector3d>> pruneContainedCubes(
-            List<List<org.joml.Vector3d>> cubeVerts, List<Cube> cubes) {
-        int n = cubeVerts.size();
-        boolean[] pruned = new boolean[n];
+    @NotNull
+    BoneTemplate getTemplate();
 
-        for (int a = 0; a < n; a++) {
-            if (pruned[a]) continue;
-            for (int b = 0; b < n; b++) {
-                if (a == b || pruned[b]) continue;
-                ModelCoordinateData mcdB = cubes.get(b).getCoordinateData();
-                if (mcdB != null && isFullyContainedInOBB(cubeVerts.get(a), mcdB)) {
-                    pruned[a] = true;
-                    break;
-                }
-            }
-        }
+    Optional<? extends Bone> getParentBone();
 
-        List<List<org.joml.Vector3d>> result = new java.util.ArrayList<>();
-        for (int i = 0; i < n; i++)
-            if (!pruned[i]) result.add(cubeVerts.get(i));
-        return result;
+    List<? extends Cube> getCubes(); // Impls should shallow-copy cuz we still want to be able to mutate cubes and stuff directly
+
+    @NotNull
+    Vector3d getPivot(); // TODO Whenever MCDs are properly implemented for bones, this needs to be cleaned tf up
+
+    Optional<Vector3d> getRotation();
+    Optional<Vector3d> getScale();
+
+    void setScale(Vector3dc scale);
+    void setScale(double scaleX, double scaleY, double scaleZ);
+
+    AABB getGeneralBounds();
+
+    @NotNull
+    default ModelBoneData getBackingData() {
+        return getTemplate().getBackingData();
     }
 
-    private static boolean isFullyContainedInOBB(List<org.joml.Vector3d> corners,
-                                                 ModelCoordinateData obb) {
-        org.joml.Vector3d center = obb.getModelObbCenter();
-        org.joml.Vector3d[] axes = obb.getModelObbAxes();
-        org.joml.Vector3d half = obb.getModelObbHalfExtents();
-
-        for (org.joml.Vector3d c : corners) {
-            org.joml.Vector3d d = new org.joml.Vector3d(c).sub(center);
-            if (Math.abs(d.dot(axes[0])) > half.x + ModelCoordinateData.EPSILON) return false;
-            if (Math.abs(d.dot(axes[1])) > half.y + ModelCoordinateData.EPSILON) return false;
-            if (Math.abs(d.dot(axes[2])) > half.z + ModelCoordinateData.EPSILON) return false;
-        }
-        return true;
+    default int getIndex() {
+        return getTemplate().getIndex();
     }
 
-    String getName();
+    default String getName() {
+        return getTemplate().getName();
+    }
 
-    Optional<Bone> getParentBone();
+    default int getParentIndex() {
+        return getTemplate().getParentIndex();
+    }
 
-    List<Cube> getCubes();
+    default int[] getCubeIndices() {
+        return getTemplate().getCubeIndices();
+    }
 
     default void enable() {
         getCubes().forEach(Cube::enable);
@@ -62,58 +61,11 @@ public interface Bone {
         getCubes().forEach(Cube::disable);
     }
 
-    default AABB getGeneralBounds() {
-        return getCoordinateData(false).getWorldAABB();
+    default boolean isEnabled() {
+        return getCubes().stream().anyMatch(Cube::isEnabled);
     }
 
-    default ModelCoordinateData getCoordinateData(boolean cleanupCubeCollisions) {
-        List<Cube> cubes = getCubes().stream()
-                .filter(Cube::isEnabled)
-                .filter(Cube::hasCollision)
-                .toList();
-        if (cubes.isEmpty()) return null;
-
-        // Collect model-space vertices per cube (post localTransform*boneMatrix, pre entityTransform)
-        List<List<org.joml.Vector3d>> cubeVerts = new java.util.ArrayList<>();
-        for (Cube cube : cubes) {
-            ModelCoordinateData mcd = cube.getCoordinateData();
-            if (mcd == null) continue;
-            List<org.joml.Vector3d> verts = mcd.getModelSpaceVertices();
-            if (!verts.isEmpty()) cubeVerts.add(new java.util.ArrayList<>(verts));
-        }
-        if (cubeVerts.isEmpty()) return null;
-
-        // Optional: prune cubes whose volume is fully contained inside another cube's OBB
-        if (cleanupCubeCollisions && cubeVerts.size() > 1) {
-            cubeVerts = pruneContainedCubes(cubeVerts, cubes);
-        }
-
-        // Flatten to a point cloud and build convex hull
-        List<org.joml.Vector3d> allPts = new java.util.ArrayList<>();
-        for (List<org.joml.Vector3d> verts : cubeVerts) allPts.addAll(verts);
-
-        ConvexHullShape hull = allPts.size() >= 4
-                ? ConvexHullShape.fromPointCloud(allPts)
-                : new ConvexHullShape(allPts);
-
-        // Compute tight bounds over all points (required to satisfy boundsInitialized)
-        double minX = Double.MAX_VALUE, minY = Double.MAX_VALUE, minZ = Double.MAX_VALUE;
-        double maxX = -Double.MAX_VALUE, maxY = -Double.MAX_VALUE, maxZ = -Double.MAX_VALUE;
-        for (org.joml.Vector3d v : allPts) {
-            minX = Math.min(minX, v.x);
-            minY = Math.min(minY, v.y);
-            minZ = Math.min(minZ, v.z);
-            maxX = Math.max(maxX, v.x);
-            maxY = Math.max(maxY, v.y);
-            maxZ = Math.max(maxZ, v.z);
-        }
-
-        // Hull vertices are already in model space — boneMatrix stays identity.
-        // The caller applies the entity transform via computeWorldSpace(entityPos, yRot).
-        ModelCoordinateData result = new ModelCoordinateData(hull);
-        result.setBounds(minX, minY, minZ, maxX, maxY, maxZ);
-        return result;
-    }
+    // TODO Implement aggregator MCD that can perform selective CSGUnions and compound cubes as needed
 
     default boolean isLeaf() {
         return getCubes().isEmpty();
@@ -129,10 +81,11 @@ public interface Bone {
 
     default Set<Bone> getDirectParents() { // Sorted bottom -> top
         Set<Bone> directParents = new ObjectLinkedOpenHashSet<>();
-        Optional<Bone> parentBone = getParentBone();
+        Optional<? extends Bone> parentBone = getParentBone();
 
         while (parentBone.isPresent()) {
             directParents.add(parentBone.get());
+
             parentBone = parentBone.get().getParentBone();
         }
 

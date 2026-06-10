@@ -5,7 +5,7 @@ import com.mememan.nexus.asm.annotations.RegistrarEntry;
 import com.mememan.nexus.platform.NexusServices;
 import io.github.chaosawakens.CAConstants;
 import io.github.chaosawakens.content.worldgen.config.base.DimensionLevelStemConfig;
-import io.github.chaosawakens.content.worldgen.config.crystal_world.CrystalDimensionConfig;
+import io.github.chaosawakens.content.worldgen.config.crystal_world.CrystalWorldDimensionConfig;
 import io.github.chaosawakens.content.worldgen.config.mining_paradise.MiningParadiseDimensionConfig;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.core.registries.Registries;
@@ -24,8 +24,8 @@ public class CADimensions {
     private static final ObjectArrayList<Supplier<ResourceKey<Level>>> LEVEL_KEYS = new ObjectArrayList<>();
 
     // Crystal World
-    public static final Supplier<ResourceKey<DimensionType>> CRYSTAL_DIMENSION_TYPE = registerDimensionType("crystal_world", CrystalDimensionConfig::createDimensionType);
-    public static final Supplier<ResourceKey<LevelStem>> CRYSTAL_LEVEL_STEM = registerLevelStem("crystal_world", CrystalDimensionConfig::new);
+    public static final Supplier<ResourceKey<DimensionType>> CRYSTAL_DIMENSION_TYPE = registerDimensionType("crystal_world", CrystalWorldDimensionConfig::createDimensionType);
+    public static final Supplier<ResourceKey<LevelStem>> CRYSTAL_LEVEL_STEM = registerLevelStem("crystal_world", CrystalWorldDimensionConfig::new);
     public static final Supplier<ResourceKey<Level>> CRYSTAL_LEVEL_KEY = registerLevelKey("crystal_world");
 
 

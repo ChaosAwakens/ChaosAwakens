@@ -1,7 +1,7 @@
 package io.github.chaosawakens.api.animation_resolver_system.faal.animation;
 
 import io.github.chaosawakens.api.animation_resolver_system.faal.AnimationManager;
-import io.github.chaosawakens.api.animation_resolver_system.faal.controller.AnimationController;
+import io.github.chaosawakens.api.animation_resolver_system.faal.animation.controller.AnimationController;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.Nullable;
 

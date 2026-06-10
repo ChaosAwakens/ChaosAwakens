@@ -7,6 +7,8 @@ import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.level.Level;
 
 public abstract class AnimatableMonster extends StatefulMonster implements Animatable {
+    protected float zRot = 0.0F;
+    protected float zRotO = 0.0F;
 
     protected AnimatableMonster(EntityType<? extends Monster> entityType, Level level) {
         super(entityType, level);

@@ -2,6 +2,6 @@
   "parent": "minecraft:block/cross",
   "render_type": "minecraft:cutout",
   "textures": {
-    "cross": "chaosawakens:block/tall_orange_crystal_growth_top"
+    "cross": "chaosawakens:block/vegetation/crystal/tall_orange_crystal_growth_top"
   }
 }

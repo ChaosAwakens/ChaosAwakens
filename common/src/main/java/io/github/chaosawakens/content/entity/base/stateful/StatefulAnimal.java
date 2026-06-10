@@ -31,8 +31,30 @@ public abstract class StatefulAnimal extends Animal {
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new StatefulPanicGoal(this));
 
-        this.goalSelector.addGoal(1, new WaterAvoidingRandomStrollGoal(this, 1.1D));
-        this.goalSelector.addGoal(1, new RandomLookAroundGoal(this));
+        this.goalSelector.addGoal(1, new WaterAvoidingRandomStrollGoal(this, 1.1D) {
+
+            @Override
+            public boolean canUse() {
+                return super.canUse() && !isPanicking();
+            }
+
+            @Override
+            public boolean canContinueToUse() {
+                return super.canContinueToUse() && !isPanicking();
+            }
+        });
+        this.goalSelector.addGoal(1, new RandomLookAroundGoal(this) {
+
+            @Override
+            public boolean canUse() {
+                return super.canUse() && !isPanicking();
+            }
+
+            @Override
+            public boolean canContinueToUse() {
+                return super.canContinueToUse() && !isPanicking();
+            }
+        });
         
         this.goalSelector.addGoal(2, new FloatGoal(this));
     }
@@ -74,12 +96,14 @@ public abstract class StatefulAnimal extends Animal {
     @Override
     public void push(double pX, double pY, double pZ) {
         if (!canBeKnockedBack()) return;
+
         super.push(pX, pY, pZ);
     }
 
     @Override
     public void knockback(double pStrength, double pRatioX, double pRatioZ) {
         if (!canBeKnockedBack()) return;
+
         super.knockback(pStrength, pRatioX, pRatioZ);
     }
 

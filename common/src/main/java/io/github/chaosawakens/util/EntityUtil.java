@@ -1,7 +1,5 @@
 package io.github.chaosawakens.util;
 
-import io.github.chaosawakens.api.animation_resolver_system.faal.animation.Animatable;
-import io.github.chaosawakens.api.animation_resolver_system.pipeline.processing.geckolib.model.GeckolibSkeleton;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 
@@ -32,9 +30,5 @@ public final class EntityUtil {
 
     public static List<LivingEntity> getAllEntitiesAround(Entity user, double dX, double dY, double dZ, double radius) {
         return getEntitiesAround(user, LivingEntity.class, dX, dY, dZ, radius);
-    }
-
-    public static GeckolibSkeleton createGeckolibSkeleton(Animatable targetEntity) {
-        return new GeckolibSkeleton(targetEntity.getModelInfo());
     }
 }

@@ -164,6 +164,21 @@ public class ModelCoordinateData { // TODO Fix localScale[Axis] application
         this(BoxShape.INSTANCE);
     }
 
+    public ModelCoordinateData(ModelCoordinateData other) {
+        this.collisionShape = other == null ? BoxShape.INSTANCE : other.collisionShape;
+
+        resetBounds();
+
+        if (other == null) return;
+
+        setBounds(other.originalMinX, other.originalMinY, other.originalMinZ, other.originalMaxX, other.originalMaxY, other.originalMaxZ);
+        setPivot(other.pivotX, other.pivotY, other.pivotZ);
+        setLocalRotation(other.localRotationX, other.localRotationY, other.localRotationZ);
+        setLocalScale(other.localScaleX, other.localScaleY, other.localScaleZ);
+        setLocalOffset(other.localOffsetX, other.localOffsetY, other.localOffsetZ);
+        setBoneMatrix(new Matrix4d(other.boneMatrix)); // Other data's fundamentally built off of these, so no need to copy or set the rest
+    }
+
     public void setBounds(double minX, double minY, double minZ, double maxX, double maxY, double maxZ) {
         this.originalMinX = minX;
         this.originalMinY = minY;
@@ -257,18 +272,18 @@ public class ModelCoordinateData { // TODO Fix localScale[Axis] application
         return new Matrix4d(boneMatrix).mul(buildLocalTransformMatrix());
     }
 
-    public Matrix4d buildEntityTransformMatrix(Vec3 entityPos, float yRotDeg, float xRotDeg, float zRotDeg) { // We'll probably implement zRotDeg (roll) for entities ourselves, cuz MC only has pitch (xRotDeg) and yaw (yRotDeg)
+    public Matrix4d buildEntityTransformMatrix(Vec3 entityPos, float xRotDeg, float yRotDeg, float zRotDeg) { // We'll probably implement zRotDeg (roll) for entities ourselves, cuz MC only has pitch (xRotDeg) and yaw (yRotDeg)
         return new Matrix4d()
                 .identity()
                 .translate(entityPos.x, entityPos.y, entityPos.z)
-                .rotateY(Math.toRadians(-yRotDeg)) // MC uses negative Y rotation, apparently
                 .rotateX(Math.toRadians(xRotDeg))
+                .rotateY(Math.toRadians(yRotDeg))
                 .rotateZ(Math.toRadians(zRotDeg))
                 .scale(MODEL_TO_WORLD_SCALE); // Translate to block units
     }
 
     public Matrix4d buildWorldSpaceMatrix(Vec3 entityPos, float xRot, float yRot, float zRot) { // worldTransform = entityTransform * modelSpaceTransform
-        return buildEntityTransformMatrix(entityPos, yRot, xRot, zRot).mul(buildModelSpaceMatrix());
+        return buildEntityTransformMatrix(entityPos, xRot, yRot, zRot).mul(buildModelSpaceMatrix());
     }
 
     public void computeWorldSpace(Vec3 entityPos, float xRotDeg, float yRotDeg, float zRotDeg) { // Rotation params passed here are effectively accumulated/applied post-transform to the whole MCD, particularly useful since entities themselves have basic IK from MC (e.g. BodyController)
@@ -362,9 +377,9 @@ public class ModelCoordinateData { // TODO Fix localScale[Axis] application
 
     public Vector3d getOriginalCenter() {
         return new Vector3d(
-                (originalMinX + originalMaxX) / 2.0,
-                (originalMinY + originalMaxY) / 2.0,
-                (originalMinZ + originalMaxZ) / 2.0
+                (originalMinX + originalMaxX) / 2.0D,
+                (originalMinY + originalMaxY) / 2.0D,
+                (originalMinZ + originalMaxZ) / 2.0D
         );
     }
 
@@ -624,12 +639,9 @@ public class ModelCoordinateData { // TODO Fix localScale[Axis] application
     public Vector3d gjkSupport(Vector3d worldSpaceSearchDir, Vec3 entityPos, float xRotDeg, float yRotDeg, float zRotDeg) {
         computeWorldSpace(entityPos, xRotDeg, yRotDeg, zRotDeg);
 
-        if (collisionShape instanceof BoxShape)
-            return gjkSupportBox(worldSpaceSearchDir); // For BoxShape, we can optimize using OBB axes directly
-        if (collisionShape instanceof CapsuleShape)
-            return gjkSupportCapsule(worldSpaceSearchDir, entityPos, xRotDeg, yRotDeg, zRotDeg); // For CapsuleShape, use basic specialized algorithm (based on primary axis)
-        if (collisionShape instanceof SphereShape)
-            return gjkSupportSphere(worldSpaceSearchDir); // For SphereShape, O(1) center + radius * worldSpaceSearchDir
+        if (collisionShape instanceof BoxShape) return gjkSupportBox(worldSpaceSearchDir); // For BoxShape, we can optimize using OBB axes directly
+        if (collisionShape instanceof CapsuleShape) return gjkSupportCapsule(worldSpaceSearchDir, entityPos, xRotDeg, yRotDeg, zRotDeg); // For CapsuleShape, use basic specialized algorithm (based on primary axis)
+        if (collisionShape instanceof SphereShape) return gjkSupportSphere(worldSpaceSearchDir); // For SphereShape, O(1) center + radius * worldSpaceSearchDir
 
         return gjkSupportGeneral(worldSpaceSearchDir); // General case: scan all vertices
     }

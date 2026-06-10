@@ -116,7 +116,7 @@ public final class CATags {
 
         // Base Stone
         public static final Supplier<TagKey<Block>> BASE_STONE_CRYSTALWORLD = TagPropertyWrapperTemplates.registerAndChain(Registries.BLOCK, CAConstants.prefix("stone/base_stone_crystalworld"))
-                .withTaggedObject((Supplier<Block>) CABlocks.KYANITE.stoneBlockFamily().entrySet().stream().filter(curBlockEntry -> curBlockEntry.getKey().getPath().equals("kyanite")).map(Map.Entry::getValue).findFirst().orElseThrow())
+                .withTaggedObject(CABlocks.KYANITE)
                 .buildAndGet();
         public static final Supplier<TagKey<Block>> BASE_STONE_MINING_PARADISE = TagPropertyWrapperTemplates.registerAndChain(Registries.BLOCK, CAConstants.prefix("stone/base_stone_mining_paradise"))
                 .withTaggedObject((Supplier<Block>) CABlocks.DREDGESTONE.stoneBlockFamily().entrySet().stream().filter(curBlockEntry -> curBlockEntry.getKey().getPath().equals("dredgestone")).map(Map.Entry::getValue).findFirst().orElseThrow())
