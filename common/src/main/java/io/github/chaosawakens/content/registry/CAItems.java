@@ -142,6 +142,7 @@ public final class CAItems {
 
     // Components
     public static final Supplier<Item> SALT = ItemPropertyWrapperTemplates.registerItemFromTemplate(CAConstants.prefix("salt"), () -> new Item(new Item.Properties()), CAIPWTemplates.FOOD_COMPONENT, ITEMS);
+    public static final Supplier<Item> CRYSTAL_STICK = ItemPropertyWrapperTemplates.registerItemFromTemplate(CAConstants.prefix("crystalwood_stick"), () -> new Item(new Item.Properties()), ItemPropertyWrapperTemplates.ROD, ITEMS);
 
     // Food on a Stick
 
@@ -191,10 +192,8 @@ public final class CAItems {
 
     // Utility
     public static final Supplier<MinersDreamItem> MINERS_DREAM = ItemPropertyWrapperTemplates.registerAndChain(CAConstants.prefix("miners_dream"), () -> new MinersDreamItem(new Item.Properties().stacksTo(16)), ItemPropertyWrapperTemplates.BASIC_GENERATED, ITEMS).withRecipe(recipeConsumer -> CARecipeTemplates.threeRowRecipe(recipeConsumer, KUNZITE.get(), Items.REDSTONE_BLOCK, Items.GUNPOWDER)).buildAndGet();
-
-    public static final Supplier<UltimateBolt> ULTIMATE_BOLT = ItemPropertyWrapperTemplates.registerAndChain(CAConstants.prefix("ultimate_bolt"), () -> new UltimateBolt(new Item.Properties().stacksTo(64)), ItemPropertyWrapperTemplates.BASIC_GENERATED, ITEMS).withRecipe(recipeConsumer -> CARecipeTemplates.threeRowRecipe(recipeConsumer, KUNZITE.get(), Items.REDSTONE_BLOCK, Items.GUNPOWDER)).buildAndGet();
-
-    public static final Supplier<IrukandjiArrow> IRUKANDJI_ARROW = ItemPropertyWrapperTemplates.registerAndChain(CAConstants.prefix("irukandji_arrow"), () -> new IrukandjiArrow(new Item.Properties().stacksTo(64)), ItemPropertyWrapperTemplates.BASIC_GENERATED, ITEMS).withRecipe(recipeConsumer -> CARecipeTemplates.threeRowRecipe(recipeConsumer, KUNZITE.get(), Items.REDSTONE_BLOCK, Items.GUNPOWDER)).buildAndGet();
+    public static final Supplier<UltimateBolt> ULTIMATE_BOLT = ItemPropertyWrapperTemplates.registerAndChain(CAConstants.prefix("ultimate_bolt"), () -> new UltimateBolt(new Item.Properties().stacksTo(64)), ItemPropertyWrapperTemplates.BASIC_GENERATED, ITEMS).withRecipe(CARecipeTemplates::ultBoltRecipe).buildAndGet();
+    public static final Supplier<IrukandjiArrow> IRUKANDJI_ARROW = ItemPropertyWrapperTemplates.registerAndChain(CAConstants.prefix("irukandji_arrow"), () -> new IrukandjiArrow(new Item.Properties().stacksTo(64)), ItemPropertyWrapperTemplates.BASIC_GENERATED, ITEMS).withRecipe(CARecipeTemplates::irukandjiArrowRecipe).buildAndGet();
 
     // Material Weapons and Tools
     public static final Supplier<EnchantedItem> ULTIMATE_APPLE = ItemPropertyWrapperTemplates.registerAndChain(CAConstants.prefix("ultimate_apple"), () -> new EnchantedItem(food(CAFood.FOOD_ULTIMATE_APPLE)), CAIPWTemplates.FOOD, ITEMS).withRecipe(recipeConsumer -> CARecipeTemplates.crossTwoDotRecipe(recipeConsumer, Items.APPLE, TITANIUM_NUGGET.get(), URANIUM_NUGGET.get())).buildAndGet();
@@ -337,9 +336,9 @@ public final class CAItems {
     public static final Supplier<PrismaticReaper> PRISMATIC_REAPER = ItemPropertyWrapperTemplates.registerAndChain(CAConstants.prefix("prismatic_reaper"), () -> new PrismaticReaper(CAItemTierTemplates.SPECIAL_MID, 28, -2.4F, new Item.Properties().durability(6000).rarity(Rarity.EPIC), Map.ofEntries(Map.entry(Enchantments.UNBREAKING, 4), Map.entry(Enchantments.SWEEPING_EDGE, 4))), CAIPWTemplates.HANDHELD_LONG, EQUIPMENT).withRecipe(CARecipeTemplates::prismaticReaperRecipe).buildAndGet();
 
     // Weapon Components
-    public static final Supplier<Item> BIG_BERTHA_BLADE = ItemPropertyWrapperTemplates.registerAndChain(CAConstants.prefix("big_bertha_blade"), () -> new Item(new Item.Properties().rarity(Rarity.EPIC)), ItemPropertyWrapperTemplates.BASIC_GENERATED, ITEMS).withRecipe(recipeConsumer -> CARecipeTemplates.bigBerthaBladeRecipe(recipeConsumer, WORM_TOOTH.get(), WASP_STINGER.get(), SEA_VIPER_TONGUE.get(), ULTIMATE_SWORD.get(), RAT_SWORD.get(), POISON_SWORD.get(), FAIRY_SWORD.get())).buildAndGet();
-    public static final Supplier<Item> BIG_BERTHA_GUARD = ItemPropertyWrapperTemplates.registerAndChain(CAConstants.prefix("big_bertha_guard"), () -> new Item(new Item.Properties().rarity(Rarity.EPIC)), ItemPropertyWrapperTemplates.BASIC_GENERATED, ITEMS).withRecipe(recipeConsumer -> CARecipeTemplates.bigBerthaGuardRecipe(recipeConsumer, ENDER_DRAGON_SCALE.get(), NIGHTMARE_SWORD.get(), VORTEX_EYE.get(), MOTH_SCALE.get(), BASILISK_SCALE.get(), EMPEROR_SCORPION_SCALE.get(), NIGHTMARE_SCALE.get())).buildAndGet();
     public static final Supplier<Item> BIG_BERTHA_HANDLE = ItemPropertyWrapperTemplates.registerAndChain(CAConstants.prefix("big_bertha_handle"), () -> new Item(new Item.Properties().rarity(Rarity.EPIC)), ItemPropertyWrapperTemplates.BASIC_GENERATED, ITEMS).withRecipe(recipeConsumer -> CARecipeTemplates.bigBerthaHandelRecipe(recipeConsumer, JEFFERY_CORE.get(), BIG_HAMMER.get(), MANTIS_CLAW.get(), WATER_DRAGON_SCALE.get(), TRIFFID_GOO.get())).buildAndGet();
+    public static final Supplier<Item> BIG_BERTHA_GUARD = ItemPropertyWrapperTemplates.registerAndChain(CAConstants.prefix("big_bertha_guard"), () -> new Item(new Item.Properties().rarity(Rarity.EPIC)), ItemPropertyWrapperTemplates.BASIC_GENERATED, ITEMS).withRecipe(recipeConsumer -> CARecipeTemplates.bigBerthaGuardRecipe(recipeConsumer, ENDER_DRAGON_SCALE.get(), NIGHTMARE_SWORD.get(), VORTEX_EYE.get(), MOTH_SCALE.get(), BASILISK_SCALE.get(), EMPEROR_SCORPION_SCALE.get(), NIGHTMARE_SCALE.get())).buildAndGet();
+    public static final Supplier<Item> BIG_BERTHA_BLADE = ItemPropertyWrapperTemplates.registerAndChain(CAConstants.prefix("big_bertha_blade"), () -> new Item(new Item.Properties().rarity(Rarity.EPIC)), ItemPropertyWrapperTemplates.BASIC_GENERATED, ITEMS).withRecipe(recipeConsumer -> CARecipeTemplates.bigBerthaBladeRecipe(recipeConsumer, WORM_TOOTH.get(), WASP_STINGER.get(), SEA_VIPER_TONGUE.get(), ULTIMATE_SWORD.get(), RAT_SWORD.get(), POISON_SWORD.get(), FAIRY_SWORD.get())).buildAndGet();
 
     // Big Swords
     public static final Supplier<SlayerChainSaw> SLAYER_CHAIN_SAW = ItemPropertyWrapperTemplates.registerAndChain(CAConstants.prefix("slayer_chainsaw"), () -> new SlayerChainSaw(CAItemTierTemplates.BIG_SWORD, SlayerChainSaw.ATTACK_DAMAGE, -3F, new Item.Properties().fireResistant().rarity(Rarity.EPIC)), ItemPropertyWrapperTemplates.BASIC_HANDHELD, EQUIPMENT).withRecipe(recipeConsumer -> CARecipeTemplates.dotRingRecipe(recipeConsumer, Items.REDSTONE_BLOCK, ULTIMATE_AXE.get())).buildAndGet();

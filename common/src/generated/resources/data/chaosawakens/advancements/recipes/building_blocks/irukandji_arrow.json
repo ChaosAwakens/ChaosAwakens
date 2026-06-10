@@ -1,36 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_chaosawakens:kunzite": {
+    "has_chaosawakens:dead_irukandji": {
       "conditions": {
         "items": [
           {
             "items": [
-              "chaosawakens:kunzite"
-            ]
-          }
-        ]
-      },
-      "trigger": "minecraft:inventory_changed"
-    },
-    "has_minecraft:gunpowder": {
-      "conditions": {
-        "items": [
-          {
-            "items": [
-              "minecraft:gunpowder"
-            ]
-          }
-        ]
-      },
-      "trigger": "minecraft:inventory_changed"
-    },
-    "has_minecraft:redstone_block": {
-      "conditions": {
-        "items": [
-          {
-            "items": [
-              "minecraft:redstone_block"
+              "chaosawakens:dead_irukandji"
             ]
           }
         ]
@@ -46,9 +22,7 @@
   },
   "requirements": [
     [
-      "has_chaosawakens:kunzite",
-      "has_minecraft:redstone_block",
-      "has_minecraft:gunpowder",
+      "has_chaosawakens:dead_irukandji",
       "has_the_recipe"
     ]
   ],

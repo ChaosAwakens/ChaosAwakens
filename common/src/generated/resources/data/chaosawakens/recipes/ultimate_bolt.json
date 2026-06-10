@@ -2,22 +2,29 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "B": {
-      "item": "minecraft:gunpowder"
+    "F": {
+      "item": "minecraft:feather"
     },
-    "M": {
-      "item": "minecraft:redstone_block"
+    "P": {
+      "item": "chaosawakens:platinum_lump"
+    },
+    "S": {
+      "item": "chaosawakens:sunstone"
     },
     "T": {
-      "item": "chaosawakens:kunzite"
+      "item": "chaosawakens:titanium_nugget"
+    },
+    "U": {
+      "item": "chaosawakens:uranium_nugget"
     }
   },
   "pattern": [
-    "TTT",
-    "MMM",
-    "BBB"
+    "ST ",
+    "TPU",
+    " UF"
   ],
   "result": {
+    "count": 8,
     "item": "chaosawakens:ultimate_bolt"
   },
   "show_notification": true

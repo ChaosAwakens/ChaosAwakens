@@ -1,12 +1,36 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_minecraft:bow": {
+    "has_chaosawakens:platinum_lump": {
       "conditions": {
         "items": [
           {
             "items": [
-              "minecraft:bow"
+              "chaosawakens:platinum_lump"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_chaosawakens:titanium_ingot": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "chaosawakens:titanium_ingot"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_chaosawakens:uranium_ingot": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "chaosawakens:uranium_ingot"
             ]
           }
         ]
@@ -22,7 +46,9 @@
   },
   "requirements": [
     [
-      "has_minecraft:bow",
+      "has_chaosawakens:uranium_ingot",
+      "has_chaosawakens:titanium_ingot",
+      "has_chaosawakens:platinum_lump",
       "has_the_recipe"
     ]
   ],

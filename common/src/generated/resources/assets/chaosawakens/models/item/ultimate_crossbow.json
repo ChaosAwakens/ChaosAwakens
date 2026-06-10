@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/handheld",
   "textures": {
-    "layer0": "minecraft:item/invalid"
+    "layer0": "chaosawakens:item/equipment/ultimate/ultimate_crossbow"
   }
 }

@@ -186,7 +186,6 @@ public final class CARecipeTemplates {
     }
 
     public static <I extends Item> Consumer<Supplier<I>> ultBowRecipe(Consumer<FinishedRecipe> recipeConsumer, int resultItemCount) {
-
         return (resultItemSup) -> ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, resultItemSup.get(), resultItemCount)
                 .define('U', URANIUM_INGOT)
                 .define('T', TITANIUM_INGOT)
@@ -206,8 +205,6 @@ public final class CARecipeTemplates {
     }
 
     public static <I extends Item> Consumer<Supplier<I>> ultCrossBowRecipe(Consumer<FinishedRecipe> recipeConsumer, int resultItemCount) {
-
-
         return (resultItemSup) -> ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, resultItemSup.get(), resultItemCount)
                 .define('U', URANIUM_INGOT)
                 .define('T', TITANIUM_INGOT)
@@ -227,8 +224,6 @@ public final class CARecipeTemplates {
     }
 
     public static <I extends Item> Consumer<Supplier<I>> ultFishRodRecipe(Consumer<FinishedRecipe> recipeConsumer, int resultItemCount) {
-
-
         return (resultItemSup) -> ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, resultItemSup.get(), resultItemCount)
                 .define('U', URANIUM_INGOT)
                 .define('T', TITANIUM_INGOT)
@@ -244,6 +239,38 @@ public final class CARecipeTemplates {
     }
     public static <I extends Item> Consumer<Supplier<I>> ultFishRodRecipe(Consumer<FinishedRecipe> recipeConsumer) {
         return (resultItemSup) -> ultFishRodRecipe(recipeConsumer,1).accept((Supplier<Item>) resultItemSup);
+    }
+
+    public static <I extends Item> Consumer<Supplier<I>> ultBoltRecipe(Consumer<FinishedRecipe> recipeConsumer, int resultItemCount) {
+        return (resultItemSup) -> ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, resultItemSup.get(), resultItemCount)
+                .define('S', SUNSTONE.get())
+                .define('U', URANIUM_NUGGET.get())
+                .define('T', TITANIUM_NUGGET.get())
+                .define('P', PLATINUM_LUMP)
+                .define('F', Items.FEATHER)
+                .pattern("ST ")
+                .pattern("TPU")
+                .pattern(" UF")
+                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(SUNSTONE.get()), PredicateUtil.has(SUNSTONE.get()))
+                .save(recipeConsumer);
+    }
+    public static <I extends Item> Consumer<Supplier<I>> ultBoltRecipe(Consumer<FinishedRecipe> recipeConsumer) {
+        return (resultItemSup) -> ultBoltRecipe(recipeConsumer,8).accept((Supplier<Item>) resultItemSup);
+    }
+
+    public static <I extends Item> Consumer<Supplier<I>> irukandjiArrowRecipe(Consumer<FinishedRecipe> recipeConsumer, int resultItemCount) {
+        return (resultItemSup) -> ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, resultItemSup.get(), resultItemCount)
+                .define('I', DEAD_IRUKANDJI.get())
+                .define('C', CRYSTAL_STICK.get())
+                .define('P', PEACOCK_FEATHER.get())
+                .pattern("  I")
+                .pattern(" C ")
+                .pattern("P  ")
+                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(DEAD_IRUKANDJI.get()), PredicateUtil.has(DEAD_IRUKANDJI.get()))
+                .save(recipeConsumer);
+    }
+    public static <I extends Item> Consumer<Supplier<I>> irukandjiArrowRecipe(Consumer<FinishedRecipe> recipeConsumer) {
+        return (resultItemSup) -> irukandjiArrowRecipe(recipeConsumer,8).accept((Supplier<Item>) resultItemSup);
     }
 
     // Tools

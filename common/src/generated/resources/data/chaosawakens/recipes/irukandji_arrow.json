@@ -2,22 +2,23 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "B": {
-      "item": "minecraft:gunpowder"
+    "C": {
+      "item": "chaosawakens:crystalwood_stick"
     },
-    "M": {
-      "item": "minecraft:redstone_block"
+    "I": {
+      "item": "chaosawakens:dead_irukandji"
     },
-    "T": {
-      "item": "chaosawakens:kunzite"
+    "P": {
+      "item": "chaosawakens:peacock_feather"
     }
   },
   "pattern": [
-    "TTT",
-    "MMM",
-    "BBB"
+    "  I",
+    " C ",
+    "P  "
   ],
   "result": {
+    "count": 8,
     "item": "chaosawakens:irukandji_arrow"
   },
   "show_notification": true

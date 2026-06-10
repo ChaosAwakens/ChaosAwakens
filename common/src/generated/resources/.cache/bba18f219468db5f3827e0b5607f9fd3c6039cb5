@@ -1,4 +1,4 @@
-// 1.20.1	2026-06-10T12:08:44.9889337	Loot Tables [chaosawakens]
+// 1.20.1	2026-06-10T22:15:11.9533101	Loot Tables [chaosawakens]
 7d3bf49cdf706609ed56d6127d53cfce1efa350a data/chaosawakens/loot_tables/blocks/acacia_leaf_carpet.json
 0554dabb677eb72c96033b60bdb34e44f731a08a data/chaosawakens/loot_tables/blocks/alstroemeriat.json
 9dcc945a74aaf08ac12cfe196e94269d9115ab82 data/chaosawakens/loot_tables/blocks/aluminum_block.json
@@ -39,7 +39,6 @@ c2eb3ba9af3484c04722d4759723872e382cca39 data/chaosawakens/loot_tables/blocks/br
 f64e23fbde903f5160f60a6aa1195ad9631c2f13 data/chaosawakens/loot_tables/blocks/brown_crystal_growth.json
 c2eb3ba9af3484c04722d4759723872e382cca39 data/chaosawakens/loot_tables/blocks/brown_crystal_wall_fan.json
 b6b254c0ca3625251da09c54040b443216d7a128 data/chaosawakens/loot_tables/blocks/bush.json
-100fae838c575b67a700721af6242af5dcc7fff0 data/chaosawakens/loot_tables/blocks/cats_eye_block.json
 b9a9fd39cd2ba0887ad57a903717d314377d1a95 data/chaosawakens/loot_tables/blocks/cherry_leaf_carpet.json
 793bc3b076f9c08c51ddcf0b00df07da01011c4d data/chaosawakens/loot_tables/blocks/chiseled_dredgestone.json
 c05ce9ff2ef17b499a2133a4aa82f92e2f28aaae data/chaosawakens/loot_tables/blocks/chiseled_dredgestone_slab.json
@@ -80,6 +79,7 @@ da7302737ba093199e2d7ce5bc236d6ef9afd2c0 data/chaosawakens/loot_tables/blocks/cr
 3e299199b3aeae3af9bd2a88305e59a68ca68e90 data/chaosawakens/loot_tables/blocks/crystalwood_wall_sign.json
 e908437ea3966275fe6c1c4fc07df0460a5183f9 data/chaosawakens/loot_tables/blocks/crystal_defossilizer.json
 81fffd68d6457ab0aeff3a1a3ed7884e28fb48fa data/chaosawakens/loot_tables/blocks/crystal_grass.json
+25e47352bb46e07f24c65aa9c62f10bcacdf9166 data/chaosawakens/loot_tables/blocks/crystal_grass_block.json
 ae6fc8406ef38a4d55115a79bcfa90dc1f4dad34 data/chaosawakens/loot_tables/blocks/crystal_rose.json
 1a76c5276bddd03f5f05a1acd4c2a8147890f597 data/chaosawakens/loot_tables/blocks/crystal_rose_bush.json
 81bea188586f8fef06655c8d98f272624069a416 data/chaosawakens/loot_tables/blocks/cyan_rose.json
@@ -490,7 +490,6 @@ db082f3446751c7499622cfaa6ab38d152c3851c data/chaosawakens/loot_tables/blocks/gr
 317a7a27a18d0c83d606d2c95d9714fa0016d42b data/chaosawakens/loot_tables/blocks/kunzite_block.json
 a90f76566f941eb1a9d5c1bcba6a9bb719e8482b data/chaosawakens/loot_tables/blocks/kunzite_ore.json
 bcbbd91020f3392bad92bc54ed63665724a47d6c data/chaosawakens/loot_tables/blocks/kyanite.json
-9839ea15f356274537b64429de155fee1b59fb19 data/chaosawakens/loot_tables/blocks/kyanite_grass_block.json
 c31e1b16c386de90d8a346a3e93a50d825f82782 data/chaosawakens/loot_tables/blocks/large_densewood_bush.json
 de90b7408fab1b257f79008f214f047e629681aa data/chaosawakens/loot_tables/blocks/large_ginkgo_bush.json
 a5035fb117673ab7c37cb2761e4f7738bdadd64e data/chaosawakens/loot_tables/blocks/large_mesozoic_bush.json
