@@ -32,11 +32,11 @@ public final class CAFood {
     public static final FoodProperties FOOD_TOMATO = new FoodProperties.Builder().nutrition(2).saturationMod(0.55F).build();
 
     // Crystal Plants
-    public static final FoodProperties FOOD_CRYSTAL_APPLE = new FoodProperties.Builder().nutrition(5).saturationMod(0.85F).alwaysEat().effect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 3000, 0), 1.0F).effect(new MobEffectInstance(MobEffects.REGENERATION, 3000, 0), 1.0F).build();
-    public static final FoodProperties FOOD_CRYSTAL_BEETROOT = new FoodProperties.Builder().nutrition(1).saturationMod(0.15F).alwaysEat().effect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 3000, 0), 1.0F).effect(new MobEffectInstance(MobEffects.REGENERATION, 3000, 0), 1.0F).build();
-    public static final FoodProperties FOOD_CRYSTAL_CARROT = new FoodProperties.Builder().nutrition(3).saturationMod(0.35F).alwaysEat().effect(new MobEffectInstance(MobEffects.NIGHT_VISION, 3000, 0), 1.0F).effect(new MobEffectInstance(MobEffects.REGENERATION, 3000, 0), 1.0F).build();
-    public static final FoodProperties FOOD_CRYSTAL_POTATO = new FoodProperties.Builder().nutrition(2).saturationMod(0.30F).alwaysEat().effect(new MobEffectInstance(MobEffects.SATURATION, 3000, 0), 1.0F).effect(new MobEffectInstance(MobEffects.REGENERATION, 3000, 0), 1.0F).build();
-    public static final FoodProperties FOOD_CATS_EYE_CHORUS = new FoodProperties.Builder().nutrition(2).saturationMod(0.30F).alwaysEat().effect(new MobEffectInstance(MobEffects.SATURATION, 3000, 0), 1.0F).effect(new MobEffectInstance(MobEffects.REGENERATION, 3000, 0), 1.0F).build();
+    public static final FoodProperties FOOD_CRYSTAL_APPLE = new FoodProperties.Builder().nutrition(5).saturationMod(0.85F).alwaysEat().effect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 1000, 1), 0.8F).effect(new MobEffectInstance(MobEffects.REGENERATION, 50, 1), 0.65F).build();
+    public static final FoodProperties FOOD_CRYSTAL_BEETROOT = new FoodProperties.Builder().nutrition(1).saturationMod(0.15F).alwaysEat().effect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 750, 1), 0.7F).effect(new MobEffectInstance(MobEffects.REGENERATION, 50, 1), 0.25F).build();
+    public static final FoodProperties FOOD_CRYSTAL_CARROT = new FoodProperties.Builder().nutrition(3).saturationMod(0.40F).alwaysEat().effect(new MobEffectInstance(MobEffects.NIGHT_VISION, 3000, 0), 0.2F).effect(new MobEffectInstance(MobEffects.REGENERATION, 50, 1), 0.25F).build();
+    public static final FoodProperties FOOD_CRYSTAL_POTATO = new FoodProperties.Builder().nutrition(2).saturationMod(0.30F).alwaysEat().effect(new MobEffectInstance(MobEffects.SATURATION, 150, 0), 0.1F).effect(new MobEffectInstance(MobEffects.REGENERATION, 50, 1), 0.25F).build();
+    public static final FoodProperties FOOD_CATS_EYE_CHORUS = new FoodProperties.Builder().nutrition(2).saturationMod(0.30F).alwaysEat().effect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 333, 0), 1.0F).effect(new MobEffectInstance(MobEffects.REGENERATION, 250, 1), 0.5F).build();
 
     // Manufactured
     public static final FoodProperties FOOD_BLT_SANDWICH = new FoodProperties.Builder().nutrition(9).saturationMod(1.1F).build();
