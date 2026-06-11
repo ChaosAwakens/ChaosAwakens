@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableList;
 import com.mememan.nexus.asm.annotations.RegistrarEntry;
 import com.mememan.nexus.template.property_wrapper.ItemPropertyWrapperTemplates;
 import io.github.chaosawakens.CAConstants;
+import io.github.chaosawakens.content.entity.boss.HerculesBeetle;
 import io.github.chaosawakens.content.item.equipment.armor.PeacockBoots;
 import io.github.chaosawakens.content.item.equipment.armor.lapis.LapisBoots;
 import io.github.chaosawakens.content.item.equipment.armor.lapis.LapisChestplate;
@@ -39,6 +40,7 @@ import io.github.chaosawakens.content.item.food.BaggedPopcornItem;
 import io.github.chaosawakens.content.item.food.BowledFoodItem;
 import io.github.chaosawakens.content.item.food.CatsEyeChorusItem;
 import io.github.chaosawakens.content.item.misc.*;
+import io.github.chaosawakens.content.item.mob.WrappedFoodOnAStickItem;
 import io.github.chaosawakens.content.item.utility.MinersDreamItem;
 import io.github.chaosawakens.content.item.utility.PowerChipItem;
 import io.github.chaosawakens.core.template.CAArmorMaterialTemplates;
@@ -46,12 +48,16 @@ import io.github.chaosawakens.core.template.CAIPWTemplates;
 import io.github.chaosawakens.core.template.CAItemTierTemplates;
 import io.github.chaosawakens.core.template.CARecipeTemplates;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.animal.Pig;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.enchantment.Enchantments;
 
 import java.util.Map;
 import java.util.function.Supplier;
+
+import static io.github.chaosawakens.content.registry.CATags.CAItemTags.ENCHANTED_GOLDEN_APPLES;
 
 @RegistrarEntry
 public final class CAItems {
@@ -94,10 +100,10 @@ public final class CAItems {
     public static final Supplier<Item> TOMATO_SEEDS = ItemPropertyWrapperTemplates.registerItemFromTemplate(CAConstants.prefix("tomato_seeds"), () -> new BlackListItemNameBlockItem(() -> CABlocks.TOMATO_HEAD_BLOCK, new Item.Properties(), new Supplier[] {() -> CABlocks.TOMATO_HEAD_BLOCK, () -> CABlocks.TOMATO_BODY_BLOCK}), CAIPWTemplates.FOOD, ITEMS);
 
     // Crystal Plants
-    public static final Supplier<Item> CRYSTAL_APPLE = ItemPropertyWrapperTemplates.registerItemFromTemplate(CAConstants.prefix("crystal_apple"), () -> new Item(food(CAFood.FOOD_CRYSTAL_APPLE)), CAIPWTemplates.FOOD, ITEMS);
-    public static final Supplier<Item> CRYSTAL_BEETROOT = ItemPropertyWrapperTemplates.registerItemFromTemplate(CAConstants.prefix("crystal_beetroot"), () -> new Item(food(CAFood.FOOD_CRYSTAL_BEETROOT)), CAIPWTemplates.FOOD, ITEMS);
-    public static final Supplier<Item> CRYSTAL_CARROT = ItemPropertyWrapperTemplates.registerItemFromTemplate(CAConstants.prefix("crystal_carrot"), () -> new Item(food(CAFood.FOOD_CRYSTAL_CARROT)), CAIPWTemplates.FOOD, ITEMS);
-    public static final Supplier<Item> CRYSTAL_POTATO = ItemPropertyWrapperTemplates.registerItemFromTemplate(CAConstants.prefix("crystal_potato"), () -> new Item(food(CAFood.FOOD_CRYSTAL_POTATO)), CAIPWTemplates.FOOD, ITEMS);
+    public static final Supplier<Item> CRYSTAL_APPLE = ItemPropertyWrapperTemplates.registerItemFromTemplate(CAConstants.prefix("crystal_apple"), () -> new Item(food(CAFood.FOOD_CRYSTAL_APPLE).rarity(Rarity.RARE)), CAIPWTemplates.FOOD, ITEMS);
+    public static final Supplier<Item> CRYSTAL_BEETROOT = ItemPropertyWrapperTemplates.registerItemFromTemplate(CAConstants.prefix("crystal_beetroot"), () -> new Item(food(CAFood.FOOD_CRYSTAL_BEETROOT).rarity(Rarity.RARE)), CAIPWTemplates.FOOD, ITEMS);
+    public static final Supplier<Item> CRYSTAL_CARROT = ItemPropertyWrapperTemplates.registerItemFromTemplate(CAConstants.prefix("crystal_carrot"), () -> new Item(food(CAFood.FOOD_CRYSTAL_CARROT).rarity(Rarity.RARE)), CAIPWTemplates.FOOD, ITEMS);
+    public static final Supplier<Item> CRYSTAL_POTATO = ItemPropertyWrapperTemplates.registerItemFromTemplate(CAConstants.prefix("crystal_potato"), () -> new Item(food(CAFood.FOOD_CRYSTAL_POTATO).rarity(Rarity.RARE)), CAIPWTemplates.FOOD, ITEMS);
 
     public static final Supplier<CatsEyeChorusItem> CATS_EYE_CHORUS = ItemPropertyWrapperTemplates.registerItemFromTemplate(CAConstants.prefix("cats_eye_chorus"), () -> new CatsEyeChorusItem(food(CAFood.FOOD_CATS_EYE_CHORUS)), CAIPWTemplates.FOOD, ITEMS);
 
@@ -117,8 +123,8 @@ public final class CAItems {
     public static final Supplier<BaggedPopcornItem> BUTTERED_POPCORN_BAG = ItemPropertyWrapperTemplates.registerAndChain(CAConstants.prefix("buttered_popcorn_bag"), () -> new BaggedPopcornItem(food(CAFood.FOOD_BUTTERED_POPCORN_BAG).stacksTo(1)), CAIPWTemplates.FOOD, ITEMS).withRecipe(CARecipeTemplates::baggedButteredPopcornRecipe).buildAndGet();
 
     // Candy
-    public static final Supplier<Item> BUTTER_CANDY = ItemPropertyWrapperTemplates.registerItemFromTemplate(CAConstants.prefix("butter_candy"), () -> new Item(food(CAFood.FOOD_BUTTER_CANDY)), CAIPWTemplates.FOOD, ITEMS);
-    public static final Supplier<Item> CANDYCANE = ItemPropertyWrapperTemplates.registerItemFromTemplate(CAConstants.prefix("candycane"), () -> new Item(food(CAFood.FOOD_CANDYCANE)), CAIPWTemplates.FOOD, ITEMS);
+    public static final Supplier<Item> BUTTER_CANDY = ItemPropertyWrapperTemplates.registerItemFromTemplate(CAConstants.prefix("butter_candy"), () -> new Item(food(CAFood.FOOD_BUTTER_CANDY).rarity(Rarity.RARE)), CAIPWTemplates.FOOD, ITEMS);
+    public static final Supplier<Item> CANDYCANE = ItemPropertyWrapperTemplates.registerItemFromTemplate(CAConstants.prefix("candycane"), () -> new Item(food(CAFood.FOOD_CANDYCANE).rarity(Rarity.RARE)), CAIPWTemplates.FOOD, ITEMS);
 
     // Fish
     public static final Supplier<Item> BLUE_FISH = ItemPropertyWrapperTemplates.registerItemFromTemplate(CAConstants.prefix("blue_fish"), () -> new Item(food(CAFood.FOOD_BLUE_FISH)), CAIPWTemplates.FOOD, ITEMS);
@@ -133,18 +139,24 @@ public final class CAItems {
     public static final Supplier<Item> WOOD_FISH = ItemPropertyWrapperTemplates.registerItemFromTemplate(CAConstants.prefix("wood_fish"), () -> new Item(food(CAFood.FOOD_WOOD_FISH)), CAIPWTemplates.FOOD, ITEMS);
 
     // Golden Food
-    public static final Supplier<Item> GOLDEN_MELON_SLICE = ItemPropertyWrapperTemplates.registerAndChain(CAConstants.prefix("golden_melon_slice"), () -> new Item(food(CAFood.FOOD_GOLDEN_MELON_SLICE)), CAIPWTemplates.FOOD, ITEMS).withRecipe(recipeConsumer -> CARecipeTemplates.dotRingRecipe(recipeConsumer, Items.GOLD_INGOT, Items.MELON_SLICE)).buildAndGet();
-    public static final Supplier<Item> GOLDEN_BEETROOT = ItemPropertyWrapperTemplates.registerAndChain(CAConstants.prefix("golden_beetroot"), () -> new Item(food(CAFood.FOOD_GOLDEN_BEETROOT)), CAIPWTemplates.FOOD, ITEMS).withRecipe(recipeConsumer -> CARecipeTemplates.dotRingRecipe(recipeConsumer, Items.GOLD_INGOT, Items.BEETROOT)).buildAndGet();
-    public static final Supplier<Item> GOLDEN_POTATO = ItemPropertyWrapperTemplates.registerAndChain(CAConstants.prefix("golden_potato"), () -> new Item(food(CAFood.FOOD_GOLDEN_POTATO)), CAIPWTemplates.FOOD, ITEMS).withRecipe(recipeConsumer -> CARecipeTemplates.dotRingRecipe(recipeConsumer, Items.GOLD_INGOT, Items.POTATO)).buildAndGet();
-    public static final Supplier<Item> BAKED_GOLDEN_POTATO = ItemPropertyWrapperTemplates.registerAndChain(CAConstants.prefix("baked_golden_potato"), () -> new Item(food(CAFood.FOOD_BAKED_GOLDEN_POTATO)), CAIPWTemplates.FOOD, ITEMS).withRecipe(CARecipeTemplates::goldenBakedPotatoRecipe).buildAndGet();
+    public static final Supplier<Item> GOLDEN_MELON_SLICE = ItemPropertyWrapperTemplates.registerAndChain(CAConstants.prefix("golden_melon_slice"), () -> new Item(food(CAFood.FOOD_GOLDEN_MELON_SLICE).rarity(Rarity.UNCOMMON)), CAIPWTemplates.FOOD, ITEMS).withRecipe(recipeConsumer -> CARecipeTemplates.dotRingRecipe(recipeConsumer, Items.GOLD_INGOT, Items.MELON_SLICE)).buildAndGet();
+    public static final Supplier<Item> GOLDEN_BEETROOT = ItemPropertyWrapperTemplates.registerAndChain(CAConstants.prefix("golden_beetroot"), () -> new Item(food(CAFood.FOOD_GOLDEN_BEETROOT).rarity(Rarity.UNCOMMON)), CAIPWTemplates.FOOD, ITEMS).withRecipe(recipeConsumer -> CARecipeTemplates.dotRingRecipe(recipeConsumer, Items.GOLD_INGOT, Items.BEETROOT)).buildAndGet();
+    public static final Supplier<Item> GOLDEN_POTATO = ItemPropertyWrapperTemplates.registerAndChain(CAConstants.prefix("golden_potato"), () -> new Item(food(CAFood.FOOD_GOLDEN_POTATO).rarity(Rarity.UNCOMMON)), CAIPWTemplates.FOOD, ITEMS).withRecipe(recipeConsumer -> CARecipeTemplates.dotRingRecipe(recipeConsumer, Items.GOLD_INGOT, Items.POTATO)).buildAndGet();
+    public static final Supplier<Item> BAKED_GOLDEN_POTATO = ItemPropertyWrapperTemplates.registerAndChain(CAConstants.prefix("baked_golden_potato"), () -> new Item(food(CAFood.FOOD_BAKED_GOLDEN_POTATO).rarity(Rarity.UNCOMMON)), CAIPWTemplates.FOOD, ITEMS).withRecipe(CARecipeTemplates::goldenBakedPotatoRecipe).buildAndGet();
 
-    public static final Supplier<EnchantedItem> ENCHANTED_GOLDEN_CARROT = ItemPropertyWrapperTemplates.registerAndChain(CAConstants.prefix("enchanted_golden_carrot"), () -> new EnchantedItem(food(CAFood.FOOD_ENCHANTED_GOLDEN_CARROT)), CAIPWTemplates.FOOD, ITEMS).withRecipe(recipeConsumer -> CARecipeTemplates.dotRingRecipe(recipeConsumer, Items.GOLD_INGOT, Items.GOLDEN_CARROT)).buildAndGet();
+    public static final Supplier<EnchantedItem> ENCHANTED_GOLDEN_BEETROOT = ItemPropertyWrapperTemplates.registerAndChain(CAConstants.prefix("enchanted_golden_beetroot"), () -> new EnchantedItem(food(CAFood.FOOD_ENCHANTED_GOLDEN_BEETROOT).rarity(Rarity.EPIC)), CAIPWTemplates.FOOD, ITEMS).withRecipe(recipeConsumer -> CARecipeTemplates.dotRingRecipe(recipeConsumer, Items.GOLD_BLOCK, GOLDEN_BEETROOT.get())).buildAndGet();
+    public static final Supplier<EnchantedItem> ENCHANTED_GOLDEN_CARROT = ItemPropertyWrapperTemplates.registerAndChain(CAConstants.prefix("enchanted_golden_carrot"), () -> new EnchantedItem(food(CAFood.FOOD_ENCHANTED_GOLDEN_CARROT).rarity(Rarity.EPIC)), CAIPWTemplates.FOOD, ITEMS).withRecipe(recipeConsumer -> CARecipeTemplates.dotRingRecipe(recipeConsumer, Items.GOLD_BLOCK, Items.GOLDEN_CARROT)).buildAndGet();
+    public static final Supplier<EnchantedItem> ENCHANTED_GOLDEN_APPLE = ItemPropertyWrapperTemplates.registerAndChain(CAConstants.prefix("enchanted_golden_apple"), () -> new EnchantedItem(food(CAFood.FOOD_ENCHANTED_GOLDEN_APPLE).rarity(Rarity.EPIC)), CAIPWTemplates.FOOD, ITEMS).withRecipe(recipeConsumer -> CARecipeTemplates.dotRingRecipe(recipeConsumer, Items.GOLD_BLOCK, Items.GOLDEN_APPLE)).buildAndGet();
 
     // Components
     public static final Supplier<Item> SALT = ItemPropertyWrapperTemplates.registerItemFromTemplate(CAConstants.prefix("salt"), () -> new Item(new Item.Properties()), CAIPWTemplates.FOOD_COMPONENT, ITEMS);
     public static final Supplier<Item> CRYSTAL_STICK = ItemPropertyWrapperTemplates.registerItemFromTemplate(CAConstants.prefix("crystalwood_stick"), () -> new Item(new Item.Properties()), ItemPropertyWrapperTemplates.ROD, ITEMS);
 
     // Food on a Stick
+    public static final Supplier<WrappedFoodOnAStickItem<Pig>> BEETROOT_ON_A_STICK = ItemPropertyWrapperTemplates.registerAndChain(CAConstants.prefix("beetroot_on_a_stick"), () -> new WrappedFoodOnAStickItem<>(new Item.Properties().durability(64), () -> EntityType.PIG /*change to carrotpig*/, 1), CAIPWTemplates.FOOD_ON_A_STICK, ITEMS).withRecipe(recipeConsumer -> CARecipeTemplates.foodOnStickRecipe(recipeConsumer, Items.BEETROOT)).buildAndGet();
+    public static final Supplier<WrappedFoodOnAStickItem<Pig>> GOLDEN_BEETROOT_ON_A_STICK = ItemPropertyWrapperTemplates.registerAndChain(CAConstants.prefix("golden_beetroot_on_a_stick"), () -> new WrappedFoodOnAStickItem<>(new Item.Properties().durability(64).rarity(Rarity.UNCOMMON), () -> EntityType.PIG /*change to goldencarrotpig*/, 1), CAIPWTemplates.FOOD_ON_A_STICK, ITEMS).withRecipe(recipeConsumer -> CARecipeTemplates.foodOnStickRecipe(recipeConsumer, GOLDEN_BEETROOT.get())).buildAndGet();
+    public static final Supplier<WrappedFoodOnAStickItem<Pig>> ENCHANTED_GOLDEN_BEETROOT_ON_A_STICK = ItemPropertyWrapperTemplates.registerAndChain(CAConstants.prefix("enchanted_golden_beetroot_on_a_stick"), () -> new WrappedFoodOnAStickItem<>(new Item.Properties().durability(64).rarity(Rarity.EPIC), () -> EntityType.PIG /*change to enchantedgoldencarrotpig*/, 1), CAIPWTemplates.FOOD_ON_A_STICK, ITEMS).withRecipe(recipeConsumer -> CARecipeTemplates.foodOnStickRecipe(recipeConsumer, ENCHANTED_GOLDEN_BEETROOT.get())).buildAndGet();
+    public static final Supplier<WrappedFoodOnAStickItem<Pig>> CRYSTAL_BEETROOT_ON_A_STICK = ItemPropertyWrapperTemplates.registerAndChain(CAConstants.prefix("crystal_beetroot_on_a_stick"), () -> new WrappedFoodOnAStickItem<>(new Item.Properties().durability(64).rarity(Rarity.RARE), () -> EntityType.PIG /*change to crystalcarrotpig*/, 1), CAIPWTemplates.FOOD_ON_A_STICK, ITEMS).withRecipe(recipeConsumer -> CARecipeTemplates.foodOnStickRecipe(recipeConsumer, CRYSTAL_BEETROOT.get())).buildAndGet();
 
     // Materials
     public static final Supplier<Item> KUNZITE = ItemPropertyWrapperTemplates.registerItemFromTemplate(CAConstants.prefix("kunzite"), () -> new Item(new Item.Properties()), ItemPropertyWrapperTemplates.MATERIAL, ITEMS);
@@ -196,7 +208,8 @@ public final class CAItems {
     public static final Supplier<IrukandjiArrow> IRUKANDJI_ARROW = ItemPropertyWrapperTemplates.registerAndChain(CAConstants.prefix("irukandji_arrow"), () -> new IrukandjiArrow(new Item.Properties().stacksTo(64)), ItemPropertyWrapperTemplates.BASIC_GENERATED, ITEMS).withRecipe(CARecipeTemplates::irukandjiArrowRecipe).buildAndGet();
 
     // Material Weapons and Tools
-    public static final Supplier<EnchantedItem> ULTIMATE_APPLE = ItemPropertyWrapperTemplates.registerAndChain(CAConstants.prefix("ultimate_apple"), () -> new EnchantedItem(food(CAFood.FOOD_ULTIMATE_APPLE)), CAIPWTemplates.FOOD, ITEMS).withRecipe(recipeConsumer -> CARecipeTemplates.crossTwoDotRecipe(recipeConsumer, Items.APPLE, TITANIUM_NUGGET.get(), URANIUM_NUGGET.get())).buildAndGet();
+    public static final Supplier<EnchantedItem> ULTIMATE_APPLE = ItemPropertyWrapperTemplates.registerAndChain(CAConstants.prefix("ultimate_apple"), () -> new EnchantedItem(food(CAFood.FOOD_ULTIMATE_APPLE).rarity(Rarity.EPIC)), CAIPWTemplates.FOOD, ITEMS).withRecipe(recipeConsumer -> CARecipeTemplates.ultAppleRecipe(recipeConsumer, ENCHANTED_GOLDEN_APPLES.get(), TITANIUM_INGOT.get(), URANIUM_INGOT.get(), TITANIUM_NUGGET.get(), URANIUM_NUGGET.get())).buildAndGet();
+
     public static final Supplier<UltimateSword> ULTIMATE_SWORD = ItemPropertyWrapperTemplates.registerAndChain(CAConstants.prefix("ultimate_sword"), () -> new UltimateSword(CAItemTierTemplates.ULTIMATE, 22, -2.4F, new Item.Properties().fireResistant().rarity(Rarity.EPIC), Map.ofEntries(Map.entry(Enchantments.SHARPNESS, 4), Map.entry(Enchantments.UNBREAKING, 3), Map.entry(Enchantments.KNOCKBACK, 2), Map.entry(Enchantments.FIRE_ASPECT, 2))), ItemPropertyWrapperTemplates.BASIC_HANDHELD, EQUIPMENT).withRecipe(CARecipeTemplates::ultSwordRecipe).buildAndGet();
     public static final Supplier<UltimatePickaxe> ULTIMATE_PICKAXE = ItemPropertyWrapperTemplates.registerAndChain(CAConstants.prefix("ultimate_pickaxe"), () -> new UltimatePickaxe(CAItemTierTemplates.ULTIMATE, 6, -2.8F, new Item.Properties().fireResistant().rarity(Rarity.EPIC), Map.ofEntries(Map.entry(Enchantments.BLOCK_EFFICIENCY, 5), Map.entry(Enchantments.UNBREAKING, 3))), ItemPropertyWrapperTemplates.BASIC_HANDHELD, EQUIPMENT).withRecipe(CARecipeTemplates::ultPickaxeRecipe).buildAndGet();
     public static final Supplier<UltimateAxe> ULTIMATE_AXE = ItemPropertyWrapperTemplates.registerAndChain(CAConstants.prefix("ultimate_axe"), () -> new UltimateAxe(CAItemTierTemplates.ULTIMATE, 28, -3.0F, new Item.Properties().fireResistant().fireResistant().rarity(Rarity.EPIC), Map.ofEntries(Map.entry(Enchantments.BLOCK_EFFICIENCY, 5), Map.entry(Enchantments.UNBREAKING, 3))), ItemPropertyWrapperTemplates.BASIC_HANDHELD, EQUIPMENT).withRecipe(CARecipeTemplates::ultAxeRecipe).buildAndGet();

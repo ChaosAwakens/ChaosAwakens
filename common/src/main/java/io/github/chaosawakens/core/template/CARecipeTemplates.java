@@ -8,6 +8,7 @@ import com.mememan.nexus.util.RegistryUtil;
 import com.mememan.nexus.util.StringUtil;
 import io.github.chaosawakens.content.data.recipe_builder.DefossilizingRecipeBuilder;
 import io.github.chaosawakens.content.registry.CAItems;
+import io.github.chaosawakens.content.registry.CATags;
 import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.recipes.FinishedRecipe;
@@ -15,6 +16,7 @@ import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.SingleItemRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.SwordItem;
@@ -764,6 +766,20 @@ public final class CARecipeTemplates {
     }
 
     // General shapes
+    public static <I extends Item> Consumer<Supplier<I>> foodOnStickRecipe(Consumer<FinishedRecipe> recipeConsumer, I itemFood, int resultItemCount) {
+        return (resultItemSup) -> ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, resultItemSup.get(), resultItemCount)
+                .define('F', itemFood)
+                .define('R', Items.FISHING_ROD)
+                .pattern("R  ")
+                .pattern(" F ")
+                .pattern("   ")
+                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(itemFood), PredicateUtil.has(itemFood))
+                .save(recipeConsumer);
+    }
+    public static <I extends Item> Consumer<Supplier<I>> foodOnStickRecipe(Consumer<FinishedRecipe> recipeConsumer, Item itemFood) {
+        return (resultItemSup) -> foodOnStickRecipe(recipeConsumer, itemFood, 1).accept((Supplier<Item>) resultItemSup);
+    }
+
     public static <I extends Item> Consumer<Supplier<I>> crossDotRecipe(Consumer<FinishedRecipe> recipeConsumer, I itemDot, I itemCross, int resultItemCount) {
         return (resultItemSup) -> ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, resultItemSup.get(), resultItemCount)
                 .define('C', itemCross)
@@ -779,21 +795,22 @@ public final class CARecipeTemplates {
         return (resultItemSup) -> crossDotRecipe(recipeConsumer, itemCross, itemDot, 1).accept((Supplier<Item>) resultItemSup);
     }
 
-    public static <I extends Item> Consumer<Supplier<I>> crossTwoDotRecipe(Consumer<FinishedRecipe> recipeConsumer, I itemDot, I itemTopBotCross, I itemSideCross, int resultItemCount) {
+    // Ultimate Apple Recipe
+    public static <I extends Item, T extends TagKey<Item>> Consumer<Supplier<I>> ultAppleRecipe(Consumer<FinishedRecipe> recipeConsumer, T itemDot, I itemTopBotCross, I itemSideCross, I itemCorner, I itemKorner, int resultItemCount) {
         return (resultItemSup) -> ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, resultItemSup.get(), resultItemCount)
                 .define('T', itemTopBotCross)
                 .define('S', itemSideCross)
                 .define('D', itemDot)
-                .pattern(" T ")
+                .define('C', itemCorner)
+                .define('K', itemKorner)
+                .pattern("CTK")
                 .pattern("SDS")
-                .pattern(" T ")
-                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(itemDot), PredicateUtil.has(itemDot))
+                .pattern("KTC")
                 .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(itemTopBotCross), PredicateUtil.has(itemTopBotCross))
-                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(itemSideCross), PredicateUtil.has(itemSideCross))
                 .save(recipeConsumer);
     }
-    public static <I extends Item> Consumer<Supplier<I>> crossTwoDotRecipe(Consumer<FinishedRecipe> recipeConsumer, Item itemTopBotCross, Item itemSideCross, Item itemDot) {
-        return (resultItemSup) -> crossTwoDotRecipe(recipeConsumer, itemTopBotCross, itemSideCross, itemDot, 1).accept((Supplier<Item>) resultItemSup);
+    public static <I extends Item> Consumer<Supplier<I>> ultAppleRecipe(Consumer<FinishedRecipe> recipeConsumer, TagKey<Item> itemDot, Item itemTopBotCross, Item itemSideCross, Item itemCorner, Item itemKorner) {
+        return (resultItemSup) -> ultAppleRecipe(recipeConsumer, itemDot, itemTopBotCross, itemSideCross, itemCorner, itemKorner,  1).accept((Supplier<Item>) resultItemSup);
     }
 
     public static <I extends Item> Consumer<Supplier<I>> dotRingRecipe(Consumer<FinishedRecipe> recipeConsumer, I itemRing, I itemDot, int resultItemCount) {
