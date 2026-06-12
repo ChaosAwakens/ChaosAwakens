@@ -58,6 +58,7 @@ import java.util.Map;
 import java.util.function.Supplier;
 
 import static io.github.chaosawakens.content.registry.CATags.CAItemTags.ENCHANTED_GOLDEN_APPLES;
+import static io.github.chaosawakens.content.registry.CATags.CAItemTags.SPOON;
 
 @RegistrarEntry
 public final class CAItems {
@@ -66,8 +67,8 @@ public final class CAItems {
     protected static final ObjectArrayList<Supplier<Item>> EQUIPMENT = new ObjectArrayList<>();
 
     // Dairy
-    public static final Supplier<Item> BUTTER = ItemPropertyWrapperTemplates.registerItemFromTemplate(CAConstants.prefix("butter"), () -> new Item(food(CAFood.FOOD_BUTTER)), CAIPWTemplates.FOOD, ITEMS);
-    public static final Supplier<Item> CHEESE = ItemPropertyWrapperTemplates.registerItemFromTemplate(CAConstants.prefix("cheese"), () -> new Item(food(CAFood.FOOD_CHEESE)), CAIPWTemplates.FOOD, ITEMS);
+    public static final Supplier<Item> BUTTER = ItemPropertyWrapperTemplates.registerAndChain(CAConstants.prefix("butter"), () -> new Item(food(CAFood.FOOD_BUTTER).craftRemainder(Items.BOWL)), CAIPWTemplates.FOOD, ITEMS).withRecipe(CARecipeTemplates::butterRecipe).buildAndGet();
+    public static final Supplier<Item> CHEESE = ItemPropertyWrapperTemplates.registerAndChain(CAConstants.prefix("cheese"), () -> new Item(food(CAFood.FOOD_CHEESE).craftRemainder(Items.BOWL)), CAIPWTemplates.FOOD, ITEMS).withRecipe(CARecipeTemplates::cheeseRecipe).buildAndGet();
 
     // Meat
     public static final Supplier<Item> RAW_BACON = ItemPropertyWrapperTemplates.registerItemFromTemplate(CAConstants.prefix("raw_bacon"), () -> new Item(food(CAFood.FOOD_RAW_BACON)), CAIPWTemplates.FOOD, ITEMS);
@@ -354,7 +355,7 @@ public final class CAItems {
     public static final Supplier<Item> BIG_BERTHA_BLADE = ItemPropertyWrapperTemplates.registerAndChain(CAConstants.prefix("big_bertha_blade"), () -> new Item(new Item.Properties().rarity(Rarity.EPIC)), ItemPropertyWrapperTemplates.BASIC_GENERATED, ITEMS).withRecipe(recipeConsumer -> CARecipeTemplates.bigBerthaBladeRecipe(recipeConsumer, WORM_TOOTH.get(), WASP_STINGER.get(), SEA_VIPER_TONGUE.get(), ULTIMATE_SWORD.get(), RAT_SWORD.get(), POISON_SWORD.get(), FAIRY_SWORD.get())).buildAndGet();
 
     // Big Swords
-    public static final Supplier<SlayerChainSaw> SLAYER_CHAIN_SAW = ItemPropertyWrapperTemplates.registerAndChain(CAConstants.prefix("slayer_chainsaw"), () -> new SlayerChainSaw(CAItemTierTemplates.BIG_SWORD, SlayerChainSaw.ATTACK_DAMAGE, -3F, new Item.Properties().fireResistant().rarity(Rarity.EPIC)), ItemPropertyWrapperTemplates.BASIC_HANDHELD, EQUIPMENT).withRecipe(recipeConsumer -> CARecipeTemplates.dotRingRecipe(recipeConsumer, Items.REDSTONE_BLOCK, ULTIMATE_AXE.get())).buildAndGet();
+    public static final Supplier<SlayerChainSaw> SLAYER_CHAIN_SAW = ItemPropertyWrapperTemplates.registerAndChain(CAConstants.prefix("slayer_chainsaw"), () -> new SlayerChainSaw(CAItemTierTemplates.BIG_SWORD, SlayerChainSaw.ATTACK_DAMAGE, -3F, new Item.Properties().fireResistant().rarity(Rarity.EPIC)), ItemPropertyWrapperTemplates.BASIC_HANDHELD, EQUIPMENT).withRecipe(CARecipeTemplates::slayerChainSawRecipe).buildAndGet();
     public static final Supplier<BattleAxe> BATTLE_AXE = ItemPropertyWrapperTemplates.registerAndChain(CAConstants.prefix("battle_axe"), () -> new BattleAxe(CAItemTierTemplates.BIG_SWORD, BattleAxe.ATTACK_DAMAGE, -3F, new Item.Properties().fireResistant().rarity(Rarity.EPIC), Map.ofEntries(Map.entry(Enchantments.MOB_LOOTING, 3), Map.entry(Enchantments.UNBREAKING, 3))), ItemPropertyWrapperTemplates.BASIC_HANDHELD, EQUIPMENT).withRecipe(CARecipeTemplates::battleAxeRecipe).buildAndGet();
     public static final Supplier<QueenBattleAxe> QUEEN_BATTLE_AXE = ItemPropertyWrapperTemplates.registerAndChain(CAConstants.prefix("queen_battle_axe"), () -> new QueenBattleAxe(CAItemTierTemplates.BIG_SWORD, QueenBattleAxe.ATTACK_DAMAGE, -3F, new Item.Properties().fireResistant().rarity(Rarity.EPIC), Map.ofEntries(Map.entry(Enchantments.SMITE, 5), Map.entry(Enchantments.BANE_OF_ARTHROPODS, 5), Map.entry(Enchantments.KNOCKBACK, 3), Map.entry(Enchantments.MOB_LOOTING, 3), Map.entry(Enchantments.UNBREAKING, 3), Map.entry(Enchantments.FIRE_ASPECT, 2))), ItemPropertyWrapperTemplates.BASIC_HANDHELD, EQUIPMENT).withRecipe(recipeConsumer -> CARecipeTemplates.crossDotRecipe(recipeConsumer, BATTLE_AXE.get(), QUEEN_SCALE.get())).buildAndGet();
     public static final Supplier<BigBertha> BIG_BERTHA = ItemPropertyWrapperTemplates.registerAndChain(CAConstants.prefix("big_bertha"), () -> new BigBertha(CAItemTierTemplates.BIG_SWORD, BigBertha.ATTACK_DAMAGE, -3F, new Item.Properties().fireResistant().rarity(Rarity.EPIC), Map.ofEntries(Map.entry(Enchantments.BANE_OF_ARTHROPODS, 3), Map.entry(Enchantments.FIRE_ASPECT, 2), Map.entry(Enchantments.KNOCKBACK, 2))), ItemPropertyWrapperTemplates.BASIC_HANDHELD, EQUIPMENT).withRecipe(recipeConsumer -> CARecipeTemplates.diagonalLeftRecipe(recipeConsumer, BIG_BERTHA_BLADE.get(), BIG_BERTHA_GUARD.get(), BIG_BERTHA_HANDLE.get())).buildAndGet();

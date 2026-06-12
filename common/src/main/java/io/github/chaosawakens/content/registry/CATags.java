@@ -212,9 +212,7 @@ public final class CATags {
 
         // Misc.
         public static final Supplier<TagKey<Item>> ROBO_BLOCKS = TagPropertyWrapperTemplates.registerTagKey(Registries.ITEM, CAConstants.prefix("misc/robo_blocks"));
-        public static final Supplier<TagKey<Item>> ENCHANTED_GOLDEN_APPLES = TagPropertyWrapperTemplates.registerAndChain(Registries.ITEM, CAConstants.prefix("enchantment/enchanted_golden_apple"))
-                .withTaggedObject(() -> Items.ENCHANTED_GOLDEN_APPLE)
-                .withTaggedObject(ENCHANTED_GOLDEN_APPLE::get)
-                .buildAndGet();
+        public static final Supplier<TagKey<Item>> ENCHANTED_GOLDEN_APPLES = TagPropertyWrapperTemplates.registerAndChain(Registries.ITEM, CAConstants.prefix("enchantment/enchanted_golden_apple")).withTaggedObject(() -> Items.ENCHANTED_GOLDEN_APPLE).withTaggedObject(ENCHANTED_GOLDEN_APPLE::get).buildAndGet();
+        public static final Supplier<TagKey<Item>> SPOON = TagPropertyWrapperTemplates.registerAndChain(Registries.ITEM, CAConstants.prefix("misc/spoon")).withTaggedObjects(() -> Items.NETHERITE_SHOVEL, () -> Items.DIAMOND_SHOVEL, () -> Items.IRON_SHOVEL, () -> Items.GOLDEN_SHOVEL, () -> Items.STONE_SHOVEL, () -> Items.WOODEN_SHOVEL).withTaggedObjects(CAItems.CATS_EYE_SHOVEL::get, CAItems.CRYSTALWOOD_SHOVEL::get, CAItems.EMERALD_SHOVEL::get, CAItems.KUNZITE_SHOVEL::get, CAItems.RUBY_SHOVEL::get, CAItems.KYANITE_SHOVEL::get, CAItems.PINK_TOURMALINE_SHOVEL::get, CAItems.ULTIMATE_SHOVEL::get).buildAndGet();
     }
 }
