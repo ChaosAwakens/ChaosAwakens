@@ -16,10 +16,13 @@ import net.minecraft.core.Direction;
 import net.minecraft.data.models.blockstates.*;
 import net.minecraft.data.models.model.*;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.PipeBlock;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 
+import javax.print.DocFlavor;
+import java.util.Map;
 import java.util.Optional;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
@@ -29,9 +32,36 @@ public final class CAModelTemplates {
     public static final ModelTemplate LEAF_CARPET = new ModelTemplate(Optional.of(CAConstants.prefix("block/leaf_carpet")), Optional.empty(), TextureSlot.TEXTURE);
     public static final ModelTemplate LEAF_CARPET_INVENTORY = new ModelTemplate(Optional.of(CAConstants.prefix("block/leaf_carpet_inventory")), Optional.of("_inventory"), TextureSlot.TEXTURE);
     public static final ModelTemplate HANDHELD_LONG = new ModelTemplate(Optional.of(CAConstants.prefix("item/handheld_long")), Optional.empty(), TextureSlot.LAYER0);
+    public static final ModelTemplate ULTIMATE_CROSSBOW = new ModelTemplate(Optional.of(CAConstants.prefix("item/ultimate_crossbow")), Optional.empty(), TextureSlot.LAYER0);
 
     private CAModelTemplates() {
         throw new IllegalAccessError("Attempted to construct instance of template class! (CAModelTemplates)");
+    }
+
+    public static ItemModelDefinition crossbow(ResourceLocation crossbowid) {
+        String prefix = "item/equipment/ultimate/";
+        return new ItemModelDefinition(ULTIMATE_CROSSBOW)
+                .withTextureMapping(TextureMapping.layer0(crossbowid.withPrefix(prefix).withSuffix("_standby")))
+                .setItemModelTextureOverrides(Map.of(
+                        Map.of(new ResourceLocation("pulling"), 1.0F),
+                        crossbowid.withPrefix(prefix).withSuffix("_pulling_0"),
+
+                        Map.of(new ResourceLocation("pulling"), 1.0F, new ResourceLocation("pull"), 0.58F),
+                        crossbowid.withPrefix(prefix).withSuffix("_pulling_1"),
+
+                        Map.of(new ResourceLocation("pulling"), 1.0F, new ResourceLocation("pull"), 1.0F),
+                        crossbowid.withPrefix(prefix).withSuffix("_pulling_2"),
+
+                        Map.of(new ResourceLocation("charged"), 1.0F),
+                        crossbowid.withPrefix(prefix).withSuffix("_arrow"),
+
+                        Map.of(new ResourceLocation("charged"), 1.0F,new  ResourceLocation("firework"), 1.0F),
+                        crossbowid.withPrefix(prefix).withSuffix("_firework")
+                ));
+    }
+
+    public static ItemModelDefinition crossbow(Supplier<Item> parentItem) {
+        return crossbow(DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(parentItem.get()));
     }
 
     public static BlockModelDefinition leafCarpetDefault(ResourceLocation leafCarpetTextureLoc) {

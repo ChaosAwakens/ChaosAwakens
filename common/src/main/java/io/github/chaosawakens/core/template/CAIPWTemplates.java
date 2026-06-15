@@ -40,7 +40,13 @@ public final class CAIPWTemplates {
     public static final ItemPropertyWrapper<Item> HANDHELD_LONG = new ItemPropertyWrapper<>()
             .builder()
             .withModelDefinition(parentItem -> new ItemModelDefinition(CAModelTemplates.HANDHELD_LONG)
-                    .withTextureMapping(TextureMapping.layer0(RegistryUtil.getTextureLocationOrDefault(parentItem, "item"))))
+                .withTextureMapping(TextureMapping.layer0(RegistryUtil.getTextureLocationOrDefault(parentItem, "item"))))
+            .build();
+
+    public static final ItemPropertyWrapper<Item> CROSSBOW = new ItemPropertyWrapper<>()
+            .builder()
+            .copyFrom(ItemPropertyWrapperTemplates.MATERIAL)
+            .withModelDefinition(CAModelTemplates::crossbow)
             .build();
 
     private CAIPWTemplates() {

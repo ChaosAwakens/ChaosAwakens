@@ -21,6 +21,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.BlockCollisions;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 
@@ -433,7 +434,7 @@ public final class CARecipeTemplates {
         return (resultItemSup) -> thunderStaffRecipe(recipeConsumer, 1).accept((Supplier<Item>) resultItemSup);
     }
 
-    // Overloaded Crystalwood Tools
+    // Overloaded Crystal Wood Tools
     /*
     public static <I extends Item, B extends Block> Consumer<Supplier<I>> swordWoodRecipe(Consumer<FinishedRecipe> recipeConsumer, B itemBlockMaterial, I itemStick, int resultItemCount) {
         return (resultItemSup) -> ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, resultItemSup.get(), resultItemCount)
@@ -665,7 +666,7 @@ public final class CARecipeTemplates {
         return (resultItemSup) -> nightmareSwordRecipe(recipeConsumer, 1).accept((Supplier<Item>) resultItemSup);
     }
 
-    // Big Bethra Parts
+    // Big Bertha Parts
     public static <I extends Item> Consumer<Supplier<I>> bigBerthaHandelRecipe(Consumer<FinishedRecipe> recipeConsumer, I itemJefferyCore, I itemHammer, I itemMantisClaw, I itemWaterDragon, I itemTriffidGoo, int resultItemCount) {
         return (resultItemSup) -> ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, resultItemSup.get(), resultItemCount)
                 .define('C', itemJefferyCore)
@@ -687,13 +688,13 @@ public final class CARecipeTemplates {
         return (resultItemSup) -> bigBerthaHandelRecipe(recipeConsumer, itemJefferyCore, itemHammer, itemMantisClaw, itemWaterDragon, itemTriffidGoo, 1).accept((Supplier<Item>) resultItemSup);
     }
 
-    public static <I extends Item> Consumer<Supplier<I>> bigBerthaGuardRecipe(Consumer<FinishedRecipe> recipeConsumer, I itemEnderDragon, I itemNightmareSword, I itemVortexEye, I itemMothScale, I itemBascaliscScale, I itemScorpionScale, I itemNightmareScale, int resultItemCount) {
+    public static <I extends Item> Consumer<Supplier<I>> bigBerthaGuardRecipe(Consumer<FinishedRecipe> recipeConsumer, I itemEnderDragon, I itemNightmareSword, I itemVortexEye, I itemMothScale, I itemBasilisk, I itemScorpionScale, I itemNightmareScale, int resultItemCount) {
         return (resultItemSup) -> ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, resultItemSup.get(), resultItemCount)
                 .define('E', itemEnderDragon)
                 .define('S', itemNightmareSword)
                 .define('V', itemVortexEye)
                 .define('O', itemMothScale)
-                .define('B', itemBascaliscScale)
+                .define('B', itemBasilisk)
                 .define('C', itemScorpionScale)
                 .define('N', itemNightmareScale)
                 .pattern("O B")
@@ -703,13 +704,13 @@ public final class CARecipeTemplates {
                 .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(itemNightmareSword), PredicateUtil.has(itemNightmareSword))
                 .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(itemVortexEye), PredicateUtil.has(itemVortexEye))
                 .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(itemMothScale), PredicateUtil.has(itemMothScale))
-                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(itemBascaliscScale), PredicateUtil.has(itemBascaliscScale))
+                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(itemBasilisk), PredicateUtil.has(itemBasilisk))
                 .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(itemScorpionScale), PredicateUtil.has(itemScorpionScale))
                 .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(itemNightmareScale), PredicateUtil.has(itemNightmareScale))
                 .save(recipeConsumer);
     }
-    public static <I extends Item> Consumer<Supplier<I>> bigBerthaGuardRecipe(Consumer<FinishedRecipe> recipeConsumer, Item itemEnderDragon, Item itemNightmareSword, Item itemVortexEye, Item itemMothScale, Item itemBascaliscScale, Item itemScorpionScale, Item itemNightmareScale) {
-        return (resultItemSup) -> bigBerthaGuardRecipe(recipeConsumer, itemEnderDragon, itemNightmareSword, itemVortexEye, itemMothScale, itemBascaliscScale, itemScorpionScale, itemNightmareScale, 1).accept((Supplier<Item>) resultItemSup);
+    public static <I extends Item> Consumer<Supplier<I>> bigBerthaGuardRecipe(Consumer<FinishedRecipe> recipeConsumer, Item itemEnderDragon, Item itemNightmareSword, Item itemVortexEye, Item itemMothScale, Item itemBasiliskScale, Item itemScorpionScale, Item itemNightmareScale) {
+        return (resultItemSup) -> bigBerthaGuardRecipe(recipeConsumer, itemEnderDragon, itemNightmareSword, itemVortexEye, itemMothScale, itemBasiliskScale, itemScorpionScale, itemNightmareScale, 1).accept((Supplier<Item>) resultItemSup);
     }
 
     public static <I extends Item> Consumer<Supplier<I>> bigBerthaBladeRecipe(Consumer<FinishedRecipe> recipeConsumer, I itemWormTooth, I itemVexEye, I itemTrexTooth, I itemUltimateSword, I itemKrakenTooth, I itemCatakillerJaw, I itemViperTounge, int resultItemCount) {
@@ -866,6 +867,19 @@ public final class CARecipeTemplates {
     }
     public static <I extends Item> Consumer<Supplier<I>> diagonalLeftRecipe(Consumer<FinishedRecipe> recipeConsumer, Item topItemReference, Item middleItemReference, Item bottomItemReference) {
         return (resultItemSup) -> diagonalLeftRecipe(recipeConsumer, topItemReference, middleItemReference, bottomItemReference, 1).accept((Supplier<Item>) resultItemSup);
+    }
+
+    // ender eye and pearl blocks
+    public static <I extends Item, B extends Block> Consumer<Supplier<B>> twoByTwoRecipe(Consumer<FinishedRecipe> recipeConsumer, I itemReferenced, int resultItemCount) {
+        return (resultItemSup) -> ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, resultItemSup.get(), resultItemCount)
+                .define('#', itemReferenced)
+                .pattern("##")
+                .pattern("##")
+                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(itemReferenced), PredicateUtil.has(itemReferenced))
+                .save(recipeConsumer);
+    }
+    public static <B extends Block> Consumer<Supplier<B>> twoByTwoRecipe(Consumer<FinishedRecipe> recipeConsumer, Item itemReferenced) {
+        return (resultItemSup) -> twoByTwoRecipe(recipeConsumer, itemReferenced, 1).accept((Supplier<Block>) resultItemSup);
     }
 
     // Fossiles
@@ -1174,7 +1188,7 @@ public final class CARecipeTemplates {
     public static <I extends Item> Consumer<Supplier<I>> butterRecipe(Consumer<FinishedRecipe> recipeConsumer, int resultItemCount) {
         return (resultItemSup) -> ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, resultItemSup.get(), resultItemCount)
                 .define('B', Items.MILK_BUCKET)
-                .define('S', SPOON.get())
+                .define('S', Items.WOODEN_SHOVEL) // TODO: Needs damage modifing to given tool
                 .pattern("S")
                 .pattern("B")
                 .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(Items.MILK_BUCKET), PredicateUtil.has(Items.MILK_BUCKET))
@@ -1183,6 +1197,7 @@ public final class CARecipeTemplates {
     public static <I extends Item> Consumer<Supplier<I>> butterRecipe(Consumer<FinishedRecipe> recipeConsumer) {
         return (resultItemSup) -> butterRecipe(recipeConsumer, 4).accept((Supplier<Item>) resultItemSup);
     }
+
     public static <I extends Item> Consumer<Supplier<I>> cheeseRecipe(Consumer<FinishedRecipe> recipeConsumer, int resultItemCount) {
         return (resultItemSup) -> ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, resultItemSup.get(), resultItemCount)
                 .define('B', Items.MILK_BUCKET)
@@ -1193,6 +1208,21 @@ public final class CARecipeTemplates {
     }
     public static <I extends Item> Consumer<Supplier<I>> cheeseRecipe(Consumer<FinishedRecipe> recipeConsumer) {
         return (resultItemSup) -> cheeseRecipe(recipeConsumer, 4).accept((Supplier<Item>) resultItemSup);
+    }
+
+    public static <I extends Item> Consumer<Supplier<I>> powerChipRecipe(Consumer<FinishedRecipe> recipeConsumer, int resultItemCount) {
+        return (resultItemSup) -> ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, resultItemSup.get(), resultItemCount)
+                .define('A', ALUMINUM_INGOT.get())
+                .define('I', Items.IRON_INGOT)
+                .define('R', Items.REDSTONE)
+                .pattern("ARA")
+                .pattern("RIR")
+                .pattern("ARA")
+                .unlockedBy("has_" + DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(ALUMINUM_INGOT.get()), PredicateUtil.has(ALUMINUM_INGOT.get()))
+                .save(recipeConsumer);
+    }
+    public static <I extends Item> Consumer<Supplier<I>> powerChipRecipe(Consumer<FinishedRecipe> recipeConsumer) {
+        return (resultItemSup) -> powerChipRecipe(recipeConsumer, 3).accept((Supplier<Item>) resultItemSup);
     }
 }
 

@@ -22,6 +22,7 @@ import io.github.chaosawakens.content.block.vegetation.crystalworld.*;
 import io.github.chaosawakens.content.block.vegetation.generic.*;
 import io.github.chaosawakens.content.block.vegetation.mining_paradise.*;
 import io.github.chaosawakens.core.template.CABPWTemplates;
+import io.github.chaosawakens.core.template.CARecipeTemplates;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 import net.minecraft.core.Direction;
@@ -290,8 +291,8 @@ public final class CABlocks {
     public static final Supplier<Block> TITANIUM_BLOCK = CABPWTemplates.registerBlockWithItemFromTemplate(CAConstants.prefix("titanium_block"), () -> new Block(BlockBehaviour.Properties.of().requiresCorrectToolForDrops().mapColor(MapColor.COLOR_BLUE).strength(35.0F, 2400.0F).sound(SoundType.NETHERITE_BLOCK)), new Item.Properties().fireResistant(), CABPWTemplates.MATERIAL_BLOCK_PICKAXE_DIAMOND, BLOCKS, BLOCK_ITEMS);
     public static final Supplier<Block> URANIUM_BLOCK = CABPWTemplates.registerBlockWithItemFromTemplate(CAConstants.prefix("uranium_block"), () -> new Block(BlockBehaviour.Properties.of().requiresCorrectToolForDrops().mapColor(MapColor.COLOR_GREEN).strength(25.0F, 1800.0F).sound(SoundType.NETHERITE_BLOCK)), new Item.Properties().fireResistant(), CABPWTemplates.MATERIAL_BLOCK_PICKAXE_DIAMOND, BLOCKS, BLOCK_ITEMS);
 
-    public static final Supplier<Block> ENDER_PEARL_BLOCK = BlockPropertyWrapperTemplates.registerBlockWithItemFromTemplate(CAConstants.prefix("ender_pearl_block"), () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_GREEN).sound(SoundType.NETHERITE_BLOCK).strength(0.5F)), CABPWTemplates.MATERIAL_BLOCK_PICKAXE_DIAMOND, BLOCKS, BLOCK_ITEMS);
-    public static final Supplier<Block> ENDER_EYE_BLOCK = BlockPropertyWrapperTemplates.registerBlockWithItemFromTemplate(CAConstants.prefix("ender_eye_block"), () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_LIGHT_GREEN).sound(SoundType.NETHERITE_BLOCK).strength(0.5F)), CABPWTemplates.MATERIAL_BLOCK_PICKAXE_DIAMOND, BLOCKS, BLOCK_ITEMS);
+    public static final Supplier<Block> ENDER_PEARL_BLOCK = BlockPropertyWrapperTemplates.registerWithItemAndChain(CAConstants.prefix("ender_pearl_block"), () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_GREEN).sound(SoundType.NETHERITE_BLOCK).strength(0.5F)), CABPWTemplates.MATERIAL_BLOCK_PICKAXE_DIAMOND, BLOCKS, BLOCK_ITEMS).withRecipe(recipeConsumer -> CARecipeTemplates.twoByTwoRecipe(recipeConsumer, Items.ENDER_PEARL)).buildAndGet();
+    public static final Supplier<Block> ENDER_EYE_BLOCK = BlockPropertyWrapperTemplates.registerWithItemAndChain(CAConstants.prefix("ender_eye_block"), () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_LIGHT_GREEN).sound(SoundType.NETHERITE_BLOCK).strength(0.5F)), CABPWTemplates.MATERIAL_BLOCK_PICKAXE_DIAMOND, BLOCKS, BLOCK_ITEMS).withRecipe(recipeConsumer -> CARecipeTemplates.twoByTwoRecipe(recipeConsumer, Items.ENDER_EYE)).buildAndGet();
 
     // Mob Blocks
     public static final Supplier<Block> BASILISK_SCALE_BLOCK = CABPWTemplates.registerBlockWithItemFromTemplate(CAConstants.prefix("basilisk_scale_block"), () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_GREEN).sound(SoundType.SHROOMLIGHT).strength(5.0F, 6.0F)), new Item.Properties().rarity(Rarity.RARE), CABPWTemplates.MATERIAL_BLOCK_PICKAXE_DIAMOND, BLOCKS, BLOCK_ITEMS);
