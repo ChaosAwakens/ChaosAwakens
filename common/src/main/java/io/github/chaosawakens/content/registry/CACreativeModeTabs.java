@@ -24,7 +24,7 @@ public final class CACreativeModeTabs {
     public static final Supplier<CreativeModeTab> BLOCKS = CreativeModeTabPropertyWrapperTemplates.registerAndChain(CAConstants.prefix("blocks"),
             () -> CreativeModeTab.builder(CreativeModeTab.Row.TOP, 0)
                     .title(Component.translatable("creative_mode_tab.chaosawakens.blocks"))
-                    .icon(() -> CABlocks.BLOCKS.stream().findFirst().orElse(CABlocks.ACACIA_GATE_BLOCK::get).get().asItem().getDefaultInstance())
+                    .icon(() -> CABlocks.BLOCKS.stream().findFirst().orElse(CABlocks.ROYAL_GUARDIAN_SCALE_BLOCK).get().asItem().getDefaultInstance())
                     .displayItems((param, output) -> output.acceptAll(CABlocks.BLOCK_ITEMS.stream()
                             .map(Supplier::get)
                             .filter(BlockItem.class::isInstance) // JIC
@@ -34,10 +34,11 @@ public final class CACreativeModeTabs {
                     .build(), CREATIVE_MODE_TABS)
             .withCustomName("Chaos Awakens: Blocks")
             .buildAndGet();
+
     public static final Supplier<CreativeModeTab> FOSSILS = CreativeModeTabPropertyWrapperTemplates.registerAndReflectAndChain(CAConstants.prefix("fossils"),
                     () -> CreativeModeTab.builder(CreativeModeTab.Row.TOP, 0)
                             .title(Component.translatable("creative_mode_tab.chaosawakens.fossils"))
-                            .icon(() -> CABlocks.BLOCKS.stream().filter(curBlockSup -> curBlockSup.get() instanceof FossilBlock).findFirst().map(Supplier::get).orElse(CABlocks.FROZEN_ARCTIC_FOX_PACKED_ICE.get()).asItem().getDefaultInstance())
+                            .icon(() -> CABlocks.BLOCKS.stream().filter(curBlockSup -> curBlockSup.get() instanceof FossilBlock).findFirst().map(Supplier::get).orElse(CABlocks.FOSSILIZED_HERCULES_BEETLE_STONE.get()).asItem().getDefaultInstance())
                             .displayItems((param, output) -> output.acceptAll(CABlocks.BLOCK_ITEMS.stream()
                                     .map(Supplier::get)
                                     .filter(BlockItem.class::isInstance) // JIC
@@ -51,7 +52,7 @@ public final class CACreativeModeTabs {
     public static final Supplier<CreativeModeTab> ITEMS = CreativeModeTabPropertyWrapperTemplates.registerAndReflectAndChain(CAConstants.prefix("items"),
                     () -> CreativeModeTab.builder(CreativeModeTab.Row.TOP, 0)
                             .title(Component.translatable("creative_mode_tab.chaosawakens.items"))
-                            .icon(() -> CAItems.ITEMS.stream().filter(curItemSup -> !PredicateUtil.hasSpecifiedCreativeModeTabs(curItemSup)).findFirst().orElse(CAItems.KUNZITE).get().getDefaultInstance())
+                            .icon(() -> CAItems.ITEMS.stream().filter(curItemSup -> !PredicateUtil.hasSpecifiedCreativeModeTabs(curItemSup)).findFirst().orElse(CAItems.TITANIUM_INGOT).get().getDefaultInstance())
                             .displayItems((param, output) -> output.acceptAll(CAItems.ITEMS.stream()
                                     .map(Supplier::get)
                                     .filter(curItem -> !PredicateUtil.hasSpecifiedCreativeModeTabs(curItem))
@@ -60,10 +61,11 @@ public final class CACreativeModeTabs {
                             .build(), CREATIVE_MODE_TABS)
             .withCustomName("Chaos Awakens: Items")
             .buildAndGet();
+
     public static final Supplier<CreativeModeTab> EQUIPMENT = CreativeModeTabPropertyWrapperTemplates.registerAndReflectAndChain(CAConstants.prefix("equipment"),
                     () -> CreativeModeTab.builder(CreativeModeTab.Row.TOP, 0)
                             .title(Component.translatable("creative_mode_tab.chaosawakens.equipment"))
-                            .icon(() -> CAItems.EQUIPMENT.stream().filter(curItem -> curItem.get() instanceof TieredItem).findFirst().orElse(CAItems.ULTIMATE_SWORD::get).get().getDefaultInstance()) // TODO Sub
+                            .icon(() -> CAItems.EQUIPMENT.stream().filter(curItem -> curItem.get() instanceof TieredItem).findFirst().orElse(CAItems.BIG_BERTHA::get).get().getDefaultInstance())
                             .displayItems((param, output) -> output.acceptAll(CAItems.EQUIPMENT.stream()
                                     .map(Supplier::get)
                                     .map(Item::getDefaultInstance)
@@ -71,19 +73,35 @@ public final class CACreativeModeTabs {
                             .build(), CREATIVE_MODE_TABS)
             .withCustomName("Chaos Awakens: Equipment")
             .buildAndGet();
-   public static final Supplier<CreativeModeTab> FOOD = CreativeModeTabPropertyWrapperTemplates.registerAndReflectAndChain(CAConstants.prefix("food"),
+
+    public static final Supplier<CreativeModeTab> FOOD = CreativeModeTabPropertyWrapperTemplates.registerAndReflectAndChain(CAConstants.prefix("food"),
+                     () -> CreativeModeTab.builder(CreativeModeTab.Row.TOP, 0)
+                             .title(Component.translatable("creative_mode_tab.chaosawakens.food"))
+                             .icon(() -> CAItems.ITEMS.stream().filter(PredicateUtil::isFood).findFirst().orElse(CAItems.BLT_SANDWICH).get().getDefaultInstance())
+                             .displayItems((param, output) -> output.acceptAll(CAItems.ITEMS.stream()
+                                     .filter(PredicateUtil::isFood)
+                                     .map(Supplier::get)
+                                     .map(Item::getDefaultInstance)
+                                     .collect(Collectors.toCollection(ObjectArrayList::new))))
+                             .build(), CREATIVE_MODE_TABS)
+             .withCustomName("Chaos Awakens: Food")
+             .buildAndGet();
+    /*
+    // Only to be accepted once entities are in the game
+
+    public static final Supplier<CreativeModeTab> SPAWN_EGGS = CreativeModeTabPropertyWrapperTemplates.registerAndReflectAndChain(CAConstants.prefix("spawn_eggs"),
                     () -> CreativeModeTab.builder(CreativeModeTab.Row.TOP, 0)
-                            .title(Component.translatable("creative_mode_tab.chaosawakens.food"))
-                            .icon(() -> CAItems.ITEMS.stream().filter(PredicateUtil::isFood).findFirst().orElse(CAItems.BUTTER).get().getDefaultInstance())
+                            .title(Component.translatable("creative_mode_tab.chaosawakens.spawn_eggs"))
+                            .icon(() -> CAItems.ITEMS.stream().filter().findFirst().orElse(CAItems.RED_ANT_SPAWNEGG).get().getDefaultInstance())
                             .displayItems((param, output) -> output.acceptAll(CAItems.ITEMS.stream()
                                     .filter(PredicateUtil::isFood)
                                     .map(Supplier::get)
                                     .map(Item::getDefaultInstance)
                                     .collect(Collectors.toCollection(ObjectArrayList::new))))
                             .build(), CREATIVE_MODE_TABS)
-            .withCustomName("Chaos Awakens: Food")
+            .withCustomName("Chaos Awakens: Spawns")
             .buildAndGet();
-
+    */
     public static ImmutableList<Supplier<CreativeModeTab>> getCreativeModeTabs() {
         return ImmutableList.copyOf(CREATIVE_MODE_TABS);
     }
