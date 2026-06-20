@@ -32,6 +32,7 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 
 import static io.github.chaosawakens.content.registry.CAItems.*;
+import static io.github.chaosawakens.content.registry.CATags.CAItemTags.ENCHANTED_GOLDEN_APPLES;
 import static io.github.chaosawakens.content.registry.CATags.CAItemTags.SPOON;
 
 public final class CARecipeTemplates {
@@ -176,8 +177,8 @@ public final class CARecipeTemplates {
                 .define('U', URANIUM_INGOT.get())
                 .define('T', TITANIUM_INGOT.get())
                 .define('P', PLATINUM_LUMP.get())
-                .pattern("UU ")
-                .pattern(" T ")
+                .pattern("TU ")
+                .pattern(" P ")
                 .pattern(" P ")
                 .unlockedBy("has_" + URANIUM_NAME + "_and_" + TITANIUM_NAME + "_and_" + PLATINUM_NAME,
                         PredicateUtil.inventoryTrigger(ItemPredicate.Builder.item().of(URANIUM_INGOT.get(), TITANIUM_INGOT.get(), PLATINUM_LUMP.get()).build())
@@ -616,9 +617,9 @@ public final class CARecipeTemplates {
                 .define('U', URANIUM_INGOT.get())
                 .define('T', TITANIUM_INGOT.get())
                 .define('P', PLATINUM_LUMP.get())
-                .pattern("TTT")
+                .pattern("PPP")
+                .pattern("T T")
                 .pattern("U U")
-                .pattern("P P")
                 .unlockedBy(
                         "has_" + URANIUM_NAME + "_and_" + TITANIUM_NAME + "_and_" + PLATINUM_NAME,
                         PredicateUtil.inventoryTrigger(ItemPredicate.Builder.item().of(URANIUM_INGOT.get(), TITANIUM_INGOT.get(), PLATINUM_LUMP.get()).build())
@@ -716,6 +717,7 @@ public final class CARecipeTemplates {
     }
 
     //Prismatic Reaper
+/*
     public static <I extends Item> Consumer<Supplier<I>> prismaticReaperRecipe(Consumer<FinishedRecipe> recipeConsumer, int resultItemCount) {
         ResourceLocation kunziteName = DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(KUNZITE.get());
         ResourceLocation rubyName = DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(RUBY.get());
@@ -740,24 +742,24 @@ public final class CARecipeTemplates {
     public static <I extends Item> Consumer<Supplier<I>> prismaticReaperRecipe(Consumer<FinishedRecipe> recipeConsumer) {
         return (resultItemSup) -> prismaticReaperRecipe(recipeConsumer, 1).accept((Supplier<Item>) resultItemSup);
     }
-
+*/
     // Nightmare Sword
     public static <I extends Item> Consumer<Supplier<I>> nightmareSwordRecipe(Consumer<FinishedRecipe> recipeConsumer, int resultItemCount) {
         ResourceLocation nightmareScaleName = DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(NIGHTMARE_SCALE.get());
         ResourceLocation diamondName = DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(Items.DIAMOND);
         ResourceLocation redstoneName = DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(Items.REDSTONE);
-        ResourceLocation ironIngotName = DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(Items.IRON_INGOT);
+        ResourceLocation platinumLumpName = DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(PLATINUM_LUMP.get());
         return (resultItemSup) -> ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, resultItemSup.get(), resultItemCount)
                 .define('N', NIGHTMARE_SCALE.get())
                 .define('D', Items.DIAMOND)
                 .define('T', TITANIUM_INGOT.get())
                 .define('R', Items.REDSTONE)
-                .define('I', Items.IRON_INGOT)
+                .define('P', PLATINUM_LUMP.get())
                 .pattern("NDN")
                 .pattern("RTR")
-                .pattern("NIN")
+                .pattern("NPN")
                 .unlockedBy(
-                        "has_" + nightmareScaleName + "_and_" + diamondName + "_and_" +  TITANIUM_NAME + "_and_" + redstoneName + "_and_" + ironIngotName,
+                        "has_" + nightmareScaleName + "_and_" + diamondName + "_and_" +  TITANIUM_NAME + "_and_" + redstoneName + "_and_" + platinumLumpName,
                         PredicateUtil.inventoryTrigger(ItemPredicate.Builder.item().of(NIGHTMARE_SCALE.get(), Items.DIAMOND, TITANIUM_INGOT.get(), Items.REDSTONE, Items.IRON_INGOT).build())
                 )
                 .save(recipeConsumer);
@@ -767,6 +769,7 @@ public final class CARecipeTemplates {
     }
 
     // Big Bertha Parts
+/*
     public static <I extends Item> Consumer<Supplier<I>> bigBerthaHandelRecipe(Consumer<FinishedRecipe> recipeConsumer, int resultItemCount) {
         ResourceLocation jefferyCoreName = DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(JEFFERY_CORE.get());
         ResourceLocation bigHammerName = DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(BIG_HAMMER.get());
@@ -852,25 +855,25 @@ public final class CARecipeTemplates {
     public static <I extends Item> Consumer<Supplier<I>> bigBerthaBladeRecipe(Consumer<FinishedRecipe> recipeConsumer) {
         return (resultItemSup) -> bigBerthaBladeRecipe(recipeConsumer, 1).accept((Supplier<Item>) resultItemSup);
     }
-
+*/
     // Big Weapons
     // BattleAxe
     public static <I extends Item> Consumer<Supplier<I>> battleAxeRecipe(Consumer<FinishedRecipe> recipeConsumer, int resultItemCount) {
         ResourceLocation ultimateAxeName = DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(ULTIMATE_AXE.get());
-        ResourceLocation redstoneBlockName = DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(Items.REDSTONE_BLOCK);
+        ResourceLocation rubyName = DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(RUBY.get());
         ResourceLocation triffidGooName = DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(TRIFFID_GOO.get());
-        ResourceLocation ultimateSwordName = DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(ULTIMATE_SWORD.get());
+        ResourceLocation stickName = DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(Items.STICK);
         return (resultItemSup) -> ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, resultItemSup.get(), resultItemCount)
                 .define('A', ULTIMATE_AXE.get())
-                .define('B', Items.REDSTONE_BLOCK)
-                .define('C', TRIFFID_GOO.get())
-                .define('D', ULTIMATE_SWORD.get())
-                .pattern("ABA")
-                .pattern(" C ")
-                .pattern(" D ")
+                .define('R', RUBY.get())
+                .define('T', TRIFFID_GOO.get())
+                .define('S', Items.STICK)
+                .pattern(" AT")
+                .pattern(" RA")
+                .pattern("S  ")
                 .unlockedBy(
-                        "has_" + ultimateAxeName + "_and_" + redstoneBlockName + "_and_" +  triffidGooName + "_and_" + ultimateSwordName,
-                        PredicateUtil.inventoryTrigger(ItemPredicate.Builder.item().of(ULTIMATE_AXE.get(), Items.REDSTONE_BLOCK, TRIFFID_GOO.get(), ULTIMATE_SWORD.get()).build())
+                        "has_" + ultimateAxeName + "_and_" + rubyName + "_and_" +  triffidGooName + "_and_" + stickName,
+                        PredicateUtil.inventoryTrigger(ItemPredicate.Builder.item().of(ULTIMATE_AXE.get(), RUBY.get(), TRIFFID_GOO.get(), Items.STICK).build())
                 )
                 .save(recipeConsumer);
     }
@@ -878,6 +881,26 @@ public final class CARecipeTemplates {
         return (resultItemSup) -> battleAxeRecipe(recipeConsumer, 1).accept((Supplier<Item>) resultItemSup);
     }
 
+    public static <I extends Item> Consumer<Supplier<I>> queenBattleAxeRecipe(Consumer<FinishedRecipe> recipeConsumer, int resultItemCount) {
+        ResourceLocation battleAxeName = DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(BATTLE_AXE.get());
+        ResourceLocation queenBattleAxeName = DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(QUEEN_SCALE.get());
+        ResourceLocation platinumLumpName = DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(PLATINUM_LUMP.get());
+        return (resultItemSup) -> ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, resultItemSup.get(), resultItemCount)
+                .define('A', BATTLE_AXE.get())
+                .define('Q', QUEEN_SCALE.get())
+                .define('P', PLATINUM_LUMP.get())
+                .pattern("QAQ")
+                .pattern("QPQ")
+                .pattern(" P ")
+                .unlockedBy(
+                        "has_" + battleAxeName + "_and_" + queenBattleAxeName + "_and_" +  platinumLumpName,
+                        PredicateUtil.inventoryTrigger(ItemPredicate.Builder.item().of(ULTIMATE_AXE.get(), RUBY.get(), TRIFFID_GOO.get(), Items.STICK).build())
+                )
+                .save(recipeConsumer);
+    }
+    public static <I extends Item> Consumer<Supplier<I>> queenBattleAxeRecipe(Consumer<FinishedRecipe> recipeConsumer) {
+        return (resultItemSup) -> queenBattleAxeRecipe(recipeConsumer, 1).accept((Supplier<Item>) resultItemSup);
+    }
     // General shapes
     public static <I extends Item> Consumer<Supplier<I>> foodOnStickRecipe(Consumer<FinishedRecipe> recipeConsumer, I itemFood, int resultItemCount) {
         ResourceLocation itemFoodName = DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(itemFood);
@@ -918,29 +941,24 @@ public final class CARecipeTemplates {
     }
 
     // Ultimate Apple Recipe
-    public static <I extends Item, T extends TagKey<Item>> Consumer<Supplier<I>> ultAppleRecipe(Consumer<FinishedRecipe> recipeConsumer, T itemDot, I itemTopBotCross, I itemSideCross, I itemCorner, I itemKorner, int resultItemCount) {
-        ResourceLocation itemTopBotCrossName = DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(itemTopBotCross);
-        ResourceLocation itemSideCrossName = DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(itemSideCross);
-        ResourceLocation itemDotName = DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(itemDot);
-        ResourceLocation itemCornerName = DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(itemCorner);
-        ResourceLocation itemKornerName = DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(itemKorner);
+    public static <I extends Item, T extends TagKey<Item>> Consumer<Supplier<I>> ultAppleRecipe(Consumer<FinishedRecipe> recipeConsumer, int resultItemCount) {
+        ResourceLocation appleName = DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(ENCHANTED_GOLDEN_APPLES.get());
         return (resultItemSup) -> ShapedRecipeBuilder.shaped(RecipeCategory.MISC, resultItemSup.get(), resultItemCount)
-                .define('T', itemTopBotCross)
-                .define('S', itemSideCross)
-                .define('D', itemDot)
-                .define('C', itemCorner)
-                .define('K', itemKorner)
-                .pattern("CTK")
-                .pattern("SDS")
-                .pattern("KTC")
+                .define('T', TITANIUM_INGOT.get())
+                .define('U', URANIUM_INGOT.get())
+                .define('P', PLATINUM_LUMP.get())
+                .define('A', ENCHANTED_GOLDEN_APPLES.get())
+                .pattern("UPT")
+                .pattern("PAP")
+                .pattern("TPU")
                 .unlockedBy(
-                        "has_" + itemTopBotCrossName + "_and_" + itemSideCrossName + "_and_" + itemDotName + "_and_" + itemCornerName + "_and_" + itemKornerName,
-                        PredicateUtil.inventoryTrigger(ItemPredicate.Builder.item().of(itemTopBotCross, itemSideCross, itemCorner, itemKorner).of(itemDot).build())
+                        "has_" + appleName + "_and_" + TITANIUM_NAME + "_and_" + URANIUM_NAME + "_and_" + PLATINUM_NAME,
+                        PredicateUtil.inventoryTrigger(ItemPredicate.Builder.item().of(TITANIUM_INGOT.get(), URANIUM_INGOT.get(), PLATINUM_LUMP.get()).of(ENCHANTED_GOLDEN_APPLES.get()).build())
                 )
                 .save(recipeConsumer);
     }
-    public static <I extends Item> Consumer<Supplier<I>> ultAppleRecipe(Consumer<FinishedRecipe> recipeConsumer, TagKey<Item> itemDot, Item itemTopBotCross, Item itemSideCross, Item itemCorner, Item itemKorner) {
-        return (resultItemSup) -> ultAppleRecipe(recipeConsumer, itemDot, itemTopBotCross, itemSideCross, itemCorner, itemKorner,  1).accept((Supplier<Item>) resultItemSup);
+    public static <I extends Item> Consumer<Supplier<I>> ultAppleRecipe(Consumer<FinishedRecipe> recipeConsumer) {
+        return (resultItemSup) -> ultAppleRecipe(recipeConsumer,  1).accept((Supplier<Item>) resultItemSup);
     }
 
     // Slayer Chainsaw
@@ -952,9 +970,9 @@ public final class CARecipeTemplates {
                 .define('R', RUBY.get())
                 .define('A', ULTIMATE_AXE.get())
                 .define('S', Items.REDSTONE_BLOCK)
-                .pattern(" RR")
+                .pattern("RRR")
                 .pattern("SAR")
-                .pattern("SS ")
+                .pattern("SSR")
                 .unlockedBy(
                         "has_" + rubyName + "_and_" + ultimateAxeName + "_and_" + redstoneBlockName,
                         PredicateUtil.inventoryTrigger(ItemPredicate.Builder.item().of(RUBY.get(), ULTIMATE_AXE.get(), Items.REDSTONE_BLOCK).build())
@@ -1246,15 +1264,19 @@ public final class CARecipeTemplates {
         ResourceLocation bowlName = DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(Items.BOWL);
         ResourceLocation lettuceName = DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(LETTUCE.get());
         ResourceLocation quinoaName = DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(QUINOA.get());
+        ResourceLocation beetrootName = DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(Items.BEETROOT);
+        ResourceLocation radishName = DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(RADISH.get());
         return (resultItemSup) -> ShapedRecipeBuilder.shaped(RecipeCategory.FOOD, resultItemSup.get(), resultItemCount)
-                .define('B', Items.BOWL)
+                .define('O', Items.BOWL)
                 .define('L', LETTUCE.get())
                 .define('Q', QUINOA.get())
+                .define('B', Items.BEETROOT)
+                .define('R', RADISH.get())
                 .pattern(" Q ")
-                .pattern("QLQ")
-                .pattern(" B ")
+                .pattern("RLB")
+                .pattern(" O ")
                 .unlockedBy(
-                        "has_" + bowlName + "_and_" + lettuceName + "_and_" + quinoaName,
+                        "has_" + bowlName + "_and_" + lettuceName + "_and_" + quinoaName + "_and_" + beetrootName + "_and_" + radishName,
                         PredicateUtil.inventoryTrigger(ItemPredicate.Builder.item().of(Items.BOWL, RADISH.get(), Items.POTATO).build())
                 )
                 .save(recipeConsumer);
@@ -1396,14 +1418,11 @@ public final class CARecipeTemplates {
     }
 
     public static <I extends Item> Consumer<Supplier<I>> cheeseRecipe(Consumer<FinishedRecipe> recipeConsumer, int resultItemCount) {
-        ResourceLocation bowlName = DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(Items.BOWL);
         ResourceLocation milkBucketName = DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(Items.MILK_BUCKET);
-        return (resultItemSup) -> ShapedRecipeBuilder.shaped(RecipeCategory.FOOD, resultItemSup.get(), resultItemCount)
-                .define('B', Items.MILK_BUCKET)
-                .define('W', Items.BOWL)
-                .pattern("BWB")
+        return (resultItemSup) -> ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, resultItemSup.get(), resultItemCount)
+                .requires(Items.MILK_BUCKET)
                 .unlockedBy(
-                        "has_" + bowlName + "_and_" + milkBucketName,
+                        "has_" + milkBucketName,
                         PredicateUtil.inventoryTrigger(ItemPredicate.Builder.item().of(Items.BOWL, Items.MILK_BUCKET).build())
                 )
                 .save(recipeConsumer);
