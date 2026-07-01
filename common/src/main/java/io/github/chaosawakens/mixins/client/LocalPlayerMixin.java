@@ -176,7 +176,7 @@ public abstract class LocalPlayerMixin extends AbstractClientPlayer {
 
             if (this.isSprinting()) {
                 boolean flag7 = !this.input.hasForwardImpulse() || !this.hasEnoughFoodToStartSprinting();
-                boolean flag8 = flag7 || this.horizontalCollision && !this.minorHorizontalCollision || this.isInWater() && !this.isUnderWater();
+                boolean flag8 = flag7 || this.horizontalCollision && !this.minorHorizontalCollision || this.isInWater() && !this.isUnderWater() || this.isInLava() && !this.isEyeInFluid(FluidTags.LAVA);
                 if (this.isSwimming()) {
                     if (!this.onGround() && !this.input.shiftKeyDown && flag7 || !this.isInWater() && !this.isInLava()) {
                         this.setSprinting(false);
