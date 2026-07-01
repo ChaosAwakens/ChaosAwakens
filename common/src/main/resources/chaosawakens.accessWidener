@@ -208,3 +208,6 @@ accessible class net/minecraft/world/level/levelgen/DensityFunctions$BeardifierM
 
 # BlockStateProviderType
 accessible method net/minecraft/world/level/levelgen/feature/stateproviders/BlockStateProviderType <init> (Lcom/mojang/serialization/Codec;)V
+
+#FogData
+accessible class net/minecraft/client/renderer/FogRenderer$FogData

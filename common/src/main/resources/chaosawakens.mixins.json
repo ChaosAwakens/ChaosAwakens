@@ -11,10 +11,18 @@
     "block.GrowingPlantHeadBlockMixin",
     "block.StemBlockMixin",
     "level.LevelMixin",
-    "server.MinecraftServerMixin"
+    "server.MinecraftServerMixin",
+    "entity.ExperienceOrbMixin",
+    "entity.EntityMixin",
+    "entity.VillagerMixin",
+    "entity.LivingEntityMixin",
+    "inventory.EnchantmentMenuMixin",
+    "inventory.AnvilMenuMixin"
   ],
   "client": [
-    "client.EntityRenderDispatcherMixin"
+    "client.EntityRenderDispatcherMixin",
+    "client.LocalPlayerMixin",
+    "client.ScreenEffectRendererMixin"
   ],
   "server": [
   ],
