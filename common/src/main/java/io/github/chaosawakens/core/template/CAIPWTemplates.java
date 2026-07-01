@@ -5,6 +5,7 @@ import com.mememan.nexus.property_wrapper.def.item.ItemPropertyWrapper;
 import com.mememan.nexus.template.property_wrapper.ItemPropertyWrapperTemplates;
 import com.mememan.nexus.util.RegistryUtil;
 import io.github.chaosawakens.content.registry.CACreativeModeTabs;
+import io.github.chaosawakens.content.registry.CAExtraLocalizations;
 import net.minecraft.data.models.model.TextureMapping;
 import net.minecraft.world.item.Item;
 
@@ -47,6 +48,16 @@ public final class CAIPWTemplates {
             .builder()
             .copyFrom(ItemPropertyWrapperTemplates.MATERIAL)
             .withModelDefinition(CAModelTemplates::crossbow)
+            .build();
+
+    public static final ItemPropertyWrapper<Item> SET_BONUS_IPW = new ItemPropertyWrapper<>()
+            .builder()
+            .copyFrom(ItemPropertyWrapperTemplates.BASIC_GENERATED)
+            .withAdditionalLocalizationKey(CAExtraLocalizations.SET_BONUS_LABEL.key(), CAExtraLocalizations.SET_BONUS_LABEL.value())
+            .withAdditionalLocalizationKey(CAExtraLocalizations.EXPERIENCE_BONUS_DESCRIPTION.key(), CAExtraLocalizations.EXPERIENCE_BONUS_DESCRIPTION.value())
+            .withAdditionalLocalizationKey(CAExtraLocalizations.LAVA_EEL_BONUS_DESCRIPTION.key(), CAExtraLocalizations.LAVA_EEL_BONUS_DESCRIPTION.value())
+            .withAdditionalLocalizationKey(CAExtraLocalizations.EMERALD_BONUS_DESCRIPTION.key(), CAExtraLocalizations.EMERALD_BONUS_DESCRIPTION.value())
+            .withAdditionalLocalizationKey(CAExtraLocalizations.LAPIS_BONUS_DESCRIPTION.key(), CAExtraLocalizations.LAPIS_BONUS_DESCRIPTION.value())
             .build();
 
     private CAIPWTemplates() {
