@@ -1,0 +1,6 @@
+{
+    "parent": "chaosawakens:item/ultimate_bow",
+    "textures": {
+        "layer0": "chaosawakens:item/ultimate_bow_pulling_0"
+    }
+}

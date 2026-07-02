@@ -1,21 +1,27 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "building",
+  "category": "misc",
   "key": {
     "B": {
-      "item": "minecraft:bowl"
+      "item": "minecraft:beetroot"
     },
     "L": {
       "item": "chaosawakens:lettuce"
     },
+    "O": {
+      "item": "minecraft:bowl"
+    },
     "Q": {
       "item": "chaosawakens:quinoa"
+    },
+    "R": {
+      "item": "chaosawakens:radish"
     }
   },
   "pattern": [
     " Q ",
-    "QLQ",
-    " B "
+    "RLB",
+    " O "
   ],
   "result": {
     "item": "chaosawakens:quinoa_salad"

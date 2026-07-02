@@ -1,5 +1,5 @@
 {
-  "parent": "minecraft:item/handheld",
+  "parent": "chaosawakens:item/handheld_long",
   "textures": {
     "layer0": "chaosawakens:item/weapons/big_bertha"
   }

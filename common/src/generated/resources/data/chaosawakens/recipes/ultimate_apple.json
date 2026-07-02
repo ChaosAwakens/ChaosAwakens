@@ -1,21 +1,24 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "building",
+  "category": "misc",
   "key": {
-    "D": {
-      "item": "minecraft:apple"
+    "A": {
+      "item": "minecraft:enchanted_golden_apple"
     },
-    "S": {
-      "item": "chaosawakens:uranium_nugget"
+    "P": {
+      "item": "chaosawakens:platinum_lump"
     },
     "T": {
-      "item": "chaosawakens:titanium_nugget"
+      "item": "chaosawakens:titanium_ingot"
+    },
+    "U": {
+      "item": "chaosawakens:uranium_ingot"
     }
   },
   "pattern": [
-    " T ",
-    "SDS",
-    " T "
+    "UPT",
+    "PAP",
+    "TPU"
   ],
   "result": {
     "item": "chaosawakens:ultimate_apple"

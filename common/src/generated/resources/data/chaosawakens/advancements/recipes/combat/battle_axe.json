@@ -1,0 +1,38 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_chaosawakens:ultimate_axe_and_chaosawakens:ruby_and_chaosawakens:triffid_goo_and_minecraft:stick": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "chaosawakens:ultimate_axe",
+              "chaosawakens:ruby",
+              "chaosawakens:triffid_goo",
+              "minecraft:stick"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "chaosawakens:battle_axe"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_chaosawakens:ultimate_axe_and_chaosawakens:ruby_and_chaosawakens:triffid_goo_and_minecraft:stick",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "chaosawakens:battle_axe"
+    ]
+  },
+  "sends_telemetry_event": false
+}

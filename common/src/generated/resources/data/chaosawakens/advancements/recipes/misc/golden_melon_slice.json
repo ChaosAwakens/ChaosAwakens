@@ -1,0 +1,36 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_minecraft:gold_ingot_and_minecraft:melon_slice": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:gold_ingot",
+              "minecraft:melon_slice"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "chaosawakens:golden_melon_slice"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_minecraft:gold_ingot_and_minecraft:melon_slice",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "chaosawakens:golden_melon_slice"
+    ]
+  },
+  "sends_telemetry_event": false
+}

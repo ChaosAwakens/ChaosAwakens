@@ -1,8 +1,11 @@
 package io.github.chaosawakens.content.item.misc;
 
 import io.github.chaosawakens.content.item.equipment.tools.UltimateBow;
+import net.minecraft.client.renderer.item.ItemProperties;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BowItem;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantment;
 
 import java.util.Map;

@@ -9,4 +9,5 @@ public class UltimateCrossbow extends EnchantedCrossbowItem {
     public UltimateCrossbow(Properties properties, Map<Enchantment, Integer> enchantments) {
         super(properties, enchantments);
     }
+
 }

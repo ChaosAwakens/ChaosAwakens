@@ -1,0 +1,38 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_minecraft:beetroot_and_minecraft:fishing_rod": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "chaosawakens:ultimate_axe",
+              "minecraft:redstone_block",
+              "chaosawakens:triffid_goo",
+              "chaosawakens:ultimate_sword"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "chaosawakens:beetroot_on_a_stick"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_minecraft:beetroot_and_minecraft:fishing_rod",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "chaosawakens:beetroot_on_a_stick"
+    ]
+  },
+  "sends_telemetry_event": false
+}

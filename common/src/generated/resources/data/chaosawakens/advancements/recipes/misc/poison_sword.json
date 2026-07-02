@@ -1,0 +1,36 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_chaosawakens:dead_stink_bug_and_chaosawakens:emerald_sword": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "chaosawakens:dead_stink_bug",
+              "chaosawakens:emerald_sword"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "chaosawakens:poison_sword"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_chaosawakens:dead_stink_bug_and_chaosawakens:emerald_sword",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "chaosawakens:poison_sword"
+    ]
+  },
+  "sends_telemetry_event": false
+}

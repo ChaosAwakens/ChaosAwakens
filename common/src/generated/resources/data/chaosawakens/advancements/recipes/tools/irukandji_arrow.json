@@ -1,0 +1,37 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_chaosawakens:dead_irukandji_and_chaosawakens:crystalwood_stick_and_chaosawakens:peacock_feather": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "chaosawakens:dead_irukandji",
+              "chaosawakens:crystalwood_stick",
+              "chaosawakens:peacock_feather"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "chaosawakens:irukandji_arrow"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_chaosawakens:dead_irukandji_and_chaosawakens:crystalwood_stick_and_chaosawakens:peacock_feather",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "chaosawakens:irukandji_arrow"
+    ]
+  },
+  "sends_telemetry_event": false
+}

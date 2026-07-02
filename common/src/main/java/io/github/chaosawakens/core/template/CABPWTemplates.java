@@ -244,10 +244,10 @@ public final class CABPWTemplates {
             .withLootTable(CALootTableTemplates::dropLeavesRipe)
             .build();
 
-    public static final BlockPropertyWrapper<Block> CRYSTAL_GRASS_BLOCK = new BlockPropertyWrapper<>()
+    public static final BlockPropertyWrapper<Block> KYANITE_GRASS_BLOCK = new BlockPropertyWrapper<>()
             .builder()
             .copyFrom(BlockPropertyWrapperTemplates.BASIC_PICKAXE)
-            .withModelDefinition(CAModelTemplates::crystalGrassBlock)
+            .withModelDefinition(CAModelTemplates::kyaniteGrassBlock)
             .withTag(CATags.CABlockTags.CRYSTAL_SOIL::get)
             .withLootTable(LootUtil::dropSilkTouchOnly)
             .literalTranslation()

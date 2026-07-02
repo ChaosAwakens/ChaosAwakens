@@ -1,0 +1,37 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_minecraft:bowl_and_chaosawakens:lettuce_and_chaosawakens:quinoa_and_minecraft:beetroot_and_chaosawakens:radish": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:bowl",
+              "chaosawakens:radish",
+              "minecraft:potato"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "chaosawakens:quinoa_salad"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_minecraft:bowl_and_chaosawakens:lettuce_and_chaosawakens:quinoa_and_minecraft:beetroot_and_chaosawakens:radish",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "chaosawakens:quinoa_salad"
+    ]
+  },
+  "sends_telemetry_event": false
+}

@@ -1,6 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "building",
+  "category": "equipment",
   "key": {
     "C": {
       "item": "chaosawakens:crystalwood_stick"

@@ -1,0 +1,36 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_minecraft:experience_bottle_and_chaosawakens:emerald_helmet": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:experience_bottle",
+              "chaosawakens:emerald_helmet"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "chaosawakens:experience_helmet"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_minecraft:experience_bottle_and_chaosawakens:emerald_helmet",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "chaosawakens:experience_helmet"
+    ]
+  },
+  "sends_telemetry_event": false
+}

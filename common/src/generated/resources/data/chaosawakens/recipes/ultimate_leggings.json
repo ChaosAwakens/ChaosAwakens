@@ -1,6 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "building",
+  "category": "equipment",
   "key": {
     "P": {
       "item": "chaosawakens:platinum_lump"
@@ -13,9 +13,9 @@
     }
   },
   "pattern": [
-    "TTT",
-    "U U",
-    "P P"
+    "PPP",
+    "T T",
+    "U U"
   ],
   "result": {
     "item": "chaosawakens:ultimate_leggings"

@@ -201,7 +201,7 @@ public final class CABlocks {
     public static final Supplier<MesozoicVinesBodyBlock> MESOZOIC_VINES_BODY = BlockPropertyWrapperTemplates.registerBlockFromTemplate(CAConstants.prefix("mesozoic_vines_plant"), () -> new MesozoicVinesBodyBlock(BlockBehaviour.Properties.copy(Blocks.VINE)), BlockPropertyWrapperTemplates.NO_TINT_PLANT, BLOCKS);
 
     // Vegetation (CrystalWorld)
-    public static final Supplier<DefaultableGrassBlock> CRYSTAL_GRASS_BLOCK = BlockPropertyWrapperTemplates.registerBlockWithItemFromTemplate(CAConstants.prefix("crystal_grass_block"), () -> new DefaultableGrassBlock(BlockBehaviour.Properties.copy(Blocks.GRASS_BLOCK).sound(CASoundTypes.CRYSTAL_GRASS)), CABPWTemplates.CRYSTAL_GRASS_BLOCK, BLOCKS, BLOCK_ITEMS);
+    public static final Supplier<DefaultableGrassBlock> KYANITE_GRASS_BLOCK = BlockPropertyWrapperTemplates.registerBlockWithItemFromTemplate(CAConstants.prefix("kyanite_grass_block"), () -> new DefaultableGrassBlock(BlockBehaviour.Properties.copy(Blocks.STONE).sound(CASoundTypes.CRYSTAL_GRASS)), CABPWTemplates.KYANITE_GRASS_BLOCK, BLOCKS, BLOCK_ITEMS);
     public static final Supplier<Block> KYANITE = BlockPropertyWrapperTemplates.registerWithItemAndChain(CAConstants.prefix("kyanite"), () -> new Block(BlockBehaviour.Properties.copy(Blocks.STONE).sound(SoundType.AMETHYST).sound(CASoundTypes.KYANITE)), BlockPropertyWrapperTemplates.BASIC_PICKAXE_STONE, BLOCKS, BLOCK_ITEMS)
             .withTag(CATags.CABlockTags.CRYSTAL_SOIL::get)
             .buildAndGet();

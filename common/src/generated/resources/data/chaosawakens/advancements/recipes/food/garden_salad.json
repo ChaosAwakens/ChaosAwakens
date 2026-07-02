@@ -1,0 +1,39 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_minecraft:bread_and_chaosawakens:lettuce_and_chaosawakens:tomato_and_chaosawakens:cooked_bacon_and_chaosawakens:butter": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:bread",
+              "chaosawakens:lettuce",
+              "chaosawakens:tomato",
+              "chaosawakens:cooked_bacon",
+              "chaosawakens:butter"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "chaosawakens:garden_salad"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_minecraft:bread_and_chaosawakens:lettuce_and_chaosawakens:tomato_and_chaosawakens:cooked_bacon_and_chaosawakens:butter",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "chaosawakens:garden_salad"
+    ]
+  },
+  "sends_telemetry_event": false
+}

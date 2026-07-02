@@ -1,0 +1,38 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_chaosawakens:royal_guardian_scale_and_chaosawakens:big_bertha": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "chaosawakens:ultimate_axe",
+              "minecraft:redstone_block",
+              "chaosawakens:triffid_goo",
+              "chaosawakens:ultimate_sword"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "chaosawakens:royal_guardian"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_chaosawakens:royal_guardian_scale_and_chaosawakens:big_bertha",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "chaosawakens:royal_guardian"
+    ]
+  },
+  "sends_telemetry_event": false
+}

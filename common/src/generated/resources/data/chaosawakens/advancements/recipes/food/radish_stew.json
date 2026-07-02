@@ -1,0 +1,37 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_minecraft:bowl_and_chaosawakens:radish_and_minecraft:potato": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:bowl",
+              "chaosawakens:radish",
+              "minecraft:potato"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "chaosawakens:radish_stew"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_minecraft:bowl_and_chaosawakens:radish_and_minecraft:potato",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "chaosawakens:radish_stew"
+    ]
+  },
+  "sends_telemetry_event": false
+}

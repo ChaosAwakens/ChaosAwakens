@@ -60,6 +60,12 @@ public final class CAIPWTemplates {
             .withAdditionalLocalizationKey(CAExtraLocalizations.LAPIS_BONUS_DESCRIPTION.key(), CAExtraLocalizations.LAPIS_BONUS_DESCRIPTION.value())
             .build();
 
+    public static final ItemPropertyWrapper<Item> BOW = new ItemPropertyWrapper<>()
+            .builder()
+            .copyFrom(ItemPropertyWrapperTemplates.MATERIAL)
+            .withModelDefinition(CAModelTemplates::bow)
+            .build();
+
     private CAIPWTemplates() {
         throw new IllegalAccessError("Attempted to construct instance of template class! (CAIPWTemplates)");
     }

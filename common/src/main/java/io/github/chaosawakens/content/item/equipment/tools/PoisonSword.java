@@ -19,11 +19,11 @@ public class PoisonSword extends EnchantedSwordItem {
         super(tier, attackDamage, attackSpeedModifier, properties, enchantment);
     }
 
-     @Override
-     public void onCraftedBy(ItemStack stack, Level world, Player player) {
-         super.onCraftedBy(stack, world, player);
-         if (world.isClientSide) return;
-         if (!EnchantmentHelper.getEnchantments(stack).isEmpty()) return;
-         stack.enchant(Enchantments.SHARPNESS, 1);
-     }
+    @Override
+    public void onCraftedBy(ItemStack stack, Level world, Player player) {
+        if (world.isClientSide) return;
+        if (!EnchantmentHelper.getEnchantments(stack).isEmpty()) return;
+        stack.enchant(Enchantments.SHARPNESS, 1);
+        super.onCraftedBy(stack, world, player);
+    }
 }

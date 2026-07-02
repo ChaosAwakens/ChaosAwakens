@@ -21,7 +21,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.PipeBlock;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 
-import javax.print.DocFlavor;
 import java.util.Map;
 import java.util.Optional;
 import java.util.function.Supplier;
@@ -32,7 +31,8 @@ public final class CAModelTemplates {
     public static final ModelTemplate LEAF_CARPET = new ModelTemplate(Optional.of(CAConstants.prefix("block/leaf_carpet")), Optional.empty(), TextureSlot.TEXTURE);
     public static final ModelTemplate LEAF_CARPET_INVENTORY = new ModelTemplate(Optional.of(CAConstants.prefix("block/leaf_carpet_inventory")), Optional.of("_inventory"), TextureSlot.TEXTURE);
     public static final ModelTemplate HANDHELD_LONG = new ModelTemplate(Optional.of(CAConstants.prefix("item/handheld_long")), Optional.empty(), TextureSlot.LAYER0);
-    public static final ModelTemplate ULTIMATE_CROSSBOW = new ModelTemplate(Optional.of(CAConstants.prefix("item/ultimate_crossbow")), Optional.empty(), TextureSlot.LAYER0);
+    public static final ModelTemplate CROSSBOW = new ModelTemplate(Optional.of(new ResourceLocation("minecraft", "item/crossbow")), Optional.empty(), TextureSlot.LAYER0);
+    public static final ModelTemplate BOW = new ModelTemplate(Optional.of(new ResourceLocation("minecraft", "item/bow")), Optional.empty(), TextureSlot.LAYER0);
 
     private CAModelTemplates() {
         throw new IllegalAccessError("Attempted to construct instance of template class! (CAModelTemplates)");
@@ -40,7 +40,7 @@ public final class CAModelTemplates {
 
     public static ItemModelDefinition crossbow(ResourceLocation crossbowid) {
         String prefix = "item/equipment/ultimate/";
-        return new ItemModelDefinition(ULTIMATE_CROSSBOW)
+        return new ItemModelDefinition(CROSSBOW)
                 .withTextureMapping(TextureMapping.layer0(crossbowid.withPrefix(prefix).withSuffix("_standby")))
                 .setItemModelTextureOverrides(Map.of(
                         Map.of(new ResourceLocation("pulling"), 1.0F),
@@ -62,6 +62,26 @@ public final class CAModelTemplates {
 
     public static ItemModelDefinition crossbow(Supplier<Item> parentItem) {
         return crossbow(DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(parentItem.get()));
+    }
+
+    public static ItemModelDefinition bow(ResourceLocation bowid) {
+        String prefix = "item/equipment/ultimate/";
+        return new ItemModelDefinition(BOW)
+                .withTextureMapping(TextureMapping.layer0(bowid.withPrefix(prefix)))
+                .setItemModelTextureOverrides(Map.of(
+                        Map.of(new ResourceLocation("pulling"), 1.0F),
+                        bowid.withPrefix(prefix).withSuffix("_pulling_0"),
+
+                        Map.of(new ResourceLocation("pulling"), 1.0F, new ResourceLocation("pull"), 0.58F),
+                        bowid.withPrefix(prefix).withSuffix("_pulling_1"),
+
+                        Map.of(new ResourceLocation("pulling"), 1.0F, new ResourceLocation("pull"), 1.0F),
+                        bowid.withPrefix(prefix).withSuffix("_pulling_2")
+                ));
+    }
+
+    public static ItemModelDefinition bow(Supplier<Item> parentItem) {
+        return bow(DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(parentItem.get()));
     }
 
     public static BlockModelDefinition leafCarpetDefault(ResourceLocation leafCarpetTextureLoc) {
@@ -311,7 +331,7 @@ public final class CAModelTemplates {
                                 .select(Direction.NORTH, Variant.variant())));
     }
 
-    public static BlockModelDefinition crystalGrassBlock(Supplier<Block> targetBlock) {
+    public static BlockModelDefinition kyaniteGrassBlock(Supplier<Block> targetBlock) {
         ResourceLocation targetBlockId = DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(targetBlock.get());
         ResourceLocation sideTextureLoc = RegistryUtil.getTextureLocationOrDefault(targetBlockId.withSuffix("_side"), "block");
         ResourceLocation bottomTextureLoc = RegistryUtil.getTextureLocationOrDefault(targetBlockId.withSuffix("_bottom"), "block");

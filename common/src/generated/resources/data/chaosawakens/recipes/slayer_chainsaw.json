@@ -1,18 +1,21 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "building",
+  "category": "misc",
   "key": {
-    "D": {
+    "A": {
       "item": "chaosawakens:ultimate_axe"
     },
     "R": {
+      "item": "chaosawakens:ruby"
+    },
+    "S": {
       "item": "minecraft:redstone_block"
     }
   },
   "pattern": [
     "RRR",
-    "RDR",
-    "RRR"
+    "SAR",
+    "SSR"
   ],
   "result": {
     "item": "chaosawakens:slayer_chainsaw"

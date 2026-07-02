@@ -1,18 +1,21 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "building",
+  "category": "equipment",
   "key": {
-    "C": {
-      "item": "chaosawakens:queen_scale"
-    },
-    "D": {
+    "A": {
       "item": "chaosawakens:battle_axe"
+    },
+    "P": {
+      "item": "chaosawakens:platinum_lump"
+    },
+    "Q": {
+      "item": "chaosawakens:queen_scale"
     }
   },
   "pattern": [
-    " C ",
-    "CDC",
-    " C "
+    "QAQ",
+    "QPQ",
+    " P "
   ],
   "result": {
     "item": "chaosawakens:queen_battle_axe"

@@ -1,4 +1,4 @@
-// 1.20.1	2026-06-10T22:15:11.9462744	Dynamic Registries [chaosawakens]
+// 1.20.1	2026-06-24T19:29:21.3738093	Dynamic Registries [chaosawakens]
 2340a4b1d099214775cb456687b1aa902d5c058a data/chaosawakens/damage_type/big_carnivorous_plant.json
 639d3e54d3df69c99f7b7d1571b1fffe8ec5e442 data/chaosawakens/damage_type/thorny_sun.json
 9d01a762df8ee8a410e437d254efbc928426b389 data/chaosawakens/dimension/crystal_world.json
@@ -192,7 +192,7 @@ f819fb29070e13882767d5ea75439dde044abd17 data/chaosawakens/worldgen/noise/mining
 dee3d1cb549513644a534b3d41b89380ace745a2 data/chaosawakens/worldgen/noise/mining_paradise/spaghetti_3d_thickness.json
 6d3163b5d765c759b3dbf6f993342db056dfaea9 data/chaosawakens/worldgen/noise/mining_paradise/spaghetti_roughness.json
 dee3d1cb549513644a534b3d41b89380ace745a2 data/chaosawakens/worldgen/noise/mining_paradise/spaghetti_roughness_modulator.json
-52e5fe6b413782f4da907a4b6d703a37b1cace2b data/chaosawakens/worldgen/noise_settings/crystal_world.json
+6a0d8a36269390185f966cdeeec6ee6d1058f0ad data/chaosawakens/worldgen/noise_settings/crystal_world.json
 578f51c293c993937c88e6452a8f93ca6d865c01 data/chaosawakens/worldgen/noise_settings/mining_paradise.json
 8a049893da2011e932a89dd93ea210506402ff49 data/chaosawakens/worldgen/placed_feature/alstroemeriat_patch.json
 8df5ff9cf98720821e979d9ff20c46c5f9f51313 data/chaosawakens/worldgen/placed_feature/big_carnivorous_plant_patch.json

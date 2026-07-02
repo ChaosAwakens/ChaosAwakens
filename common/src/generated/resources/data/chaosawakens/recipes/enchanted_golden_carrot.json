@@ -1,12 +1,12 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "building",
+  "category": "misc",
   "key": {
     "D": {
       "item": "minecraft:golden_carrot"
     },
     "R": {
-      "item": "minecraft:gold_ingot"
+      "item": "minecraft:gold_block"
     }
   },
   "pattern": [

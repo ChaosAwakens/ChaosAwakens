@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "D": {
+      "item": "chaosawakens:golden_beetroot"
+    },
+    "R": {
+      "item": "minecraft:gold_block"
+    }
+  },
+  "pattern": [
+    "RRR",
+    "RDR",
+    "RRR"
+  ],
+  "result": {
+    "item": "chaosawakens:enchanted_golden_beetroot"
+  },
+  "show_notification": true
+}

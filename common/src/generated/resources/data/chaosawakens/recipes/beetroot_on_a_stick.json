@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "F": {
+      "item": "minecraft:beetroot"
+    },
+    "R": {
+      "item": "minecraft:fishing_rod"
+    }
+  },
+  "pattern": [
+    "R  ",
+    " F ",
+    "   "
+  ],
+  "result": {
+    "item": "chaosawakens:beetroot_on_a_stick"
+  },
+  "show_notification": true
+}

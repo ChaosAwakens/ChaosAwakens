@@ -32,7 +32,6 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 
 import static io.github.chaosawakens.content.registry.CAItems.*;
-import static io.github.chaosawakens.content.registry.CATags.CAItemTags.ENCHANTED_GOLDEN_APPLES;
 import static io.github.chaosawakens.content.registry.CATags.CAItemTags.SPOON;
 
 public final class CARecipeTemplates {
@@ -40,7 +39,6 @@ public final class CARecipeTemplates {
     private static final ResourceLocation URANIUM_NAME = DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(URANIUM_INGOT.get());
     private static final ResourceLocation TITANIUM_NAME = DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(TITANIUM_INGOT.get());
     private static final ResourceLocation PLATINUM_NAME = DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(PLATINUM_LUMP.get());
-
 
     private CARecipeTemplates() {
         throw new IllegalAccessError("Attempted to construct instance of template class! (CARecipeTemplates)");
@@ -942,18 +940,18 @@ public final class CARecipeTemplates {
 
     // Ultimate Apple Recipe
     public static <I extends Item, T extends TagKey<Item>> Consumer<Supplier<I>> ultAppleRecipe(Consumer<FinishedRecipe> recipeConsumer, int resultItemCount) {
-        ResourceLocation appleName = DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(ENCHANTED_GOLDEN_APPLES.get());
+        ResourceLocation appleName = DataGenPropertyWrapper.RegistryLookupContainer.getObjectRegistryIdOrThrow(Items.ENCHANTED_GOLDEN_APPLE);
         return (resultItemSup) -> ShapedRecipeBuilder.shaped(RecipeCategory.MISC, resultItemSup.get(), resultItemCount)
                 .define('T', TITANIUM_INGOT.get())
                 .define('U', URANIUM_INGOT.get())
                 .define('P', PLATINUM_LUMP.get())
-                .define('A', ENCHANTED_GOLDEN_APPLES.get())
+                .define('A', Items.ENCHANTED_GOLDEN_APPLE)
                 .pattern("UPT")
                 .pattern("PAP")
                 .pattern("TPU")
                 .unlockedBy(
                         "has_" + appleName + "_and_" + TITANIUM_NAME + "_and_" + URANIUM_NAME + "_and_" + PLATINUM_NAME,
-                        PredicateUtil.inventoryTrigger(ItemPredicate.Builder.item().of(TITANIUM_INGOT.get(), URANIUM_INGOT.get(), PLATINUM_LUMP.get()).of(ENCHANTED_GOLDEN_APPLES.get()).build())
+                        PredicateUtil.inventoryTrigger(ItemPredicate.Builder.item().of(TITANIUM_INGOT.get(), URANIUM_INGOT.get(), PLATINUM_LUMP.get()).of(Items.ENCHANTED_GOLDEN_APPLE).build())
                 )
                 .save(recipeConsumer);
     }

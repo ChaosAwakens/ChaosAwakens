@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "chaosawakens:aluminum_ingot"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    }
+  },
+  "pattern": [
+    "ARA",
+    "RIR",
+    "ARA"
+  ],
+  "result": {
+    "count": 3,
+    "item": "chaosawakens:aluminum_power_chip"
+  },
+  "show_notification": true
+}

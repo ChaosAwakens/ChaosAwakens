@@ -118,10 +118,6 @@ public final class CAFood {
             .effect(new MobEffectInstance(MobEffects.ABSORPTION, 1200, 4), 1.0F)
             .effect(new MobEffectInstance(MobEffects.HEAL, 60, 10), 1.0F)
             .build();
-    public static final FoodProperties FOOD_ENCHANTED_GOLDEN_APPLE = new FoodProperties.Builder().nutrition(4).saturationMod(0.85F).alwaysEat()
-            .effect(new MobEffectInstance(MobEffects.REGENERATION, 600, 2), 1.0F)
-            .effect(new MobEffectInstance(MobEffects.HEALTH_BOOST, 1200, 2), 1.0F)
-            .build();
 
     public static final FoodProperties FOOD_ULTIMATE_APPLE = new FoodProperties.Builder().nutrition(1).saturationMod(1.0F)
             .effect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 3900, 2), 1.0F)

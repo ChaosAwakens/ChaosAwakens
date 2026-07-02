@@ -1,4 +1,4 @@
-// 1.20.1	2026-06-10T22:15:11.9644275	BlockStates [chaosawakens]
+// 1.20.1	2026-06-24T19:29:21.3883493	BlockStates [chaosawakens]
 5c81494d06a5589da8afe9c24272dddb04a88d14 assets/chaosawakens/blockstates/acacia_gate_block.json
 807de6368ec3d2d151f9683203f9b05493f6600e assets/chaosawakens/blockstates/acacia_leaf_carpet.json
 d87edfaebd05837212a46d7c4ff3d3f16312c8cf assets/chaosawakens/blockstates/alstroemeriat.json
@@ -85,7 +85,6 @@ b2c86d270585cd541ab2759f471e0b28c711ee1e assets/chaosawakens/blockstates/crystal
 a6fdb317b48336c7c0a03eff43732eeccf0fdd4f assets/chaosawakens/blockstates/crystalwood_wall_sign.json
 ad6cd9663fe3d14385e4107f9a94c33f26ffd15a assets/chaosawakens/blockstates/crystal_defossilizer.json
 bd7643152baa125726fc43b7a4dde0234efd0bd8 assets/chaosawakens/blockstates/crystal_grass.json
-5fe52568baf8edd503a2d4b1fe011c7e0bb6f0f9 assets/chaosawakens/blockstates/crystal_grass_block.json
 7590beb5f5413fdec64dbe934d26d6afe836deac assets/chaosawakens/blockstates/crystal_rose.json
 d4b84e379f3f763075197b7a1d1d13581bb53487 assets/chaosawakens/blockstates/crystal_rose_bush.json
 af8fe270bdc63aa30c31520cab730f535383fbba assets/chaosawakens/blockstates/cyan_rose.json
@@ -501,6 +500,7 @@ af286e0bdb05f349d93476571dbd6515d4b832c4 assets/chaosawakens/blockstates/iron_de
 4545e1a67cc5393bd46fec24b4788188e373f777 assets/chaosawakens/blockstates/kunzite_block.json
 ea081fb53d0d2c4e06cd870d1cb2cb0479af9b10 assets/chaosawakens/blockstates/kunzite_ore.json
 3130375a4f148be7b4ae178055281de3d4f0008b assets/chaosawakens/blockstates/kyanite.json
+80af8851fe1b6daad916c5d632a023e4590efcce assets/chaosawakens/blockstates/kyanite_grass_block.json
 c62de09dc5b02f771b17e7b207b33d47a2780124 assets/chaosawakens/blockstates/large_densewood_bush.json
 57349e026851a0eb23c050344285ea276fd2f460 assets/chaosawakens/blockstates/large_ginkgo_bush.json
 b97e8ea9442e34aa3e7e05699d994e6ca95d14d2 assets/chaosawakens/blockstates/large_mesozoic_bush.json

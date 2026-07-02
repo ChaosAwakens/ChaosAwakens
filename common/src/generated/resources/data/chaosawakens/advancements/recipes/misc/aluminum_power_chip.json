@@ -1,0 +1,37 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_chaosawakens:aluminum_ingot_and_minecraft:iron_ingot_and_minecraft:redstone": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "chaosawakens:aluminum_ingot",
+              "minecraft:iron_ingot",
+              "minecraft:redstone"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "chaosawakens:aluminum_power_chip"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_chaosawakens:aluminum_ingot_and_minecraft:iron_ingot_and_minecraft:redstone",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "chaosawakens:aluminum_power_chip"
+    ]
+  },
+  "sends_telemetry_event": false
+}
