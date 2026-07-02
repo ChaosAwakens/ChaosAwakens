@@ -6,12 +6,10 @@ plugins {
 
 base {
     archivesName = "${mod_id}-fabric-${minecraft_version}"
-
-    sourceCompatibility = targetCompatibility = JavaVersion.VERSION_17
 }
 
 java {
-    toolchain.languageVersion = JavaLanguageVersion.of(17)
+    toolchain.languageVersion = JavaLanguageVersion.of(21)
 
     withSourcesJar()
     withJavadocJar()
@@ -75,7 +73,6 @@ loom {
         }
         server {
             server()
-            serverWithGui()
             setConfigName("${fabric_server_taskname}")
             ideConfigGenerated(true)
             runDir("run/server")

@@ -8,6 +8,10 @@ base {
     archivesName = "${mod_id}-forge-${minecraft_version}"
 }
 
+java {
+    toolchain.languageVersion = JavaLanguageVersion.of(17)
+}
+
 mixin {
     add(sourceSets.main, "${mod_id}.refmap.json")
 

@@ -2,37 +2,31 @@
   "parent": "minecraft:item/crossbow",
   "overrides": [
     {
-      "model": "chaosawakens:item/equipment/ultimate/ultimate_crossbow_arrow",
+      "model": "chaosawakens:ultimate_crossbow_pulling_0",
       "predicate": {
-        "minecraft:charged": 1.0
+        "pull": 0.58
       }
     },
     {
-      "model": "chaosawakens:item/equipment/ultimate/ultimate_crossbow_pulling_0",
+      "model": "chaosawakens:ultimate_crossbow_firework",
       "predicate": {
-        "minecraft:pulling": 1.0
+        "firework": 1.0
       }
     },
     {
-      "model": "chaosawakens:item/equipment/ultimate/ultimate_crossbow_firework",
+      "model": "chaosawakens:ultimate_crossbow_arrow",
       "predicate": {
-        "minecraft:firework": 1.0
+        "charged": 1.0
       }
     },
     {
-      "model": "chaosawakens:item/equipment/ultimate/ultimate_crossbow_pulling_1",
+      "model": "chaosawakens:ultimate_crossbow_pulling_1",
       "predicate": {
-        "minecraft:pulling": 1.0
-      }
-    },
-    {
-      "model": "chaosawakens:item/equipment/ultimate/ultimate_crossbow_pulling_2",
-      "predicate": {
-        "minecraft:pulling": 1.0
+        "pull": 1.0
       }
     }
   ],
   "textures": {
-    "layer0": "chaosawakens:item/equipment/ultimate/ultimate_crossbow_standby"
+    "layer0": "chaosawakens:item/equipment/ultimate/ultimate_crossbow"
   }
 }

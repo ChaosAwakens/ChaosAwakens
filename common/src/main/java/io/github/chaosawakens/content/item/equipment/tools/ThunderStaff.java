@@ -36,7 +36,7 @@ public class ThunderStaff extends Item {
             }
         }
 
-        level.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.ARROW_SHOOT, SoundSource.PLAYERS, SHOOT_SOUND_VOLUME, SHOOT_SOUND_PITCH);
+        level.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.ARROW_SHOOT/*TODO replace with the given sfx*/, SoundSource.PLAYERS, SHOOT_SOUND_VOLUME, SHOOT_SOUND_PITCH);
         return InteractionResultHolder.sidedSuccess(heldStack, level.isClientSide());
     }
 

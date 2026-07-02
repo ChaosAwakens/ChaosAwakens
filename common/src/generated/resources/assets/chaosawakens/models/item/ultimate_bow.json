@@ -1,5 +1,19 @@
 {
-  "parent": "minecraft:item/handheld",
+  "parent": "minecraft:item/bow",
+  "overrides": [
+    {
+      "model": "chaosawakens:ultimate_bow_pulling_0",
+      "predicate": {
+        "pull": 0.65
+      }
+    },
+    {
+      "model": "chaosawakens:ultimate_bow_pulling_1",
+      "predicate": {
+        "pull": 0.9
+      }
+    }
+  ],
   "textures": {
     "layer0": "chaosawakens:item/equipment/ultimate/ultimate_bow"
   }

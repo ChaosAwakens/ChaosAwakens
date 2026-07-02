@@ -3,6 +3,7 @@ package io.github.chaosawakens.core.template;
 import com.mememan.nexus.client.model.item.ItemModelDefinition;
 import com.mememan.nexus.property_wrapper.def.item.ItemPropertyWrapper;
 import com.mememan.nexus.template.property_wrapper.ItemPropertyWrapperTemplates;
+import com.mememan.nexus.util.ModelUtil;
 import com.mememan.nexus.util.RegistryUtil;
 import io.github.chaosawakens.content.registry.CACreativeModeTabs;
 import io.github.chaosawakens.content.registry.CAExtraLocalizations;
@@ -43,13 +44,19 @@ public final class CAIPWTemplates {
             .withModelDefinition(parentItem -> new ItemModelDefinition(CAModelTemplates.HANDHELD_LONG)
                 .withTextureMapping(TextureMapping.layer0(RegistryUtil.getTextureLocationOrDefault(parentItem, "item"))))
             .build();
-
+/*
     public static final ItemPropertyWrapper<Item> CROSSBOW = new ItemPropertyWrapper<>()
             .builder()
-            .copyFrom(ItemPropertyWrapperTemplates.MATERIAL)
-            .withModelDefinition(CAModelTemplates::crossbow)
+            .copyFrom(ItemPropertyWrapperTemplates.CROSSBOW)
+            .withModelDefinition(ModelUtil::crossbow)
             .build();
 
+    public static final ItemPropertyWrapper<Item> BOW = new ItemPropertyWrapper<>()
+            .builder()
+            .copyFrom(ItemPropertyWrapperTemplates.BOW)
+            .withModelDefinition(ModelUtil::bow)
+            .build();
+*/
     public static final ItemPropertyWrapper<Item> SET_BONUS_IPW = new ItemPropertyWrapper<>()
             .builder()
             .copyFrom(ItemPropertyWrapperTemplates.BASIC_GENERATED)
@@ -58,12 +65,6 @@ public final class CAIPWTemplates {
             .withAdditionalLocalizationKey(CAExtraLocalizations.LAVA_EEL_BONUS_DESCRIPTION.key(), CAExtraLocalizations.LAVA_EEL_BONUS_DESCRIPTION.value())
             .withAdditionalLocalizationKey(CAExtraLocalizations.EMERALD_BONUS_DESCRIPTION.key(), CAExtraLocalizations.EMERALD_BONUS_DESCRIPTION.value())
             .withAdditionalLocalizationKey(CAExtraLocalizations.LAPIS_BONUS_DESCRIPTION.key(), CAExtraLocalizations.LAPIS_BONUS_DESCRIPTION.value())
-            .build();
-
-    public static final ItemPropertyWrapper<Item> BOW = new ItemPropertyWrapper<>()
-            .builder()
-            .copyFrom(ItemPropertyWrapperTemplates.MATERIAL)
-            .withModelDefinition(CAModelTemplates::bow)
             .build();
 
     private CAIPWTemplates() {
